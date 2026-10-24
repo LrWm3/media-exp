@@ -1,0 +1,21 @@
+{
+  "implementation": "shared-h264-compiler",
+  "decoder": "ffmpeg",
+  "samples": 256,
+  "seed": 200000,
+  "noise_probability": 0.15,
+  "verified": true,
+  "model_sha256": "ec8de200e9f598c3b6dcafd2503ab874620a2aecc56da2d146261263103ca32d",
+  "checkpoint_verified": true,
+  "stream_sha256": "c42dc1e2cdf78720f4104eb43b2f543ff025dfa70053647ef14e3fd7c168b462",
+  "raw_sha256": "140423ed37c6b38ec67944b759ef8928c4d7504765fb35c8df6f18e24a5f0fd7",
+  "stream_bytes": 6993693,
+  "instruction_tail_sha256": "28a86225407e010014bc894c814a21237860c97ffd82a9e876dacf673a738eb2",
+  "pictures_per_image": 74,
+  "noisy_error": 0.15071487426757812,
+  "decoded_error": 0.032932281494140625,
+  "majority_error": 0.033420562744140625,
+  "compile_and_encode_seconds": 2.278197314000863,
+  "decode_and_readback_seconds": 1.6651559520032606,
+  "checkpoint_sha256": "7b76291de035f39fc181e396489d3a395f8409b221ddf54af34574bfbb8fe5eb"
+}

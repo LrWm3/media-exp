@@ -1,0 +1,21 @@
+{
+  "implementation": "shared-h264-compiler",
+  "decoder": "vaapi",
+  "samples": 8,
+  "seed": 900000,
+  "noise_probability": 0.15,
+  "verified": true,
+  "model_sha256": "ec8de200e9f598c3b6dcafd2503ab874620a2aecc56da2d146261263103ca32d",
+  "checkpoint_verified": true,
+  "stream_sha256": "590cb7ecf77f528e09b15113cd23120e06f5ec30527c6330440b0e8279130e70",
+  "raw_sha256": "c26c5fcd2e7471ae187ad95daff725cf6dd2b812e024e9a334dcf7d1178c934b",
+  "stream_bytes": 218542,
+  "instruction_tail_sha256": "28a86225407e010014bc894c814a21237860c97ffd82a9e876dacf673a738eb2",
+  "pictures_per_image": 74,
+  "noisy_error": 0.151123046875,
+  "decoded_error": 0.0296630859375,
+  "majority_error": 0.029541015625,
+  "compile_and_encode_seconds": 0.12634465900191572,
+  "decode_and_readback_seconds": 0.3597532380008488,
+  "checkpoint_sha256": "7b76291de035f39fc181e396489d3a395f8409b221ddf54af34574bfbb8fe5eb"
+}
