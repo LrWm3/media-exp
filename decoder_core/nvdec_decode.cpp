@@ -7,6 +7,7 @@
 #include <nvbufsurftransform.h>
 
 #include <chrono>
+#include <algorithm>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -394,6 +395,163 @@ public:
         return counts;
     }
 
+    // Experimental continuous stream: append acknowledges queueing, collect
+    // acknowledges output samples. Only close sends EOS; no request resets DPB.
+    Counts stream(int fd, const Options &options) {
+        constexpr uint64_t magic = 0x4e565354;  // NVST, separate from NVDS jobs.
+        constexpr uint64_t max_pictures = 32767, max_wait_ms = 60000;
+        require(options.width && options.height && !options.selective && !options.expected_frames,
+                "Stream mode requires fixed dimensions and no file-mode selection");
+        const uint64_t pixels = uint64_t(options.width) * options.height;
+        require(pixels <= SESSION_LIMIT / 3 * 2, "Stream frame exceeds byte limit");
+        const uint64_t frame_bytes = pixels * 3 / 2;
+        Channel channel(fd);
+        pipeline = gst_pipeline_new("exact-nvdec-stream");
+        require(pipeline, "Cannot create stream pipeline");
+        GstElement *source = gst_element_factory_make("appsrc", nullptr);
+        GstElement *decoder = gst_element_factory_make("nvv4l2decoder", nullptr);
+        GstElement *destination = gst_element_factory_make("appsink", nullptr);
+        require(source && decoder && destination, "Missing stream GStreamer element");
+        gst_bin_add_many(GST_BIN(pipeline), source, decoder, destination, nullptr);
+        g_object_set(source, "format", GST_FORMAT_TIME, "is-live", TRUE, "block", FALSE,
+                     "max-bytes", static_cast<guint64>(SESSION_LIMIT), nullptr);
+        GstCaps *input_caps = gst_caps_from_string("video/x-h264,stream-format=byte-stream,alignment=au");
+        gst_app_src_set_caps(GST_APP_SRC(source), input_caps); gst_caps_unref(input_caps);
+        g_object_set(decoder, "enable-error-check", TRUE, "enable-full-frame", TRUE, nullptr);
+        sink = GST_APP_SINK(destination);
+        g_object_set(sink, "sync", FALSE, "async", FALSE, "max-buffers", 2u,
+                     "drop", FALSE, "enable-last-sample", FALSE, nullptr);
+        GstCaps *caps = gst_caps_from_string("video/x-raw(memory:NVMM),format=NV12");
+        gst_app_sink_set_caps(sink, caps); gst_caps_unref(caps);
+        require(gst_element_link_many(source, decoder, destination, nullptr), "Cannot link stream pipeline");
+        bus = gst_element_get_bus(pipeline);
+        require(gst_element_set_state(pipeline, GST_STATE_PLAYING) != GST_STATE_CHANGE_FAILURE,
+                "Cannot start stream pipeline");
+        for (const uint64_t value : {magic, uint64_t(1), uint64_t(options.width), uint64_t(options.height),
+                                    frame_bytes, SESSION_LIMIT, max_pictures, max_wait_ms}) channel.write(value);
+        Counts counts;
+        uint64_t submitted = 0, requests = 0, outstanding_bytes = 0;
+        std::vector<uint64_t> unit_sizes;
+        constexpr uint64_t tick = GST_SECOND / 25;
+        auto pull = [&](GstClockTime timeout) {
+            check_bus();
+            std::unique_ptr<GstSample, decltype(&gst_sample_unref)> sample(
+                gst_app_sink_try_pull_sample(sink, timeout), gst_sample_unref);
+            if (sample) {
+                check_frame(sample.get(), options);
+                require(counts.decoded < submitted, "Unexpected extra stream picture");
+                const auto pts = GST_BUFFER_PTS(gst_sample_get_buffer(sample.get()));
+                require(pts == counts.decoded * tick, "Unexpected stream picture timestamp/order");
+                require(outstanding_bytes >= unit_sizes[counts.decoded], "Invalid outstanding stream byte count");
+                outstanding_bytes -= unit_sizes[counts.decoded];
+                ++counts.decoded;
+            }
+            check_bus();
+            return sample;
+        };
+        auto reply = [&](uint64_t id, uint64_t returned) {
+            for (const uint64_t value : {magic, id, submitted, uint64_t(counts.decoded),
+                                        uint64_t(counts.copied), submitted - counts.decoded,
+                                        outstanding_bytes, returned}) channel.write(value);
+        };
+        while (true) {
+            channel.wait_request();
+            const uint64_t opcode = channel.read(), id = channel.read(), target = channel.read();
+            const uint64_t selected_count = channel.read(), wait_ms = channel.read();
+            const uint64_t reserved1 = channel.read(), reserved2 = channel.read(), reserved3 = channel.read();
+            require(id == requests + 1 && !reserved1 && !reserved2 && !reserved3,
+                    "Unexpected stream request id or reserved field");
+            require(opcode >= 1 && opcode <= 3, "Unknown stream request opcode");
+            if (opcode == 1) {
+                require(target && target <= max_pictures - submitted && !selected_count && !wait_ms,
+                        "Invalid stream append counts");
+                uint64_t bytes = 0;
+                std::vector<std::vector<unsigned char>> units;
+                for (uint64_t i = 0; i < target; ++i) {
+                    const uint64_t size = channel.read();
+                    require(size && size <= SESSION_LIMIT - outstanding_bytes - bytes,
+                            "Stream outstanding input exceeds byte limit");
+                    bytes += size;
+                    units.emplace_back(size);
+                    channel.transfer(units.back().data(), size, false);
+                    check_unit(units.back(), !submitted && i == 0, 0);
+                }
+                // Conservative bound includes every queued/uncollected input AU,
+                // even if appsrc or the decoder has already consumed its bytes.
+                for (const auto &unit : units) {
+                    GstBuffer *buffer = gst_buffer_new_allocate(nullptr, unit.size(), nullptr);
+                    require(buffer, "Cannot allocate stream input buffer");
+                    gst_buffer_fill(buffer, 0, unit.data(), unit.size());
+                    GST_BUFFER_PTS(buffer) = GST_BUFFER_DTS(buffer) = submitted * tick;
+                    GST_BUFFER_DURATION(buffer) = tick;
+                    GST_BUFFER_FLAG_SET(buffer, GST_BUFFER_FLAG_MARKER);
+                    unit_sizes.push_back(unit.size());
+                    outstanding_bytes += unit.size(); ++submitted;
+                    require(gst_app_src_push_buffer(GST_APP_SRC(source), buffer) == GST_FLOW_OK,
+                            "Cannot append stream access unit");
+                }
+                check_bus(); ++requests; reply(id, 0);
+                continue;
+            }
+            const bool closing = opcode == 3;
+            require(wait_ms <= max_wait_ms && (closing ? (!target && !wait_ms)
+                    : (target >= counts.decoded && target <= submitted)), "Invalid stream collection target or wait");
+            const uint64_t end = closing ? submitted : target;
+            require(selected_count <= end - counts.decoded && selected_count <= SESSION_LIMIT / frame_bytes,
+                    "Stream selection exceeds count or readback limit");
+            std::vector<uint64_t> selected;
+            for (uint64_t i = 0; i < selected_count; ++i) {
+                const uint64_t index = channel.read();
+                require(index >= counts.decoded && index < end && (selected.empty() || index > selected.back()),
+                        "Invalid stream picture selection");
+                selected.push_back(index);
+            }
+            if (closing)
+                require(gst_app_src_end_of_stream(GST_APP_SRC(source)) == GST_FLOW_OK, "Cannot finish stream");
+            const auto deadline = std::chrono::steady_clock::now() +
+                std::chrono::milliseconds(closing ? 170000 : wait_ms);
+            std::vector<unsigned char> result;
+            std::vector<uint64_t> returned;
+            result.reserve(selected_count * frame_bytes);
+            size_t cursor = 0;
+            while (closing ? !gst_app_sink_is_eos(sink) : counts.decoded < end) {
+                const auto remaining = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                    deadline - std::chrono::steady_clock::now()).count();
+                const GstClockTime timeout = remaining > 0
+                    ? static_cast<GstClockTime>(std::min<int64_t>(remaining, GST_SECOND / 10)) : 0;
+                auto sample = pull(timeout);
+                if (sample) {
+                    const uint64_t index = counts.decoded - 1;
+                    if (cursor < selected.size() && index == selected[cursor]) {
+                        pack_frame(sample.get());
+                        result.insert(result.end(), packed.begin(), packed.end());
+                        returned.push_back(index); ++cursor; ++counts.copied;
+                    }
+                } else if (closing) {
+                    require(std::chrono::steady_clock::now() < deadline || gst_app_sink_is_eos(sink),
+                            "Stream EOS timed out");
+                } else {
+                    require(!gst_app_sink_is_eos(sink), "Unexpected EOS within stream");
+                }
+                // A collection budget limits the entire operation, including
+                // sample processing. Expiry returns partial progress, not error.
+                if (!closing && std::chrono::steady_clock::now() >= deadline) break;
+            }
+            check_bus();
+            if (closing) {
+                require(counts.decoded == submitted && !outstanding_bytes && cursor == selected.size(),
+                        "Incomplete stream at EOS");
+                gst_element_set_state(pipeline, GST_STATE_NULL); check_bus();
+            }
+            ++requests; reply(id, returned.size());
+            for (size_t i = 0; i < returned.size(); ++i) {
+                channel.write(returned[i]);
+                channel.transfer(result.data() + i * frame_bytes, frame_bytes, true);
+            }
+            if (closing) return counts;
+        }
+    }
+
     Counts serve(int fd, const Options &options) {
         require(options.width && options.height && !options.selective && !options.expected_frames,
                 "Serve mode requires fixed dimensions and no file-mode selection");
@@ -548,6 +706,8 @@ int main(int argc, char **argv) {
         Decoder decoder;
         const Counts counts = std::string(argv[1]) == "--serve"
             ? decoder.serve(static_cast<int>(parse_index(argv[2])), options)
+            : std::string(argv[1]) == "--stream"
+            ? decoder.stream(static_cast<int>(parse_index(argv[2])), options)
             : decoder.run(argv[1], argv[2], options);
         std::cerr << "NVDEC_DECODE_FRAMES=" << counts.decoded << '\n';
         std::cerr << "NVDEC_COPIED_FRAMES=" << counts.copied << '\n';
