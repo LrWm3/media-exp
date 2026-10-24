@@ -17,6 +17,24 @@ parameters, pending pictures remain eligible for output, while the IDR clears
 the previous reference state. A following job starts with its own input IDR.
 The fence is additional decoded work, not a graph output or a reusable input.
 
+## Completion-only diagnostic
+
+Protocol-v2 workers support `NVDECSession.complete(access_units, fence=...)`.
+This waits for all real pictures and returns an empty tuple without copying any
+of them to host memory. It uses the same counted IDR fence and final drain as
+ordinary `submit` requests; it does not preserve state across independent jobs,
+expose a GPU surface, or check output pixels. The fence itself can remain pending
+until the next request or close, whose final diagnostics must account for it.
+Use separate full-output preflight/postflight to validate streams and the live
+pipeline; that does not inspect inaccessible pixels of completion-only requests.
+
+New clients accept worker versions 1 and 2 for ordinary nonempty output
+selections. `complete` rejects version 1 before submitting work, leaving the
+session usable. Historical version-1-only clients reject the version-2 hello,
+so use a separate new helper path when retaining historical measurements.
+See [experiment 10](../10-decoder-interface-limits/README.md) for the diagnostic
+comparison and its deliberately unequal result contract.
+
 Local tests compare every decoded I420 byte using FFmpeg, VAAPI and OpenH264,
 when available, at active sizes 128x128 (High 3.1) and 256x256 (High 4.1).
 They cover alternating fence IDs and changing PCM/P/B jobs separated by fences.

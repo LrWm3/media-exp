@@ -1,0 +1,21 @@
+{
+  "format": "codec-compute-interface-availability-1",
+  "created_utc": "2026-10-24T19:52:24.490208+00:00",
+  "probe_sha256": "5af01cb86092f6b584d51f04326cd58a189b7e835f46231a71d3521b913403b6",
+  "nvdecode_library_loadable": false,
+  "nvdecode_symbols": {
+    "cuvidCreateDecoder": false,
+    "cuvidDecodePicture": false,
+    "cuvidRegisterDecodeSurfaces": false,
+    "cuvidDecodePictureAsync": false
+  },
+  "stateful_nvdec_plugin_available": true,
+  "stateful_properties": {
+    "enable-full-frame": true,
+    "disable-dpb": true,
+    "num-extra-surfaces": true,
+    "capture-io-mode": true
+  },
+  "scope": "Library symbol and plugin-property inspection only; no decoder capability query, surface import, CUDA consumer, or API feature execution. No settings modified; no device identity recorded.",
+  "interpretation": "Missing interfaces limit this installed software path; they do not prove hardware impossibility. Present symbols do not prove a device supports the feature."
+}

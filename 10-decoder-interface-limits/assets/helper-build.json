@@ -1,0 +1,11 @@
+{
+  "format": "codec-compute-nvdec-helper-build-1",
+  "protocol_version": 2,
+  "compiler": "g++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+  "source_sha256": {
+    "decoder_core/nvdec_decode.cpp": "271262dfc424b1fd5be5fc782f3027f3e1bc9db39e29e871d0afa2b89f8add5f",
+    "decoder_core/build_nvdec.sh": "e6b183183623ee787d7284fd99cd2f690fbd215c41d9051f91967f5e0281f143"
+  },
+  "helper_sha256": "438cfa9ac9f85e722a1ad5d88a37a7d28d7c25efe5f49a49762805b256291230",
+  "build": "Unmodified decoder_core/build_nvdec.sh; existing matching headers and libraries, no SDK install or settings changes."
+}

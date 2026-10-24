@@ -67,6 +67,13 @@ show CPU winning elapsed time at every tested depth; some longer synthetic
 chains save measured process CPU. The small observed background-work gain has
 overlapping trial ranges and does not establish general application benefit.
 
+[Experiment 10](../10-decoder-interface-limits/README.md) extends this with
+larger prediction slices and separate input/readback diagnostics. Its 64-stage
+chain uses 41.9% less process CPU while taking 18.3% longer than native CPU;
+practical single-stage tasks still lose, even with no host readback. This
+narrows the remaining research toward resident input surfaces and completion
+interfaces, rather than establishing a general application speedup.
+
 ## Migrate from the experiment 05 frontend
 
 This is a source-level migration, not an import alias. The two packages have

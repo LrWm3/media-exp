@@ -5,6 +5,50 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Prediction bands and decoder interfaces
+
+[Experiment 09](../09-codec-compute-ir/README.md) is now the numbered shared-IR
+entry point. Experiment 05's frontend is deprecated for new kernels; its
+backend and legacy packing remain required and available.
+
+[Experiment 10](../10-decoder-interface-limits/README.md) adds opt-in H.264
+prediction row bands with the actual cross-row motion-vector predictor.
+One row remains the default with byte compatibility. Compatible 512×512
+predictions use 34/9/1 slices for one-row/four-row/whole-picture layouts;
+heterogeneous headers and nonzero offsets retain the earlier layout. Tests
+cover exact P/B fractional samples, independent fields, all denominators,
+retained references, partial bands, legal vector endpoints and default bytes.
+Completed full suites pass **187 shared tests and 105 decoder-core tests**;
+the subsequently added endpoint regression passes in the **nine-test band
+suite**. Protocol-v2 diagnostic coverage passes **17 session tests**, and the
+paired experiment tooling passes **15 focused tests**. These counts overlap;
+they are not a combined test total.
+
+The frozen 512×512 export contains **72 streams / 1,428 pictures**, with
+**216 local decoder checks** and **48 byte-identical complete-I420 pairs**.
+NVDEC preflight checks **1,356 real pictures / 601,933,824 I420 bytes** plus
+72 fences. All **300 timing trials** pass. Completion-only timing returns
+zero copied pictures; its 360 new postflight requests check another **6,780
+real pictures**, outside timing. They do not inspect pixels from the earlier
+completion-only requests. Final close validates all decoded/copied counts and
+drains every pending fence. Source, bundle, CPU/PCM build and worker hashes
+bind the results; a curated six-case fixture-0 capture preserves actual pixels.
+
+For 64 stages, whole-picture slices reduce warm native-input/host-output
+elapsed time **216.27 → 96.82 ms** versus one-row slices. CPU takes **81.86 ms**;
+its five-trial range remains entirely below the decoder's range. Decoder
+process CPU is **47.48 versus 81.71 ms**, a **41.9% reduction** at an **18.3%
+latency penalty**. At 32 stages process CPU is 33.8% lower. These synthetic
+chains establish a resource tradeoff, not an application or energy win.
+
+Atlas and interpolation remain slower than CPU even with prepared input and
+completion-only output. All modes still decode input pictures and submit an
+IDR fence. Their separate noisy medians are not isolated stage-cost estimates;
+some omitted-work medians are higher. No reference-surface import, GPU consumer,
+retained state across jobs, direct-array API execution or hardware modification
+was tested. The read-only availability probe found no loadable NVDECODE library
+on this software path; this does not establish hardware impossibility.
+
 ## Zero-guard merging and CPU offload
 
 The shared compiler now enables compatible zero-guard row merging by default;
