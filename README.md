@@ -42,6 +42,11 @@ copy/translation/average target, and separates exact image semantics from
 codec-specific instruction selection and reference scheduling. Includes real
 decoder validation, explicit unsupported operations, and reusable computation tails.
 
+[Automatic computation synthesis](codec_compute/synthesis/README.md): generic
+bounded search discovers min/max and Boolean AND/OR/XOR implementations from
+exact codec primitive descriptions, retains exhaustive scalar verification
+records, and emits real H.264/HEVC/AV1 programs for successful searches.
+
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.
