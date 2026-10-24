@@ -68,7 +68,7 @@ def capture(bundle, output):
         captures.append({"case": name, "output": label, "variants": outputs})
     output.parent.mkdir(parents=True, exist_ok=True)
     image.save(output)
-    output.with_suffix(".json").write_text(json.dumps({"suite_sha256": digest(suite_bytes),
+    output.with_suffix(".capture.json").write_text(json.dumps({"suite_sha256": digest(suite_bytes),
         "comparison_sha256": digest(report_bytes), "capture_sha256": digest(output.read_bytes()),
         "capture_script_sha256": digest(Path(__file__).read_bytes()),
         "source": "Checked full FFmpeg I420 bytes; named output regions cross-checked against old graph reference",

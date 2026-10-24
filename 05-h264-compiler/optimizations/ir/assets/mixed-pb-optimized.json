@@ -1,0 +1,623 @@
+{
+  "format": "h264-packed-python-0.1",
+  "width": 16,
+  "height": 16,
+  "canvas_width": 48,
+  "canvas_height": 16,
+  "coded_width": 80,
+  "coded_height": 48,
+  "guard": 16,
+  "tile_gap": 16,
+  "tiles": [
+    {
+      "tile": 0,
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    },
+    {
+      "tile": 1,
+      "x": 32,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    }
+  ],
+  "frame_tiles": {
+    "0": [
+      0
+    ],
+    "1": [
+      0
+    ],
+    "2": [
+      0,
+      1
+    ],
+    "3": [
+      0
+    ]
+  },
+  "pictures": 4,
+  "output_frames": {
+    "unary": 2,
+    "binary": 2,
+    "combined": 3
+  },
+  "output_regions": {
+    "unary": {
+      "frame": 2,
+      "tile": 0,
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    },
+    "binary": {
+      "frame": 2,
+      "tile": 1,
+      "x": 32,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    },
+    "combined": {
+      "frame": 3,
+      "tile": 0,
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    }
+  },
+  "inputs": [
+    {
+      "name": "a",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "tile": 0,
+      "encoding": "literal u8"
+    },
+    {
+      "name": "b",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 1,
+      "tile": 0,
+      "encoding": "literal u8"
+    }
+  ],
+  "reference_mode": "retained",
+  "slice_mode": "row",
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 0,
+    "3": 0
+  },
+  "stats": {
+    "original_pictures": 5,
+    "tile_capacity": 2,
+    "peak_live_values": 2,
+    "scheduled_operations": 3,
+    "packed_prediction_pictures": 2,
+    "mixed_predictions": true,
+    "p_to_b_promotions": 1,
+    "mixed_prediction_pictures": 1
+  },
+  "costs": {
+    "input_pictures": 2,
+    "total_pictures": 4,
+    "prediction_pictures": 2,
+    "prediction_slices": 12,
+    "prediction_bytes": 275,
+    "coded_width": 80,
+    "coded_height": 48,
+    "coded_luma_samples": 15360,
+    "coded_macroblocks": 60,
+    "full_readback_bytes": 23040,
+    "output_readback_bytes": 11520,
+    "tile_capacity": 2,
+    "peak_live_values": 2,
+    "reference_slots_used": 2
+  },
+  "original_frame_locations": {
+    "0": {
+      "frame": 0,
+      "tile": 0
+    },
+    "1": {
+      "frame": 1,
+      "tile": 0
+    },
+    "2": {
+      "frame": 2,
+      "tile": 0
+    },
+    "3": {
+      "frame": 2,
+      "tile": 1
+    },
+    "4": {
+      "frame": 3,
+      "tile": 0
+    }
+  },
+  "instructions": [
+    {
+      "frame": 2,
+      "original_frames": [
+        2,
+        3
+      ],
+      "label": "packed: saturating_weighted, saturating_combine",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 0,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 0,
+          "weight": 0,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": [],
+      "block_operations": [
+        {
+          "label": "saturating_weighted",
+          "sources": [
+            {
+              "frame": 0,
+              "weight": -1,
+              "offset": 127,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            },
+            {
+              "frame": 0,
+              "weight": -1,
+              "offset": 127,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            }
+          ],
+          "denominator": 0,
+          "block_offsets": [],
+          "block_operations": []
+        },
+        {
+          "label": "zero padding",
+          "sources": [
+            {
+              "frame": 0,
+              "weight": 0,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            },
+            {
+              "frame": 0,
+              "weight": 0,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            }
+          ],
+          "denominator": 0,
+          "block_offsets": [],
+          "block_operations": []
+        },
+        {
+          "label": "saturating_combine",
+          "sources": [
+            {
+              "frame": 0,
+              "weight": 2,
+              "offset": 0,
+              "dx": -32,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            },
+            {
+              "frame": 1,
+              "weight": 2,
+              "offset": 0,
+              "dx": -32,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            }
+          ],
+          "denominator": 0,
+          "block_offsets": [],
+          "block_operations": []
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "original_frames": [
+        4
+      ],
+      "label": "packed: saturating_combine",
+      "sources": [
+        {
+          "frame": 2,
+          "weight": 0,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 2,
+          "weight": 0,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": [],
+      "block_operations": [
+        {
+          "label": "saturating_combine",
+          "sources": [
+            {
+              "frame": 2,
+              "weight": 2,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            },
+            {
+              "frame": 2,
+              "weight": 2,
+              "offset": 0,
+              "dx": 32,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            }
+          ],
+          "denominator": 0,
+          "block_offsets": [],
+          "block_operations": []
+        },
+        {
+          "label": "zero padding",
+          "sources": [
+            {
+              "frame": 2,
+              "weight": 0,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            },
+            {
+              "frame": 2,
+              "weight": 0,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            }
+          ],
+          "denominator": 0,
+          "block_offsets": [],
+          "block_operations": []
+        },
+        {
+          "label": "zero padding",
+          "sources": [
+            {
+              "frame": 2,
+              "weight": 0,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            },
+            {
+              "frame": 2,
+              "weight": 0,
+              "offset": 0,
+              "dx": 0,
+              "dy": 0,
+              "qx": 0,
+              "qy": 0
+            }
+          ],
+          "denominator": 0,
+          "block_offsets": [],
+          "block_operations": []
+        }
+      ]
+    }
+  ],
+  "original": {
+    "format": "h264-python-0.2",
+    "width": 16,
+    "height": 16,
+    "input_range": null,
+    "seed_encoding": "literal u8",
+    "inputs": [
+      {
+        "name": "a",
+        "range": [
+          0,
+          255
+        ],
+        "frame": 0,
+        "encoding": "literal u8"
+      },
+      {
+        "name": "b",
+        "range": [
+          0,
+          255
+        ],
+        "frame": 1,
+        "encoding": "literal u8"
+      }
+    ],
+    "guard": 16,
+    "pictures": 5,
+    "output_frames": {
+      "unary": 2,
+      "binary": 3,
+      "combined": 4
+    },
+    "graph_outputs": {
+      "unary": 1,
+      "binary": 3,
+      "combined": 4
+    },
+    "stats": {
+      "reachable_nodes_before_cse": 5,
+      "graph_nodes": 5,
+      "cse_eliminated": 0,
+      "commutative_cse_eliminated": 0,
+      "double_not_eliminated": 0,
+      "direct_or_gates": 0,
+      "direct_and_gates": 0,
+      "boolean_sum_nodes_bypassed": 0,
+      "boolean_operands_deduplicated": 0,
+      "boolean_nodes_fused": 0,
+      "affine_nodes_fused": 0,
+      "identity_affines_eliminated": 0,
+      "threshold_negative_two_p": 0,
+      "exact_search_enabled": true,
+      "exact_search_attempts": 0,
+      "exact_search_rewrites": 0,
+      "exact_search_proofs": [],
+      "exact_search_saved_instructions": 0,
+      "fused_shift_nodes": 0,
+      "lowered_instructions": 3,
+      "semantic_ir_enabled": true,
+      "semantic_ir_saved_instructions": 0,
+      "semantic_ir_rewrites": 0,
+      "semantic_ir_proofs": [],
+      "semantic_ir_aliases": 0,
+      "semantic_ir_constants": 0,
+      "semantic_ir_cse": 0,
+      "traced_nodes": 5,
+      "dead_nodes": 0,
+      "reference_copies": 0,
+      "peak_live_values": 3,
+      "optimized": true
+    },
+    "costs": {
+      "input_pictures": 2,
+      "normalization_pictures": 0,
+      "arithmetic_pictures": 3,
+      "refresh_pictures": 0,
+      "total_pictures": 5,
+      "prediction_slices": 15,
+      "prediction_bytes": 301,
+      "peak_live_values": 3,
+      "reference_slots_used": 3
+    },
+    "reference_mode": "retained",
+    "slice_mode": "row",
+    "reference_slots": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 0,
+      "4": 0
+    },
+    "graph": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ],
+        "last_lowered_frame": null
+      },
+      {
+        "id": 1,
+        "op": "saturating_weighted",
+        "args": [
+          0
+        ],
+        "params": [
+          -1,
+          127
+        ],
+        "range": [
+          0,
+          127
+        ],
+        "last_lowered_frame": 2
+      },
+      {
+        "id": 2,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ],
+        "last_lowered_frame": null
+      },
+      {
+        "id": 3,
+        "op": "saturating_combine",
+        "args": [
+          0,
+          2
+        ],
+        "params": [
+          1,
+          1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ],
+        "last_lowered_frame": 3
+      },
+      {
+        "id": 4,
+        "op": "saturating_combine",
+        "args": [
+          1,
+          3
+        ],
+        "params": [
+          1,
+          1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ],
+        "last_lowered_frame": 4
+      }
+    ],
+    "instructions": [
+      {
+        "frame": 2,
+        "label": "saturating_weighted",
+        "sources": [
+          {
+            "frame": 0,
+            "weight": -1,
+            "offset": 127,
+            "dx": 0,
+            "dy": 0,
+            "qx": 0,
+            "qy": 0
+          }
+        ],
+        "denominator": 0,
+        "block_offsets": [],
+        "block_operations": []
+      },
+      {
+        "frame": 3,
+        "label": "saturating_combine",
+        "sources": [
+          {
+            "frame": 0,
+            "weight": 2,
+            "offset": 0,
+            "dx": 0,
+            "dy": 0,
+            "qx": 0,
+            "qy": 0
+          },
+          {
+            "frame": 1,
+            "weight": 2,
+            "offset": 0,
+            "dx": 0,
+            "dy": 0,
+            "qx": 0,
+            "qy": 0
+          }
+        ],
+        "denominator": 0,
+        "block_offsets": [],
+        "block_operations": []
+      },
+      {
+        "frame": 4,
+        "label": "saturating_combine",
+        "sources": [
+          {
+            "frame": 2,
+            "weight": 2,
+            "offset": 0,
+            "dx": 0,
+            "dy": 0,
+            "qx": 0,
+            "qy": 0
+          },
+          {
+            "frame": 3,
+            "weight": 2,
+            "offset": 0,
+            "dx": 0,
+            "dy": 0,
+            "qx": 0,
+            "qy": 0
+          }
+        ],
+        "denominator": 0,
+        "block_offsets": [],
+        "block_operations": []
+      }
+    ],
+    "refresh_frames": []
+  },
+  "stream_sha256": "a5c57160dc6a5f4f3318f76ca5db96841552ed8896b1ad2194c412c8668cfaf5",
+  "prediction_sha256": "1f4fd9d979871539232861db2c672342419c24a3c4c39e25bf4af10900913b75"
+}

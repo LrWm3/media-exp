@@ -1,0 +1,170 @@
+{
+  "format": "h264-python-0.2",
+  "width": 16,
+  "height": 16,
+  "input_range": null,
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "a",
+      "range": [
+        0,
+        1
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    },
+    {
+      "name": "b",
+      "range": [
+        0,
+        1
+      ],
+      "frame": 1,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 2,
+  "output_frames": {
+    "output": 0,
+    "a": 0,
+    "b": 1
+  },
+  "graph_outputs": {
+    "output": 0,
+    "a": 0,
+    "b": 1
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 322,
+    "graph_nodes": 2,
+    "cse_eliminated": 305,
+    "commutative_cse_eliminated": 0,
+    "double_not_eliminated": 0,
+    "direct_or_gates": 0,
+    "direct_and_gates": 0,
+    "boolean_sum_nodes_bypassed": 0,
+    "boolean_operands_deduplicated": 0,
+    "boolean_nodes_fused": 0,
+    "affine_nodes_fused": 0,
+    "identity_affines_eliminated": 0,
+    "threshold_negative_two_p": 0,
+    "exact_search_enabled": true,
+    "exact_search_attempts": 0,
+    "exact_search_rewrites": 0,
+    "exact_search_proofs": [],
+    "exact_search_saved_instructions": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 0,
+    "semantic_ir_enabled": true,
+    "semantic_ir_saved_instructions": 151,
+    "semantic_ir_rewrites": 2,
+    "semantic_ir_proofs": [
+      {
+        "original_node": 12,
+        "operation": "threshold",
+        "kind": "cse",
+        "frontier": [
+          0,
+          1
+        ],
+        "frontier_domains": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "truth_table": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "checked_points": 4,
+        "replacement_value": 4
+      },
+      {
+        "original_node": 17,
+        "operation": "threshold",
+        "kind": "aliases",
+        "frontier": [
+          0
+        ],
+        "frontier_domains": [
+          [
+            0,
+            1
+          ]
+        ],
+        "truth_table": [
+          0,
+          1
+        ],
+        "checked_points": 2,
+        "replacement_value": 0
+      }
+    ],
+    "semantic_ir_aliases": 1,
+    "semantic_ir_constants": 0,
+    "semantic_ir_cse": 1,
+    "traced_nodes": 322,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 0,
+    "optimized": true
+  },
+  "costs": {
+    "input_pictures": 2,
+    "normalization_pictures": 0,
+    "arithmetic_pictures": 0,
+    "refresh_pictures": 0,
+    "total_pictures": 2,
+    "prediction_slices": 0,
+    "prediction_bytes": 0,
+    "peak_live_values": 0,
+    "reference_slots_used": 2
+  },
+  "reference_mode": "retained",
+  "slice_mode": "row",
+  "reference_slots": {
+    "0": 0,
+    "1": 1
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "a"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "input",
+      "args": [],
+      "params": [
+        "b"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    }
+  ],
+  "instructions": [],
+  "refresh_frames": [],
+  "stream_sha256": "04d4d14b6eaba4cc3f9d0fde89184f8fd20d93a21bd3daac463ec1d8cbf98016",
+  "prediction_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
