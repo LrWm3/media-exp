@@ -1,0 +1,492 @@
+{
+  "format": "codec-compute-cpu-reference-capture-1",
+  "capture_script": {
+    "path": "codec_compute/workloads/cpu_comparison/capture.py",
+    "sha256": "106a7b259dbbfb742ced08c0da0dcca581def6ec098d8c15046abb5b2352a175"
+  },
+  "source_commit": "ed20a7185d360a0a0560a1733a254c731d55cae0",
+  "curated_bundle": {
+    "path": "bundle.json",
+    "bytes": 204399,
+    "sha256": "4adfc16874a026c6b0e08d440f0c6ce361e35139e897d3a0acb239f577d2fb43"
+  },
+  "full_bundle": {
+    "path": "full-bundle.json",
+    "bytes": 337632,
+    "sha256": "f7758a7f0b7921ee1bf6b447f32701bbde11696739b73ae9b70e871d402d3d1b"
+  },
+  "audits": {
+    "retained_artifacts": 270,
+    "retained_artifact_bytes": 28545841,
+    "ordinary_streams_checked": 12,
+    "cpu_specs_bound_to_semantic_graphs": 12,
+    "full_bundle_sha256": "f7758a7f0b7921ee1bf6b447f32701bbde11696739b73ae9b70e871d402d3d1b",
+    "scope": "Checks saved export evidence and exact subset identity; no new decoder run or hardware claim."
+  },
+  "pixel_source": "Saved local decoded I420 from the frozen export; output crops match saved compact references.",
+  "local_export_decoders": [
+    "ffmpeg",
+    "openh264",
+    "vaapi"
+  ],
+  "hardware_evidence": "This capture performs no hardware decode. Consult the separate complete benchmark report for NVDEC equality and timing.",
+  "display": {
+    "scale": 1,
+    "interpolation": "none",
+    "contrast_stretch": false,
+    "zero_luma": "black",
+    "guards_and_chroma": "Audited, excluded from displayed active luma."
+  },
+  "sheets": [
+    {
+      "size": 128,
+      "image": {
+        "path": "reference-outputs-128.png",
+        "bytes": 64332,
+        "sha256": "1bc5205c230fb2cc151eefa7c2491a2024bf5b6705e6dc12066b32d71afdbd12"
+      }
+    },
+    {
+      "size": 256,
+      "image": {
+        "path": "reference-outputs-256.png",
+        "bytes": 139419,
+        "sha256": "44697a4e3d92d205af01d321438751c56eed33f431f306196b4819f34a2d1a45"
+      }
+    }
+  ],
+  "panels": [
+    {
+      "case": "128/control/fused",
+      "fixture": 0,
+      "frame_index": 0,
+      "source_i420": {
+        "path": "128/control/fused/000/expected.i420",
+        "bytes": 76800,
+        "sha256": "b2fb739454dcdc460fcd13bd41f1f87174ca7e1f9cd6d68b26052f6afa92d5f6"
+      },
+      "compact_reference": {
+        "path": "128/control/fused/000/output.u8",
+        "bytes": 16384,
+        "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+      },
+      "plane_sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+      "panel": {
+        "path": "panels/128/control.png",
+        "bytes": 726,
+        "sha256": "9c3ac352891bfbf85e77963a7d29427a7998921a06c174c5bde051613063ae61"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 16384,
+      "i420_crop": [
+        16,
+        16,
+        128,
+        128
+      ],
+      "contact_sheet_rectangle": [
+        72,
+        130,
+        128,
+        128
+      ]
+    },
+    {
+      "case": "128/average-control/fused",
+      "fixture": 0,
+      "frame_index": 2,
+      "source_i420": {
+        "path": "128/average-control/fused/000/expected.i420",
+        "bytes": 153600,
+        "sha256": "33b1130ae91b077de1169c1f65467697aac9d0d545ecdd7748b3b125ce365af8"
+      },
+      "compact_reference": {
+        "path": "128/average-control/fused/000/output.u8",
+        "bytes": 16384,
+        "sha256": "2863bf41c09c6e3e98fcd2081b5749b73a2eac9b1474dd9933f0d86931a4fbc5"
+      },
+      "plane_sha256": "2863bf41c09c6e3e98fcd2081b5749b73a2eac9b1474dd9933f0d86931a4fbc5",
+      "panel": {
+        "path": "panels/128/average-control.png",
+        "bytes": 767,
+        "sha256": "8e2d68b65651149455877b0b14d0123d6d3c149d0f5ac97e99deeb99a6c430eb"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 16384,
+      "i420_crop": [
+        16,
+        16,
+        128,
+        128
+      ],
+      "contact_sheet_rectangle": [
+        328,
+        130,
+        128,
+        128
+      ]
+    },
+    {
+      "case": "128/patch-atlas/fused",
+      "fixture": 0,
+      "frame_index": 1,
+      "source_i420": {
+        "path": "128/patch-atlas/fused/000/expected.i420",
+        "bytes": 115200,
+        "sha256": "ddcadfcf518d93e45c302f551a49481348dcac785e3289c5fc85549586a9e52e"
+      },
+      "compact_reference": {
+        "path": "128/patch-atlas/fused/000/output.u8",
+        "bytes": 16384,
+        "sha256": "8ac8c6fdfb624b7dde867f1a3eb0820b05db7827774d2529b38f1aa9257a1373"
+      },
+      "plane_sha256": "8ac8c6fdfb624b7dde867f1a3eb0820b05db7827774d2529b38f1aa9257a1373",
+      "panel": {
+        "path": "panels/128/patch-atlas.png",
+        "bytes": 183,
+        "sha256": "13e4193b129c622b648645630b0986121768f9533690528a4d7f9cfec38df55a"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 4071,
+      "i420_crop": [
+        16,
+        16,
+        128,
+        128
+      ],
+      "contact_sheet_rectangle": [
+        584,
+        130,
+        128,
+        128
+      ]
+    },
+    {
+      "case": "128/motion-interpolation/fused",
+      "fixture": 0,
+      "frame_index": 2,
+      "source_i420": {
+        "path": "128/motion-interpolation/fused/000/expected.i420",
+        "bytes": 153600,
+        "sha256": "03aad5fee79ee565b216a0ee891e65d4640a37de27614094834da3df21c42538"
+      },
+      "compact_reference": {
+        "path": "128/motion-interpolation/fused/000/output.u8",
+        "bytes": 16384,
+        "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f"
+      },
+      "plane_sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f",
+      "panel": {
+        "path": "panels/128/motion-interpolation.png",
+        "bytes": 4450,
+        "sha256": "eef9704e52b2100166de6b3eeabb96a7299bc0f626b8d60ec3826142241bf79a"
+      },
+      "pixel_min": 0,
+      "pixel_max": 249,
+      "nonzero_pixels": 16320,
+      "i420_crop": [
+        16,
+        16,
+        128,
+        128
+      ],
+      "contact_sheet_rectangle": [
+        72,
+        333,
+        128,
+        128
+      ]
+    },
+    {
+      "case": "128/resident-chain-16/fused",
+      "fixture": 0,
+      "frame_index": 16,
+      "source_i420": {
+        "path": "128/resident-chain-16/fused/000/expected.i420",
+        "bytes": 691200,
+        "sha256": "9b4619426c141c8bd60cb43fad8b50c5f701a4cf580e0660a710d6dcd9154d45"
+      },
+      "compact_reference": {
+        "path": "128/resident-chain-16/fused/000/output.u8",
+        "bytes": 16384,
+        "sha256": "070a861c81d82eb9890b4cb25ee0228238b9a3d822ace98fb4df38cffd45b3f6"
+      },
+      "plane_sha256": "070a861c81d82eb9890b4cb25ee0228238b9a3d822ace98fb4df38cffd45b3f6",
+      "panel": {
+        "path": "panels/128/resident-chain-16.png",
+        "bytes": 6103,
+        "sha256": "4e39ca86adda337c0ff0359b61be5dc5386524834ca848532c1b1730df402e5e"
+      },
+      "pixel_min": 6,
+      "pixel_max": 246,
+      "nonzero_pixels": 16384,
+      "i420_crop": [
+        16,
+        16,
+        128,
+        128
+      ],
+      "contact_sheet_rectangle": [
+        328,
+        333,
+        128,
+        128
+      ]
+    },
+    {
+      "case": "128/resident-chain-64/fused",
+      "fixture": 0,
+      "frame_index": 64,
+      "source_i420": {
+        "path": "128/resident-chain-64/fused/000/expected.i420",
+        "bytes": 2534400,
+        "sha256": "1cace06a3485262b66b65248afb4cb7b6eab76f5f2799c4612e12a626b6a1b36"
+      },
+      "compact_reference": {
+        "path": "128/resident-chain-64/fused/000/output.u8",
+        "bytes": 16384,
+        "sha256": "f75324871274e0317930de31494a37a24267b4e0a94c89e7d886875a7982048e"
+      },
+      "plane_sha256": "f75324871274e0317930de31494a37a24267b4e0a94c89e7d886875a7982048e",
+      "panel": {
+        "path": "panels/128/resident-chain-64.png",
+        "bytes": 5758,
+        "sha256": "fba34b1e8aa0db6c0b73fd27c7f5210503ab2ae52fc1d330d31d84b72cc11c47"
+      },
+      "pixel_min": 5,
+      "pixel_max": 252,
+      "nonzero_pixels": 16384,
+      "i420_crop": [
+        16,
+        16,
+        128,
+        128
+      ],
+      "contact_sheet_rectangle": [
+        584,
+        333,
+        128,
+        128
+      ]
+    },
+    {
+      "case": "256/control/fused",
+      "fixture": 0,
+      "frame_index": 0,
+      "source_i420": {
+        "path": "256/control/fused/000/expected.i420",
+        "bytes": 248832,
+        "sha256": "def309bcfb2a71f40ff0cd0d1be605b76cbaa6bb1eb83b3b5bc8e25632f5d4e9"
+      },
+      "compact_reference": {
+        "path": "256/control/fused/000/output.u8",
+        "bytes": 65536,
+        "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+      },
+      "plane_sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799",
+      "panel": {
+        "path": "panels/256/control.png",
+        "bytes": 1756,
+        "sha256": "1a3263950a99bbceb3e0f9a3050e39033880ce33414b8cef156786abcf83d220"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 65536,
+      "i420_crop": [
+        16,
+        16,
+        256,
+        256
+      ],
+      "contact_sheet_rectangle": [
+        20,
+        130,
+        256,
+        256
+      ]
+    },
+    {
+      "case": "256/average-control/fused",
+      "fixture": 0,
+      "frame_index": 2,
+      "source_i420": {
+        "path": "256/average-control/fused/000/expected.i420",
+        "bytes": 497664,
+        "sha256": "ebdea2ff7c656256c1fa350bbb2518006a19bcc45d9a73c16a6cd4a5f8413764"
+      },
+      "compact_reference": {
+        "path": "256/average-control/fused/000/output.u8",
+        "bytes": 65536,
+        "sha256": "0998fa3c113ce474361055958b4827a7b8148ac8ae0a09ee1c587c5f600d56e3"
+      },
+      "plane_sha256": "0998fa3c113ce474361055958b4827a7b8148ac8ae0a09ee1c587c5f600d56e3",
+      "panel": {
+        "path": "panels/256/average-control.png",
+        "bytes": 1861,
+        "sha256": "e7698ca49b4329fb7335f50b9259f40ef66c4702cea714773d27dbe045692153"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 65536,
+      "i420_crop": [
+        16,
+        16,
+        256,
+        256
+      ],
+      "contact_sheet_rectangle": [
+        300,
+        130,
+        256,
+        256
+      ]
+    },
+    {
+      "case": "256/patch-atlas/fused",
+      "fixture": 0,
+      "frame_index": 1,
+      "source_i420": {
+        "path": "256/patch-atlas/fused/000/expected.i420",
+        "bytes": 373248,
+        "sha256": "8893d5d83276a06a6d961fd1d20cf2fe4af9b730bf93000e11b6ddda5fd97acb"
+      },
+      "compact_reference": {
+        "path": "256/patch-atlas/fused/000/output.u8",
+        "bytes": 65536,
+        "sha256": "d5e82f9382d5cb65c22b41ac83564420b7ed9f745321d433bab69fe3a410fd67"
+      },
+      "plane_sha256": "d5e82f9382d5cb65c22b41ac83564420b7ed9f745321d433bab69fe3a410fd67",
+      "panel": {
+        "path": "panels/256/patch-atlas.png",
+        "bytes": 394,
+        "sha256": "4de9ef8054eb15cccc9273b84a18134a9a8f2b99b8df69ac8c8cb92005535557"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 16323,
+      "i420_crop": [
+        16,
+        16,
+        256,
+        256
+      ],
+      "contact_sheet_rectangle": [
+        580,
+        130,
+        256,
+        256
+      ]
+    },
+    {
+      "case": "256/motion-interpolation/fused",
+      "fixture": 0,
+      "frame_index": 2,
+      "source_i420": {
+        "path": "256/motion-interpolation/fused/000/expected.i420",
+        "bytes": 497664,
+        "sha256": "a12718c7c827900a4009f4f0222aa5afcdd89a1b028b9cb8bf2511ee63bdcbc3"
+      },
+      "compact_reference": {
+        "path": "256/motion-interpolation/fused/000/output.u8",
+        "bytes": 65536,
+        "sha256": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5"
+      },
+      "plane_sha256": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5",
+      "panel": {
+        "path": "panels/256/motion-interpolation.png",
+        "bytes": 12973,
+        "sha256": "92fb21c34969bca547710aba4934aabc40cf95ec32a4ec80f9ed1751865db8f3"
+      },
+      "pixel_min": 0,
+      "pixel_max": 253,
+      "nonzero_pixels": 65409,
+      "i420_crop": [
+        16,
+        16,
+        256,
+        256
+      ],
+      "contact_sheet_rectangle": [
+        20,
+        461,
+        256,
+        256
+      ]
+    },
+    {
+      "case": "256/resident-chain-16/fused",
+      "fixture": 0,
+      "frame_index": 16,
+      "source_i420": {
+        "path": "256/resident-chain-16/fused/000/expected.i420",
+        "bytes": 2239488,
+        "sha256": "0cbdd920b7ab3773c970680b071f2f8c2c95e7d66f4f052d7c40508d302324ae"
+      },
+      "compact_reference": {
+        "path": "256/resident-chain-16/fused/000/output.u8",
+        "bytes": 65536,
+        "sha256": "9b8e8c2a953bed8c9f10e5db7bd7296dc1a620076ca903a26eeba6938a911ef5"
+      },
+      "plane_sha256": "9b8e8c2a953bed8c9f10e5db7bd7296dc1a620076ca903a26eeba6938a911ef5",
+      "panel": {
+        "path": "panels/256/resident-chain-16.png",
+        "bytes": 15468,
+        "sha256": "a39fab1c0446b9ce2b4f9669e199d83c82e3260b20bc87f771b121b51a65990c"
+      },
+      "pixel_min": 8,
+      "pixel_max": 244,
+      "nonzero_pixels": 65536,
+      "i420_crop": [
+        16,
+        16,
+        256,
+        256
+      ],
+      "contact_sheet_rectangle": [
+        300,
+        461,
+        256,
+        256
+      ]
+    },
+    {
+      "case": "256/resident-chain-64/fused",
+      "fixture": 0,
+      "frame_index": 64,
+      "source_i420": {
+        "path": "256/resident-chain-64/fused/000/expected.i420",
+        "bytes": 8211456,
+        "sha256": "1ebb2b89c72fb81a6fdc759c9a5b2bd3c7590d87467fd192827f1ca07d9a2827"
+      },
+      "compact_reference": {
+        "path": "256/resident-chain-64/fused/000/output.u8",
+        "bytes": 65536,
+        "sha256": "85962ca5ce770d69d5ae2e1390a58858da4f614d147e5580705d63be00587b86"
+      },
+      "plane_sha256": "85962ca5ce770d69d5ae2e1390a58858da4f614d147e5580705d63be00587b86",
+      "panel": {
+        "path": "panels/256/resident-chain-64.png",
+        "bytes": 21363,
+        "sha256": "5793bcd5eb081262715862bcd6e74be1f0aa5c3b02042d61c354303f5807b7be"
+      },
+      "pixel_min": 5,
+      "pixel_max": 251,
+      "nonzero_pixels": 65536,
+      "i420_crop": [
+        16,
+        16,
+        256,
+        256
+      ],
+      "contact_sheet_rectangle": [
+        580,
+        461,
+        256,
+        256
+      ]
+    }
+  ]
+}

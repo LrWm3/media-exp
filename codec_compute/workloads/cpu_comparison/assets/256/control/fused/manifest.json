@@ -1,0 +1,113 @@
+{
+  "format": "codec-compute-program-1",
+  "ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      256,
+      256
+    ],
+    "inputs": [
+      {
+        "name": "image",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 0
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "image"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "lowered_ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      256,
+      256
+    ],
+    "inputs": [
+      {
+        "name": "image",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 0
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "image"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "synthesis": [],
+  "target": "h264",
+  "coded_shape": [
+    288,
+    288
+  ],
+  "level_idc": 41,
+  "output_frames": {
+    "output": 0
+  },
+  "costs": {
+    "input_pictures": 1,
+    "computation_pictures": 0,
+    "total_pictures": 1,
+    "prediction_bytes": 0,
+    "peak_live_references": 0,
+    "prediction_slices": 0
+  },
+  "reference_slots": {
+    "0": 0
+  },
+  "optimizations": {
+    "spatial_read_fusion": {
+      "enabled": true,
+      "eligible_nodes": 0,
+      "fused_nodes": 0,
+      "eligible_kinds": [],
+      "reason": "no eligible shifts"
+    },
+    "shift_read_fusion": {
+      "enabled": true,
+      "eligible_nodes": 0,
+      "fused_nodes": 0,
+      "eligible_kinds": [],
+      "reason": "no eligible shifts"
+    }
+  },
+  "scheduling": "H.264 retained long-term references",
+  "guard": 16,
+  "prediction_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
