@@ -150,6 +150,65 @@ def shift(image, dx=0, dy=0, *, border="zero"):
                  min(0, image.lo) if border == "zero" else image.lo, image.hi)
 
 
+def _offset_field(offsets):
+    """Take an immutable snapshot of an iterable of integer coordinate pairs."""
+    if isinstance(offsets, (str, bytes, Mapping)):
+        raise CompileError("offsets must be a nonempty iterable of integer pairs")
+    try:
+        field = []
+        for pair in offsets:
+            if isinstance(pair, (str, bytes, Mapping)):
+                raise CompileError("offsets must be a nonempty iterable of integer pairs")
+            field.append(tuple(pair))
+        field = tuple(field)
+    except TypeError as error:
+        raise CompileError("offsets must be a nonempty iterable of integer pairs") from error
+    if not field or any(len(pair) != 2 or any(type(value) is not int for value in pair) for pair in field):
+        raise CompileError("offsets must be a nonempty iterable of integer pairs")
+    return field
+
+
+def _block_size(value):
+    if integer(value, "block_size") <= 0:
+        raise CompileError("block_size must be positive")
+    return value
+
+
+def gather(image, offsets, *, block_size=16, border="zero"):
+    """Read integer relative (dx,dy) offsets per output block, in row order.
+
+    The graph shape determines the field length, including partial edge
+    blocks. Each block's offset addresses the original source image.
+    """
+    _image(image)
+    field, size = _offset_field(offsets), _block_size(block_size)
+    if border not in ("zero", "clamp"):
+        raise CompileError("border must be 'zero' or 'clamp'")
+    return _node("gather", (image,), (field, size, border),
+                 0 if border == "zero" else image.lo, image.hi)
+
+
+def sample_h264(image, qx=0, qy=0):
+    """H.264 luma sampling at a relative quarter-pixel offset, zero extended.
+
+    This operation deliberately names its codec-defined six-tap filter;
+    it does not claim portable fractional resampling semantics.
+    """
+    _image(image)
+    integer(qx, "qx")
+    integer(qy, "qy")
+    return _node("sample_h264", (image,), (qx, qy), 0,
+                 255 if qx % 4 or qy % 4 else image.hi)
+
+
+def gather_h264(image, offsets, *, block_size=16):
+    """H.264 luma sampling with quarter-pixel offsets per output block."""
+    _image(image)
+    field, size = _offset_field(offsets), _block_size(block_size)
+    return _node("gather_h264", (image,), (field, size), 0,
+                 255 if any(qx % 4 or qy % 4 for qx, qy in field) else image.hi)
+
+
 def threshold(image, cutoff):
     _image(image)
     integer(cutoff, "cutoff")
@@ -319,6 +378,17 @@ def validate_graph(graph):
                     proof = average(*args)
                 elif node.op == "shift" and len(args) == 1 and len(params) == 3:
                     proof = shift(*args, params[0], params[1], border=params[2])
+                elif node.op == "sample_h264" and len(args) == 1 and len(params) == 2:
+                    proof = sample_h264(*args, *params)
+                elif node.op in ("gather", "gather_h264") and len(args) == 1 and len(params) == (3 if node.op == "gather" else 2):
+                    field, size = params[:2]
+                    if not isinstance(field, tuple) or any(not isinstance(pair, tuple) for pair in field):
+                        raise CompileError("Gather offsets must be immutable tuples of integer pairs")
+                    proof = (gather(*args, field, block_size=size, border=params[2]) if node.op == "gather"
+                             else gather_h264(*args, field, block_size=size))
+                    expected = ((graph.width+size-1)//size)*((graph.height+size-1)//size)
+                    if len(field) != expected:
+                        raise CompileError(f"{node.op} needs {expected} offsets for this image and block_size")
                 elif node.op == "threshold" and len(args) == 1 and len(params) == 1:
                     proof = threshold(*args, *params)
                 elif node.op in ("and", "or", "xor", "minimum", "maximum", "absdiff") and len(args) == 2 and not params:
@@ -369,15 +439,34 @@ def evaluate(graph, images):
                          "xor": lambda a, b: a ^ b, "minimum": min, "maximum": max,
                          "absdiff": lambda a, b: abs(a - b)}[node.op]
             value = [operation(a, b) for a, b in zip(values[node.args[0]], values[node.args[1]])]
-        elif node.op == "shift":
-            dx, dy, border = node.params
+        elif node.op in ("shift", "gather"):
+            if node.op == "shift":
+                dx, dy, border = node.params
+            else:
+                field, size, border = node.params
+                columns = (width+size-1)//size
             source, value = values[node.args[0]], []
             for y in range(height):
                 for x in range(width):
+                    if node.op == "gather":
+                        dx, dy = field[(y//size)*columns+x//size]
                     sx, sy = x + dx, y + dy
                     if border == "clamp":
                         sx, sy = min(width - 1, max(0, sx)), min(height - 1, max(0, sy))
                     value.append(source[sy * width + sx] if 0 <= sx < width and 0 <= sy < height else 0)
+        elif node.op in ("sample_h264", "gather_h264"):
+            from .sampling import interpolate_h264
+            if node.op == "sample_h264":
+                qx, qy = node.params
+            else:
+                field, size = node.params
+                columns = (width+size-1)//size
+            source, value = values[node.args[0]], []
+            for y in range(height):
+                for x in range(width):
+                    if node.op == "gather_h264":
+                        qx, qy = field[(y//size)*columns+x//size]
+                    value.append(interpolate_h264(source, width, height, 4*x+qx, 4*y+qy))
         else:
             raise CompileError(f"Unknown semantic operation: {node.op}")
         if any(not node.lo <= sample <= node.hi for sample in value):

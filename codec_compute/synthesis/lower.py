@@ -78,6 +78,12 @@ def _rebuild(node, args):
         return ir.threshold(*args, *node.params)
     if node.op == "shift":
         return ir.shift(*args, *node.params[:2], border=node.params[2])
+    if node.op == "gather":
+        return ir.gather(*args, node.params[0], block_size=node.params[1], border=node.params[2])
+    if node.op == "sample_h264":
+        return ir.sample_h264(*args, *node.params)
+    if node.op == "gather_h264":
+        return ir.gather_h264(*args, node.params[0], block_size=node.params[1])
     raise ir.CompileError(f"Cannot rebuild semantic operation {node.op}")
 
 
