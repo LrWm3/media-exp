@@ -1,0 +1,858 @@
+{
+  "format": "codec-compute-resident-1",
+  "status": "pass",
+  "sizes": [
+    128,
+    256
+  ],
+  "jobs": 1,
+  "source_commit": "0d4184c451c31211d085e167eb26a1bf5ef5a685",
+  "source_sha256": {
+    "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+    "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
+    "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+    "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+    "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+    "05-h264-compiler/h264/packed.py": "31f232f58a463d25bf0767ccd6d01b39df5692e0cb98f4c9b1d2ac0d5197daeb",
+    "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+    "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+    "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
+    "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770",
+    "codec_compute/__init__.py": "44cfe5a4e0759dd9315a63e2d11ea1600adb2873fae95a942a7ab430eef8bab0",
+    "codec_compute/av1/__init__.py": "b79a63600905f7831b0750ccd23faa2ebc5f112b08bcccd242c2e9143ad41677",
+    "codec_compute/av1/bootstrap.py": "218ae23fca2e2eaf1fe42552aa2d1d77f4d6d85b806332b0b412050420568856",
+    "codec_compute/compiler.py": "442f9a5f39be59d876c8c57c99db8aab529e550c92b9e66b8bcd1b854024ebf0",
+    "codec_compute/demo.py": "9a096e724f0e91c92298f69e48f292bc9f8a73e53089ef219e88e4bda9ba29a8",
+    "codec_compute/hevc/__init__.py": "8cf7d30ea505c0ef8aa62eb9cef71d867e58d170cd0a27b81f8cf7547b53c280",
+    "codec_compute/hevc/native.py": "8d35e57eaf4969fb3b3562312a43e2016a82ff4ab83d52772966769d48149ef8",
+    "codec_compute/hevc/program.py": "3fdb399e9d54919481bc5dc575f2e7fe0588da92bfb6ce20b5989d323c9db4b0",
+    "codec_compute/ir.py": "746f6635b39cecc4089b3d5a51e6e73b756e27b672292785403e9100ebc77ef5",
+    "codec_compute/runtime.py": "5f7aca941ed1a310f6fec3b740f95146aadb242c664ad2885351cbc82f7f5a1d",
+    "codec_compute/sampling.py": "5303746e2c2d329fff93f4a3157cba8a1451d6fc46af3e6a0ca4a23a3fe6d627",
+    "codec_compute/synthesis/__init__.py": "ef35f6385758a1907493ea9bd2c95657fcf9d31960c8196277631e18acb61df6",
+    "codec_compute/synthesis/demo.py": "4a3e42c3cef2d837c5a926df9fd964416608ec38a08aef1a880780291f5d7a91",
+    "codec_compute/synthesis/lower.py": "b509ba7447923dbcb1063f703f6c35a8ccd034f7dfeb45d080ce21c1bb0f8bca",
+    "codec_compute/synthesis/model.py": "03ffe4f117fbdf2231edfa96005727c3654059981b47b48a432f20f62684ddce",
+    "codec_compute/synthesis/search.py": "626385b4f1b4e9e33168e52fb6c717cafeb340aa337cea9283d7ea233685f000",
+    "codec_compute/synthesis/verify.py": "291c6e3f5b17b39e56a128eaa7c279e4819de074726b05111a57bc77445ce5dd",
+    "codec_compute/targets/__init__.py": "34e7368d1c8648a2867b98863741e66cca96695ce3f5d910d8c310c8db73a465",
+    "codec_compute/targets/av1.py": "aa9e3052d0c1985b870962abeab71ac8467e73af1845f87a9e34ab35ada85aee",
+    "codec_compute/targets/h264.py": "9e58b4437ba0a99e6261789503de2a4e7c6bcf06cf6863dfd694cb8c41018da8",
+    "codec_compute/targets/hevc.py": "5ec8346040e2b9bb052f11b94697ddfe6ae7a079d9bd3e1b01169ca3982ba883",
+    "codec_compute/workloads/__init__.py": "92f92f5a0db0585928120bc79f7d5acb264ac7d6cea9df072ec8198533e7cb86",
+    "codec_compute/workloads/benchmark.py": "c8074f02d15115dcec908397939b82284dec7dc5080baa786ca21b1cf7e3acaa",
+    "codec_compute/workloads/capture.py": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+    "codec_compute/workloads/demo.py": "50295bf1d823dee38f5d279c56d5da28d2f3560acbe447ec33dba1cc3d411bc7",
+    "codec_compute/workloads/export_h264.py": "b402922c4c77d6fd7e3b1b47328bb653f9439103977dd865b94f9e45127c5930",
+    "codec_compute/workloads/fusion.py": "c9b12e9e84361ee600fa6706252ced4a882e33af92db036be53659bab74c62f0",
+    "codec_compute/workloads/kernels.py": "5690ab7d914f02a3b14e2204876747cdd6a21e18703393dc5a208f083716fa80",
+    "codec_compute/workloads/resampling/__init__.py": "45e7687cf1553a1429daa5c3b79eedcb5b542aa2094b853102e52ed6e6120ee6",
+    "codec_compute/workloads/resampling/benchmark.py": "a6c45b84f728fce5c586a53b1fb36f58b7843d99e2c5b44a98c567bebb918149",
+    "codec_compute/workloads/resampling/capture.py": "064510d5a8823591c04d7baa55696006e137e21b498f45daaf2371d148a31531",
+    "codec_compute/workloads/resampling/demo.py": "befc85fc764ea3e5f3adcc14cb5f2d7ebd5bc6333ec399160d10e4564a1ffd48",
+    "codec_compute/workloads/resampling/kernels.py": "40c6c88028adcd70c366737209659824d03fb291555316ce6bb1b12b85a26e92",
+    "codec_compute/workloads/resident/__init__.py": "f4c519efc8925d031ad65d7915be01af68a1f2dbaf5af96e324845a442163c7e",
+    "codec_compute/workloads/resident/benchmark.py": "b1e2cb9702707085fda5b9f866c62dfa7143e0dacb90f6e2624493ca2df9e2ae",
+    "codec_compute/workloads/resident/capture.py": "bb6d4de41a46e12450bacbd62856c850be1b73b84abf551f9979f83b185f8515",
+    "codec_compute/workloads/resident/prepare.py": "08230543b5d5d79bacd65bb39ecf5d0db954cc1e29eaae502d05aa598ab4607d",
+    "codec_compute/workloads/temporal_benchmark.py": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+    "decoder_core/bitstream.py": "7652a41db5554b9bdf9b29b04ce7527248caf993de3077a1424740b22dcceba4",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+    "decoder_core/fence.py": "a573db67b7c13f62fbd4d6424d69652f87975594be00df326c6a9057ca53eb75",
+    "decoder_core/nvdec_decode.cpp": "13f6674abd3aeb60379745f11ae7cdfe3752b65708afe3fbbd735e004e8f6d74",
+    "decoder_core/session.py": "5b6d361b30aefdb350b61243314a960432f6751cbb73d461308d57a76f6271d6"
+  },
+  "cases": {
+    "128/motion-interpolation/baseline": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 3,
+        "total_pictures": 5,
+        "prediction_bytes": 1782,
+        "peak_live_references": 2,
+        "prediction_slices": 78
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 4
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0,
+          "3": 1,
+          "4": 0
+        }
+      },
+      "manifest": {
+        "path": "128/motion-interpolation/baseline/manifest.json",
+        "bytes": 20070,
+        "sha256": "690ab511a5c12ff809ce8f4b5b1567ff6b85033c27879b4f459741e5418316e6"
+      },
+      "prediction_units": [
+        {
+          "path": "128/motion-interpolation/baseline/prediction-000.h264",
+          "bytes": 552,
+          "sha256": "24e5a1cdd1bca58d3237677457f0fedf93aae64d4bc97a3c9a08f493e15964a2"
+        },
+        {
+          "path": "128/motion-interpolation/baseline/prediction-001.h264",
+          "bytes": 588,
+          "sha256": "236ebe2906e76dc5e78ac587deba13cccfec70a6aecf68d2e50a5494467996be"
+        },
+        {
+          "path": "128/motion-interpolation/baseline/prediction-002.h264",
+          "bytes": 642,
+          "sha256": "93393c6a7ffe619cbfd801559dbf1d92ebd48fefe1d5756b8ff418a1ea7dee69"
+        }
+      ],
+      "fence": {
+        "path": "128/motion-interpolation/baseline/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/000/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/000/input-b.u8",
+              "bytes": 16384,
+              "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/000/input-001.h264",
+              "bytes": 43221,
+              "sha256": "42ed623dc331a5ac4440ae474df0b696414c349daf78890b89c021077b310986"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/000/program.h264",
+            "bytes": 88408,
+            "sha256": "77cb9ef3e6efe40f276889b55801e1aad5bc2b81d987e34543246bd3acaa7236"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/000/expected.i420",
+            "bytes": 230400,
+            "sha256": "24ab7c581ac5fca7007f5436cee4600694c79c7c59b2b0815303dafa47a01028"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/000/output.u8",
+              "bytes": 16384,
+              "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f"
+            }
+          }
+        }
+      ]
+    },
+    "128/motion-interpolation/fused": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 771,
+        "peak_live_references": 2,
+        "prediction_slices": 26
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "128/motion-interpolation/fused/manifest.json",
+        "bytes": 20607,
+        "sha256": "7d262a18091aade372779655d90abbde09d293f986cbb5bad33f67b151e5d7d3"
+      },
+      "prediction_units": [
+        {
+          "path": "128/motion-interpolation/fused/prediction-000.h264",
+          "bytes": 771,
+          "sha256": "e980978e69f17447d19349b010989141789e61183de6c355c2d89f3e61eb4261"
+        }
+      ],
+      "fence": {
+        "path": "128/motion-interpolation/fused/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/000/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/000/input-b.u8",
+              "bytes": 16384,
+              "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            },
+            {
+              "path": "128/motion-interpolation/fused/000/input-001.h264",
+              "bytes": 43221,
+              "sha256": "42ed623dc331a5ac4440ae474df0b696414c349daf78890b89c021077b310986"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/000/program.h264",
+            "bytes": 87397,
+            "sha256": "c7f2761edf0caca91a5e1d3cc474253d33061c184a8fbe871ea74499103ddbe8"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/000/expected.i420",
+            "bytes": 153600,
+            "sha256": "03aad5fee79ee565b216a0ee891e65d4640a37de27614094834da3df21c42538"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/000/output.u8",
+              "bytes": 16384,
+              "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f"
+            }
+          }
+        }
+      ]
+    },
+    "128/average-control/fused": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 642,
+        "peak_live_references": 2,
+        "prediction_slices": 26
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "128/average-control/fused/manifest.json",
+        "bytes": 2965,
+        "sha256": "f51a21d8283d07e8dd350e6ec145e0d1fe3b7e95e909d216452ae77f23e34558"
+      },
+      "prediction_units": [
+        {
+          "path": "128/average-control/fused/prediction-000.h264",
+          "bytes": 642,
+          "sha256": "5fc49c0342d9680fde943bb5cfb3114a63b186099f622a2280ab7a8848aaa154"
+        }
+      ],
+      "fence": {
+        "path": "128/average-control/fused/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/000/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            },
+            "b": {
+              "path": "128/average-control/fused/000/input-b.u8",
+              "bytes": 16384,
+              "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            },
+            {
+              "path": "128/average-control/fused/000/input-001.h264",
+              "bytes": 43221,
+              "sha256": "42ed623dc331a5ac4440ae474df0b696414c349daf78890b89c021077b310986"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/000/program.h264",
+            "bytes": 87268,
+            "sha256": "22364b1a647282a07ba12f2fe17e7d30fba4d501dc603ed9363d697d7f4de455"
+          },
+          "expected": {
+            "path": "128/average-control/fused/000/expected.i420",
+            "bytes": 153600,
+            "sha256": "33b1130ae91b077de1169c1f65467697aac9d0d545ecdd7748b3b125ce365af8"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/000/output.u8",
+              "bytes": 16384,
+              "sha256": "2863bf41c09c6e3e98fcd2081b5749b73a2eac9b1474dd9933f0d86931a4fbc5"
+            }
+          }
+        }
+      ]
+    },
+    "128/control/fused": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "image"
+      ],
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 0,
+        "total_pictures": 1,
+        "prediction_bytes": 0,
+        "peak_live_references": 0,
+        "prediction_slices": 0
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 0
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0
+        }
+      },
+      "manifest": {
+        "path": "128/control/fused/manifest.json",
+        "bytes": 1936,
+        "sha256": "3f65a2ca9f3f7761439c093d4b0c5fc37f63d587a9e62773c1709fae65351a82"
+      },
+      "prediction_units": [],
+      "fence": {
+        "path": "128/control/fused/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/000/input-image.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/000/program.h264",
+            "bytes": 43405,
+            "sha256": "15f65071a374a6779722ea78186ff40cc92f64acc3e35b940a7fff32a1814719"
+          },
+          "expected": {
+            "path": "128/control/fused/000/expected.i420",
+            "bytes": 76800,
+            "sha256": "b2fb739454dcdc460fcd13bd41f1f87174ca7e1f9cd6d68b26052f6afa92d5f6"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/000/output.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            }
+          }
+        }
+      ]
+    },
+    "256/motion-interpolation/baseline": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 3,
+        "total_pictures": 5,
+        "prediction_bytes": 4102,
+        "peak_live_references": 2,
+        "prediction_slices": 150
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 4
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0,
+          "3": 1,
+          "4": 0
+        }
+      },
+      "manifest": {
+        "path": "256/motion-interpolation/baseline/manifest.json",
+        "bytes": 68455,
+        "sha256": "39ef890964c21727195f7b6a5fbc9a84b938997e48ff1aa41dc72a7d78f0e786"
+      },
+      "prediction_units": [
+        {
+          "path": "256/motion-interpolation/baseline/prediction-000.h264",
+          "bytes": 1277,
+          "sha256": "95cf9c662703292ee40a872e8efd9884afc3c60b4cff4a6a72eda96630ce0726"
+        },
+        {
+          "path": "256/motion-interpolation/baseline/prediction-001.h264",
+          "bytes": 1395,
+          "sha256": "252c0b0a3559894b836413aab27bd54294d48ebcc059f258a041a7c978d7dc22"
+        },
+        {
+          "path": "256/motion-interpolation/baseline/prediction-002.h264",
+          "bytes": 1430,
+          "sha256": "ee6845f598900545a1d0e5ebe7bb6371b859bc541463d2159bfe9021b79d9d9d"
+        }
+      ],
+      "fence": {
+        "path": "256/motion-interpolation/baseline/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/000/input-a.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/000/input-b.u8",
+              "bytes": 65536,
+              "sha256": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/000/input-001.h264",
+              "bytes": 133781,
+              "sha256": "55f8a567676f2740c95b6ae1ed7eb637fd9ed67e312cba4c40d0a426ba3505b2"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/000/program.h264",
+            "bytes": 272070,
+            "sha256": "8ef89a9338335ff74b35d632d82f91d346e74bca7a7e0ebdc721b1138d963263"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/000/expected.i420",
+            "bytes": 746496,
+            "sha256": "a5c8553286645eeeebb62351527733b35611c1fede597c3b5f582e19d6fa7d2d"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/000/output.u8",
+              "bytes": 65536,
+              "sha256": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5"
+            }
+          }
+        }
+      ]
+    },
+    "256/motion-interpolation/fused": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 1957,
+        "peak_live_references": 2,
+        "prediction_slices": 50
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "256/motion-interpolation/fused/manifest.json",
+        "bytes": 68994,
+        "sha256": "53992cc6e48a1fdeefb8a54503fbbe2a56ff2c2f9566ab0f1da887a306943688"
+      },
+      "prediction_units": [
+        {
+          "path": "256/motion-interpolation/fused/prediction-000.h264",
+          "bytes": 1957,
+          "sha256": "8941b6a25380a241adc50e04043c68005b54cc36da7de802c42277265a7a887e"
+        }
+      ],
+      "fence": {
+        "path": "256/motion-interpolation/fused/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/000/input-a.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/000/input-b.u8",
+              "bytes": 65536,
+              "sha256": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            },
+            {
+              "path": "256/motion-interpolation/fused/000/input-001.h264",
+              "bytes": 133781,
+              "sha256": "55f8a567676f2740c95b6ae1ed7eb637fd9ed67e312cba4c40d0a426ba3505b2"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/000/program.h264",
+            "bytes": 269925,
+            "sha256": "6b6e2edb01f4b58ae391cc5c382f63e3085958a67f7b67b76f3b0e90d20a9824"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/000/expected.i420",
+            "bytes": 497664,
+            "sha256": "a12718c7c827900a4009f4f0222aa5afcdd89a1b028b9cb8bf2511ee63bdcbc3"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/000/output.u8",
+              "bytes": 65536,
+              "sha256": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5"
+            }
+          }
+        }
+      ]
+    },
+    "256/average-control/fused": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 1430,
+        "peak_live_references": 2,
+        "prediction_slices": 50
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "256/average-control/fused/manifest.json",
+        "bytes": 2966,
+        "sha256": "43c60ce86993ba1c32d8f6f615fccc6363f3fd0942eb91520f0f217694149c72"
+      },
+      "prediction_units": [
+        {
+          "path": "256/average-control/fused/prediction-000.h264",
+          "bytes": 1430,
+          "sha256": "afd1b45a674e98535d9bd514014afd11b1eab3d91f678ae6b3d6304835628d84"
+        }
+      ],
+      "fence": {
+        "path": "256/average-control/fused/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/000/input-a.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            },
+            "b": {
+              "path": "256/average-control/fused/000/input-b.u8",
+              "bytes": 65536,
+              "sha256": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            },
+            {
+              "path": "256/average-control/fused/000/input-001.h264",
+              "bytes": 133781,
+              "sha256": "55f8a567676f2740c95b6ae1ed7eb637fd9ed67e312cba4c40d0a426ba3505b2"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/000/program.h264",
+            "bytes": 269398,
+            "sha256": "725772ada1d77c313ce5c86d1a634b4e4cbb82c673c4d41f38fa7209d31dd484"
+          },
+          "expected": {
+            "path": "256/average-control/fused/000/expected.i420",
+            "bytes": 497664,
+            "sha256": "ebdea2ff7c656256c1fa350bbb2518006a19bcc45d9a73c16a6cd4a5f8413764"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/000/output.u8",
+              "bytes": 65536,
+              "sha256": "0998fa3c113ce474361055958b4827a7b8148ac8ae0a09ee1c587c5f600d56e3"
+            }
+          }
+        }
+      ]
+    },
+    "256/control/fused": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "image"
+      ],
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 0,
+        "total_pictures": 1,
+        "prediction_bytes": 0,
+        "peak_live_references": 0,
+        "prediction_slices": 0
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 0
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0
+        }
+      },
+      "manifest": {
+        "path": "256/control/fused/manifest.json",
+        "bytes": 1936,
+        "sha256": "554eca84a894e9d4e18725b8883ee2fa401f23490da6319845783092b9692c6a"
+      },
+      "prediction_units": [],
+      "fence": {
+        "path": "256/control/fused/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/000/input-image.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/000/program.h264",
+            "bytes": 134187,
+            "sha256": "dc6019ca57c19dd536c4a0cbf0f0869bfb372dcf22a5050a4bd98aa0ffd013fc"
+          },
+          "expected": {
+            "path": "256/control/fused/000/expected.i420",
+            "bytes": 248832,
+            "sha256": "def309bcfb2a71f40ff0cd0d1be605b76cbaa6bb1eb83b3b5bc8e25632f5d4e9"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/000/output.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "validation": {
+    "streams": 8,
+    "pictures": 32,
+    "local_decoder_runs": 24
+  },
+  "decoders": [
+    "ffmpeg",
+    "openh264",
+    "vaapi"
+  ],
+  "selection": {
+    "description": "First original fixture (index 0) from every case; copied artifacts retain their original hashes.",
+    "original_fixture_indices": [
+      0
+    ],
+    "original_jobs_per_case": 8,
+    "full_bundle": {
+      "path": "full-bundle.json",
+      "bytes": 118579,
+      "sha256": "207dafe26cf48b4465d9ee942bfe5375fe40fefcc35926e721e23c0b12db1250"
+    },
+    "full_validation": {
+      "streams": 64,
+      "pictures": 256,
+      "local_decoder_runs": 192
+    },
+    "purpose": "Representative streams and capture; benchmark reports use the immutable full-bundle.json hash.",
+    "picture_accounting": "All stream picture counts include one discarded IDR fence per job."
+  }
+}

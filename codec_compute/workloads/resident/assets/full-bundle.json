@@ -1,0 +1,3107 @@
+{
+  "format": "codec-compute-resident-1",
+  "status": "pass",
+  "sizes": [
+    128,
+    256
+  ],
+  "jobs": 8,
+  "source_commit": "0d4184c451c31211d085e167eb26a1bf5ef5a685",
+  "source_sha256": {
+    "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+    "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
+    "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+    "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+    "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+    "05-h264-compiler/h264/packed.py": "31f232f58a463d25bf0767ccd6d01b39df5692e0cb98f4c9b1d2ac0d5197daeb",
+    "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+    "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+    "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
+    "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770",
+    "codec_compute/__init__.py": "44cfe5a4e0759dd9315a63e2d11ea1600adb2873fae95a942a7ab430eef8bab0",
+    "codec_compute/av1/__init__.py": "b79a63600905f7831b0750ccd23faa2ebc5f112b08bcccd242c2e9143ad41677",
+    "codec_compute/av1/bootstrap.py": "218ae23fca2e2eaf1fe42552aa2d1d77f4d6d85b806332b0b412050420568856",
+    "codec_compute/compiler.py": "442f9a5f39be59d876c8c57c99db8aab529e550c92b9e66b8bcd1b854024ebf0",
+    "codec_compute/demo.py": "9a096e724f0e91c92298f69e48f292bc9f8a73e53089ef219e88e4bda9ba29a8",
+    "codec_compute/hevc/__init__.py": "8cf7d30ea505c0ef8aa62eb9cef71d867e58d170cd0a27b81f8cf7547b53c280",
+    "codec_compute/hevc/native.py": "8d35e57eaf4969fb3b3562312a43e2016a82ff4ab83d52772966769d48149ef8",
+    "codec_compute/hevc/program.py": "3fdb399e9d54919481bc5dc575f2e7fe0588da92bfb6ce20b5989d323c9db4b0",
+    "codec_compute/ir.py": "746f6635b39cecc4089b3d5a51e6e73b756e27b672292785403e9100ebc77ef5",
+    "codec_compute/runtime.py": "5f7aca941ed1a310f6fec3b740f95146aadb242c664ad2885351cbc82f7f5a1d",
+    "codec_compute/sampling.py": "5303746e2c2d329fff93f4a3157cba8a1451d6fc46af3e6a0ca4a23a3fe6d627",
+    "codec_compute/synthesis/__init__.py": "ef35f6385758a1907493ea9bd2c95657fcf9d31960c8196277631e18acb61df6",
+    "codec_compute/synthesis/demo.py": "4a3e42c3cef2d837c5a926df9fd964416608ec38a08aef1a880780291f5d7a91",
+    "codec_compute/synthesis/lower.py": "b509ba7447923dbcb1063f703f6c35a8ccd034f7dfeb45d080ce21c1bb0f8bca",
+    "codec_compute/synthesis/model.py": "03ffe4f117fbdf2231edfa96005727c3654059981b47b48a432f20f62684ddce",
+    "codec_compute/synthesis/search.py": "626385b4f1b4e9e33168e52fb6c717cafeb340aa337cea9283d7ea233685f000",
+    "codec_compute/synthesis/verify.py": "291c6e3f5b17b39e56a128eaa7c279e4819de074726b05111a57bc77445ce5dd",
+    "codec_compute/targets/__init__.py": "34e7368d1c8648a2867b98863741e66cca96695ce3f5d910d8c310c8db73a465",
+    "codec_compute/targets/av1.py": "aa9e3052d0c1985b870962abeab71ac8467e73af1845f87a9e34ab35ada85aee",
+    "codec_compute/targets/h264.py": "9e58b4437ba0a99e6261789503de2a4e7c6bcf06cf6863dfd694cb8c41018da8",
+    "codec_compute/targets/hevc.py": "5ec8346040e2b9bb052f11b94697ddfe6ae7a079d9bd3e1b01169ca3982ba883",
+    "codec_compute/workloads/__init__.py": "92f92f5a0db0585928120bc79f7d5acb264ac7d6cea9df072ec8198533e7cb86",
+    "codec_compute/workloads/benchmark.py": "c8074f02d15115dcec908397939b82284dec7dc5080baa786ca21b1cf7e3acaa",
+    "codec_compute/workloads/capture.py": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+    "codec_compute/workloads/demo.py": "50295bf1d823dee38f5d279c56d5da28d2f3560acbe447ec33dba1cc3d411bc7",
+    "codec_compute/workloads/export_h264.py": "b402922c4c77d6fd7e3b1b47328bb653f9439103977dd865b94f9e45127c5930",
+    "codec_compute/workloads/fusion.py": "c9b12e9e84361ee600fa6706252ced4a882e33af92db036be53659bab74c62f0",
+    "codec_compute/workloads/kernels.py": "5690ab7d914f02a3b14e2204876747cdd6a21e18703393dc5a208f083716fa80",
+    "codec_compute/workloads/resampling/__init__.py": "45e7687cf1553a1429daa5c3b79eedcb5b542aa2094b853102e52ed6e6120ee6",
+    "codec_compute/workloads/resampling/benchmark.py": "a6c45b84f728fce5c586a53b1fb36f58b7843d99e2c5b44a98c567bebb918149",
+    "codec_compute/workloads/resampling/capture.py": "064510d5a8823591c04d7baa55696006e137e21b498f45daaf2371d148a31531",
+    "codec_compute/workloads/resampling/demo.py": "befc85fc764ea3e5f3adcc14cb5f2d7ebd5bc6333ec399160d10e4564a1ffd48",
+    "codec_compute/workloads/resampling/kernels.py": "40c6c88028adcd70c366737209659824d03fb291555316ce6bb1b12b85a26e92",
+    "codec_compute/workloads/resident/__init__.py": "f4c519efc8925d031ad65d7915be01af68a1f2dbaf5af96e324845a442163c7e",
+    "codec_compute/workloads/resident/benchmark.py": "b1e2cb9702707085fda5b9f866c62dfa7143e0dacb90f6e2624493ca2df9e2ae",
+    "codec_compute/workloads/resident/capture.py": "bb6d4de41a46e12450bacbd62856c850be1b73b84abf551f9979f83b185f8515",
+    "codec_compute/workloads/resident/prepare.py": "08230543b5d5d79bacd65bb39ecf5d0db954cc1e29eaae502d05aa598ab4607d",
+    "codec_compute/workloads/temporal_benchmark.py": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+    "decoder_core/bitstream.py": "7652a41db5554b9bdf9b29b04ce7527248caf993de3077a1424740b22dcceba4",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+    "decoder_core/fence.py": "a573db67b7c13f62fbd4d6424d69652f87975594be00df326c6a9057ca53eb75",
+    "decoder_core/nvdec_decode.cpp": "13f6674abd3aeb60379745f11ae7cdfe3752b65708afe3fbbd735e004e8f6d74",
+    "decoder_core/session.py": "5b6d361b30aefdb350b61243314a960432f6751cbb73d461308d57a76f6271d6"
+  },
+  "cases": {
+    "128/motion-interpolation/baseline": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 3,
+        "total_pictures": 5,
+        "prediction_bytes": 1782,
+        "peak_live_references": 2,
+        "prediction_slices": 78
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 4
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0,
+          "3": 1,
+          "4": 0
+        }
+      },
+      "manifest": {
+        "path": "128/motion-interpolation/baseline/manifest.json",
+        "bytes": 20070,
+        "sha256": "690ab511a5c12ff809ce8f4b5b1567ff6b85033c27879b4f459741e5418316e6"
+      },
+      "prediction_units": [
+        {
+          "path": "128/motion-interpolation/baseline/prediction-000.h264",
+          "bytes": 552,
+          "sha256": "24e5a1cdd1bca58d3237677457f0fedf93aae64d4bc97a3c9a08f493e15964a2"
+        },
+        {
+          "path": "128/motion-interpolation/baseline/prediction-001.h264",
+          "bytes": 588,
+          "sha256": "236ebe2906e76dc5e78ac587deba13cccfec70a6aecf68d2e50a5494467996be"
+        },
+        {
+          "path": "128/motion-interpolation/baseline/prediction-002.h264",
+          "bytes": 642,
+          "sha256": "93393c6a7ffe619cbfd801559dbf1d92ebd48fefe1d5756b8ff418a1ea7dee69"
+        }
+      ],
+      "fence": {
+        "path": "128/motion-interpolation/baseline/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/000/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/000/input-b.u8",
+              "bytes": 16384,
+              "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/000/input-001.h264",
+              "bytes": 43221,
+              "sha256": "42ed623dc331a5ac4440ae474df0b696414c349daf78890b89c021077b310986"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/000/program.h264",
+            "bytes": 88408,
+            "sha256": "77cb9ef3e6efe40f276889b55801e1aad5bc2b81d987e34543246bd3acaa7236"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/000/expected.i420",
+            "bytes": 230400,
+            "sha256": "24ab7c581ac5fca7007f5436cee4600694c79c7c59b2b0815303dafa47a01028"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/000/output.u8",
+              "bytes": 16384,
+              "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/001/input-a.u8",
+              "bytes": 16384,
+              "sha256": "033cc6d0c99022d07a4647618cb9c17438f3d985d5f0a9c7efe35b2a99e0485a"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/001/input-b.u8",
+              "bytes": 16384,
+              "sha256": "8c2e405c63354faf7c34af267f19aa4ee432720588fcc592e3397214acb74916"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/001/input-000.h264",
+              "bytes": 43256,
+              "sha256": "5c1adddd04aefaa11f99318daac241c37e345bd237ff595229efece87b15b571"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/001/input-001.h264",
+              "bytes": 43221,
+              "sha256": "3961ce409088caf7a7400e2c9734204f038d4b8822b02d1b43c933005d120aeb"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/001/program.h264",
+            "bytes": 88408,
+            "sha256": "00c72ae0e69f10a9c61082693b69122383c9d2f7ec9194f8f4a4979727958171"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/001/expected.i420",
+            "bytes": 230400,
+            "sha256": "597741d1f8d49a476d7073985e860a37348e28dc1b25fa66d3851779e8f0cf21"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/001/output.u8",
+              "bytes": 16384,
+              "sha256": "e1c9fd255c8ccd44f934ed94100b45574fff83763f4d5fea0184b7b437fdfc0b"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/002/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/002/input-b.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/002/input-000.h264",
+              "bytes": 51448,
+              "sha256": "d85e63c2211abfa41975c3bd03f355a883e98e726cd6b14467942d51d5a280be"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/002/input-001.h264",
+              "bytes": 43221,
+              "sha256": "c54a9e10b0ad9f8c415c80180657992b7846acf6b88ac5d55e670658c3e1e07a"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/002/program.h264",
+            "bytes": 96600,
+            "sha256": "d9e97e41cabad2f6ae78c35db792038047d6d8daa95c4c6623811bd823e8d0cf"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/002/expected.i420",
+            "bytes": 230400,
+            "sha256": "e7329f207807d004b7cb49008e7bcd2852dac64c94df3c22f39d9feb4f0c5eef"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/002/output.u8",
+              "bytes": 16384,
+              "sha256": "329b3e46de8c8d8142e2b54f5977b6a0b4519888209d8429990806c9f7b57e35"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/003/input-a.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/003/input-b.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/003/input-000.h264",
+              "bytes": 43256,
+              "sha256": "bb279c6b09e607fd8720c64ef165de4589ce291e3695df8753d29016db250d74"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/003/input-001.h264",
+              "bytes": 51413,
+              "sha256": "7e1ffdbea55aa085a4de2ec5fe9f17f2b6dd3bc4e029cfbcdbba78024c3451e3"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/003/program.h264",
+            "bytes": 96600,
+            "sha256": "317cf73243c25896c5009001f88c4cd445c07a74a7cb75afb3feed68c6389a25"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/003/expected.i420",
+            "bytes": 230400,
+            "sha256": "f518899f8ee90038a0286fe96b47d3dbc54a812b26e4eb11372f7e7d05bde66f"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/003/output.u8",
+              "bytes": 16384,
+              "sha256": "c0535802e4ba0b25185b5bc058141515dc52c0408b8d62e28af84803330f43a7"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/004/input-a.u8",
+              "bytes": 16384,
+              "sha256": "3569e09fcec544c4a6accc88a693b848c09d5667218019f712086156d60cf41f"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/004/input-b.u8",
+              "bytes": 16384,
+              "sha256": "888cc453d6389960a45359661463bf419ca3bfc0ed80507f9653815a4aa52309"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/004/input-000.h264",
+              "bytes": 43256,
+              "sha256": "1993cf1f4991dc852df35594dd4808b424cd32700aa54871bc565f1c00a1f285"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/004/input-001.h264",
+              "bytes": 43221,
+              "sha256": "35f7c46317d2645eb89bd1c9af1c3c71d77cfb6c2f1eaf0a9102f29fab5c6e2f"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/004/program.h264",
+            "bytes": 88408,
+            "sha256": "36af0524e6be906f1be0656f56afeecf0f8285bfea43fe4d4e6a8b7cf169bb48"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/004/expected.i420",
+            "bytes": 230400,
+            "sha256": "ed5265394c897676ac412d053369c9da289ddb26883e68a11e37cf1c26fda588"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/004/output.u8",
+              "bytes": 16384,
+              "sha256": "d3403dc5d236a46b70ae47c7f851c2e3ca41bfa88f0b1463f7fde94bea58eb15"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/005/input-a.u8",
+              "bytes": 16384,
+              "sha256": "ad7ea2c31fa39319f3ac2de68f368da086eafbca98e5a37ba110b991d6c9a8f5"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/005/input-b.u8",
+              "bytes": 16384,
+              "sha256": "c13785b6f0727081cdcbdd76c21d8a8e550b272aa2fffd4d97857f5ba7428a5f"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/005/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4872b41a3efb1145ff824ae5fb2bddcf6aad502fe5e89de9601089c8c14cd429"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/005/input-001.h264",
+              "bytes": 43221,
+              "sha256": "72f15bfb56ead706d5064f3c5b4dd571efd75cbe4666f646c29916cff7981b63"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/005/program.h264",
+            "bytes": 88408,
+            "sha256": "2617f2b5cb02d8c764e60acc6e46bafa7f5f4499ea15f8e6495963ffd21aa81e"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/005/expected.i420",
+            "bytes": 230400,
+            "sha256": "55e4ad6778044d55be0473bd429bf3028241e409f87bd24d83170c9230a300dd"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/005/output.u8",
+              "bytes": 16384,
+              "sha256": "3cc20c2558e28727122b2785cd483c34313e35aefb5d011678cefb693d1fca75"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/006/input-a.u8",
+              "bytes": 16384,
+              "sha256": "6cd986635ac1f29550b0fddbb3b9aac833869b777531e08f67867794fa198f56"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/006/input-b.u8",
+              "bytes": 16384,
+              "sha256": "a13a0999de485b8b5eb850f777cd79602a43e10abc660f9596d4f4517e74a730"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/006/input-000.h264",
+              "bytes": 43256,
+              "sha256": "e64e2ee4066a1e8003c45c5084dd42ad6742db8fe474c6687cf529d913874508"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/006/input-001.h264",
+              "bytes": 43221,
+              "sha256": "cd58e00b797f3ce208d6c7f452910c8ff2a78d8fdab6e844dd41877491f69c7d"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/006/program.h264",
+            "bytes": 88408,
+            "sha256": "268407c1e861012eac0d2025b555467312e85f064a80fe845c9ca527e9ee0d92"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/006/expected.i420",
+            "bytes": 230400,
+            "sha256": "3abe62b2cf75f4fd2eee2cf65ba3580f0a181c01fa35e0e04876ff1b45ec3353"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/006/output.u8",
+              "bytes": 16384,
+              "sha256": "7dcbfb4bfa07d9e039b18bcb3b4803fad08315e09dc7e308e7b80156cab56bca"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/baseline/007/input-a.u8",
+              "bytes": 16384,
+              "sha256": "bd108606ac8dd8601686b2874176151f4ff582ece9957ca09504e27167698889"
+            },
+            "b": {
+              "path": "128/motion-interpolation/baseline/007/input-b.u8",
+              "bytes": 16384,
+              "sha256": "4f141e3d626922381ee6c125d4c901f6eaa83a7d2726a40f5281cfbffa8dfaa1"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/baseline/007/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4e8f3b2af6ea7d411587ec2c7d3c812e57aa97d17ff12d2926ed750d873f2239"
+            },
+            {
+              "path": "128/motion-interpolation/baseline/007/input-001.h264",
+              "bytes": 43221,
+              "sha256": "c8d395abbbcef7ca6f6dedd2c0d2baaf55f28278491479dcb6726109899b4641"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/baseline/007/program.h264",
+            "bytes": 88408,
+            "sha256": "9ac92f05cbab8bb78cf72ec63d031889ba86ebd4ebbd51f39ebfcb8f9cece065"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/baseline/007/expected.i420",
+            "bytes": 230400,
+            "sha256": "335161b8ffb305a8e47acd10d4225977a778369ae7a08b750bc0b54435c9f5a1"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/baseline/007/output.u8",
+              "bytes": 16384,
+              "sha256": "6edb050ea12f6f9b1f421a07c035e15575120ed22105c08c1b1364423859a1c3"
+            }
+          }
+        }
+      ]
+    },
+    "128/motion-interpolation/fused": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 771,
+        "peak_live_references": 2,
+        "prediction_slices": 26
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "128/motion-interpolation/fused/manifest.json",
+        "bytes": 20607,
+        "sha256": "7d262a18091aade372779655d90abbde09d293f986cbb5bad33f67b151e5d7d3"
+      },
+      "prediction_units": [
+        {
+          "path": "128/motion-interpolation/fused/prediction-000.h264",
+          "bytes": 771,
+          "sha256": "e980978e69f17447d19349b010989141789e61183de6c355c2d89f3e61eb4261"
+        }
+      ],
+      "fence": {
+        "path": "128/motion-interpolation/fused/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/000/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/000/input-b.u8",
+              "bytes": 16384,
+              "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            },
+            {
+              "path": "128/motion-interpolation/fused/000/input-001.h264",
+              "bytes": 43221,
+              "sha256": "42ed623dc331a5ac4440ae474df0b696414c349daf78890b89c021077b310986"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/000/program.h264",
+            "bytes": 87397,
+            "sha256": "c7f2761edf0caca91a5e1d3cc474253d33061c184a8fbe871ea74499103ddbe8"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/000/expected.i420",
+            "bytes": 153600,
+            "sha256": "03aad5fee79ee565b216a0ee891e65d4640a37de27614094834da3df21c42538"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/000/output.u8",
+              "bytes": 16384,
+              "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/001/input-a.u8",
+              "bytes": 16384,
+              "sha256": "033cc6d0c99022d07a4647618cb9c17438f3d985d5f0a9c7efe35b2a99e0485a"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/001/input-b.u8",
+              "bytes": 16384,
+              "sha256": "8c2e405c63354faf7c34af267f19aa4ee432720588fcc592e3397214acb74916"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/001/input-000.h264",
+              "bytes": 43256,
+              "sha256": "5c1adddd04aefaa11f99318daac241c37e345bd237ff595229efece87b15b571"
+            },
+            {
+              "path": "128/motion-interpolation/fused/001/input-001.h264",
+              "bytes": 43221,
+              "sha256": "3961ce409088caf7a7400e2c9734204f038d4b8822b02d1b43c933005d120aeb"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/001/program.h264",
+            "bytes": 87397,
+            "sha256": "cb8891c35577abeedbce6d58a8b4f9ab74f6391611adedbed81062a694da531e"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/001/expected.i420",
+            "bytes": 153600,
+            "sha256": "9b6c697c0e90e8505a1cbcf5298625381577eef7707f4ecfff01e7d6bca43c2a"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/001/output.u8",
+              "bytes": 16384,
+              "sha256": "e1c9fd255c8ccd44f934ed94100b45574fff83763f4d5fea0184b7b437fdfc0b"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/002/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/002/input-b.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/002/input-000.h264",
+              "bytes": 51448,
+              "sha256": "d85e63c2211abfa41975c3bd03f355a883e98e726cd6b14467942d51d5a280be"
+            },
+            {
+              "path": "128/motion-interpolation/fused/002/input-001.h264",
+              "bytes": 43221,
+              "sha256": "c54a9e10b0ad9f8c415c80180657992b7846acf6b88ac5d55e670658c3e1e07a"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/002/program.h264",
+            "bytes": 95589,
+            "sha256": "dea96b373db3d3bcc8a6cf75820d9a7588939331c13bce794a816f980945bff9"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/002/expected.i420",
+            "bytes": 153600,
+            "sha256": "246d20067dadfdb7a763219fcc2b331ee7853106e59d1f184eae262049998aff"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/002/output.u8",
+              "bytes": 16384,
+              "sha256": "329b3e46de8c8d8142e2b54f5977b6a0b4519888209d8429990806c9f7b57e35"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/003/input-a.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/003/input-b.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/003/input-000.h264",
+              "bytes": 43256,
+              "sha256": "bb279c6b09e607fd8720c64ef165de4589ce291e3695df8753d29016db250d74"
+            },
+            {
+              "path": "128/motion-interpolation/fused/003/input-001.h264",
+              "bytes": 51413,
+              "sha256": "7e1ffdbea55aa085a4de2ec5fe9f17f2b6dd3bc4e029cfbcdbba78024c3451e3"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/003/program.h264",
+            "bytes": 95589,
+            "sha256": "eb2de566ce53201321528881b9ba0ffe6f74bb51e83b9f6ba78299e89a83b06b"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/003/expected.i420",
+            "bytes": 153600,
+            "sha256": "99dcb3fd1e673973a7062622470cd3c0591cc361aec83354ca7f015662926dcd"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/003/output.u8",
+              "bytes": 16384,
+              "sha256": "c0535802e4ba0b25185b5bc058141515dc52c0408b8d62e28af84803330f43a7"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/004/input-a.u8",
+              "bytes": 16384,
+              "sha256": "3569e09fcec544c4a6accc88a693b848c09d5667218019f712086156d60cf41f"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/004/input-b.u8",
+              "bytes": 16384,
+              "sha256": "888cc453d6389960a45359661463bf419ca3bfc0ed80507f9653815a4aa52309"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/004/input-000.h264",
+              "bytes": 43256,
+              "sha256": "1993cf1f4991dc852df35594dd4808b424cd32700aa54871bc565f1c00a1f285"
+            },
+            {
+              "path": "128/motion-interpolation/fused/004/input-001.h264",
+              "bytes": 43221,
+              "sha256": "35f7c46317d2645eb89bd1c9af1c3c71d77cfb6c2f1eaf0a9102f29fab5c6e2f"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/004/program.h264",
+            "bytes": 87397,
+            "sha256": "8445f129bd1b2677936f4b1f30c0535c95f556087d4acd2a5a54ccdf87a17ab4"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/004/expected.i420",
+            "bytes": 153600,
+            "sha256": "d74f7f21656b988689ebe679ecb74343ac7b5faa7dafa5f6ae0e620420bc902e"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/004/output.u8",
+              "bytes": 16384,
+              "sha256": "d3403dc5d236a46b70ae47c7f851c2e3ca41bfa88f0b1463f7fde94bea58eb15"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/005/input-a.u8",
+              "bytes": 16384,
+              "sha256": "ad7ea2c31fa39319f3ac2de68f368da086eafbca98e5a37ba110b991d6c9a8f5"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/005/input-b.u8",
+              "bytes": 16384,
+              "sha256": "c13785b6f0727081cdcbdd76c21d8a8e550b272aa2fffd4d97857f5ba7428a5f"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/005/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4872b41a3efb1145ff824ae5fb2bddcf6aad502fe5e89de9601089c8c14cd429"
+            },
+            {
+              "path": "128/motion-interpolation/fused/005/input-001.h264",
+              "bytes": 43221,
+              "sha256": "72f15bfb56ead706d5064f3c5b4dd571efd75cbe4666f646c29916cff7981b63"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/005/program.h264",
+            "bytes": 87397,
+            "sha256": "7f5781ed6fbd18aabaa666edf509f129a39ea23c40735c2bf102b1ce2a696e5d"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/005/expected.i420",
+            "bytes": 153600,
+            "sha256": "bcc35f27b39b701f210bf4338d35ce1a8151763d14df30d4e122f0da2482d5a8"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/005/output.u8",
+              "bytes": 16384,
+              "sha256": "3cc20c2558e28727122b2785cd483c34313e35aefb5d011678cefb693d1fca75"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/006/input-a.u8",
+              "bytes": 16384,
+              "sha256": "6cd986635ac1f29550b0fddbb3b9aac833869b777531e08f67867794fa198f56"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/006/input-b.u8",
+              "bytes": 16384,
+              "sha256": "a13a0999de485b8b5eb850f777cd79602a43e10abc660f9596d4f4517e74a730"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/006/input-000.h264",
+              "bytes": 43256,
+              "sha256": "e64e2ee4066a1e8003c45c5084dd42ad6742db8fe474c6687cf529d913874508"
+            },
+            {
+              "path": "128/motion-interpolation/fused/006/input-001.h264",
+              "bytes": 43221,
+              "sha256": "cd58e00b797f3ce208d6c7f452910c8ff2a78d8fdab6e844dd41877491f69c7d"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/006/program.h264",
+            "bytes": 87397,
+            "sha256": "c67de0bb734383c321414952921431502fce463ea8030e56b84f5870183a92ec"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/006/expected.i420",
+            "bytes": 153600,
+            "sha256": "499dd069dd30dee50d8f51d2e3a175c1268f95a68a4d6eb8b1d9740986652794"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/006/output.u8",
+              "bytes": 16384,
+              "sha256": "7dcbfb4bfa07d9e039b18bcb3b4803fad08315e09dc7e308e7b80156cab56bca"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/motion-interpolation/fused/007/input-a.u8",
+              "bytes": 16384,
+              "sha256": "bd108606ac8dd8601686b2874176151f4ff582ece9957ca09504e27167698889"
+            },
+            "b": {
+              "path": "128/motion-interpolation/fused/007/input-b.u8",
+              "bytes": 16384,
+              "sha256": "4f141e3d626922381ee6c125d4c901f6eaa83a7d2726a40f5281cfbffa8dfaa1"
+            }
+          },
+          "units": [
+            {
+              "path": "128/motion-interpolation/fused/007/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4e8f3b2af6ea7d411587ec2c7d3c812e57aa97d17ff12d2926ed750d873f2239"
+            },
+            {
+              "path": "128/motion-interpolation/fused/007/input-001.h264",
+              "bytes": 43221,
+              "sha256": "c8d395abbbcef7ca6f6dedd2c0d2baaf55f28278491479dcb6726109899b4641"
+            }
+          ],
+          "stream": {
+            "path": "128/motion-interpolation/fused/007/program.h264",
+            "bytes": 87397,
+            "sha256": "9166957e1e6002970826f4a2110b9ec4b200ea682edd751499ed3f443cc4a80f"
+          },
+          "expected": {
+            "path": "128/motion-interpolation/fused/007/expected.i420",
+            "bytes": 153600,
+            "sha256": "f2c17f868a491a9e6ec5902f48ee9cbadbb4e4a28eda5c38445c466a30fc1e1f"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/motion-interpolation/fused/007/output.u8",
+              "bytes": 16384,
+              "sha256": "6edb050ea12f6f9b1f421a07c035e15575120ed22105c08c1b1364423859a1c3"
+            }
+          }
+        }
+      ]
+    },
+    "128/average-control/fused": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 642,
+        "peak_live_references": 2,
+        "prediction_slices": 26
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "128/average-control/fused/manifest.json",
+        "bytes": 2965,
+        "sha256": "f51a21d8283d07e8dd350e6ec145e0d1fe3b7e95e909d216452ae77f23e34558"
+      },
+      "prediction_units": [
+        {
+          "path": "128/average-control/fused/prediction-000.h264",
+          "bytes": 642,
+          "sha256": "5fc49c0342d9680fde943bb5cfb3114a63b186099f622a2280ab7a8848aaa154"
+        }
+      ],
+      "fence": {
+        "path": "128/average-control/fused/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/000/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            },
+            "b": {
+              "path": "128/average-control/fused/000/input-b.u8",
+              "bytes": 16384,
+              "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            },
+            {
+              "path": "128/average-control/fused/000/input-001.h264",
+              "bytes": 43221,
+              "sha256": "42ed623dc331a5ac4440ae474df0b696414c349daf78890b89c021077b310986"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/000/program.h264",
+            "bytes": 87268,
+            "sha256": "22364b1a647282a07ba12f2fe17e7d30fba4d501dc603ed9363d697d7f4de455"
+          },
+          "expected": {
+            "path": "128/average-control/fused/000/expected.i420",
+            "bytes": 153600,
+            "sha256": "33b1130ae91b077de1169c1f65467697aac9d0d545ecdd7748b3b125ce365af8"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/000/output.u8",
+              "bytes": 16384,
+              "sha256": "2863bf41c09c6e3e98fcd2081b5749b73a2eac9b1474dd9933f0d86931a4fbc5"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/001/input-a.u8",
+              "bytes": 16384,
+              "sha256": "033cc6d0c99022d07a4647618cb9c17438f3d985d5f0a9c7efe35b2a99e0485a"
+            },
+            "b": {
+              "path": "128/average-control/fused/001/input-b.u8",
+              "bytes": 16384,
+              "sha256": "8c2e405c63354faf7c34af267f19aa4ee432720588fcc592e3397214acb74916"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/001/input-000.h264",
+              "bytes": 43256,
+              "sha256": "5c1adddd04aefaa11f99318daac241c37e345bd237ff595229efece87b15b571"
+            },
+            {
+              "path": "128/average-control/fused/001/input-001.h264",
+              "bytes": 43221,
+              "sha256": "3961ce409088caf7a7400e2c9734204f038d4b8822b02d1b43c933005d120aeb"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/001/program.h264",
+            "bytes": 87268,
+            "sha256": "ac62222bbd7ae44e29f4191c62b436eebfe4c360c3e4709ae96c3e2a1c542369"
+          },
+          "expected": {
+            "path": "128/average-control/fused/001/expected.i420",
+            "bytes": 153600,
+            "sha256": "8b418b4aa178f8991e38701d7e03ac7629cc620a20c5a0d5ba4269c1fde6ebf0"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/001/output.u8",
+              "bytes": 16384,
+              "sha256": "be1a58ab99c824a5da48cb6e90fb246c6df47bc38c299ab903ec4174e9f918ff"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/002/input-a.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            },
+            "b": {
+              "path": "128/average-control/fused/002/input-b.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/002/input-000.h264",
+              "bytes": 51448,
+              "sha256": "d85e63c2211abfa41975c3bd03f355a883e98e726cd6b14467942d51d5a280be"
+            },
+            {
+              "path": "128/average-control/fused/002/input-001.h264",
+              "bytes": 43221,
+              "sha256": "c54a9e10b0ad9f8c415c80180657992b7846acf6b88ac5d55e670658c3e1e07a"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/002/program.h264",
+            "bytes": 95460,
+            "sha256": "aa8b6ecce5539de9f0f0b3dd82a7814e37ac58d66c2e0ac5d5512b37f2d03f07"
+          },
+          "expected": {
+            "path": "128/average-control/fused/002/expected.i420",
+            "bytes": 153600,
+            "sha256": "a92f29953e594669ee1a00e6da7b803117ea732f995f2085ca35f77269566b8f"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/002/output.u8",
+              "bytes": 16384,
+              "sha256": "9febfa442e392f042ed554036318921c8bbeb3192d4c4f23d5fa6c6ddb22aeb8"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/003/input-a.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            },
+            "b": {
+              "path": "128/average-control/fused/003/input-b.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/003/input-000.h264",
+              "bytes": 43256,
+              "sha256": "bb279c6b09e607fd8720c64ef165de4589ce291e3695df8753d29016db250d74"
+            },
+            {
+              "path": "128/average-control/fused/003/input-001.h264",
+              "bytes": 51413,
+              "sha256": "7e1ffdbea55aa085a4de2ec5fe9f17f2b6dd3bc4e029cfbcdbba78024c3451e3"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/003/program.h264",
+            "bytes": 95460,
+            "sha256": "4b47d5751a16eb311b2c87bafb12a564542df5ec3bb32f172ce05d714717688a"
+          },
+          "expected": {
+            "path": "128/average-control/fused/003/expected.i420",
+            "bytes": 153600,
+            "sha256": "1a1e73ba38e3039ee677e6dca946fd44995084acc0323926c65a215a065d78cd"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/003/output.u8",
+              "bytes": 16384,
+              "sha256": "9febfa442e392f042ed554036318921c8bbeb3192d4c4f23d5fa6c6ddb22aeb8"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/004/input-a.u8",
+              "bytes": 16384,
+              "sha256": "3569e09fcec544c4a6accc88a693b848c09d5667218019f712086156d60cf41f"
+            },
+            "b": {
+              "path": "128/average-control/fused/004/input-b.u8",
+              "bytes": 16384,
+              "sha256": "888cc453d6389960a45359661463bf419ca3bfc0ed80507f9653815a4aa52309"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/004/input-000.h264",
+              "bytes": 43256,
+              "sha256": "1993cf1f4991dc852df35594dd4808b424cd32700aa54871bc565f1c00a1f285"
+            },
+            {
+              "path": "128/average-control/fused/004/input-001.h264",
+              "bytes": 43221,
+              "sha256": "35f7c46317d2645eb89bd1c9af1c3c71d77cfb6c2f1eaf0a9102f29fab5c6e2f"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/004/program.h264",
+            "bytes": 87268,
+            "sha256": "556c53217c9625078110efce36012a3896a58b97cd97ff962a90f44397220df3"
+          },
+          "expected": {
+            "path": "128/average-control/fused/004/expected.i420",
+            "bytes": 153600,
+            "sha256": "3b5438cd51e042411a369a3dd4b94e310a2de99b64741480822bd7fb575338d6"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/004/output.u8",
+              "bytes": 16384,
+              "sha256": "0d0a5501834e36d79cb4de047e8a8bb7056404ed71bb889f015e87bf87dff19d"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/005/input-a.u8",
+              "bytes": 16384,
+              "sha256": "ad7ea2c31fa39319f3ac2de68f368da086eafbca98e5a37ba110b991d6c9a8f5"
+            },
+            "b": {
+              "path": "128/average-control/fused/005/input-b.u8",
+              "bytes": 16384,
+              "sha256": "c13785b6f0727081cdcbdd76c21d8a8e550b272aa2fffd4d97857f5ba7428a5f"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/005/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4872b41a3efb1145ff824ae5fb2bddcf6aad502fe5e89de9601089c8c14cd429"
+            },
+            {
+              "path": "128/average-control/fused/005/input-001.h264",
+              "bytes": 43221,
+              "sha256": "72f15bfb56ead706d5064f3c5b4dd571efd75cbe4666f646c29916cff7981b63"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/005/program.h264",
+            "bytes": 87268,
+            "sha256": "2b01a338b90b3c604370a3e9df5216a40eb7a7e17a43a36293144e93415aee42"
+          },
+          "expected": {
+            "path": "128/average-control/fused/005/expected.i420",
+            "bytes": 153600,
+            "sha256": "cad710126174f25200b905b28453759a1a8372582c3cf2f98f20c4a3455538e0"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/005/output.u8",
+              "bytes": 16384,
+              "sha256": "66fb5b0901bb472f5d5a92cc58eabffdbc89cc8d2ec4dfc6b1e75b39b0fed785"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/006/input-a.u8",
+              "bytes": 16384,
+              "sha256": "6cd986635ac1f29550b0fddbb3b9aac833869b777531e08f67867794fa198f56"
+            },
+            "b": {
+              "path": "128/average-control/fused/006/input-b.u8",
+              "bytes": 16384,
+              "sha256": "a13a0999de485b8b5eb850f777cd79602a43e10abc660f9596d4f4517e74a730"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/006/input-000.h264",
+              "bytes": 43256,
+              "sha256": "e64e2ee4066a1e8003c45c5084dd42ad6742db8fe474c6687cf529d913874508"
+            },
+            {
+              "path": "128/average-control/fused/006/input-001.h264",
+              "bytes": 43221,
+              "sha256": "cd58e00b797f3ce208d6c7f452910c8ff2a78d8fdab6e844dd41877491f69c7d"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/006/program.h264",
+            "bytes": 87268,
+            "sha256": "399ef13d8d9f5f0055e68ad3a3f85735a2abc044b582aec4b93744a93684d6fa"
+          },
+          "expected": {
+            "path": "128/average-control/fused/006/expected.i420",
+            "bytes": 153600,
+            "sha256": "19e7fa66bbcf2d6a843b81d5a9dcba78c0e453b96c59a19c0240fc7f64857650"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/006/output.u8",
+              "bytes": 16384,
+              "sha256": "3528fc38089d25e04d587fa8e2153c34df22085af2db22d57d09aef5f80203db"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "128/average-control/fused/007/input-a.u8",
+              "bytes": 16384,
+              "sha256": "bd108606ac8dd8601686b2874176151f4ff582ece9957ca09504e27167698889"
+            },
+            "b": {
+              "path": "128/average-control/fused/007/input-b.u8",
+              "bytes": 16384,
+              "sha256": "4f141e3d626922381ee6c125d4c901f6eaa83a7d2726a40f5281cfbffa8dfaa1"
+            }
+          },
+          "units": [
+            {
+              "path": "128/average-control/fused/007/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4e8f3b2af6ea7d411587ec2c7d3c812e57aa97d17ff12d2926ed750d873f2239"
+            },
+            {
+              "path": "128/average-control/fused/007/input-001.h264",
+              "bytes": 43221,
+              "sha256": "c8d395abbbcef7ca6f6dedd2c0d2baaf55f28278491479dcb6726109899b4641"
+            }
+          ],
+          "stream": {
+            "path": "128/average-control/fused/007/program.h264",
+            "bytes": 87268,
+            "sha256": "ed1ab5a748cfa0b449f7e7120675c59a77464a1962b3e43eb67380ad6d2d164c"
+          },
+          "expected": {
+            "path": "128/average-control/fused/007/expected.i420",
+            "bytes": 153600,
+            "sha256": "8a44505d97dfeefe5673b3a2ffbd572bd70388c03200720ed4719e067ad04827"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/average-control/fused/007/output.u8",
+              "bytes": 16384,
+              "sha256": "056847fc3ffe733702a3f25e6b816d8c1acfb03e8523e267b446768f6fa417fe"
+            }
+          }
+        }
+      ]
+    },
+    "128/control/fused": {
+      "size": 128,
+      "level_idc": 31,
+      "input_names": [
+        "image"
+      ],
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 0,
+        "total_pictures": 1,
+        "prediction_bytes": 0,
+        "peak_live_references": 0,
+        "prediction_slices": 0
+      },
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "output_frames": {
+        "output": 0
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 31,
+        "reference_slots": {
+          "0": 0
+        }
+      },
+      "manifest": {
+        "path": "128/control/fused/manifest.json",
+        "bytes": 1936,
+        "sha256": "3f65a2ca9f3f7761439c093d4b0c5fc37f63d587a9e62773c1709fae65351a82"
+      },
+      "prediction_units": [],
+      "fence": {
+        "path": "128/control/fused/fence.h264",
+        "bytes": 149,
+        "sha256": "7173f9d79f22abbb8dde0c1603d9b797b141f7d5bfb024adda4cce51ca7a7a0a"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/000/input-image.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/000/input-000.h264",
+              "bytes": 43256,
+              "sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/000/program.h264",
+            "bytes": 43405,
+            "sha256": "15f65071a374a6779722ea78186ff40cc92f64acc3e35b940a7fff32a1814719"
+          },
+          "expected": {
+            "path": "128/control/fused/000/expected.i420",
+            "bytes": 76800,
+            "sha256": "b2fb739454dcdc460fcd13bd41f1f87174ca7e1f9cd6d68b26052f6afa92d5f6"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/000/output.u8",
+              "bytes": 16384,
+              "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/001/input-image.u8",
+              "bytes": 16384,
+              "sha256": "033cc6d0c99022d07a4647618cb9c17438f3d985d5f0a9c7efe35b2a99e0485a"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/001/input-000.h264",
+              "bytes": 43256,
+              "sha256": "5c1adddd04aefaa11f99318daac241c37e345bd237ff595229efece87b15b571"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/001/program.h264",
+            "bytes": 43405,
+            "sha256": "d77ef26b6388763246f719f1982593e4a13398d6a7ec3a6090d51622e56b4da3"
+          },
+          "expected": {
+            "path": "128/control/fused/001/expected.i420",
+            "bytes": 76800,
+            "sha256": "b055a760aeaea8da5380fd5940e1144b692e58faee3b9896082ba3e3246d7b45"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/001/output.u8",
+              "bytes": 16384,
+              "sha256": "033cc6d0c99022d07a4647618cb9c17438f3d985d5f0a9c7efe35b2a99e0485a"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/002/input-image.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/002/input-000.h264",
+              "bytes": 51448,
+              "sha256": "d85e63c2211abfa41975c3bd03f355a883e98e726cd6b14467942d51d5a280be"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/002/program.h264",
+            "bytes": 51597,
+            "sha256": "9195b8499a2e2c687499a567405a2eb8ffc55776090a0eb1e2505c883b6dbc66"
+          },
+          "expected": {
+            "path": "128/control/fused/002/expected.i420",
+            "bytes": 76800,
+            "sha256": "7990773c7138e3e55fedee03f68e87ad91cece3f566db991ffa55f8c24dd26e7"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/002/output.u8",
+              "bytes": 16384,
+              "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/003/input-image.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/003/input-000.h264",
+              "bytes": 43256,
+              "sha256": "bb279c6b09e607fd8720c64ef165de4589ce291e3695df8753d29016db250d74"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/003/program.h264",
+            "bytes": 43405,
+            "sha256": "f8cb4514b655d271fecfc51c2b97bfc107730bee8594377edceec41c8ea18d67"
+          },
+          "expected": {
+            "path": "128/control/fused/003/expected.i420",
+            "bytes": 76800,
+            "sha256": "c1ada7edf28fd8bb29e08a7f0c553c066f5c88dd692c7d3548397034967503fd"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/003/output.u8",
+              "bytes": 16384,
+              "sha256": "0fbba07a833d4dcfc7024eaf313661a0ba8f80a05c6d29b8801c612e10e60dee"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/004/input-image.u8",
+              "bytes": 16384,
+              "sha256": "3569e09fcec544c4a6accc88a693b848c09d5667218019f712086156d60cf41f"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/004/input-000.h264",
+              "bytes": 43256,
+              "sha256": "1993cf1f4991dc852df35594dd4808b424cd32700aa54871bc565f1c00a1f285"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/004/program.h264",
+            "bytes": 43405,
+            "sha256": "dbd0f9c063bb4b5748ace7bb0f7bdd24f994c85dac7728b1c98b814fb667f720"
+          },
+          "expected": {
+            "path": "128/control/fused/004/expected.i420",
+            "bytes": 76800,
+            "sha256": "b5ecfe419b13a1e344e0719f980464ce199bd7446d80c130c02cc57a50639739"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/004/output.u8",
+              "bytes": 16384,
+              "sha256": "3569e09fcec544c4a6accc88a693b848c09d5667218019f712086156d60cf41f"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/005/input-image.u8",
+              "bytes": 16384,
+              "sha256": "ad7ea2c31fa39319f3ac2de68f368da086eafbca98e5a37ba110b991d6c9a8f5"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/005/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4872b41a3efb1145ff824ae5fb2bddcf6aad502fe5e89de9601089c8c14cd429"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/005/program.h264",
+            "bytes": 43405,
+            "sha256": "c22e53f71fefce26f2af0ddea84f15012cf6a56b55e9f59c9571a07812779859"
+          },
+          "expected": {
+            "path": "128/control/fused/005/expected.i420",
+            "bytes": 76800,
+            "sha256": "6e436b74b6b9c799690f77715f16aa399a7b48a0aad59dd39b0698cfbb25a676"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/005/output.u8",
+              "bytes": 16384,
+              "sha256": "ad7ea2c31fa39319f3ac2de68f368da086eafbca98e5a37ba110b991d6c9a8f5"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/006/input-image.u8",
+              "bytes": 16384,
+              "sha256": "6cd986635ac1f29550b0fddbb3b9aac833869b777531e08f67867794fa198f56"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/006/input-000.h264",
+              "bytes": 43256,
+              "sha256": "e64e2ee4066a1e8003c45c5084dd42ad6742db8fe474c6687cf529d913874508"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/006/program.h264",
+            "bytes": 43405,
+            "sha256": "6c0ca4b4b842d5314ab888361077f6c4f39378db8048b33384df67067b615bb1"
+          },
+          "expected": {
+            "path": "128/control/fused/006/expected.i420",
+            "bytes": 76800,
+            "sha256": "fee1d1f1f0b6ad824900448cb1f3aafb0692f6d617d201a872304bb4abee72e5"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/006/output.u8",
+              "bytes": 16384,
+              "sha256": "6cd986635ac1f29550b0fddbb3b9aac833869b777531e08f67867794fa198f56"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "128/control/fused/007/input-image.u8",
+              "bytes": 16384,
+              "sha256": "bd108606ac8dd8601686b2874176151f4ff582ece9957ca09504e27167698889"
+            }
+          },
+          "units": [
+            {
+              "path": "128/control/fused/007/input-000.h264",
+              "bytes": 43256,
+              "sha256": "4e8f3b2af6ea7d411587ec2c7d3c812e57aa97d17ff12d2926ed750d873f2239"
+            }
+          ],
+          "stream": {
+            "path": "128/control/fused/007/program.h264",
+            "bytes": 43405,
+            "sha256": "d86b4e3626ccb8f9bfd1e6a11c5613678c42b3b280d0bb9eabb5e51aec5c73db"
+          },
+          "expected": {
+            "path": "128/control/fused/007/expected.i420",
+            "bytes": 76800,
+            "sha256": "0dc969e95e7c05aa1b383a61b723aac59869489800f19d432e7c6c8b50beb946"
+          },
+          "outputs": {
+            "output": {
+              "path": "128/control/fused/007/output.u8",
+              "bytes": 16384,
+              "sha256": "bd108606ac8dd8601686b2874176151f4ff582ece9957ca09504e27167698889"
+            }
+          }
+        }
+      ]
+    },
+    "256/motion-interpolation/baseline": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 3,
+        "total_pictures": 5,
+        "prediction_bytes": 4102,
+        "peak_live_references": 2,
+        "prediction_slices": 150
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 4
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0,
+          "3": 1,
+          "4": 0
+        }
+      },
+      "manifest": {
+        "path": "256/motion-interpolation/baseline/manifest.json",
+        "bytes": 68455,
+        "sha256": "39ef890964c21727195f7b6a5fbc9a84b938997e48ff1aa41dc72a7d78f0e786"
+      },
+      "prediction_units": [
+        {
+          "path": "256/motion-interpolation/baseline/prediction-000.h264",
+          "bytes": 1277,
+          "sha256": "95cf9c662703292ee40a872e8efd9884afc3c60b4cff4a6a72eda96630ce0726"
+        },
+        {
+          "path": "256/motion-interpolation/baseline/prediction-001.h264",
+          "bytes": 1395,
+          "sha256": "252c0b0a3559894b836413aab27bd54294d48ebcc059f258a041a7c978d7dc22"
+        },
+        {
+          "path": "256/motion-interpolation/baseline/prediction-002.h264",
+          "bytes": 1430,
+          "sha256": "ee6845f598900545a1d0e5ebe7bb6371b859bc541463d2159bfe9021b79d9d9d"
+        }
+      ],
+      "fence": {
+        "path": "256/motion-interpolation/baseline/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/000/input-a.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/000/input-b.u8",
+              "bytes": 65536,
+              "sha256": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/000/input-001.h264",
+              "bytes": 133781,
+              "sha256": "55f8a567676f2740c95b6ae1ed7eb637fd9ed67e312cba4c40d0a426ba3505b2"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/000/program.h264",
+            "bytes": 272070,
+            "sha256": "8ef89a9338335ff74b35d632d82f91d346e74bca7a7e0ebdc721b1138d963263"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/000/expected.i420",
+            "bytes": 746496,
+            "sha256": "a5c8553286645eeeebb62351527733b35611c1fede597c3b5f582e19d6fa7d2d"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/000/output.u8",
+              "bytes": 65536,
+              "sha256": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/001/input-a.u8",
+              "bytes": 65536,
+              "sha256": "ba790023cdf97dc5ecbee1a60716a5cb968579f50225eef8321dd3df5ac54c31"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/001/input-b.u8",
+              "bytes": 65536,
+              "sha256": "02973d8775bb6f1ffec8b8fe2e4e425e6de037ac25f8af9495d6beae36e4adcf"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/001/input-000.h264",
+              "bytes": 133815,
+              "sha256": "be0bb0a768b237e762285c560fa12ac3138e6c6040796560f288d5c8b0edce41"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/001/input-001.h264",
+              "bytes": 133781,
+              "sha256": "8fbbe8849edb759e8bf6ce591584ddcece6754171b2359fcefd41da16a1a7544"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/001/program.h264",
+            "bytes": 272070,
+            "sha256": "38dc5c9429534b4ae290ad0cacbd2d741fb06c8d622b631e0d5b5403460937d7"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/001/expected.i420",
+            "bytes": 746496,
+            "sha256": "0a5d86de60d1b3064ee554b579ee364bfa9ba88ba8cc90335d5ec4a49e224047"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/001/output.u8",
+              "bytes": 65536,
+              "sha256": "9ea66805edc8d5901efee44a3276a8b9d0b97a6a451e7333c0915ea02c03d217"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/002/input-a.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/002/input-b.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/002/input-000.h264",
+              "bytes": 166583,
+              "sha256": "afc9cb442ebf04e29a018ec3db9c06e6a731c2cad9eefdb88a23bdacc7ea34c5"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/002/input-001.h264",
+              "bytes": 133781,
+              "sha256": "cb6dd31c9db85c60a27e4e40295fb538a549610c2ec83d232832024a2e16defc"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/002/program.h264",
+            "bytes": 304838,
+            "sha256": "d41ee8084149dd8c4f800b686edd08504a49c4dc33b1a99c3b08e1f546e813d5"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/002/expected.i420",
+            "bytes": 746496,
+            "sha256": "0f6b2ed22066c67aa47a5d029331a38be5b428321694434b1c2452fe0b0d54cc"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/002/output.u8",
+              "bytes": 65536,
+              "sha256": "228e7065ec76cc18dc1a570e47b12069b2c42e074af1159a79be7a8ee3e9d77c"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/003/input-a.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/003/input-b.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/003/input-000.h264",
+              "bytes": 133815,
+              "sha256": "ef43e0ea2832833ce78179f2bd31cbabc6723d6b7868f198a75b0ac3562e9f2d"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/003/input-001.h264",
+              "bytes": 166549,
+              "sha256": "5a1ba6f198057a8c9ae75df313dd2de99522e8e5c50095c632a38faab9e32053"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/003/program.h264",
+            "bytes": 304838,
+            "sha256": "ac19246cb06265eb40b3b7516277ad2e551166d2afcf56c5d491e15c2e778fe4"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/003/expected.i420",
+            "bytes": 746496,
+            "sha256": "860ff065c9d59918dd95b7e99de02fa82c7fd6c87dad1dda44f5d24fafc2a51b"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/003/output.u8",
+              "bytes": 65536,
+              "sha256": "e8e61b7c1fca8243ab9e37db76a0e6f3659517a0cf2b9159aab891c4543dc1ff"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/004/input-a.u8",
+              "bytes": 65536,
+              "sha256": "a69aa6ba9391e83cdba3a3459b25c60ec06c6de3c8f928953e7a4c1c0ac7f60b"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/004/input-b.u8",
+              "bytes": 65536,
+              "sha256": "6edf230f38d49d6b8c49e8718972355528432df22eb611735da032650569efc3"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/004/input-000.h264",
+              "bytes": 133815,
+              "sha256": "14f54549e9fcd7c9ec30114637a02fbf767a0fbe25d71e7797a745e4f92552e6"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/004/input-001.h264",
+              "bytes": 133781,
+              "sha256": "a13b4e3a93839d2f9b754bf5e66c2d28c80c242fea635abc9932f82caea2736a"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/004/program.h264",
+            "bytes": 272070,
+            "sha256": "301c213d98f0a0791b58c547427eddb552f5676019c1dfd6d3369db1fb230a0e"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/004/expected.i420",
+            "bytes": 746496,
+            "sha256": "7bf62cdbb2bdadbf6cc6610298a603b7c09efbdd671f642a8c6a5f8579966077"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/004/output.u8",
+              "bytes": 65536,
+              "sha256": "0eb17e465d1d1d5eea15c62dd0928589ee9a7253f5a25d24f2eaa407ed006fec"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/005/input-a.u8",
+              "bytes": 65536,
+              "sha256": "469488ff654a08a3313b19e3732e6314d1080c397b3ca32c6857fae90be7cf57"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/005/input-b.u8",
+              "bytes": 65536,
+              "sha256": "661cfe68bd99b594adc0e182890365ee223e2101e9f1b8a51c94301e6e1f05ea"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/005/input-000.h264",
+              "bytes": 133815,
+              "sha256": "fb76f56e2a81b4d790fb82531953226502dbc3537b4525b716503fb8ce09fe80"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/005/input-001.h264",
+              "bytes": 133781,
+              "sha256": "8c2f30aa426ef58e911b75144c56fbd40e21ffd5f90356416b094c734ec9eb76"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/005/program.h264",
+            "bytes": 272070,
+            "sha256": "7788a1391af4e3482af39e2d8afda200f2568b8cdbcacd919795653211ba1b04"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/005/expected.i420",
+            "bytes": 746496,
+            "sha256": "5e59bd3656c6d3ff0f061ce7c2feb1e314d0336a6a291825b2f5aba331286c65"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/005/output.u8",
+              "bytes": 65536,
+              "sha256": "69505f498efa26de004d5f4475a96b54bb198dd530e0371423711bdcff861dc5"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/006/input-a.u8",
+              "bytes": 65536,
+              "sha256": "d6ddb4c29e422fa37ce7dc2824e414d2ff6ea4b204b0b6695430ca0812e9c41c"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/006/input-b.u8",
+              "bytes": 65536,
+              "sha256": "77cd8167d4fd989a45a7657bc19776cd4445d64bbc7dff4e55fdcad554983ae7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/006/input-000.h264",
+              "bytes": 133815,
+              "sha256": "5e1ca9a0200f740cda30684c8ab3daf5a2f56ba0749fb3c6afccc3895f6a33a9"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/006/input-001.h264",
+              "bytes": 133781,
+              "sha256": "5991c288a379f0004cb27ba3629241999bcea27a41c29aea5769c4c05b2092d9"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/006/program.h264",
+            "bytes": 272070,
+            "sha256": "7b17dbd814df597ae3013d5be205b6c28ba0dcca843b1089919a431b119fc7a0"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/006/expected.i420",
+            "bytes": 746496,
+            "sha256": "caadecd153f6582211f04c291b8ee8f7aab5f99d95e452eb77f8972edf4a660a"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/006/output.u8",
+              "bytes": 65536,
+              "sha256": "8e5becdeb2c37cdd3928f7ebf9f5825ace9ab0d4fc3ca4580d2e17c7cbcb1df7"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/baseline/007/input-a.u8",
+              "bytes": 65536,
+              "sha256": "b17444508a1e8a97d1e96cdb1bb88fee222d95fcae1145cd31d355cc657b04e8"
+            },
+            "b": {
+              "path": "256/motion-interpolation/baseline/007/input-b.u8",
+              "bytes": 65536,
+              "sha256": "cdbd78579def95727b152eab255301ee623c77c8cdd38433960147ec1cf6f8cb"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/baseline/007/input-000.h264",
+              "bytes": 133815,
+              "sha256": "f65fbbfa9504b2085e9c7a104e49c451279f7a3dc1e362f2123a114c9f49c447"
+            },
+            {
+              "path": "256/motion-interpolation/baseline/007/input-001.h264",
+              "bytes": 133781,
+              "sha256": "84dbf5e668b548d11f0cd983adbbd36455606c6f400fdf9108e7df2efdbc32eb"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/baseline/007/program.h264",
+            "bytes": 272070,
+            "sha256": "feef72baea6630a54eb008cc9910e9adb6e0b1c0b7afe261974eb54b80f6f22f"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/baseline/007/expected.i420",
+            "bytes": 746496,
+            "sha256": "fd6a3e77e3f94e638c5ce2f69ed35ba55c12b5a4a836e540aa19e29af0b7e62c"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/baseline/007/output.u8",
+              "bytes": 65536,
+              "sha256": "425f7ad4e09d956b658b357613ede79a1fb91b5f7e89980386c85dc864d1bd2e"
+            }
+          }
+        }
+      ]
+    },
+    "256/motion-interpolation/fused": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 1957,
+        "peak_live_references": 2,
+        "prediction_slices": 50
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "256/motion-interpolation/fused/manifest.json",
+        "bytes": 68994,
+        "sha256": "53992cc6e48a1fdeefb8a54503fbbe2a56ff2c2f9566ab0f1da887a306943688"
+      },
+      "prediction_units": [
+        {
+          "path": "256/motion-interpolation/fused/prediction-000.h264",
+          "bytes": 1957,
+          "sha256": "8941b6a25380a241adc50e04043c68005b54cc36da7de802c42277265a7a887e"
+        }
+      ],
+      "fence": {
+        "path": "256/motion-interpolation/fused/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/000/input-a.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/000/input-b.u8",
+              "bytes": 65536,
+              "sha256": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            },
+            {
+              "path": "256/motion-interpolation/fused/000/input-001.h264",
+              "bytes": 133781,
+              "sha256": "55f8a567676f2740c95b6ae1ed7eb637fd9ed67e312cba4c40d0a426ba3505b2"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/000/program.h264",
+            "bytes": 269925,
+            "sha256": "6b6e2edb01f4b58ae391cc5c382f63e3085958a67f7b67b76f3b0e90d20a9824"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/000/expected.i420",
+            "bytes": 497664,
+            "sha256": "a12718c7c827900a4009f4f0222aa5afcdd89a1b028b9cb8bf2511ee63bdcbc3"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/000/output.u8",
+              "bytes": 65536,
+              "sha256": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/001/input-a.u8",
+              "bytes": 65536,
+              "sha256": "ba790023cdf97dc5ecbee1a60716a5cb968579f50225eef8321dd3df5ac54c31"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/001/input-b.u8",
+              "bytes": 65536,
+              "sha256": "02973d8775bb6f1ffec8b8fe2e4e425e6de037ac25f8af9495d6beae36e4adcf"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/001/input-000.h264",
+              "bytes": 133815,
+              "sha256": "be0bb0a768b237e762285c560fa12ac3138e6c6040796560f288d5c8b0edce41"
+            },
+            {
+              "path": "256/motion-interpolation/fused/001/input-001.h264",
+              "bytes": 133781,
+              "sha256": "8fbbe8849edb759e8bf6ce591584ddcece6754171b2359fcefd41da16a1a7544"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/001/program.h264",
+            "bytes": 269925,
+            "sha256": "85257a02f429e5b311977a649b07de0e7e87a6972e9ecbfa4ed0c5fbf6f3d396"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/001/expected.i420",
+            "bytes": 497664,
+            "sha256": "2576d4c74822796cc409ced89f70dc87bd2c8f0f86a542cbf142a4e73adcf306"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/001/output.u8",
+              "bytes": 65536,
+              "sha256": "9ea66805edc8d5901efee44a3276a8b9d0b97a6a451e7333c0915ea02c03d217"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/002/input-a.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/002/input-b.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/002/input-000.h264",
+              "bytes": 166583,
+              "sha256": "afc9cb442ebf04e29a018ec3db9c06e6a731c2cad9eefdb88a23bdacc7ea34c5"
+            },
+            {
+              "path": "256/motion-interpolation/fused/002/input-001.h264",
+              "bytes": 133781,
+              "sha256": "cb6dd31c9db85c60a27e4e40295fb538a549610c2ec83d232832024a2e16defc"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/002/program.h264",
+            "bytes": 302693,
+            "sha256": "a2aae924306aaac9b8afc4783eab3489e94c6b426138e2670e4c1b203632b2a0"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/002/expected.i420",
+            "bytes": 497664,
+            "sha256": "a8139df4658ab10c082abe0cda4a249ce9206773c8380ef9c686ca982e7bfb86"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/002/output.u8",
+              "bytes": 65536,
+              "sha256": "228e7065ec76cc18dc1a570e47b12069b2c42e074af1159a79be7a8ee3e9d77c"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/003/input-a.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/003/input-b.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/003/input-000.h264",
+              "bytes": 133815,
+              "sha256": "ef43e0ea2832833ce78179f2bd31cbabc6723d6b7868f198a75b0ac3562e9f2d"
+            },
+            {
+              "path": "256/motion-interpolation/fused/003/input-001.h264",
+              "bytes": 166549,
+              "sha256": "5a1ba6f198057a8c9ae75df313dd2de99522e8e5c50095c632a38faab9e32053"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/003/program.h264",
+            "bytes": 302693,
+            "sha256": "1ffbacbb2028afa910f1d280e08879a01f61fe13d38eb536be8309f118e67e8d"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/003/expected.i420",
+            "bytes": 497664,
+            "sha256": "7c3a8efd9c64d0e59ea498633c923f34fa5797e7eed91ed9eecb59e355da9412"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/003/output.u8",
+              "bytes": 65536,
+              "sha256": "e8e61b7c1fca8243ab9e37db76a0e6f3659517a0cf2b9159aab891c4543dc1ff"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/004/input-a.u8",
+              "bytes": 65536,
+              "sha256": "a69aa6ba9391e83cdba3a3459b25c60ec06c6de3c8f928953e7a4c1c0ac7f60b"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/004/input-b.u8",
+              "bytes": 65536,
+              "sha256": "6edf230f38d49d6b8c49e8718972355528432df22eb611735da032650569efc3"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/004/input-000.h264",
+              "bytes": 133815,
+              "sha256": "14f54549e9fcd7c9ec30114637a02fbf767a0fbe25d71e7797a745e4f92552e6"
+            },
+            {
+              "path": "256/motion-interpolation/fused/004/input-001.h264",
+              "bytes": 133781,
+              "sha256": "a13b4e3a93839d2f9b754bf5e66c2d28c80c242fea635abc9932f82caea2736a"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/004/program.h264",
+            "bytes": 269925,
+            "sha256": "ef599824cf71be0538c37e28e47373eebce2d61ba407fea5b6735abdca3ed84b"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/004/expected.i420",
+            "bytes": 497664,
+            "sha256": "b8874ec7fdb0c6b71e61e0c86538adcce2f0f7fcc578195f0539ed11ef6d7164"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/004/output.u8",
+              "bytes": 65536,
+              "sha256": "0eb17e465d1d1d5eea15c62dd0928589ee9a7253f5a25d24f2eaa407ed006fec"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/005/input-a.u8",
+              "bytes": 65536,
+              "sha256": "469488ff654a08a3313b19e3732e6314d1080c397b3ca32c6857fae90be7cf57"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/005/input-b.u8",
+              "bytes": 65536,
+              "sha256": "661cfe68bd99b594adc0e182890365ee223e2101e9f1b8a51c94301e6e1f05ea"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/005/input-000.h264",
+              "bytes": 133815,
+              "sha256": "fb76f56e2a81b4d790fb82531953226502dbc3537b4525b716503fb8ce09fe80"
+            },
+            {
+              "path": "256/motion-interpolation/fused/005/input-001.h264",
+              "bytes": 133781,
+              "sha256": "8c2f30aa426ef58e911b75144c56fbd40e21ffd5f90356416b094c734ec9eb76"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/005/program.h264",
+            "bytes": 269925,
+            "sha256": "9e1d5e87feaa22df1e23c334ca01d2dc4c05f0215bf68d63bcfaf87931272158"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/005/expected.i420",
+            "bytes": 497664,
+            "sha256": "25f5da9d7b490431a31fab85598290ed20ba0d6f34f11237fe33187db870ff70"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/005/output.u8",
+              "bytes": 65536,
+              "sha256": "69505f498efa26de004d5f4475a96b54bb198dd530e0371423711bdcff861dc5"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/006/input-a.u8",
+              "bytes": 65536,
+              "sha256": "d6ddb4c29e422fa37ce7dc2824e414d2ff6ea4b204b0b6695430ca0812e9c41c"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/006/input-b.u8",
+              "bytes": 65536,
+              "sha256": "77cd8167d4fd989a45a7657bc19776cd4445d64bbc7dff4e55fdcad554983ae7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/006/input-000.h264",
+              "bytes": 133815,
+              "sha256": "5e1ca9a0200f740cda30684c8ab3daf5a2f56ba0749fb3c6afccc3895f6a33a9"
+            },
+            {
+              "path": "256/motion-interpolation/fused/006/input-001.h264",
+              "bytes": 133781,
+              "sha256": "5991c288a379f0004cb27ba3629241999bcea27a41c29aea5769c4c05b2092d9"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/006/program.h264",
+            "bytes": 269925,
+            "sha256": "0653ae718569f494d21aa51679f3803e644122f434c4bfc0c2b640fddfdcddad"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/006/expected.i420",
+            "bytes": 497664,
+            "sha256": "8291e6527d53fc2332f55ff650f78ff7a4eccbd8234badfab81ed8b85d66d3dc"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/006/output.u8",
+              "bytes": 65536,
+              "sha256": "8e5becdeb2c37cdd3928f7ebf9f5825ace9ab0d4fc3ca4580d2e17c7cbcb1df7"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/motion-interpolation/fused/007/input-a.u8",
+              "bytes": 65536,
+              "sha256": "b17444508a1e8a97d1e96cdb1bb88fee222d95fcae1145cd31d355cc657b04e8"
+            },
+            "b": {
+              "path": "256/motion-interpolation/fused/007/input-b.u8",
+              "bytes": 65536,
+              "sha256": "cdbd78579def95727b152eab255301ee623c77c8cdd38433960147ec1cf6f8cb"
+            }
+          },
+          "units": [
+            {
+              "path": "256/motion-interpolation/fused/007/input-000.h264",
+              "bytes": 133815,
+              "sha256": "f65fbbfa9504b2085e9c7a104e49c451279f7a3dc1e362f2123a114c9f49c447"
+            },
+            {
+              "path": "256/motion-interpolation/fused/007/input-001.h264",
+              "bytes": 133781,
+              "sha256": "84dbf5e668b548d11f0cd983adbbd36455606c6f400fdf9108e7df2efdbc32eb"
+            }
+          ],
+          "stream": {
+            "path": "256/motion-interpolation/fused/007/program.h264",
+            "bytes": 269925,
+            "sha256": "f774a9508136832a77deb57bc360f330e3ad7d6f961c242c0977361a21a9f227"
+          },
+          "expected": {
+            "path": "256/motion-interpolation/fused/007/expected.i420",
+            "bytes": 497664,
+            "sha256": "17ddc045add872d29857e82905b4d1a67f58737f8f809825125fb448045e3de3"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/motion-interpolation/fused/007/output.u8",
+              "bytes": 65536,
+              "sha256": "425f7ad4e09d956b658b357613ede79a1fb91b5f7e89980386c85dc864d1bd2e"
+            }
+          }
+        }
+      ]
+    },
+    "256/average-control/fused": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "a",
+        "b"
+      ],
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 1430,
+        "peak_live_references": 2,
+        "prediction_slices": 50
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 2
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        }
+      },
+      "manifest": {
+        "path": "256/average-control/fused/manifest.json",
+        "bytes": 2966,
+        "sha256": "43c60ce86993ba1c32d8f6f615fccc6363f3fd0942eb91520f0f217694149c72"
+      },
+      "prediction_units": [
+        {
+          "path": "256/average-control/fused/prediction-000.h264",
+          "bytes": 1430,
+          "sha256": "afd1b45a674e98535d9bd514014afd11b1eab3d91f678ae6b3d6304835628d84"
+        }
+      ],
+      "fence": {
+        "path": "256/average-control/fused/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/000/input-a.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            },
+            "b": {
+              "path": "256/average-control/fused/000/input-b.u8",
+              "bytes": 65536,
+              "sha256": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            },
+            {
+              "path": "256/average-control/fused/000/input-001.h264",
+              "bytes": 133781,
+              "sha256": "55f8a567676f2740c95b6ae1ed7eb637fd9ed67e312cba4c40d0a426ba3505b2"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/000/program.h264",
+            "bytes": 269398,
+            "sha256": "725772ada1d77c313ce5c86d1a634b4e4cbb82c673c4d41f38fa7209d31dd484"
+          },
+          "expected": {
+            "path": "256/average-control/fused/000/expected.i420",
+            "bytes": 497664,
+            "sha256": "ebdea2ff7c656256c1fa350bbb2518006a19bcc45d9a73c16a6cd4a5f8413764"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/000/output.u8",
+              "bytes": 65536,
+              "sha256": "0998fa3c113ce474361055958b4827a7b8148ac8ae0a09ee1c587c5f600d56e3"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/001/input-a.u8",
+              "bytes": 65536,
+              "sha256": "ba790023cdf97dc5ecbee1a60716a5cb968579f50225eef8321dd3df5ac54c31"
+            },
+            "b": {
+              "path": "256/average-control/fused/001/input-b.u8",
+              "bytes": 65536,
+              "sha256": "02973d8775bb6f1ffec8b8fe2e4e425e6de037ac25f8af9495d6beae36e4adcf"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/001/input-000.h264",
+              "bytes": 133815,
+              "sha256": "be0bb0a768b237e762285c560fa12ac3138e6c6040796560f288d5c8b0edce41"
+            },
+            {
+              "path": "256/average-control/fused/001/input-001.h264",
+              "bytes": 133781,
+              "sha256": "8fbbe8849edb759e8bf6ce591584ddcece6754171b2359fcefd41da16a1a7544"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/001/program.h264",
+            "bytes": 269398,
+            "sha256": "5d3736389910887cc5b90295a87ad42f9f5eb4e828c630cbe9765ddface18cc3"
+          },
+          "expected": {
+            "path": "256/average-control/fused/001/expected.i420",
+            "bytes": 497664,
+            "sha256": "105fe9efe8d9ca7435c2cedea0ad198e74fb3ef2bf485e0e5bf2bba7773100df"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/001/output.u8",
+              "bytes": 65536,
+              "sha256": "e6d106f2919256b5919150a33d437248f684932461dc7b805448d72ebe95fd7b"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/002/input-a.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            },
+            "b": {
+              "path": "256/average-control/fused/002/input-b.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/002/input-000.h264",
+              "bytes": 166583,
+              "sha256": "afc9cb442ebf04e29a018ec3db9c06e6a731c2cad9eefdb88a23bdacc7ea34c5"
+            },
+            {
+              "path": "256/average-control/fused/002/input-001.h264",
+              "bytes": 133781,
+              "sha256": "cb6dd31c9db85c60a27e4e40295fb538a549610c2ec83d232832024a2e16defc"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/002/program.h264",
+            "bytes": 302166,
+            "sha256": "5df4dd0a6663d7216153838d1c1b25b84e71962eb45f0dd0b0bffd650f9415e1"
+          },
+          "expected": {
+            "path": "256/average-control/fused/002/expected.i420",
+            "bytes": 497664,
+            "sha256": "e3b1256a978a907a456975cf1224769a6893bf16b62056ad6abe1c328516c0eb"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/002/output.u8",
+              "bytes": 65536,
+              "sha256": "086317bd0c9bcd77537c8a6cfe66f8e7dd84ded162673903b29f9b3f5e5ea244"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/003/input-a.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            },
+            "b": {
+              "path": "256/average-control/fused/003/input-b.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/003/input-000.h264",
+              "bytes": 133815,
+              "sha256": "ef43e0ea2832833ce78179f2bd31cbabc6723d6b7868f198a75b0ac3562e9f2d"
+            },
+            {
+              "path": "256/average-control/fused/003/input-001.h264",
+              "bytes": 166549,
+              "sha256": "5a1ba6f198057a8c9ae75df313dd2de99522e8e5c50095c632a38faab9e32053"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/003/program.h264",
+            "bytes": 302166,
+            "sha256": "61732b55cda6e87f92802b52a26f0e713c61ac5ead1b0f0e2cec966984f684de"
+          },
+          "expected": {
+            "path": "256/average-control/fused/003/expected.i420",
+            "bytes": 497664,
+            "sha256": "24e4f763c2759aadec484909737ccaf80d00e6026f86894165869ba6dc451f14"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/003/output.u8",
+              "bytes": 65536,
+              "sha256": "086317bd0c9bcd77537c8a6cfe66f8e7dd84ded162673903b29f9b3f5e5ea244"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/004/input-a.u8",
+              "bytes": 65536,
+              "sha256": "a69aa6ba9391e83cdba3a3459b25c60ec06c6de3c8f928953e7a4c1c0ac7f60b"
+            },
+            "b": {
+              "path": "256/average-control/fused/004/input-b.u8",
+              "bytes": 65536,
+              "sha256": "6edf230f38d49d6b8c49e8718972355528432df22eb611735da032650569efc3"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/004/input-000.h264",
+              "bytes": 133815,
+              "sha256": "14f54549e9fcd7c9ec30114637a02fbf767a0fbe25d71e7797a745e4f92552e6"
+            },
+            {
+              "path": "256/average-control/fused/004/input-001.h264",
+              "bytes": 133781,
+              "sha256": "a13b4e3a93839d2f9b754bf5e66c2d28c80c242fea635abc9932f82caea2736a"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/004/program.h264",
+            "bytes": 269398,
+            "sha256": "6539e5a2a68407d4493b98e0060dd77c67f2c67fd6621bb1766c4666dcebe59f"
+          },
+          "expected": {
+            "path": "256/average-control/fused/004/expected.i420",
+            "bytes": 497664,
+            "sha256": "d6a61534410384984da38c34effab1efdde321e07430638a2cca2502565f10d6"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/004/output.u8",
+              "bytes": 65536,
+              "sha256": "4d31f26a01a7abacc7876cdd577cc5e7d87620f78ba57a6b3aa1c9d8bda56bf0"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/005/input-a.u8",
+              "bytes": 65536,
+              "sha256": "469488ff654a08a3313b19e3732e6314d1080c397b3ca32c6857fae90be7cf57"
+            },
+            "b": {
+              "path": "256/average-control/fused/005/input-b.u8",
+              "bytes": 65536,
+              "sha256": "661cfe68bd99b594adc0e182890365ee223e2101e9f1b8a51c94301e6e1f05ea"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/005/input-000.h264",
+              "bytes": 133815,
+              "sha256": "fb76f56e2a81b4d790fb82531953226502dbc3537b4525b716503fb8ce09fe80"
+            },
+            {
+              "path": "256/average-control/fused/005/input-001.h264",
+              "bytes": 133781,
+              "sha256": "8c2f30aa426ef58e911b75144c56fbd40e21ffd5f90356416b094c734ec9eb76"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/005/program.h264",
+            "bytes": 269398,
+            "sha256": "5e3da8261f4915bdb0282dc3b195328d993d975b79a6d1a618a2f58748f59c24"
+          },
+          "expected": {
+            "path": "256/average-control/fused/005/expected.i420",
+            "bytes": 497664,
+            "sha256": "d210c313a034b3d20f8d805d8623b83f2f8e6cee8a14ab335af50c66c5d8b25b"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/005/output.u8",
+              "bytes": 65536,
+              "sha256": "b4302a502f99518d2f7bce6cd97f5fd21e8f457a903aa81bb5cfecd913de05fd"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/006/input-a.u8",
+              "bytes": 65536,
+              "sha256": "d6ddb4c29e422fa37ce7dc2824e414d2ff6ea4b204b0b6695430ca0812e9c41c"
+            },
+            "b": {
+              "path": "256/average-control/fused/006/input-b.u8",
+              "bytes": 65536,
+              "sha256": "77cd8167d4fd989a45a7657bc19776cd4445d64bbc7dff4e55fdcad554983ae7"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/006/input-000.h264",
+              "bytes": 133815,
+              "sha256": "5e1ca9a0200f740cda30684c8ab3daf5a2f56ba0749fb3c6afccc3895f6a33a9"
+            },
+            {
+              "path": "256/average-control/fused/006/input-001.h264",
+              "bytes": 133781,
+              "sha256": "5991c288a379f0004cb27ba3629241999bcea27a41c29aea5769c4c05b2092d9"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/006/program.h264",
+            "bytes": 269398,
+            "sha256": "41994d1dd3af2eaf946215f62bcec58af00eefd8e87aa5a236151e7ca78dcb36"
+          },
+          "expected": {
+            "path": "256/average-control/fused/006/expected.i420",
+            "bytes": 497664,
+            "sha256": "8e002087b66f3483a3ae429a28a60bfd5740cbc3bce76a1a4c5e20276b07c6a4"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/006/output.u8",
+              "bytes": 65536,
+              "sha256": "2494dc7cc133cc2212076fddea1e998b977ef5bc89e4151243fd4c93e6c04551"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "a": {
+              "path": "256/average-control/fused/007/input-a.u8",
+              "bytes": 65536,
+              "sha256": "b17444508a1e8a97d1e96cdb1bb88fee222d95fcae1145cd31d355cc657b04e8"
+            },
+            "b": {
+              "path": "256/average-control/fused/007/input-b.u8",
+              "bytes": 65536,
+              "sha256": "cdbd78579def95727b152eab255301ee623c77c8cdd38433960147ec1cf6f8cb"
+            }
+          },
+          "units": [
+            {
+              "path": "256/average-control/fused/007/input-000.h264",
+              "bytes": 133815,
+              "sha256": "f65fbbfa9504b2085e9c7a104e49c451279f7a3dc1e362f2123a114c9f49c447"
+            },
+            {
+              "path": "256/average-control/fused/007/input-001.h264",
+              "bytes": 133781,
+              "sha256": "84dbf5e668b548d11f0cd983adbbd36455606c6f400fdf9108e7df2efdbc32eb"
+            }
+          ],
+          "stream": {
+            "path": "256/average-control/fused/007/program.h264",
+            "bytes": 269398,
+            "sha256": "bda3eff648fc334c48bd989bbb365915ffa97a982e46a736004b07e858d4aa54"
+          },
+          "expected": {
+            "path": "256/average-control/fused/007/expected.i420",
+            "bytes": 497664,
+            "sha256": "f20d5bc4603565bb0639b7920bdaf40c99a9d686a2c7f14f2bdfb6dfcd3e6c9d"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/average-control/fused/007/output.u8",
+              "bytes": 65536,
+              "sha256": "5a3d936dd77683b2989da336497ee15c90d0876a87f62b12f13b828cb042b743"
+            }
+          }
+        }
+      ]
+    },
+    "256/control/fused": {
+      "size": 256,
+      "level_idc": 41,
+      "input_names": [
+        "image"
+      ],
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 0,
+        "total_pictures": 1,
+        "prediction_bytes": 0,
+        "peak_live_references": 0,
+        "prediction_slices": 0
+      },
+      "coded_width": 288,
+      "coded_height": 288,
+      "frame_bytes": 124416,
+      "output_frames": {
+        "output": 0
+      },
+      "writer": {
+        "width": 256,
+        "height": 256,
+        "fps": 30,
+        "motion_bits": 4,
+        "slice_mode": "row",
+        "level_idc": 41,
+        "reference_slots": {
+          "0": 0
+        }
+      },
+      "manifest": {
+        "path": "256/control/fused/manifest.json",
+        "bytes": 1936,
+        "sha256": "554eca84a894e9d4e18725b8883ee2fa401f23490da6319845783092b9692c6a"
+      },
+      "prediction_units": [],
+      "fence": {
+        "path": "256/control/fused/fence.h264",
+        "bytes": 372,
+        "sha256": "25c6f629e921273972c8bd2dbdd5d02da02521d1de98537e471cc4669796aae8"
+      },
+      "jobs": [
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/000/input-image.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/000/input-000.h264",
+              "bytes": 133815,
+              "sha256": "87f5acf9d9ff74ce031a1ef0c3f19661a3276768a229046596c0baa22bc5bca4"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/000/program.h264",
+            "bytes": 134187,
+            "sha256": "dc6019ca57c19dd536c4a0cbf0f0869bfb372dcf22a5050a4bd98aa0ffd013fc"
+          },
+          "expected": {
+            "path": "256/control/fused/000/expected.i420",
+            "bytes": 248832,
+            "sha256": "def309bcfb2a71f40ff0cd0d1be605b76cbaa6bb1eb83b3b5bc8e25632f5d4e9"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/000/output.u8",
+              "bytes": 65536,
+              "sha256": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/001/input-image.u8",
+              "bytes": 65536,
+              "sha256": "ba790023cdf97dc5ecbee1a60716a5cb968579f50225eef8321dd3df5ac54c31"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/001/input-000.h264",
+              "bytes": 133815,
+              "sha256": "be0bb0a768b237e762285c560fa12ac3138e6c6040796560f288d5c8b0edce41"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/001/program.h264",
+            "bytes": 134187,
+            "sha256": "8ca4811b97900ebe3aa89e2983c556873c54c051fa2d83cb58c8fd8aeb40a75f"
+          },
+          "expected": {
+            "path": "256/control/fused/001/expected.i420",
+            "bytes": 248832,
+            "sha256": "e0327dff3087ae780b4a25df3fbd188d37df7737dcf0251a5a47be8a8108a942"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/001/output.u8",
+              "bytes": 65536,
+              "sha256": "ba790023cdf97dc5ecbee1a60716a5cb968579f50225eef8321dd3df5ac54c31"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/002/input-image.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/002/input-000.h264",
+              "bytes": 166583,
+              "sha256": "afc9cb442ebf04e29a018ec3db9c06e6a731c2cad9eefdb88a23bdacc7ea34c5"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/002/program.h264",
+            "bytes": 166955,
+            "sha256": "59bd44ba15e433f1d039ff6868bf9b72d96873f7dc47a234567da41e6063f139"
+          },
+          "expected": {
+            "path": "256/control/fused/002/expected.i420",
+            "bytes": 248832,
+            "sha256": "af5f4578111a01e699e6b10d6d4a14411e67f23b93682ce98a21705e8742d1f6"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/002/output.u8",
+              "bytes": 65536,
+              "sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/003/input-image.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/003/input-000.h264",
+              "bytes": 133815,
+              "sha256": "ef43e0ea2832833ce78179f2bd31cbabc6723d6b7868f198a75b0ac3562e9f2d"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/003/program.h264",
+            "bytes": 134187,
+            "sha256": "3a632ae10b029df07d2ca10737480d4bc177aa35aaf95494ae7f2a8455f1b896"
+          },
+          "expected": {
+            "path": "256/control/fused/003/expected.i420",
+            "bytes": 248832,
+            "sha256": "174488c1b76792894655716f86f2d0d54f95231464d9638c508c6ed5f1f0530e"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/003/output.u8",
+              "bytes": 65536,
+              "sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/004/input-image.u8",
+              "bytes": 65536,
+              "sha256": "a69aa6ba9391e83cdba3a3459b25c60ec06c6de3c8f928953e7a4c1c0ac7f60b"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/004/input-000.h264",
+              "bytes": 133815,
+              "sha256": "14f54549e9fcd7c9ec30114637a02fbf767a0fbe25d71e7797a745e4f92552e6"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/004/program.h264",
+            "bytes": 134187,
+            "sha256": "d3c83a56d8ce17bb4789827bbc980129e3723e5e9c38396828d3744a06ff42c0"
+          },
+          "expected": {
+            "path": "256/control/fused/004/expected.i420",
+            "bytes": 248832,
+            "sha256": "4f8a2bfc9b8e1aa33aa408a65bc7184b37d4576cf7cfc5bbb9572a23779b4c28"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/004/output.u8",
+              "bytes": 65536,
+              "sha256": "a69aa6ba9391e83cdba3a3459b25c60ec06c6de3c8f928953e7a4c1c0ac7f60b"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/005/input-image.u8",
+              "bytes": 65536,
+              "sha256": "469488ff654a08a3313b19e3732e6314d1080c397b3ca32c6857fae90be7cf57"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/005/input-000.h264",
+              "bytes": 133815,
+              "sha256": "fb76f56e2a81b4d790fb82531953226502dbc3537b4525b716503fb8ce09fe80"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/005/program.h264",
+            "bytes": 134187,
+            "sha256": "5d28adacf9a6a623dee18dd17b03f2522ff3fb6276f88c0015d47d050032dda7"
+          },
+          "expected": {
+            "path": "256/control/fused/005/expected.i420",
+            "bytes": 248832,
+            "sha256": "7118c2a6a06bcd4feb2f1d6ed8d98adaacf7a00ef0ed3dea37a20ea2da7a3cb9"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/005/output.u8",
+              "bytes": 65536,
+              "sha256": "469488ff654a08a3313b19e3732e6314d1080c397b3ca32c6857fae90be7cf57"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/006/input-image.u8",
+              "bytes": 65536,
+              "sha256": "d6ddb4c29e422fa37ce7dc2824e414d2ff6ea4b204b0b6695430ca0812e9c41c"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/006/input-000.h264",
+              "bytes": 133815,
+              "sha256": "5e1ca9a0200f740cda30684c8ab3daf5a2f56ba0749fb3c6afccc3895f6a33a9"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/006/program.h264",
+            "bytes": 134187,
+            "sha256": "1a2fa51bc7f8b17c56fcfbc9f21017d36081f6d7e4cc9364c6521ebbfa16f6a9"
+          },
+          "expected": {
+            "path": "256/control/fused/006/expected.i420",
+            "bytes": 248832,
+            "sha256": "168c6c757929fe3ca6614a0b82858571c8536317826120d063c6a1e2cc7d8030"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/006/output.u8",
+              "bytes": 65536,
+              "sha256": "d6ddb4c29e422fa37ce7dc2824e414d2ff6ea4b204b0b6695430ca0812e9c41c"
+            }
+          }
+        },
+        {
+          "inputs": {
+            "image": {
+              "path": "256/control/fused/007/input-image.u8",
+              "bytes": 65536,
+              "sha256": "b17444508a1e8a97d1e96cdb1bb88fee222d95fcae1145cd31d355cc657b04e8"
+            }
+          },
+          "units": [
+            {
+              "path": "256/control/fused/007/input-000.h264",
+              "bytes": 133815,
+              "sha256": "f65fbbfa9504b2085e9c7a104e49c451279f7a3dc1e362f2123a114c9f49c447"
+            }
+          ],
+          "stream": {
+            "path": "256/control/fused/007/program.h264",
+            "bytes": 134187,
+            "sha256": "9d6164b20c098a63feb538cdda126b7890083e9883ae81366ed07da47aecd8e8"
+          },
+          "expected": {
+            "path": "256/control/fused/007/expected.i420",
+            "bytes": 248832,
+            "sha256": "ca96fc6abb9ba25deda726552a1c110856fbca261cd4345ba11e8520bcbecf7a"
+          },
+          "outputs": {
+            "output": {
+              "path": "256/control/fused/007/output.u8",
+              "bytes": 65536,
+              "sha256": "b17444508a1e8a97d1e96cdb1bb88fee222d95fcae1145cd31d355cc657b04e8"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "validation": {
+    "streams": 64,
+    "pictures": 256,
+    "local_decoder_runs": 192
+  },
+  "decoders": [
+    "ffmpeg",
+    "openh264",
+    "vaapi"
+  ]
+}

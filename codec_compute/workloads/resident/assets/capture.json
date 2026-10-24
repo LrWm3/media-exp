@@ -1,0 +1,46 @@
+{
+  "bundle_sha256": "656f3c12782b51ba955b1d0a10d1c722811eec6c11fbad1faafd0f9cfd8c94d4",
+  "rows": [
+    {
+      "size": 128,
+      "fixture": 0,
+      "displayed_plane_sha256": {
+        "Input A": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+        "Input B": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315",
+        "Unfused: 3 compute pictures": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f",
+        "Fused: 1 compute picture": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f"
+      },
+      "baseline_raw": {
+        "path": "128/motion-interpolation/baseline/000/expected.i420",
+        "bytes": 230400,
+        "sha256": "24ab7c581ac5fca7007f5436cee4600694c79c7c59b2b0815303dafa47a01028"
+      },
+      "fused_raw": {
+        "path": "128/motion-interpolation/fused/000/expected.i420",
+        "bytes": 153600,
+        "sha256": "03aad5fee79ee565b216a0ee891e65d4640a37de27614094834da3df21c42538"
+      }
+    },
+    {
+      "size": 256,
+      "fixture": 0,
+      "displayed_plane_sha256": {
+        "Input A": "38c624fb52009ec9d3994bed68d232c93024e045553919043bd2a0c3fb35c799",
+        "Input B": "1627eafb80e92b143874c2c62d8c95a9146530d2769691ea0e7dc51f19ccf1e7",
+        "Unfused: 3 compute pictures": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5",
+        "Fused: 1 compute picture": "0d2e6f05769a8a3e3761e28814c7042bdb34ad18d79749b07da78acb8665e9c5"
+      },
+      "baseline_raw": {
+        "path": "256/motion-interpolation/baseline/000/expected.i420",
+        "bytes": 746496,
+        "sha256": "a5c8553286645eeeebb62351527733b35611c1fede597c3b5f582e19d6fa7d2d"
+      },
+      "fused_raw": {
+        "path": "256/motion-interpolation/fused/000/expected.i420",
+        "bytes": 497664,
+        "sha256": "a12718c7c827900a4009f4f0222aa5afcdd89a1b028b9cb8bf2511ee63bdcbc3"
+      }
+    }
+  ],
+  "capture_sha256": "b62b0401d9a8aea8a6c2e34ba2a7d5e8445e29e32733250313c304efa5abc71e"
+}
