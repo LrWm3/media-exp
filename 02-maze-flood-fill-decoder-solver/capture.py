@@ -33,7 +33,8 @@ def render(solution, maze, output, backend):
     grid_w, grid_h = maze.width * scale, maze.height * scale
     canvas_w = max(560, grid_w + 48)
     canvas_h = grid_h + 176
-    backend_label = {"vaapi": "Intel VA-API hardware", "ffmpeg": "FFmpeg software", "openh264": "OpenH264 software"}[backend]
+    backend_label = {"vaapi": "Intel VA-API hardware", "ffmpeg": "FFmpeg software",
+                     "openh264": "OpenH264 software", "nvdec": "NVDEC"}[backend]
     goal_distance = len(solution.path) - 1 if solution.path else None
     if goal_distance is not None:
         result_label = f"Goal distance = {goal_distance} steps"
