@@ -118,9 +118,13 @@ def prepare(output, tiles=(2, 4, 8), decoders=("ffmpeg", "openh264", "vaapi")):
         if len(reference.frames) != len(images):
             raise AssertionError("Reference batch job count differs")
         spans = padding_spans(shape)
+        seed_region = next(tile for tile in shape["tiles"] if tile["tile"] == 0)
         padding_bytes, chroma_bytes = 0, 0
         for index, (frames, named) in enumerate(zip(reference.frames, expected)):
             raw = b"".join(frames)
+            seed_pixels = bytes(value * 255 for row in images[index] for value in row)
+            if extract_region(frames[0], seed_region, shape) != seed_pixels:
+                raise AssertionError("Decoded seed differs from the intended input image")
             if program.read(raw) != named:
                 raise AssertionError("Decoded output differs from frozen-network oracle")
             checks = validate_frames(frames, shape, spans=spans)
