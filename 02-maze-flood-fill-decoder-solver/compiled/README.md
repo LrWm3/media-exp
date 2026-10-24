@@ -1,19 +1,25 @@
 # Maze flood through the shared H.264 compiler
 
-The current compiler includes [shared optimizations and measured comparisons](../../05-h264-compiler/optimizations/README.md). Saved assets below preserve the original compiler baseline.
+The current kernel uses **four pictures per expansion**, and the runner reads
+back only completed flood states by default. The 52-step demo uses **214 decoded
+pictures and 54 returned pictures**, down from 265 pictures with full readback.
+[Measured comparison, proofs and captures](optimizations/README.md).
 
 This variant expresses flood propagation in [the shared compiler DSL](../../05-h264-compiler/README.md).
-The [kernel](maze_kernel.py) derives an open-cell mask and a start mask from the
-input, ORs reachability with four shifted neighbors, then ANDs with open cells.
+The [kernel](maze_kernel.py) derives a terrain mask from the input:
+0 for walls, 1 for passages, 2 for starts. Each step combines the four shifted
+neighbors, blocks walls and preserves starts in one final threshold operation.
+Every other reached cell persists through its reached predecessor.
 Finite zero padding prevents movement across opposite boundaries.
 
-![Flood states and route captured from the compiled stream on Intel VA-API](assets/maze.gif)
+![Flood states and route captured from NVDEC with selective readback](optimizations/assets/maze.gif)
 
-The checked-in [stream](assets/maze.h264) reaches the goal in 50 hops and
+The current [stream](optimizations/assets/maze.h264) reaches the goal in 50 hops and
 converges at step 51, leaving the sealed nine-cell room unreachable. FFmpeg,
-OpenH264, and Intel VA-API produce identical raw bytes; every flood state and
-arrival distance matches independent BFS. See [validation results](VALIDATION.md),
-the [compiler manifest](assets/maze.json), and [decoded distances](assets/maze.distances.json).
+OpenH264, Intel VA-API and NVDEC produce identical raw bytes; every flood state
+and arrival distance matches independent BFS. See [validation results](VALIDATION.md),
+the [compiler manifest](optimizations/assets/maze.json), and
+[decoded distances](optimizations/assets/maze.distances.json).
 
 The input keeps the original byte encoding: walls are `0`, open cells are
 `128`, and starts are `255`. Symbolic thresholds produce logical `0/1` masks.
@@ -30,7 +36,13 @@ python 02-maze-flood-fill-decoder-solver/compiled/run.py \
 
 `--maze PATH` loads an ASCII maze; `--random-seed N` chooses another fixture.
 With no `--steps`, the open-cell count supplies a convergence-safe budget.
-Use `--decoder openh264` or `--decoder vaapi` for an installed alternative.
+Use `--decoder openh264`, `--decoder vaapi`, or `--decoder nvdec` for an installed
+alternative. NVDEC accepts `--helper PATH` or the `H264_NVDEC_DECODER` environment
+variable; see [runtime setup](../../05-h264-compiler/native_ops/nvdec/README.md#reproduce).
+`--readback outputs` is the default. NVDEC skips copies of unnamed intermediates;
+the compatibility backends copy all pictures before host selection. `--readback
+all` returns every picture for diagnostics. Distance JSON records actual decoded,
+copied and returned counts. All flood states remain available in either mode.
 `--no-optimize` disables compiler optimizations. FFmpeg renders previews.
 
 The CLI saves the `.h264` stream and compiler `.json` manifest, decodes the saved
@@ -42,7 +54,7 @@ budget ends before convergence.
 from maze_kernel import compile_maze, extract_solution
 
 program = compile_maze(maze.width, maze.height, steps=52)
-outputs = program.verify(maze.initial_luma(), backend="ffmpeg")
+outputs = program.verify(maze.initial_luma(), backend="ffmpeg", readback="outputs")
 solution = extract_solution(outputs, maze, steps=52)
 ```
 
@@ -66,7 +78,7 @@ zero budgets, input reuse, original-stream parity, and disabled-oracle execution
 FFmpeg, OpenH264, and VA-API paths are exercised when available; missing optional
 backends are reported as skips.
 
-For this 52-step capture, the general compiler emits 560 pictures and 148,540
-bytes. The original specialized schedule emits 261 pictures and 78,341 bytes
-for the same maze and budget. Both compute the same states; the shared
-compiler trades the specialized schedule's compactness for reusable operations.
+The current demo stream has 214 pictures and 45,853 bytes. Original assets under
+[`assets/`](assets/) preserve the first compiler's 560-picture, 148,540-byte
+baseline. The earlier optimized kernel used 265 pictures; the specialized
+original used 261. All variants compute the same states and shortest distances.

@@ -1,5 +1,9 @@
 # Maze flood-fill decoder solver
 
+The [shared-compiler variant](compiled/README.md) now uses four pictures per
+expansion and selective NVDEC readback: [measurements and capture](compiled/optimizations/README.md).
+The specialized implementation described below retains its original five-picture schedule.
+
 An H.264 decoder expands a flood through a maze, in parallel across its pixels.
 Walls block propagation. Only the maze and starting cells are stored as pixels;
 every later picture contains prediction instructions without residual data.

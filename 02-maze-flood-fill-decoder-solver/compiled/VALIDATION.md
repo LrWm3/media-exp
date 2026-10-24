@@ -1,5 +1,20 @@
 # Compiled maze validation
 
+The current four-picture kernel and selected-output runner are documented in
+the [paired optimization report](optimizations/README.md). All 19 compiled-maze
+tests pass. Ten paired fixtures match independent BFS and full FFmpeg,
+OpenH264, VA-API and NVDEC output: 5,302 pictures / 31,286,784 I420 bytes across
+both kernels. Full and selective NVDEC readback agree on every named output.
+
+The current demo uses 214 decoded pictures and returns 54 unique output pictures.
+The NVDEC helper confirms only 54 copies in selective mode. It reaches 359 cells,
+the goal in 50 hops, and convergence at step 51. Paired five-repetition medians
+are 652.22 ms for the previous kernel/full readback and 582.10 ms for the new
+kernel/selected readback. The [raw report](optimizations/assets/nvdec-results.json)
+retains every sample and count; selection alone did not demonstrate a latency win.
+
+The remaining sections preserve the first compiler baseline and its assets.
+
 Validated on 2026-10-23 with actual FFmpeg, OpenH264, and Intel VA-API decoders.
 All 14 integration tests passed; no backend checks were skipped.
 

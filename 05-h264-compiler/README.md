@@ -85,7 +85,7 @@ pictures, not a precomputed presentation animation.
 | Variant | Workload | Specialized original | First compiler | Optimized compiler |
 | --- | --- | ---: | ---: | ---: |
 | [01 Life](../01-conways-decoder-of-life/compiled/README.md) | 40 generations | 561 | 922 | **402** |
-| [02 Maze](../02-maze-flood-fill-decoder-solver/compiled/README.md) | 52 steps | 261 | 560 | **265** |
+| [02 Maze](../02-maze-flood-fill-decoder-solver/compiled/README.md) | 52 steps | 261 | 560 | **214** |
 | [03 Denoiser](../03-denoising-decoder/compiled/README.md) | One image | 98 | 74 | **52** |
 | [04 MNIST](../04-binary-mnist-classification-decoder/compiled/README.md) | Eight digits | 1,802 | 1,826 | **1,589** |
 
@@ -96,6 +96,10 @@ running their kernels now uses the optimized compiler. The comparison suite
 checks all saved generations, flood states, denoiser features and classifier
 activations. Earlier full-dataset accuracy measurements remain in their reports;
 this optimization run uses the saved demo inputs.
+
+Maze's current figure includes its revised four-picture recurrence. Recompiling
+the historical five-picture graph still uses 265 pictures. Its runner now reads
+back 54 completed-state/passage pictures; see the [paired comparison](../02-maze-flood-fill-decoder-solver/compiled/optimizations/README.md).
 
 ## Run and inspect
 
@@ -115,6 +119,13 @@ python3 -m unittest -v
 references, slot assignments, named output frame numbers, hashes, and execution
 costs. Inspect `program.costs` for picture, slice, byte and lifetime counts.
 See the [small example manifest](assets/shifted-or.json).
+
+`program.decode(image, backend="nvdec", readback="outputs")` returns all named
+outputs while NVDEC copies only their unique physical pictures. `verify()` accepts
+the same option; the default remains `readback="all"`. `output_picture_indices`
+exposes the sorted selection, and `read(raw, selected_frames=indices)` reads those
+packed I420 pictures without fabricating missing intermediates. FFmpeg, VA-API
+and OpenH264 currently perform full readback before host selection.
 
 See [API and exact semantics](DESIGN.md) and [validation](VALIDATION.md) for
 compiler tests, exhaustive byte arithmetic and interpolation checks, and

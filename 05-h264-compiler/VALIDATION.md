@@ -1,5 +1,12 @@
 # Validation
 
+The [four-picture maze and readback report](../02-maze-flood-fill-decoder-solver/compiled/optimizations/README.md)
+extends the local regression run to 184 passing tests. The shared compiler has
+78 tests, including selected-picture ordering, output aliases, missing-picture
+rejection and guard/chroma/range validation. Ten paired maze fixtures passed
+full and selected NVDEC byte comparisons; the demo uses 214 decoded pictures
+and 54 copied pictures in the new mode.
+
 The latest [exact-search report](optimizations/exact-search/README.md) records
 148 passing tests and 42 saved cases verified on FFmpeg, OpenH264, VA-API and
 NVDEC: 4,855 pictures and all 323 named output planes. Paired measurements

@@ -41,3 +41,7 @@ slots, and exact comparisons across all six experiments.
 [Exact instruction search](05-h264-compiler/optimizations/exact-search/README.md):
 proved small-domain replacements reduce Life from 682 to 402 pictures and
 denoising from 58 to 52, with decoder captures and paired NVDEC measurements.
+
+[Maze kernel and readback improvements](02-maze-flood-fill-decoder-solver/compiled/optimizations/README.md):
+265 → 214 decoded pictures, 265 → 54 NVDEC copies, and a measured 1.12× speedup
+while preserving every flood state and shortest distance.

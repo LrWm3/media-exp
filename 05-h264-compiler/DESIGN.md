@@ -223,6 +223,18 @@ still read every picture before selecting on the host. This API batches existing
 streams through EOS; it does not maintain an interactive service or reuse input
 references across job boundaries. See [motion-mask timings](../06-motion-mask-decoder/VALIDATION.md).
 
+`Program.decode(..., readback="outputs")` and `verify(..., readback="outputs")`
+use this runtime for a single invocation and return every named output. Aliases
+share one physical readback; `output_picture_indices` is the sorted unique tuple.
+`Program.read(raw, selected_frames=indices)` validates strictly increasing,
+in-range integer indices, exact packed size, complete named-output coverage,
+each supplied picture's guard/chroma, and each named output's proven range.
+Missing intermediates are never filled with invented pixels. Full readback
+remains the default for the shared API and checks guard/chroma in every picture.
+Selective readback checks those properties only in supplied pictures; use full
+validation when auditing a new program. The maze CLI defaults to output selection
+after both modes have been independently checked against full decoder output.
+
 The manifest records logical graph IDs/ranges, physical instruction frame numbers,
 reference dependencies, weights/offsets/motion, output frames, refreshes, and
 optimization statistics. It also records slot assignments, execution modes and
