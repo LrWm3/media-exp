@@ -1,0 +1,268 @@
+{
+  "format": "codec-compute-cpu-reference-capture-1",
+  "capture_script": {
+    "path": "codec_compute/workloads/cpu_comparison/capture.py",
+    "sha256": "3a22c383cbaafc3587b959b5612802bb7419e2b5991f905289c9d14987c63334"
+  },
+  "source_commit": "6eb0cc2581b2174e068ed8c0aaa4f03fca724fae",
+  "curated_bundle": {
+    "path": "bundle.json",
+    "bytes": 442292,
+    "sha256": "2c465b52067626940976ff9901e5cec04681761bf414ad2bc695de43294295a0"
+  },
+  "full_bundle": {
+    "path": "full-bundle.json",
+    "bytes": 508686,
+    "sha256": "9e7eaed290ecdd4e344ba96fcef0baff486ce98cea8c8021f3e758242679ce2a"
+  },
+  "audits": {
+    "retained_artifacts": 135,
+    "retained_artifact_bytes": 79922106,
+    "ordinary_streams_checked": 6,
+    "cpu_specs_bound_to_semantic_graphs": 6,
+    "full_bundle_sha256": "9e7eaed290ecdd4e344ba96fcef0baff486ce98cea8c8021f3e758242679ce2a",
+    "scope": "Checks saved export evidence and exact subset identity; no new decoder run or hardware claim."
+  },
+  "pixel_source": "Saved local decoded I420 from the frozen export; output crops match saved compact references.",
+  "local_export_decoders": [
+    "ffmpeg",
+    "openh264",
+    "vaapi"
+  ],
+  "hardware_evidence": "This capture performs no hardware decode. Consult the separate complete benchmark report for NVDEC equality and timing.",
+  "display": {
+    "scale": 1,
+    "interpolation": "none",
+    "contrast_stretch": false,
+    "zero_luma": "black",
+    "guards_and_chroma": "Audited, excluded from displayed active luma."
+  },
+  "sheets": [
+    {
+      "size": 512,
+      "image": {
+        "path": "reference-outputs-512.png",
+        "bytes": 421332,
+        "sha256": "30bd13e36e75394590318b8c1932a5f01864ba218b46b50b97910e6674b46320"
+      }
+    }
+  ],
+  "panels": [
+    {
+      "case": "512/control/fused",
+      "fixture": 0,
+      "frame_index": 0,
+      "source_i420": {
+        "path": "512/control/fused/000/expected.i420",
+        "bytes": 887808,
+        "sha256": "b42a8c510bd3c9c9945b42ebc5a81a2f216ebf191ea226e53b4f2cd5000e9986"
+      },
+      "compact_reference": {
+        "path": "512/control/fused/000/output.u8",
+        "bytes": 262144,
+        "sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e"
+      },
+      "plane_sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e",
+      "panel": {
+        "path": "panels/512/control.png",
+        "bytes": 4666,
+        "sha256": "2d95c14fdb18aa33f53c6053becc84ee82911b70ff72fea7994ebb12aea65720"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 262144,
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        20,
+        130,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/average-control/fused",
+      "fixture": 0,
+      "frame_index": 2,
+      "source_i420": {
+        "path": "512/average-control/fused/000/expected.i420",
+        "bytes": 1775616,
+        "sha256": "5b5d00ca51b9a0bcc27278cb3a559c2bc57e6cf4952d984525183a719c6923bb"
+      },
+      "compact_reference": {
+        "path": "512/average-control/fused/000/output.u8",
+        "bytes": 262144,
+        "sha256": "583a5ca44a463bb419e73126d17e254d862a4643a9dbb0bfd2251d4379ffb420"
+      },
+      "plane_sha256": "583a5ca44a463bb419e73126d17e254d862a4643a9dbb0bfd2251d4379ffb420",
+      "panel": {
+        "path": "panels/512/average-control.png",
+        "bytes": 4730,
+        "sha256": "e3f45d49fd9386f20d71ab09dbaffb6e3930d5875634369a45a3487de9ea18ff"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 262144,
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        556,
+        130,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/patch-atlas/fused",
+      "fixture": 0,
+      "frame_index": 1,
+      "source_i420": {
+        "path": "512/patch-atlas/fused/000/expected.i420",
+        "bytes": 1331712,
+        "sha256": "87dab794f948c7e70c8e03548ba51b9d92835ceb56f9651d15519b79336d4ff4"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/fused/000/output.u8",
+        "bytes": 262144,
+        "sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c"
+      },
+      "plane_sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c",
+      "panel": {
+        "path": "panels/512/patch-atlas.png",
+        "bytes": 1072,
+        "sha256": "5986f5d1c2b24987aa8131daaa377a1c6df53365ffc641ea31287f916610d173"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65267,
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        1092,
+        130,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/fused",
+      "fixture": 0,
+      "frame_index": 2,
+      "source_i420": {
+        "path": "512/motion-interpolation/fused/000/expected.i420",
+        "bytes": 1775616,
+        "sha256": "e3bf326ee2e2f3b7375f2d4aec9d3fc85b9866db5576c7f3128085cf258e83b4"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/fused/000/output.u8",
+        "bytes": 262144,
+        "sha256": "dcabca6c835b929243294410e65fb56d231feec20387faa5b32114ca8b0ea05b"
+      },
+      "plane_sha256": "dcabca6c835b929243294410e65fb56d231feec20387faa5b32114ca8b0ea05b",
+      "panel": {
+        "path": "panels/512/motion-interpolation.png",
+        "bytes": 45223,
+        "sha256": "e37505ca55caa4830ef7a4853ebb42d305e705ded6824d9a4f92fd0168915b85"
+      },
+      "pixel_min": 0,
+      "pixel_max": 253,
+      "nonzero_pixels": 261891,
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        20,
+        717,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/resident-chain-16/fused",
+      "fixture": 0,
+      "frame_index": 16,
+      "source_i420": {
+        "path": "512/resident-chain-16/fused/000/expected.i420",
+        "bytes": 7990272,
+        "sha256": "8626769570878c24bf8a1370ab7601134801669280993c5086afa753612b22ec"
+      },
+      "compact_reference": {
+        "path": "512/resident-chain-16/fused/000/output.u8",
+        "bytes": 262144,
+        "sha256": "ca8047b117acbb7cc895d9302e9594ee59f1e39156cfe4f26c7fcf1ae3bfac96"
+      },
+      "plane_sha256": "ca8047b117acbb7cc895d9302e9594ee59f1e39156cfe4f26c7fcf1ae3bfac96",
+      "panel": {
+        "path": "panels/512/resident-chain-16.png",
+        "bytes": 31070,
+        "sha256": "50417ca48c9bf398fa2e8869a739b52860d7a3e87b82a0ec88382338b6e4285e"
+      },
+      "pixel_min": 9,
+      "pixel_max": 246,
+      "nonzero_pixels": 262144,
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        556,
+        717,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/resident-chain-64/fused",
+      "fixture": 0,
+      "frame_index": 64,
+      "source_i420": {
+        "path": "512/resident-chain-64/fused/000/expected.i420",
+        "bytes": 29297664,
+        "sha256": "5e9781a0390a7cf5cbee808e2c4e63c9c277866bac5f9b0a5c26f0d982ad64f5"
+      },
+      "compact_reference": {
+        "path": "512/resident-chain-64/fused/000/output.u8",
+        "bytes": 262144,
+        "sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73"
+      },
+      "plane_sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73",
+      "panel": {
+        "path": "panels/512/resident-chain-64.png",
+        "bytes": 67546,
+        "sha256": "607face091ee611a25658118935bd044efda40d4749b803a729d02f9b07f76b0"
+      },
+      "pixel_min": 5,
+      "pixel_max": 252,
+      "nonzero_pixels": 262144,
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        1092,
+        717,
+        512,
+        512
+      ]
+    }
+  ]
+}
