@@ -149,6 +149,7 @@ class _Template:
     weight_end: int
     alignment: int
     cabac_start: int
+    list_modification_position: int
 
 
 @lru_cache(maxsize=32)
@@ -168,15 +169,29 @@ def _template(width: int, height: int, binary: bool) -> _Template:
         "pps_deblocking_filter_disabled_flag": 1,
         "num_ref_idx_l0_default_active_minus1": 0,
         "num_ref_idx_l1_default_active_minus1": 0,
+        "log2_max_pic_order_cnt_lsb_minus4": 4,
+        "num_short_term_ref_pic_sets": 0,
+        "long_term_ref_pics_present_flag": 0,
+        "dependent_slice_segments_enabled_flag": 0,
+        "output_flag_present_flag": 0,
+        "num_extra_slice_header_bits": 0,
+        "cabac_init_present_flag": 0,
+        "lists_modification_present_flag": 0,
+        "tiles_enabled_flag": 0,
+        "entropy_coding_sync_enabled_flag": 0,
+        "slice_segment_header_extension_present_flag": 0,
     }.items():
         if _value(trace, name) != expected:
             raise HEVCError(f"unsupported libx265 template setting: {name}")
+    if binary and (_value(trace, "sps_max_dec_pic_buffering_minus1[0]") != 3
+                   or _value(trace, "sps_max_num_reorder_pics[0]") != 1):
+        raise HEVCError("unsupported libx265 decoded-picture-buffer configuration")
     alignment = _position(trace, "alignment_bit_equal_to_one")
     return _Template(
         tuple(n for n in nals if _nal_type(n) in (32, 33, 34)),
         _bits(_rbsp(targets[0])), _position(trace, "luma_log2_weight_denom"),
         _position(trace, "five_minus_max_num_merge_cand"), alignment,
-        (alignment // 8 + 1) * 8,
+        (alignment // 8 + 1) * 8, _position(trace, "lists_modification_present_flag"),
     )
 
 

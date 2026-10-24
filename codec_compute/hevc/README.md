@@ -50,3 +50,45 @@ Implementation references:
 - [x265 lossless coding](https://x265.readthedocs.io/en/stable/lossless.html).
 - [x265 encoder options](https://x265.readthedocs.io/en/stable/cli.html).
 - [FFmpeg HEVC slice-header parsing](https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/hevc/hevcdec.c).
+
+## Resident programs
+
+`NativeProgram` uploads inputs once and keeps intermediate values inside HEVC's
+decoded-picture buffer. It emits reference P/B pictures with explicit
+short-term reference sets and reference-list selection. Future computation
+slices refer directly to previous decoder results. No intermediate picture is
+decoded on the host and re-encoded.
+
+```python
+from codec_compute.hevc import NativeProgram, NativeStep
+
+program = NativeProgram(32, 32, ("a", "b"), (
+    NativeStep("sum", ("a", "b"), (2, 2)),
+    NativeStep("difference", ("sum", "b"), (2, -2)),
+    NativeStep("result", ("difference", "a"), (1, 1)),
+))
+results = program.decode({"a": bytes([200]) * 1024, "b": bytes([70]) * 1024})
+assert results["result"] == bytes([193]) * 1024
+```
+
+Program constraints: one or two uploaded inputs, 1–128 instructions, and at
+most three simultaneously retained references. Last-use analysis releases
+references. Programs exceeding these limits fail during compilation. Every
+instruction accepts one or two named references and corresponding weights,
+with the same arithmetic as `Kernel`. References may name any earlier result
+that remains live. There is no motion operation.
+
+Unlike the single binary kernel's reordered output, resident programs assign
+monotonically increasing result POCs after the uploads. With two inputs, POCs
+are `a=0,b=2,step0=3,step1=4,...`; with one input they are
+`a=0,step0=1,step1=2,...`. Display order is inputs followed by instructions.
+`output_frame_indices` and `picture_order_counts` explicitly expose both maps.
+`decode` returns every named input and result as a flat luma byte string.
+
+Compilation changes the PPS reference-list-modification flag and builds new
+slice headers; uploaded slices retain their lossless payload. The 4-picture
+SPS buffer permits three retained references plus the current picture. Tests
+include 3-reference branching, 40 resident stages, repeated operands, rejection
+of excess reference lifetimes, exact display-order mapping, and a spy confirming
+that assembly invokes the encoder once with only the original uploaded inputs
+(and the schedule's duplicate A).

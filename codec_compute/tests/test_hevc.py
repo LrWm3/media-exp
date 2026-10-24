@@ -2,8 +2,9 @@
 import random
 import shutil
 import unittest
+from unittest.mock import patch
 
-from codec_compute.hevc import compile_binary, compile_unary, decode_frames
+from codec_compute.hevc import NativeProgram, NativeStep, compile_binary, compile_unary, decode_frames
 
 
 def patterns(width=32, height=32):
@@ -69,6 +70,55 @@ class HEVCNativeTests(unittest.TestCase):
             kernel.assemble(bytes(1023))
         with self.assertRaises(ValueError):
             kernel.assemble([[1] * 32] * 31)
+
+    def test_given_resident_dag_when_decoded_then_intermediates_remain_decoder_computed(self):
+        from codec_compute.hevc.program import _encode
+        program = NativeProgram(32, 32, ("a", "b"), (
+            NativeStep("sum", ("a", "b"), (2, 2)),
+            NativeStep("difference", ("sum", "b"), (2, -2)),
+            NativeStep("result", ("difference", "a"), (1, 1)),
+        ))
+        self.assertEqual(program.max_live_references, 3)
+        original_tail = program.tail
+        inputs = patterns()
+        for index, a in enumerate(inputs):
+            b = inputs[(index + 2) % len(inputs)]
+            summed = bytes(clip(x + y) for x, y in zip(a, b))
+            difference = bytes(clip(x - y) for x, y in zip(summed, b))
+            expected = bytes((x + y + 1) // 2 for x, y in zip(difference, a))
+            with patch("codec_compute.hevc.program._encode", wraps=_encode) as encoder:
+                actual = program.decode({"a": a, "b": b})
+            self.assertEqual(encoder.call_count, 1)
+            self.assertEqual(encoder.call_args.args[2], [a, a, b])
+            self.assertEqual(actual, dict(a=a, b=b, sum=summed, difference=difference, result=expected))
+            self.assertTrue(program.assemble({"a": a, "b": b}).endswith(original_tail))
+        self.assertEqual(dict(program.output_frame_indices), dict(a=0, b=1, sum=2, difference=3, result=4))
+
+    def test_given_long_unary_chain_when_decoded_then_dead_references_release(self):
+        source = patterns()[-1]
+        steps = tuple(NativeStep(f"stage{index}", ("a" if index == 0 else f"stage{index-1}",),
+                                 (1,), 3 if index % 2 == 0 else -2)
+                      for index in range(40))
+        program = NativeProgram(32, 32, ("a",), steps)
+        actual = program.decode({"a": source})
+        expected = source
+        for index in range(40):
+            expected = bytes(clip(value + (3 if index % 2 == 0 else -2)) for value in expected)
+            self.assertEqual(actual[f"stage{index}"], expected)
+        self.assertEqual(program.max_live_references, 1)
+
+    def test_given_repeated_operand_when_binary_prediction_decodes_then_both_weights_apply(self):
+        source = patterns()[-1]
+        program = NativeProgram(40, 24, ("a",), (NativeStep("result", ("a", "a"), (2, -2)),))
+        self.assertEqual(program.decode({"a": source[:960]})["result"], bytes(960))
+
+    def test_given_excess_reference_lifetime_when_compiling_then_reject(self):
+        steps = (
+            NativeStep("c", ("a",), (1,)), NativeStep("d", ("b",), (1,)),
+            NativeStep("e", ("a", "b"), (2, 2)), NativeStep("f", ("c", "d"), (2, 2)),
+        )
+        with self.assertRaisesRegex(ValueError, "three simultaneously retained"):
+            NativeProgram(32, 32, ("a", "b"), steps)
 
 
 if __name__ == "__main__":
