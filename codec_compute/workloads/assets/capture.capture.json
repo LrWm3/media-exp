@@ -1,0 +1,344 @@
+{
+  "format": "codec-compute-workload-capture-1",
+  "report": "validation.json",
+  "report_sha256": "023045ef2e845cd5914a6cbcc2ea51fa11fe5ac14e8083ad37b09900bdd547fb",
+  "report_hash_pinned": true,
+  "repository_commit": "f3dbf6559c2ca8cc07b989a8a0bbb63348b08ddb",
+  "capture_script_sha256": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+  "capture_sha256": "4f664b16eebeb63f4184ebb20fefcdbe79f5e2235c5c2b4aba66cf3137afe1b9",
+  "size": [
+    1320,
+    1210
+  ],
+  "source": "Hash-checked actual fixture planes and decoded named output planes",
+  "timings": "not measured",
+  "rows": [
+    {
+      "task": "absolute-change",
+      "target": "h264",
+      "variant": 0,
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 799,
+        "peak_live_references": 3
+      },
+      "stream": "streams/absolute-change-h264-0.h264",
+      "stream_sha256": "b49c3320da94d064a882fec80e6a3e7cb4dc5e8c8e9996b13738e823ff7b0cc7",
+      "manifest_sha256": "04a0fcbab7b6de2e10db88a1a319fe399e42f87a49f8c28e8bbe6924e0fe59e4",
+      "decoders": [
+        {
+          "decoder": "ffmpeg",
+          "status": "pass",
+          "full_decoded_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2",
+          "decoded_bytes": 43008,
+          "decoded_format": "guarded I420, including chroma"
+        },
+        {
+          "decoder": "openh264",
+          "status": "pass",
+          "full_decoded_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2",
+          "decoded_bytes": 43008,
+          "decoded_format": "guarded I420, including chroma"
+        },
+        {
+          "decoder": "vaapi",
+          "status": "pass",
+          "full_decoded_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2",
+          "decoded_bytes": 43008,
+          "decoded_format": "guarded I420, including chroma"
+        }
+      ],
+      "planes": [
+        {
+          "kind": "inputs",
+          "name": "a",
+          "path": "planes/absolute-change-h264-0/input-a.u8",
+          "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "inputs",
+          "name": "b",
+          "path": "planes/absolute-change-h264-0/input-b.u8",
+          "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "outputs",
+          "name": "output",
+          "path": "planes/absolute-change-h264-0/output-output.u8",
+          "sha256": "c30d240b26763bfef270497fe4139a0467bbb502d826036ca0f2af60a2a39f45",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "outputs",
+          "name": "mask",
+          "path": "planes/absolute-change-h264-0/output-mask.u8",
+          "sha256": "61452c3d73501ab2d86ffe0b19f9406ea93a9c0fd48a1cd7715a04cf97bed2dd",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "binary 0/1 to 0/255"
+        }
+      ]
+    },
+    {
+      "task": "temporal-envelope",
+      "target": "hevc",
+      "variant": 0,
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 91,
+        "peak_live_references": 3
+      },
+      "stream": "streams/temporal-envelope-hevc-0.hevc",
+      "stream_sha256": "1d150c66f61d50e8184e4ed61185aab45365770e93a465c1384943111e157859",
+      "manifest_sha256": "8a7d9ac4ff431d7cdf0c79002bc56e29d02901bf54e95b79f2473447063abdbc",
+      "decoders": [
+        {
+          "decoder": "ffmpeg",
+          "status": "pass",
+          "full_decoded_sha256": "6aef43ef60108766c1da14b23155279a5c69a0fc33f001b8020c9ef06240bd5a",
+          "decoded_bytes": 7168,
+          "decoded_format": "displayed luma planes"
+        }
+      ],
+      "planes": [
+        {
+          "kind": "inputs",
+          "name": "a",
+          "path": "planes/temporal-envelope-hevc-0/input-a.u8",
+          "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "inputs",
+          "name": "b",
+          "path": "planes/temporal-envelope-hevc-0/input-b.u8",
+          "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "outputs",
+          "name": "low",
+          "path": "planes/temporal-envelope-hevc-0/output-low.u8",
+          "sha256": "e581811b7c911a0ca74cbee1d121a13a5779d70354555a4fbf371bb6b0f0ce99",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "outputs",
+          "name": "high",
+          "path": "planes/temporal-envelope-hevc-0/output-high.u8",
+          "sha256": "a226190637730bb98fd66077a57cfd7979a3c0820e142e59ca40a15c702a676d",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "outputs",
+          "name": "output",
+          "path": "planes/temporal-envelope-hevc-0/output-output.u8",
+          "sha256": "c30d240b26763bfef270497fe4139a0467bbb502d826036ca0f2af60a2a39f45",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        }
+      ]
+    },
+    {
+      "task": "dilate-clamp",
+      "target": "av1",
+      "variant": 0,
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 240,
+        "reference_capacity": 8
+      },
+      "stream": "streams/dilate-clamp-av1-0.ivf",
+      "stream_sha256": "6524715019b54ba7d493464c75df54eb149a7981de8c1b84599475b648fa3eab",
+      "manifest_sha256": "87526d431051c05fc7d3dc2c9902cf277c796978e09ae7ee93d63b4636b202ef",
+      "decoders": [
+        {
+          "decoder": "libdav1d",
+          "status": "pass",
+          "full_decoded_sha256": "7ec22baea1bf20079a4fcdf2aa89def4bd491b1e437267da0a55e30f23965a1d",
+          "decoded_bytes": 9216,
+          "decoded_format": "displayed monochrome planes"
+        },
+        {
+          "decoder": "libaom-av1",
+          "status": "pass",
+          "full_decoded_sha256": "7ec22baea1bf20079a4fcdf2aa89def4bd491b1e437267da0a55e30f23965a1d",
+          "decoded_bytes": 9216,
+          "decoded_format": "displayed monochrome planes"
+        }
+      ],
+      "planes": [
+        {
+          "kind": "inputs",
+          "name": "image",
+          "path": "planes/dilate-clamp-av1-0/input-image.u8",
+          "sha256": "017ac1aa1125fd7077ea58ff0cfda6e070b198b6d82beb6cce259f9bf476f62c",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "binary 0/1 to 0/255"
+        },
+        {
+          "kind": "outputs",
+          "name": "output",
+          "path": "planes/dilate-clamp-av1-0/output-output.u8",
+          "sha256": "de77b121f1c6bea10c53864c64a3b5906f67c5561377d9dcc7d7ad6cafadca03",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "binary 0/1 to 0/255"
+        }
+      ]
+    },
+    {
+      "task": "smooth-clamp",
+      "target": "av1",
+      "variant": 0,
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 240,
+        "reference_capacity": 8
+      },
+      "stream": "streams/smooth-clamp-av1-0.ivf",
+      "stream_sha256": "57e22dfc513ec902aa19d195fe5ddbc53aea2ef9604b96f9700c2df1ee053f16",
+      "manifest_sha256": "2e23c1bb5545ebdb8fcd30f655bba7431d94db65dc834bf1997e099ccb9ccc29",
+      "decoders": [
+        {
+          "decoder": "libdav1d",
+          "status": "pass",
+          "full_decoded_sha256": "93156f04d27863420df05ca43234e1c24d0c7e1670b9f0823b006639824b1f60",
+          "decoded_bytes": 9216,
+          "decoded_format": "displayed monochrome planes"
+        },
+        {
+          "decoder": "libaom-av1",
+          "status": "pass",
+          "full_decoded_sha256": "93156f04d27863420df05ca43234e1c24d0c7e1670b9f0823b006639824b1f60",
+          "decoded_bytes": 9216,
+          "decoded_format": "displayed monochrome planes"
+        }
+      ],
+      "planes": [
+        {
+          "kind": "inputs",
+          "name": "image",
+          "path": "planes/smooth-clamp-av1-0/input-image.u8",
+          "sha256": "cb476b34528c1b6d0fdd0cb5c0cf55e65d4e58a3e087328a529a4b185b4d4ebc",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        },
+        {
+          "kind": "outputs",
+          "name": "output",
+          "path": "planes/smooth-clamp-av1-0/output-output.u8",
+          "sha256": "586d978b2b2a1978f523a7e70e80527b26c765aed51b0060214626fb8eddeb2d",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 5,
+          "display_mapping": "literal u8"
+        }
+      ]
+    }
+  ]
+}
