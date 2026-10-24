@@ -1,0 +1,79 @@
+{
+  "format": "codec-compute-interface-capture-1",
+  "source_commit": "966dd65979ccd4e034ce33cbb2c61484d08dbcb4",
+  "bundle_sha256": "9601fb4d17ffea5df3f2aad1f4c7a8c0b2efd7e1d3e5a72ccc669a7dae629187",
+  "script_sha256": "6ae96e613adb86339f6bb3bad53b38b061d634b4bb55f665864a246366e93ef5",
+  "source": "Fixture 0 saved decoded I420; exact output crops and complete paired I420 audited against frozen bundle",
+  "hardware_scope": "No fresh decode or NVDEC claim; separate benchmark report supplies hardware evidence",
+  "display": {
+    "scale": 1,
+    "contrast_stretch": false,
+    "interpolation": "none",
+    "zero_luma": "black",
+    "guards_chroma": "Audited in complete I420; only active luma displayed"
+  },
+  "panels": [
+    {
+      "case": "512/motion-interpolation/rows-1",
+      "fixture": 0,
+      "frame": 2,
+      "reference_i420": {
+        "path": "512/motion-interpolation/rows-1/000/expected.i420",
+        "bytes": 1775616,
+        "sha256": "e3bf326ee2e2f3b7375f2d4aec9d3fc85b9866db5576c7f3128085cf258e83b4"
+      },
+      "frame_sha256": "e194d7334cc89d4f8debac2c7dd662ed2e55b90c4035eb2b1ed0019ea03e4944",
+      "active_luma_sha256": "dcabca6c835b929243294410e65fb56d231feec20387faa5b32114ca8b0ea05b",
+      "path": "512-motion-interpolation-rows-1.png",
+      "sha256": "e37505ca55caa4830ef7a4853ebb42d305e705ded6824d9a4f92fd0168915b85"
+    },
+    {
+      "case": "512/motion-interpolation/full",
+      "fixture": 0,
+      "frame": 2,
+      "reference_i420": {
+        "path": "512/motion-interpolation/full/000/expected.i420",
+        "bytes": 1775616,
+        "sha256": "e3bf326ee2e2f3b7375f2d4aec9d3fc85b9866db5576c7f3128085cf258e83b4"
+      },
+      "frame_sha256": "e194d7334cc89d4f8debac2c7dd662ed2e55b90c4035eb2b1ed0019ea03e4944",
+      "active_luma_sha256": "dcabca6c835b929243294410e65fb56d231feec20387faa5b32114ca8b0ea05b",
+      "path": "512-motion-interpolation-full.png",
+      "sha256": "e37505ca55caa4830ef7a4853ebb42d305e705ded6824d9a4f92fd0168915b85"
+    },
+    {
+      "case": "512/resident-chain-64/rows-1",
+      "fixture": 0,
+      "frame": 64,
+      "reference_i420": {
+        "path": "512/resident-chain-64/rows-1/000/expected.i420",
+        "bytes": 29297664,
+        "sha256": "5e9781a0390a7cf5cbee808e2c4e63c9c277866bac5f9b0a5c26f0d982ad64f5"
+      },
+      "frame_sha256": "9e5c7a01a1f7a030672a8153555e04d279fdd626ddd0751a267156cf848f757e",
+      "active_luma_sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73",
+      "path": "512-resident-chain-64-rows-1.png",
+      "sha256": "607face091ee611a25658118935bd044efda40d4749b803a729d02f9b07f76b0"
+    },
+    {
+      "case": "512/resident-chain-64/full",
+      "fixture": 0,
+      "frame": 64,
+      "reference_i420": {
+        "path": "512/resident-chain-64/full/000/expected.i420",
+        "bytes": 29297664,
+        "sha256": "5e9781a0390a7cf5cbee808e2c4e63c9c277866bac5f9b0a5c26f0d982ad64f5"
+      },
+      "frame_sha256": "9e5c7a01a1f7a030672a8153555e04d279fdd626ddd0751a267156cf848f757e",
+      "active_luma_sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73",
+      "path": "512-resident-chain-64-full.png",
+      "sha256": "607face091ee611a25658118935bd044efda40d4749b803a729d02f9b07f76b0"
+    }
+  ],
+  "sheets": [
+    {
+      "path": "paired-512.png",
+      "sha256": "de0cc80f14ceca2972297a58fe95bf623dc78f33d56eee51aa103debede720f3"
+    }
+  ]
+}
