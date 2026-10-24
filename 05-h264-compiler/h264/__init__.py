@@ -10,8 +10,10 @@ from .graph import (CompileError, Image, Input, kernel, shift, weighted, combine
                     threshold, bit_not, bit_or, bit_and, equal, repeat,
                     binary_dot, conv2d_binary)
 from .backend import Program, compile
+from .packed import PackedProgram, pack
 
 __all__ = ["CompileError", "Image", "Input", "kernel", "shift", "weighted", "combine",
            "add", "threshold", "bit_not", "bit_or", "bit_and", "equal", "repeat",
            "binary_dot", "conv2d_binary", "Program", "compile"]
 __all__ += ["sample", "gather", "saturating_add", "saturating_weighted", "saturating_combine"]
+__all__ += ["PackedProgram", "pack"]
