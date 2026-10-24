@@ -1,10 +1,10 @@
-"""Small Annex B writer: High profile, I_PCM seed, weighted P/B predictions.
+"""Small Annex B writer: High profile, I_PCM inputs, weighted P/B predictions.
 
 Each prediction macroblock has its own slice, so motion-vector predictors are zero.
-There are no transform coefficients or residual samples after the seed.
+Prediction pictures contain no transform coefficients or residual samples.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 
 class Bits:
@@ -56,6 +56,9 @@ class Source:
     offset: int = 0
     dx: int = 0
     dy: int = 0
+    # Additional quarter-pixel displacements: MV = (4*dx + qx, 4*dy + qy).
+    qx: int = 0
+    qy: int = 0
 
 
 @dataclass(frozen=True)
@@ -63,6 +66,8 @@ class Operation:
     label: str
     sources: tuple[Source, ...]
     denominator: int = 0
+    # Extra quarter-pixel displacements for active 16x16 blocks, in row order.
+    block_offsets: tuple[tuple[int, int], ...] = ()
 
 
 class Writer:
@@ -157,7 +162,8 @@ class Writer:
         b.ue({0: 2, 1: 0, 2: 1}[len(sources)])  # I, P, B
         b.ue(0)
         b.u(frame % 65536, 16)
-        if not sources:
+        idr = not sources and frame == 0
+        if idr:
             b.ue(0)  # idr_pic_id
         b.u((2 * frame) % 65536, 16)
         if len(sources) == 2:
@@ -183,10 +189,11 @@ class Writer:
                 b.se(source.weight)
                 b.se(source.offset)
                 b.u(0)  # chroma weights default: keep neutral 128
-            b.u(0)  # adaptive_ref_pic_marking_mode_flag: sliding window
-        else:
+        if idr:
             b.u(0)  # no_output_of_prior_pics_flag
             b.u(0)  # long_term_reference_flag
+        else:
+            b.u(0)  # adaptive_ref_pic_marking_mode_flag: sliding window
         b.se(0)  # slice_qp_delta
         b.ue(1)  # disable_deblocking_filter_idc
         return b
@@ -198,12 +205,18 @@ class Writer:
 
     def seed_luma(self, board):
         """Store arbitrary 8-bit initial conditions, with a permanent zero guard."""
+        return self.input_luma(board, 0)
+
+    def input_luma(self, board, frame):
+        """Load a u8 input; only frame zero resets the reference-picture buffer."""
+        if not isinstance(frame, int) or isinstance(frame, bool) or frame < 0:
+            raise ValueError("Input frame must be a nonnegative integer")
         if len(board) != self.height - 32 or any(len(row) != self.width - 32 for row in board):
             raise ValueError("Seed dimensions do not match board")
         if any(not isinstance(value, int) or not 0 <= value <= 255 for row in board for value in row):
             raise ValueError("Seed luma samples must be integers from 0 through 255")
-        # One IDR slice: level 3.1 has a tighter first-picture slice-count bound.
-        b = self.header(0, 0)
+        # One I_PCM slice; later non-IDR inputs retain earlier reference pictures.
+        b = self.header(0, frame)
         for my in range(self.mb_height):
             for mx in range(self.mb_width):
                 b.ue(25)  # I_PCM
@@ -214,33 +227,60 @@ class Writer:
                         b.u(board[y - 16][x - 16] if inside else 0, 8)
                 for _ in range(128):
                     b.u(128, 8)
-        out = self.parameter_sets() + nal(5, b)
+        out = (self.parameter_sets() + nal(5, b)) if frame == 0 else nal(1, b)
         # High profile MinCR=4; initial AU bound, Annex A.3.3(i).
         # Exactly three NALs (SPS, PPS, IDR); four-byte start codes don't count.
         initial_limit = 96 * max(self.mb_width * self.mb_height * 172, 108000) // 172
-        if len(out) - 12 > initial_limit:
+        if frame == 0 and len(out) - 12 > initial_limit:
             raise ValueError("PCM seed exceeds High level 3.1 initial access-unit size limit")
         return out
 
     def prediction(self, frame, operation):
-        for source in operation.sources:
-            if any(not -(1 << self.motion_bits) <= component * 4 < (1 << self.motion_bits)
-                   for component in (source.dx, source.dy)):
+        def motion(source):
+            components = (source.dx, source.dy, source.qx, source.qy)
+            if any(not isinstance(value, int) or isinstance(value, bool) for value in components):
+                raise ValueError("Motion-vector components must be integers")
+            vector = (source.dx * 4 + source.qx, source.dy * 4 + source.qy)
+            if any(not -(1 << self.motion_bits) <= component < (1 << self.motion_bits)
+                   for component in vector):
                 raise ValueError("Motion vector exceeds declared SPS bound")
+            return vector
+
+        for source in operation.sources:
+            motion(source)
+        offsets = operation.block_offsets
+        if offsets:
+            if len(operation.sources) != 1:
+                raise ValueError("Block offsets require exactly one source")
+            if len(offsets) != (self.mb_width - 2) * (self.mb_height - 2):
+                raise ValueError("Block offsets must cover every active macroblock")
+            source = operation.sources[0]
+            for offset in offsets:
+                if (not isinstance(offset, (tuple, list)) or len(offset) != 2 or
+                        any(not isinstance(value, int) or isinstance(value, bool) for value in offset)):
+                    raise ValueError("Block offsets must be integer quarter-pixel pairs")
+                motion(replace(source, qx=source.qx + offset[0], qy=source.qy + offset[1]))
         out = bytearray()
         for my in range(self.mb_height):
             for mx in range(self.mb_width):
                 border = mx in (0, self.mb_width - 1) or my in (0, self.mb_height - 1)
                 op = operation
                 if border:
-                    op = Operation(operation.label, tuple(Source(s.frame, weight=0) for s in operation.sources))
+                    op = replace(operation, sources=tuple(replace(s, weight=0, offset=0,
+                                 dx=0, dy=0, qx=0, qy=0) for s in operation.sources))
+                elif offsets:
+                    index = (my - 1) * (self.mb_width - 2) + mx - 1
+                    qx, qy = offsets[index]
+                    op = replace(operation, sources=(replace(operation.sources[0],
+                                 qx=operation.sources[0].qx + qx, qy=operation.sources[0].qy + qy),))
                 b = self.header(my * self.mb_width + mx, frame, op)
                 b.ue(0)  # mb_skip_run
                 b.ue(0 if len(op.sources) == 1 else 3)  # P_L0_16x16 / B_Bi_16x16
                 for source in op.sources:
                     # Slice boundaries make every neighboring predictor unavailable.
-                    b.se(source.dx * 4)
-                    b.se(source.dy * 4)
+                    qx, qy = motion(source)
+                    b.se(qx)
+                    b.se(qy)
                 b.ue(0)  # coded_block_pattern: no residual
                 out.extend(nal(1, b))
         return bytes(out)
