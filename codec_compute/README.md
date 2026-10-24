@@ -27,10 +27,17 @@ tracing and lowering. An omitted `input_ranges` declares one positional input,
 called `image` when supplying pixels. Named inputs invoke the kernel by keyword.
 
 The compiler also performs [automatic scalar synthesis](synthesis/README.md)
-for `minimum`, `maximum`, and Boolean AND/OR/XOR. It searches each target's exact
+for `minimum`, `maximum`, `absdiff`, and Boolean AND/OR/XOR. It searches each target's exact
 primitive library, exhaustively verifies candidates, and lowers successful
-plans into decoder instructions. H.264/HEVC find all five goals; the initial
+plans into decoder instructions. H.264/HEVC find all six goals; the initial
 AV1 library finds OR and reports bounded search misses for the others.
+
+[Useful workload survey](workloads/README.md) exercises change detection,
+temporal extrema, blending, binary dilation, and explicitly rounded smoothing.
+Fourteen task/target combinations execute exactly. Absolute difference needs
+three computation pictures; the one-picture temporal operations are the most
+promising next workloads to benchmark. Captures, input-loading sizes, target
+restrictions, and exact-decoder evidence are included.
 
 ## Run locally
 
@@ -130,6 +137,7 @@ portable meaning; the original H.264 API remains available for those operations.
 | Signed affine | Native or supported offset sequence | Native, legal coefficients/offset | Unimplemented except identity |
 | Threshold | Native or sequence | Sequence | Unimplemented |
 | Minimum / maximum | Synthesized, 2 predictions | Synthesized, 2 predictions | No plan within default search bound |
+| Absolute difference | Synthesized, 3 predictions | Synthesized, 3 predictions | No plan within default search bound |
 | Boolean OR | Synthesized rounded average | Synthesized rounded average | Synthesized rounded average |
 | Boolean AND / XOR | Synthesized, 2 / 3 predictions | Synthesized, 2 / 3 predictions | No plan within default search bound |
 | Boolean NOT | Native | Native | Unimplemented |
@@ -142,7 +150,7 @@ portable meaning; the original H.264 API remains available for those operations.
 | Live reference policy | Existing 15-live-value scheduler | At most 3 retained references | 8 slots, including slot needed for next result |
 | Shape | Multiples of 16; existing level and PCM limits | Multiples of 8, 16–512 each axis | Multiples of 16, 16–4096 each axis |
 | Instruction bound | Existing writer/reference constraints | 128 native prediction stages | No fixed bound in allocator |
-| Validated execution | FFmpeg; legacy baseline also OpenH264/VA-API | FFmpeg HEVC software decoder | FFmpeg/libdav1d and FFmpeg/libaom-av1 |
+| Validated execution | FFmpeg, OpenH264, VA-API; workload suite also NVDEC | FFmpeg HEVC software decoder | FFmpeg/libdav1d and FFmpeg/libaom-av1 |
 
 Manifests report input/computation pictures, prediction bytes, outputs, and
 target scheduling information. They are static work counts, not runtime speed

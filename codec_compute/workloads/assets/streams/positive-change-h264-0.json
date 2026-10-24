@@ -1,0 +1,172 @@
+{
+  "format": "codec-compute-program-1",
+  "ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "a",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "name": "b",
+        "id": 1,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 2
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "affine_sat",
+        "args": [
+          0,
+          1
+        ],
+        "params": [
+          1,
+          -1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "lowered_ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "a",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "name": "b",
+        "id": 1,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 2
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "affine_sat",
+        "args": [
+          0,
+          1
+        ],
+        "params": [
+          1,
+          -1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "synthesis": [],
+  "target": "h264",
+  "coded_shape": [
+    64,
+    64
+  ],
+  "output_frames": {
+    "output": 2
+  },
+  "costs": {
+    "input_pictures": 2,
+    "computation_pictures": 1,
+    "total_pictures": 3,
+    "prediction_bytes": 171,
+    "peak_live_references": 2
+  },
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 0
+  },
+  "scheduling": "H.264 retained long-term references",
+  "guard": 16,
+  "prediction_sha256": "362d48e4e0d7c21504e9d9209c1af31817c3b14c09c2c3e1f9818697a7a5d76a",
+  "stream_sha256": "580a36fdc49c1e5b1ab3685a3a84b079e58bee28254bb2b323155df50395e021"
+}

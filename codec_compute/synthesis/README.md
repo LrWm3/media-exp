@@ -2,7 +2,7 @@
 
 The shared compiler can now **search for an implementation**, verify every
 scalar input, and lower the resulting plan through the existing codec backends.
-There are no stored implementations of min, max, AND, OR, or XOR in the search
+There are no stored implementations of min, max, absolute difference, AND, OR, or XOR in the search
 engine. Their mathematical specifications are ordinary opaque Python callables.
 
 ```python
@@ -20,11 +20,11 @@ inputs = {"a": [[13] * 16 for _ in range(16)],
 assert program.verify(inputs)["output"][0][0] == 7
 ```
 
-`media.minimum`, `media.maximum`, `media.bit_and`, `media.bit_or`, and
+`media.minimum`, `media.maximum`, `media.absdiff`, `media.bit_and`, `media.bit_or`, and
 `media.bit_xor` trigger search by default. The bit operations require **Boolean
 0/1 images**; they are not bytewise bit operations. Use `synthesis=False` to
 retain existing direct instruction selection for previously supported gates.
-New min/max/XOR operations then have no direct implementation.
+New min/max/absolute-difference/XOR operations then have no direct implementation.
 
 ## What the prototype discovers
 
@@ -37,14 +37,17 @@ not global optimality claims.
 | --- | --- | ---: | ---: | --- |
 | Minimum | Two bytes | 2 | 2 | No plan within bound |
 | Maximum | Two bytes | 2 | 2 | No plan within bound |
+| Absolute difference | Two bytes | 3 | 3 | No plan within bound |
 | AND | Two Booleans | 2 | 2 | No plan within bound |
 | OR | Two Booleans | 1 | 1 | 1 |
 | XOR | Two Booleans | 3 | 3 | No plan within bound |
 
 Each byte result is verified over all **65,536 pairs**; each Boolean result over
 all **four pairs**. H.264 and HEVC software decoder tests also cover every byte
-pair for the synthesized extrema and every Boolean pair for the gates. AV1 OR
-runs through both libdav1d and libaom-av1. Hardware testing is deferred.
+pair for the synthesized extrema and absolute difference, and every Boolean
+pair for the gates. AV1 OR runs through both libdav1d and libaom-av1. The
+[workload survey](../workloads/README.md) adds NVDEC validation of H.264 change,
+extrema, and spatial tasks; HEVC/AV1 hardware testing remains deferred.
 
 For example, the engine discovers minimum using two saturated subtractions,
 and XOR using two opposite saturated subtractions and their saturated sum.
@@ -172,8 +175,8 @@ python3 -m unittest discover -s codec_compute/tests -p 'test_synthesis*.py' -v
 python3 -m codec_compute.synthesis.demo
 ```
 
-The demo writes eleven successful streams and manifests plus a report covering
-all fifteen target/goal combinations under ignored
+The demo writes thirteen successful streams and manifests plus a report covering
+all eighteen target/goal combinations under ignored
 `codec_compute/artifacts/synthesis/`. Its per-stream decoder check uses one
 16x16 input pair; the test suite supplies the exhaustive decoded extrema checks.
 Use `--target h264` or `--target hevc` without the optional AV1 serializer build.

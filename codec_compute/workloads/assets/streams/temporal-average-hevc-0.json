@@ -1,0 +1,168 @@
+{
+  "format": "codec-compute-program-1",
+  "ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "a",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "name": "b",
+        "id": 1,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 2
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "average",
+        "args": [
+          0,
+          1
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "lowered_ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "a",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "name": "b",
+        "id": 1,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 2
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "average",
+        "args": [
+          0,
+          1
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "synthesis": [],
+  "target": "hevc",
+  "coded_shape": [
+    32,
+    32
+  ],
+  "output_frames": {
+    "output": 2
+  },
+  "picture_order_counts": {
+    "v0": 0,
+    "v1": 2,
+    "v2": 3
+  },
+  "costs": {
+    "input_pictures": 2,
+    "computation_pictures": 1,
+    "total_pictures": 3,
+    "prediction_bytes": 17,
+    "peak_live_references": 2
+  },
+  "scheduling": "HEVC short-term reference sets and explicit lists",
+  "input_loading": "lossless libx265; computation uses fixed zero-residual CABAC templates",
+  "prediction_sha256": "78a9af35d0551141d5d6732160e12cfb15719b0ab3a461db1a7bdaf5571357fb",
+  "stream_sha256": "fe3badadd80dd76f8039ed75f72ee5a41855ac4eb77ff137b6e9fe7bf08e7a3a"
+}

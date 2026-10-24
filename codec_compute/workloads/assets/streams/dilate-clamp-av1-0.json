@@ -1,0 +1,864 @@
+{
+  "format": "codec-compute-program-1",
+  "ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "image",
+        "id": 0,
+        "range": [
+          0,
+          1
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 8
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "image"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 1,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          -1,
+          0,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 2,
+        "op": "or",
+        "args": [
+          0,
+          1
+        ],
+        "params": [],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 3,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          1,
+          0,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 4,
+        "op": "or",
+        "args": [
+          2,
+          3
+        ],
+        "params": [],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 5,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          0,
+          -1,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 6,
+        "op": "or",
+        "args": [
+          4,
+          5
+        ],
+        "params": [],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 7,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          0,
+          1,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 8,
+        "op": "or",
+        "args": [
+          6,
+          7
+        ],
+        "params": [],
+        "range": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "lowered_ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "image",
+        "id": 0,
+        "range": [
+          0,
+          1
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 8
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "image"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 1,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          -1,
+          0,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 2,
+        "op": "average",
+        "args": [
+          0,
+          1
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 3,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          1,
+          0,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 4,
+        "op": "average",
+        "args": [
+          2,
+          3
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 5,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          0,
+          -1,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 6,
+        "op": "average",
+        "args": [
+          4,
+          5
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 7,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          0,
+          1,
+          "clamp"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 8,
+        "op": "average",
+        "args": [
+          6,
+          7
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "synthesis": [
+    {
+      "source_node": 2,
+      "operation": "or",
+      "source_operands": [
+        0,
+        1
+      ],
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "found",
+        "detail": "A candidate passed exhaustive verification over the declared input domain.",
+        "name": "or",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 4,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 4,
+        "verification_attempts": 1,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 1,
+        "plan": {
+          "format": "scalar-plan-1",
+          "input_count": 2,
+          "instructions": [
+            {
+              "primitive": "rounded_average",
+              "operands": [
+                0,
+                1
+              ]
+            }
+          ],
+          "output": 2
+        },
+        "verification": {
+          "schema": "codec-compute.scalar-verification.v1",
+          "method": "exhaustive_cartesian_enumeration",
+          "scope": "scalar_primitive_model",
+          "status": "verified",
+          "verified": true,
+          "bitstream_verified": false,
+          "target": "av1",
+          "domains": [
+            {
+              "name": "input0",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            },
+            {
+              "name": "input1",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            }
+          ],
+          "input_order": [
+            "input0",
+            "input1"
+          ],
+          "enumeration_order": "lexicographic_ascending_last_input_varies_fastest",
+          "combinations_total": 4,
+          "combinations_checked": 4,
+          "mismatch_count": 0,
+          "primitive_model_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+          "plan_fingerprint": "d4a4a78e19d43ae2fe37cece2b91f6a5dcd0206edcd9cf865dab84fdb8de9bf8",
+          "primitive_model": {
+            "primitives": [
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": true,
+                "cost": 1,
+                "divisor_shift": 1,
+                "integer_precision": "unbounded",
+                "name": "rounded_average",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  1
+                ]
+              }
+            ],
+            "reference_model": "previous instruction values; physical scheduling checked separately",
+            "scope": "pointwise scalar u8; operands at identical image coordinates",
+            "target": "av1",
+            "version": "scalar-u8-v1"
+          },
+          "plan": {
+            "format": "scalar-plan-1",
+            "input_count": 2,
+            "instructions": [
+              {
+                "operands": [
+                  0,
+                  1
+                ],
+                "primitive": "rounded_average"
+              }
+            ],
+            "output": 2
+          },
+          "hash_algorithm": "sha256",
+          "hash_encoding": "one_u8_output_byte_per_domain_tuple",
+          "hash_scope": "complete_domain",
+          "expected_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "actual_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "counterexample": null
+        }
+      },
+      "lowered_output_node": 2
+    },
+    {
+      "source_node": 4,
+      "operation": "or",
+      "source_operands": [
+        2,
+        3
+      ],
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "found",
+        "detail": "A candidate passed exhaustive verification over the declared input domain.",
+        "name": "or",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 4,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 4,
+        "verification_attempts": 1,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 1,
+        "plan": {
+          "format": "scalar-plan-1",
+          "input_count": 2,
+          "instructions": [
+            {
+              "primitive": "rounded_average",
+              "operands": [
+                0,
+                1
+              ]
+            }
+          ],
+          "output": 2
+        },
+        "verification": {
+          "schema": "codec-compute.scalar-verification.v1",
+          "method": "exhaustive_cartesian_enumeration",
+          "scope": "scalar_primitive_model",
+          "status": "verified",
+          "verified": true,
+          "bitstream_verified": false,
+          "target": "av1",
+          "domains": [
+            {
+              "name": "input0",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            },
+            {
+              "name": "input1",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            }
+          ],
+          "input_order": [
+            "input0",
+            "input1"
+          ],
+          "enumeration_order": "lexicographic_ascending_last_input_varies_fastest",
+          "combinations_total": 4,
+          "combinations_checked": 4,
+          "mismatch_count": 0,
+          "primitive_model_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+          "plan_fingerprint": "d4a4a78e19d43ae2fe37cece2b91f6a5dcd0206edcd9cf865dab84fdb8de9bf8",
+          "primitive_model": {
+            "primitives": [
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": true,
+                "cost": 1,
+                "divisor_shift": 1,
+                "integer_precision": "unbounded",
+                "name": "rounded_average",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  1
+                ]
+              }
+            ],
+            "reference_model": "previous instruction values; physical scheduling checked separately",
+            "scope": "pointwise scalar u8; operands at identical image coordinates",
+            "target": "av1",
+            "version": "scalar-u8-v1"
+          },
+          "plan": {
+            "format": "scalar-plan-1",
+            "input_count": 2,
+            "instructions": [
+              {
+                "operands": [
+                  0,
+                  1
+                ],
+                "primitive": "rounded_average"
+              }
+            ],
+            "output": 2
+          },
+          "hash_algorithm": "sha256",
+          "hash_encoding": "one_u8_output_byte_per_domain_tuple",
+          "hash_scope": "complete_domain",
+          "expected_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "actual_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "counterexample": null
+        }
+      },
+      "lowered_output_node": 4
+    },
+    {
+      "source_node": 6,
+      "operation": "or",
+      "source_operands": [
+        4,
+        5
+      ],
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "found",
+        "detail": "A candidate passed exhaustive verification over the declared input domain.",
+        "name": "or",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 4,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 4,
+        "verification_attempts": 1,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 1,
+        "plan": {
+          "format": "scalar-plan-1",
+          "input_count": 2,
+          "instructions": [
+            {
+              "primitive": "rounded_average",
+              "operands": [
+                0,
+                1
+              ]
+            }
+          ],
+          "output": 2
+        },
+        "verification": {
+          "schema": "codec-compute.scalar-verification.v1",
+          "method": "exhaustive_cartesian_enumeration",
+          "scope": "scalar_primitive_model",
+          "status": "verified",
+          "verified": true,
+          "bitstream_verified": false,
+          "target": "av1",
+          "domains": [
+            {
+              "name": "input0",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            },
+            {
+              "name": "input1",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            }
+          ],
+          "input_order": [
+            "input0",
+            "input1"
+          ],
+          "enumeration_order": "lexicographic_ascending_last_input_varies_fastest",
+          "combinations_total": 4,
+          "combinations_checked": 4,
+          "mismatch_count": 0,
+          "primitive_model_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+          "plan_fingerprint": "d4a4a78e19d43ae2fe37cece2b91f6a5dcd0206edcd9cf865dab84fdb8de9bf8",
+          "primitive_model": {
+            "primitives": [
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": true,
+                "cost": 1,
+                "divisor_shift": 1,
+                "integer_precision": "unbounded",
+                "name": "rounded_average",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  1
+                ]
+              }
+            ],
+            "reference_model": "previous instruction values; physical scheduling checked separately",
+            "scope": "pointwise scalar u8; operands at identical image coordinates",
+            "target": "av1",
+            "version": "scalar-u8-v1"
+          },
+          "plan": {
+            "format": "scalar-plan-1",
+            "input_count": 2,
+            "instructions": [
+              {
+                "operands": [
+                  0,
+                  1
+                ],
+                "primitive": "rounded_average"
+              }
+            ],
+            "output": 2
+          },
+          "hash_algorithm": "sha256",
+          "hash_encoding": "one_u8_output_byte_per_domain_tuple",
+          "hash_scope": "complete_domain",
+          "expected_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "actual_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "counterexample": null
+        }
+      },
+      "lowered_output_node": 6
+    },
+    {
+      "source_node": 8,
+      "operation": "or",
+      "source_operands": [
+        6,
+        7
+      ],
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "found",
+        "detail": "A candidate passed exhaustive verification over the declared input domain.",
+        "name": "or",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 4,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 4,
+        "verification_attempts": 1,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 1,
+        "plan": {
+          "format": "scalar-plan-1",
+          "input_count": 2,
+          "instructions": [
+            {
+              "primitive": "rounded_average",
+              "operands": [
+                0,
+                1
+              ]
+            }
+          ],
+          "output": 2
+        },
+        "verification": {
+          "schema": "codec-compute.scalar-verification.v1",
+          "method": "exhaustive_cartesian_enumeration",
+          "scope": "scalar_primitive_model",
+          "status": "verified",
+          "verified": true,
+          "bitstream_verified": false,
+          "target": "av1",
+          "domains": [
+            {
+              "name": "input0",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            },
+            {
+              "name": "input1",
+              "minimum": 0,
+              "maximum": 1,
+              "size": 2
+            }
+          ],
+          "input_order": [
+            "input0",
+            "input1"
+          ],
+          "enumeration_order": "lexicographic_ascending_last_input_varies_fastest",
+          "combinations_total": 4,
+          "combinations_checked": 4,
+          "mismatch_count": 0,
+          "primitive_model_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+          "plan_fingerprint": "d4a4a78e19d43ae2fe37cece2b91f6a5dcd0206edcd9cf865dab84fdb8de9bf8",
+          "primitive_model": {
+            "primitives": [
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": true,
+                "cost": 1,
+                "divisor_shift": 1,
+                "integer_precision": "unbounded",
+                "name": "rounded_average",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  1
+                ]
+              }
+            ],
+            "reference_model": "previous instruction values; physical scheduling checked separately",
+            "scope": "pointwise scalar u8; operands at identical image coordinates",
+            "target": "av1",
+            "version": "scalar-u8-v1"
+          },
+          "plan": {
+            "format": "scalar-plan-1",
+            "input_count": 2,
+            "instructions": [
+              {
+                "operands": [
+                  0,
+                  1
+                ],
+                "primitive": "rounded_average"
+              }
+            ],
+            "output": 2
+          },
+          "hash_algorithm": "sha256",
+          "hash_encoding": "one_u8_output_byte_per_domain_tuple",
+          "hash_scope": "complete_domain",
+          "expected_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "actual_sha256": "cbd95ae5ef8810691e3fc7efb7c39ef9ffb661135d858aa0ccc81fc74a0160ae",
+          "counterexample": null
+        }
+      },
+      "lowered_output_node": 8
+    }
+  ],
+  "target": "av1",
+  "coded_shape": [
+    32,
+    32
+  ],
+  "output_frames": {
+    "output": 8
+  },
+  "costs": {
+    "input_pictures": 1,
+    "computation_pictures": 8,
+    "total_pictures": 9,
+    "prediction_bytes": 240,
+    "reference_capacity": 8
+  },
+  "scheduling": "AV1 reference-slot refresh with last-use allocation",
+  "input_loading": "lossless intra blocks from pinned libaom serializer",
+  "rounding": "average: floor((a+b+1)/2)",
+  "translation_border": "clamp",
+  "prediction_sha256": "4255a3b67a977334c4fa213790b409ac611c4bcce5d38dddd57187fdd02c464b",
+  "stream_sha256": "6524715019b54ba7d493464c75df54eb149a7981de8c1b84599475b648fa3eab"
+}

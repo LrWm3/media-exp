@@ -5,12 +5,45 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Shared-IR workload survey
+
+The current complete suite passes **113 tests in 25.769 s, with no skips**.
+The new `absdiff` semantic operation is synthesized for H.264 and HEVC, verified
+over all 65,536 byte pairs, and decoded across the complete byte-pair domain on
+both targets. It uses three computation pictures. The AV1 average-only library
+reports a bounded search miss. Runtime purity, forged ranges, aliases, and
+composed thresholds are tested independently.
+
+Nine task graphs are attempted across three targets. **14 combinations run**;
+the remaining 13 report specific backend restrictions or bounded search misses.
+Every accepted program executes two input fixtures with an identical prediction
+tail: **28 streams, 62 local decoder runs, and 45,056 named output pixels**.
+Saved-stream outputs agree with both the IR interpreter and independent task
+formulas. New tests also cover cross-shaped neighborhoods, directional changes,
+zero/clamp borders, and observable nested rounding.
+
+**NVDEC passes all 14 H.264 streams: 120 pictures and 737,280 I420 bytes.**
+This includes both fixtures for all supported H.264 tasks. HEVC and AV1 hardware
+execution remains untested. Decoder latency was not measured; suite duration
+and serialized byte counts are not throughput benchmarks.
+
+The [workload report and captures](workloads/README.md) retain source, serializer,
+stream, and output hashes; static costs; input-prefix sizes; and rejection
+reasons. Reproduce with:
+
+```sh
+python3 -m unittest discover -s codec_compute/tests -v
+python3 -m codec_compute.workloads.demo
+```
+
+The sections below preserve earlier milestone results.
+
 ## Automatic synthesis extension
 
-The complete suite now passes **93 tests in 21.312 s, with no skips**. This adds
+The initial synthesis milestone passed **93 tests in 21.312 s, with no skips**. It added
 43 synthesis tests: 13 search, 17 independent verification, and 13 compiler/
 software-decoder integration tests. This run used software decoders only;
-hardware validation remains deferred for synthesis.
+hardware validation was deferred at that milestone.
 
 ```sh
 python3 -m unittest discover -s codec_compute/tests -v

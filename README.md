@@ -47,6 +47,11 @@ bounded search discovers min/max and Boolean AND/OR/XOR implementations from
 exact codec primitive descriptions, retains exhaustive scalar verification
 records, and emits real H.264/HEVC/AV1 programs for successful searches.
 
+[Shared IR workload survey](codec_compute/workloads/README.md): exact change
+detection, temporal extrema, blending, binary mask expansion, and rounded
+smoothing across decoder targets. Includes an `absdiff` operation, actual
+captures, target limits, and measured picture/input/byte costs.
+
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.

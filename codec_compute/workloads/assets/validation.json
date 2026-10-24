@@ -1,0 +1,2543 @@
+{
+  "format": "codec-compute-workload-survey-1",
+  "status": "pass",
+  "timings": "not measured",
+  "hardware_validation": "separate; this runner validates local software and available H.264 VA-API",
+  "repository_commit": "f3dbf6559c2ca8cc07b989a8a0bbb63348b08ddb",
+  "source_sha256": {
+    "codec_compute/__init__.py": "06603016bc99b50387db5cd57c8bc20f2334c686e8fde815eaf8067a1fd75e9e",
+    "codec_compute/av1/__init__.py": "b79a63600905f7831b0750ccd23faa2ebc5f112b08bcccd242c2e9143ad41677",
+    "codec_compute/av1/bootstrap.py": "218ae23fca2e2eaf1fe42552aa2d1d77f4d6d85b806332b0b412050420568856",
+    "codec_compute/compiler.py": "86a365ddbdf3797e98f3aa92b0a076d74f1e02b40484888abf5eff937180e1c6",
+    "codec_compute/demo.py": "9a096e724f0e91c92298f69e48f292bc9f8a73e53089ef219e88e4bda9ba29a8",
+    "codec_compute/hevc/__init__.py": "8cf7d30ea505c0ef8aa62eb9cef71d867e58d170cd0a27b81f8cf7547b53c280",
+    "codec_compute/hevc/native.py": "8d35e57eaf4969fb3b3562312a43e2016a82ff4ab83d52772966769d48149ef8",
+    "codec_compute/hevc/program.py": "3fdb399e9d54919481bc5dc575f2e7fe0588da92bfb6ce20b5989d323c9db4b0",
+    "codec_compute/ir.py": "f0a198e224b31c2f9764baf7dcc9c71cfd43d41576bab9dd7603d5718ad802dc",
+    "codec_compute/synthesis/__init__.py": "ef35f6385758a1907493ea9bd2c95657fcf9d31960c8196277631e18acb61df6",
+    "codec_compute/synthesis/demo.py": "4a3e42c3cef2d837c5a926df9fd964416608ec38a08aef1a880780291f5d7a91",
+    "codec_compute/synthesis/lower.py": "527b54897c0f964427943e4bbe582850bb4ed60a4cc6575ac4100c7dffe1a3f2",
+    "codec_compute/synthesis/model.py": "03ffe4f117fbdf2231edfa96005727c3654059981b47b48a432f20f62684ddce",
+    "codec_compute/synthesis/search.py": "626385b4f1b4e9e33168e52fb6c717cafeb340aa337cea9283d7ea233685f000",
+    "codec_compute/synthesis/verify.py": "291c6e3f5b17b39e56a128eaa7c279e4819de074726b05111a57bc77445ce5dd",
+    "codec_compute/targets/__init__.py": "34e7368d1c8648a2867b98863741e66cca96695ce3f5d910d8c310c8db73a465",
+    "codec_compute/targets/av1.py": "aa9e3052d0c1985b870962abeab71ac8467e73af1845f87a9e34ab35ada85aee",
+    "codec_compute/targets/h264.py": "2937eaee5c9881cedd8073dcae32bae72e167f31eab7a1a65e4217a10f5bc823",
+    "codec_compute/targets/hevc.py": "5ec8346040e2b9bb052f11b94697ddfe6ae7a079d9bd3e1b01169ca3982ba883",
+    "codec_compute/workloads/__init__.py": "92f92f5a0db0585928120bc79f7d5acb264ac7d6cea9df072ec8198533e7cb86",
+    "codec_compute/workloads/capture.py": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+    "codec_compute/workloads/demo.py": "3c85d0e0a41ac96bf8c73144b9c6569b0fc8d15e519d6b273f4aa2ea6dfd055b",
+    "codec_compute/workloads/export_h264.py": "b402922c4c77d6fd7e3b1b47328bb653f9439103977dd865b94f9e45127c5930",
+    "codec_compute/workloads/kernels.py": "5690ab7d914f02a3b14e2204876747cdd6a21e18703393dc5a208f083716fa80",
+    "decoder_core/bitstream.py": "75a7c92e8a090f3fc9179e9c76160f778bb46a54eb70a4920481b67fc9dcc6f5",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+    "codec_compute/av1/bridge.c": "874c82de6ce7308937ab7831aa92601f577e26319acd3a2d915d0d410636b136",
+    "codec_compute/av1/libaom.patch": "cba0b29e6d95b1ebdc67eaab025d4280e8743aa708baeb4ca578ce9a92095a80",
+    "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+    "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
+    "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+    "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+    "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+    "05-h264-compiler/h264/packed.py": "31f232f58a463d25bf0767ccd6d01b39df5692e0cb98f4c9b1d2ac0d5197daeb",
+    "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+    "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+    "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
+    "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770"
+  },
+  "python": "3.12.13",
+  "av1_serializer": {
+    "binary_sha256": "153a50df0c1d1da5a7369e0148f1447835b7ebb3d49e53fb0389d5796df987c4",
+    "libaom_revision": "10aece4157eb79315da205f39e19bf6ab3ee30d0"
+  },
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "task_target_pairs": 27,
+  "supported_pairs": 14,
+  "streams": 28,
+  "decoder_runs": 62,
+  "named_output_pixels": 45056,
+  "semantics": "Identical traced graph on every target; explicit borders; independent task formulas",
+  "cost_notes": "Pictures include inputs. Prediction bytes exclude input prefix; framing and geometry differ by codec.",
+  "cases": [
+    {
+      "task": "positive-change",
+      "target": "h264",
+      "description": "One-sided brightness increase: max(current-reference,0).",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 171,
+        "peak_live_references": 2
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 12288,
+      "prediction_sha256": "362d48e4e0d7c21504e9d9209c1af31817c3b14c09c2c3e1f9818697a7a5d76a",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/positive-change-h264-0.h264",
+          "stream_sha256": "580a36fdc49c1e5b1ab3685a3a84b079e58bee28254bb2b323155df50395e021",
+          "stream_bytes": 15654,
+          "manifest": "streams/positive-change-h264-0.json",
+          "manifest_sha256": "5c04b5e0fadb7800b6aeb590f9c3232d0e1386f9f1b175bb0cca3ae8fe305938",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "dd48ee9c9730b88e6eed32dcf2a295658f9988f356c15f0382b623b8d1fad706",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "dd48ee9c9730b88e6eed32dcf2a295658f9988f356c15f0382b623b8d1fad706",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "dd48ee9c9730b88e6eed32dcf2a295658f9988f356c15f0382b623b8d1fad706",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/positive-change-h264-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/positive-change-h264-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/positive-change-h264-0/output-output.u8",
+              "sha256": "05886e64778e0b6de1e679f7ff9d2efd8e30d2d0d4fe39aceb33ff68ca5eabd1",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/positive-change-h264-0.i420",
+          "expected_sha256": "dd48ee9c9730b88e6eed32dcf2a295658f9988f356c15f0382b623b8d1fad706"
+        },
+        {
+          "index": 1,
+          "stream": "streams/positive-change-h264-1.h264",
+          "stream_sha256": "4b3762237498960130c0deedd0b279ab1bd8d91656880050276321d3a9e2930b",
+          "stream_bytes": 15654,
+          "manifest": "streams/positive-change-h264-1.json",
+          "manifest_sha256": "da3c1c14ed59bb63321bf8d2b0aa4069090fc93a24ad720a96e92d1b93cc36fa",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "3ae8eb5cd98423de385db8d757008b20b4644b3f889f5fd534f8bf9d0f083f8f",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "3ae8eb5cd98423de385db8d757008b20b4644b3f889f5fd534f8bf9d0f083f8f",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "3ae8eb5cd98423de385db8d757008b20b4644b3f889f5fd534f8bf9d0f083f8f",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/positive-change-h264-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/positive-change-h264-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/positive-change-h264-1/output-output.u8",
+              "sha256": "11e09d55e86d09cfdeb87fd1fb29773bf70ca06ff65732bc9e817c3b6b64950a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/positive-change-h264-1.i420",
+          "expected_sha256": "3ae8eb5cd98423de385db8d757008b20b4644b3f889f5fd534f8bf9d0f083f8f"
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "positive-change",
+      "target": "hevc",
+      "description": "One-sided brightness increase: max(current-reference,0).",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 18,
+        "peak_live_references": 2
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 3072,
+      "prediction_sha256": "8b2ff32078e2677d348c9fe32d279df973ec00f5bd3224fcbb357da03fdf04fb",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/positive-change-hevc-0.hevc",
+          "stream_sha256": "bd5c06c5015b8dc9376f582528fb83796e600487c6110e6a10884ebe363c99b8",
+          "stream_bytes": 1032,
+          "manifest": "streams/positive-change-hevc-0.json",
+          "manifest_sha256": "e6141c749255794e4dc9fbcd028765960f96f5053f9bc3fde5788590e93bd336",
+          "input_prefix_bytes": 1014,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "967f580e7bd10a40e16b549dbed4e1ca67533a7c7c8350b08439b32f4cb2ad14",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/positive-change-hevc-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/positive-change-hevc-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/positive-change-hevc-0/output-output.u8",
+              "sha256": "05886e64778e0b6de1e679f7ff9d2efd8e30d2d0d4fe39aceb33ff68ca5eabd1",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/positive-change-hevc-1.hevc",
+          "stream_sha256": "f48d9ff74577b1e0115bf1a6893da023c09838075c762309f1e3050d792f9eff",
+          "stream_bytes": 2347,
+          "manifest": "streams/positive-change-hevc-1.json",
+          "manifest_sha256": "4e53da04d81ea2ff5bc61b38f0ee43e473267b8a3965f890bbc2c2f3bde2c03c",
+          "input_prefix_bytes": 2329,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "6503b4d07b5c6287b051162ee2f0c820fe7a45eb83ce635af0a4bbf6cda4c003",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/positive-change-hevc-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/positive-change-hevc-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/positive-change-hevc-1/output-output.u8",
+              "sha256": "11e09d55e86d09cfdeb87fd1fb29773bf70ca06ff65732bc9e817c3b6b64950a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "positive-change",
+      "target": "av1",
+      "description": "One-sided brightness increase: max(current-reference,0).",
+      "border": null,
+      "status": "unsupported",
+      "reason": "av1: cannot lower affine_sat: exact synthesis is unimplemented for this operation; this is not a proof of AV1 impossibility",
+      "operation": "affine_sat"
+    },
+    {
+      "task": "absolute-change",
+      "target": "h264",
+      "description": "Absolute frame difference and a >=24 change mask.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 799,
+        "peak_live_references": 3
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 28672,
+      "prediction_sha256": "b773ea08a4e3e1d704411570eda510bda9cab3cd6462997471b8d523efa27eb3",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/absolute-change-h264-0.h264",
+          "stream_sha256": "b49c3320da94d064a882fec80e6a3e7cb4dc5e8c8e9996b13738e823ff7b0cc7",
+          "stream_bytes": 16282,
+          "manifest": "streams/absolute-change-h264-0.json",
+          "manifest_sha256": "04a0fcbab7b6de2e10db88a1a319fe399e42f87a49f8c28e8bbe6924e0fe59e4",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/absolute-change-h264-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/absolute-change-h264-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/absolute-change-h264-0/output-output.u8",
+              "sha256": "c30d240b26763bfef270497fe4139a0467bbb502d826036ca0f2af60a2a39f45",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "mask": {
+              "path": "planes/absolute-change-h264-0/output-mask.u8",
+              "sha256": "61452c3d73501ab2d86ffe0b19f9406ea93a9c0fd48a1cd7715a04cf97bed2dd",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "expected": "raw/absolute-change-h264-0.i420",
+          "expected_sha256": "1869ea51840c8149457a67f830c54bab980b74e94890cf286b0da731727000a2"
+        },
+        {
+          "index": 1,
+          "stream": "streams/absolute-change-h264-1.h264",
+          "stream_sha256": "71aa9c51d82734292d8c6c4bb64d14b76a0f5ec7fe9298ea3ba6543b8c0e93de",
+          "stream_bytes": 16282,
+          "manifest": "streams/absolute-change-h264-1.json",
+          "manifest_sha256": "da8ab4602462950874791f87542d002be41f550bdafbbb12c6bb38033b179713",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "c95df41f22a15e179fe19b80f1c9980cb2bfb3af9530c30836f880c5c39af35a",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "c95df41f22a15e179fe19b80f1c9980cb2bfb3af9530c30836f880c5c39af35a",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "c95df41f22a15e179fe19b80f1c9980cb2bfb3af9530c30836f880c5c39af35a",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/absolute-change-h264-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/absolute-change-h264-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/absolute-change-h264-1/output-output.u8",
+              "sha256": "06ba1455df9ab19bba75aa85291077f43a35d834eca730d4dc2573830f190591",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "mask": {
+              "path": "planes/absolute-change-h264-1/output-mask.u8",
+              "sha256": "aabe8a12c23d4f3670a7f2c466c9ce67710548df33253fd19898c99dcc0fa23a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "expected": "raw/absolute-change-h264-1.i420",
+          "expected_sha256": "c95df41f22a15e179fe19b80f1c9980cb2bfb3af9530c30836f880c5c39af35a"
+        }
+      ],
+      "named_output_pixels_per_input": 2048,
+      "synthesis_goals": [
+        "absdiff"
+      ]
+    },
+    {
+      "task": "absolute-change",
+      "target": "hevc",
+      "description": "Absolute frame difference and a >=24 change mask.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 6,
+        "total_pictures": 8,
+        "prediction_bytes": 105,
+        "peak_live_references": 3
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 8192,
+      "prediction_sha256": "abf6d17e09d90144582c7c7704220b1247bdce228276874bf3880d405674dac4",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/absolute-change-hevc-0.hevc",
+          "stream_sha256": "35bcc4c68532f4aaef2440f72e2678978d0205815bb3e66e60a9e7fb873cc0bc",
+          "stream_bytes": 1119,
+          "manifest": "streams/absolute-change-hevc-0.json",
+          "manifest_sha256": "1d2cd8bed382732d66cb183723be0cd22e8fb2e11c95f3481aede2317b4389f3",
+          "input_prefix_bytes": 1014,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "e5d51081350feda17fda2fad594e7b7f022d82029d98267be9cc6b1d1a9057d0",
+              "decoded_bytes": 8192,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/absolute-change-hevc-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/absolute-change-hevc-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/absolute-change-hevc-0/output-output.u8",
+              "sha256": "c30d240b26763bfef270497fe4139a0467bbb502d826036ca0f2af60a2a39f45",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "mask": {
+              "path": "planes/absolute-change-hevc-0/output-mask.u8",
+              "sha256": "61452c3d73501ab2d86ffe0b19f9406ea93a9c0fd48a1cd7715a04cf97bed2dd",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/absolute-change-hevc-1.hevc",
+          "stream_sha256": "42e600c985bbe60937bddec590f8fca3125fadafe6fd0b732e49aecdb6f82299",
+          "stream_bytes": 2434,
+          "manifest": "streams/absolute-change-hevc-1.json",
+          "manifest_sha256": "dd99dd0b92354e4e1d5155348cf99e69f0a5ad5a767646f45b5164cac33f2bb3",
+          "input_prefix_bytes": 2329,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "86277ba1591f24eafcbbbecfe9e30e6b1c84a9201d3a0ec36a0e0eb16520f70b",
+              "decoded_bytes": 8192,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/absolute-change-hevc-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/absolute-change-hevc-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/absolute-change-hevc-1/output-output.u8",
+              "sha256": "06ba1455df9ab19bba75aa85291077f43a35d834eca730d4dc2573830f190591",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "mask": {
+              "path": "planes/absolute-change-hevc-1/output-mask.u8",
+              "sha256": "aabe8a12c23d4f3670a7f2c466c9ce67710548df33253fd19898c99dcc0fa23a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 2048,
+      "synthesis_goals": [
+        "absdiff"
+      ]
+    },
+    {
+      "task": "absolute-change",
+      "target": "av1",
+      "description": "Absolute frame difference and a >=24 change mask.",
+      "border": null,
+      "status": "search_miss",
+      "reason": "av1: cannot lower absdiff: scalar synthesis ended with instruction_bound: tree bound 3, candidate budget 50000; this is not a codec impossibility result",
+      "operation": "absdiff",
+      "search_status": "instruction_bound",
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "instruction_bound",
+        "detail": "No candidate was found within the declared expression-tree instruction bound.",
+        "name": "absdiff",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 12,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 60,
+        "verification_attempts": 0,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 3,
+        "plan": null,
+        "verification": null
+      }
+    },
+    {
+      "task": "temporal-envelope",
+      "target": "h264",
+      "description": "Two-frame minimum, maximum, and observed range; no persistent host-side state.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 861,
+        "peak_live_references": 3
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 28672,
+      "prediction_sha256": "a1646529ca6e98e91491b48132f0d87966f8a823088b3c2c1299914d64018036",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/temporal-envelope-h264-0.h264",
+          "stream_sha256": "dc73d897f532ba47f2923179a2f5eff3acf108b97357f9954377c49a8ca6c95b",
+          "stream_bytes": 16344,
+          "manifest": "streams/temporal-envelope-h264-0.json",
+          "manifest_sha256": "455fc803233a7e32b0101818bfcd150a6d5c07c9400c3dc34285514e953d018a",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "7e33c90c48a5985d836be71abad0043b1f1cad7b77f10a95256290319290d774",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "7e33c90c48a5985d836be71abad0043b1f1cad7b77f10a95256290319290d774",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "7e33c90c48a5985d836be71abad0043b1f1cad7b77f10a95256290319290d774",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-envelope-h264-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-envelope-h264-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "low": {
+              "path": "planes/temporal-envelope-h264-0/output-low.u8",
+              "sha256": "e581811b7c911a0ca74cbee1d121a13a5779d70354555a4fbf371bb6b0f0ce99",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "high": {
+              "path": "planes/temporal-envelope-h264-0/output-high.u8",
+              "sha256": "a226190637730bb98fd66077a57cfd7979a3c0820e142e59ca40a15c702a676d",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "output": {
+              "path": "planes/temporal-envelope-h264-0/output-output.u8",
+              "sha256": "c30d240b26763bfef270497fe4139a0467bbb502d826036ca0f2af60a2a39f45",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/temporal-envelope-h264-0.i420",
+          "expected_sha256": "7e33c90c48a5985d836be71abad0043b1f1cad7b77f10a95256290319290d774"
+        },
+        {
+          "index": 1,
+          "stream": "streams/temporal-envelope-h264-1.h264",
+          "stream_sha256": "48a35e2472aa88c5f9117a07796b1ee04c2816e6a290164a9c1a08ee28e0723d",
+          "stream_bytes": 16344,
+          "manifest": "streams/temporal-envelope-h264-1.json",
+          "manifest_sha256": "73c83d255f93d6cdf7bb18b38a83f815bc703da3ae3dc808a97e339ac39b2a4a",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "5b885e0f1b3251c08d86a4363df65af0fb33430cb2242c79e93419c09d011893",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "5b885e0f1b3251c08d86a4363df65af0fb33430cb2242c79e93419c09d011893",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "5b885e0f1b3251c08d86a4363df65af0fb33430cb2242c79e93419c09d011893",
+              "decoded_bytes": 43008,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-envelope-h264-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-envelope-h264-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "low": {
+              "path": "planes/temporal-envelope-h264-1/output-low.u8",
+              "sha256": "4df977f3cb14e6baad8b87157a56206b380909cfd279b81f7ff2a488bcf5999e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "high": {
+              "path": "planes/temporal-envelope-h264-1/output-high.u8",
+              "sha256": "5e72fed84c0643ff14f4c69b996dc1eae3c52bd16a8791990778c3fec532f92d",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "output": {
+              "path": "planes/temporal-envelope-h264-1/output-output.u8",
+              "sha256": "06ba1455df9ab19bba75aa85291077f43a35d834eca730d4dc2573830f190591",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/temporal-envelope-h264-1.i420",
+          "expected_sha256": "5b885e0f1b3251c08d86a4363df65af0fb33430cb2242c79e93419c09d011893"
+        }
+      ],
+      "named_output_pixels_per_input": 3072,
+      "synthesis_goals": [
+        "minimum",
+        "maximum"
+      ]
+    },
+    {
+      "task": "temporal-envelope",
+      "target": "hevc",
+      "description": "Two-frame minimum, maximum, and observed range; no persistent host-side state.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 91,
+        "peak_live_references": 3
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 7168,
+      "prediction_sha256": "c40fbebd4a566bdb461eec682aba66d882e028cc2ee57731f00da73b80c306e1",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/temporal-envelope-hevc-0.hevc",
+          "stream_sha256": "1d150c66f61d50e8184e4ed61185aab45365770e93a465c1384943111e157859",
+          "stream_bytes": 1105,
+          "manifest": "streams/temporal-envelope-hevc-0.json",
+          "manifest_sha256": "8a7d9ac4ff431d7cdf0c79002bc56e29d02901bf54e95b79f2473447063abdbc",
+          "input_prefix_bytes": 1014,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "6aef43ef60108766c1da14b23155279a5c69a0fc33f001b8020c9ef06240bd5a",
+              "decoded_bytes": 7168,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-envelope-hevc-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-envelope-hevc-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "low": {
+              "path": "planes/temporal-envelope-hevc-0/output-low.u8",
+              "sha256": "e581811b7c911a0ca74cbee1d121a13a5779d70354555a4fbf371bb6b0f0ce99",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "high": {
+              "path": "planes/temporal-envelope-hevc-0/output-high.u8",
+              "sha256": "a226190637730bb98fd66077a57cfd7979a3c0820e142e59ca40a15c702a676d",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "output": {
+              "path": "planes/temporal-envelope-hevc-0/output-output.u8",
+              "sha256": "c30d240b26763bfef270497fe4139a0467bbb502d826036ca0f2af60a2a39f45",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/temporal-envelope-hevc-1.hevc",
+          "stream_sha256": "7e1b1f709b7f46c8bcfa49e135052fa3d100a1da2837c148fe34cd95f39954c9",
+          "stream_bytes": 2420,
+          "manifest": "streams/temporal-envelope-hevc-1.json",
+          "manifest_sha256": "961e0f76215102d8568ef29bf9ea28521e37601d7314b3f53337ebc3a2cec9de",
+          "input_prefix_bytes": 2329,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "54ebc0162f95f251605f765295bf224c948fbb2b2a5c9f0b777d0177c46d3ef1",
+              "decoded_bytes": 7168,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-envelope-hevc-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-envelope-hevc-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "low": {
+              "path": "planes/temporal-envelope-hevc-1/output-low.u8",
+              "sha256": "4df977f3cb14e6baad8b87157a56206b380909cfd279b81f7ff2a488bcf5999e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "high": {
+              "path": "planes/temporal-envelope-hevc-1/output-high.u8",
+              "sha256": "5e72fed84c0643ff14f4c69b996dc1eae3c52bd16a8791990778c3fec532f92d",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "output": {
+              "path": "planes/temporal-envelope-hevc-1/output-output.u8",
+              "sha256": "06ba1455df9ab19bba75aa85291077f43a35d834eca730d4dc2573830f190591",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 3072,
+      "synthesis_goals": [
+        "minimum",
+        "maximum"
+      ]
+    },
+    {
+      "task": "temporal-envelope",
+      "target": "av1",
+      "description": "Two-frame minimum, maximum, and observed range; no persistent host-side state.",
+      "border": null,
+      "status": "search_miss",
+      "reason": "av1: cannot lower minimum: scalar synthesis ended with instruction_bound: tree bound 3, candidate budget 50000; this is not a codec impossibility result",
+      "operation": "minimum",
+      "search_status": "instruction_bound",
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "instruction_bound",
+        "detail": "No candidate was found within the declared expression-tree instruction bound.",
+        "name": "minimum",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 12,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 60,
+        "verification_attempts": 0,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 3,
+        "plan": null,
+        "verification": null
+      }
+    },
+    {
+      "task": "temporal-average",
+      "target": "h264",
+      "description": "Two-frame blend with exact half-up rounding.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 171,
+        "peak_live_references": 2
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 12288,
+      "prediction_sha256": "8012c00bf9b64eeb9f99f2acc09ab5567421f24f0214c8139b95735a6235850a",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/temporal-average-h264-0.h264",
+          "stream_sha256": "4b20dbef0cf5b0d4001b543c472791665135519d6b708d4bf11ecd824f5b8ec8",
+          "stream_bytes": 15654,
+          "manifest": "streams/temporal-average-h264-0.json",
+          "manifest_sha256": "970e54ad7c0c9a1aa46cbd98c577dd055943ee596dd598af81471da03809972b",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "9c784c37dda0342e5fd071256cc93cf1b5c1de6fafc9f89d42c9ff835bf4878a",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "9c784c37dda0342e5fd071256cc93cf1b5c1de6fafc9f89d42c9ff835bf4878a",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "9c784c37dda0342e5fd071256cc93cf1b5c1de6fafc9f89d42c9ff835bf4878a",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-average-h264-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-average-h264-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/temporal-average-h264-0/output-output.u8",
+              "sha256": "fc2d94575a6213bddff562a691c32fbef6de52ff8db05e503c2882240b399aa4",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/temporal-average-h264-0.i420",
+          "expected_sha256": "9c784c37dda0342e5fd071256cc93cf1b5c1de6fafc9f89d42c9ff835bf4878a"
+        },
+        {
+          "index": 1,
+          "stream": "streams/temporal-average-h264-1.h264",
+          "stream_sha256": "18537399c91912344747bf262a8f27c60f9ce9cf98691d54ef30693049d7c923",
+          "stream_bytes": 15654,
+          "manifest": "streams/temporal-average-h264-1.json",
+          "manifest_sha256": "10074dade1b9a4a1bf0d14c26a05d107c47789e3ab62cab64ac618bac8f2f5e1",
+          "input_prefix_bytes": 15483,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "be88332fb659e4510817c5756a688ae1e21d0ef534e449f336e2876b51084977",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "be88332fb659e4510817c5756a688ae1e21d0ef534e449f336e2876b51084977",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "be88332fb659e4510817c5756a688ae1e21d0ef534e449f336e2876b51084977",
+              "decoded_bytes": 18432,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-average-h264-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-average-h264-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/temporal-average-h264-1/output-output.u8",
+              "sha256": "f991acb1e5897fe61be2decbf1d1b41b165ec8c2317284f8e3d8322c4d052e21",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/temporal-average-h264-1.i420",
+          "expected_sha256": "be88332fb659e4510817c5756a688ae1e21d0ef534e449f336e2876b51084977"
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "temporal-average",
+      "target": "hevc",
+      "description": "Two-frame blend with exact half-up rounding.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 17,
+        "peak_live_references": 2
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 3072,
+      "prediction_sha256": "78a9af35d0551141d5d6732160e12cfb15719b0ab3a461db1a7bdaf5571357fb",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/temporal-average-hevc-0.hevc",
+          "stream_sha256": "fe3badadd80dd76f8039ed75f72ee5a41855ac4eb77ff137b6e9fe7bf08e7a3a",
+          "stream_bytes": 1031,
+          "manifest": "streams/temporal-average-hevc-0.json",
+          "manifest_sha256": "f49e7f160f6ca36c78dd6962c3ea3b8528b7f0e17731d0162efb98fe12ce12b2",
+          "input_prefix_bytes": 1014,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "4ddf8af3c6cd8f8c80476a752df29e36d23ffcaeb4f41d34b713ec51c5646e90",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-average-hevc-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-average-hevc-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/temporal-average-hevc-0/output-output.u8",
+              "sha256": "fc2d94575a6213bddff562a691c32fbef6de52ff8db05e503c2882240b399aa4",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/temporal-average-hevc-1.hevc",
+          "stream_sha256": "8561a0a9e2b052eefd8a02e7d440123236023293aafd14a047c3be26dccdfd9a",
+          "stream_bytes": 2346,
+          "manifest": "streams/temporal-average-hevc-1.json",
+          "manifest_sha256": "fefd7f13b34a89cd0c09ebfd6eaf50708c5385171ccf3de39c9dd480bccd0555",
+          "input_prefix_bytes": 2329,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "5987188b6f464f0a66740dde42386d95a8584d5eca09a9f5f4911c469f6b0b7a",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed luma planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-average-hevc-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-average-hevc-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/temporal-average-hevc-1/output-output.u8",
+              "sha256": "f991acb1e5897fe61be2decbf1d1b41b165ec8c2317284f8e3d8322c4d052e21",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "temporal-average",
+      "target": "av1",
+      "description": "Two-frame blend with exact half-up rounding.",
+      "border": null,
+      "status": "pass",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 30,
+        "reference_capacity": 8
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 3072,
+      "prediction_sha256": "5db1c16bb9aebd24ad8a9fdd07f04d858b20bfc49dd9326c81382ab904083b38",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/temporal-average-av1-0.ivf",
+          "stream_sha256": "b4f5c892888da1b73ce0d87d94fdc06e1308b32f7569abdd0e4cd849be291ef7",
+          "stream_bytes": 1547,
+          "manifest": "streams/temporal-average-av1-0.json",
+          "manifest_sha256": "010a61a5cc127f761aec3b5f4b9620eeba43e728fdfd9c410bf6b1e514783bd7",
+          "input_prefix_bytes": 1517,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "libdav1d",
+              "status": "pass",
+              "full_decoded_sha256": "4ddf8af3c6cd8f8c80476a752df29e36d23ffcaeb4f41d34b713ec51c5646e90",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed monochrome planes"
+            },
+            {
+              "decoder": "libaom-av1",
+              "status": "pass",
+              "full_decoded_sha256": "4ddf8af3c6cd8f8c80476a752df29e36d23ffcaeb4f41d34b713ec51c5646e90",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed monochrome planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-average-av1-0/input-a.u8",
+              "sha256": "821eb92963fae06dd499e9ea22b71207c10fe66588c440e26cd40acff816d2e2",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-average-av1-0/input-b.u8",
+              "sha256": "54e74d79dada6f8a1989f346e13dfd9e8acaa0181cf93ab881380e4a8af9833e",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/temporal-average-av1-0/output-output.u8",
+              "sha256": "fc2d94575a6213bddff562a691c32fbef6de52ff8db05e503c2882240b399aa4",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/temporal-average-av1-1.ivf",
+          "stream_sha256": "88cdb6cd60782ef83d8dc530873dbf934a5fca0e7e1600882c261b736a1ec46c",
+          "stream_bytes": 2767,
+          "manifest": "streams/temporal-average-av1-1.json",
+          "manifest_sha256": "d061974bb6a0260c8f468b2ccceaf3b17fa2dea40be791f6f4812060ba111bce",
+          "input_prefix_bytes": 2737,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "libdav1d",
+              "status": "pass",
+              "full_decoded_sha256": "5987188b6f464f0a66740dde42386d95a8584d5eca09a9f5f4911c469f6b0b7a",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed monochrome planes"
+            },
+            {
+              "decoder": "libaom-av1",
+              "status": "pass",
+              "full_decoded_sha256": "5987188b6f464f0a66740dde42386d95a8584d5eca09a9f5f4911c469f6b0b7a",
+              "decoded_bytes": 3072,
+              "decoded_format": "displayed monochrome planes"
+            }
+          ],
+          "inputs": {
+            "a": {
+              "path": "planes/temporal-average-av1-1/input-a.u8",
+              "sha256": "eb63ad80f088d765c1276f0b2291ec10e41716eda70300ae54820f4ba6e5ffff",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "b": {
+              "path": "planes/temporal-average-av1-1/input-b.u8",
+              "sha256": "2fb8e50ee38efd8934a6be1b8574330ab4d4d32d6af04bcb82509fabd8de3d8a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/temporal-average-av1-1/output-output.u8",
+              "sha256": "f991acb1e5897fe61be2decbf1d1b41b165ec8c2317284f8e3d8322c4d052e21",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "dilate-zero",
+      "target": "h264",
+      "description": "Expand a binary mask by one four-connected step, including its center.",
+      "border": "zero",
+      "status": "pass",
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 1262,
+        "peak_live_references": 3
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 36864,
+      "prediction_sha256": "86384c5c37d505669e6a5f88ce94343fd49cd35d47fe43213169f63faef6e421",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/dilate-zero-h264-0.h264",
+          "stream_sha256": "d8c0457e146d9e8fa382dc6f19ee46731b95df7f0df96e0f5374e92e0078fd03",
+          "stream_bytes": 9477,
+          "manifest": "streams/dilate-zero-h264-0.json",
+          "manifest_sha256": "d498c1eb71c66cb426d38858bdee397f2aa6c7e159f8b977e8d569e76947d193",
+          "input_prefix_bytes": 8215,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "c90e4678603c5389f6c79112338244fa3f5548bdda4aa8ca0402d0cfef4e5ed3",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "c90e4678603c5389f6c79112338244fa3f5548bdda4aa8ca0402d0cfef4e5ed3",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "c90e4678603c5389f6c79112338244fa3f5548bdda4aa8ca0402d0cfef4e5ed3",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/dilate-zero-h264-0/input-image.u8",
+              "sha256": "017ac1aa1125fd7077ea58ff0cfda6e070b198b6d82beb6cce259f9bf476f62c",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/dilate-zero-h264-0/output-output.u8",
+              "sha256": "de77b121f1c6bea10c53864c64a3b5906f67c5561377d9dcc7d7ad6cafadca03",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "expected": "raw/dilate-zero-h264-0.i420",
+          "expected_sha256": "c90e4678603c5389f6c79112338244fa3f5548bdda4aa8ca0402d0cfef4e5ed3"
+        },
+        {
+          "index": 1,
+          "stream": "streams/dilate-zero-h264-1.h264",
+          "stream_sha256": "59ebac7cda6c05163b464492b280ab5b27916bd5a00c4e50175281ab36b61584",
+          "stream_bytes": 9477,
+          "manifest": "streams/dilate-zero-h264-1.json",
+          "manifest_sha256": "ff3a2de27f2dec61fdd7e390b6b7fd966ed29c8de5fe0a34c25d297abcf3296f",
+          "input_prefix_bytes": 8215,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "83939da1dd45318726a41e82ba028e8fd54b05e6b9682f461983d4a401341660",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "83939da1dd45318726a41e82ba028e8fd54b05e6b9682f461983d4a401341660",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "83939da1dd45318726a41e82ba028e8fd54b05e6b9682f461983d4a401341660",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/dilate-zero-h264-1/input-image.u8",
+              "sha256": "77aee2c83b444d4a77cb8eb0fc6c002318eb84f2c935a960c0eff9546001bdbf",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/dilate-zero-h264-1/output-output.u8",
+              "sha256": "2103ace62f9ea5a7ee0dcf933c8131b77ac053bd7f6c3832c7400b1d0a858588",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "expected": "raw/dilate-zero-h264-1.i420",
+          "expected_sha256": "83939da1dd45318726a41e82ba028e8fd54b05e6b9682f461983d4a401341660"
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": [
+        "or",
+        "or",
+        "or",
+        "or"
+      ]
+    },
+    {
+      "task": "dilate-zero",
+      "target": "hevc",
+      "description": "Expand a binary mask by one four-connected step, including its center.",
+      "border": "zero",
+      "status": "unsupported",
+      "reason": "hevc: cannot lower shift: no exact lowering implemented by this HEVC subset",
+      "operation": "shift"
+    },
+    {
+      "task": "dilate-zero",
+      "target": "av1",
+      "description": "Expand a binary mask by one four-connected step, including its center.",
+      "border": "zero",
+      "status": "unsupported",
+      "reason": "av1: cannot lower shift: native translation clamps borders; zero-border synthesis is unimplemented",
+      "operation": "shift"
+    },
+    {
+      "task": "dilate-clamp",
+      "target": "h264",
+      "description": "Expand a binary mask by one four-connected step, including its center.",
+      "border": "clamp",
+      "status": "unsupported",
+      "reason": "h264: cannot lower shift: this writer implements zero borders; clamp synthesis is unimplemented",
+      "operation": "shift"
+    },
+    {
+      "task": "dilate-clamp",
+      "target": "hevc",
+      "description": "Expand a binary mask by one four-connected step, including its center.",
+      "border": "clamp",
+      "status": "unsupported",
+      "reason": "hevc: cannot lower shift: no exact lowering implemented by this HEVC subset",
+      "operation": "shift"
+    },
+    {
+      "task": "dilate-clamp",
+      "target": "av1",
+      "description": "Expand a binary mask by one four-connected step, including its center.",
+      "border": "clamp",
+      "status": "pass",
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 240,
+        "reference_capacity": 8
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 9216,
+      "prediction_sha256": "4255a3b67a977334c4fa213790b409ac611c4bcce5d38dddd57187fdd02c464b",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/dilate-clamp-av1-0.ivf",
+          "stream_sha256": "6524715019b54ba7d493464c75df54eb149a7981de8c1b84599475b648fa3eab",
+          "stream_bytes": 349,
+          "manifest": "streams/dilate-clamp-av1-0.json",
+          "manifest_sha256": "87526d431051c05fc7d3dc2c9902cf277c796978e09ae7ee93d63b4636b202ef",
+          "input_prefix_bytes": 109,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "libdav1d",
+              "status": "pass",
+              "full_decoded_sha256": "7ec22baea1bf20079a4fcdf2aa89def4bd491b1e437267da0a55e30f23965a1d",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            },
+            {
+              "decoder": "libaom-av1",
+              "status": "pass",
+              "full_decoded_sha256": "7ec22baea1bf20079a4fcdf2aa89def4bd491b1e437267da0a55e30f23965a1d",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/dilate-clamp-av1-0/input-image.u8",
+              "sha256": "017ac1aa1125fd7077ea58ff0cfda6e070b198b6d82beb6cce259f9bf476f62c",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/dilate-clamp-av1-0/output-output.u8",
+              "sha256": "de77b121f1c6bea10c53864c64a3b5906f67c5561377d9dcc7d7ad6cafadca03",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/dilate-clamp-av1-1.ivf",
+          "stream_sha256": "a15b873f9d8be754a285f1b2c4a59abaa266bd619ee8c7c6e2fdbfaa5f60a5ab",
+          "stream_bytes": 519,
+          "manifest": "streams/dilate-clamp-av1-1.json",
+          "manifest_sha256": "f9a1deea82927d207c8cab2e025db8767795276164a0b38b7e24012007ef6ac9",
+          "input_prefix_bytes": 279,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "libdav1d",
+              "status": "pass",
+              "full_decoded_sha256": "1d0305b1a8526c9e28a745ece068ee8efbb477ab4d8eb3a5391f99520c8db6dc",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            },
+            {
+              "decoder": "libaom-av1",
+              "status": "pass",
+              "full_decoded_sha256": "1d0305b1a8526c9e28a745ece068ee8efbb477ab4d8eb3a5391f99520c8db6dc",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/dilate-clamp-av1-1/input-image.u8",
+              "sha256": "77aee2c83b444d4a77cb8eb0fc6c002318eb84f2c935a960c0eff9546001bdbf",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/dilate-clamp-av1-1/output-output.u8",
+              "sha256": "2103ace62f9ea5a7ee0dcf933c8131b77ac053bd7f6c3832c7400b1d0a858588",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                1
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": [
+        "or",
+        "or",
+        "or",
+        "or"
+      ]
+    },
+    {
+      "task": "smooth-zero",
+      "target": "h264",
+      "description": "Separable three-tap smoothing with nested rounded averages.",
+      "border": "zero",
+      "status": "pass",
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 1262,
+        "peak_live_references": 3
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 36864,
+      "prediction_sha256": "08fb506c7d92db84d613858b75c1ea080340a7755bbd7cca80a999cc44f7aef2",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/smooth-zero-h264-0.h264",
+          "stream_sha256": "631540d51bbca2ef4775410ffd59f8b68d67aa9abafa1297b41f90414075fc83",
+          "stream_bytes": 9020,
+          "manifest": "streams/smooth-zero-h264-0.json",
+          "manifest_sha256": "6ecf96c7be9b281e8864e22c8be3bc7500bc5f2efbde6d68f087c2ebf71e5f08",
+          "input_prefix_bytes": 7758,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "7b339bb93c4ddff78174974e7b339f56638de15bff4a8d8bf1cbb24dadd2685e",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "7b339bb93c4ddff78174974e7b339f56638de15bff4a8d8bf1cbb24dadd2685e",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "7b339bb93c4ddff78174974e7b339f56638de15bff4a8d8bf1cbb24dadd2685e",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/smooth-zero-h264-0/input-image.u8",
+              "sha256": "cb476b34528c1b6d0fdd0cb5c0cf55e65d4e58a3e087328a529a4b185b4d4ebc",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/smooth-zero-h264-0/output-output.u8",
+              "sha256": "58f1dc3146474b2748ce7ad45dd7fcfc9027b4ac2bc4d622ee21849fdf616edd",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/smooth-zero-h264-0.i420",
+          "expected_sha256": "7b339bb93c4ddff78174974e7b339f56638de15bff4a8d8bf1cbb24dadd2685e"
+        },
+        {
+          "index": 1,
+          "stream": "streams/smooth-zero-h264-1.h264",
+          "stream_sha256": "d733eaeeb7fd37d3508dfee8bac550902968f632c8f437614fe058785ddd5963",
+          "stream_bytes": 9020,
+          "manifest": "streams/smooth-zero-h264-1.json",
+          "manifest_sha256": "37e31e647f9dda94ba24c11d1ad0e40fe9e95407db62c36e549123d12660c8bb",
+          "input_prefix_bytes": 7758,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "6dc475e989c7cb3a9b84db933ef44942660b2eaf2cc5dfb577608fb2027b9e6f",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "6dc475e989c7cb3a9b84db933ef44942660b2eaf2cc5dfb577608fb2027b9e6f",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "6dc475e989c7cb3a9b84db933ef44942660b2eaf2cc5dfb577608fb2027b9e6f",
+              "decoded_bytes": 55296,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/smooth-zero-h264-1/input-image.u8",
+              "sha256": "6c63a7652a42ac8500cc82707e5dc99815ee5f7a02eae2dbe898eb2e87ce8664",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/smooth-zero-h264-1/output-output.u8",
+              "sha256": "360fdd895f4214a0cfe84d6a3490ec4b9c0589385c8e95c5510cdd8513d5baa4",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/smooth-zero-h264-1.i420",
+          "expected_sha256": "6dc475e989c7cb3a9b84db933ef44942660b2eaf2cc5dfb577608fb2027b9e6f"
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "smooth-zero",
+      "target": "hevc",
+      "description": "Separable three-tap smoothing with nested rounded averages.",
+      "border": "zero",
+      "status": "unsupported",
+      "reason": "hevc: cannot lower shift: no exact lowering implemented by this HEVC subset",
+      "operation": "shift"
+    },
+    {
+      "task": "smooth-zero",
+      "target": "av1",
+      "description": "Separable three-tap smoothing with nested rounded averages.",
+      "border": "zero",
+      "status": "unsupported",
+      "reason": "av1: cannot lower shift: native translation clamps borders; zero-border synthesis is unimplemented",
+      "operation": "shift"
+    },
+    {
+      "task": "smooth-clamp",
+      "target": "h264",
+      "description": "Separable three-tap smoothing with nested rounded averages.",
+      "border": "clamp",
+      "status": "unsupported",
+      "reason": "h264: cannot lower shift: this writer implements zero borders; clamp synthesis is unimplemented",
+      "operation": "shift"
+    },
+    {
+      "task": "smooth-clamp",
+      "target": "hevc",
+      "description": "Separable three-tap smoothing with nested rounded averages.",
+      "border": "clamp",
+      "status": "unsupported",
+      "reason": "hevc: cannot lower shift: no exact lowering implemented by this HEVC subset",
+      "operation": "shift"
+    },
+    {
+      "task": "smooth-clamp",
+      "target": "av1",
+      "description": "Separable three-tap smoothing with nested rounded averages.",
+      "border": "clamp",
+      "status": "pass",
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 240,
+        "reference_capacity": 8
+      },
+      "coded_shape": [
+        32,
+        32
+      ],
+      "coded_luma_samples": 9216,
+      "prediction_sha256": "b3bf550871de3b13d73ec1773a51c0454aa2ea23af45d11be1af94845ede7427",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/smooth-clamp-av1-0.ivf",
+          "stream_sha256": "57e22dfc513ec902aa19d195fe5ddbc53aea2ef9604b96f9700c2df1ee053f16",
+          "stream_bytes": 1278,
+          "manifest": "streams/smooth-clamp-av1-0.json",
+          "manifest_sha256": "2e23c1bb5545ebdb8fcd30f655bba7431d94db65dc834bf1997e099ccb9ccc29",
+          "input_prefix_bytes": 1038,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "libdav1d",
+              "status": "pass",
+              "full_decoded_sha256": "93156f04d27863420df05ca43234e1c24d0c7e1670b9f0823b006639824b1f60",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            },
+            {
+              "decoder": "libaom-av1",
+              "status": "pass",
+              "full_decoded_sha256": "93156f04d27863420df05ca43234e1c24d0c7e1670b9f0823b006639824b1f60",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/smooth-clamp-av1-0/input-image.u8",
+              "sha256": "cb476b34528c1b6d0fdd0cb5c0cf55e65d4e58a3e087328a529a4b185b4d4ebc",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/smooth-clamp-av1-0/output-output.u8",
+              "sha256": "586d978b2b2a1978f523a7e70e80527b26c765aed51b0060214626fb8eddeb2d",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        },
+        {
+          "index": 1,
+          "stream": "streams/smooth-clamp-av1-1.ivf",
+          "stream_sha256": "0891aa18b92ef7c7fe345a3f57c3dcbed787b7d15a34444af929fa5ab00cd260",
+          "stream_bytes": 1613,
+          "manifest": "streams/smooth-clamp-av1-1.json",
+          "manifest_sha256": "43530067afcd5939cd5f87b22539c9c0e14453bb32d82314ff1f289fc4cde6d7",
+          "input_prefix_bytes": 1373,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "libdav1d",
+              "status": "pass",
+              "full_decoded_sha256": "67e87d7b474fa7352971b6419f6278fc813a727d5c9d77c9929d6dc3f3165e40",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            },
+            {
+              "decoder": "libaom-av1",
+              "status": "pass",
+              "full_decoded_sha256": "67e87d7b474fa7352971b6419f6278fc813a727d5c9d77c9929d6dc3f3165e40",
+              "decoded_bytes": 9216,
+              "decoded_format": "displayed monochrome planes"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/smooth-clamp-av1-1/input-image.u8",
+              "sha256": "6c63a7652a42ac8500cc82707e5dc99815ee5f7a02eae2dbe898eb2e87ce8664",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "output": {
+              "path": "planes/smooth-clamp-av1-1/output-output.u8",
+              "sha256": "884af7477bd5234256b16a4071cee1f311062f52fd483930c9c91833386fa09d",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          }
+        }
+      ],
+      "named_output_pixels_per_input": 1024,
+      "synthesis_goals": []
+    },
+    {
+      "task": "local-range",
+      "target": "h264",
+      "description": "Five-pixel cross erosion, dilation, and local max-minus-min contrast.",
+      "border": "zero",
+      "status": "pass",
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 21,
+        "total_pictures": 22,
+        "prediction_bytes": 3553,
+        "peak_live_references": 7
+      },
+      "coded_shape": [
+        64,
+        64
+      ],
+      "coded_luma_samples": 90112,
+      "prediction_sha256": "4792593599239498d5700f11f4b18b6cfdb4bdcfaf031f920e7c729ee5761fe4",
+      "variants": [
+        {
+          "index": 0,
+          "stream": "streams/local-range-h264-0.h264",
+          "stream_sha256": "46d85eca5ae76eaef74cc4f31e0b15ef2a7f250d0c4406fd20a198869955b30f",
+          "stream_bytes": 11311,
+          "manifest": "streams/local-range-h264-0.json",
+          "manifest_sha256": "283be89eb7f849d0d1afea37c61e7c9b02eb39b7b6cf58ee1b29939581e19180",
+          "input_prefix_bytes": 7758,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "09186052095e14839f63eefdfd67676c7b8477ac182b62f8b30bff346d647e11",
+              "decoded_bytes": 135168,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "09186052095e14839f63eefdfd67676c7b8477ac182b62f8b30bff346d647e11",
+              "decoded_bytes": 135168,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "09186052095e14839f63eefdfd67676c7b8477ac182b62f8b30bff346d647e11",
+              "decoded_bytes": 135168,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/local-range-h264-0/input-image.u8",
+              "sha256": "cb476b34528c1b6d0fdd0cb5c0cf55e65d4e58a3e087328a529a4b185b4d4ebc",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "low": {
+              "path": "planes/local-range-h264-0/output-low.u8",
+              "sha256": "fb0699bbd79955289c20f33b406c2a3c3055c2a042a60f3e71eb3efbf9457823",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "high": {
+              "path": "planes/local-range-h264-0/output-high.u8",
+              "sha256": "79c001b11e0378c566354a66d5fdad6135e1bbbcdd50d42020c5687541d943d8",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "output": {
+              "path": "planes/local-range-h264-0/output-output.u8",
+              "sha256": "23b22a1f5a00b0c540372bcc963df751141771116def55ef7c9f5dfb4e352907",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/local-range-h264-0.i420",
+          "expected_sha256": "09186052095e14839f63eefdfd67676c7b8477ac182b62f8b30bff346d647e11"
+        },
+        {
+          "index": 1,
+          "stream": "streams/local-range-h264-1.h264",
+          "stream_sha256": "65d08c7c89faafc16a78b3059b0139ef970e505ae1ad49973ca7b5447f615673",
+          "stream_bytes": 11311,
+          "manifest": "streams/local-range-h264-1.json",
+          "manifest_sha256": "980f4dbcf6770e0cca36295d6e7be709097dc47cd346afdd10cc7518f07b41d2",
+          "input_prefix_bytes": 7758,
+          "fixed_tail_verified": true,
+          "decoders": [
+            {
+              "decoder": "ffmpeg",
+              "status": "pass",
+              "full_decoded_sha256": "624046e8a9f5567e06976ccd7b99d2dcc0ea8827e5d94988596ba1ed21d2b7a7",
+              "decoded_bytes": 135168,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "openh264",
+              "status": "pass",
+              "full_decoded_sha256": "624046e8a9f5567e06976ccd7b99d2dcc0ea8827e5d94988596ba1ed21d2b7a7",
+              "decoded_bytes": 135168,
+              "decoded_format": "guarded I420, including chroma"
+            },
+            {
+              "decoder": "vaapi",
+              "status": "pass",
+              "full_decoded_sha256": "624046e8a9f5567e06976ccd7b99d2dcc0ea8827e5d94988596ba1ed21d2b7a7",
+              "decoded_bytes": 135168,
+              "decoded_format": "guarded I420, including chroma"
+            }
+          ],
+          "inputs": {
+            "image": {
+              "path": "planes/local-range-h264-1/input-image.u8",
+              "sha256": "6c63a7652a42ac8500cc82707e5dc99815ee5f7a02eae2dbe898eb2e87ce8664",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "outputs": {
+            "low": {
+              "path": "planes/local-range-h264-1/output-low.u8",
+              "sha256": "a556ee78e4b6ee55bf9f7e63feaf248c7f86e0b32d76bdd2fe6ad30362155b8c",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "high": {
+              "path": "planes/local-range-h264-1/output-high.u8",
+              "sha256": "e9b632b6f1806694effaa5ea684f833a49db16a80c4375ae7b28f9ec0847d32a",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            },
+            "output": {
+              "path": "planes/local-range-h264-1/output-output.u8",
+              "sha256": "44c90929fc71b4803f1e1431e9188c461d8c84d1986ad6c24653d331b6749865",
+              "bytes": 1024,
+              "width": 32,
+              "height": 32,
+              "range": [
+                0,
+                255
+              ]
+            }
+          },
+          "expected": "raw/local-range-h264-1.i420",
+          "expected_sha256": "624046e8a9f5567e06976ccd7b99d2dcc0ea8827e5d94988596ba1ed21d2b7a7"
+        }
+      ],
+      "named_output_pixels_per_input": 3072,
+      "synthesis_goals": [
+        "minimum",
+        "minimum",
+        "minimum",
+        "minimum",
+        "maximum",
+        "maximum",
+        "maximum",
+        "maximum"
+      ]
+    },
+    {
+      "task": "local-range",
+      "target": "hevc",
+      "description": "Five-pixel cross erosion, dilation, and local max-minus-min contrast.",
+      "border": "zero",
+      "status": "unsupported",
+      "reason": "hevc: cannot lower shift: no exact lowering implemented by this HEVC subset",
+      "operation": "shift"
+    },
+    {
+      "task": "local-range",
+      "target": "av1",
+      "description": "Five-pixel cross erosion, dilation, and local max-minus-min contrast.",
+      "border": "zero",
+      "status": "search_miss",
+      "reason": "av1: cannot lower minimum: scalar synthesis ended with instruction_bound: tree bound 3, candidate budget 50000; this is not a codec impossibility result",
+      "operation": "minimum",
+      "search_status": "instruction_bound",
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "instruction_bound",
+        "detail": "No candidate was found within the declared expression-tree instruction bound.",
+        "name": "minimum",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 12,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 60,
+        "verification_attempts": 0,
+        "counterexamples": [],
+        "library_fingerprint": "d816b93bddb7da9530cc3457ed2d4491269bc75cd39719b5f7e302f6f5991d0e",
+        "largest_tree_size_considered": 3,
+        "plan": null,
+        "verification": null
+      }
+    }
+  ]
+}
