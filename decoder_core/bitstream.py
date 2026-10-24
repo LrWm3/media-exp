@@ -78,6 +78,9 @@ class Operation:
     denominator: int = 0
     # Extra quarter-pixel displacements for active 16x16 blocks, in row order.
     block_offsets: tuple[tuple[int, int], ...] = ()
+    # Complete predictions for active 16x16 blocks, in row order. Children use
+    # the parent's source count and cannot carry either kind of block override.
+    block_operations: tuple["Operation", ...] = ()
 
 
 class Writer:
@@ -337,6 +340,22 @@ class Writer:
         for source in operation.sources:
             self._motion(source)
         offsets = operation.block_offsets
+        blocks = operation.block_operations
+        if blocks:
+            if offsets:
+                raise ValueError("Block operations and block offsets are mutually exclusive")
+            if len(blocks) != (self.mb_width - 2) * (self.mb_height - 2):
+                raise ValueError("Block operations must cover every active macroblock")
+            for block in blocks:
+                if not isinstance(block, Operation):
+                    raise ValueError("Block operations must contain Operation values")
+                if block.block_operations or block.block_offsets:
+                    raise ValueError("Block operations cannot contain nested block overrides")
+                self._validate_operation(block)
+                if len(block.sources) != len(operation.sources):
+                    raise ValueError("Block operations must have the parent's source count")
+                for source in block.sources:
+                    self._motion(source)
         if offsets:
             if len(operation.sources) != 1:
                 raise ValueError("Block offsets require exactly one source")
@@ -349,7 +368,8 @@ class Writer:
                     raise ValueError("Block offsets must be integer quarter-pixel pairs")
                 self._motion(replace(source, qx=source.qx + offset[0], qy=source.qy + offset[1]))
         guard = replace(operation, sources=tuple(replace(s, weight=0, offset=0,
-                        dx=0, dy=0, qx=0, qy=0) for s in operation.sources))
+                        dx=0, dy=0, qx=0, qy=0) for s in operation.sources),
+                        block_offsets=(), block_operations=())
         for my in range(self.mb_height):
             run, previous_key = [], None
             for mx in range(self.mb_width):
@@ -357,6 +377,9 @@ class Writer:
                 op = operation
                 if border:
                     op = guard
+                elif blocks:
+                    index = (my - 1) * (self.mb_width - 2) + mx - 1
+                    op = blocks[index]
                 elif offsets:
                     index = (my - 1) * (self.mb_width - 2) + mx - 1
                     qx, qy = offsets[index]
@@ -377,8 +400,21 @@ class Writer:
         return sum(1 for _ in self._prediction_runs(operation))
 
     def prediction(self, frame, operation):
+        runs = self._prediction_runs(operation)
+        if operation.block_operations:
+            # Per-block headers can split rows more often than the uniform
+            # prediction bound checked by the constructor. Check before writing.
+            runs = list(runs)
+            if len(runs) * self.fps > 1800:
+                raise ValueError("Prediction slices exceed level 3.1 slice rate; reduce board size or fps")
+            self._validate_frame(frame)
+            for block in operation.block_operations:
+                for source in block.sources:
+                    # A matching run key does not establish valid frame types:
+                    # True and 1.0 compare equal to frame 1 in Python.
+                    self._reference_index(frame, source)
         out = bytearray()
-        for run in self._prediction_runs(operation):
+        for run in runs:
             b = self.header(run[0][0], frame, run[0][1])
             previous = [(0, 0)] * len(operation.sources)
             for _, op in run:
