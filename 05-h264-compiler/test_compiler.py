@@ -16,14 +16,14 @@ class CompilerTests(unittest.TestCase):
         rng = random.Random(4)
         return [[rng.randrange(2) for _ in range(size)] for _ in range(size)]
 
-    def test__given_shifted_or__when_fusing__then_two_prediction_operations_and_all_decoders_match(self):
+    def test__given_shifted_or__when_fusing__then_one_boolean_prediction_and_all_decoders_match(self):
         def kernel(x):
             return h264.bit_or(h264.shift(x, 1, 0), h264.shift(x, 0, 1))
         program = h264.compile(kernel, 16, 16)
-        self.assertEqual(program.pictures, 4)  # seed, normalization, B sum, P OR
+        self.assertEqual(program.pictures, 3)  # seed, normalization, direct B OR
         self.assertEqual(len(program.operations[1].sources), 2)
-        self.assertEqual(program.operations[2].denominator, 7)
-        self.assertEqual(program.operations[2].sources[0].weight, 64)
+        self.assertEqual(program.operations[1].denominator, 0)
+        self.assertEqual([source.weight for source in program.operations[1].sources], [1, 1])
         for backend in ("ffmpeg", "openh264", "vaapi"):
             with self.subTest(backend=backend):
                 if not available(backend):
