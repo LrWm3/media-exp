@@ -49,6 +49,15 @@ def records(value):
             yield from records(child)
 
 
+def expected_cases(bundle):
+    sizes = bundle.get("sizes")
+    if (not isinstance(sizes, list) or not sizes
+            or any(type(size) is not int or size not in (128, 256, 512) for size in sizes)
+            or len(set(sizes)) != len(sizes)):
+        raise AssertionError("Expected distinct corpus sizes from 128, 256, and 512")
+    return {f"{size}/{name}/fused" for size in sizes for name, _, _, _ in TASKS}
+
+
 def audit_cpu(root, key, case):
     """Bind native CPU kind, rounds and both motion fields to the semantic DAG."""
     expected = {name: (kind, rounds) for name, _, kind, rounds in TASKS}
@@ -122,15 +131,18 @@ def audit(root):
             or selection["original_jobs_per_case"] != full["jobs"]
             or selection["original_validation"] != full["validation"]):
         raise AssertionError("Full index or selection provenance differs")
-    expected_keys = {f"{size}/{name}/fused" for size in (128, 256) for name, _, _, _ in TASKS}
-    if set(workloads) != expected_keys or set(full["cases"]) != expected_keys:
-        raise AssertionError("Expected all twelve size/task combinations")
+    expected_keys = expected_cases(full)
+    if (expected_cases(bundle) != expected_keys or set(workloads) != expected_keys
+            or set(full["cases"]) != expected_keys or set(selection["fixture_indices"]) != expected_keys):
+        raise AssertionError("Expected all six tasks for every declared corpus size")
     original = copy.deepcopy(full)
     original["jobs"] = 1
     original["selection"] = selection
     streams, pictures, files = 0, 0, {}
     for key, workload in workloads.items():
         case = workload["case"]
+        if type(case["size"]) is not int or case["size"] != int(key.split("/")[0]):
+            raise AssertionError("Case size differs from its corpus key")
         index = selection["fixture_indices"][key]
         if type(index) is not int or not 0 <= index < full["jobs"]:
             raise AssertionError("Selected fixture index is invalid")
