@@ -2,15 +2,22 @@
 
 import hashlib
 import json
+from copy import deepcopy
 from pathlib import Path
 
 from . import ir
 
 
 class Program:
-    def __init__(self, graph, native):
+    def __init__(self, graph, native, *, lowered_graph=None, synthesis_records=()):
         self.graph, self.native = graph, native
         self.target = native.target
+        self.lowered_graph = graph if lowered_graph is None else lowered_graph
+        self._synthesis_records = deepcopy(list(synthesis_records))
+
+    @property
+    def synthesis_records(self):
+        return deepcopy(self._synthesis_records)
 
     @property
     def tail(self):
@@ -49,6 +56,7 @@ class Program:
 
     def manifest(self):
         return {"format": "codec-compute-program-1", "ir": self.graph.manifest(),
+                "lowered_ir": self.lowered_graph.manifest(), "synthesis": self.synthesis_records,
                 **self.native.manifest(), "prediction_sha256": hashlib.sha256(self.tail).hexdigest()}
 
     def save(self, path, inputs):
@@ -65,24 +73,41 @@ class Program:
         return path
 
 
-def compile(function, *, target="h264", width=32, height=32, input_ranges=None):
+def compile(function, *, target="h264", width=32, height=32, input_ranges=None,
+            synthesis=True, synthesis_max_instructions=3, synthesis_max_candidates=50000):
     graph = ir.trace(function, width=width, height=height, input_ranges=input_ranges)
-    return compile_graph(graph, target=target)
+    return compile_graph(graph, target=target, synthesis=synthesis,
+                         synthesis_max_instructions=synthesis_max_instructions,
+                         synthesis_max_candidates=synthesis_max_candidates)
 
 
-def compile_graph(graph, *, target="h264"):
+def compile_graph(graph, *, target="h264", synthesis=True,
+                  synthesis_max_instructions=3, synthesis_max_candidates=50000):
     if not isinstance(graph, ir.Graph):
         raise TypeError("compile_graph requires a traced Graph")
     ir.validate_graph(graph)
+    if target not in ("h264", "hevc", "h265", "av1"):
+        raise ir.CompileError(f"Unknown codec target: {target}")
+    if type(synthesis) is not bool:
+        raise ir.CompileError("synthesis must be Boolean")
+    for name, value in (("synthesis_max_instructions", synthesis_max_instructions),
+                        ("synthesis_max_candidates", synthesis_max_candidates)):
+        if type(value) is not int or value < 0:
+            raise ir.CompileError(f"{name} must be a nonnegative integer")
+    lowered, records = graph, []
+    if synthesis:
+        from .synthesis.lower import lower_graph
+        lowered, records = lower_graph(graph, target=target, max_instructions=synthesis_max_instructions,
+                                      max_candidates=synthesis_max_candidates)
     if target == "h264":
         from .targets.h264 import H264Program
-        native = H264Program(graph)
+        native = H264Program(lowered)
     elif target in ("hevc", "h265"):
         from .targets.hevc import HEVCProgram
-        native = HEVCProgram(graph)
+        native = HEVCProgram(lowered)
     elif target == "av1":
         from .targets.av1 import AV1Program
-        native = AV1Program(graph)
+        native = AV1Program(lowered)
     else:
         raise ir.CompileError(f"Unknown codec target: {target}")
-    return Program(graph, native)
+    return Program(graph, native, lowered_graph=lowered, synthesis_records=records)
