@@ -50,7 +50,8 @@ Operand fixtures already exist before these timers start. Both measurements incl
 
 Each decoder measurement includes external process startup, parsing, decoding, all-picture YUV readback, and Python output/guard validation. Stream construction and prewriting benchmark files are excluded from these decode measurements and measured separately above. GStreamer backends also include writing and reading a temporary YUV file. This is an application pipeline measurement, not an isolated device-kernel benchmark.
 
-The separate-session comparison includes fewer decoder startups. The single-session comparison holds startup count at one while comparing repeated input loads/IDR resets against resident references. Both comparisons include fewer PCM pictures and less readback in the resident case. They do not establish GPU arithmetic throughput or superiority over CPU/vectorized addition. No NVIDIA hardware or NVDEC was tested.
+The separate-session comparison includes fewer decoder startups. The single-session comparison holds startup count at one while comparing repeated input loads/IDR resets against resident references. Both comparisons include fewer PCM pictures and less readback in the resident case. They do not establish GPU arithmetic throughput or superiority over CPU/vectorized addition. This benchmark covers FFmpeg, VA-API, and OpenH264; separate
+[NVDEC measurements](nvdec/README.md#measured-cost) are available.
 
 Prediction bytes are input-independent and reused without rebuilding. Reference refresh copies extend live values beyond the 16-picture DPB window; they consume both pictures and stream bytes. The workload report counts these copies explicitly. The runtime still loads inputs using ordinary H.264 PCM pictures; it cannot directly inject host buffers into decoder references.
 

@@ -9,9 +9,11 @@ with different input pixels.
 All examples use 64 × 64 active grayscale pixels inside a zero guard. Every
 named output matches the independent integer interpreter on **FFmpeg, Intel
 VA-API, and OpenH264**. The checked captures use the actual decoded output
-planes. No NVIDIA hardware or NVDEC was tested.
+planes. A subsequent [NVDEC run](nvdec/README.md) passed these demos,
+exhaustive byte addition, interpolation, reference scheduling, and all four
+compiled experiments: 34 cases and 6,116 pictures matched exactly.
 
-Hardware runs use **Intel Raptor Lake-P Iris Xe Graphics**. The six demos check
+The captures on this page use **Intel Raptor Lake-P Iris Xe Graphics**. The six demos check
 172,032 named-output pixel values across the three decoders, plus guards,
 neutral chroma, picture counts, and output ranges.
 
@@ -118,7 +120,10 @@ chroma stays neutral. `gather` selects block displacements, not arbitrary
 per-pixel indices. Programs remain finite streams with statically chosen shapes
 and operation counts.
 
-## Optional NVIDIA exploration — untested here
+## Desktop NVIDIA and SDK 13.1 — untested
+
+NVDEC hardware decoding is now [tested with its own backend](nvdec/README.md).
+The desktop CUVID recipe and direct-array API below remain untested.
 
 NVIDIA Video Codec SDK 13.1 documents registering application-allocated CUDA
 arrays with `cuvidRegisterDecodeSurfaces()` and submitting asynchronous decoding

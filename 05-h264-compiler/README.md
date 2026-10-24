@@ -49,10 +49,16 @@ brightness/contrast, tile permutation, blockwise warp, fractional translation,
 and a chain retaining both original inputs. Each includes an executable stream,
 manifest, and captures from actual decoding. The [benchmark](native_ops/BENCHMARK.md)
 separates host input packing from decoding and compares fresh inputs with
-resident references. Tests run on FFmpeg, OpenH264, and Intel VA-API; NVDEC remains
-untested because this machine has no NVIDIA GPU.
+resident references. Tests run on FFmpeg, OpenH264, and Intel VA-API.
+[NVDEC validation](native_ops/nvdec/README.md) also passed all 34
+hardware cases: 6,116 pictures matched byte-for-byte, including all four compiled
+experiments. Desktop CUVID and SDK 13.1 direct-array output remain untested.
 
 ![Saturating addition captured from Intel decoding](native_ops/assets/saturating-add.png)
+
+[Experiment 06](../06-motion-mask-decoder/README.md) combines frame differences,
+thresholding, and morphology into motion masks. It also adds one-session batch
+execution and selective NVDEC output readback to the shared runtime.
 
 ## Original binary example
 
@@ -80,7 +86,9 @@ the compiler is not yet as compact as every specialized schedule.
 ## Run and inspect
 
 Python 3.10+ and FFmpeg suffice. Optional OpenH264 and Intel VA-API execution
-use the same GStreamer backends as earlier experiments.
+use the same GStreamer backends as earlier experiments. The optional
+[NVDEC backend](native_ops/nvdec/README.md#reproduce) uses a small C++ helper
+to preserve exact full-range bytes during hardware readback.
 
 ```sh
 python3 run.py --preview

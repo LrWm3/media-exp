@@ -1,0 +1,16 @@
+{
+  "note": "Historical execution source hashes, before metadata and caption redaction. They are not hashes of the rewritten source tree.",
+  "source_files": {
+    "06-motion-mask-decoder/benchmark.py": "500d637d56e864340552c4ab4619bf95a65b5eaf4ca00fb1d7736b60c23ade78",
+    "06-motion-mask-decoder/capture.py": "4dadb574dee7b53790621b96cb1d33c1121a56df729d10c459b615428d84d187",
+    "06-motion-mask-decoder/fixtures.py": "aa155d586d9893a666427c651fe93eb8c68e7026e67961d1c10d2e7b383ac84d",
+    "06-motion-mask-decoder/kernel.py": "e60373191ee1626bb61401d34aaa6fcc4c59d15f49ecfa71deb720fb86c1d637",
+    "06-motion-mask-decoder/prepare.py": "fa0566626c2a346f5cb9bd7b32d10d2eeb03ccf4b4071ce3c606dfe0a580d066",
+    "06-motion-mask-decoder/reference.py": "cf71d1ec7f77b16b46d34e3304f8732fa3897e2358b418cf17fc35f08a4160cf",
+    "06-motion-mask-decoder/test_motion.py": "cb376ed70803ec7aded0e1d456050e9d981635ff2ffc56193d212a3d62016927",
+    "decoder_core/decode.py": "ee97e5d0738a25bbc678abdcbd98ecdfdf4a91014bbffdcaf926c593725255ab",
+    "decoder_core/nvdec_decode.cpp": "82a126efc612a92833567bd56f96f9d51aed6ce5e50d0394f972d815edd8c4fc",
+    "decoder_core/build_nvdec.sh": "638187f97218a58d3585d7afb4a0a56e3c55957b6697081da75d4de1f281ac7b"
+  },
+  "metadata_note": "Device identity and legacy source revision identifiers were removed. Recorded measurements and stream/pixel hashes are unchanged."
+}

@@ -19,6 +19,9 @@
   [native-operation demos](05-h264-compiler/native_ops/README.md) add multiple
   input images, saturating arithmetic, block gathers, and quarter-pixel interpolation,
   with measured input-loading and decoder costs.
+- [06 — Motion-mask decoder](06-motion-mask-decoder/README.md): frame differences,
+  thresholding, and binary mask cleanup; persistent NVDEC batches and selective
+  output readback, with exact captures and measured costs.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·
@@ -26,3 +29,7 @@ Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [MNIST](04-binary-mnist-classification-decoder/compiled/README.md).
 
 The experiments use the shared [H.264 writer and decoder tools](decoder_core).
+
+[NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
+34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
+four compiled experiments. Captures, timings, and reproduction commands included.

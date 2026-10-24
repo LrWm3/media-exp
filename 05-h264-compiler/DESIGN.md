@@ -157,6 +157,18 @@ loading step for measurement. `program.tail` contains only reusable predictions.
 Host input bytes must still be serialized and decoded on every new invocation.
 This does not inject existing GPU tensors into the DPB.
 
+The shared `decoder_core.decode.decode_batch()` runtime can execute a finite
+list of independent same-shape streams in one decoder session. Each job begins
+with its own SPS/PPS and IDR and must have the declared picture count. Dimensions
+refer to full coded pictures, including guards. `selected_frames=(...)` gives
+strictly increasing picture indices within each job; results are packed I420
+bytes indexed by job and position in that selection. On NVDEC, only selected
+pictures undergo VIC/CPU readback. Other output samples are released while the
+decoder retains its internal prediction references. Compatibility backends
+still read every picture before selecting on the host. This API batches existing
+streams through EOS; it does not maintain an interactive service or reuse input
+references across job boundaries. See [motion-mask timings](../06-motion-mask-decoder/VALIDATION.md).
+
 The manifest records logical graph IDs/ranges, physical instruction frame numbers,
 reference dependencies, weights/offsets/motion, output frames, refreshes, and
 optimization statistics. Folded nodes and aliases may have no standalone frame.

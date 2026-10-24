@@ -4,6 +4,33 @@ Recorded on 2026-10-23 with Python 3.12.13, FFmpeg 6.1.1, GStreamer 1.24.2,
 OpenH264, and Intel VA-API through `vah264dec`. Neural checkpoint comparisons
 used PyTorch 2.5.1+cpu. Original model weights were not retrained or modified.
 
+## NVDEC
+
+The subsequent [NVDEC run](native_ops/nvdec/README.md) passed
+**34 cases / 6,116 pictures /
+101,193,216 raw I420 bytes**. Every byte matched FFmpeg; all 300 named outputs
+also matched independent integer graphs. Coverage includes the six native
+demos, all 65,536 byte-addition pairs, fractional phases and block gathers,
+signed biprediction, long-lived references, and all four committed compiled
+experiment streams (eight denoiser images and 16 MNIST digits).
+
+The new readback helper preserves full-range surface formats during VIC layout
+copy and copies actual NV12 planes to I420. This avoids the observed 0–255 to
+16–235 conversion in the initial `nvvidconv` readback attempt. Streams and the
+NVIDIA decoder remain unchanged. Unknown diagnostics, decoder errors, and
+concealed blocks fail the run.
+
+After adding the backend, **126 local regression tests passed with no skips**:
+the 116 below plus ten NVDEC diagnostic/backend tests. The same 116 suites
+were rerun, including all original and compiled experiments. The full neural
+accuracy datasets were not rerun. [Results and timing samples](native_ops/nvdec/results.json)
+and [actual NVDEC captures](native_ops/nvdec/README.md#what-passed) are saved.
+Desktop CUVID and SDK 13.1 direct-array output remain untested.
+
+```sh
+python3 -m unittest decoder_core.test_decode -v
+```
+
 ## Native operations, v0.2
 
 **116 tests passed, with no skips**, after adding native image operations and
@@ -44,8 +71,7 @@ with resident references. These medians include startup, all-picture readback,
 and validation; the small difference does not establish a hardware speedup.
 Input packing for the complete workloads was 44.71 ms versus 1.39 ms.
 
-No NVIDIA device is present, so NVDEC and SDK 13.1 direct-array output remain
-untested. The native-demo README includes an explicitly untested NVIDIA command.
+NVDEC validation is recorded above. Direct-array output remains untested.
 The full 1,984-image MNIST accuracy and 256-image denoiser reports below are the
 previous v0.1 runs; this update reran their regression suites rather than those
 full datasets.
