@@ -6,19 +6,72 @@ import unittest
 from unittest.mock import patch
 
 import codec_compute as media
-from decoder_core.decode import decode
+from decoder_core.decode import available, decode
+from decoder_core.test_block_predictions import i420_picture
 
 
 class RuntimeTests(unittest.TestCase):
     def test__given_explicit_or_invalid_levels__when_compiling__then_level_choice_is_preserved_or_rejected(self):
-        for level in (31, 41):
+        for level in (31, 41, 51):
             p = media.compile(lambda x: x, h264_level=level)
             self.assertEqual(p.manifest()["level_idc"], level)
-        for level in (True, "41", 32, 40, 41.0):
+        for level in (True, "41", "51", 32, 40, 41.0, 50, 51.0, 52):
             with self.subTest(level=level), self.assertRaisesRegex(media.CompileError, "h264_level"):
                 media.compile(lambda x: x, h264_level=level)
         with self.assertRaisesRegex(media.CompileError, "only"):
             media.compile(lambda x: x, target="hevc", h264_level=41)
+
+    def assert_local_i420(self, program, inputs, pictures):
+        backends = [name for name in ("ffmpeg", "openh264", "vaapi") if available(name)]
+        if not backends:
+            self.skipTest("No H.264 decoder available")
+        expected = b"".join(i420_picture(board) for board in pictures)
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)/"program.h264"
+            path.write_bytes(program.encode(inputs))
+            for backend in backends:
+                with self.subTest(decoder=backend):
+                    self.assertEqual(decode(path, backend), expected)
+
+    def test__given_level51_and_512_fractional_reads__when_fusing__then_all_decoder_picture_bytes_match(self):
+        size = 512
+        program = media.compile(lambda a, b: media.average(media.sample_h264(a, 2), media.sample_h264(b, -2)),
+                                width=size, height=size, h264_level=51,
+                                input_ranges={"a": (0, 255), "b": (0, 255)})
+        inputs = {"a": [[(17*x+31*y+(x*y) % 23) % 256 for x in range(size)] for y in range(size)],
+                  "b": [[255*((x+3*y) % 7 < 3) for x in range(size)] for y in range(size)]}
+
+        def half(row, x):
+            # Independent horizontal six-tap oracle. The -1/2 source uses
+            # integer base x-1; clip each source before rounded averaging.
+            value = sum(weight*(row[x+offset] if 0 <= x+offset < size else 0)
+                        for weight, offset in zip((1, -5, 20, 20, -5, 1), range(-2, 4)))
+            return min(255, max(0, (value+16)//32))
+
+        result = [[(half(a, x)+half(b, x-1)+1)//2 for x in range(size)]
+                  for a, b in zip(inputs["a"], inputs["b"])]
+        self.assertEqual(program.manifest()["level_idc"], 51)
+        self.assertEqual(program.manifest()["costs"]["computation_pictures"], 1)
+        self.assertEqual(b"".join(program.native.access_units(inputs)), program.encode(inputs))
+        self.assert_local_i420(program, inputs, [inputs["a"], inputs["b"], result])
+
+    def test__given_512_iterative_warp_blend__when_compiling_level51__then_all_sixteen_stages_decode_exactly(self):
+        size, rounds = 512, 16
+
+        def kernel(image):
+            for _ in range(rounds):
+                image = media.average(media.shift(image, 1), media.shift(image, -1))
+            return image
+
+        initial = [[(29*x+11*y+(x*y) % 37) % 256 for x in range(size)] for y in range(size)]
+        pictures = [initial]
+        for _ in range(rounds):
+            pictures.append([[(left+right+1)//2 for left, right in zip([0]+row[:-1], row[1:]+[0])]
+                             for row in pictures[-1]])
+        program = media.compile(kernel, width=size, height=size, h264_level=51)
+        self.assertEqual(program.manifest()["costs"]["computation_pictures"], rounds)
+        self.assertEqual(program.manifest()["costs"]["input_pictures"], 1)
+        self.assert_local_i420(program, {"image": initial}, pictures)
 
     def test__given_large_extreme_inputs__when_compiling_level41__then_fused_output_and_access_units_remain_exact(self):
         program = media.compile(lambda a, b: media.average(media.sample_h264(a, 2), media.sample_h264(b, -2)),

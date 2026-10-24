@@ -110,8 +110,8 @@ def compile_graph(graph, *, target="h264", synthesis=True,
         raise ir.CompileError("synthesis must be Boolean")
     if type(h264_fuse_shifts) is not bool:
         raise ir.CompileError("h264_fuse_shifts must be Boolean")
-    if type(h264_level) is not int or h264_level not in (31, 41):
-        raise ir.CompileError("h264_level must be 31 or 41")
+    if type(h264_level) is not int or h264_level not in (31, 41, 51):
+        raise ir.CompileError("h264_level must be 31, 41, or 51")
     if target != "h264" and h264_level != 31:
         raise ir.CompileError("h264_level applies only to the H.264 target")
     for name, value in (("synthesis_max_instructions", synthesis_max_instructions),

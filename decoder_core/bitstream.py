@@ -99,6 +99,7 @@ class _LevelLimits:
 _LEVELS = MappingProxyType({
     31: _LevelLimits(108000, 3600, 18000, 14000, 14000, 4, 60),
     41: _LevelLimits(245760, 8192, 32768, 50000, 62500, 2, 24),
+    51: _LevelLimits(983040, 36864, 184320, 240000, 240000, 2, 24),
 })
 
 
@@ -116,12 +117,12 @@ class Writer:
         Encoding never changes reference state; repeated or out-of-order calls
         produce the same bytes for the same arguments.
 
-        High level 3.1 remains the byte-compatible default. Explicit level 4.1
-        permits larger PCM inputs and uses a conservative per-access-unit
+        High level 3.1 remains the byte-compatible default. Explicit levels 4.1
+        and 5.1 permit larger PCM inputs and use a conservative per-access-unit
         bitrate budget, rather than simulating a stateful burst-buffer model.
         """
         if type(level_idc) is not int or level_idc not in _LEVELS:
-            raise ValueError("level_idc must be 31 or 41")
+            raise ValueError("level_idc must be 31, 41, or 51")
         self.level_idc, self._limits = level_idc, _LEVELS[level_idc]
         self.level_name = f"{level_idc // 10}.{level_idc % 10}"
         # A 16-pixel guard on every side enforces a finite, dead boundary.
@@ -385,10 +386,10 @@ class Writer:
         # Table A-2 specifies High-profile VCL/NAL factors of 1250/1500.
         if vcl_bytes * 8 > 1250 * limits.max_cpb or len(data) * 8 > 1500 * limits.max_cpb:
             raise ValueError(f"{label} exceeds High level {self.level_name} coded-picture buffer capacity")
-        if self.level_idc == 41:
+        if self.level_idc in (41, 51):
             # A sufficient, deliberately narrower bound for arbitrary sequences
             # assembled from this stateless writer: every AU fits one frame
-            # interval at both inferred HRD bitrates. Valid bursty level-4.1
+            # interval at both inferred HRD bitrates. Valid bursty level-4.1/5.1
             # streams can exceed this bound and are not supported here.
             if vcl_bytes * 8 * self.fps > 1250 * limits.max_br:
                 raise ValueError(f"{label} exceeds conservative level {self.level_name} VCL bitrate budget")
@@ -404,7 +405,7 @@ class Writer:
         if any(not -(1 << self.motion_bits) <= component < (1 << self.motion_bits)
                for component in vector):
             raise ValueError("Motion vector exceeds declared SPS bound")
-        # Both supported levels have MaxVmvR=512 luma samples; Annex A.3.2
+        # All supported levels have MaxVmvR=512 luma samples; Annex A.3.2
         # independently limits horizontal displacement to [-2048,2047.75].
         if not -8192 <= vector[0] <= 8191 or not -2048 <= vector[1] <= 2047:
             raise ValueError(f"Motion vector exceeds level {self.level_name} component limit")
