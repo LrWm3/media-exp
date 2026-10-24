@@ -63,6 +63,8 @@ def evaluate_plan(plan, values, output_index):
         bias, denominator = step["bias"], step["denominator"]
         _integer(bias, -128, 127, "Effective offset")
         _integer(denominator, 0, 7, "Denominator")
+        if len(sources) == 2:
+            _integer(sum(weights), -128, 127 if denominator == 7 else 128, "B weight sum")
         numerator = sum(available[source] * weight
                         for source, weight in zip(sources, weights))
         shift = denominator + (len(sources) == 2)
@@ -89,7 +91,8 @@ def enumerate_single_predictions():
     For binary output containing a one, max(rounded_values)+bias must equal 1.
     Thus bias=1-max is the only candidate, and its output mask is the argmax
     mask. Constant zero has a separate explicit witness. Reversed B sources
-    exchange weights; repeated B sources depend only on their sum [-256,254].
+    exchange weights; repeated B sources depend only on their legal weight sum,
+    [-128,128] at denominators 0..6 and [-128,127] at denominator 7.
     These reductions are exhaustive, not a bounded synthesis heuristic.
     """
     witnesses = {0: _step([0], [0]), 15: _step([0], [0], 1)}
@@ -116,16 +119,20 @@ def enumerate_single_predictions():
     for first in range(-128, 128):
         for second in range(-128, 128):
             for denominator in range(8):
+                if not -128 <= first + second <= (127 if denominator == 7 else 128):
+                    continue
                 half, divisor = 1 << denominator, 1 << (denominator + 1)
                 rounded = (0, (second + half) // divisor, (first + half) // divisor,
                            (first + second + half) // divisor)
                 record("B_distinct", rounded, [0, 1], [first, second], denominator)
 
     for source in (0, 1):
-        for total in range(-256, 255):
+        for total in range(-128, 129):
             first = max(-128, total - 127)
             second = total - first
             for denominator in range(8):
+                if denominator == 7 and total == 128:
+                    continue
                 value = (total + (1 << denominator)) // (1 << (denominator + 1))
                 rounded = (0, 0, value, value) if source == 0 else (0, value, 0, value)
                 record("B_repeated", rounded, [source, source], [first, second], denominator)
@@ -144,7 +151,7 @@ def enumerate_single_predictions():
             raise AssertionError(f"Single-instruction witness failed for mask {mask}")
     report = {
         "method": "exhaustive legal weights and denominators with proved exact offset/source reductions",
-        "source_reduction": "B(1,0) swaps weights; repeated B sources use every weight sum [-256,254]",
+        "source_reduction": "B(1,0) swaps weights; repeated B sources use every legal sum [-128,128], capped at 127 for d=7",
         "offset_reduction": "Any binary output containing one requires bias=1-max(rounded values); zero is explicit",
         "parameter_classes": {kind: sum(histogram.values()) for kind, histogram in counts.items()},
         "parameter_classes_total": sum(sum(histogram.values()) for histogram in counts.values()),
@@ -154,7 +161,7 @@ def enumerate_single_predictions():
         },
         "raw_effective_offset_parameterizations": {
             "P": 2 * 256 * 8 * 256,
-            "B": 4 * 256 * 256 * 8 * 256,
+            "B": 4 * sum(counts["B_distinct"].values()) * 256,
         },
         "raw_B_offset_pairs_checked": 256 * 256,
         "effective_B_offsets": sorted(effective_offsets),
@@ -227,6 +234,7 @@ def build_atlas():
             "offsets": [-128, 127], "denominators": [0, 7],
             "P": "clip_u8(round_shift(w*x,d)+bias)",
             "B": "clip_u8(round_shift(w0*x+w1*y,d+1)+(o0+o1+1)//2)",
+            "B_weight_sum": "-128 <= w0+w1 <= (127 if d=7 else 128)",
             "round_shift": "n if shift=0, otherwise (n+2**(shift-1))//2**shift",
             "sources": "one or two original inputs or earlier instruction results; repeated sources permitted",
             "free_operations": "only original input aliases; constant generation costs one instruction",

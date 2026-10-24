@@ -26,7 +26,10 @@ and each explicit weighted B instruction is
 clip_u8(round_shift(w0*x+w1*y,d+1) + (offset0+offset1+1)//2).
 ```
 
-Every weight and signalled offset lies in [-128,127]; d lies in [0,7]. Here
+Every weight and signalled offset lies in [-128,127]; d lies in [0,7]. Explicit
+B prediction additionally requires `-128 <= w0+w1 <= (127 if d=7 else 128)`,
+including when both sources reference the same input. This is the combined
+weight constraint in H.264 section 8.4.2.3 ([ITU-T H.264, equation 8-242](https://www.itu.int/rec/dologin_pub.asp?id=T-REC-H.264-200305-S!!PDF-E&lang=e&type=items)). Here
 `round_shift(n,0)=n`; for positive s it equals
 `(n+2**(s-1))//2**s`, using mathematical floor division, also for negative n.
 Clipping occurs after rounding and offset addition. Residuals, deblocking,
@@ -109,18 +112,22 @@ outputs exist for any skipped offset.
 
 * P has two choices of original source, 256 weights, and eight denominators:
   **4,096 classes**.
-* B with distinct sources is represented by ordered sources `(A,B)`, all
-  256 squared weight pairs, and eight denominators: **524,288 classes**.
+* B with distinct sources is represented by ordered sources `(A,B)` and every
+  legal pair of signed weights at each denominator. Denominators 0 through 6
+  admit 49,279 pairs each; denominator 7 admits 49,152 pairs:
+  **394,105 classes**. These counts remove weight sums below -128 and above
+  128 (127 at denominator 7) from the 256 squared possible weight pairs.
   The source order `(B,A)` produces exactly the same operations by exchanging
   the two weights; effective offset addition is symmetric too.
 * B with repeated sources depends on the sum of its two weights. Every sum
-  from -256 through 254 is legal: use
+  from -128 through 128 is legal at denominators 0 through 6; denominator 7
+  stops at 127. Each sum is realized by
   `w0=max(-128,total-127)` and `w1=total-w0`. With two source choices and eight
-  denominators, this gives **8,176 classes**. Different pairs with the same sum
-  are arithmetically identical before rounding and clipping.
+  denominators, this gives `2*(7*257+256)` = **4,110 classes**. Different pairs
+  with the same sum are arithmetically identical before rounding and clipping.
 
-Total: **536,560 exact classes**. Before these reductions, the grammar contains
-1,048,576 P parameterizations and 536,870,912 B parameterizations when effective
+Total: **402,311 exact classes**. Before these reductions, the grammar contains
+1,048,576 P parameterizations and 403,563,520 B parameterizations when effective
 offsets are counted once. Raw B offset pairs add redundancy, already removed by
 the proved effective-offset equivalence.
 
@@ -168,6 +175,8 @@ parity either. Otherwise there are only these source cases:
    direction in A independently of B.
 
 XOR and XNOR require reversals in both inputs and contradict every case.
+The monotonicity argument does not rely on the combined weight bound, so
+imposing that legality constraint preserves this lower bound.
 This covers the full instruction grammar, including negative coefficients,
 all legal denominators, repeated sources, a constant or nonbinary h, and both
 clipping boundaries. There is no restriction to binary intermediates and no
