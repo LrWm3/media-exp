@@ -52,6 +52,12 @@ detection, temporal extrema, blending, binary mask expansion, and rounded
 smoothing across decoder targets. Includes an `absdiff` operation, actual
 captures, target limits, and measured picture/input/byte costs.
 
+[IR resampling experiments](codec_compute/workloads/resampling/README.md): patch
+atlases, motion-compensated interpolation, bandwise correction, compensated
+residuals, dense polarity maps, and stereo cost candidates. Adds explicit
+H.264 fractional sampling and per-block routing to the shared IR, including
+two independently warped references blended in one prediction picture.
+
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.

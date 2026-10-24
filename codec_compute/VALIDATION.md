@@ -5,9 +5,65 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Block routing and codec-defined fractional sampling
+
+The current complete suite passes **165 tests in 34.244 s, with no skips**.
+New semantic and target tests cover integer block gathers, all sixteen H.264
+fractional luma phases, negative coordinates, diagonal filter precision, image
+boundaries, immutable fields, and conservative range proofs. Target tests also
+exercise two independently moving B-prediction sources, retained references,
+named outputs, successive crop/filter barriers, multistage arithmetic, and
+cost-based fallback. Changed inputs reuse identical prediction tails with host
+evaluation and synthesis disabled during execution.
+
+The [resampling experiments](workloads/resampling/README.md) cover patch routing,
+motion-compensated interpolation, bandwise correction, compensated absolute
+residuals, dense polarity maps, and three stereo candidate costs. At 128×128
+logical pixels, their fused computation-picture counts are **1, 1, 1, 3, 6,
+and 9**, respectively. Interpolation falls from three computation pictures to
+one; both spatial reads and their rounded blend execute in that picture.
+
+The complete export contains **113 streams and 588 pictures**, checked through
+FFmpeg, OpenH264, and VA-API in **339 local decoder checks**. All 162 named outputs
+match both the semantic interpreter and independent task formulas. Full I420
+comparisons also check guard luma and chroma. The saved capture binds each output
+panel to its decoded frame; analytic truth is labeled separately.
+
+A controlled nonlinear texture translated by ±2.5 pixels gives a known-motion
+quality witness: compensation lowers midpoint mean absolute error from
+**14.56 to 0.06 grayscale levels** on an interior 112×112 crop. This establishes
+the result for the supplied-motion fixture, not general optical-flow or
+occlusion quality. Motion fields are fixed at compilation. Patch routing packs
+a 64×64 active ROI within the existing surface; it does not shrink the 160×160
+coded geometry or readback allocation. The current uploader rejects the tested
+256×256 inputs at its level-3.1 I_PCM access-unit bound.
+
+NVDEC passes the same **113 streams, 588 pictures, and 22,579,200 I420 bytes**,
+including both decoded quality-witness outputs. Its actual output pixels
+reproduce the reported midpoint errors. Both timing runners validate the full
+corpus before measuring batches of one and eight jobs, with one warmup and five
+repeats per case/mode. Raw reports preserve samples and source/artifact hashes.
+
+For eight-job NVDEC batches, interpolation's directly measured host-input-to-output
+median falls from **533.35 to 490.91 ms per batch** (66.67 to 61.36 ms per job),
+about **8%** in this run. Pre-encoded selected-output medians fall from 368.41
+to 342.99 ms per batch; the matched unwarped-average control measures 343.01 ms.
+These finite batches include process/pipeline startup, I/O, readback, and exact
+checks. Input serialization alone measures 164.43 ms per eight interpolation
+jobs in its separate mode. Independent mode medians must not be subtracted to
+infer decoder-only time. The local FFmpeg sample ranges overlap substantially;
+they do not establish a reliable latency improvement. No GPU arithmetic baseline,
+concurrent GPU load, or persistent-stream performance is measured. FFmpeg and
+NVDEC timings come from different hosts and are not a controlled backend race.
+
+```sh
+python3 -m unittest discover -s codec_compute/tests -v
+python3 -m codec_compute.workloads.resampling.demo --size 128 --jobs 8
+```
+
 ## Spatial read fusion and temporal benchmarks
 
-The current complete suite passes **133 tests in 29.709 s, with no skips**.
+At this milestone, the complete suite passed **133 tests in 29.709 s, with no skips**.
 Sixteen fusion tests cover zero borders, nonzero input minima, successive crops,
 named aliases, shared reads, threshold stages, synthesized extrema, motion limits,
 and fallback after either schedule or stream-cost validation fails. Four
