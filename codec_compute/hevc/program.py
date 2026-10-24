@@ -8,7 +8,7 @@ from typing import Iterable, Mapping
 from .native import (
     HEVCError, _Template, _bits, _dimensions, _encode, _from_bits, _nal_type,
     _nals, _plane, _rbsp, _template, _ue, _weight_bits, _weights, _wrap,
-    decode_frames,
+    _upload_nals, decode_frames,
 )
 
 
@@ -28,6 +28,8 @@ class NativeStep:
             raise ValueError("HEVC instruction names must be nonempty strings")
         if len(self.inputs) not in (1, 2) or len(self.inputs) != len(self.weights):
             raise ValueError("HEVC instructions need one or two matching inputs and weights")
+        if any(not isinstance(name, str) or not name for name in self.inputs):
+            raise ValueError("HEVC instruction input names must be nonempty strings")
         _weights(self.weights, self.offset, self.denominator)
 
 
@@ -95,15 +97,34 @@ class NativeProgram:
         known = set(self.input_names)
         last_use: dict[str, int] = {}
         for index, step in enumerate(self.steps):
+            if not isinstance(step, NativeStep):
+                raise ValueError("HEVC program steps must be NativeStep instances")
             if step.name in known or any(name not in known for name in step.inputs):
                 raise ValueError("HEVC steps require unique names and previously defined inputs")
             for name in step.inputs:
                 last_use[name] = index
             known.add(step.name)
 
+        pocs = dict(zip(self.input_names, (0, 2)))
+        frame_indices = {name: index for index, name in enumerate(self.input_names)}
+        next_poc = 3 if len(self.input_names) == 2 else 1
+        schedule = []
+        max_live = 0
+        for index, step in enumerate(self.steps):
+            live = [poc for name, poc in pocs.items() if last_use.get(name, -1) >= index]
+            max_live = max(max_live, len(live))
+            if len(live) > 3:
+                raise ValueError("HEVC program exceeds three simultaneously retained references")
+            schedule.append((step, next_poc, tuple(pocs[name] for name in step.inputs), live))
+            pocs[step.name] = next_poc
+            frame_indices[step.name] = len(self.input_names) + index
+            next_poc += 1
+
         binary_template = _template(self.width, self.height, True)
         unary_template = (_template(self.width, self.height, False)
                           if any(len(step.inputs) == 1 for step in self.steps) else None)
+        if unary_template and unary_template.parameter_sets[-1] != binary_template.parameter_sets[-1]:
+            raise HEVCError("libx265 P/B templates have incompatible picture parameter sets")
         headers = list(binary_template.parameter_sets)
         for index, nal in enumerate(headers):
             if _nal_type(nal) == 34:
@@ -111,23 +132,11 @@ class NativeProgram:
                 position = binary_template.list_modification_position
                 bits = bits[:position] + "1" + bits[position + 1:]
                 headers[index] = _nals(_wrap(_from_bits(bits)))[0]
-        pocs = dict(zip(self.input_names, (0, 2)))
-        frame_indices = {name: index for index, name in enumerate(self.input_names)}
-        next_poc = 3 if len(self.input_names) == 2 else 1
         tail = bytearray()
-        max_live = 0
-        for index, step in enumerate(self.steps):
-            live = [poc for name, poc in pocs.items() if last_use.get(name, -1) >= index]
-            max_live = max(max_live, len(live))
-            if len(live) > 3:
-                raise ValueError("HEVC program exceeds three simultaneously retained references")
+        for step, poc, inputs, live in schedule:
             template = binary_template if len(step.inputs) == 2 else unary_template
             assert template is not None
-            tail.extend(_instruction(template, step, next_poc,
-                                     tuple(pocs[name] for name in step.inputs), live))
-            pocs[step.name] = next_poc
-            frame_indices[step.name] = len(self.input_names) + index
-            next_poc += 1
+            tail.extend(_instruction(template, step, poc, inputs, live))
         object.__setattr__(self, "tail", bytes(tail))
         object.__setattr__(self, "parameter_sets", tuple(headers))
         object.__setattr__(self, "_upload_parameter_sets", binary_template.parameter_sets)
@@ -136,15 +145,12 @@ class NativeProgram:
         object.__setattr__(self, "max_live_references", max_live)
 
     def assemble(self, inputs: Mapping[str, bytes | Iterable[Iterable[int]]]) -> bytes:
-        if set(inputs) != set(self.input_names):
+        if not isinstance(inputs, Mapping) or set(inputs) != set(self.input_names):
             raise ValueError("HEVC inputs must match compiled input names exactly")
         planes = [_plane(inputs[name], self.width, self.height) for name in self.input_names]
         frames = planes if len(planes) == 1 else [planes[0], planes[0], planes[1]]
         encoded = _encode(self.width, self.height, frames, True)
-        nals = _nals(encoded)
-        headers = tuple(n for n in nals if _nal_type(n) in (32, 33, 34))
-        if headers != self._upload_parameter_sets:
-            raise HEVCError("input upload parameter sets differ from compiled template")
+        nals = _upload_nals(encoded, len(self.input_names), self._upload_parameter_sets)
         replacements = {_nal_type(n): n for n in self.parameter_sets}
         prefix = b"".join(b"\x00\x00\x00\x01" + replacements.get(_nal_type(nal), nal)
                           for nal in nals if _nal_type(nal) != 0)

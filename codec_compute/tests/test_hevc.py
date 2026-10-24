@@ -4,7 +4,7 @@ import shutil
 import unittest
 from unittest.mock import patch
 
-from codec_compute.hevc import NativeProgram, NativeStep, compile_binary, compile_unary, decode_frames
+from codec_compute.hevc import HEVCError, Kernel, NativeProgram, NativeStep, compile_binary, compile_unary, decode_frames
 
 
 def patterns(width=32, height=32):
@@ -117,8 +117,120 @@ class HEVCNativeTests(unittest.TestCase):
             NativeStep("c", ("a",), (1,)), NativeStep("d", ("b",), (1,)),
             NativeStep("e", ("a", "b"), (2, 2)), NativeStep("f", ("c", "d"), (2, 2)),
         )
-        with self.assertRaisesRegex(ValueError, "three simultaneously retained"):
-            NativeProgram(32, 32, ("a", "b"), steps)
+        with patch("codec_compute.hevc.program._template") as encoder:
+            with self.assertRaisesRegex(ValueError, "three simultaneously retained"):
+                NativeProgram(32, 32, ("a", "b"), steps)
+        encoder.assert_not_called()
+
+    def test_given_every_u8_pair_when_native_arithmetic_decodes_then_all_65536_pairs_match(self):
+        a = bytes(index // 256 for index in range(65536))
+        b = bytes(index % 256 for index in range(65536))
+        operations = {"add": (2, 2), "subtract": (2, -2), "average": (1, 1)}
+        expected = {name: bytes(clip((wa*x + wb*y + 1) // 2) for x, y in zip(a, b))
+                    for name, (wa, wb) in operations.items()}
+        for name, weights in operations.items():
+            with self.subTest(name=name):
+                self.assertEqual(compile_binary(256, 256, *weights).decode(a, b), expected[name])
+        program = NativeProgram(256, 256, ("a", "b"),
+                                tuple(NativeStep(name, ("a", "b"), weights)
+                                      for name, weights in operations.items()))
+        self.assertEqual(program.decode({"a": a, "b": b}), dict(a=a, b=b, **expected))
+
+    def test_given_weight_syntax_boundaries_when_predictions_decode_then_exact_signed_rounding_holds(self):
+        source = bytes(range(256))
+        for denominator in range(8):
+            for delta, offset in [(-128, 127), (127, -128)]:
+                weight = (1 << denominator) + delta
+                rounding = (1 << (denominator - 1)) if denominator else 0
+                expected = bytes(clip(((weight * value + rounding) >> denominator) + offset)
+                                 for value in source)
+                with self.subTest(denominator=denominator, delta=delta, offset=offset):
+                    self.assertEqual(compile_unary(16, 16, weight, offset, denominator).decode(source), expected)
+
+    def test_given_every_u8_value_when_all_shared_threshold_cutoffs_decode_then_match_predicates(self):
+        from codec_compute import compile, threshold
+        source = [list(range(y * 16, (y + 1) * 16)) for y in range(16)]
+        # Group outputs to exercise long resident schedules while keeping each
+        # target program below its 128-instruction limit.
+        for start in range(-1, 258, 40):
+            cutoffs = tuple(range(start, min(start + 40, 258)))
+            program = compile(lambda image: {f"cutoff_{c}": threshold(image, c) for c in cutoffs},
+                              target="hevc", width=16, height=16)
+            actual = program.decode({"image": source})
+            for cutoff in cutoffs:
+                with self.subTest(cutoff=cutoff):
+                    self.assertEqual(actual[f"cutoff_{cutoff}"],
+                                     [[int(value >= cutoff) for value in row] for row in source])
+
+    def test_given_maximum_stage_count_when_old_reference_is_used_then_poc_and_liveness_remain_exact(self):
+        a, b = bytes(range(256)), bytes(reversed(range(256)))
+        steps = tuple(NativeStep(f"s{i}", ("a" if i == 0 else f"s{i-1}",), (1,),
+                                 1 if i % 2 == 0 else -1) for i in range(127))
+        steps += (NativeStep("result", ("s126", "a"), (2, -2)),)
+        program = NativeProgram(16, 16, ("a", "b"), steps)
+        result = program.decode({"a": a, "b": b})
+        self.assertEqual(len(result), 130)
+        self.assertEqual(result["result"], bytes([1] * 255 + [0]))
+        self.assertEqual(program.picture_order_counts["result"], 130)
+        self.assertEqual(program.output_frame_indices["result"], 129)
+        self.assertEqual(program.max_live_references, 2)
+
+    def test_given_boundary_shapes_when_resident_arithmetic_decodes_then_all_pixels_match(self):
+        for width, height in [(512, 512), (16, 512), (512, 16)]:
+            with self.subTest(shape=(width, height)):
+                a = bytes((i * 17 + i // width * 9) % 256 for i in range(width * height))
+                b = a[::-1]
+                program = NativeProgram(width, height, ("a", "b"), (
+                    NativeStep("sum", ("a", "b"), (2, 2)),
+                    NativeStep("result", ("sum", "a"), (2, -2)),
+                ))
+                self.assertEqual(program.decode({"a": a, "b": b})["result"],
+                                 bytes(min(255, x + y) - x for x, y in zip(a, b)))
+
+    def test_given_invalid_names_or_resources_when_compiling_then_reject_before_encoding(self):
+        valid = NativeStep("result", ("a",), (1,))
+        cases = [
+            (("a", "a"), (valid,)), (("a", "b", "c"), (valid,)), (("",), (valid,)),
+            (("a",), ()), (("a",), (object(),)), (("a",), (valid,) * 129),
+            (("a",), (valid, valid)), (("a",), (NativeStep("a", ("a",), (1,)),)),
+            (("a",), (NativeStep("result", ("absent",), (1,)),)),
+            (("a",), (NativeStep("first", ("later",), (1,)), NativeStep("later", ("a",), (1,)))),
+        ]
+        with patch("codec_compute.hevc.program._template") as encoder:
+            for names, steps in cases:
+                with self.subTest(names=names, steps=steps), self.assertRaises(ValueError):
+                    NativeProgram(16, 16, names, steps)
+        encoder.assert_not_called()
+        for name, inputs in [("", ("a",)), ("result", ("",)), ("result", (42,)), ("result", ([],))]:
+            with self.subTest(name=name, inputs=inputs), self.assertRaises(ValueError):
+                NativeStep(name, inputs, (1,))
+
+    def test_given_missing_computation_picture_when_decoding_then_frame_count_error_is_explicit(self):
+        source = bytes(range(256))
+        kernel = compile_unary(16, 16)
+        prefix = kernel.assemble(source)[:-len(kernel.tail)]
+        with patch.object(Kernel, "assemble", return_value=prefix):
+            with self.assertRaisesRegex(HEVCError, "unexpected decoded frame count"):
+                kernel.decode(source)
+        program = NativeProgram(16, 16, ("a",), (NativeStep("result", ("a",), (1,)),))
+        prefix = program.assemble({"a": source})[:-len(program.tail)]
+        with patch.object(NativeProgram, "assemble", return_value=prefix):
+            with self.assertRaisesRegex(HEVCError, "unexpected frame count"):
+                program.decode({"a": source})
+
+    def test_given_invalid_encoder_schedule_when_uploading_then_reject(self):
+        source = bytes(range(256))
+        program = NativeProgram(16, 16, ("a",), (NativeStep("result", ("a",), (1,)),))
+        headers = b"".join(b"\x00\x00\x00\x01" + nal for nal in program.parameter_sets)
+        with patch("codec_compute.hevc.program._encode", return_value=headers):
+            with self.assertRaisesRegex(HEVCError, "unexpected HEVC.*schedule"):
+                program.assemble({"a": source})
+        with self.assertRaisesRegex(ValueError, "input names exactly"):
+            program.assemble(["a"])
+
+    def test_given_malformed_hevc_when_decoding_then_decoder_failure_propagates(self):
+        with self.assertRaises(HEVCError):
+            decode_frames(b"\x00\x00\x00\x01\x02\x01", 16, 16)
 
 
 if __name__ == "__main__":

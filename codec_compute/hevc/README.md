@@ -92,3 +92,24 @@ include 3-reference branching, 40 resident stages, repeated operands, rejection
 of excess reference lifetimes, exact display-order mapping, and a spy confirming
 that assembly invokes the encoder once with only the original uploaded inputs
 (and the schedule's duplicate A).
+
+## Validation boundaries
+
+The compiler checks parameter-set IDs, bit depth, chroma format, temporal
+layers, POC width, slice types, active reference counts, prediction flags and
+DPB settings before reusing a template. Uploads must match the expected
+IDR/P/B picture schedule and original parameter sets. Mixed unary/binary
+programs require compatible PPS bytes. Invalid names, forward references,
+duplicate names and excess live references fail before template generation.
+
+The HEVC tests include all 65,536 u8 input pairs for saturating add, saturating
+subtract and rounded average, in both single-kernel and resident-program modes.
+They also cover every u8 value at every shared threshold cutoff from -1 through
+257, all denominator/weight-delta boundaries, 128 resident stages retaining an
+old reference, and the maximum supported 512×512 shape.
+
+The decoder wrapper reports FFmpeg errors and rejects unexpected result counts
+in kernel/program execution. `decode_frames` accepts valid HEVC streams whose
+dimensions are supplied by the caller; it does not authenticate arbitrary stream
+bytes. FFmpeg can silently conceal some truncated CABAC payloads even with
+`-xerror`. Internally assembled streams append the complete immutable tail.

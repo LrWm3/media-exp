@@ -55,6 +55,20 @@ def _nal_type(nal: bytes) -> int:
     return (nal[0] >> 1) & 63
 
 
+def _check_schedule(nals: list[bytes], expected: tuple[int, ...]) -> None:
+    if any(len(nal) < 2 for nal in nals) or tuple(map(_nal_type, nals)) != expected:
+        raise HEVCError("libx265 stream has unexpected HEVC parameter-set/picture schedule")
+
+
+def _upload_nals(encoded: bytes, input_count: int,
+                 parameter_sets: tuple[bytes, ...]) -> list[bytes]:
+    nals = _nals(encoded)
+    _check_schedule(nals, (32, 33, 34, 20) + ((1, 0) if input_count == 2 else ()))
+    if tuple(nals[:3]) != parameter_sets:
+        raise HEVCError("input upload parameter sets differ from compiled template")
+    return nals
+
+
 def _rbsp(nal: bytes) -> bytes:
     return nal.replace(b"\x00\x00\x03", b"\x00\x00")
 
@@ -90,7 +104,7 @@ def _from_bits(bits: str) -> bytes:
 
 def _trace(data: bytes) -> str:
     result = subprocess.run([
-        "ffmpeg", "-hide_banner", "-loglevel", "info", "-i", "pipe:0", "-c",
+        "ffmpeg", "-hide_banner", "-loglevel", "info", "-f", "hevc", "-i", "pipe:0", "-c",
         "copy", "-bsf:v", "trace_headers", "-f", "null", "-",
     ], input=data, capture_output=True)
     if result.returncode:
@@ -158,12 +172,20 @@ def _template(width: int, height: int, binary: bool) -> _Template:
     zero = bytes(width * height)
     encoded = _encode(width, height, [zero] * (3 if binary else 2), binary)
     nals = _nals(encoded)
+    _check_schedule(nals, (32, 33, 34, 20, 1) + ((0,) if binary else ()))
     target_type = 0 if binary else 1
     targets = [n for n in nals if _nal_type(n) == target_type]
     if len(targets) != 1:
         raise HEVCError("libx265 template has unexpected prediction-frame structure")
     trace = _trace(encoded)
     for name, expected in {
+        "vps_video_parameter_set_id": 0, "sps_video_parameter_set_id": 0,
+        "sps_seq_parameter_set_id": 0, "pps_pic_parameter_set_id": 0,
+        "pps_seq_parameter_set_id": 0, "slice_pic_parameter_set_id": 0,
+        "vps_max_sub_layers_minus1": 0, "sps_max_sub_layers_minus1": 0,
+        "chroma_format_idc": 1, "bit_depth_luma_minus8": 0,
+        "bit_depth_chroma_minus8": 0,
+        "pic_width_in_luma_samples": width, "pic_height_in_luma_samples": height,
         "weighted_pred_flag": 1, "weighted_bipred_flag": 1,
         "sps_temporal_mvp_enabled_flag": 0, "sample_adaptive_offset_enabled_flag": 0,
         "pps_deblocking_filter_disabled_flag": 1,
@@ -180,9 +202,21 @@ def _template(width: int, height: int, binary: bool) -> _Template:
         "tiles_enabled_flag": 0,
         "entropy_coding_sync_enabled_flag": 0,
         "slice_segment_header_extension_present_flag": 0,
+        "sps_extension_present_flag": 0, "pps_extension_present_flag": 0,
+        "init_qp_minus26": 0, "transquant_bypass_enabled_flag": 1,
+        "nuh_layer_id": 0, "nuh_temporal_id_plus1": 1,
+        "first_slice_segment_in_pic_flag": 1, "slice_type": 0 if binary else 1,
+        "slice_pic_order_cnt_lsb": 1,
+        "short_term_ref_pic_set_sps_flag": 0,
+        "num_negative_pics": 1, "num_positive_pics": int(binary),
+        "num_ref_idx_active_override_flag": 0,
+        "luma_weight_l0_flag[0]": 0, "chroma_weight_l0_flag[0]": 0,
     }.items():
         if _value(trace, name) != expected:
             raise HEVCError(f"unsupported libx265 template setting: {name}")
+    if binary and (_value(trace, "luma_weight_l1_flag[0]") != 0
+                   or _value(trace, "chroma_weight_l1_flag[0]") != 0):
+        raise HEVCError("unsupported libx265 B-picture template weights")
     if binary and (_value(trace, "sps_max_dec_pic_buffering_minus1[0]") != 3
                    or _value(trace, "sps_max_num_reorder_pics[0]") != 1):
         raise HEVCError("unsupported libx265 decoded-picture-buffer configuration")
@@ -238,10 +272,7 @@ class Kernel:
         planes = [_plane(value, self.width, self.height) for value in inputs]
         frames = planes if self.input_count == 1 else [planes[0], planes[0], planes[1]]
         encoded = _encode(self.width, self.height, frames, self.input_count == 2)
-        nals = _nals(encoded)
-        headers = tuple(n for n in nals if _nal_type(n) in (32, 33, 34))
-        if headers != self.parameter_sets:
-            raise HEVCError("input upload parameter sets differ from compiled template")
+        nals = _upload_nals(encoded, self.input_count, self.parameter_sets)
         # The duplicated A is merely encoder lookahead input. Its B slice is
         # discarded; only the original A and B uploads remain in the prefix.
         prefix = [n for n in nals if _nal_type(n) != 0]
@@ -255,15 +286,20 @@ class Kernel:
 
 
 def decode_frames(bitstream: bytes, width: int, height: int) -> list[bytes]:
-    """Decode Annex B HEVC and return its displayed luma planes in POC order."""
+    """Decode valid Annex B HEVC; return displayed luma planes in POC order.
+
+    Dimensions must match the stream. This is not a stream integrity checker:
+    FFmpeg can conceal some corrupt or truncated CABAC payloads without errors.
+    """
+    _dimensions(width, height)
     raw = _run([
-        "-hide_banner", "-loglevel", "error", "-xerror", "-threads", "1", "-i",
+        "-hide_banner", "-loglevel", "error", "-xerror", "-threads", "1", "-f", "hevc", "-i",
         "pipe:0", "-f", "rawvideo", "-pix_fmt", "yuv420p", "-fps_mode",
         "passthrough", "pipe:1",
     ], bitstream)
     size = width * height
     frame_size = size * 3 // 2
-    if len(raw) % frame_size:
+    if not raw or len(raw) % frame_size:
         raise HEVCError("decoded frame size differs from compiled dimensions")
     return [raw[start:start + size] for start in range(0, len(raw), frame_size)]
 
