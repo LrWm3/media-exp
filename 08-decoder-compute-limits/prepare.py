@@ -16,7 +16,7 @@ import subprocess
 import time
 
 from atlas import build_atlas
-from program import Program
+from program import Program, RECURRENCE_NOTE
 from decoder_core.decode import available, decode
 
 
@@ -79,16 +79,18 @@ def prepare(output, decoders=("ffmpeg", "openh264", "vaapi"), *, throughput=True
     ready = tuple(name for name in requested if available(name))
     atlas = build_atlas()
     write_json(output / "atlas.json", atlas)
+    proofs = save_bytes(output, Path("PROOFS.md"), (ROOT / "PROOFS.md").read_bytes())
     model = {"format": "h264-compute-limits-model-0.1", "sample_domain": [0, 1],
              "bit_depth": 8, "truth_order": ["00", "01", "10", "11"],
              "prediction_sources": [1, 2], "weight_range": [-128, 127],
              "effective_offset_range": [-128, 127], "denominator_range": [0, 7],
              "recurrence": "a[r+1] = truth[2*a[r] + original_b]",
+             "recurrence_note": RECURRENCE_NOTE,
              "input_encoding": "two literal I_PCM luma pictures; chroma 128; guards 0",
              "compute_encoding": "weighted prediction; zero residual; deblocking disabled",
              "atlas_sha256": digest((output / "atlas.json").read_bytes())}
     write_json(output / "model.json", model)
-    sources = sorted([*ROOT.glob("*.py"), ROOT.parent / "decoder_core" / "bitstream.py",
+    sources = sorted([*ROOT.glob("*.py"), ROOT / "PROOFS.md", ROOT.parent / "decoder_core" / "bitstream.py",
                       ROOT.parent / "decoder_core" / "decode.py"])
     provenance = {"source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"],
                                                            cwd=ROOT, text=True).strip(),
@@ -100,6 +102,7 @@ def prepare(output, decoders=("ffmpeg", "openh264", "vaapi"), *, throughput=True
     report = {"format": "h264-compute-limits-bundle-0.1",
               "created_utc": datetime.now(timezone.utc).isoformat(),
               "atlas": "atlas.json", "atlas_sha256": model["atlas_sha256"],
+              "proofs": proofs["path"], "proofs_sha256": proofs["sha256"],
               "model": "model.json", "model_sha256": digest((output / "model.json").read_bytes()),
               "provenance": "provenance.json",
               "provenance_sha256": digest((output / "provenance.json").read_bytes()),
@@ -170,7 +173,9 @@ def prepare(output, decoders=("ffmpeg", "openh264", "vaapi"), *, throughput=True
                   "expected_output": saved_output["path"], "expected_output_sha256": saved_output["sha256"],
                   "expected_output_bytes": saved_output["bytes"], "frame_bytes": frame_bytes,
                   "inputs": stored_inputs, "prediction": saved_tail, "costs": program.costs,
-                  "scalar_minimum": case["scalar_minimum"], "packed_minimum": case["packed_minimum"],
+                  "single_evaluation_minima": program.single_evaluation_minima,
+                  "cost_scope": "executed witness counts across all rounds",
+                  "recurrence_note": RECURRENCE_NOTE,
                   "lowering_ms": lowering_ms, "first_tail_ms": tail_ms, "input_packing_ms": prefix_ms,
                   "decoders": checks}
         report["cases"].append(record)

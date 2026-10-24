@@ -15,6 +15,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from decoder_core.bitstream import Operation, Source, Writer
 
 
+RECURRENCE_NOTE = (
+    "Rounds execute the single-evaluation witness repeatedly with original b retained. "
+    "Composition can simplify algebraically; for example, an even number of XOR rounds "
+    "is the identity on a. Executed instruction and picture counts are not minimum "
+    "costs for the composed function."
+)
+
+
 def _slots(operations, input_count):
     """Replace a source only after its final read, including the current frame."""
     last = list(range(input_count + len(operations)))
@@ -144,6 +152,11 @@ class Program:
     def pictures(self):
         return self.input_count + len(self.operations)
 
+    @property
+    def single_evaluation_minima(self):
+        return {"scalar_instructions": self.case["scalar_minimum"],
+                "packed_pictures": self.case["packed_minimum"]}
+
     @cached_property
     def tail(self):
         return b"".join(self.writer.prediction(frame, operation)
@@ -206,6 +219,9 @@ class Program:
                 "pictures": self.pictures, "input_count": self.input_count, "input_frames": {"a": 0, "b": 1},
                 "rounds": self.rounds, "round_count": self.rounds, "compute_pictures": len(self.operations),
                 "computational_evaluations": self.rounds * self.width * self.height,
+                "single_evaluation_minima": self.single_evaluation_minima,
+                "cost_scope": "executed witness counts across all rounds",
+                "recurrence_note": RECURRENCE_NOTE,
                 "output_frames": self.output_frames, "output_regions": self.output_regions,
                 "reference_slots": self.reference_slots, "reference_mode": "retained", "slice_mode": "row",
                 "prediction_slices": self.costs["prediction_slices"], "prediction_bytes": len(self.tail),
