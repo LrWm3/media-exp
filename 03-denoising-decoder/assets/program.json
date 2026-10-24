@@ -1,0 +1,1878 @@
+{
+  "pictures_per_image": 98,
+  "features": [
+    11,
+    23,
+    35,
+    46,
+    58,
+    70,
+    82,
+    93
+  ],
+  "output": 97,
+  "refreshes": [
+    17,
+    33,
+    49,
+    65,
+    81
+  ],
+  "operations": [
+    {
+      "frame": 1,
+      "label": "normalize noisy input",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 2,
+      "label": "channel 0: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 3,
+      "label": "channel 0: tap 1",
+      "sources": [
+        {
+          "frame": 2,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 4,
+      "label": "channel 0: tap 2",
+      "sources": [
+        {
+          "frame": 3,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 5,
+      "label": "channel 0: tap 3",
+      "sources": [
+        {
+          "frame": 4,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 6,
+      "label": "channel 0: tap 4",
+      "sources": [
+        {
+          "frame": 5,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 7,
+      "label": "channel 0: tap 5",
+      "sources": [
+        {
+          "frame": 6,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 8,
+      "label": "channel 0: tap 6",
+      "sources": [
+        {
+          "frame": 7,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 9,
+      "label": "channel 0: tap 7",
+      "sources": [
+        {
+          "frame": 8,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 10,
+      "label": "channel 0: tap 8",
+      "sources": [
+        {
+          "frame": 9,
+          "weight": 2,
+          "offset": 58,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 58,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 11,
+      "label": "channel 0: binary activation",
+      "sources": [
+        {
+          "frame": 10,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 12,
+      "label": "1x1: channel 0",
+      "sources": [
+        {
+          "frame": 11,
+          "weight": -1,
+          "offset": 8,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 13,
+      "label": "channel 1: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 14,
+      "label": "channel 1: tap 1",
+      "sources": [
+        {
+          "frame": 13,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 15,
+      "label": "channel 1: tap 2",
+      "sources": [
+        {
+          "frame": 14,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 16,
+      "label": "channel 1: tap 3",
+      "sources": [
+        {
+          "frame": 15,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 17,
+      "label": "refresh input",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 18,
+      "label": "channel 1: tap 4",
+      "sources": [
+        {
+          "frame": 16,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 19,
+      "label": "channel 1: tap 5",
+      "sources": [
+        {
+          "frame": 18,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 20,
+      "label": "channel 1: tap 6",
+      "sources": [
+        {
+          "frame": 19,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 21,
+      "label": "channel 1: tap 7",
+      "sources": [
+        {
+          "frame": 20,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 22,
+      "label": "channel 1: tap 8",
+      "sources": [
+        {
+          "frame": 21,
+          "weight": 2,
+          "offset": 58,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 58,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 23,
+      "label": "channel 1: binary activation",
+      "sources": [
+        {
+          "frame": 22,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 24,
+      "label": "1x1: channel 1",
+      "sources": [
+        {
+          "frame": 12,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 23,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 25,
+      "label": "channel 2: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 17,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 26,
+      "label": "channel 2: tap 1",
+      "sources": [
+        {
+          "frame": 25,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 27,
+      "label": "channel 2: tap 2",
+      "sources": [
+        {
+          "frame": 26,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 28,
+      "label": "channel 2: tap 3",
+      "sources": [
+        {
+          "frame": 27,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 29,
+      "label": "channel 2: tap 4",
+      "sources": [
+        {
+          "frame": 28,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 30,
+      "label": "channel 2: tap 5",
+      "sources": [
+        {
+          "frame": 29,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 31,
+      "label": "channel 2: tap 6",
+      "sources": [
+        {
+          "frame": 30,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 32,
+      "label": "channel 2: tap 7",
+      "sources": [
+        {
+          "frame": 31,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 17,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 33,
+      "label": "refresh input",
+      "sources": [
+        {
+          "frame": 17,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 34,
+      "label": "channel 2: tap 8",
+      "sources": [
+        {
+          "frame": 32,
+          "weight": 2,
+          "offset": 58,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 58,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 35,
+      "label": "channel 2: binary activation",
+      "sources": [
+        {
+          "frame": 34,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 36,
+      "label": "1x1: channel 2",
+      "sources": [
+        {
+          "frame": 24,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 35,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 37,
+      "label": "channel 3: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 33,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 38,
+      "label": "channel 3: tap 1",
+      "sources": [
+        {
+          "frame": 37,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 39,
+      "label": "channel 3: tap 2",
+      "sources": [
+        {
+          "frame": 38,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 40,
+      "label": "channel 3: tap 3",
+      "sources": [
+        {
+          "frame": 39,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 41,
+      "label": "channel 3: tap 4",
+      "sources": [
+        {
+          "frame": 40,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 42,
+      "label": "channel 3: tap 5",
+      "sources": [
+        {
+          "frame": 41,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 43,
+      "label": "channel 3: tap 6",
+      "sources": [
+        {
+          "frame": 42,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 44,
+      "label": "channel 3: tap 7",
+      "sources": [
+        {
+          "frame": 43,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 45,
+      "label": "channel 3: tap 8",
+      "sources": [
+        {
+          "frame": 44,
+          "weight": 2,
+          "offset": 59,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 33,
+          "weight": -2,
+          "offset": 59,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 46,
+      "label": "channel 3: binary activation",
+      "sources": [
+        {
+          "frame": 45,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 47,
+      "label": "1x1: channel 3",
+      "sources": [
+        {
+          "frame": 36,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 46,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 48,
+      "label": "channel 4: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 33,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 49,
+      "label": "refresh input",
+      "sources": [
+        {
+          "frame": 33,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 50,
+      "label": "channel 4: tap 1",
+      "sources": [
+        {
+          "frame": 48,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 51,
+      "label": "channel 4: tap 2",
+      "sources": [
+        {
+          "frame": 50,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 52,
+      "label": "channel 4: tap 3",
+      "sources": [
+        {
+          "frame": 51,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 53,
+      "label": "channel 4: tap 4",
+      "sources": [
+        {
+          "frame": 52,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 54,
+      "label": "channel 4: tap 5",
+      "sources": [
+        {
+          "frame": 53,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 55,
+      "label": "channel 4: tap 6",
+      "sources": [
+        {
+          "frame": 54,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 56,
+      "label": "channel 4: tap 7",
+      "sources": [
+        {
+          "frame": 55,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 57,
+      "label": "channel 4: tap 8",
+      "sources": [
+        {
+          "frame": 56,
+          "weight": 2,
+          "offset": 50,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 50,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 58,
+      "label": "channel 4: binary activation",
+      "sources": [
+        {
+          "frame": 57,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 59,
+      "label": "1x1: channel 4",
+      "sources": [
+        {
+          "frame": 47,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 58,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 60,
+      "label": "channel 5: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 49,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 61,
+      "label": "channel 5: tap 1",
+      "sources": [
+        {
+          "frame": 60,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 62,
+      "label": "channel 5: tap 2",
+      "sources": [
+        {
+          "frame": 61,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": 2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 63,
+      "label": "channel 5: tap 3",
+      "sources": [
+        {
+          "frame": 62,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 64,
+      "label": "channel 5: tap 4",
+      "sources": [
+        {
+          "frame": 63,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 49,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 65,
+      "label": "refresh input",
+      "sources": [
+        {
+          "frame": 49,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 66,
+      "label": "channel 5: tap 5",
+      "sources": [
+        {
+          "frame": 64,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 67,
+      "label": "channel 5: tap 6",
+      "sources": [
+        {
+          "frame": 66,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": 2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 68,
+      "label": "channel 5: tap 7",
+      "sources": [
+        {
+          "frame": 67,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 69,
+      "label": "channel 5: tap 8",
+      "sources": [
+        {
+          "frame": 68,
+          "weight": 2,
+          "offset": 57,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 57,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 70,
+      "label": "channel 5: binary activation",
+      "sources": [
+        {
+          "frame": 69,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 71,
+      "label": "1x1: channel 5",
+      "sources": [
+        {
+          "frame": 59,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 70,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 72,
+      "label": "channel 6: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 65,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 73,
+      "label": "channel 6: tap 1",
+      "sources": [
+        {
+          "frame": 72,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 74,
+      "label": "channel 6: tap 2",
+      "sources": [
+        {
+          "frame": 73,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": 2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 75,
+      "label": "channel 6: tap 3",
+      "sources": [
+        {
+          "frame": 74,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 76,
+      "label": "channel 6: tap 4",
+      "sources": [
+        {
+          "frame": 75,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 77,
+      "label": "channel 6: tap 5",
+      "sources": [
+        {
+          "frame": 76,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 78,
+      "label": "channel 6: tap 6",
+      "sources": [
+        {
+          "frame": 77,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 79,
+      "label": "channel 6: tap 7",
+      "sources": [
+        {
+          "frame": 78,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 80,
+      "label": "channel 6: tap 8",
+      "sources": [
+        {
+          "frame": 79,
+          "weight": 2,
+          "offset": 59,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 65,
+          "weight": -2,
+          "offset": 59,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 81,
+      "label": "refresh input",
+      "sources": [
+        {
+          "frame": 65,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 82,
+      "label": "channel 6: binary activation",
+      "sources": [
+        {
+          "frame": 80,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 83,
+      "label": "1x1: channel 6",
+      "sources": [
+        {
+          "frame": 71,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 82,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 84,
+      "label": "channel 7: tap 0, bias 9",
+      "sources": [
+        {
+          "frame": 81,
+          "weight": -1,
+          "offset": 9,
+          "dx": -1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 85,
+      "label": "channel 7: tap 1",
+      "sources": [
+        {
+          "frame": 84,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 86,
+      "label": "channel 7: tap 2",
+      "sources": [
+        {
+          "frame": 85,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": -1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 87,
+      "label": "channel 7: tap 3",
+      "sources": [
+        {
+          "frame": 86,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 88,
+      "label": "channel 7: tap 4",
+      "sources": [
+        {
+          "frame": 87,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 89,
+      "label": "channel 7: tap 5",
+      "sources": [
+        {
+          "frame": 88,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 90,
+      "label": "channel 7: tap 6",
+      "sources": [
+        {
+          "frame": 89,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": -1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 91,
+      "label": "channel 7: tap 7",
+      "sources": [
+        {
+          "frame": 90,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 92,
+      "label": "channel 7: tap 8",
+      "sources": [
+        {
+          "frame": 91,
+          "weight": 2,
+          "offset": 58,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 81,
+          "weight": 2,
+          "offset": 58,
+          "dx": 1,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 93,
+      "label": "channel 7: binary activation",
+      "sources": [
+        {
+          "frame": 92,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 94,
+      "label": "1x1: channel 7",
+      "sources": [
+        {
+          "frame": 83,
+          "weight": 2,
+          "offset": 58,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frame": 93,
+          "weight": -2,
+          "offset": 58,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 95,
+      "label": "1x1: binary output",
+      "sources": [
+        {
+          "frame": 94,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 96,
+      "label": "display scale x127",
+      "sources": [
+        {
+          "frame": 95,
+          "weight": 127,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 97,
+      "label": "display scale x3",
+      "sources": [
+        {
+          "frame": 96,
+          "weight": 3,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 0
+    }
+  ]
+}

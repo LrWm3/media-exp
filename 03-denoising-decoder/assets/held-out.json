@@ -1,0 +1,19 @@
+{
+  "decoder": "ffmpeg",
+  "samples": 256,
+  "seed": 200000,
+  "noise_probability": 0.15,
+  "model_sha256": "ec8de200e9f598c3b6dcafd2503ab874620a2aecc56da2d146261263103ca32d",
+  "stream_sha256": "55f0d2e468023d25748b6ec2c63ad7fd643c1409233f1c9e07a3417e81b9d9c0",
+  "raw_sha256": "f51107d8bcbed3d2616347b839f29e21269dbff683a474f82654c4ffba50d4c0",
+  "stream_bytes": 8703773,
+  "pictures_per_image": 98,
+  "prediction_pictures": 97,
+  "reference_copies_per_image": 5,
+  "maximum_reference_age": 16,
+  "noisy_error": 0.15071487426757812,
+  "decoded_error": 0.032932281494140625,
+  "majority_error": 0.033420562744140625,
+  "compile_seconds": 1.5588141979969805,
+  "decode_and_readback_seconds": 1.0578775490066619
+}

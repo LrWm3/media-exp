@@ -6,5 +6,8 @@
 - [02 — Maze flood-fill decoder solver](02-maze-flood-fill-decoder-solver/README.md):
   the decoder expands reachability through a maze; decoded arrival times provide
   shortest distances and paths while walls block propagation.
+- [03 — Denoising decoder](03-denoising-decoder/README.md): a PyTorch-trained binary
+  CNN compiles into H.264 prediction operations, including signed 3×3 filters,
+  binary feature maps, and a streaming 1×1 output layer.
 
-Both experiments use the shared [H.264 writer and decoder tools](decoder_core).
+The experiments use the shared [H.264 writer and decoder tools](decoder_core).

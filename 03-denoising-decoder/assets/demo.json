@@ -1,0 +1,19 @@
+{
+  "decoder": "vaapi",
+  "samples": 8,
+  "seed": 900000,
+  "noise_probability": 0.15,
+  "model_sha256": "ec8de200e9f598c3b6dcafd2503ab874620a2aecc56da2d146261263103ca32d",
+  "stream_sha256": "ddfd075d0e20eb9d5653baa695081887a4401614094765fed29dad417364249d",
+  "raw_sha256": "bed0d7fb0e174c82217effb2cece370b72679155514531ebc1dfba2394883fc2",
+  "stream_bytes": 271982,
+  "pictures_per_image": 98,
+  "prediction_pictures": 97,
+  "reference_copies_per_image": 5,
+  "maximum_reference_age": 16,
+  "noisy_error": 0.151123046875,
+  "decoded_error": 0.0296630859375,
+  "majority_error": 0.029541015625,
+  "compile_seconds": 0.09062984400225105,
+  "decode_and_readback_seconds": 0.27109485999972094
+}
