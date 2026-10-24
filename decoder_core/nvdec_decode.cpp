@@ -424,7 +424,8 @@ public:
         bus = gst_element_get_bus(pipeline);
         require(gst_element_set_state(pipeline, GST_STATE_PLAYING) != GST_STATE_CHANGE_FAILURE,
                 "Cannot start session pipeline");
-        for (const uint64_t value : {SESSION_MAGIC, uint64_t(1), uint64_t(options.width),
+        // Protocol v2 permits zero selected pictures for diagnostic completion-only requests.
+        for (const uint64_t value : {SESSION_MAGIC, uint64_t(2), uint64_t(options.width),
                                     uint64_t(options.height), frame_bytes, SESSION_LIMIT}) channel.write(value);
         Counts counts;
         uint64_t submitted = 0, requests = 0, fences_decoded = 0;
@@ -468,7 +469,7 @@ public:
                                             uint64_t(counts.copied), fences_decoded, uint64_t(0)}) channel.write(value);
                 return counts;
             }
-            require(opcode == 1 && n && n < 32768 && selected_count && selected_count <= n,
+            require(opcode == 1 && n && n < 32768 && selected_count <= n,
                     "Invalid session request counts");
             require(fence_size && fence_size <= SESSION_LIMIT && selected_count <= SESSION_LIMIT / frame_bytes,
                     "Session request exceeds byte limit");

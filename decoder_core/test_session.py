@@ -34,7 +34,9 @@ def read(n):
 def send(data):
     for i in range(0,len(data),7):s.sendall(data[i:i+7])
 
-send(h.pack(magic if mode!='hello' else 1,1,w,height,size,128*1024*1024))
+version = 3 if mode == 'version' else 2 if mode.startswith('v2-') else 1
+if mode.startswith('v2-'): mode=mode[3:]
+send(h.pack(magic if mode!='hello' else 1,version,w,height,size,128*1024*1024))
 if mode=='partial':os.write(1,b'Opening in ')
 submitted=copied=requests=0
 while True:
@@ -54,11 +56,12 @@ while True:
     indices=[u.unpack(read(8))[0] for _ in range(k)]
     for _ in range(n):read(u.unpack(read(8))[0])
     read(fence)
-    requests+=1;submitted+=n+1;copied+=k
+    requests+=1;submitted+=n+1;copied+=k+(mode=='badcopied')
     if mode=='partial':os.write(2,b'ErrorType= 0 Decoded MBs= 1 Concealed MBs= 0 FrameDecodeTime 0\n')
     if mode=='timeout':time.sleep(2)
     if mode=='truncated':sys.exit(0)
-    send(h.pack(magic,ident+(mode=='identity'),submitted-1+(mode=='counts'),copied,requests-1,1))
+    pending = int(mode != 'immediate')
+    send(h.pack(magic,ident+(mode=='identity'),submitted-pending+(mode=='counts'),copied,requests-pending,pending))
     for index in indices:send(bytes([(requests+index)%256])*size)
 '''
 
@@ -88,6 +91,83 @@ class SessionTests(unittest.TestCase):
         session.close()
         with self.assertRaisesRegex(RuntimeError, 'closed'):
             session.submit((_IDR,), fence=_FENCE)
+
+    def test__given_v2_worker__when_mixing_completion_and_readback__then_all_counts_and_pixels_match(self):
+        with NVDECSession(16, 16, helper=self.helper('v2-normal')) as session:
+            self.assertEqual(session.protocol_version, 2)
+            self.assertEqual(session.complete((_IDR, _P), fence=_FENCE), ())
+            self.assertEqual(session.stats['copied_frames'], 0)
+            self.assertEqual(session.stats['decoded_frames'], 2)
+            self.assertEqual(session.submit((_IDR, _P), (1,), fence=_FENCE), (bytes([3])*384,))
+            self.assertEqual(session.complete((_IDR,), fence=_FENCE), ())
+            self.assertEqual(session.stats['pending_fences'], 1)
+        self.assertEqual(session.stats['requests'], 3)
+        self.assertEqual(session.stats['decoded_frames'], 8)
+        self.assertEqual(session.stats['copied_frames'], 1)
+        self.assertEqual(session.stats['decoded_fences'], 3)
+        self.assertEqual(session.stats['pending_fences'], 0)
+        with self.assertRaisesRegex(RuntimeError, 'closed'):
+            session.complete((_IDR,), fence=_FENCE)
+
+    def test__given_immediate_fences__when_completing_then_reading__then_pending_counts_stay_zero(self):
+        with NVDECSession(16, 16, helper=self.helper('v2-immediate')) as session:
+            self.assertEqual(session.complete((_IDR, _P), fence=_FENCE), ())
+            self.assertEqual(session.stats['pending_fences'], 0)
+            self.assertEqual(session.stats['decoded_frames'], 3)
+            self.assertEqual(session.stats['decoded_fences'], 1)
+            self.assertEqual(session.submit((_IDR,), fence=_FENCE), (bytes([2])*384,))
+        self.assertEqual(session.stats['decoded_frames'], 5)
+        self.assertEqual(session.stats['copied_frames'], 1)
+        self.assertEqual(session.stats['decoded_fences'], 2)
+
+    def test__given_only_completion_requests__when_closing__then_zero_copies_and_late_errors_are_checked(self):
+        with NVDECSession(16, 16, helper=self.helper('v2-normal')) as session:
+            for _ in range(3):
+                self.assertEqual(session.complete((_IDR, _P), fence=_FENCE), ())
+        self.assertEqual(session.stats['decoded_frames'], 9)
+        self.assertEqual(session.stats['copied_frames'], 0)
+        self.assertEqual(session.stats['decoded_fences'], 3)
+        for mode in ('late', 'finalcounts'):
+            with self.subTest(mode=mode), self.assertRaisesRegex(RuntimeError, 'diagnostic'):
+                with NVDECSession(16, 16, helper=self.helper('v2-'+mode)) as failed:
+                    failed.complete((_IDR,), fence=_FENCE)
+
+    def test__given_v1_worker__when_requesting_completion__then_capability_fails_before_submission(self):
+        with NVDECSession(16, 16, helper=self.helper()) as session:
+            with self.assertRaisesRegex(RuntimeError, 'protocol-v2'):
+                session.complete((_IDR,), fence=_FENCE)
+            self.assertEqual(session.stats['requests'], 0)
+            self.assertEqual(session.submit((_IDR,), fence=_FENCE), (bytes([1])*384,))
+
+    def test__given_unknown_worker_version__when_opening__then_rejected(self):
+        with self.assertRaisesRegex(RuntimeError, 'handshake'):
+            NVDECSession(16, 16, helper=self.helper('version'))
+
+    def test__given_empty_selection__when_using_ordinary_submit__then_rejected(self):
+        for mode in ('normal', 'v2-normal'):
+            with self.subTest(mode=mode):
+                session = NVDECSession(16, 16, helper=self.helper(mode))
+                with self.assertRaises(ValueError):
+                    session.submit((_IDR,), (), fence=_FENCE)
+                self.assertEqual(session.stats['requests'], 0)
+                session.close()
+
+    def test__given_bad_completion_reply__when_completing__then_counts_and_transport_fail_closed(self):
+        for mode in ('badcopied', 'counts', 'identity', 'truncated', 'timeout'):
+            with self.subTest(mode=mode):
+                session = NVDECSession(16, 16, helper=self.helper('v2-'+mode), timeout=0.5)
+                with self.assertRaises((RuntimeError, TimeoutError)):
+                    session.complete((_IDR, _P), fence=_FENCE)
+                with self.assertRaisesRegex(RuntimeError, 'poisoned'):
+                    session.complete((_IDR,), fence=_FENCE)
+                session.close()
+
+    def test__given_invalid_completion_units__when_completing__then_validation_still_runs(self):
+        session = NVDECSession(16, 16, helper=self.helper('v2-normal'))
+        with self.assertRaises(ValueError):
+            session.complete((_P,), fence=_FENCE)
+        self.assertEqual(session.stats['requests'], 0)
+        session.close()
 
     def test__given_no_jobs__when_closing__then_zero_counts_are_checked(self):
         with NVDECSession(16, 16, helper=self.helper()) as session:

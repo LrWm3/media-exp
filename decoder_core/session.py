@@ -5,7 +5,9 @@ starts with SPS/PPS/IDR and ends with an explicit independent SPS/PPS/IDR fence.
 The fence is a real extra decoded picture; it is never returned as a result.
 The pipeline retains its DPB and stays PLAYING until close sends its sole EOS.
 
-Wire v1: unsigned 64-bit network-order integers. Worker hello contains magic,
+Wire v2 adds completion-only requests (zero selected pictures) to v1.
+Clients still accept v1 workers for ordinary readback requests. All fields are
+unsigned 64-bit network-order integers. Worker hello contains magic,
 version, width, height, I420 bytes, maximum bytes. Request contains opcode (1
 submit, 2 close), increasing id, real AU count, selected count, fence byte count,
 zero; then indices, (AU byte count, AU bytes) pairs, fence bytes. Reply contains
@@ -128,8 +130,10 @@ class NVDECSession:
                 thread.start(); self._threads.append(thread)
             self._deadline = time.monotonic() + self.timeout
             hello = _HEADER.unpack(self._read(_HEADER.size))
-            if hello != (_MAGIC, 1, width, height, self.frame_bytes, _LIMIT):
+            if (hello[0] != _MAGIC or hello[1] not in (1, 2)
+                    or hello[2:] != (width, height, self.frame_bytes, _LIMIT)):
                 raise RuntimeError('Invalid NVDEC session handshake')
+            self.protocol_version = hello[1]
             self._stats['pipeline_starts'] = 1
         except BaseException as error:
             child.close()
@@ -209,6 +213,26 @@ class NVDECSession:
         return dict(self._stats)
 
     def submit(self, access_units, selected_frames=None, *, fence):
+        """Decode a request and return its selected full I420 pictures."""
+        return self._submit(access_units, selected_frames, fence=fence, completion_only=False)
+
+    def complete(self, access_units, *, fence):
+        """Decode every real picture without copying or returning image pixels.
+
+        This diagnostic operation returns an empty tuple after all real pictures
+        have reached the output queue. It still uploads/decodes the input and a
+        counted fence; final close drains any pending fence. It does not expose
+        or retain a surface for a GPU consumer, and cannot verify output pixels.
+        Use full readback outside timing to validate the same inputs/program.
+        Requires a protocol-v2 helper; ordinary submit remains v1 compatible.
+        """
+        if self._closed or self._poisoned:
+            raise RuntimeError('NVDEC session is closed or poisoned')
+        if self.protocol_version < 2:
+            raise RuntimeError('Completion-only requests require a protocol-v2 NVDEC helper')
+        return self._submit(access_units, (), fence=fence, completion_only=True)
+
+    def _submit(self, access_units, selected_frames, *, fence, completion_only):
         if self._closed or self._poisoned:
             raise RuntimeError('NVDEC session is closed or poisoned')
         if not self._lock.acquire(blocking=False):
@@ -218,7 +242,7 @@ class NVDECSession:
             if not units or len(units) >= 32768:
                 raise ValueError('Submit requires 1..32767 complete real pictures')
             selected = tuple(range(len(units))) if selected_frames is None else tuple(selected_frames)
-            if (not selected or any(type(i) is not int or i < 0 or i >= len(units) for i in selected)
+            if ((not selected and not completion_only) or any(type(i) is not int or i < 0 or i >= len(units) for i in selected)
                     or any(a >= b for a, b in zip(selected, selected[1:]))):
                 raise ValueError('Picture selection must be nonempty, sorted, unique and in range')
             if type(fence) is not bytes or any(type(unit) is not bytes for unit in units):
