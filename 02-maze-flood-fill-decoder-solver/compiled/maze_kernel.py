@@ -15,20 +15,35 @@ from solve import Solution
 
 
 def compile_maze(width, height, steps, *, optimize=True):
-    """Trace only geometry and iteration budget; maze contents remain runtime input."""
+    """Trace geometry and budget; maze contents remain literal runtime luma.
+
+    With P = passages and S = starts, terrain = P + S has values 0/1/2.
+    Thresholding terrain plus the binary neighbor union at 2 implements
+    F(R) = S union (P intersection neighbors(R)). Starts therefore persist,
+    including isolated starts. F is monotone and R0 = S is contained in F(S),
+    so every subsequent reached set contains its predecessor. Inductively,
+    Rt contains exactly cells at BFS distance <= t: each non-start needs a
+    reached predecessor, while every start remains reached without one.
+
+    Three binary ORs combine four shifted states; the existing exact search
+    fuses the final add/threshold into one prediction picture.
+    """
     if not isinstance(steps, int) or steps < 0:
         raise ValueError("steps must be a nonnegative integer")
 
     @h264.kernel
     def flood(seed):
         passages = h264.threshold(seed, 1)
-        reached = h264.threshold(seed, 129)
+        starts = h264.threshold(seed, 129)
+        terrain = h264.add(passages, starts)
+        reached = starts
         states = [reached]
         for _ in range(steps):
-            expanded = reached
-            for dx, dy in CARDINALS:
-                expanded = h264.bit_or(expanded, h264.shift(reached, dx=dx, dy=dy))
-            reached = h264.bit_and(expanded, passages)
+            neighbors = [h264.shift(reached, dx=dx, dy=dy) for dx, dy in CARDINALS]
+            neighbor_union = neighbors[0]
+            for neighbor in neighbors[1:]:
+                neighbor_union = h264.bit_or(neighbor_union, neighbor)
+            reached = h264.threshold(h264.add(neighbor_union, terrain), 2)
             states.append(reached)
         return {"output": reached,
                 **{f"step_{i}": state for i, state in enumerate(states)},

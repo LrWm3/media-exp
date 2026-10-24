@@ -37,6 +37,18 @@ class CompiledMazeTests(unittest.TestCase):
         verify(solution, maze)
         return solution
 
+    def test__given_optimized_flood__when_compiling__then_setup_and_iterations_have_expected_picture_costs(self):
+        for steps in (1, 2, 52):
+            with self.subTest(steps=steps):
+                program = compile_maze(32, 32, steps)
+                self.assertEqual(program.pictures, 6 + 4 * steps)
+                self.assertEqual(program.stats["reference_copies"], 0)
+                self.assertEqual(set(program.output_frames),
+                                 {"output", "passages", *[f"step_{i}" for i in range(steps + 1)]})
+                for step in range(2, steps + 1):
+                    self.assertEqual(program.output_frames[f"step_{step}"]
+                                     - program.output_frames[f"step_{step - 1}"], 4)
+
     def test__given_all_243_neighborhoods__when_decoding_three_steps__then_every_state_matches_bfs(self):
         self.solve(exhaustive_maze(), 3)
 
@@ -59,6 +71,19 @@ class CompiledMazeTests(unittest.TestCase):
         self.assertEqual(solution.path, [])
         self.assertEqual(solution.converged_at, 1)
 
+    def test__given_isolated_and_connected_starts__when_flooding__then_sources_persist_and_sealed_room_stays_unreached(self):
+        maze = parse_ascii("S#S..S##..\n########..\n########G.")
+        for backend in ("ffmpeg", "openh264", "vaapi"):
+            with self.subTest(backend=backend):
+                solution = self.solve(maze, 4, backend=backend)
+                self.assertEqual(solution.converged_at, 2)
+                self.assertEqual(solution.distances[0][:6], [0, None, 0, 1, 1, 0])
+                self.assertIsNone(solution.distances[2][8])
+                self.assertEqual(solution.path, [])
+                for state in solution.states:
+                    for x, y in maze.starts:
+                        self.assertEqual(state[y * maze.width + x], 255)
+
     def test__given_short_budget__when_extracting__then_unvisited_goal_stays_unresolved(self):
         maze = Maze(tuple((True,) * 16 for _ in range(16)), ((0, 0),), (15, 15))
         solution = self.solve(maze, 2)
@@ -73,6 +98,19 @@ class CompiledMazeTests(unittest.TestCase):
                 cells = [[rng.random() > 0.35 for _ in range(16)] for _ in range(16)]
                 cells[0][0] = True
                 self.solve(Maze(tuple(tuple(row) for row in cells), ((0, 0),)), 12)
+
+    def test__given_corridor_longer_than_255__when_decoding__then_first_arrival_distance_does_not_overflow_luma(self):
+        cells = [[False] * 32 for _ in range(32)]
+        for row in range(15):
+            y = row * 2 + 1
+            cells[y][1:31] = [True] * 30
+            if row < 14:
+                cells[y + 1][30 if row % 2 == 0 else 1] = True
+        maze = Maze(tuple(tuple(row) for row in cells), ((1, 1),), (30, 29))
+        solution = self.solve(maze, 464)
+        self.assertEqual(solution.distances[29][30], 463)
+        self.assertEqual(len(solution.path), 464)
+        self.assertEqual(solution.converged_at, 464)
 
     def test__given_original_and_compiled_variants__when_decoding_same_maze__then_all_states_and_distances_match(self):
         maze = demo_maze()
@@ -108,12 +146,35 @@ class CompiledMazeTests(unittest.TestCase):
             self.assertEqual(program.operations, operations)
 
     def test__given_zero_budget__when_decoding__then_only_starts_have_distance_zero(self):
+        program = compile_maze(32, 32, 0)
+        self.assertEqual(program.pictures, 5)
+        self.assertEqual(program.stats["dead_nodes"], 1)
         solution = self.solve(demo_maze(), 0)
         self.assertEqual(sum(value is not None for row in solution.distances for value in row), 1)
         self.assertIsNone(solution.converged_at)
 
     def test__given_unoptimized_graph__when_decoding__then_all_states_match_bfs(self):
         self.solve(demo_maze(), 3, optimize=False)
+        self.solve(parse_ascii("S#S..S##..\n########..\n########G."), 4, optimize=False)
+
+    def test__given_demo_outputs__when_selecting_readback__then_all_decoders_match_full_readback_and_bfs(self):
+        maze = demo_maze()
+        program = compile_maze(32, 32, 52)
+        indices = program.output_picture_indices
+        self.assertEqual(list(indices), sorted(set(program.output_frames.values())))
+        self.assertEqual(len(indices), 54)
+        self.assertEqual(program.output_frames["output"], program.output_frames["step_52"])
+        for backend in ("ffmpeg", "openh264", "vaapi"):
+            with self.subTest(backend=backend):
+                if not available(backend):
+                    self.skipTest(f"{backend} unavailable")
+                all_outputs = program.verify(maze.initial_luma(), backend=backend, readback="all")
+                selected_outputs = program.verify(maze.initial_luma(), backend=backend, readback="outputs")
+                self.assertEqual(selected_outputs, all_outputs)
+                solution = extract_solution(selected_outputs, maze, 52)
+                verify(solution, maze)
+                self.assertEqual(solution.converged_at, 51)
+                self.assertEqual(len(solution.path) - 1, 50)
 
     def test__given_exhaustive_inputs__when_decoding_with_openh264__then_every_rule_matches(self):
         self.solve(exhaustive_maze(), 1, backend="openh264")
