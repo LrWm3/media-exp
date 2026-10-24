@@ -5,7 +5,54 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
-## Results
+## Automatic synthesis extension
+
+The complete suite now passes **93 tests in 21.312 s, with no skips**. This adds
+43 synthesis tests: 13 search, 17 independent verification, and 13 compiler/
+software-decoder integration tests. This run used software decoders only;
+hardware validation remains deferred for synthesis.
+
+```sh
+python3 -m unittest discover -s codec_compute/tests -v
+python3 -m codec_compute.synthesis.demo
+```
+
+The generic engine discovers full-byte min/max and Boolean AND/OR/XOR for H.264
+and HEVC, and Boolean OR for AV1. Every successful plan has an exhaustive scalar
+record: 65,536 states for each byte extremum and four states for each Boolean
+gate. The remaining four AV1 goals report `instruction_bound` for the initial
+average-only library at three tree applications; this is not an impossibility
+claim about AV1.
+
+The integration suite decodes **all 65,536 byte pairs** for both synthesized
+extrema on H.264 and HEVC, and all four Boolean pairs for the gates. AV1 OR
+passes both libdav1d and libaom-av1. Other checks cover opaque callable goals
+(including full-byte absolute difference), counterexample refinement, budget
+exhaustion, descriptor-based arithmetic independent of evaluator overrides,
+signed rounding, tampered-record rejection, composed Boolean ranges, existing
+strict affine lowering, backend resource rejection after scalar success, and
+changed inputs with no runtime synthesis or host computation.
+
+The synthesis demo writes eleven streams and their manifests, plus a report
+covering fifteen target/goal combinations, under
+`codec_compute/artifacts/synthesis/`. Its per-stream software check uses one
+16x16 pair; exhaustive decoded byte coverage belongs to the test suite.
+
+| Discovered program | Target | Compute pictures | Prediction bytes |
+| --- | --- | ---: | ---: |
+| Min, max, or Boolean AND (each) | H.264 | 2 | 212 |
+| Boolean OR | H.264 | 1 | 105 |
+| Boolean XOR | H.264 | 3 | 318 |
+| Min, max, or Boolean AND (each) | HEVC | 2 | 32 |
+| Boolean OR | HEVC | 1 | 15 |
+| Boolean XOR | HEVC | 3 | 47 |
+| Boolean OR | AV1 | 1 | 27 |
+
+Each program also loads two input pictures. Counts reflect this small grammar,
+not optimal target costs. Scalar evidence and software-decoder evidence remain
+separate in the report. See [synthesis details](synthesis/README.md).
+
+## Original multi-codec milestone results
 
 | Check | Result |
 | --- | --- |

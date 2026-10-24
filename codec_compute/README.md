@@ -26,6 +26,12 @@ for target in ("h264", "hevc", "av1"):
 tracing and lowering. An omitted `input_ranges` declares one positional input,
 called `image` when supplying pixels. Named inputs invoke the kernel by keyword.
 
+The compiler also performs [automatic scalar synthesis](synthesis/README.md)
+for `minimum`, `maximum`, and Boolean AND/OR/XOR. It searches each target's exact
+primitive library, exhaustively verifies candidates, and lowers successful
+plans into decoder instructions. H.264/HEVC find all five goals; the initial
+AV1 library finds OR and reports bounded search misses for the others.
+
 ## Run locally
 
 Run commands from the repository root. Python uses its standard library.
@@ -36,6 +42,7 @@ H.264 needs FFmpeg; HEVC additionally needs its `libx265` encoder and
 python3 -m codec_compute.av1.bootstrap
 python3 -m unittest discover -s codec_compute/tests -v
 python3 -m codec_compute.demo
+python3 -m codec_compute.synthesis.demo
 ```
 
 The bootstrap downloads a pinned libaom revision and builds a small, narrowly
@@ -51,7 +58,8 @@ and `validation.json` under ignored `codec_compute/artifacts`. Use
 ## Semantics and implementation boundary
 
 ```text
-Python kernel → exact u8 image graph → target-specific instruction selection
+Python kernel → exact u8 image graph → bounded synthesis + scalar verification
+                                    → target-specific instruction selection
                                     → codec-specific reference scheduling
                                     → lossless input prefix + fixed compute tail
                                     → ordinary decoder
@@ -121,8 +129,10 @@ portable meaning; the original H.264 API remains available for those operations.
 | Saturated add/subtract | Native, legal coefficients | Native, legal coefficients | Unimplemented |
 | Signed affine | Native or supported offset sequence | Native, legal coefficients/offset | Unimplemented except identity |
 | Threshold | Native or sequence | Sequence | Unimplemented |
-| Boolean OR | Native | Native | Rounded average on 0/1 values |
-| Boolean AND/NOT | Native | Native | Unimplemented |
+| Minimum / maximum | Synthesized, 2 predictions | Synthesized, 2 predictions | No plan within default search bound |
+| Boolean OR | Synthesized rounded average | Synthesized rounded average | Synthesized rounded average |
+| Boolean AND / XOR | Synthesized, 2 / 3 predictions | Synthesized, 2 / 3 predictions | No plan within default search bound |
+| Boolean NOT | Native | Native | Unimplemented |
 | Integer shift, zero border | Native | Unimplemented | Unimplemented |
 | Integer shift, clamp border | Unimplemented | Unimplemented | Native, each component ±16 |
 
@@ -152,7 +162,7 @@ Native tests additionally inspect AV1 entropy/reference headers, exercise full
 reference capacity and reuse, and verify long HEVC chains. See
 [VALIDATION.md](VALIDATION.md) for the recorded run and reproducible commands.
 
-The next useful extensions are synthesis for currently unimplemented operations,
+The next useful extensions are richer synthesis primitive catalogs,
 target-aware costs, broader reference allocation, controlled hardware validation,
 and codec-specific operations beyond this initial set. MLIR is not required for
 the current graph size or pass structure.

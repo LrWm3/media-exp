@@ -105,6 +105,20 @@ def sub_sat(a, b):
     return affine(a, b, weights=(1, -1), saturating=True)
 
 
+def minimum(a, b):
+    """Pointwise unsigned minimum; target realization is synthesized."""
+    _image(a)
+    _image(b)
+    return _node("minimum", (a, b), (), min(a.lo, b.lo), min(a.hi, b.hi))
+
+
+def maximum(a, b):
+    """Pointwise unsigned maximum; target realization is synthesized."""
+    _image(a)
+    _image(b)
+    return _node("maximum", (a, b), (), max(a.lo, b.lo), max(a.hi, b.hi))
+
+
 def average(a, b):
     """Exact rounded average: floor((A+B+1)/2), including full-range bytes.
 
@@ -149,6 +163,14 @@ def bit_and(a, b):
 
 def bit_or(a, b):
     return _node("or", (_binary(a), _binary(b)), (), a.lo | b.lo, a.hi | b.hi)
+
+
+def bit_xor(a, b):
+    """Boolean XOR on proven 0/1 images, not bytewise bit manipulation."""
+    _binary(a)
+    _binary(b)
+    values = [x ^ y for x in range(a.lo, a.hi + 1) for y in range(b.lo, b.hi + 1)]
+    return _node("xor", (a, b), (), min(values), max(values))
 
 
 def postorder(roots):
@@ -290,8 +312,9 @@ def validate_graph(graph):
                     proof = shift(*args, params[0], params[1], border=params[2])
                 elif node.op == "threshold" and len(args) == 1 and len(params) == 1:
                     proof = threshold(*args, *params)
-                elif node.op in ("and", "or") and len(args) == 2 and not params:
-                    proof = (bit_and if node.op == "and" else bit_or)(*args)
+                elif node.op in ("and", "or", "xor", "minimum", "maximum") and len(args) == 2 and not params:
+                    proof = {"and": bit_and, "or": bit_or, "xor": bit_xor,
+                             "minimum": minimum, "maximum": maximum}[node.op](*args)
                 else:
                     raise CompileError(f"Unknown or malformed semantic operation: {node.op}")
             except (TypeError, AttributeError) as error:
@@ -332,9 +355,10 @@ def evaluate(graph, images):
             value = [int(x >= node.params[0]) for x in values[node.args[0]]]
         elif node.op == "average":
             value = [(a + b + 1) // 2 for a, b in zip(values[node.args[0]], values[node.args[1]])]
-        elif node.op in ("and", "or"):
-            value = [a & b if node.op == "and" else a | b
-                     for a, b in zip(values[node.args[0]], values[node.args[1]])]
+        elif node.op in ("and", "or", "xor", "minimum", "maximum"):
+            operation = {"and": lambda a, b: a & b, "or": lambda a, b: a | b,
+                         "xor": lambda a, b: a ^ b, "minimum": min, "maximum": max}[node.op]
+            value = [operation(a, b) for a, b in zip(values[node.args[0]], values[node.args[1]])]
         elif node.op == "shift":
             dx, dy, border = node.params
             source, value = values[node.args[0]], []
