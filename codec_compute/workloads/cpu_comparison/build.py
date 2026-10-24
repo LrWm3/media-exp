@@ -15,9 +15,10 @@ def build(output, compiler="c++"):
     version = subprocess.check_output([compiler, "--version"], universal_newlines=True).splitlines()[0]
     report = {"compiler": version, "flags": {}, "source_sha256": {}, "helper_sha256": {}, "diagnostics": {}}
     for name, source in (("cpu", "codec_compute/workloads/cpu_comparison/cpu.cpp"),
+                         ("cpu_planes", "codec_compute/workloads/cpu_comparison/cpu_planes.cpp"),
                          ("pcm", "decoder_core/pcm_native.cpp")):
         flags = ["-std=c++17", "-O3", "-DNDEBUG", "-fPIC", "-shared", "-Wall", "-Wextra"]
-        if name == "cpu" and "clang" not in version.lower():
+        if name != "pcm" and "clang" not in version.lower():
             flags += ["-fopt-info-vec-optimized"]
         target = output/("lib"+name+".so")
         completed = subprocess.run([compiler, *flags, source, "-o", str(target)], cwd=root,

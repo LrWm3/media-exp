@@ -91,10 +91,10 @@ def counts(active, case, jobs, copies):
     return actual
 
 
-def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repeats=5, requests=64):
+def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, planes_helper, build_info, repeats=5, requests=64):
     root, output = Path(root).resolve(), Path(output).resolve()
     helpers = {name: Path(value).resolve() for name, value in
-               (("cpu", cpu_helper), ("pcm", pcm_helper), ("nvdec", nvdec_helper))}
+               (("cpu", cpu_helper), ("pcm", pcm_helper), ("nvdec", nvdec_helper), ("cpu_planes", planes_helper))}
     if repeats < 1 or requests < 8 or requests % 8:
         raise ValueError("Positive repeats and a positive multiple of eight requests required")
     data, bundle, workloads = resident.load(root)
@@ -105,11 +105,12 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
                  "decoder_core/pcm.py", "decoder_core/pcm_native.cpp", "decoder_core/nvdec_decode.cpp",
                  "codec_compute/workloads/resident/benchmark.py", "codec_compute/workloads/temporal_benchmark.py",
                  "codec_compute/workloads/cpu_comparison/native.py", "codec_compute/workloads/cpu_comparison/cpu.cpp",
+                 "codec_compute/workloads/cpu_comparison/cpu_planes.cpp",
                  "codec_compute/workloads/cpu_comparison/benchmark.py"):
         if common.digest((repository/name).read_bytes()) != bundle["source_sha256"][name]:
             raise AssertionError("Runtime source differs: "+name)
     build = json.loads(Path(build_info).read_text())
-    for key in ("cpu", "pcm"):
+    for key in ("cpu", "pcm", "cpu_planes"):
         if build["helper_sha256"][key] != common.digest(helpers[key].read_bytes()):
             raise AssertionError("Native binary differs from its build record")
     for source, checksum in build["source_sha256"].items():
@@ -126,6 +127,7 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
               "clock_ticks_per_second": os.sysconf("SC_CLK_TCK"), "cases": {},
               "protocol": {
                   "cpu": "Single-threaded optimized C++ via ctypes, preallocated scratch/output, compact host u8 inputs, returned bytes and exact equality checked every request; no memoization",
+                  "cpu_planes": "Same recurrence, specialized to its fixed two fields; shared half-sample calculations eliminate redundant filtering; all rounds and clipping retained",
                   "nvdec_preencoded": "Warm live pipeline, frozen prepared access units; fresh input picture uploads still decoded each request; exact returned I420 checked",
                   "nvdec_native": "Same warm path, native I_PCM serialization of compact host inputs, existing Writer limits plus exact prefix equality checked; host image inputs and host result",
                   "batch": "Finite 64-job batch, no completion fences; input assembly/file I/O, process/startup, decode, selected readback, equality and EOS/shutdown included; prepared-input and native-host variants",
@@ -161,6 +163,8 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
         w["encoder"] = NativePCMWriter(Writer(**params), helper=helpers["pcm"])
         w["selection"] = tuple(sorted(set(case["output_frames"].values())))
         w["cpu"] = native.CPU(helpers["cpu"], case["size"], case["cpu"])
+        if case["cpu"]["kind"] == 4:
+            w["cpu_planes"] = native.CPU(helpers["cpu_planes"], case["size"], case["cpu"])
         for job, record in zip(w["jobs"], case["jobs"]):
             job["compact"] = {name: common.checked(root, value) for name, value in record["inputs"].items()}
             job["output"] = common.checked(root, record["outputs"]["output"])
@@ -169,6 +173,8 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
             job["ordinary"] = root/record["ordinary"]["path"]
             if w["cpu"].run(*(job["compact"][name] for name in case["input_names"])) != job["output"]:
                 raise AssertionError("CPU output differs")
+            if "cpu_planes" in w and w["cpu_planes"].run(job["compact"]["image"]) != job["output"]:
+                raise AssertionError("Specialized CPU recurrence differs")
             encode(w, job)
         active = session(w)
         with active:
@@ -182,8 +188,9 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
 
     entries = [(key, mode) for key, w in workloads.items()
                for mode in ("cpu", "native-serialization", "nvdec-preencoded", "nvdec-native")]
+    entries += [(key, "cpu-planes") for key, w in workloads.items() if "cpu_planes" in w]
     entries += [(key, mode) for key, w in workloads.items()
-                if w["case"]["size"] == 256 and w["case"]["cpu"]["kind"] in (1, 2, 3)
+                if w["case"]["size"] >= 256 and w["case"]["cpu"]["kind"] in (1, 2, 3)
                 for mode in ("batch-preencoded", "batch-native")]
     for repeat in range(repeats):
         offset = repeat*11 % len(entries)
@@ -238,7 +245,7 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
                 def execute(job):
                     if mode == "native-serialization":
                         encode(w, job)
-                    elif w["cpu"].run(*(job["compact"][name] for name in w["case"]["input_names"])) != job["output"]:
+                    elif w["cpu_planes" if mode == "cpu-planes" else "cpu"].run(*(job["compact"][name] for name in w["case"]["input_names"])) != job["output"]:
                         raise AssertionError("Timed CPU output differs")
                 execute(jobs[-1])
                 accounting = Accounting()
@@ -256,6 +263,8 @@ def run(root, output, *, cpu_helper, pcm_helper, nvdec_helper, build_info, repea
         print("PASS timing repeat "+str(repeat+1), flush=True)
     for w in workloads.values():
         w["cpu"].close()
+        if "cpu_planes" in w:
+            w["cpu_planes"].close()
     report["status"] = "pass"
     save()
     return report
@@ -266,6 +275,7 @@ if __name__ == "__main__":
     parser.add_argument("bundle", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--cpu-helper", type=Path, required=True)
+    parser.add_argument("--planes-helper", type=Path, required=True)
     parser.add_argument("--pcm-helper", type=Path, required=True)
     parser.add_argument("--nvdec-helper", type=Path, required=True)
     parser.add_argument("--build-info", type=Path, required=True)
@@ -273,4 +283,4 @@ if __name__ == "__main__":
     parser.add_argument("--requests", type=int, default=64)
     args = parser.parse_args()
     run(args.bundle, args.output, cpu_helper=args.cpu_helper, pcm_helper=args.pcm_helper,
-        nvdec_helper=args.nvdec_helper, build_info=args.build_info, repeats=args.repeats, requests=args.requests)
+        nvdec_helper=args.nvdec_helper, planes_helper=args.planes_helper, build_info=args.build_info, repeats=args.repeats, requests=args.requests)

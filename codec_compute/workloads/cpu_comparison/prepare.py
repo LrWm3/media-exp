@@ -22,8 +22,8 @@ def save_json(path, data):
 
 
 def prepare(output, *, cpu_helper, sizes=(128, 256), jobs=8):
-    if not sizes or any(type(size) is not int or size not in (128, 256) for size in sizes):
-        raise ValueError("Supported experiment sizes are 128 and 256")
+    if not sizes or any(type(size) is not int or size not in (128, 256, 512) for size in sizes):
+        raise ValueError("Supported experiment sizes are 128, 256 and 512")
     if type(jobs) is not int or jobs < 2:
         raise ValueError("At least two changing input fixtures are required")
     root = Path(output).resolve()
@@ -39,7 +39,7 @@ def prepare(output, *, cpu_helper, sizes=(128, 256), jobs=8):
         sources.update(str(path.relative_to(repository)) for path in (repository/folder).rglob("*.py")
                        if "tests" not in path.parts and "artifacts" not in path.parts)
     sources.update(str(path.relative_to(repository)) for path in (repository/"codec_compute/workloads/cpu_comparison").glob("*.py"))
-    sources.update({"codec_compute/workloads/cpu_comparison/cpu.cpp", "decoder_core/pcm.py", "decoder_core/pcm_native.cpp", "decoder_core/build_pcm.sh",
+    sources.update({"codec_compute/workloads/cpu_comparison/cpu.cpp", "codec_compute/workloads/cpu_comparison/cpu_planes.cpp", "decoder_core/pcm.py", "decoder_core/pcm_native.cpp", "decoder_core/build_pcm.sh",
                     "codec_compute/workloads/cpu_comparison/build_cpu.sh"})
     sources = sorted(sources)
     report = {"format": "codec-compute-resident-1", "status": "running", "sizes": list(sizes),
@@ -60,7 +60,7 @@ def prepare(output, *, cpu_helper, sizes=(128, 256), jobs=8):
         return {"path": str(path.relative_to(root)), "bytes": len(data), "sha256": digest(data)}
 
     for size in sizes:
-        level = 31 if size == 128 else 41
+        level = {128: 31, 256: 41, 512: 51}[size]
         for task, cpu_spec in tasks(size):
             name, fuse, variant = task.name, True, "fused"
             key = f"{size}/{name}/{variant}"
