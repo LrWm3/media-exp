@@ -17,7 +17,7 @@ class Instruction:
     graph_id: int
 
 
-def lower(sources, outputs, optimize=True):
+def lower(sources, outputs, optimize=True, exact_search=True):
     canonical, interned, original_keys, ranks = {}, {}, {}, {}
     original = postorder(outputs.values())
     rewrites = dict.fromkeys(("cse_eliminated", "commutative_cse_eliminated",
@@ -55,6 +55,11 @@ def lower(sources, outputs, optimize=True):
     uses = Counter(arg for item in graph for arg in item.args)
     named = set(roots.values())
     instructions, produced, fused, plans = [], {}, set(), {}
+    exact_plans, proofs = {}, []
+    search = None
+    if optimize and exact_search:
+        from .search import ExactSearch
+        search = ExactSearch(graph, named, lambda sources, outputs: lower(sources, outputs, exact_search=False))
     for index, source in enumerate(sources):
         if source in canonical:
             produced[canonical[source]] = index
@@ -124,6 +129,11 @@ def lower(sources, outputs, optimize=True):
 
     def plan(item):
         if item in plans:
+            return plans[item]
+        replacement = search.choose(item) if search else None
+        if replacement is not None:
+            exact_plans[item] = replacement
+            plans[item] = ("exact", replacement[0], (), 0, 0, 0)
             return plans[item]
         chosen = boolean_plan(item) if optimize else None
         if chosen is None:
@@ -223,6 +233,15 @@ def lower(sources, outputs, optimize=True):
             rewrites[f"direct_{kind}_gates"] += 1
         return result
 
+    def exact(item):
+        frontier, sequence, proof = exact_plans[item]
+        refs = [read(arg) for arg in frontier]
+        for step in sequence:
+            refs.append(emit("exact scalar prediction", [refs[index] for index in step.inputs],
+                             step.weights, step.bias, step.denominator, ids[item]))
+        proofs.append(proof)
+        return refs[-1]
+
     def compare(item):
         arg, t = item.args[0], item.params[0]
         ref = read(arg)
@@ -273,6 +292,8 @@ def lower(sources, outputs, optimize=True):
             else:
                 offsets = item.params[0]
             result = emit(item.op, [ref], [1], graph_id=ids[item], block_offsets=offsets)
+        elif plan(item)[0] == "exact":
+            result = exact(item)
         elif plan(item)[0] in ("or", "and"):
             result = boolean(item)
         elif item.op in AFFINE:
@@ -282,7 +303,18 @@ def lower(sources, outputs, optimize=True):
         else:
             raise CompileError(f"Unsupported node: {item.op}")
         produced[item] = result.frame
+    # A frontier can change an older fusion opportunity. Check the whole graph
+    # as well as each isolated cut so enabling search never adds instructions.
+    if proofs:
+        baseline = lower(sources, outputs, optimize=optimize, exact_search=False)
+        if len(instructions) >= len(baseline[0]):
+            baseline[3]["exact_search_enabled"] = True
+            baseline[3]["exact_search_attempts"] = search.attempts
+            return baseline
     return instructions, {name: produced[item] for name, item in roots.items()}, graph, {
         "reachable_nodes_before_cse": len(original), "graph_nodes": len(graph), **rewrites,
+        "exact_search_enabled": bool(search), "exact_search_attempts": search.attempts if search else 0,
+        "exact_search_rewrites": len(proofs), "exact_search_proofs": proofs,
+        "exact_search_saved_instructions": (len(baseline[0]) - len(instructions)) if proofs else 0,
         "fused_shift_nodes": len(fused), "lowered_instructions": len(instructions)}, {
         name: ids[item] for name, item in roots.items()}

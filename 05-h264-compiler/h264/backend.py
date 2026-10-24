@@ -17,7 +17,7 @@ from .verify import evaluate, read
 
 class Program:
     def __init__(self, function, width, height, input_range, optimize, input_ranges=None,
-                 reference_mode=None, slice_mode=None):
+                 reference_mode=None, slice_mode=None, exact_search=True):
         integer(width, "width")
         integer(height, "height")
         self.width, self.height = width, height
@@ -33,7 +33,8 @@ class Program:
             raise CompileError("reference_mode must be 'retained' or 'sliding'")
         if self.slice_mode not in ("row", "macroblock"):
             raise CompileError("slice_mode must be 'row' or 'macroblock'")
-        instructions, virtual_outputs, self.graph, self.stats, self.graph_outputs = lower(sources, outputs, optimize)
+        instructions, virtual_outputs, self.graph, self.stats, self.graph_outputs = lower(
+            sources, outputs, optimize, exact_search)
         if any(item.op == "gather" and len(item.params[0]) != (width//16)*(height//16) for item in self.graph):
             raise CompileError("gather needs one offset per active 16x16 block")
         self.operations, self.output_frames, self.refreshes, peak, self.graph_frames, self.reference_slots = schedule(
@@ -145,5 +146,5 @@ class Program:
 
 
 def compile(function, width=32, height=32, input_range=(0, 1), optimize=True, input_ranges=None,
-            reference_mode=None, slice_mode=None):
-    return Program(function, width, height, input_range, optimize, input_ranges, reference_mode, slice_mode)
+            reference_mode=None, slice_mode=None, exact_search=True):
+    return Program(function, width, height, input_range, optimize, input_ranges, reference_mode, slice_mode, exact_search)
