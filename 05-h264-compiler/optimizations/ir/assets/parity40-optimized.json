@@ -64,20 +64,34 @@
       {
         "original_node": 12,
         "operation": "threshold",
-        "kind": "cse",
-        "frontier": [
-          0,
-          1
+        "parameters": [
+          2
         ],
-        "frontier_domains": [
-          [
-            0,
-            1
-          ],
-          [
-            0,
-            1
-          ]
+        "kind": "cse",
+        "value_id_scope": "semantic pass, before instruction selection",
+        "frontier": [
+          {
+            "value_id": 0,
+            "operation": "input",
+            "parameters": [
+              "a"
+            ],
+            "range": [
+              0,
+              1
+            ]
+          },
+          {
+            "value_id": 1,
+            "operation": "input",
+            "parameters": [
+              "b"
+            ],
+            "range": [
+              0,
+              1
+            ]
+          }
         ],
         "truth_table": [
           0,
@@ -86,26 +100,36 @@
           0
         ],
         "checked_points": 4,
+        "proof_basis": "complete binary truth signature, irrelevant variables removed",
         "replacement_value": 4
       },
       {
         "original_node": 17,
         "operation": "threshold",
-        "kind": "aliases",
-        "frontier": [
-          0
+        "parameters": [
+          1
         ],
-        "frontier_domains": [
-          [
-            0,
-            1
-          ]
+        "kind": "aliases",
+        "value_id_scope": "semantic pass, before instruction selection",
+        "frontier": [
+          {
+            "value_id": 0,
+            "operation": "input",
+            "parameters": [
+              "a"
+            ],
+            "range": [
+              0,
+              1
+            ]
+          }
         ],
         "truth_table": [
           0,
           1
         ],
         "checked_points": 2,
+        "proof_basis": "complete binary truth signature, irrelevant variables removed",
         "replacement_value": 0
       }
     ],

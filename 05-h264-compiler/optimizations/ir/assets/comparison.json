@@ -7,21 +7,21 @@
   "unchanged": "optimize=True, exact_search=True, reference_mode=retained, slice_mode=row",
   "oracle": "semantic_ir=False baseline.reference; saved graphs additionally match historical outputs",
   "timings": "not measured",
-  "repository_commit": "57c73ae13c96225d560b1a1b9c608aeb6c6d560a",
+  "repository_commit": "97a227126fc19321abc89e6f84e0807dcd14db62",
   "python": "3.12.13",
   "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
   "source_sha256": {
     "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
-    "05-h264-compiler/h264/backend.py": "5f2fa081a72064753c2b3600890664b905292c2f5188083c4d559f487983e300",
+    "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
     "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
-    "05-h264-compiler/h264/ir.py": "26bc080ed03d61afb76207285cff026cbb13c45b8981ed38f3189a908b4c81de",
-    "05-h264-compiler/h264/lower.py": "116bfd0f4e940a1e03bcb8f1a760f885afd5e0660ccd669d14e71b237ce01c79",
-    "05-h264-compiler/h264/packed.py": "eba5b28dd9e65ba9f5b4c240febaec7c3dbe6a33ae0c33399e572df2e8652b0c",
+    "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+    "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+    "05-h264-compiler/h264/packed.py": "c086690fa3be9b65dc213a7830415863baec4a90d872bd97d3bb78fbaf28fbfe",
     "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
     "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
-    "05-h264-compiler/h264/synthesize.py": "f65d607bd1d09bb3ea19323e85cc029f0ddc145d5a535b6fd829fc49fd736092",
+    "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
     "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770",
-    "decoder_core/bitstream.py": "754428de6b58e11e675d613787b5f9a4d06234d0549926a1fec732f469750491",
+    "decoder_core/bitstream.py": "75a7c92e8a090f3fc9179e9c76160f778bb46a54eb70a4920481b67fc9dcc6f5",
     "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
     "05-h264-compiler/optimizations/prepare.py": "09d6320a3850f15d85b554fc30cdf805a6d579a2bdd53fcabce86321dd750f91",
     "05-h264-compiler/optimizations/ir/compare.py": "e98c5f3811ee19ebf9d2a535c61ba8c88fc1fdda75dd29364262d0cb5ef357b4",
@@ -2305,20 +2305,34 @@
             {
               "original_node": 12,
               "operation": "threshold",
-              "kind": "cse",
-              "frontier": [
-                0,
-                1
+              "parameters": [
+                2
               ],
-              "frontier_domains": [
-                [
-                  0,
-                  1
-                ],
-                [
-                  0,
-                  1
-                ]
+              "kind": "cse",
+              "value_id_scope": "semantic pass, before instruction selection",
+              "frontier": [
+                {
+                  "value_id": 0,
+                  "operation": "input",
+                  "parameters": [
+                    "a"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "value_id": 1,
+                  "operation": "input",
+                  "parameters": [
+                    "b"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                }
               ],
               "truth_table": [
                 0,
@@ -2327,26 +2341,36 @@
                 0
               ],
               "checked_points": 4,
+              "proof_basis": "complete binary truth signature, irrelevant variables removed",
               "replacement_value": 4
             },
             {
               "original_node": 17,
               "operation": "threshold",
-              "kind": "aliases",
-              "frontier": [
-                0
+              "parameters": [
+                1
               ],
-              "frontier_domains": [
-                [
-                  0,
-                  1
-                ]
+              "kind": "aliases",
+              "value_id_scope": "semantic pass, before instruction selection",
+              "frontier": [
+                {
+                  "value_id": 0,
+                  "operation": "input",
+                  "parameters": [
+                    "a"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                }
               ],
               "truth_table": [
                 0,
                 1
               ],
               "checked_points": 2,
+              "proof_basis": "complete binary truth signature, irrelevant variables removed",
               "replacement_value": 0
             }
           ],
@@ -2361,7 +2385,7 @@
         },
         "stream_sha256": "04d4d14b6eaba4cc3f9d0fde89184f8fd20d93a21bd3daac463ec1d8cbf98016",
         "expected_sha256": "5317c061cbd980c41282ee6b9c888f17eb8f171c086cf79a2d7b2dbdc7cc0e17",
-        "manifest_sha256": "ac0f9f6558ff3ea2462e9dfcab7bcd765387dca188ef1bbf44194d8f6ea52923"
+        "manifest_sha256": "239f6bef284a95d7b3aa65673d3971f5cb8e9122bfedcae433d7bf8c9b98b3ce"
       }
     },
     {
@@ -2558,41 +2582,59 @@
             {
               "original_node": 5,
               "operation": "threshold",
-              "kind": "aliases",
-              "frontier": [
-                0
+              "parameters": [
+                1
               ],
-              "frontier_domains": [
-                [
-                  0,
-                  1
-                ]
+              "kind": "aliases",
+              "value_id_scope": "semantic pass, before instruction selection",
+              "frontier": [
+                {
+                  "value_id": 0,
+                  "operation": "input",
+                  "parameters": [
+                    "a"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                }
               ],
               "truth_table": [
                 0,
                 1
               ],
               "checked_points": 2,
+              "proof_basis": "complete binary truth signature, irrelevant variables removed",
               "replacement_value": 0
             },
             {
               "original_node": 9,
               "operation": "threshold",
-              "kind": "aliases",
-              "frontier": [
-                0
+              "parameters": [
+                2
               ],
-              "frontier_domains": [
-                [
-                  0,
-                  1
-                ]
+              "kind": "aliases",
+              "value_id_scope": "semantic pass, before instruction selection",
+              "frontier": [
+                {
+                  "value_id": 0,
+                  "operation": "input",
+                  "parameters": [
+                    "a"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                }
               ],
               "truth_table": [
                 0,
                 1
               ],
               "checked_points": 2,
+              "proof_basis": "complete binary truth signature, irrelevant variables removed",
               "replacement_value": 0
             }
           ],
@@ -2607,7 +2649,7 @@
         },
         "stream_sha256": "04d4d14b6eaba4cc3f9d0fde89184f8fd20d93a21bd3daac463ec1d8cbf98016",
         "expected_sha256": "5317c061cbd980c41282ee6b9c888f17eb8f171c086cf79a2d7b2dbdc7cc0e17",
-        "manifest_sha256": "d501ac3f5c70f6b503cc3c2d01395d30afa6f2509c5fdb7ffef98f1b45a2dc8e"
+        "manifest_sha256": "32076411da726b429c282f9abd4737bf1b380a6f8c4fd0a4c4e92ca19926a920"
       }
     },
     {
@@ -2759,20 +2801,35 @@
             {
               "original_node": 8,
               "operation": "weighted",
-              "kind": "cse",
-              "frontier": [
-                0,
+              "parameters": [
+                -1,
                 1
               ],
-              "frontier_domains": [
-                [
-                  0,
-                  1
-                ],
-                [
-                  0,
-                  1
-                ]
+              "kind": "cse",
+              "value_id_scope": "semantic pass, before instruction selection",
+              "frontier": [
+                {
+                  "value_id": 0,
+                  "operation": "input",
+                  "parameters": [
+                    "a"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "value_id": 1,
+                  "operation": "input",
+                  "parameters": [
+                    "b"
+                  ],
+                  "range": [
+                    0,
+                    1
+                  ]
+                }
               ],
               "truth_table": [
                 0,
@@ -2781,6 +2838,7 @@
                 1
               ],
               "checked_points": 4,
+              "proof_basis": "complete binary truth signature, irrelevant variables removed",
               "replacement_value": 3
             }
           ],
@@ -2795,7 +2853,7 @@
         },
         "stream_sha256": "ffe7736422a090ed35d42bdad0c7802ea76d9d98d845ce991d7dd8a66d7caf9e",
         "expected_sha256": "50b959792d676ffe3337ec1bbe974ccc002aee9d26d7355c35c7623b837e9b50",
-        "manifest_sha256": "25017368acb49b2e8a1a5efc281c8405ca52531f6e370b990593640ad363baca"
+        "manifest_sha256": "7b53d1f4391793eb381d923e1d2db268a169aab17ba5da84367398122f14a069"
       }
     },
     {
