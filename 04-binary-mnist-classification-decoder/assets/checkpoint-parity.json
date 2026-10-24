@@ -1,0 +1,8 @@
+{
+  "samples": 1984,
+  "checkpoint_sha256": "4f19470ffddfd0d99e7d8f47656193214fcf9a476a82aebf64df631c55c46e03",
+  "model_sha256": "260525f39a96214890e0044e02a8ba46fdb15865ffdc54ba5b214fe846e45eb7",
+  "pytorch_hidden_mismatches": 0,
+  "pytorch_classification_mismatches": 0,
+  "retrained_frozen_weights_byte_identical": true
+}

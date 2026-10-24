@@ -68,7 +68,7 @@ class Operation:
 class Writer:
     MAX_REFS = 16
 
-    def __init__(self, width, height, fps=30):
+    def __init__(self, width, height, fps=30, motion_bits=4):
         # A 16-pixel guard on every side enforces a finite, dead boundary.
         if width < 16 or height < 16 or width % 16 or height % 16:
             raise ValueError("Board dimensions must be positive multiples of 16")
@@ -83,6 +83,9 @@ class Writer:
         if self.mb_width * self.mb_height * fps > 1800:
             raise ValueError("One prediction slice per macroblock exceeds level 3.1 slice rate; reduce board size or fps")
         self.fps = fps
+        if not 0 <= motion_bits <= 16:
+            raise ValueError("Motion-vector bound must use 0..16 bits")
+        self.motion_bits = motion_bits
 
     def parameter_sets(self):
         b = Bits()
@@ -124,8 +127,8 @@ class Writer:
         b.u(1)  # motion_vectors_over_pic_boundaries_flag
         b.ue(0)  # no VCL byte bound: PCM seed includes raw samples plus headers
         b.ue(1)  # max_bits_per_mb_denom
-        b.ue(4)  # motion vectors only +/-4 quarter-sample units
-        b.ue(4)
+        b.ue(self.motion_bits)  # declared horizontal/vertical quarter-sample bounds
+        b.ue(self.motion_bits)
         b.ue(0)  # max_num_reorder_frames
         b.ue(self.MAX_REFS)
         sps = nal(7, b)
@@ -220,6 +223,10 @@ class Writer:
         return out
 
     def prediction(self, frame, operation):
+        for source in operation.sources:
+            if any(not -(1 << self.motion_bits) <= component * 4 < (1 << self.motion_bits)
+                   for component in (source.dx, source.dy)):
+                raise ValueError("Motion vector exceeds declared SPS bound")
         out = bytearray()
         for my in range(self.mb_height):
             for mx in range(self.mb_width):
