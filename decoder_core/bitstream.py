@@ -32,15 +32,23 @@ class Bits:
 
     def finish(self):
         self.u(1)  # rbsp_stop_one_bit
+        return self.aligned_bytes()
+
+    def aligned_bytes(self):
+        """Zero-pad to a byte boundary without adding an RBSP stop bit."""
         self.align()
         return bytes(sum(self.bits[i + j] << (7 - j) for j in range(8))
                      for i in range(0, len(self.bits), 8))
 
 
 def nal(kind, bits, reference=3):
+    return nal_from_rbsp(kind, bits.finish(), reference)
+
+
+def nal_from_rbsp(kind, rbsp, reference=3):
     escaped = bytearray()
     zeros = 0
-    for value in bits.finish():
+    for value in rbsp:
         if zeros == 2 and value <= 3:
             escaped.append(3)
             zeros = 0
@@ -217,17 +225,24 @@ class Writer:
             raise ValueError("Seed luma samples must be integers from 0 through 255")
         # One I_PCM slice; later non-IDR inputs retain earlier reference pictures.
         b = self.header(0, frame)
+        b.ue(25)  # First I_PCM type shares the slice header's partial byte.
+        rbsp = bytearray(b.aligned_bytes())
+        rows = [bytes(row) for row in board]
+        chroma = bytes([128]) * 128
+        guard = bytes(256) + chroma
         for my in range(self.mb_height):
             for mx in range(self.mb_width):
-                b.ue(25)  # I_PCM
-                b.align()
-                for y in range(my * 16, my * 16 + 16):
-                    for x in range(mx * 16, mx * 16 + 16):
-                        inside = 16 <= x < self.width - 16 and 16 <= y < self.height - 16
-                        b.u(board[y - 16][x - 16] if inside else 0, 8)
-                for _ in range(128):
-                    b.u(128, 8)
-        out = (self.parameter_sets() + nal(5, b)) if frame == 0 else nal(1, b)
+                if my or mx:
+                    rbsp.extend(b"\x0d\x00")  # ue(25), then seven pcm_alignment_zero_bits.
+                if mx in (0, self.mb_width - 1) or my in (0, self.mb_height - 1):
+                    rbsp.extend(guard)
+                else:
+                    x = (mx - 1) * 16
+                    for y in range((my - 1) * 16, my * 16):
+                        rbsp.extend(rows[y][x:x + 16])
+                    rbsp.extend(chroma)
+        rbsp.append(128)  # rbsp_stop_one_bit, then seven zero alignment bits.
+        out = (self.parameter_sets() + nal_from_rbsp(5, rbsp)) if frame == 0 else nal_from_rbsp(1, rbsp)
         # High profile MinCR=4; initial AU bound, Annex A.3.3(i).
         # Exactly three NALs (SPS, PPS, IDR); four-byte start codes don't count.
         initial_limit = 96 * max(self.mb_width * self.mb_height * 172, 108000) // 172

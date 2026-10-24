@@ -11,6 +11,32 @@ from decoder_core.bitstream import Operation, Source, Writer
 from decoder_core.decode import available, decode
 
 
+def legacy_input_luma(writer, board, frame):
+    """Original bit-at-a-time PCM path, retained as an independent packing oracle."""
+    bits = writer.header(0, frame)
+    for my in range(writer.mb_height):
+        for mx in range(writer.mb_width):
+            bits.ue(25)
+            bits.align()
+            for y in range(my * 16, my * 16 + 16):
+                for x in range(mx * 16, mx * 16 + 16):
+                    inside = 16 <= x < writer.width - 16 and 16 <= y < writer.height - 16
+                    bits.u(board[y - 16][x - 16] if inside else 0, 8)
+            for _ in range(128):
+                bits.u(128, 8)
+    # Keep the former NAL packing here, independent of nal_from_rbsp.
+    escaped, zeros = bytearray(), 0
+    for value in bits.finish():
+        if zeros == 2 and value <= 3:
+            escaped.append(3)
+            zeros = 0
+        escaped.append(value)
+        zeros = zeros + 1 if value == 0 else 0
+    kind = 5 if frame == 0 else 1
+    prefix = writer.parameter_sets() if frame == 0 else b""
+    return prefix + b"\x00\x00\x00\x01" + bytes([0x60 | kind]) + escaped
+
+
 class NativeBitstreamTests(unittest.TestCase):
     def decoded(self, writer, stream):
         backends = [name for name in ("ffmpeg", "openh264", "vaapi") if available(name)]
@@ -50,6 +76,29 @@ class NativeBitstreamTests(unittest.TestCase):
         self.assertEqual((source.frame, source.weight, source.offset, source.dx, source.dy, source.qx, source.qy),
                          (1, 2, 3, 4, 5, 0, 0))
         self.assertEqual(Operation("legacy", (source,), 2).block_offsets, ())
+
+    def test__given_random_and_escape_heavy_pcm__when_packing_bytes__then_both_input_frames_match_legacy_bit_encoding(self):
+        rng = random.Random(741)
+        escape_pattern = (0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 255)
+        for width, height in ((16, 16), (32, 16), (32, 32), (64, 64)):
+            writer = Writer(width, height)
+            boards = (
+                [[0] * width for _ in range(height)],
+                [[255] * width for _ in range(height)],
+                [[escape_pattern[(x + y) % len(escape_pattern)] for x in range(width)] for y in range(height)],
+                [[rng.randrange(256) for _ in range(width)] for _ in range(height)],
+            )
+            for pattern, board in enumerate(boards):
+                for frame in (0, 1):
+                    with self.subTest(width=width, height=height, pattern=pattern, frame=frame):
+                        self.assertEqual(writer.input_luma(board, frame), legacy_input_luma(writer, board, frame))
+
+    def test__given_picture_number_boundaries__when_packing_pcm_header__then_legacy_bytes_match_without_extra_stop_bits(self):
+        writer = Writer(16, 32, fps=60, motion_bits=9)
+        board = [[(x * 59 + y * 13) % 256 for x in range(16)] for y in range(32)]
+        for frame in (0, 1, 127, 32767, 32768, 65535, 65536):
+            with self.subTest(frame=frame):
+                self.assertEqual(writer.input_luma(board, frame), legacy_input_luma(writer, board, frame))
 
     def test__given_two_u8_inputs__when_summing_and_reading_both_again__then_every_decoder_retains_inputs_and_clips_sum(self):
         writer = Writer(16, 16)
