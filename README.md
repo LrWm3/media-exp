@@ -13,5 +13,13 @@
   a trained binary network classifies handwritten 3s versus 8s using decoder
   pooling, signed arithmetic, and thresholds; 94.96% accuracy on the official
   two-class test subset.
+- [05 — Python H.264 compiler](05-h264-compiler/README.md): a shared symbolic image
+  language with exact arithmetic, shift fusion, common-expression elimination,
+  reference scheduling, and inspectable instruction manifests.
+
+Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
+[Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·
+[Denoising](03-denoising-decoder/compiled/README.md) ·
+[MNIST](04-binary-mnist-classification-decoder/compiled/README.md).
 
 The experiments use the shared [H.264 writer and decoder tools](decoder_core).

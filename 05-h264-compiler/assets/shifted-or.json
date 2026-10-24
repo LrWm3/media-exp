@@ -1,0 +1,164 @@
+{
+  "format": "h264-python-0.1",
+  "width": 32,
+  "height": 32,
+  "input_range": [
+    0,
+    1
+  ],
+  "seed_encoding": "binary 0/255",
+  "guard": 16,
+  "pictures": 4,
+  "output_frames": {
+    "output": 3
+  },
+  "graph_outputs": {
+    "output": 4
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 5,
+    "graph_nodes": 5,
+    "cse_eliminated": 0,
+    "fused_shift_nodes": 2,
+    "lowered_instructions": 2,
+    "traced_nodes": 5,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 1,
+    "optimized": true
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "image"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "shift",
+      "args": [
+        0
+      ],
+      "params": [
+        1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 2,
+      "op": "shift",
+      "args": [
+        0
+      ],
+      "params": [
+        0,
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 3,
+      "op": "combine",
+      "args": [
+        1,
+        2
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": 2
+    },
+    {
+      "id": 4,
+      "op": "threshold",
+      "args": [
+        3
+      ],
+      "params": [
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 3
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 1,
+      "label": "normalize binary seed",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    },
+    {
+      "frame": 2,
+      "label": "combine",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1
+        }
+      ],
+      "denominator": 0
+    },
+    {
+      "frame": 3,
+      "label": "threshold >= 1",
+      "sources": [
+        {
+          "frame": 2,
+          "weight": 64,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "denominator": 7
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "8998978eadc8f718a82c1dcafaf33baefa307b3449ad00ddf62fc672aa8e7401",
+  "prediction_sha256": "7aa53cbbb13065aa76e449041fba40dd9f376c47c77c1aa627a53fb0d952adbd"
+}
