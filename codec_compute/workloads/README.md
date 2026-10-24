@@ -28,11 +28,15 @@ not produce a program; it is not a codec impossibility result.
 | Absolute change plus cutoff-24 mask | 2 | **5** | **6** | — |
 | Two-frame minimum, maximum, and range | 2 | **5** | **5** | — |
 | Rounded temporal average | 2 | **1** | **1** | **1** |
-| Cross-shaped binary dilation, zero border | 1 | **8** | — | — |
+| Cross-shaped binary dilation, zero border | 1 | **4** | — | — |
 | Cross-shaped binary dilation, clamp border | 1 | — | — | **8** |
-| Nested rounded smoothing, zero border | 1 | **8** | — | — |
+| Nested rounded smoothing, zero border | 1 | **4** | — | — |
 | Nested rounded smoothing, clamp border | 1 | — | — | **8** |
-| Cross-shaped grayscale min/max/range, zero border | 1 | **21** | — | — |
+| Cross-shaped grayscale min/max/range, zero border | 1 | **17** | — | — |
+
+The original survey below recorded H.264 counts of 8, 8, and 21 for those
+spatial tasks. The subsequent [shift-fusion comparison](motion-fusion/README.md)
+records the current counts above; original survey artifacts remain unchanged.
 
 Absolute difference alone uses **three** compute pictures on H.264 and HEVC.
 It is now a first-class semantic operation:
@@ -68,10 +72,10 @@ plan within the default three-application bound.
    finite two-input jobs; an ongoing video pipeline still needs integration.
 3. **Binary mask growth and rounded image smoothing.** AV1 runs these with
    clamp borders, while this H.264 backend runs zero-border variants. Four
-   translation pictures are currently materialized separately. Folding those
-   reads into prediction consumers is a promising compiler follow-up.
+   translation pictures are now folded into H.264 prediction consumers,
+   reducing dilation and smoothing from eight to four compute pictures each.
 4. **Grayscale local contrast.** The five-point min/max construction works on
-   H.264 but requires 21 computation pictures. Keep it as an exploratory
+   H.264 but still requires 17 computation pictures after fusion. Keep it as an exploratory
    workload until a shorter implementation or measured benefit justifies it.
 
 These results establish exact execution. Decoder latency and concurrent GPU
@@ -121,7 +125,7 @@ every supported H.264 workload. The
 [suite index](assets/nvdec-suite.json) identifies exact stream and output hashes.
 HEVC and AV1 hardware execution was not tested.
 
-The complete shared-IR suite passes **113 tests, with no skips**. New tests
+The original survey's shared-IR suite passed **113 tests, with no skips**. Its tests
 decode all 65,536 byte pairs for absolute difference on both H.264 and HEVC,
 check forged range rejection, preserve aliases and composed thresholds, and
 forbid runtime synthesis or interpreter calls during encoding/decoding. Task
@@ -140,13 +144,15 @@ From the repository root, using the existing [codec dependencies](../README.md):
 
 ```sh
 python3 -m unittest discover -s codec_compute/tests -v
-python3 -m codec_compute.workloads.demo
+python3 -m codec_compute.workloads.demo --no-h264-fuse-shifts
 python3 -m codec_compute.workloads.capture codec_compute/artifacts/workloads \
   --output codec_compute/workloads/assets/capture.png
 ```
 
 Use `--target h264` or `--target hevc` without the AV1 serializer. `--tasks`
-selects specific workloads. No model training, dataset downloads, or automatic
+selects specific workloads. Omit `--no-h264-fuse-shifts` to exercise the current
+optimized default instead of the historical survey configuration.
+No model training, dataset downloads, or automatic
 dependency installation occur.
 
 The saved H.264 cases can be checked with the existing portable NVDEC runner:

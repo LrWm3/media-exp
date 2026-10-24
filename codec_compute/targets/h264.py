@@ -1,5 +1,7 @@
-"""Reuse the unchanged H.264 selector, reference scheduler, writer, and reader."""
+"""Fuse spatial reads, then reuse the H.264 selector, scheduler, and writer."""
 
+from collections import defaultdict
+from copy import deepcopy
 from dataclasses import replace
 from functools import cached_property, lru_cache
 import importlib.util
@@ -29,7 +31,62 @@ class H264Program:
     target = "h264"
     suffix = ".h264"
 
-    def __init__(self, graph):
+    def __init__(self, graph, *, fuse_shifts=True):
+        consumers = defaultdict(list)
+        for node in graph.nodes:
+            for arg in node.args:
+                consumers[arg].append(node)
+        named = {node for _, node in graph.outputs}
+        scalar = {"copy", "affine", "affine_sat", "threshold", "and", "or", "average"}
+        # Do not compose movements: each materialized crop is observable. A
+        # named shift remains a real picture, as does any shift read by a shift.
+        eligible = {node for node in graph.nodes if node.op == "shift"
+                    and node.params[2] == "zero" and node not in named
+                    and consumers[node] and all(user.op in scalar for user in consumers[node])}
+        baseline_error, baseline_cost = None, None
+        try:
+            baseline = self._build(graph, set())
+            if fuse_shifts and eligible:
+                baseline_cost = baseline._cost()
+        except UnsupportedOperation as error:
+            if not fuse_shifts or not eligible or error.operation != "resources":
+                raise
+            baseline, baseline_error = None, error
+        chosen = baseline
+        stats = {"enabled": fuse_shifts, "eligible_nodes": len(eligible), "fused_nodes": 0,
+                 "reason": "disabled" if not fuse_shifts else "no eligible shifts"}
+        if fuse_shifts and eligible:
+            try:
+                candidate = self._build(graph, eligible)
+                candidate_cost = candidate._cost()
+            except UnsupportedOperation as error:
+                if baseline is None:
+                    raise baseline_error from error
+                stats.update(reason="candidate rejected", detail=str(error))
+            else:
+                stats.update(baseline_cost=baseline_cost, candidate_cost=candidate_cost)
+                # Fusion changes lifetimes and scheduling. Compare emitted
+                # streams, not just the count of removed graph nodes.
+                if baseline_cost is None or all(candidate_cost[key] <= baseline_cost[key]
+                                                for key in candidate_cost):
+                    chosen = candidate
+                    stats.update(fused_nodes=len(eligible), reason="accepted")
+                else:
+                    stats.update(reason="scheduled cost regression")
+        self.__dict__.update(chosen.__dict__)
+        self.optimizations = {"shift_read_fusion": stats}
+
+    def _cost(self):
+        try:
+            size = len(self.tail)
+        except ValueError as error:
+            raise UnsupportedOperation(self.target, "resources", str(error)) from error
+        return {"computation_pictures": len(self.operations), "prediction_bytes": size,
+                "output_readback_pictures": len(set(self.output_frames.values()))}
+
+    @classmethod
+    def _build(cls, graph, fused):
+        self = cls.__new__(cls)
         legacy = _legacy()
         if len(graph.inputs) > 15:
             raise UnsupportedOperation(self.target, "inputs", "this scheduler supports at most 15 input pictures")
@@ -41,23 +98,38 @@ class H264Program:
         values = {node: index for index, node in enumerate(graph.inputs)}
         instructions, next_value = [], len(values)
         for graph_id, node in enumerate(graph.nodes):
-            if node.op == "input":
+            if node.op == "input" or node in fused:
                 continue
+            bases = tuple(arg.args[0] if arg in fused else arg for arg in node.args)
             if node.op == "average":
                 # Keep the complete sum in the decoder's weighted predictor;
                 # materializing it as a u8 image would change full-range means.
-                operation = Operation("rounded average", tuple(Source(values[arg]) for arg in node.args))
+                refs = tuple(Source(values[base], dx=arg.params[0], dy=arg.params[1])
+                             if arg in fused else Source(values[base])
+                             for arg, base in zip(node.args, bases))
+                # Use the same motion limits as standalone shift selection.
+                for arg in node.args:
+                    if arg in fused:
+                        try:
+                            legacy.shift(legacy.Input(), *arg.params[:2])
+                        except legacy.CompileError as error:
+                            raise UnsupportedOperation(self.target, "shift", str(error)) from error
+                operation = Operation("rounded average", refs)
                 instructions.append(legacy.lower.Instruction(next_value, operation, graph_id))
                 values[node] = next_value
                 next_value += 1
                 continue
-            proxies = tuple(legacy.Input(f"x{i}", (arg.lo, arg.hi)) for i, arg in enumerate(node.args))
+            proxies = tuple(legacy.Input(f"x{i}", (arg.lo, arg.hi)) for i, arg in enumerate(bases))
             try:
-                expression = self._expression(legacy, node, proxies)
+                # Wrapping a proxy in a shift lets the existing selector fold
+                # the moving read only at its first use in a scalar sequence.
+                operands = tuple(legacy.shift(proxy, *arg.params[:2]) if arg in fused else proxy
+                                 for proxy, arg in zip(proxies, node.args))
+                expression = self._expression(legacy, node, operands)
                 selected, outputs, *_ = legacy.backend.lower(proxies, {"out": expression}, exact_search=False)
             except legacy.CompileError as error:
                 raise UnsupportedOperation(self.target, node.op, str(error)) from error
-            registers = {index: values[arg] for index, arg in enumerate(node.args)}
+            registers = {index: values[arg] for index, arg in enumerate(bases)}
             for instruction in selected:
                 refs = tuple(replace(source, frame=registers[source.frame]) for source in instruction.operation.sources)
                 instructions.append(legacy.lower.Instruction(next_value,
@@ -77,6 +149,7 @@ class H264Program:
         except (ValueError, legacy.CompileError) as error:
             raise UnsupportedOperation(self.target, "resources", str(error)) from error
         self.pictures = len(graph.inputs) + len(self.operations)
+        return self
 
     @staticmethod
     def _expression(legacy, node, args):
@@ -127,4 +200,5 @@ class H264Program:
                           "computation_pictures": len(self.operations), "total_pictures": self.pictures,
                           "prediction_bytes": len(self.tail), "peak_live_references": self.peak_live},
                 "reference_slots": self.reference_slots,
+                "optimizations": deepcopy(self.optimizations),
                 "scheduling": "H.264 retained long-term references", "guard": 16}

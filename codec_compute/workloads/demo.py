@@ -62,7 +62,7 @@ def decode_saved(program, path, decoder):
     return outputs, raw, "displayed monochrome planes"
 
 
-def run(output, *, targets=TARGETS, tasks=None):
+def run(output, *, targets=TARGETS, tasks=None, h264_fuse_shifts=True):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     selected = [task for task in WORKLOADS if tasks is None or task.name in tasks]
@@ -93,7 +93,7 @@ def run(output, *, targets=TARGETS, tasks=None):
             entry = {"task": task.name, "target": target, "description": task.description,
                      "border": task.border}
             try:
-                program = media.compile_graph(graph, target=target)
+                program = media.compile_graph(graph, target=target, h264_fuse_shifts=h264_fuse_shifts)
             except SynthesisError as error:
                 entry.update(status="search_miss", reason=str(error), operation=error.operation,
                              search_status=error.result.status, search=error.result.manifest())
@@ -160,6 +160,7 @@ def run(output, *, targets=TARGETS, tasks=None):
               "hardware_validation": "separate; this runner validates local software and available H.264 VA-API",
               "repository_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "source_sha256": sources, "python": platform.python_version(),
+              "h264_fuse_shifts": h264_fuse_shifts,
               "av1_serializer": serializer,
               "ffmpeg": subprocess.check_output(["ffmpeg", "-version"], text=True).splitlines()[0],
               "task_target_pairs": len(cases), "supported_pairs": len(passed),
@@ -178,7 +179,9 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, default=ROOT / "codec_compute" / "artifacts" / "workloads")
     parser.add_argument("--target", choices=("all", *TARGETS), default="all")
     parser.add_argument("--tasks", nargs="+", choices=[task.name for task in WORKLOADS])
+    parser.add_argument("--no-h264-fuse-shifts", action="store_true")
     args = parser.parse_args()
-    report = run(args.output, targets=TARGETS if args.target == "all" else (args.target,), tasks=args.tasks)
+    report = run(args.output, targets=TARGETS if args.target == "all" else (args.target,), tasks=args.tasks,
+                 h264_fuse_shifts=not args.no_h264_fuse_shifts)
     print(json.dumps({key: report[key] for key in ("task_target_pairs", "supported_pairs", "streams",
                                                   "decoder_runs", "named_output_pixels")}, indent=2))

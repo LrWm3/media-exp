@@ -35,8 +35,8 @@ AV1 library finds OR and reports bounded search misses for the others.
 [Useful workload survey](workloads/README.md) exercises change detection,
 temporal extrema, blending, binary dilation, and explicitly rounded smoothing.
 Fourteen task/target combinations execute exactly. Absolute difference needs
-three computation pictures; the one-picture temporal operations are the most
-promising next workloads to benchmark. Captures, input-loading sizes, target
+three computation pictures. H.264 spatial read fusion halves the dilation and
+smoothing picture counts. Captures, input-loading sizes, target
 restrictions, and exact-decoder evidence are included.
 
 ## Run locally
@@ -90,10 +90,15 @@ bytes. `decode()` extracts actual decoder results. Only `reference()` and
 on actual input pixels. Multiple stages keep intermediate values in decoder
 reference buffers; no intermediate is read back and re-encoded for execution.
 
-The H.264 adapter reuses the unchanged selector for individual operations and
-the original retained-reference scheduler, writer, and reader. Its new rounded
-average lowers directly to a weighted B prediction. Whole-graph optimizations
-from the original compiler are not yet generalized across this new API.
+The H.264 adapter folds eligible zero-border shifts into scalar consumers, then
+reuses the selector, retained-reference scheduler, writer, and reader. Rounded
+average lowers directly to a weighted B prediction. Named shifts and successive
+crop boundaries remain materialized. Both fused and unfused plans are scheduled;
+fusion is accepted only when computation pictures, prediction bytes, and distinct
+output readback pictures do not increase. The manifest records that decision.
+Pass `h264_fuse_shifts=False` to `compile` or `compile_graph` for the baseline;
+this target-specific option has no effect on HEVC or AV1. See the
+[spatial comparison](workloads/motion-fusion/README.md).
 
 The HEVC backend was implemented independently using lossless libx265 uploads,
 verified skip-CABAC templates, and compiler-written weighted-prediction headers.

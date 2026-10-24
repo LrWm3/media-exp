@@ -74,15 +74,18 @@ class Program:
 
 
 def compile(function, *, target="h264", width=32, height=32, input_ranges=None,
-            synthesis=True, synthesis_max_instructions=3, synthesis_max_candidates=50000):
+            synthesis=True, synthesis_max_instructions=3, synthesis_max_candidates=50000,
+            h264_fuse_shifts=True):
     graph = ir.trace(function, width=width, height=height, input_ranges=input_ranges)
     return compile_graph(graph, target=target, synthesis=synthesis,
                          synthesis_max_instructions=synthesis_max_instructions,
-                         synthesis_max_candidates=synthesis_max_candidates)
+                         synthesis_max_candidates=synthesis_max_candidates,
+                         h264_fuse_shifts=h264_fuse_shifts)
 
 
 def compile_graph(graph, *, target="h264", synthesis=True,
-                  synthesis_max_instructions=3, synthesis_max_candidates=50000):
+                  synthesis_max_instructions=3, synthesis_max_candidates=50000,
+                  h264_fuse_shifts=True):
     if not isinstance(graph, ir.Graph):
         raise TypeError("compile_graph requires a traced Graph")
     ir.validate_graph(graph)
@@ -90,6 +93,8 @@ def compile_graph(graph, *, target="h264", synthesis=True,
         raise ir.CompileError(f"Unknown codec target: {target}")
     if type(synthesis) is not bool:
         raise ir.CompileError("synthesis must be Boolean")
+    if type(h264_fuse_shifts) is not bool:
+        raise ir.CompileError("h264_fuse_shifts must be Boolean")
     for name, value in (("synthesis_max_instructions", synthesis_max_instructions),
                         ("synthesis_max_candidates", synthesis_max_candidates)):
         if type(value) is not int or value < 0:
@@ -101,7 +106,7 @@ def compile_graph(graph, *, target="h264", synthesis=True,
                                       max_candidates=synthesis_max_candidates)
     if target == "h264":
         from .targets.h264 import H264Program
-        native = H264Program(lowered)
+        native = H264Program(lowered, fuse_shifts=h264_fuse_shifts)
     elif target in ("hevc", "h265"):
         from .targets.hevc import HEVCProgram
         native = HEVCProgram(lowered)
