@@ -119,6 +119,15 @@ def maximum(a, b):
     return _node("maximum", (a, b), (), max(a.lo, b.lo), max(a.hi, b.hi))
 
 
+def absdiff(a, b):
+    """Pointwise |a-b| on unsigned bytes; target realization is synthesized."""
+    _image(a)
+    _image(b)
+    lo = max(0, a.lo - b.hi, b.lo - a.hi)
+    hi = max(abs(a.lo - b.hi), abs(a.hi - b.lo))
+    return _node("absdiff", (a, b), (), lo, hi)
+
+
 def average(a, b):
     """Exact rounded average: floor((A+B+1)/2), including full-range bytes.
 
@@ -312,9 +321,9 @@ def validate_graph(graph):
                     proof = shift(*args, params[0], params[1], border=params[2])
                 elif node.op == "threshold" and len(args) == 1 and len(params) == 1:
                     proof = threshold(*args, *params)
-                elif node.op in ("and", "or", "xor", "minimum", "maximum") and len(args) == 2 and not params:
+                elif node.op in ("and", "or", "xor", "minimum", "maximum", "absdiff") and len(args) == 2 and not params:
                     proof = {"and": bit_and, "or": bit_or, "xor": bit_xor,
-                             "minimum": minimum, "maximum": maximum}[node.op](*args)
+                             "minimum": minimum, "maximum": maximum, "absdiff": absdiff}[node.op](*args)
                 else:
                     raise CompileError(f"Unknown or malformed semantic operation: {node.op}")
             except (TypeError, AttributeError) as error:
@@ -355,9 +364,10 @@ def evaluate(graph, images):
             value = [int(x >= node.params[0]) for x in values[node.args[0]]]
         elif node.op == "average":
             value = [(a + b + 1) // 2 for a, b in zip(values[node.args[0]], values[node.args[1]])]
-        elif node.op in ("and", "or", "xor", "minimum", "maximum"):
+        elif node.op in ("and", "or", "xor", "minimum", "maximum", "absdiff"):
             operation = {"and": lambda a, b: a & b, "or": lambda a, b: a | b,
-                         "xor": lambda a, b: a ^ b, "minimum": min, "maximum": max}[node.op]
+                         "xor": lambda a, b: a ^ b, "minimum": min, "maximum": max,
+                         "absdiff": lambda a, b: abs(a - b)}[node.op]
             value = [operation(a, b) for a, b in zip(values[node.args[0]], values[node.args[1]])]
         elif node.op == "shift":
             dx, dy, border = node.params

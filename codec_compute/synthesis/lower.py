@@ -14,7 +14,8 @@ from .search import synthesize
 from .verify import verify_record
 
 
-GOALS = {"minimum": min, "maximum": max, "and": and_, "or": or_, "xor": xor}
+GOALS = {"minimum": min, "maximum": max, "and": and_, "or": or_, "xor": xor,
+         "absdiff": lambda a, b: abs(a - b)}
 
 
 class SynthesisError(ir.UnsupportedOperation):

@@ -1,4 +1,4 @@
-"""Search five goals, retain scalar evidence, and validate real software decoders."""
+"""Search six goals, retain scalar evidence, and validate real software decoders."""
 
 import argparse
 import hashlib
@@ -21,7 +21,8 @@ def main():
               "ffmpeg": subprocess.check_output(["ffmpeg", "-version"], text=True).splitlines()[0],
               "hardware_validation": False, "cases": []}
     goals = (("min", media.minimum, 255), ("max", media.maximum, 255),
-             ("and", media.bit_and, 1), ("or", media.bit_or, 1), ("xor", media.bit_xor, 1))
+             ("and", media.bit_and, 1), ("or", media.bit_or, 1), ("xor", media.bit_xor, 1),
+             ("absdiff", media.absdiff, 255))
     for target in ("h264", "hevc", "av1"):
         if args.target not in ("all", target):
             continue
