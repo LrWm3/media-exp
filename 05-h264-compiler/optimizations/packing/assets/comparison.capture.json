@@ -1,0 +1,50 @@
+{
+  "suite_sha256": "1baa9eae98dd78505ab4e9df2d9eff5c0202f513ccbf1bd1da8a08d6277b6757",
+  "comparison_sha256": "2c06e4aa8038a037e4d694488afbd718e3a733d8322af6da60fbc572f483b2bc",
+  "capture_sha256": "de037baf2d6a9521c37bfcc6d5dd8c8cf48170257d7c6774b78856998cc02d06",
+  "capture_script_sha256": "6317f69bebb5474cc258d402653cf4c4ee0b1fdac0efec7aa290ea2d5a4b5030",
+  "captures": [
+    {
+      "case": "denoise-tiles4",
+      "output": "output",
+      "variants": [
+        {
+          "variant": "baseline",
+          "stream_sha256": "82ab456f08375a3c3f689ec6ddd513ff545cf8efe83d04cf94d0db8628e5ea05",
+          "decoded_sha256": "11556b3b7f5dbf244bffb9818f3e2685d27f719f014510d5e937b48078cc0a0b",
+          "output_sha256": "1e783055935f922513c310e0e9a16753ad1f76fa8762b3f88feb74137439bfb1",
+          "display_mapping": "binary 0/1 to 0/255"
+        },
+        {
+          "variant": "optimized",
+          "stream_sha256": "6d998ec2e5499d641e2d09c48e340d528a7f8a35c208a6449a616bd20fabf0a1",
+          "decoded_sha256": "5257bb4b2d6ba1718f0f539460146aac1f47b55c0ecec0fe84a3653807ba82f9",
+          "output_sha256": "1e783055935f922513c310e0e9a16753ad1f76fa8762b3f88feb74137439bfb1",
+          "display_mapping": "binary 0/1 to 0/255"
+        }
+      ]
+    },
+    {
+      "case": "chain-leaves-tiles4",
+      "output": "output",
+      "variants": [
+        {
+          "variant": "baseline",
+          "stream_sha256": "0743c7a67d52ae54426f96b807c97ed31ecff3a745757fd05391a72fbde181bf",
+          "decoded_sha256": "ab6c5703a966c95bee432c608d58c4a2e6deed6e1d5db3c483d1a69c2d621d75",
+          "output_sha256": "da8ed6bc39929db3ce64524d2f827d6a373b7d29d8b097379c805c1acd3d65ab",
+          "display_mapping": "literal u8"
+        },
+        {
+          "variant": "optimized",
+          "stream_sha256": "aca8f06b2caa876c0285463c8edde700dce11303376159e38becd31d63efb77d",
+          "decoded_sha256": "a74d94a0604a2f4cc0b488aeea0c6b6c3b1b682362c60d4a25d1273fecbce4f5",
+          "output_sha256": "da8ed6bc39929db3ce64524d2f827d6a373b7d29d8b097379c805c1acd3d65ab",
+          "display_mapping": "literal u8"
+        }
+      ]
+    }
+  ],
+  "timings": "not measured",
+  "source": "Checked full FFmpeg I420 named output regions"
+}
