@@ -161,8 +161,8 @@ class MixedPackingTests(unittest.TestCase):
                                 optimize=False, reference_mode="retained")
         for tiles in (1, 2, 4, 8):
             with self.subTest(tiles=tiles):
-                first = h264.pack(original, tiles, mixed_predictions=False)
-                second = h264.PackedProgram(original, tiles, mixed_predictions=False)
+                first = h264.pack(original, tiles, mixed_predictions=False, scheduling="stable")
+                second = h264.PackedProgram(original, tiles, mixed_predictions=False, scheduling="stable")
                 pending = dict(enumerate(original.operations, original.input_count))
                 completed = set(range(original.input_count))
                 expected = []
@@ -192,8 +192,8 @@ class MixedPackingTests(unittest.TestCase):
         original = compile_model()
         for tiles, before, after in ((4, 20, 19), (8, 17, 17)):
             with self.subTest(tiles=tiles):
-                separate = h264.pack(original, tiles, mixed_predictions=False)
-                mixed = h264.pack(original, tiles)
+                separate = h264.pack(original, tiles, mixed_predictions=False, scheduling="stable")
+                mixed = h264.pack(original, tiles, scheduling="stable")
                 self.assertEqual(separate.pictures, before)
                 self.assertEqual(mixed.pictures, after)
                 self.assertLessEqual(mixed.pictures, separate.pictures)

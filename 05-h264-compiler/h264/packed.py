@@ -51,6 +51,87 @@ def _slots(operations, input_count):
     return slots, peak
 
 
+def _groups(operations, input_count, tiles, mixed_predictions, scheduling):
+    """List-schedule a DAG without changing its logical picture identifiers.
+
+    Longest remaining paths start first in the critical schedule. Dependencies
+    become ready only after the entire previous picture has been published.
+    The stable schedule preserves the original FIFO grouping byte for byte.
+    """
+    operations = dict(enumerate(operations, input_count))
+    dependencies, consumers = {}, {}
+    for frame, operation in operations.items():
+        dependencies[frame] = {source.frame for source in operation.sources}
+        if any(type(source) is not int or not 0 <= source < frame
+               for source in dependencies[frame]):
+            raise CompileError("Prediction graph has an unresolved dependency")
+        for source in dependencies[frame]:
+            consumers.setdefault(source, []).append(frame)
+    depth = {}
+    for frame in reversed(operations):
+        depth[frame] = 1 + max((depth[child] for child in consumers.get(frame, ())), default=0)
+    remaining = {frame: sum(source >= input_count for source in sources)
+                 for frame, sources in dependencies.items()}
+    ready = {frame for frame, count in remaining.items() if not count}
+    arity = {frame: len(operation.sources) for frame, operation in operations.items()}
+    unpromotable = {frame for frame, operation in operations.items()
+                   if arity[frame] == 1 and _promote_prediction(operation) is None}
+    groups = []
+    while ready:
+        ordered = sorted(ready, key=(lambda frame: (-depth[frame], frame))
+                         if scheduling == "critical" else None)
+        first_arity = arity[ordered[0]]
+        group = (ordered[:tiles] if mixed_predictions else
+                 [frame for frame in ordered if arity[frame] == first_arity][:tiles])
+        if any(arity[frame] == 2 for frame in group) and unpromotable.intersection(group):
+            group = [frame for frame in ordered if arity[frame] == first_arity][:tiles]
+        groups.append(tuple(group))
+        ready.difference_update(group)
+        for frame in group:
+            for child in consumers.get(frame, ()):
+                remaining[child] -= 1
+                if not remaining[child]:
+                    ready.add(child)
+    if sum(map(len, groups)) != len(operations):
+        raise CompileError("Prediction graph has an unresolved dependency")
+    return groups
+
+
+# Geometry is identical between candidates, so picture count also guards full
+# decoded-pixel/readback work. Named outputs may scatter across more pictures
+# even when total pictures fall, hence the independent selective-readback cost.
+_SCHEDULE_COSTS = ("total_pictures", "prediction_slices", "prediction_bytes",
+                   "output_readback_bytes")
+
+
+def _select_schedule(original, tiles, mixed_predictions):
+    candidates, records = {}, []
+    for strategy in ("stable", "critical"):
+        try:
+            candidate = PackedProgram(original, tiles, mixed_predictions, scheduling=strategy)
+            # Encoding validates all actual slice headers, motion vectors and
+            # references. Estimated picture counts alone cannot choose safely.
+            costs = candidate.costs
+        except ValueError as error:
+            records.append({"schedule": strategy, "status": "invalid", "error": str(error)})
+        else:
+            candidates[strategy] = candidate
+            records.append({"schedule": strategy, "status": "valid", "costs": dict(costs)})
+    if not candidates:
+        raise CompileError("No legal packed schedule: " + "; ".join(
+            record["schedule"] + ": " + record["error"] for record in records))
+    chosen = candidates.get("stable", candidates.get("critical"))
+    if len(candidates) == 2:
+        before, after = candidates["stable"].costs, candidates["critical"].costs
+        if (all(after[key] <= before[key] for key in _SCHEDULE_COSTS) and
+                any(after[key] < before[key] for key in _SCHEDULE_COSTS)):
+            chosen = candidates["critical"]
+    chosen.stats.update(scheduling="auto", schedule_candidates=records,
+                        saved_prediction_pictures=(candidates["stable"].pictures-chosen.pictures
+                                                   if "stable" in candidates else None))
+    return chosen
+
+
 class PackedProgram(Program):
     """A Program with several independently computed logical images per picture.
 
@@ -59,13 +140,19 @@ class PackedProgram(Program):
     Named outputs retain their logical dimensions and independent ranges.
     """
 
-    def __init__(self, original, tiles=8, mixed_predictions=True):
+    def __init__(self, original, tiles=8, mixed_predictions=True, *, scheduling="auto"):
         if not isinstance(original, Program) or isinstance(original, PackedProgram):
             raise CompileError("pack expects an unpacked compiled Program")
         if type(tiles) is not int or not 1 <= tiles <= 16:
             raise CompileError("tiles must be an integer from 1 through 16")
         if type(mixed_predictions) is not bool:
             raise CompileError("mixed_predictions must be a bool")
+        if scheduling not in ("auto", "stable", "critical"):
+            raise CompileError("scheduling must be 'auto', 'stable', or 'critical'")
+        if scheduling == "auto":
+            selected = _select_schedule(original, tiles, mixed_predictions)
+            self.__dict__.update(selected.__dict__)
+            return
         for op in original.operations:
             if op.block_offsets or op.block_operations:
                 raise CompileError("Packing does not yet support per-block motion or predictions")
@@ -91,24 +178,11 @@ class PackedProgram(Program):
         self.canvas_height = rows*self.height + (rows-1)*16
         self.frame_tiles = {frame: (0,) for frame in range(self.input_count)}
         locations = {frame: (frame, 0) for frame in range(self.input_count)}
-        pending = dict(enumerate(original.operations, self.input_count))
+        logical = dict(enumerate(original.operations, self.input_count))
         self.operations, self.groups = [], []
         promotions = mixed_pictures = 0
-        while pending:
-            ready = [frame for frame, op in pending.items()
-                     if all(source.frame in locations for source in op.sources)]
-            if not ready:
-                raise CompileError("Prediction graph has an unresolved dependency")
-            arity = len(pending[ready[0]].sources)
-            group = (ready[:tiles] if mixed_predictions else
-                     [frame for frame in ready if len(pending[frame].sources) == arity][:tiles])
-            if (any(len(pending[frame].sources) == 2 for frame in group) and
-                    any(len(pending[frame].sources) == 1 and _promote_prediction(pending[frame]) is None
-                        for frame in group)):
-                # Keep an unrepresentable unary prediction in a P picture,
-                # using the same stable homogeneous rule as disabled mixing.
-                group = [frame for frame in ready if len(pending[frame].sources) == arity][:tiles]
-            arities = {len(pending[frame].sources) for frame in group}
+        for group in _groups(original.operations, self.input_count, tiles, mixed_predictions, scheduling):
+            arities = {len(logical[frame].sources) for frame in group}
             mixed = len(arities) > 1
             mixed_pictures += mixed
             physical = self.input_count + len(self.operations)
@@ -116,7 +190,7 @@ class PackedProgram(Program):
             # Source locations are looked up before publishing any result in
             # this group: a picture cannot read its own unfinished pixels.
             for tile, frame in enumerate(group):
-                op, target = pending[frame], self.tiles[tile]
+                op, target = logical[frame], self.tiles[tile]
                 if mixed and len(op.sources) == 1:
                     # Keep a pure-P picture unary to avoid needless B syntax.
                     op = _promote_prediction(op)
@@ -145,7 +219,6 @@ class PackedProgram(Program):
             self.frame_tiles[physical] = tuple(range(len(group)))
             for tile, frame in enumerate(group):
                 locations[frame] = (physical, tile)
-                del pending[frame]
         self.locations = locations
         self.output_regions = {}
         for name, old_frame in original.output_frames.items():
@@ -172,7 +245,11 @@ class PackedProgram(Program):
                       "peak_live_values": peak, "scheduled_operations": len(original.operations),
                       "packed_prediction_pictures": len(self.operations),
                       "mixed_predictions": mixed_predictions, "p_to_b_promotions": promotions,
-                      "mixed_prediction_pictures": mixed_pictures}
+                      "mixed_prediction_pictures": mixed_pictures,
+                      "scheduling": scheduling, "selected_schedule": scheduling,
+                      "schedule_cost_metrics": list(_SCHEDULE_COSTS),
+                      "saved_prediction_pictures": 0 if scheduling == "stable" else None,
+                      "schedule_candidates": []}
 
     @cached_property
     def costs(self):
@@ -259,6 +336,12 @@ class PackedProgram(Program):
         return outputs
 
 
-def pack(program, tiles=8, mixed_predictions=True):
-    """Pack ready predictions; disable mixing to retain separate P/B groups."""
-    return PackedProgram(program, tiles, mixed_predictions)
+def pack(program, tiles=8, mixed_predictions=True, *, scheduling="auto"):
+    """Pack predictions, comparing stable and critical-path schedules by default.
+
+    Auto accepts only legal plans that do not increase pictures, slices, encoded
+    prediction bytes, or named-output readback. Use scheduling="stable" to retain
+    FIFO grouping, or "critical" to inspect that candidate's cost tradeoffs.
+    mixed_predictions independently controls promotion into mixed P/B pictures.
+    """
+    return PackedProgram(program, tiles, mixed_predictions, scheduling=scheduling)

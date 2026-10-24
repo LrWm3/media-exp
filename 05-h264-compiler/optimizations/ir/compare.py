@@ -81,7 +81,7 @@ def synthetic_cases(names):
         after = h264.compile(kernel, **options, semantic_ir=True)
         expected = before.reference(inputs)
         if name == "mixed-pb":
-            before, after = (h264.pack(after, tiles=2, mixed_predictions=mixing)
+            before, after = (h264.pack(after, tiles=2, mixed_predictions=mixing, scheduling="stable")
                              for mixing in (False, True))
         yield Comparison(name, name, dict(zip(VARIANTS, (before, after))), inputs, expected,
                          "mixed_predictions" if name == "mixed-pb" else "semantic_ir",
@@ -117,8 +117,8 @@ def saved_cases(names, sources):
         versions = [(saved.name, "semantic_ir", before, after)] if saved.group in names else []
         if saved.name == "denoise":
             versions += [(f"denoise-packed{tiles}", "mixed_predictions",
-                          h264.pack(after, tiles=tiles, mixed_predictions=False),
-                          h264.pack(after, tiles=tiles, mixed_predictions=True))
+                          h264.pack(after, tiles=tiles, mixed_predictions=False, scheduling="stable"),
+                          h264.pack(after, tiles=tiles, mixed_predictions=True, scheduling="stable"))
                          for tiles in (4, 8) if f"denoise-packed{tiles}" in names]
         for index in range(len(segments)):
             original = raw[index*chunk_bytes:(index+1)*chunk_bytes]
@@ -251,7 +251,7 @@ def prepare(output, names=None, local_backends=("ffmpeg", "openh264", "vaapi")):
     report = {"format": "h264-ir-comparison-0.1", "status": "pass",
               "baseline": "semantic_ir=False for IR cases; mixed_predictions=False for packing cases",
               "optimized": "semantic_ir=True for IR cases; mixed_predictions=True for packing cases",
-              "packing_ir": "semantic_ir=True in both packing variants",
+              "packing_ir": "semantic_ir=True, scheduling=stable in both packing variants",
               "unchanged": "optimize=True, exact_search=True, reference_mode=retained, slice_mode=row",
               "oracle": "semantic_ir=False baseline.reference; saved graphs additionally match historical outputs",
               "timings": "not measured",
