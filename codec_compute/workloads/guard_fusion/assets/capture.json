@@ -1,0 +1,162 @@
+{
+  "format": "codec-compute-guard-fusion-capture-1",
+  "source_commit": "90823cc769f995240acaf4bbffbf0ecb8f08ef2f",
+  "capture_script": {
+    "path": "codec_compute/workloads/guard_fusion/capture.py",
+    "sha256": "1c267181d15986f30f4a6186903d0188fdb05df9eb1d1523eab96bcdb434fcdc",
+    "pinned_in_export": true
+  },
+  "curated_bundle": {
+    "path": "bundle.json",
+    "bytes": 1453311,
+    "sha256": "d4724c5b493fa392d0e2ce8561c8f6ce4f675d0b43f568355dd340f696b4b410"
+  },
+  "full_bundle": {
+    "path": "full-bundle.json",
+    "bytes": 1576660,
+    "sha256": "f9a63a38428904d41600d85af357be465813786c2e0e352e6f5251413ec5638a"
+  },
+  "audits": {
+    "retained_artifacts": 346,
+    "retained_artifact_bytes": 211745761,
+    "cpu_specs_bound_to_semantic_graphs": 12,
+    "paired_i420_checked": 6,
+    "scope": "Hash, framing, guard/chroma, semantic-spec and paired-reference audit; no new decoder run.",
+    "full_bundle_sha256": "f9a63a38428904d41600d85af357be465813786c2e0e352e6f5251413ec5638a"
+  },
+  "local_export_decoders": [
+    "ffmpeg",
+    "openh264",
+    "vaapi"
+  ],
+  "pixel_source": "Saved local decoded I420 crops, checked against compact input/output planes.",
+  "hardware_evidence": "No hardware decode or timing performed here; consult the separate benchmark report.",
+  "display": {
+    "scale": 1,
+    "interpolation": "none",
+    "contrast_stretch": false
+  },
+  "sheets": [
+    {
+      "size": 512,
+      "depth": 64,
+      "prediction_slices": [
+        6272,
+        2176
+      ],
+      "differing_output_pixels": 0,
+      "image": {
+        "path": "guard-fusion-512.png",
+        "bytes": 179895,
+        "sha256": "75dc7f116626c2e336654eb117a8ba48ebc05324fa53c813b6ebcd97e7fd8b04"
+      }
+    }
+  ],
+  "panels": [
+    {
+      "size": 512,
+      "depth": 64,
+      "role": "input",
+      "fixture": 0,
+      "source_i420": {
+        "path": "512/resident-chain-64/baseline/000/expected.i420",
+        "bytes": 29297664,
+        "sha256": "5e9781a0390a7cf5cbee808e2c4e63c9c277866bac5f9b0a5c26f0d982ad64f5"
+      },
+      "frame_index": 0,
+      "compact_plane": {
+        "path": "512/resident-chain-64/baseline/000/input-image.u8",
+        "bytes": 262144,
+        "sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e"
+      },
+      "plane_sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e",
+      "panel": {
+        "path": "panels/512/input.png",
+        "bytes": 4666,
+        "sha256": "2d95c14fdb18aa33f53c6053becc84ee82911b70ff72fea7994ebb12aea65720"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        20,
+        134,
+        512,
+        512
+      ]
+    },
+    {
+      "size": 512,
+      "depth": 64,
+      "role": "baseline",
+      "fixture": 0,
+      "source_i420": {
+        "path": "512/resident-chain-64/baseline/000/expected.i420",
+        "bytes": 29297664,
+        "sha256": "5e9781a0390a7cf5cbee808e2c4e63c9c277866bac5f9b0a5c26f0d982ad64f5"
+      },
+      "frame_index": 64,
+      "compact_plane": {
+        "path": "512/resident-chain-64/baseline/000/output.u8",
+        "bytes": 262144,
+        "sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73"
+      },
+      "plane_sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73",
+      "panel": {
+        "path": "panels/512/baseline.png",
+        "bytes": 67546,
+        "sha256": "607face091ee611a25658118935bd044efda40d4749b803a729d02f9b07f76b0"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        556,
+        134,
+        512,
+        512
+      ]
+    },
+    {
+      "size": 512,
+      "depth": 64,
+      "role": "merged",
+      "fixture": 0,
+      "source_i420": {
+        "path": "512/resident-chain-64/merged/000/expected.i420",
+        "bytes": 29297664,
+        "sha256": "5e9781a0390a7cf5cbee808e2c4e63c9c277866bac5f9b0a5c26f0d982ad64f5"
+      },
+      "frame_index": 64,
+      "compact_plane": {
+        "path": "512/resident-chain-64/merged/000/output.u8",
+        "bytes": 262144,
+        "sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73"
+      },
+      "plane_sha256": "a02d45641f6f6467becf4bc280f95aeab50130ca688aedd1cc153ea5bd16fc73",
+      "panel": {
+        "path": "panels/512/merged.png",
+        "bytes": 67546,
+        "sha256": "607face091ee611a25658118935bd044efda40d4749b803a729d02f9b07f76b0"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "contact_sheet_rectangle": [
+        1092,
+        134,
+        512,
+        512
+      ]
+    }
+  ]
+}
