@@ -1,0 +1,1498 @@
+{
+  "format": "retained-inputs-curation-1",
+  "status": "pass",
+  "runnable_bundle": false,
+  "full_bundle": {
+    "path": "full-bundle.json",
+    "bytes": 19956016,
+    "sha256": "4a9843b0550d46064c363d4ee3604931b5b9d809c019b3636444155ef01299ad"
+  },
+  "capture_script": {
+    "path": "capture-source.py",
+    "bytes": 21904,
+    "sha256": "ec6da120c94f1cb1d3b01c0b17e9b9e4ab2fd7f197a9812732586c97427a838d"
+  },
+  "capture_script_repository_path": "11-retained-reference-streaming/curate.py",
+  "source_commit": "9e18edf0b2c4edc7c4743af3ac8f0f27853c451d",
+  "original_validation": {
+    "streams": 96,
+    "pictures": 1456,
+    "local_decoder_runs": 288,
+    "named_outputs": 1312,
+    "retained_beyond_16_cases": 8,
+    "paired_policy_outputs": 656
+  },
+  "selected_cases": [
+    "512/patch-atlas/32/dpb16",
+    "512/patch-atlas/32/tight",
+    "512/motion-interpolation/32/dpb16",
+    "512/motion-interpolation/32/tight"
+  ],
+  "fixture": "scene",
+  "files": {
+    "512/motion-interpolation/32/dpb16/legacy-fence.h264": {
+      "path": "512/motion-interpolation/32/dpb16/legacy-fence.h264",
+      "bytes": 1206,
+      "sha256": "f702714d229a9a0349e9cc149713cd81ca9183e49e32584e3334a2fc759d1e2e"
+    },
+    "512/motion-interpolation/32/dpb16/manifest.json": {
+      "path": "512/motion-interpolation/32/dpb16/manifest.json",
+      "bytes": 8284720,
+      "sha256": "63f289f4975f822351e14cf500de0feb336f133bb629b2423fa5edb35b49866d"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-000.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-000.h264",
+      "bytes": 4470,
+      "sha256": "a2e94aa9d5e7451bfa583bf925db53a0a936152fc9dd2ee2102a984ff1d6488d"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-001.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-001.h264",
+      "bytes": 4462,
+      "sha256": "799e1f67cbe5f91db10c4f0206ed3657c7d509ffcddb34acc04efa56745c0319"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-002.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-002.h264",
+      "bytes": 4453,
+      "sha256": "71da136e493bf3704272576cb198a6b5c8a3c3568bad17724635ac22a13ec35b"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-003.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-003.h264",
+      "bytes": 4439,
+      "sha256": "dd479c76412256c5ff0f30ff982a1ef5fcff0ab3d2e4e93280e0c1f375648cba"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-004.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-004.h264",
+      "bytes": 4447,
+      "sha256": "a58153182cb4b76aee9670deb7a39f375893cb223dbd1ecac27609b109287b6e"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-005.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-005.h264",
+      "bytes": 4455,
+      "sha256": "cd1f7c6219327044fc37ca29de5cd1b91e91a514752c78bae9a46a301975e484"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-006.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-006.h264",
+      "bytes": 4457,
+      "sha256": "3f18ca077d4c1e7c6482e7745cf8a544d8967d99a2db6d4013e14e712c8d61ce"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-007.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-007.h264",
+      "bytes": 4459,
+      "sha256": "f96f7d7bca0fe2b372af451be05baf5adaddeb15c59cb96ea0492a89100648a3"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-008.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-008.h264",
+      "bytes": 4459,
+      "sha256": "a6798ad3eac9bdefd81cd05ad19fdb0a613bd5800aa9f8ca573903b976a2b5b1"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-009.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-009.h264",
+      "bytes": 4451,
+      "sha256": "49d6a5bbd98a0617832d9d655299f7d4c8b37d7c964e029a0b39f13f27cace5d"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-010.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-010.h264",
+      "bytes": 4441,
+      "sha256": "9b01d27ead0ac40ad5a0cd91ee8f4e9dc44a3c08a3515663c3e9e655f0b74d0c"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-011.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-011.h264",
+      "bytes": 4427,
+      "sha256": "52b629e1e01516101e89c08d8cf3bcf9b52f7865771f5faf3b539d4f70b207a9"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-012.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-012.h264",
+      "bytes": 4435,
+      "sha256": "b98daa9792d95d157ed87f34a91f16f0944a7a38365eb6f51a9a2875d29c4233"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-013.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-013.h264",
+      "bytes": 4443,
+      "sha256": "a441d321d585acaa33138da3612b910fd880bff6734cf8e71982bed674cb64d6"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-014.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-014.h264",
+      "bytes": 4445,
+      "sha256": "7c67c448764ecc13be81e7d465ae30769f3ba73f027202b34e68a585b4b516a9"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-015.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-015.h264",
+      "bytes": 4447,
+      "sha256": "2bba00a59960c949095dcb41540d52e752a142267d633af17775d18ca8030cdc"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-016.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-016.h264",
+      "bytes": 4463,
+      "sha256": "4aad60f423a092c289b7a8e4b2742ecc8f1e5fe5aa4e2f69d65d8788c88c48ae"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-017.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-017.h264",
+      "bytes": 4455,
+      "sha256": "e920bf468ab2a1512ace959b76fada1ca97b7bbf51beddbee3eecdff5e987d66"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-018.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-018.h264",
+      "bytes": 4445,
+      "sha256": "8ee2bcbd16eb9d51bb9c148107f3b062d5a4630055150c7c4c0d3959b6a81a8c"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-019.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-019.h264",
+      "bytes": 4431,
+      "sha256": "756a5f0e3407bd6f13dc9627ee247af083d0f8cdd21aec7bca84c35d5ae41ca6"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-020.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-020.h264",
+      "bytes": 4439,
+      "sha256": "832f34373c6c05f5f568f406a7162344d1c875eda5148c2846669f323bda9387"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-021.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-021.h264",
+      "bytes": 4447,
+      "sha256": "c92a62635513c865dc8e4e187e322eb9b24f56eed700e01c7c7be676a840cffd"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-022.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-022.h264",
+      "bytes": 4449,
+      "sha256": "0588126d56c28f6a8c9b16f0de89d54c055d4b068405cc4f7630cafe347c2e95"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-023.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-023.h264",
+      "bytes": 4451,
+      "sha256": "59b88cf7beca61cdbd620fa65c2032df69ccdcfdb5f673f2272df6f00bc2b0df"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-024.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-024.h264",
+      "bytes": 4463,
+      "sha256": "4145f448f7b9bc7fc14ceda351d2a8712c3dc853909fc51cc36f558895fea93b"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-025.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-025.h264",
+      "bytes": 4455,
+      "sha256": "ecdc7e023055ad7b33675981288672a3d59893ec36859405c917b21c0f85b7dc"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-026.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-026.h264",
+      "bytes": 4445,
+      "sha256": "62fd17bacc09326608bd832bf714afa7c46352d734ae4b017aed559a88a6e834"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-027.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-027.h264",
+      "bytes": 4431,
+      "sha256": "35d31562deae76a0cd7a232989c88a207a71dc5932d19bc939c18e9d0da9a38b"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-028.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-028.h264",
+      "bytes": 4439,
+      "sha256": "cc90d2ed1f8a4f84e4cd3e83eeb95267ed01b25ec8a5cac1445f63e9662ae686"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-029.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-029.h264",
+      "bytes": 4447,
+      "sha256": "7ccd8428b01d44807e3df1bcf7ed3c65953eb7b617c75dee651dc77d953d101b"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-030.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-030.h264",
+      "bytes": 4449,
+      "sha256": "eeef794ebef2befe91a74665c9003df35b8c64cff9e200d58a9dc5d527655bb5"
+    },
+    "512/motion-interpolation/32/dpb16/prediction-031.h264": {
+      "path": "512/motion-interpolation/32/dpb16/prediction-031.h264",
+      "bytes": 4451,
+      "sha256": "cd288e15a827e8a11820e2a6aefa26746f5a221c184f122ca41982f476e1aaf3"
+    },
+    "512/motion-interpolation/32/dpb16/scene/expected.i420": {
+      "path": "512/motion-interpolation/32/dpb16/scene/expected.i420",
+      "bytes": 15092736,
+      "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+    },
+    "512/motion-interpolation/32/dpb16/scene/input-000.h264": {
+      "path": "512/motion-interpolation/32/dpb16/scene/input-000.h264",
+      "bytes": 463161,
+      "sha256": "54b8a424d0f412de21dfa4b0edfc1cc5872e083f3e273f099b1ab2480ce5a213"
+    },
+    "512/motion-interpolation/32/dpb16/scene/input-001.h264": {
+      "path": "512/motion-interpolation/32/dpb16/scene/input-001.h264",
+      "bytes": 463125,
+      "sha256": "bc9c5004c999466306436667640c00ace27a4b63053b210c6a2293b6fcebcf0e"
+    },
+    "512/motion-interpolation/32/dpb16/scene/input-a.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/input-a.u8",
+      "bytes": 262144,
+      "sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e"
+    },
+    "512/motion-interpolation/32/dpb16/scene/input-b.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/input-b.u8",
+      "bytes": 262144,
+      "sha256": "19d1aead77a1fb03d928b039008a3c2e646c983baad2f8dc13134cdfa48ecdc9"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_000.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_000.u8",
+      "bytes": 262144,
+      "sha256": "867db7b23586f817cb5daae2711ba0489980c2dc89b75ac5d6e9d0176c5d746e"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_001.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_001.u8",
+      "bytes": 262144,
+      "sha256": "c50e261258fac82dc1c293f1455bffe2db9196b19c2b7f0f23234aaeeb62fa8b"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_002.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_002.u8",
+      "bytes": 262144,
+      "sha256": "6368c9f31f7a16c5d1646c5c76b87eb66241ad8d9251eeb2d7f51cd7decb3ede"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_003.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_003.u8",
+      "bytes": 262144,
+      "sha256": "9f2d4d4ac131e38b2c452a344eefedae858ef0d404abe036b1d1b12cd24e669f"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_004.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_004.u8",
+      "bytes": 262144,
+      "sha256": "d3316277334dcf1bd8389c175e875c0b12bcd474142afec125e8916baea80b25"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_005.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_005.u8",
+      "bytes": 262144,
+      "sha256": "f43acc3ac2d848aee1bd92fe21cace7cb756e5820645bd47a3baf8762b1f39ce"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_006.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_006.u8",
+      "bytes": 262144,
+      "sha256": "3ff6ad7565debaed6249fc4a6f002dc2df37f8fee545800d872dee8d3f759288"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_007.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_007.u8",
+      "bytes": 262144,
+      "sha256": "a9a11624d282fbbe780bf1af576558d2ec3d7d1cbf4a0ea01c2095b859f991fa"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_008.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_008.u8",
+      "bytes": 262144,
+      "sha256": "fac5dcb71810710e3cdfc3a11bb30a994f5174cf28d1c3337a6597c25288567a"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_009.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_009.u8",
+      "bytes": 262144,
+      "sha256": "eee1b983f1306c254f4b0bc86157ef1259bd9fb46f60ddac1dab4be4e075d412"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_010.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_010.u8",
+      "bytes": 262144,
+      "sha256": "8b98c0fb3ddf5e13845d1af6204ce5a5ff3e95c2acc4c1d8df659e46fa3ddb3b"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_011.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_011.u8",
+      "bytes": 262144,
+      "sha256": "abba8e407f9876ac248809c98b6879f5765c5519817c3cd48512c98dda36edc4"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_012.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_012.u8",
+      "bytes": 262144,
+      "sha256": "269b5cd0c67487dae2fa4a4b656c4c9e928fce77939691b5f67a848279038376"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_013.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_013.u8",
+      "bytes": 262144,
+      "sha256": "e0977d3c78542c4831f49f9ff82cc48c5234a91ae88bdf0a6766e886ea19e546"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_014.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_014.u8",
+      "bytes": 262144,
+      "sha256": "50eca313517e1025bc16037edbaee65d66c2d51e1669cdc956bc197382fe0c64"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_015.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_015.u8",
+      "bytes": 262144,
+      "sha256": "e289ddd614c6314e80b3dc432d9f2d06d39cc502ecfaddae7e57865226ac3596"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_016.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_016.u8",
+      "bytes": 262144,
+      "sha256": "6f48b72d6eaff2aa98fbdd1be7031db5c6d0be016fcb7fcc6ccf84723f6c77df"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_017.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_017.u8",
+      "bytes": 262144,
+      "sha256": "f820c40f4f7e9f36bc4883198aa84fcd67a6817dd7b86d4672e0214687bd9477"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_018.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_018.u8",
+      "bytes": 262144,
+      "sha256": "07bf2787616a1d5bd48a613b1e6cd117336bb654a9aa1b8e9a2b7b078e27488f"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_019.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_019.u8",
+      "bytes": 262144,
+      "sha256": "d54fda82adc52037f4c9834777aebfcb605ece3383c0da3e4641b79e4e245623"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_020.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_020.u8",
+      "bytes": 262144,
+      "sha256": "dcabca6c835b929243294410e65fb56d231feec20387faa5b32114ca8b0ea05b"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_021.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_021.u8",
+      "bytes": 262144,
+      "sha256": "ae063bb49fb75e29bd4b465fe3d500d49fb3c7b89ab880853b215b55606111c4"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_022.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_022.u8",
+      "bytes": 262144,
+      "sha256": "e9c0f532532111da91c0c3a886d6fc0803a73ae63de5c78b0cf4c3e02b60ba04"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_023.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_023.u8",
+      "bytes": 262144,
+      "sha256": "80ff6dec4cc2006a8da0877055e8adf22f61538bd1dd268abf00d125a5db8884"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_024.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_024.u8",
+      "bytes": 262144,
+      "sha256": "3a9423bee3b844a7648f53085de6c52e9734d05354af74cd370604b82fbf0a95"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_025.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_025.u8",
+      "bytes": 262144,
+      "sha256": "80e42b198bd6fcfd1d85e97e02e5e757438cce7635f35d54bbabebfebdf9dc04"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_026.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_026.u8",
+      "bytes": 262144,
+      "sha256": "4996f0fc268ed5d83b010360905109f5a008dedb2e3f26fde54579af98d3a121"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_027.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_027.u8",
+      "bytes": 262144,
+      "sha256": "0f98b28788c0966ce70affe13b234fc27573cf82b7662c41b3a7f376298f0f00"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_028.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_028.u8",
+      "bytes": 262144,
+      "sha256": "6cf9bca054add71680b371a0731dddd4076c02b891f4240ce98266ac784f791d"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_029.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_029.u8",
+      "bytes": 262144,
+      "sha256": "cffe50302b10c27e45572fae7606797cbf0684c35bb91525981555278f9d51ca"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_030.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_030.u8",
+      "bytes": 262144,
+      "sha256": "2d6466d3bff12c97a48dd98aaa18006792749509460b18f151d45e85c851cdae"
+    },
+    "512/motion-interpolation/32/dpb16/scene/output_031.u8": {
+      "path": "512/motion-interpolation/32/dpb16/scene/output_031.u8",
+      "bytes": 262144,
+      "sha256": "f112fc7e53473853a912022f63790d5b2c6a45bda8bcc6f67573796ae10e8a55"
+    },
+    "512/motion-interpolation/32/dpb16/scene/program.h264": {
+      "path": "512/motion-interpolation/32/dpb16/scene/program.h264",
+      "bytes": 1068636,
+      "sha256": "4f010ac37616126c341c0bf15c1d99275faa4893e7d4f2c21dd74e570369a145"
+    },
+    "512/motion-interpolation/32/tight/legacy-fence.h264": {
+      "path": "512/motion-interpolation/32/tight/legacy-fence.h264",
+      "bytes": 1204,
+      "sha256": "ab521ab3aa522f113ded1ee950f9c50a914dea2d36b8a7539157f15213f497cc"
+    },
+    "512/motion-interpolation/32/tight/manifest.json": {
+      "path": "512/motion-interpolation/32/tight/manifest.json",
+      "bytes": 8284717,
+      "sha256": "cfd837737971227e59a02377e0fe1b689649a0f091e9f66f893b815ecbb9fdc7"
+    },
+    "512/motion-interpolation/32/tight/prediction-000.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-000.h264",
+      "bytes": 4470,
+      "sha256": "4175137a62125111d0d5765b40d68564c50eb375a0acd7423824db52c14c6dec"
+    },
+    "512/motion-interpolation/32/tight/prediction-001.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-001.h264",
+      "bytes": 4462,
+      "sha256": "282a6fdac57e585d3e238e3cdd9e38d3fe8634e79ea6b68d914e48c983703710"
+    },
+    "512/motion-interpolation/32/tight/prediction-002.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-002.h264",
+      "bytes": 4452,
+      "sha256": "2ad333645e74f05bad5e4d40d8251c6bd734124f8283276c4192954ccf8eb660"
+    },
+    "512/motion-interpolation/32/tight/prediction-003.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-003.h264",
+      "bytes": 4439,
+      "sha256": "2de80949c608947061891f6e26276f8164ef40d8256d3f06188aea3efd587dc8"
+    },
+    "512/motion-interpolation/32/tight/prediction-004.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-004.h264",
+      "bytes": 4446,
+      "sha256": "94c4a6d9da2ad160e797bbd95633c89ad3242fb7f839e17eb21aa7deae04f245"
+    },
+    "512/motion-interpolation/32/tight/prediction-005.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-005.h264",
+      "bytes": 4454,
+      "sha256": "31f974c52ae679873a0ba82da1810950093f47f42d11696f6bee8652d58d1025"
+    },
+    "512/motion-interpolation/32/tight/prediction-006.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-006.h264",
+      "bytes": 4456,
+      "sha256": "a578d62cde52fed3a4a265447062484c50ef0125e2928872870701593afae940"
+    },
+    "512/motion-interpolation/32/tight/prediction-007.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-007.h264",
+      "bytes": 4458,
+      "sha256": "4121394048c4edad1f2623ced0e783b51a00cd0760aa32e083a4ed662cd9e57d"
+    },
+    "512/motion-interpolation/32/tight/prediction-008.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-008.h264",
+      "bytes": 4458,
+      "sha256": "67da0fb2100c99be4444f742faa1e90d4c4b4888c23262eca8ad51b2dc12ed48"
+    },
+    "512/motion-interpolation/32/tight/prediction-009.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-009.h264",
+      "bytes": 4450,
+      "sha256": "6c2734d309fe9e4736dc02b100900cefd29659f5168b5afa12910e724fbd8cfd"
+    },
+    "512/motion-interpolation/32/tight/prediction-010.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-010.h264",
+      "bytes": 4440,
+      "sha256": "1716e8f7ea3e7ab6b9046137cd5094bbade749389ce7ec8e74fc81d527dc6a1c"
+    },
+    "512/motion-interpolation/32/tight/prediction-011.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-011.h264",
+      "bytes": 4427,
+      "sha256": "2d1b60bcfcaae3f166e70edf3459d6208608fefaf93bbf5fcc8a9e77f2d5007d"
+    },
+    "512/motion-interpolation/32/tight/prediction-012.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-012.h264",
+      "bytes": 4435,
+      "sha256": "1b58a7b25e9a5163dc761d6498308b0bbaa57e4d40684eda7bcecad28ffa352f"
+    },
+    "512/motion-interpolation/32/tight/prediction-013.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-013.h264",
+      "bytes": 4442,
+      "sha256": "df1427845a4dc556015d9907ff33ec532104ce37800afb3f963010c29fd6fccd"
+    },
+    "512/motion-interpolation/32/tight/prediction-014.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-014.h264",
+      "bytes": 4444,
+      "sha256": "77c4780e0d17fc2cbb13d503b7d782d6b8c64d98366b179c64240b9bb5362a2e"
+    },
+    "512/motion-interpolation/32/tight/prediction-015.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-015.h264",
+      "bytes": 4446,
+      "sha256": "620bc0b425b74060d1ad44f3d0d401bf29214f5dea3d83404dc0a6e1acb6b770"
+    },
+    "512/motion-interpolation/32/tight/prediction-016.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-016.h264",
+      "bytes": 4462,
+      "sha256": "98c9e47a8b1550d54f1a85df3bc5b8bd03a535ed412145dd55a7fae043bb6aa0"
+    },
+    "512/motion-interpolation/32/tight/prediction-017.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-017.h264",
+      "bytes": 4454,
+      "sha256": "e871f35598ca7298fedc4016d71abfb3a97d69df51cefca16ac6e0ec3b849aed"
+    },
+    "512/motion-interpolation/32/tight/prediction-018.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-018.h264",
+      "bytes": 4444,
+      "sha256": "1ed924d9d43e7edddbdf2e786fe12d5db6f8219ae7ef1e6781835d05876cd128"
+    },
+    "512/motion-interpolation/32/tight/prediction-019.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-019.h264",
+      "bytes": 4431,
+      "sha256": "4a5bf7014b185decd2a6e35b88276d174fbf1b4615ff5a9746344d5dde9fb56f"
+    },
+    "512/motion-interpolation/32/tight/prediction-020.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-020.h264",
+      "bytes": 4439,
+      "sha256": "cd43fc653533ac1328d5a94d80e9592455a26b3658f4613f6321a845505842eb"
+    },
+    "512/motion-interpolation/32/tight/prediction-021.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-021.h264",
+      "bytes": 4446,
+      "sha256": "58bc071767155dfeaf0169802ab6bf7d13921c9fefb386c37b77614306b39aba"
+    },
+    "512/motion-interpolation/32/tight/prediction-022.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-022.h264",
+      "bytes": 4448,
+      "sha256": "7a7c4c68d0f9a184bd6f7070925741bfaaab61361822806e405a8c9129a18328"
+    },
+    "512/motion-interpolation/32/tight/prediction-023.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-023.h264",
+      "bytes": 4450,
+      "sha256": "1a907741e21098dac6d165012adbc66975d386662420178b39b4b8d87cfbb233"
+    },
+    "512/motion-interpolation/32/tight/prediction-024.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-024.h264",
+      "bytes": 4462,
+      "sha256": "7b6c8dbc8e1e75eb2f9d67ccd421fe264fe994ce9843866ef868b562432452a2"
+    },
+    "512/motion-interpolation/32/tight/prediction-025.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-025.h264",
+      "bytes": 4454,
+      "sha256": "71d5fddee2a010e2ab1073cd1fb90c69b59e4c68c3232311b37eaf94167f85f6"
+    },
+    "512/motion-interpolation/32/tight/prediction-026.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-026.h264",
+      "bytes": 4444,
+      "sha256": "e2a6cf19340f656622c813432713a01bed958fd3e3deb39d60401da391b1fa60"
+    },
+    "512/motion-interpolation/32/tight/prediction-027.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-027.h264",
+      "bytes": 4431,
+      "sha256": "628f0826d3ff6fba2140f296736f41b03fa6e5c134af822863eaac29884d4083"
+    },
+    "512/motion-interpolation/32/tight/prediction-028.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-028.h264",
+      "bytes": 4439,
+      "sha256": "f571d26dadf33b24085612192f66d87f2c20e0efe248213f54ad7e8228901f1a"
+    },
+    "512/motion-interpolation/32/tight/prediction-029.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-029.h264",
+      "bytes": 4446,
+      "sha256": "4a061dc9eacee84758566297bef48a7ba6677586dd47244630cdef8745ca3386"
+    },
+    "512/motion-interpolation/32/tight/prediction-030.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-030.h264",
+      "bytes": 4448,
+      "sha256": "6da88c358f60dc736c860f49c50f9f62651154a5b6f8a68e3de1280faa286357"
+    },
+    "512/motion-interpolation/32/tight/prediction-031.h264": {
+      "path": "512/motion-interpolation/32/tight/prediction-031.h264",
+      "bytes": 4450,
+      "sha256": "611972f70a01668d0dd4f4008a23188efb1d08d37fbdd4478220c95b55ecba89"
+    },
+    "512/motion-interpolation/32/tight/scene/expected.i420": {
+      "path": "512/motion-interpolation/32/tight/scene/expected.i420",
+      "bytes": 15092736,
+      "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+    },
+    "512/motion-interpolation/32/tight/scene/input-000.h264": {
+      "path": "512/motion-interpolation/32/tight/scene/input-000.h264",
+      "bytes": 463159,
+      "sha256": "18fcd19b2898f678ab1d129430f34f41e02980f81680391426063f3e51444c6f"
+    },
+    "512/motion-interpolation/32/tight/scene/input-001.h264": {
+      "path": "512/motion-interpolation/32/tight/scene/input-001.h264",
+      "bytes": 463124,
+      "sha256": "3baeaf42f27908df81e4d7295c67f9f0d7280abc8553e35afdb1858ffcc11079"
+    },
+    "512/motion-interpolation/32/tight/scene/input-a.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/input-a.u8",
+      "bytes": 262144,
+      "sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e"
+    },
+    "512/motion-interpolation/32/tight/scene/input-b.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/input-b.u8",
+      "bytes": 262144,
+      "sha256": "19d1aead77a1fb03d928b039008a3c2e646c983baad2f8dc13134cdfa48ecdc9"
+    },
+    "512/motion-interpolation/32/tight/scene/output_000.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_000.u8",
+      "bytes": 262144,
+      "sha256": "867db7b23586f817cb5daae2711ba0489980c2dc89b75ac5d6e9d0176c5d746e"
+    },
+    "512/motion-interpolation/32/tight/scene/output_001.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_001.u8",
+      "bytes": 262144,
+      "sha256": "c50e261258fac82dc1c293f1455bffe2db9196b19c2b7f0f23234aaeeb62fa8b"
+    },
+    "512/motion-interpolation/32/tight/scene/output_002.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_002.u8",
+      "bytes": 262144,
+      "sha256": "6368c9f31f7a16c5d1646c5c76b87eb66241ad8d9251eeb2d7f51cd7decb3ede"
+    },
+    "512/motion-interpolation/32/tight/scene/output_003.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_003.u8",
+      "bytes": 262144,
+      "sha256": "9f2d4d4ac131e38b2c452a344eefedae858ef0d404abe036b1d1b12cd24e669f"
+    },
+    "512/motion-interpolation/32/tight/scene/output_004.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_004.u8",
+      "bytes": 262144,
+      "sha256": "d3316277334dcf1bd8389c175e875c0b12bcd474142afec125e8916baea80b25"
+    },
+    "512/motion-interpolation/32/tight/scene/output_005.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_005.u8",
+      "bytes": 262144,
+      "sha256": "f43acc3ac2d848aee1bd92fe21cace7cb756e5820645bd47a3baf8762b1f39ce"
+    },
+    "512/motion-interpolation/32/tight/scene/output_006.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_006.u8",
+      "bytes": 262144,
+      "sha256": "3ff6ad7565debaed6249fc4a6f002dc2df37f8fee545800d872dee8d3f759288"
+    },
+    "512/motion-interpolation/32/tight/scene/output_007.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_007.u8",
+      "bytes": 262144,
+      "sha256": "a9a11624d282fbbe780bf1af576558d2ec3d7d1cbf4a0ea01c2095b859f991fa"
+    },
+    "512/motion-interpolation/32/tight/scene/output_008.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_008.u8",
+      "bytes": 262144,
+      "sha256": "fac5dcb71810710e3cdfc3a11bb30a994f5174cf28d1c3337a6597c25288567a"
+    },
+    "512/motion-interpolation/32/tight/scene/output_009.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_009.u8",
+      "bytes": 262144,
+      "sha256": "eee1b983f1306c254f4b0bc86157ef1259bd9fb46f60ddac1dab4be4e075d412"
+    },
+    "512/motion-interpolation/32/tight/scene/output_010.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_010.u8",
+      "bytes": 262144,
+      "sha256": "8b98c0fb3ddf5e13845d1af6204ce5a5ff3e95c2acc4c1d8df659e46fa3ddb3b"
+    },
+    "512/motion-interpolation/32/tight/scene/output_011.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_011.u8",
+      "bytes": 262144,
+      "sha256": "abba8e407f9876ac248809c98b6879f5765c5519817c3cd48512c98dda36edc4"
+    },
+    "512/motion-interpolation/32/tight/scene/output_012.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_012.u8",
+      "bytes": 262144,
+      "sha256": "269b5cd0c67487dae2fa4a4b656c4c9e928fce77939691b5f67a848279038376"
+    },
+    "512/motion-interpolation/32/tight/scene/output_013.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_013.u8",
+      "bytes": 262144,
+      "sha256": "e0977d3c78542c4831f49f9ff82cc48c5234a91ae88bdf0a6766e886ea19e546"
+    },
+    "512/motion-interpolation/32/tight/scene/output_014.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_014.u8",
+      "bytes": 262144,
+      "sha256": "50eca313517e1025bc16037edbaee65d66c2d51e1669cdc956bc197382fe0c64"
+    },
+    "512/motion-interpolation/32/tight/scene/output_015.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_015.u8",
+      "bytes": 262144,
+      "sha256": "e289ddd614c6314e80b3dc432d9f2d06d39cc502ecfaddae7e57865226ac3596"
+    },
+    "512/motion-interpolation/32/tight/scene/output_016.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_016.u8",
+      "bytes": 262144,
+      "sha256": "6f48b72d6eaff2aa98fbdd1be7031db5c6d0be016fcb7fcc6ccf84723f6c77df"
+    },
+    "512/motion-interpolation/32/tight/scene/output_017.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_017.u8",
+      "bytes": 262144,
+      "sha256": "f820c40f4f7e9f36bc4883198aa84fcd67a6817dd7b86d4672e0214687bd9477"
+    },
+    "512/motion-interpolation/32/tight/scene/output_018.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_018.u8",
+      "bytes": 262144,
+      "sha256": "07bf2787616a1d5bd48a613b1e6cd117336bb654a9aa1b8e9a2b7b078e27488f"
+    },
+    "512/motion-interpolation/32/tight/scene/output_019.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_019.u8",
+      "bytes": 262144,
+      "sha256": "d54fda82adc52037f4c9834777aebfcb605ece3383c0da3e4641b79e4e245623"
+    },
+    "512/motion-interpolation/32/tight/scene/output_020.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_020.u8",
+      "bytes": 262144,
+      "sha256": "dcabca6c835b929243294410e65fb56d231feec20387faa5b32114ca8b0ea05b"
+    },
+    "512/motion-interpolation/32/tight/scene/output_021.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_021.u8",
+      "bytes": 262144,
+      "sha256": "ae063bb49fb75e29bd4b465fe3d500d49fb3c7b89ab880853b215b55606111c4"
+    },
+    "512/motion-interpolation/32/tight/scene/output_022.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_022.u8",
+      "bytes": 262144,
+      "sha256": "e9c0f532532111da91c0c3a886d6fc0803a73ae63de5c78b0cf4c3e02b60ba04"
+    },
+    "512/motion-interpolation/32/tight/scene/output_023.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_023.u8",
+      "bytes": 262144,
+      "sha256": "80ff6dec4cc2006a8da0877055e8adf22f61538bd1dd268abf00d125a5db8884"
+    },
+    "512/motion-interpolation/32/tight/scene/output_024.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_024.u8",
+      "bytes": 262144,
+      "sha256": "3a9423bee3b844a7648f53085de6c52e9734d05354af74cd370604b82fbf0a95"
+    },
+    "512/motion-interpolation/32/tight/scene/output_025.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_025.u8",
+      "bytes": 262144,
+      "sha256": "80e42b198bd6fcfd1d85e97e02e5e757438cce7635f35d54bbabebfebdf9dc04"
+    },
+    "512/motion-interpolation/32/tight/scene/output_026.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_026.u8",
+      "bytes": 262144,
+      "sha256": "4996f0fc268ed5d83b010360905109f5a008dedb2e3f26fde54579af98d3a121"
+    },
+    "512/motion-interpolation/32/tight/scene/output_027.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_027.u8",
+      "bytes": 262144,
+      "sha256": "0f98b28788c0966ce70affe13b234fc27573cf82b7662c41b3a7f376298f0f00"
+    },
+    "512/motion-interpolation/32/tight/scene/output_028.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_028.u8",
+      "bytes": 262144,
+      "sha256": "6cf9bca054add71680b371a0731dddd4076c02b891f4240ce98266ac784f791d"
+    },
+    "512/motion-interpolation/32/tight/scene/output_029.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_029.u8",
+      "bytes": 262144,
+      "sha256": "cffe50302b10c27e45572fae7606797cbf0684c35bb91525981555278f9d51ca"
+    },
+    "512/motion-interpolation/32/tight/scene/output_030.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_030.u8",
+      "bytes": 262144,
+      "sha256": "2d6466d3bff12c97a48dd98aaa18006792749509460b18f151d45e85c851cdae"
+    },
+    "512/motion-interpolation/32/tight/scene/output_031.u8": {
+      "path": "512/motion-interpolation/32/tight/scene/output_031.u8",
+      "bytes": 262144,
+      "sha256": "f112fc7e53473853a912022f63790d5b2c6a45bda8bcc6f67573796ae10e8a55"
+    },
+    "512/motion-interpolation/32/tight/scene/program.h264": {
+      "path": "512/motion-interpolation/32/tight/scene/program.h264",
+      "bytes": 1068610,
+      "sha256": "b7a1e2f2b3982181f9a8eff2ac500f41e9c3c17b5397f218920ccf67897856ca"
+    },
+    "512/patch-atlas/32/dpb16/legacy-fence.h264": {
+      "path": "512/patch-atlas/32/dpb16/legacy-fence.h264",
+      "bytes": 1206,
+      "sha256": "ecef8806769d1e504d91f09aef510ffe22dd14b47b2b54b739581cc99156579d"
+    },
+    "512/patch-atlas/32/dpb16/manifest.json": {
+      "path": "512/patch-atlas/32/dpb16/manifest.json",
+      "bytes": 4343899,
+      "sha256": "43c650abc3cbdfd0c13fc66d7ab1fbd11d3f5726f569b977ec65ba837b3ce38b"
+    },
+    "512/patch-atlas/32/dpb16/prediction-000.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-000.h264",
+      "bytes": 2157,
+      "sha256": "4f8c7deaadc3dd58051c0782c5e83a609a5e7742578166200a9b38afc82f693e"
+    },
+    "512/patch-atlas/32/dpb16/prediction-001.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-001.h264",
+      "bytes": 2161,
+      "sha256": "8106fb1b95233f2573ac210ca496bfde2b72351c409f01126eaac02956dad700"
+    },
+    "512/patch-atlas/32/dpb16/prediction-002.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-002.h264",
+      "bytes": 2158,
+      "sha256": "b6db767f445e077d8c2db6ec13c45ba60072274dd496521792fc0e2b3cf00749"
+    },
+    "512/patch-atlas/32/dpb16/prediction-003.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-003.h264",
+      "bytes": 2159,
+      "sha256": "2104e9c10c5802ed6c9ba2d3744f0b03f4e9545a32853c3f1992245466e86066"
+    },
+    "512/patch-atlas/32/dpb16/prediction-004.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-004.h264",
+      "bytes": 2156,
+      "sha256": "9eab8edfa02005063d3a8edeb7f799d4d9d4e730ecb0793f90a3470159820820"
+    },
+    "512/patch-atlas/32/dpb16/prediction-005.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-005.h264",
+      "bytes": 2160,
+      "sha256": "a284d391ae9006efcad7209632d464a432b88238bc7425de7e6dc4ea1d3e79d6"
+    },
+    "512/patch-atlas/32/dpb16/prediction-006.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-006.h264",
+      "bytes": 2157,
+      "sha256": "2544842a1e35d4ac7ec5a580302f92ab1f2472d9bd1f84815308884e860f41ea"
+    },
+    "512/patch-atlas/32/dpb16/prediction-007.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-007.h264",
+      "bytes": 2160,
+      "sha256": "12e91a900bdb8fab2a27f114e0410f8da5b9ada6b4db488490c6b5976e290d74"
+    },
+    "512/patch-atlas/32/dpb16/prediction-008.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-008.h264",
+      "bytes": 2158,
+      "sha256": "59dc88ecf292cfe9e27d559569442c652463e360c05fa7fdbdb08aa9e5601896"
+    },
+    "512/patch-atlas/32/dpb16/prediction-009.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-009.h264",
+      "bytes": 2161,
+      "sha256": "763907b8df07a17fc0906c02fea32068a7b695d332e03f62088ab9274c5bc2d1"
+    },
+    "512/patch-atlas/32/dpb16/prediction-010.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-010.h264",
+      "bytes": 2157,
+      "sha256": "68d601e609a4c98ab52074491243735fdda9227c7054e008ddfcae29921c293f"
+    },
+    "512/patch-atlas/32/dpb16/prediction-011.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-011.h264",
+      "bytes": 2160,
+      "sha256": "5bd531c545fc003addc783a1e66ea2b43f25151dcbe537032fb832ea84685fdd"
+    },
+    "512/patch-atlas/32/dpb16/prediction-012.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-012.h264",
+      "bytes": 2157,
+      "sha256": "372f9c3ba9675b8d0cdde83c1888b8ce81fb2a7d6eaa23d397a5e225d45f6496"
+    },
+    "512/patch-atlas/32/dpb16/prediction-013.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-013.h264",
+      "bytes": 2160,
+      "sha256": "2fba63a28925e70a84602909763bc46c666277b571348d3a9f59612884aeae8b"
+    },
+    "512/patch-atlas/32/dpb16/prediction-014.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-014.h264",
+      "bytes": 2157,
+      "sha256": "af45fa7d2acabeec3e42047ca7cd6baef356fd7b492f797997d40f98089a1793"
+    },
+    "512/patch-atlas/32/dpb16/prediction-015.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-015.h264",
+      "bytes": 2161,
+      "sha256": "467aeae74db435e3b660dd37aea35f2dd5f6eabbe7191f5058c4ea69575da530"
+    },
+    "512/patch-atlas/32/dpb16/prediction-016.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-016.h264",
+      "bytes": 2158,
+      "sha256": "a620a968365e5f87f67884656ff13c4dcde46240394e4a3766720d5819caa049"
+    },
+    "512/patch-atlas/32/dpb16/prediction-017.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-017.h264",
+      "bytes": 2156,
+      "sha256": "86dbc3093270dbde438e1fe39490e609ced22df28b67c26fe30cdfc706fceca0"
+    },
+    "512/patch-atlas/32/dpb16/prediction-018.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-018.h264",
+      "bytes": 2154,
+      "sha256": "b0999b0fec6d222646b8817397c5e735030906793882f7de8390bc12a5f6f798"
+    },
+    "512/patch-atlas/32/dpb16/prediction-019.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-019.h264",
+      "bytes": 2156,
+      "sha256": "46a8a85dd819ee7deb0d2a1705e9508748f38d71a0e558afd6f4268e518c39fa"
+    },
+    "512/patch-atlas/32/dpb16/prediction-020.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-020.h264",
+      "bytes": 2155,
+      "sha256": "ad0627fce54662deeed987a67ac30cf36a3bc0c5b51c769678e05db1666324a0"
+    },
+    "512/patch-atlas/32/dpb16/prediction-021.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-021.h264",
+      "bytes": 2158,
+      "sha256": "d7e470c45956974e1cde9431bbc63fc4a17999dce1528928a963b88395602174"
+    },
+    "512/patch-atlas/32/dpb16/prediction-022.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-022.h264",
+      "bytes": 2154,
+      "sha256": "205c93d5f00e2f3870a4315aa1f577e915a41bfcdc914d85e27036bed81b84ac"
+    },
+    "512/patch-atlas/32/dpb16/prediction-023.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-023.h264",
+      "bytes": 2157,
+      "sha256": "512ccaefd2dca66ac992eaa35f302dbb12eec61dc2868209c97b60b7367fd34e"
+    },
+    "512/patch-atlas/32/dpb16/prediction-024.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-024.h264",
+      "bytes": 2154,
+      "sha256": "8324b2e964be4b1593f3e22e9cc54a8c4fb98a5915bbab0c4739ce76c20040aa"
+    },
+    "512/patch-atlas/32/dpb16/prediction-025.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-025.h264",
+      "bytes": 2157,
+      "sha256": "19be0c6d5f1a804ed23fe025015e12a1aeae4a2e408cffb403ebd86feeec3957"
+    },
+    "512/patch-atlas/32/dpb16/prediction-026.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-026.h264",
+      "bytes": 2154,
+      "sha256": "2fc15a88be22820fa0dca0c7a3956d18a089fb06c6d0fb77b84982541c53cdb1"
+    },
+    "512/patch-atlas/32/dpb16/prediction-027.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-027.h264",
+      "bytes": 2157,
+      "sha256": "96d699b5c7d4bb11d69b00488390c08bb9404c0d3581529f87028fc94fdebe2b"
+    },
+    "512/patch-atlas/32/dpb16/prediction-028.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-028.h264",
+      "bytes": 2154,
+      "sha256": "f15181c740e63ebe4848b3148685f338a6fb8c93e182a6f22f128406d17ce36f"
+    },
+    "512/patch-atlas/32/dpb16/prediction-029.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-029.h264",
+      "bytes": 2158,
+      "sha256": "10886eb8af499a296f7542f2ce8e4007976e85782026033c2d210fc7346d0d70"
+    },
+    "512/patch-atlas/32/dpb16/prediction-030.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-030.h264",
+      "bytes": 2154,
+      "sha256": "d6482a4523247144a4f58e6ab5870d6302daa54bb69010d9e47afcdd75c4c91d"
+    },
+    "512/patch-atlas/32/dpb16/prediction-031.h264": {
+      "path": "512/patch-atlas/32/dpb16/prediction-031.h264",
+      "bytes": 2157,
+      "sha256": "e038783c37d2deb942f36287b833cd4cdca69f0760f5c6481f6ad6bdf211d897"
+    },
+    "512/patch-atlas/32/dpb16/scene/expected.i420": {
+      "path": "512/patch-atlas/32/dpb16/scene/expected.i420",
+      "bytes": 14648832,
+      "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+    },
+    "512/patch-atlas/32/dpb16/scene/input-000.h264": {
+      "path": "512/patch-atlas/32/dpb16/scene/input-000.h264",
+      "bytes": 463167,
+      "sha256": "5812a49d95e1d52ea9bbfab2a2409c5f1e42412f921e6be1f1c42ec1c95888cf"
+    },
+    "512/patch-atlas/32/dpb16/scene/input-image.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/input-image.u8",
+      "bytes": 262144,
+      "sha256": "0a3e2e6d32305d92d7274243064aadbf403340962dfd7d58e666024c7efb0e32"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_000.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_000.u8",
+      "bytes": 262144,
+      "sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_001.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_001.u8",
+      "bytes": 262144,
+      "sha256": "cce1116d4fb18b9cc06085eb77ec3bfb126da951e5bf7c78c5d2c1d82670630a"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_002.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_002.u8",
+      "bytes": 262144,
+      "sha256": "02a70ea5aeff5927be1bd8b817fd774b249790af4e746ab7db1b5409eabbbd96"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_003.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_003.u8",
+      "bytes": 262144,
+      "sha256": "b3ce27a64d0032649a39d3ff4cfa385ca16e2e95ef0cc0bdea0cb89fa22eb133"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_004.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_004.u8",
+      "bytes": 262144,
+      "sha256": "8d7a4cad113901178f1117982ac925f5c35488f4ec6dfb51a70fa9201a07a971"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_005.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_005.u8",
+      "bytes": 262144,
+      "sha256": "fee31668af4a6009e4f3e959307edc193700fc871444b0cfc418301740902f4f"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_006.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_006.u8",
+      "bytes": 262144,
+      "sha256": "209c99c2b65aefeee147edfec1ce148ce2082e5ba6270d8c2659f6715219d0a3"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_007.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_007.u8",
+      "bytes": 262144,
+      "sha256": "0225d08286621f27792abf5e0a9510269307d60975138323183919d46e7e4e5e"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_008.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_008.u8",
+      "bytes": 262144,
+      "sha256": "2dc98dd0a240c718d5d30ccb2b8f01a914700a3c285303c45b6e6968e70a9c9d"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_009.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_009.u8",
+      "bytes": 262144,
+      "sha256": "e180e9839468071d9e808ae9bf9c13a1f4a362496ed3aadc4d0ae91349d0dad3"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_010.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_010.u8",
+      "bytes": 262144,
+      "sha256": "624f832da028ca2fedaa426212206a1db50cd6645b4e911daeeb29b9e2da71bb"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_011.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_011.u8",
+      "bytes": 262144,
+      "sha256": "83f1f994aac17114903409f28933c41a8845563e478633113dbf8cd24c571a42"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_012.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_012.u8",
+      "bytes": 262144,
+      "sha256": "a693bc9615e1d605321cbe8165d8a03df66e07ac8940148c2ddb3c0819e6d3dc"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_013.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_013.u8",
+      "bytes": 262144,
+      "sha256": "b62cefd1ca84d1a0ba6cefb979217513c1b8c35877b14af27cc11545139016a3"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_014.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_014.u8",
+      "bytes": 262144,
+      "sha256": "dd4fd6ed589fc69564da83fc46f7f8836aad9412da2f6ffed4d93a6c73ac5c10"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_015.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_015.u8",
+      "bytes": 262144,
+      "sha256": "b123736c2232d23c2670187af5ec90c19700a232e7d86c3cc1487db41799228e"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_016.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_016.u8",
+      "bytes": 262144,
+      "sha256": "963f5ee63277accc60c8ee45888282f0049a230ada306cac0eacf1900b948d90"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_017.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_017.u8",
+      "bytes": 262144,
+      "sha256": "74ff56fa9a2e6b931ff0a336fbe014fbdaa7b30eb83eff7cdfafb02b1a96cfe0"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_018.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_018.u8",
+      "bytes": 262144,
+      "sha256": "33dc79145439d46738d0d57b6b247d435ef8496158c9557cdea1b2c38b965da0"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_019.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_019.u8",
+      "bytes": 262144,
+      "sha256": "5efc8badc2172a8595bede7365c6ce6ba6c53ecbb4903e2f9e0bf1c0c9b63bc1"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_020.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_020.u8",
+      "bytes": 262144,
+      "sha256": "7cefb984e222df92404995da17a96b3f757103367f68d28dca335dd483b44854"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_021.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_021.u8",
+      "bytes": 262144,
+      "sha256": "4c37ebd2621794b498550686e1a372ad3453d09bacb7363e3f4c49a7f3059e54"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_022.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_022.u8",
+      "bytes": 262144,
+      "sha256": "f0a0b0a56979eac6e4e77591db4ed67d6e9f3f9f0e533a77ef56e4dafbf40bea"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_023.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_023.u8",
+      "bytes": 262144,
+      "sha256": "e2a3236f3b96046cbc4bd13d15daca69dba2849b7c502a6c52856445ef44d3e5"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_024.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_024.u8",
+      "bytes": 262144,
+      "sha256": "554ee6866a240311ee3c7a62ef74fad0a2b9fab656e81f7de273b60231067f83"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_025.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_025.u8",
+      "bytes": 262144,
+      "sha256": "fd644626cc66c0a312db56f2d4e28f17d47220bae434d7b0332b93c776643085"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_026.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_026.u8",
+      "bytes": 262144,
+      "sha256": "a88f7790f8cc0d318487c37e69366d74043cc53e1ab13ac810482ab73489432c"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_027.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_027.u8",
+      "bytes": 262144,
+      "sha256": "171a5874a0cf4d8cc79fbd311c5b95f09cb8fade8df5fd7ce06eb3ff27dc9bf3"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_028.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_028.u8",
+      "bytes": 262144,
+      "sha256": "fe073a4189172327d7290b7ca6518805abac6ab4a6d56ecc3c58f135c73f7d58"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_029.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_029.u8",
+      "bytes": 262144,
+      "sha256": "c979489c1fa8c26bc56cc3c760762907098b4cd962b7d7167bba0c75890e6372"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_030.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_030.u8",
+      "bytes": 262144,
+      "sha256": "6153eadbc8337506f1c88efef54cd86d6388b4f82da7f5e6d23c69b1ac9b3a3c"
+    },
+    "512/patch-atlas/32/dpb16/scene/output_031.u8": {
+      "path": "512/patch-atlas/32/dpb16/scene/output_031.u8",
+      "bytes": 262144,
+      "sha256": "bce747999d2002aa11c5ea91cede8cc65372ae81b8c1f2e15c90171c808ca02f"
+    },
+    "512/patch-atlas/32/dpb16/scene/program.h264": {
+      "path": "512/patch-atlas/32/dpb16/scene/program.h264",
+      "bytes": 532199,
+      "sha256": "6d4fa990dc1a3fc0827ea8a495a4cb831c653c825556394e5f518326d50f8cd8"
+    },
+    "512/patch-atlas/32/tight/legacy-fence.h264": {
+      "path": "512/patch-atlas/32/tight/legacy-fence.h264",
+      "bytes": 1205,
+      "sha256": "1d1c3b16896b5bec139e5906d9348db4c8c3a8c777120339f5401e26fea6d69f"
+    },
+    "512/patch-atlas/32/tight/manifest.json": {
+      "path": "512/patch-atlas/32/tight/manifest.json",
+      "bytes": 4343896,
+      "sha256": "17bef92efb6e04d63d60ffec3446961cda5437ef469e893423a33be18f44a3b0"
+    },
+    "512/patch-atlas/32/tight/prediction-000.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-000.h264",
+      "bytes": 2156,
+      "sha256": "d2d64f08e8507ee48fd40783c1bd062c5d716f821f1581ed9752841563259a57"
+    },
+    "512/patch-atlas/32/tight/prediction-001.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-001.h264",
+      "bytes": 2160,
+      "sha256": "c4b4442249b13ff230a88e52519b117819881bc0fdf096de88ec84227da7a850"
+    },
+    "512/patch-atlas/32/tight/prediction-002.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-002.h264",
+      "bytes": 2157,
+      "sha256": "4624e8ac859f07de28f3aaeabbbc496ac761fc19bdf774d4092206243781983c"
+    },
+    "512/patch-atlas/32/tight/prediction-003.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-003.h264",
+      "bytes": 2158,
+      "sha256": "a6059653096ff5cff5701894024ba0eb8ab8b0a74612bacc6f74845d604c06ed"
+    },
+    "512/patch-atlas/32/tight/prediction-004.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-004.h264",
+      "bytes": 2156,
+      "sha256": "bb2205cc50416e53207f1a149a4090b065ace578105607ef287c0d835440f362"
+    },
+    "512/patch-atlas/32/tight/prediction-005.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-005.h264",
+      "bytes": 2159,
+      "sha256": "24f029f9f59bf0b78361207df126047bd856aca5f7bb902ac167086f3a952e86"
+    },
+    "512/patch-atlas/32/tight/prediction-006.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-006.h264",
+      "bytes": 2156,
+      "sha256": "06e574c66b89090003e22249bac768d4b40df35055111c84d42c17ca9ce261e0"
+    },
+    "512/patch-atlas/32/tight/prediction-007.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-007.h264",
+      "bytes": 2160,
+      "sha256": "3cffae8f809bf82bd87d491cbece77153ff05d476e98173b908701b9e317b618"
+    },
+    "512/patch-atlas/32/tight/prediction-008.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-008.h264",
+      "bytes": 2157,
+      "sha256": "d5aa32a6dd8e5fc538d0898055f0a168866134352deaf41f785f74d4d41a5017"
+    },
+    "512/patch-atlas/32/tight/prediction-009.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-009.h264",
+      "bytes": 2160,
+      "sha256": "eea229e7186b79337a0b25a2ac43aa12f13674009a60bbfde4b50c3e954090e8"
+    },
+    "512/patch-atlas/32/tight/prediction-010.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-010.h264",
+      "bytes": 2156,
+      "sha256": "7b97ec2a159a14fc5d455d589932861fc3b50749c78b990ddfdc03236665b297"
+    },
+    "512/patch-atlas/32/tight/prediction-011.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-011.h264",
+      "bytes": 2160,
+      "sha256": "db867a64a80c7061efaf031ab36d74d9fc6c77b95ae48625265cf1ac007e7825"
+    },
+    "512/patch-atlas/32/tight/prediction-012.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-012.h264",
+      "bytes": 2156,
+      "sha256": "417f5afc167b54193910b854efdf175a4b164181555b96efb3d69ae6038a90c7"
+    },
+    "512/patch-atlas/32/tight/prediction-013.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-013.h264",
+      "bytes": 2160,
+      "sha256": "cf38d9d08c0ed8d7a9a441a4412ce99fd143beb265c141c7c3b9ad452fa782e1"
+    },
+    "512/patch-atlas/32/tight/prediction-014.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-014.h264",
+      "bytes": 2156,
+      "sha256": "865e2cb8a0b69bc305e40152e9bbf48dc2e66ee40f908c6d6b1b0131d2cd8bd1"
+    },
+    "512/patch-atlas/32/tight/prediction-015.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-015.h264",
+      "bytes": 2160,
+      "sha256": "80346c86e2d41acae2f3cdc945b5c2b6188e38310f840116ea2286455cc79658"
+    },
+    "512/patch-atlas/32/tight/prediction-016.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-016.h264",
+      "bytes": 2158,
+      "sha256": "b1910699ec6b4a1c725477b8e51f72bb5489caa2461f0cd176aab99f34ec49a7"
+    },
+    "512/patch-atlas/32/tight/prediction-017.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-017.h264",
+      "bytes": 2155,
+      "sha256": "d4555a0a00afa35b3ae4c8a7812dd9b9dd8f9963ca87b107eb9909cbcc21d524"
+    },
+    "512/patch-atlas/32/tight/prediction-018.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-018.h264",
+      "bytes": 2153,
+      "sha256": "9ccad848cfb1c6cd0b42f54221a588f50098ffaf3260e1978ecb19300f6a9636"
+    },
+    "512/patch-atlas/32/tight/prediction-019.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-019.h264",
+      "bytes": 2155,
+      "sha256": "ebbefbce5f7689f59f9650e982d6b4a202338560869d66f2352f6f28bc37a6aa"
+    },
+    "512/patch-atlas/32/tight/prediction-020.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-020.h264",
+      "bytes": 2154,
+      "sha256": "2571f81c2b074580eb8aee71a7a50e26b57248dcd697dc2002b8a0f1b8a2710e"
+    },
+    "512/patch-atlas/32/tight/prediction-021.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-021.h264",
+      "bytes": 2157,
+      "sha256": "e13e96677c347929a10bff187708da3f5218582e4b9410550229dbb889b73f95"
+    },
+    "512/patch-atlas/32/tight/prediction-022.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-022.h264",
+      "bytes": 2154,
+      "sha256": "bfdadf401bb270e231bf011b8dad498fac4308088c610f9699a6dbc4c4f400c5"
+    },
+    "512/patch-atlas/32/tight/prediction-023.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-023.h264",
+      "bytes": 2157,
+      "sha256": "5f5fee759b401ef31564416ac3917fb547cdab4883af27cfe42c78679a70c7b1"
+    },
+    "512/patch-atlas/32/tight/prediction-024.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-024.h264",
+      "bytes": 2153,
+      "sha256": "6de192068b984434a089694e9d3a5afd738b601dd354c7820e60194af0d8c613"
+    },
+    "512/patch-atlas/32/tight/prediction-025.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-025.h264",
+      "bytes": 2156,
+      "sha256": "72bdc606300c12aa7706427e42c2f133dfe22e8baf7cb257f607c99baf6b8d0f"
+    },
+    "512/patch-atlas/32/tight/prediction-026.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-026.h264",
+      "bytes": 2153,
+      "sha256": "79a4a9770b602bdd9c543f13f19186ac6db177e09047db73e4f5a4d202d33ec9"
+    },
+    "512/patch-atlas/32/tight/prediction-027.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-027.h264",
+      "bytes": 2157,
+      "sha256": "f4a7097cadadd3dbf75a9425d1d82468b128a5c7966382f84c7acb8d59c51ace"
+    },
+    "512/patch-atlas/32/tight/prediction-028.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-028.h264",
+      "bytes": 2153,
+      "sha256": "136004cdfda840dbadd1dea537af56bd4ca785f1e8518d0ea0266273038c7d50"
+    },
+    "512/patch-atlas/32/tight/prediction-029.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-029.h264",
+      "bytes": 2157,
+      "sha256": "83e778decf56ee5fef170d2bdc7c772c4eb9c0ac73a0ebe078ce6dc91897ff27"
+    },
+    "512/patch-atlas/32/tight/prediction-030.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-030.h264",
+      "bytes": 2154,
+      "sha256": "3d67bf4dd52cf938143c121de29e6447bdbda6ea661dd5ce84e97177f86094d8"
+    },
+    "512/patch-atlas/32/tight/prediction-031.h264": {
+      "path": "512/patch-atlas/32/tight/prediction-031.h264",
+      "bytes": 2156,
+      "sha256": "4e7a9afbf63d5e90bc9a18ba757f0654c9e8716bbe22075afcc302c9a3b2968c"
+    },
+    "512/patch-atlas/32/tight/scene/expected.i420": {
+      "path": "512/patch-atlas/32/tight/scene/expected.i420",
+      "bytes": 14648832,
+      "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+    },
+    "512/patch-atlas/32/tight/scene/input-000.h264": {
+      "path": "512/patch-atlas/32/tight/scene/input-000.h264",
+      "bytes": 463166,
+      "sha256": "a506cee447e5dff713c4ac36491ba15db948203ea7f237c3bb3fa4e6b0407338"
+    },
+    "512/patch-atlas/32/tight/scene/input-image.u8": {
+      "path": "512/patch-atlas/32/tight/scene/input-image.u8",
+      "bytes": 262144,
+      "sha256": "0a3e2e6d32305d92d7274243064aadbf403340962dfd7d58e666024c7efb0e32"
+    },
+    "512/patch-atlas/32/tight/scene/output_000.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_000.u8",
+      "bytes": 262144,
+      "sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c"
+    },
+    "512/patch-atlas/32/tight/scene/output_001.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_001.u8",
+      "bytes": 262144,
+      "sha256": "cce1116d4fb18b9cc06085eb77ec3bfb126da951e5bf7c78c5d2c1d82670630a"
+    },
+    "512/patch-atlas/32/tight/scene/output_002.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_002.u8",
+      "bytes": 262144,
+      "sha256": "02a70ea5aeff5927be1bd8b817fd774b249790af4e746ab7db1b5409eabbbd96"
+    },
+    "512/patch-atlas/32/tight/scene/output_003.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_003.u8",
+      "bytes": 262144,
+      "sha256": "b3ce27a64d0032649a39d3ff4cfa385ca16e2e95ef0cc0bdea0cb89fa22eb133"
+    },
+    "512/patch-atlas/32/tight/scene/output_004.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_004.u8",
+      "bytes": 262144,
+      "sha256": "8d7a4cad113901178f1117982ac925f5c35488f4ec6dfb51a70fa9201a07a971"
+    },
+    "512/patch-atlas/32/tight/scene/output_005.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_005.u8",
+      "bytes": 262144,
+      "sha256": "fee31668af4a6009e4f3e959307edc193700fc871444b0cfc418301740902f4f"
+    },
+    "512/patch-atlas/32/tight/scene/output_006.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_006.u8",
+      "bytes": 262144,
+      "sha256": "209c99c2b65aefeee147edfec1ce148ce2082e5ba6270d8c2659f6715219d0a3"
+    },
+    "512/patch-atlas/32/tight/scene/output_007.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_007.u8",
+      "bytes": 262144,
+      "sha256": "0225d08286621f27792abf5e0a9510269307d60975138323183919d46e7e4e5e"
+    },
+    "512/patch-atlas/32/tight/scene/output_008.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_008.u8",
+      "bytes": 262144,
+      "sha256": "2dc98dd0a240c718d5d30ccb2b8f01a914700a3c285303c45b6e6968e70a9c9d"
+    },
+    "512/patch-atlas/32/tight/scene/output_009.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_009.u8",
+      "bytes": 262144,
+      "sha256": "e180e9839468071d9e808ae9bf9c13a1f4a362496ed3aadc4d0ae91349d0dad3"
+    },
+    "512/patch-atlas/32/tight/scene/output_010.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_010.u8",
+      "bytes": 262144,
+      "sha256": "624f832da028ca2fedaa426212206a1db50cd6645b4e911daeeb29b9e2da71bb"
+    },
+    "512/patch-atlas/32/tight/scene/output_011.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_011.u8",
+      "bytes": 262144,
+      "sha256": "83f1f994aac17114903409f28933c41a8845563e478633113dbf8cd24c571a42"
+    },
+    "512/patch-atlas/32/tight/scene/output_012.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_012.u8",
+      "bytes": 262144,
+      "sha256": "a693bc9615e1d605321cbe8165d8a03df66e07ac8940148c2ddb3c0819e6d3dc"
+    },
+    "512/patch-atlas/32/tight/scene/output_013.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_013.u8",
+      "bytes": 262144,
+      "sha256": "b62cefd1ca84d1a0ba6cefb979217513c1b8c35877b14af27cc11545139016a3"
+    },
+    "512/patch-atlas/32/tight/scene/output_014.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_014.u8",
+      "bytes": 262144,
+      "sha256": "dd4fd6ed589fc69564da83fc46f7f8836aad9412da2f6ffed4d93a6c73ac5c10"
+    },
+    "512/patch-atlas/32/tight/scene/output_015.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_015.u8",
+      "bytes": 262144,
+      "sha256": "b123736c2232d23c2670187af5ec90c19700a232e7d86c3cc1487db41799228e"
+    },
+    "512/patch-atlas/32/tight/scene/output_016.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_016.u8",
+      "bytes": 262144,
+      "sha256": "963f5ee63277accc60c8ee45888282f0049a230ada306cac0eacf1900b948d90"
+    },
+    "512/patch-atlas/32/tight/scene/output_017.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_017.u8",
+      "bytes": 262144,
+      "sha256": "74ff56fa9a2e6b931ff0a336fbe014fbdaa7b30eb83eff7cdfafb02b1a96cfe0"
+    },
+    "512/patch-atlas/32/tight/scene/output_018.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_018.u8",
+      "bytes": 262144,
+      "sha256": "33dc79145439d46738d0d57b6b247d435ef8496158c9557cdea1b2c38b965da0"
+    },
+    "512/patch-atlas/32/tight/scene/output_019.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_019.u8",
+      "bytes": 262144,
+      "sha256": "5efc8badc2172a8595bede7365c6ce6ba6c53ecbb4903e2f9e0bf1c0c9b63bc1"
+    },
+    "512/patch-atlas/32/tight/scene/output_020.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_020.u8",
+      "bytes": 262144,
+      "sha256": "7cefb984e222df92404995da17a96b3f757103367f68d28dca335dd483b44854"
+    },
+    "512/patch-atlas/32/tight/scene/output_021.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_021.u8",
+      "bytes": 262144,
+      "sha256": "4c37ebd2621794b498550686e1a372ad3453d09bacb7363e3f4c49a7f3059e54"
+    },
+    "512/patch-atlas/32/tight/scene/output_022.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_022.u8",
+      "bytes": 262144,
+      "sha256": "f0a0b0a56979eac6e4e77591db4ed67d6e9f3f9f0e533a77ef56e4dafbf40bea"
+    },
+    "512/patch-atlas/32/tight/scene/output_023.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_023.u8",
+      "bytes": 262144,
+      "sha256": "e2a3236f3b96046cbc4bd13d15daca69dba2849b7c502a6c52856445ef44d3e5"
+    },
+    "512/patch-atlas/32/tight/scene/output_024.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_024.u8",
+      "bytes": 262144,
+      "sha256": "554ee6866a240311ee3c7a62ef74fad0a2b9fab656e81f7de273b60231067f83"
+    },
+    "512/patch-atlas/32/tight/scene/output_025.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_025.u8",
+      "bytes": 262144,
+      "sha256": "fd644626cc66c0a312db56f2d4e28f17d47220bae434d7b0332b93c776643085"
+    },
+    "512/patch-atlas/32/tight/scene/output_026.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_026.u8",
+      "bytes": 262144,
+      "sha256": "a88f7790f8cc0d318487c37e69366d74043cc53e1ab13ac810482ab73489432c"
+    },
+    "512/patch-atlas/32/tight/scene/output_027.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_027.u8",
+      "bytes": 262144,
+      "sha256": "171a5874a0cf4d8cc79fbd311c5b95f09cb8fade8df5fd7ce06eb3ff27dc9bf3"
+    },
+    "512/patch-atlas/32/tight/scene/output_028.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_028.u8",
+      "bytes": 262144,
+      "sha256": "fe073a4189172327d7290b7ca6518805abac6ab4a6d56ecc3c58f135c73f7d58"
+    },
+    "512/patch-atlas/32/tight/scene/output_029.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_029.u8",
+      "bytes": 262144,
+      "sha256": "c979489c1fa8c26bc56cc3c760762907098b4cd962b7d7167bba0c75890e6372"
+    },
+    "512/patch-atlas/32/tight/scene/output_030.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_030.u8",
+      "bytes": 262144,
+      "sha256": "6153eadbc8337506f1c88efef54cd86d6388b4f82da7f5e6d23c69b1ac9b3a3c"
+    },
+    "512/patch-atlas/32/tight/scene/output_031.u8": {
+      "path": "512/patch-atlas/32/tight/scene/output_031.u8",
+      "bytes": 262144,
+      "sha256": "bce747999d2002aa11c5ea91cede8cc65372ae81b8c1f2e15c90171c808ca02f"
+    },
+    "512/patch-atlas/32/tight/scene/program.h264": {
+      "path": "512/patch-atlas/32/tight/scene/program.h264",
+      "bytes": 532175,
+      "sha256": "3f7e86f3378724ca8843f6f7f0a2f66c5dae7c5764c7d11d94db034a47c6887d"
+    },
+    "capture-source.py": {
+      "path": "capture-source.py",
+      "bytes": 21904,
+      "sha256": "ec6da120c94f1cb1d3b01c0b17e9b9e4ab2fd7f197a9812732586c97427a838d"
+    },
+    "full-bundle.json": {
+      "path": "full-bundle.json",
+      "bytes": 19956016,
+      "sha256": "4a9843b0550d46064c363d4ee3604931b5b9d809c019b3636444155ef01299ad"
+    }
+  },
+  "selection_policy": "Keep 512px, 32-output scene fixtures for atlas/interpolation under both DPB declarations; retain every artifact referenced by those four cases and fixtures.",
+  "omissions": {
+    "note": "full-bundle.json is the exact complete original index. Unselected payloads are intentionally absent. This directory is review evidence, not a runnable benchmark bundle.",
+    "omitted_cases": [
+      "128/motion-interpolation/1/dpb16",
+      "128/motion-interpolation/1/tight",
+      "128/motion-interpolation/32/dpb16",
+      "128/motion-interpolation/32/tight",
+      "128/motion-interpolation/8/dpb16",
+      "128/motion-interpolation/8/tight",
+      "128/patch-atlas/1/dpb16",
+      "128/patch-atlas/1/tight",
+      "128/patch-atlas/32/dpb16",
+      "128/patch-atlas/32/tight",
+      "128/patch-atlas/8/dpb16",
+      "128/patch-atlas/8/tight",
+      "512/motion-interpolation/1/dpb16",
+      "512/motion-interpolation/1/tight",
+      "512/motion-interpolation/8/dpb16",
+      "512/motion-interpolation/8/tight",
+      "512/patch-atlas/1/dpb16",
+      "512/patch-atlas/1/tight",
+      "512/patch-atlas/8/dpb16",
+      "512/patch-atlas/8/tight"
+    ],
+    "omitted_fixtures_for_retained_cases": [
+      "noise",
+      "zero",
+      "full"
+    ],
+    "omitted_streams": 92,
+    "omitted_indexed_artifacts": 1884,
+    "omitted_indexed_bytes": 543081884
+  }
+}

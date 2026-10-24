@@ -1,0 +1,720 @@
+{
+  "format": "retained-inputs-capture-1",
+  "capture_script": {
+    "path": "capture-source.py",
+    "bytes": 21904,
+    "sha256": "ec6da120c94f1cb1d3b01c0b17e9b9e4ab2fd7f197a9812732586c97427a838d"
+  },
+  "curation": {
+    "path": "curation.json",
+    "bytes": 69985,
+    "sha256": "203728d48d9a550bdcafdd3f85a61aeb1d62deb717288e322b10d202f8fdd0e1"
+  },
+  "full_bundle": {
+    "path": "full-bundle.json",
+    "bytes": 19956016,
+    "sha256": "4a9843b0550d46064c363d4ee3604931b5b9d809c019b3636444155ef01299ad"
+  },
+  "audits": {
+    "retained_cases": 4,
+    "retained_streams": 4,
+    "retained_source_artifacts": 286,
+    "retained_source_bytes": 146253645,
+    "complete_i420_pictures_checked": 134,
+    "named_output_crops_checked": 128,
+    "paired_complete_i420_matches": 2,
+    "full_bundle_sha256": "4a9843b0550d46064c363d4ee3604931b5b9d809c019b3636444155ef01299ad",
+    "omitted_streams": 92,
+    "scope": "Saved export hashes, shared-IR/CPU field binding, framing, every compact crop, zero guards, neutral chroma and DPB-pair equality. No new decode or hardware timing."
+  },
+  "source_commit": "9e18edf0b2c4edc7c4743af3ac8f0f27853c451d",
+  "pixel_source": "Complete saved I420 checked against every compact output and original local decoder hashes.",
+  "hardware_scope": "Images show frozen local FFmpeg/OpenH264/VAAPI evidence. This script performs no NVDEC run or timing.",
+  "display": {
+    "scale": 1,
+    "interpolation": "none",
+    "contrast_stretch": false,
+    "zero_luma": "black",
+    "guards_and_chroma": "Audited; excluded from active-luma panels."
+  },
+  "panels": [
+    {
+      "case": "512/patch-atlas/32/dpb16",
+      "fixture": "scene",
+      "label": "input-image",
+      "frame_index": 0,
+      "source_i420": {
+        "path": "512/patch-atlas/32/dpb16/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/dpb16/scene/input-image.u8",
+        "bytes": 262144,
+        "sha256": "0a3e2e6d32305d92d7274243064aadbf403340962dfd7d58e666024c7efb0e32"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "0a3e2e6d32305d92d7274243064aadbf403340962dfd7d58e666024c7efb0e32",
+      "panel": {
+        "path": "panels/patch-atlas/dpb16/input-image.png",
+        "bytes": 1478,
+        "sha256": "54b9c80b90279da0eb740fa14e60d7fcc5735f16a4bb1a7316d351eb4deedaa5"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 261121
+    },
+    {
+      "case": "512/patch-atlas/32/dpb16",
+      "fixture": "scene",
+      "label": "output-00",
+      "frame_index": 1,
+      "source_i420": {
+        "path": "512/patch-atlas/32/dpb16/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/dpb16/scene/output_000.u8",
+        "bytes": 262144,
+        "sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c",
+      "panel": {
+        "path": "panels/patch-atlas/dpb16/output-00.png",
+        "bytes": 1072,
+        "sha256": "5986f5d1c2b24987aa8131daaa377a1c6df53365ffc641ea31287f916610d173"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65267,
+      "sheet": 0,
+      "sheet_rectangle": [
+        20,
+        132,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/patch-atlas/32/dpb16",
+      "fixture": "scene",
+      "label": "output-15",
+      "frame_index": 16,
+      "source_i420": {
+        "path": "512/patch-atlas/32/dpb16/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/dpb16/scene/output_015.u8",
+        "bytes": 262144,
+        "sha256": "b123736c2232d23c2670187af5ec90c19700a232e7d86c3cc1487db41799228e"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "b123736c2232d23c2670187af5ec90c19700a232e7d86c3cc1487db41799228e",
+      "panel": {
+        "path": "panels/patch-atlas/dpb16/output-15.png",
+        "bytes": 1078,
+        "sha256": "1fb4ffeb8fe600103907f908e66a8909e0fc40569979dba7b60d6a38dc8fd272"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65273,
+      "sheet": 0,
+      "sheet_rectangle": [
+        556,
+        132,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/patch-atlas/32/dpb16",
+      "fixture": "scene",
+      "label": "output-31",
+      "frame_index": 32,
+      "source_i420": {
+        "path": "512/patch-atlas/32/dpb16/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/dpb16/scene/output_031.u8",
+        "bytes": 262144,
+        "sha256": "bce747999d2002aa11c5ea91cede8cc65372ae81b8c1f2e15c90171c808ca02f"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "bce747999d2002aa11c5ea91cede8cc65372ae81b8c1f2e15c90171c808ca02f",
+      "panel": {
+        "path": "panels/patch-atlas/dpb16/output-31.png",
+        "bytes": 1074,
+        "sha256": "4639f976e51db8f642396b51049ddd94976cde0b558a3bfbd2a473337cb17c2a"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65283,
+      "sheet": 0,
+      "sheet_rectangle": [
+        1092,
+        132,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/patch-atlas/32/tight",
+      "fixture": "scene",
+      "label": "input-image",
+      "frame_index": 0,
+      "source_i420": {
+        "path": "512/patch-atlas/32/tight/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/tight/scene/input-image.u8",
+        "bytes": 262144,
+        "sha256": "0a3e2e6d32305d92d7274243064aadbf403340962dfd7d58e666024c7efb0e32"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "0a3e2e6d32305d92d7274243064aadbf403340962dfd7d58e666024c7efb0e32",
+      "panel": {
+        "path": "panels/patch-atlas/tight/input-image.png",
+        "bytes": 1478,
+        "sha256": "54b9c80b90279da0eb740fa14e60d7fcc5735f16a4bb1a7316d351eb4deedaa5"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 261121
+    },
+    {
+      "case": "512/patch-atlas/32/tight",
+      "fixture": "scene",
+      "label": "output-00",
+      "frame_index": 1,
+      "source_i420": {
+        "path": "512/patch-atlas/32/tight/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/tight/scene/output_000.u8",
+        "bytes": 262144,
+        "sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "8ba127d0a799b0c0a4be3a3050a712c6535b3b388d7649c56894993b30a8259c",
+      "panel": {
+        "path": "panels/patch-atlas/tight/output-00.png",
+        "bytes": 1072,
+        "sha256": "5986f5d1c2b24987aa8131daaa377a1c6df53365ffc641ea31287f916610d173"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65267,
+      "sheet": 0,
+      "sheet_rectangle": [
+        20,
+        710,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/patch-atlas/32/tight",
+      "fixture": "scene",
+      "label": "output-15",
+      "frame_index": 16,
+      "source_i420": {
+        "path": "512/patch-atlas/32/tight/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/tight/scene/output_015.u8",
+        "bytes": 262144,
+        "sha256": "b123736c2232d23c2670187af5ec90c19700a232e7d86c3cc1487db41799228e"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "b123736c2232d23c2670187af5ec90c19700a232e7d86c3cc1487db41799228e",
+      "panel": {
+        "path": "panels/patch-atlas/tight/output-15.png",
+        "bytes": 1078,
+        "sha256": "1fb4ffeb8fe600103907f908e66a8909e0fc40569979dba7b60d6a38dc8fd272"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65273,
+      "sheet": 0,
+      "sheet_rectangle": [
+        556,
+        710,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/patch-atlas/32/tight",
+      "fixture": "scene",
+      "label": "output-31",
+      "frame_index": 32,
+      "source_i420": {
+        "path": "512/patch-atlas/32/tight/scene/expected.i420",
+        "bytes": 14648832,
+        "sha256": "1a22f8bf52c7b46aff7626b618b5cbb8b8e690ef82e9790f782194d533344ca9"
+      },
+      "compact_reference": {
+        "path": "512/patch-atlas/32/tight/scene/output_031.u8",
+        "bytes": 262144,
+        "sha256": "bce747999d2002aa11c5ea91cede8cc65372ae81b8c1f2e15c90171c808ca02f"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "bce747999d2002aa11c5ea91cede8cc65372ae81b8c1f2e15c90171c808ca02f",
+      "panel": {
+        "path": "panels/patch-atlas/tight/output-31.png",
+        "bytes": 1074,
+        "sha256": "4639f976e51db8f642396b51049ddd94976cde0b558a3bfbd2a473337cb17c2a"
+      },
+      "pixel_min": 0,
+      "pixel_max": 255,
+      "nonzero_pixels": 65283,
+      "sheet": 0,
+      "sheet_rectangle": [
+        1092,
+        710,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/32/dpb16",
+      "fixture": "scene",
+      "label": "input-a",
+      "frame_index": 0,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/dpb16/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/dpb16/scene/input-a.u8",
+        "bytes": 262144,
+        "sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e",
+      "panel": {
+        "path": "panels/motion-interpolation/dpb16/input-a.png",
+        "bytes": 4666,
+        "sha256": "2d95c14fdb18aa33f53c6053becc84ee82911b70ff72fea7994ebb12aea65720"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 262144
+    },
+    {
+      "case": "512/motion-interpolation/32/dpb16",
+      "fixture": "scene",
+      "label": "input-b",
+      "frame_index": 1,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/dpb16/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/dpb16/scene/input-b.u8",
+        "bytes": 262144,
+        "sha256": "19d1aead77a1fb03d928b039008a3c2e646c983baad2f8dc13134cdfa48ecdc9"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "19d1aead77a1fb03d928b039008a3c2e646c983baad2f8dc13134cdfa48ecdc9",
+      "panel": {
+        "path": "panels/motion-interpolation/dpb16/input-b.png",
+        "bytes": 4640,
+        "sha256": "96b91bf493d51c11a77e5b4debec39b9ebf66c26d1992fd7707abc0b0b0ef95e"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 262144
+    },
+    {
+      "case": "512/motion-interpolation/32/dpb16",
+      "fixture": "scene",
+      "label": "output-00",
+      "frame_index": 2,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/dpb16/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/dpb16/scene/output_000.u8",
+        "bytes": 262144,
+        "sha256": "867db7b23586f817cb5daae2711ba0489980c2dc89b75ac5d6e9d0176c5d746e"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "867db7b23586f817cb5daae2711ba0489980c2dc89b75ac5d6e9d0176c5d746e",
+      "panel": {
+        "path": "panels/motion-interpolation/dpb16/output-00.png",
+        "bytes": 41615,
+        "sha256": "73e808d6feb06f8ff4a46619b98405a6ee6778a988eaf03dadc9286f8aa3763c"
+      },
+      "pixel_min": 1,
+      "pixel_max": 253,
+      "nonzero_pixels": 262144,
+      "sheet": 1,
+      "sheet_rectangle": [
+        20,
+        132,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/32/dpb16",
+      "fixture": "scene",
+      "label": "output-15",
+      "frame_index": 17,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/dpb16/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/dpb16/scene/output_015.u8",
+        "bytes": 262144,
+        "sha256": "e289ddd614c6314e80b3dc432d9f2d06d39cc502ecfaddae7e57865226ac3596"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "e289ddd614c6314e80b3dc432d9f2d06d39cc502ecfaddae7e57865226ac3596",
+      "panel": {
+        "path": "panels/motion-interpolation/dpb16/output-15.png",
+        "bytes": 37091,
+        "sha256": "68b28f836d82b3c750a4f2119eca76c2ada3f20a25c2e67dcfb7350a139a9039"
+      },
+      "pixel_min": 0,
+      "pixel_max": 252,
+      "nonzero_pixels": 262142,
+      "sheet": 1,
+      "sheet_rectangle": [
+        556,
+        132,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/32/dpb16",
+      "fixture": "scene",
+      "label": "output-31",
+      "frame_index": 33,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/dpb16/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/dpb16/scene/output_031.u8",
+        "bytes": 262144,
+        "sha256": "f112fc7e53473853a912022f63790d5b2c6a45bda8bcc6f67573796ae10e8a55"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "f112fc7e53473853a912022f63790d5b2c6a45bda8bcc6f67573796ae10e8a55",
+      "panel": {
+        "path": "panels/motion-interpolation/dpb16/output-31.png",
+        "bytes": 44576,
+        "sha256": "9f3abac5909575f56023ee1f1c45118ca7eefec5eeb74266a801b2940b0e4492"
+      },
+      "pixel_min": 0,
+      "pixel_max": 253,
+      "nonzero_pixels": 262143,
+      "sheet": 1,
+      "sheet_rectangle": [
+        1092,
+        132,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/32/tight",
+      "fixture": "scene",
+      "label": "input-a",
+      "frame_index": 0,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/tight/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/tight/scene/input-a.u8",
+        "bytes": 262144,
+        "sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "68071d01faf8f7a4fb5ce621289a128b954fa63adb1fb22122324ff4e3b0be6e",
+      "panel": {
+        "path": "panels/motion-interpolation/tight/input-a.png",
+        "bytes": 4666,
+        "sha256": "2d95c14fdb18aa33f53c6053becc84ee82911b70ff72fea7994ebb12aea65720"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 262144
+    },
+    {
+      "case": "512/motion-interpolation/32/tight",
+      "fixture": "scene",
+      "label": "input-b",
+      "frame_index": 1,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/tight/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/tight/scene/input-b.u8",
+        "bytes": 262144,
+        "sha256": "19d1aead77a1fb03d928b039008a3c2e646c983baad2f8dc13134cdfa48ecdc9"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "19d1aead77a1fb03d928b039008a3c2e646c983baad2f8dc13134cdfa48ecdc9",
+      "panel": {
+        "path": "panels/motion-interpolation/tight/input-b.png",
+        "bytes": 4640,
+        "sha256": "96b91bf493d51c11a77e5b4debec39b9ebf66c26d1992fd7707abc0b0b0ef95e"
+      },
+      "pixel_min": 24,
+      "pixel_max": 240,
+      "nonzero_pixels": 262144
+    },
+    {
+      "case": "512/motion-interpolation/32/tight",
+      "fixture": "scene",
+      "label": "output-00",
+      "frame_index": 2,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/tight/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/tight/scene/output_000.u8",
+        "bytes": 262144,
+        "sha256": "867db7b23586f817cb5daae2711ba0489980c2dc89b75ac5d6e9d0176c5d746e"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "867db7b23586f817cb5daae2711ba0489980c2dc89b75ac5d6e9d0176c5d746e",
+      "panel": {
+        "path": "panels/motion-interpolation/tight/output-00.png",
+        "bytes": 41615,
+        "sha256": "73e808d6feb06f8ff4a46619b98405a6ee6778a988eaf03dadc9286f8aa3763c"
+      },
+      "pixel_min": 1,
+      "pixel_max": 253,
+      "nonzero_pixels": 262144,
+      "sheet": 1,
+      "sheet_rectangle": [
+        20,
+        710,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/32/tight",
+      "fixture": "scene",
+      "label": "output-15",
+      "frame_index": 17,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/tight/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/tight/scene/output_015.u8",
+        "bytes": 262144,
+        "sha256": "e289ddd614c6314e80b3dc432d9f2d06d39cc502ecfaddae7e57865226ac3596"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "e289ddd614c6314e80b3dc432d9f2d06d39cc502ecfaddae7e57865226ac3596",
+      "panel": {
+        "path": "panels/motion-interpolation/tight/output-15.png",
+        "bytes": 37091,
+        "sha256": "68b28f836d82b3c750a4f2119eca76c2ada3f20a25c2e67dcfb7350a139a9039"
+      },
+      "pixel_min": 0,
+      "pixel_max": 252,
+      "nonzero_pixels": 262142,
+      "sheet": 1,
+      "sheet_rectangle": [
+        556,
+        710,
+        512,
+        512
+      ]
+    },
+    {
+      "case": "512/motion-interpolation/32/tight",
+      "fixture": "scene",
+      "label": "output-31",
+      "frame_index": 33,
+      "source_i420": {
+        "path": "512/motion-interpolation/32/tight/scene/expected.i420",
+        "bytes": 15092736,
+        "sha256": "1ae3e985939b89573aa135c879f3d5a68eb0495f6f37d08a52d21b081804dd40"
+      },
+      "compact_reference": {
+        "path": "512/motion-interpolation/32/tight/scene/output_031.u8",
+        "bytes": 262144,
+        "sha256": "f112fc7e53473853a912022f63790d5b2c6a45bda8bcc6f67573796ae10e8a55"
+      },
+      "i420_crop": [
+        16,
+        16,
+        512,
+        512
+      ],
+      "plane_sha256": "f112fc7e53473853a912022f63790d5b2c6a45bda8bcc6f67573796ae10e8a55",
+      "panel": {
+        "path": "panels/motion-interpolation/tight/output-31.png",
+        "bytes": 44576,
+        "sha256": "9f3abac5909575f56023ee1f1c45118ca7eefec5eeb74266a801b2940b0e4492"
+      },
+      "pixel_min": 0,
+      "pixel_max": 253,
+      "nonzero_pixels": 262143,
+      "sheet": 1,
+      "sheet_rectangle": [
+        1092,
+        710,
+        512,
+        512
+      ]
+    }
+  ],
+  "sheets": [
+    {
+      "workload": "patch-atlas",
+      "image": {
+        "path": "patch-atlas-outputs-512.png",
+        "bytes": 45909,
+        "sha256": "f9669ddd4805ca8c5df57e20ae159906e884a414e9a2a73db45a576fc84252a6"
+      },
+      "columns": [
+        0,
+        15,
+        31
+      ],
+      "rows": [
+        "dpb16",
+        "tight"
+      ]
+    },
+    {
+      "workload": "motion-interpolation",
+      "image": {
+        "path": "motion-interpolation-outputs-512.png",
+        "bytes": 537587,
+        "sha256": "e4da92f7c9c1e4eb65fb1b9d98cf81740d862a0ec6d6613621ab179987111459"
+      },
+      "columns": [
+        0,
+        15,
+        31
+      ],
+      "rows": [
+        "dpb16",
+        "tight"
+      ]
+    }
+  ]
+}
