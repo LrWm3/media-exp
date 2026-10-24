@@ -44,13 +44,11 @@ class LevelLimitTests(unittest.TestCase):
                 Writer(square, square, level_idc=level, slice_mode="row")
         # With the current sixteen-frame declaration the DPB bound is tighter
         # than MaxFS/MaxMBPS. Verify those independent checks also remain valid
-        # if a future caller reduces that declaration.
-        class OneReferenceWriter(Writer):
-            MAX_REFS = 1
+        # when a caller explicitly reduces that declaration.
         with self.assertRaisesRegex(ValueError, "frame-size"):
-            OneReferenceWriter(1024, 1024, level_idc=31, slice_mode="row")
+            Writer(1024, 1024, level_idc=31, slice_mode="row", reference_capacity=1)
         with self.assertRaisesRegex(ValueError, "macroblock processing rate"):
-            OneReferenceWriter(1024, 1024, level_idc=41, fps=60, slice_mode="row")
+            Writer(1024, 1024, level_idc=41, fps=60, slice_mode="row", reference_capacity=1)
 
     def test__given_uniform_and_fragmented_slices__when_emitting__then_actual_slice_rate_uses_selected_level(self):
         with self.assertRaisesRegex(ValueError, "slice rate"):

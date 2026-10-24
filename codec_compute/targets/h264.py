@@ -41,7 +41,7 @@ class H264Program:
     movements = {"shift", "gather", "sample_h264", "gather_h264"}
 
     def __init__(self, graph, *, fuse_shifts=True, level_idc=31, merge_zero_guards=True,
-                 prediction_slice_rows=1):
+                 prediction_slice_rows=1, tight_dpb=False):
         consumers = defaultdict(list)
         for node in graph.nodes:
             for arg in node.args:
@@ -60,7 +60,7 @@ class H264Program:
         try:
             baseline = self._build(graph, set(), level_idc=level_idc,
                                    merge_zero_guards=merge_zero_guards,
-                                   prediction_slice_rows=prediction_slice_rows)
+                                   prediction_slice_rows=prediction_slice_rows, tight_dpb=tight_dpb)
             if fuse_shifts and eligible:
                 baseline_cost = baseline._cost()
         except UnsupportedOperation as error:
@@ -75,7 +75,7 @@ class H264Program:
             try:
                 candidate = self._build(graph, eligible, level_idc=level_idc,
                                         merge_zero_guards=merge_zero_guards,
-                                        prediction_slice_rows=prediction_slice_rows)
+                                        prediction_slice_rows=prediction_slice_rows, tight_dpb=tight_dpb)
                 candidate_cost = candidate._cost()
             except UnsupportedOperation as error:
                 if baseline is None:
@@ -104,6 +104,9 @@ class H264Program:
             "requested_rows": prediction_slice_rows,
             "eligible_pictures": guard_eligible if merge_zero_guards else 0,
             "banded_pictures": sum(self.writer._prediction_band_rows(op) > 1 for op in self.operations)}
+        self.optimizations["tight_dpb"] = {
+            "enabled": tight_dpb, "before_capacity": Writer.MAX_REFS,
+            "after_capacity": self.writer.reference_capacity}
 
     @staticmethod
     def _field(node, graph, *, level_idc=31):
@@ -165,7 +168,7 @@ class H264Program:
 
     @classmethod
     def _build(cls, graph, fused, *, level_idc=31, merge_zero_guards=True,
-               prediction_slice_rows=1):
+               prediction_slice_rows=1, tight_dpb=False):
         self = cls.__new__(cls)
         legacy = _legacy()
         if len(graph.inputs) > 15:
@@ -236,10 +239,13 @@ class H264Program:
             maximum = max((abs(value) for op in self.operations for block in (op, *op.block_operations)
                            for source in block.sources
                            for value in (4 * source.dx + source.qx, 4 * source.dy + source.qy)), default=0)
+            # Keep the scheduler's exact slots, including noncontiguous plans.
+            # This is a declaration change, not a new allocation/lifetime pass.
+            capacity = max(self.reference_slots.values()) + 1 if tight_dpb else Writer.MAX_REFS
             self.writer = Writer(self.width, self.height, reference_slots=self.reference_slots,
                                  slice_mode="row", motion_bits=max(4, maximum.bit_length()), level_idc=level_idc,
                                  merge_zero_guards=merge_zero_guards,
-                                 prediction_slice_rows=prediction_slice_rows)
+                                 prediction_slice_rows=prediction_slice_rows, reference_capacity=capacity)
         except (ValueError, legacy.CompileError) as error:
             raise UnsupportedOperation(self.target, "resources", str(error)) from error
         self.pictures = len(graph.inputs) + len(self.operations)
@@ -313,6 +319,7 @@ class H264Program:
                 "level_idc": self.writer.level_idc,
                 "merge_zero_guards": self.writer.merge_zero_guards,
                 "prediction_slice_rows": self.writer.prediction_slice_rows,
+                "reference_capacity": self.writer.reference_capacity,
                 "output_frames": self.output_frames,
                 "costs": {"input_pictures": len(self.graph_spec.inputs),
                           "computation_pictures": len(self.operations), "total_pictures": self.pictures,

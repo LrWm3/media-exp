@@ -51,7 +51,7 @@ class NativePCMWriter:
     def _signature(self):
         writer = self.writer
         return (writer.width, writer.height, writer.mb_width, writer.mb_height,
-                writer.fps, writer.motion_bits, writer.level_idc, writer.MAX_REFS,
+                writer.fps, writer.motion_bits, writer.level_idc, writer.reference_capacity,
                 id(writer.reference_slots))
 
     def _template(self, frame_index):

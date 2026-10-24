@@ -91,20 +91,21 @@ class Program:
 def compile(function, *, target="h264", width=32, height=32, input_ranges=None,
             synthesis=True, synthesis_max_instructions=3, synthesis_max_candidates=50000,
             h264_fuse_shifts=True, h264_level=31, h264_merge_zero_guards=True,
-            h264_prediction_slice_rows=1):
+            h264_prediction_slice_rows=1, h264_tight_dpb=False):
     graph = ir.trace(function, width=width, height=height, input_ranges=input_ranges)
     return compile_graph(graph, target=target, synthesis=synthesis,
                          synthesis_max_instructions=synthesis_max_instructions,
                          synthesis_max_candidates=synthesis_max_candidates,
                          h264_fuse_shifts=h264_fuse_shifts, h264_level=h264_level,
                          h264_merge_zero_guards=h264_merge_zero_guards,
-                         h264_prediction_slice_rows=h264_prediction_slice_rows)
+                         h264_prediction_slice_rows=h264_prediction_slice_rows,
+                         h264_tight_dpb=h264_tight_dpb)
 
 
 def compile_graph(graph, *, target="h264", synthesis=True,
                   synthesis_max_instructions=3, synthesis_max_candidates=50000,
                   h264_fuse_shifts=True, h264_level=31, h264_merge_zero_guards=True,
-                  h264_prediction_slice_rows=1):
+                  h264_prediction_slice_rows=1, h264_tight_dpb=False):
     if not isinstance(graph, ir.Graph):
         raise TypeError("compile_graph requires a traced Graph")
     ir.validate_graph(graph)
@@ -116,6 +117,10 @@ def compile_graph(graph, *, target="h264", synthesis=True,
         raise ir.CompileError("h264_fuse_shifts must be Boolean")
     if type(h264_merge_zero_guards) is not bool:
         raise ir.CompileError("h264_merge_zero_guards must be Boolean")
+    if type(h264_tight_dpb) is not bool:
+        raise ir.CompileError("h264_tight_dpb must be Boolean")
+    if target != "h264" and h264_tight_dpb:
+        raise ir.CompileError("h264_tight_dpb applies only to the H.264 target")
     if type(h264_prediction_slice_rows) is not int or h264_prediction_slice_rows < 0:
         raise ir.CompileError("h264_prediction_slice_rows must be a nonnegative integer")
     if target != "h264" and h264_prediction_slice_rows != 1:
@@ -137,7 +142,8 @@ def compile_graph(graph, *, target="h264", synthesis=True,
         from .targets.h264 import H264Program
         native = H264Program(lowered, fuse_shifts=h264_fuse_shifts, level_idc=h264_level,
                              merge_zero_guards=h264_merge_zero_guards,
-                             prediction_slice_rows=h264_prediction_slice_rows)
+                             prediction_slice_rows=h264_prediction_slice_rows,
+                             tight_dpb=h264_tight_dpb)
     elif target in ("hevc", "h265"):
         from .targets.hevc import HEVCProgram
         native = HEVCProgram(lowered)

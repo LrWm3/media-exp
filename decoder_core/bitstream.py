@@ -108,15 +108,21 @@ class Writer:
 
     def __init__(self, width, height, fps=30, motion_bits=4,
                  reference_slots=None, slice_mode="macroblock", *, level_idc=31,
-                 merge_zero_guards=False, prediction_slice_rows=1):
+                 merge_zero_guards=False, prediction_slice_rows=1, reference_capacity=16):
         """Create a writer with an optional immutable physical-frame slot plan.
 
-        A plan assigns every frame, starting at zero, a long-term slot in 0..15.
+        A plan assigns every frame, starting at zero, a long-term slot below
+        reference_capacity (1..16, default 16).
         Frame zero occupies slot zero. Reusing a slot replaces its old picture
         after decoding the current picture, so the current picture may still
         read that old occupant. Without a plan, the legacy sliding window applies.
         Encoding never changes reference state; repeated or out-of-order calls
         produce the same bytes for the same arguments.
+
+        The capacity bounds both SPS reference/buffering declarations and the
+        long-term index limit (H.264 7.4.2.1.1, 7.4.3.3 and E.2.1). It also
+        bounds sliding-window age when no explicit slot plan is supplied.
+        It does not promise when a particular decoder exposes output pictures.
 
         High level 3.1 remains the byte-compatible default. Explicit levels 4.1
         and 5.1 permit larger PCM inputs and use a conservative per-access-unit
@@ -137,6 +143,9 @@ class Writer:
         if type(merge_zero_guards) is not bool:
             raise ValueError("merge_zero_guards must be Boolean")
         self.merge_zero_guards = merge_zero_guards
+        if type(reference_capacity) is not int or not 1 <= reference_capacity <= self.MAX_REFS:
+            raise ValueError("reference_capacity must be an integer from 1 through 16")
+        self.reference_capacity = reference_capacity
         if type(prediction_slice_rows) is not int or prediction_slice_rows < 0:
             raise ValueError("prediction_slice_rows must be a nonnegative integer")
         self.prediction_slice_rows = prediction_slice_rows
@@ -154,7 +163,7 @@ class Writer:
             raise ValueError(f"Board exceeds level {self.level_name} per-axis dimension limit")
         if macroblocks > self._limits.max_fs:
             raise ValueError(f"Board exceeds level {self.level_name} frame-size limit")
-        if macroblocks * self.MAX_REFS > self._limits.max_dpb_mbs:
+        if macroblocks * self.reference_capacity > self._limits.max_dpb_mbs:
             raise ValueError(f"Board exceeds level {self.level_name} decoded-picture buffer limit")
         if type(fps) is not int or not 1 <= fps <= 60:
             raise ValueError("fps must be between 1 and 60")
@@ -180,8 +189,8 @@ class Writer:
             if (not slots or any(type(frame) is not int or frame < 0 for frame in slots)
                     or sorted(slots) != list(range(len(slots)))):
                 raise ValueError("Reference slots must cover consecutive frames starting at zero")
-            if any(type(slot) is not int or not 0 <= slot < self.MAX_REFS for slot in slots.values()):
-                raise ValueError("Reference slots must be integers from 0 through 15")
+            if any(type(slot) is not int or not 0 <= slot < self.reference_capacity for slot in slots.values()):
+                raise ValueError("Reference slots must be integers below reference_capacity")
             if slots[0] != 0:
                 raise ValueError("IDR frame zero must occupy reference slot zero")
             self.reference_slots = MappingProxyType(slots)
@@ -203,7 +212,7 @@ class Writer:
             raise ValueError("Reference frame must precede the current picture")
         if self.reference_slots is None:
             distance = frame - source.frame
-            if distance > self.MAX_REFS:
+            if distance > self.reference_capacity:
                 raise ValueError(f"Reference outside DPB: {distance}")
             return distance - 1
         if self._reference_expiry.get(source.frame, frame) < frame:
@@ -241,7 +250,7 @@ class Writer:
         b.ue(12)  # 16-bit frame_num
         b.ue(0)  # pic_order_cnt_type
         b.ue(12)  # 16-bit POC LSB
-        b.ue(self.MAX_REFS)
+        b.ue(self.reference_capacity)  # max_num_ref_frames
         b.u(0)  # no gaps in frame_num
         b.ue(self.mb_width - 1)
         b.ue(self.mb_height - 1)
@@ -270,7 +279,7 @@ class Writer:
         b.ue(self.motion_bits)  # declared horizontal/vertical quarter-sample bounds
         b.ue(self.motion_bits)
         b.ue(0)  # max_num_reorder_frames
-        b.ue(self.MAX_REFS)
+        b.ue(self.reference_capacity)  # max_dec_frame_buffering
         sps = nal(7, b)
         b = Bits()
         b.ue(0)  # PPS id
@@ -333,7 +342,7 @@ class Writer:
         elif self.reference_slots is not None:
             b.u(1)  # adaptive_ref_pic_marking_mode_flag
             b.ue(4)  # set maximum long-term index
-            b.ue(self.MAX_REFS)  # max_long_term_frame_idx_plus1
+            b.ue(self.reference_capacity)  # max_long_term_frame_idx_plus1
             b.ue(6)  # assign this picture, replacing its slot's previous occupant
             b.ue(self.reference_slots[frame])
             b.ue(0)  # end memory-management commands
