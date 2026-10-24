@@ -1,0 +1,164 @@
+{
+  "format": "h264-python-0.2",
+  "width": 64,
+  "height": 64,
+  "input_range": [
+    0,
+    255
+  ],
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "image",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 4,
+  "output_frames": {
+    "integer_x_plus_1": 1,
+    "half_x": 2,
+    "quarter_x_half_y": 3
+  },
+  "graph_outputs": {
+    "integer_x_plus_1": 1,
+    "half_x": 2,
+    "quarter_x_half_y": 3
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 4,
+    "graph_nodes": 4,
+    "cse_eliminated": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 3,
+    "traced_nodes": 4,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 1,
+    "optimized": true
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "image"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "shift",
+      "args": [
+        0
+      ],
+      "params": [
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 1
+    },
+    {
+      "id": 2,
+      "op": "sample",
+      "args": [
+        0
+      ],
+      "params": [
+        2,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 2
+    },
+    {
+      "id": 3,
+      "op": "sample",
+      "args": [
+        0
+      ],
+      "params": [
+        1,
+        2
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 3
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 1,
+      "label": "shift",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 2,
+      "label": "sample",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 2,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 3,
+      "label": "sample",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 1,
+          "qy": 2
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "253b12f7c5461bdc4a2445dc62c5559f2eabdf80b8a3ef95fb9a6c29b42d4aa0",
+  "prediction_sha256": "ba727b0040fea873c3490010202f45815ffcf4ce90dc4cdfd9b4a26cd1d39e5e"
+}

@@ -15,7 +15,10 @@
   two-class test subset.
 - [05 — Python H.264 compiler](05-h264-compiler/README.md): a shared symbolic image
   language with exact arithmetic, shift fusion, common-expression elimination,
-  reference scheduling, and inspectable instruction manifests.
+  reference scheduling, and inspectable instruction manifests. Its
+  [native-operation demos](05-h264-compiler/native_ops/README.md) add multiple
+  input images, saturating arithmetic, block gathers, and quarter-pixel interpolation,
+  with measured input-loading and decoder costs.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·

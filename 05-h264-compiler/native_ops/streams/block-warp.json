@@ -1,0 +1,223 @@
+{
+  "format": "h264-python-0.2",
+  "width": 64,
+  "height": 64,
+  "input_range": [
+    0,
+    255
+  ],
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "image",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 2,
+  "output_frames": {
+    "output": 1
+  },
+  "graph_outputs": {
+    "output": 1
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 2,
+    "graph_nodes": 2,
+    "cse_eliminated": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 1,
+    "traced_nodes": 2,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 1,
+    "optimized": true
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "image"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "gather",
+      "args": [
+        0
+      ],
+      "params": [
+        [
+          [
+            -24,
+            -6
+          ],
+          [
+            -24,
+            -3
+          ],
+          [
+            -24,
+            0
+          ],
+          [
+            -24,
+            3
+          ],
+          [
+            -12,
+            -6
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            -12,
+            3
+          ],
+          [
+            0,
+            -6
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            12,
+            -6
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            12,
+            3
+          ]
+        ]
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 1
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 1,
+      "label": "gather",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": [
+        [
+          -24,
+          -6
+        ],
+        [
+          -24,
+          -3
+        ],
+        [
+          -24,
+          0
+        ],
+        [
+          -24,
+          3
+        ],
+        [
+          -12,
+          -6
+        ],
+        [
+          -12,
+          -3
+        ],
+        [
+          -12,
+          0
+        ],
+        [
+          -12,
+          3
+        ],
+        [
+          0,
+          -6
+        ],
+        [
+          0,
+          -3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          12,
+          -6
+        ],
+        [
+          12,
+          -3
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          12,
+          3
+        ]
+      ]
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "eeb1172d81866a31cdc5c1d90f5bd6925d810371ab1081e217a0f25737c8dcc6",
+  "prediction_sha256": "df7183f24132e3ca3975d04b6e63a2ef58e9abcd3951a425e03d91e2cfc8aeca"
+}

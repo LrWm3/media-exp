@@ -1,0 +1,124 @@
+{
+  "format": "h264-python-0.2",
+  "width": 64,
+  "height": 64,
+  "input_range": null,
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "a",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    },
+    {
+      "name": "b",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 1,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 3,
+  "output_frames": {
+    "output": 2
+  },
+  "graph_outputs": {
+    "output": 2
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 3,
+    "graph_nodes": 3,
+    "cse_eliminated": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 1,
+    "traced_nodes": 3,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 2,
+    "optimized": true
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "a"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "input",
+      "args": [],
+      "params": [
+        "b"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 2,
+      "op": "saturating_combine",
+      "args": [
+        0,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 2
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 2,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "05a542c0bfa1a65f86dcc65362bd3a4051f48669f670d2d5f1a7c46d895479fe",
+  "prediction_sha256": "6b8c5b37b1d47bff56c3614eb3c2a411ce39755e8f72fa4a5412a17cd4b710bf"
+}

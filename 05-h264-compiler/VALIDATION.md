@@ -4,7 +4,63 @@ Recorded on 2026-10-23 with Python 3.12.13, FFmpeg 6.1.1, GStreamer 1.24.2,
 OpenH264, and Intel VA-API through `vah264dec`. Neural checkpoint comparisons
 used PyTorch 2.5.1+cpu. Original model weights were not retrained or modified.
 
-## Tests
+## Native operations, v0.2
+
+**116 tests passed, with no skips**, after adding native image operations and
+replacing bit-at-a-time PCM packing with byte packing:
+
+| Suite | Tests |
+| --- | ---: |
+| Compiler: original core + native arithmetic + interpolation | 30 |
+| Shared writer: syntax, input retention, motion, byte equivalence | 10 |
+| Four compiled experiment variants | 34 |
+| Four original experiments | 42 |
+
+The new arithmetic suite exhausts **all 65,536 unsigned-byte pairs** for
+saturating addition on FFmpeg, OpenH264, and Intel VA-API. It also checks signed
+weights and offsets, two-input lifetime refreshes, 15 input pictures, seed aliases,
+prediction reuse without host inference, and explicit rejection of unsupported
+forms. The addition needs two input pictures and exactly one weighted B-picture.
+
+Interpolation tests cover all 16 quarter-pixel phases, negative coordinates,
+edges, diagonal intermediate precision, per-block fractional gathers, and nested
+filtering with optimization enabled and disabled. Every decoder agrees with an
+independent integer oracle. A separate review exercised signed fractional
+biprediction, three named inputs, and gathers separated by long reference chains.
+
+Byte packing preserves legacy seed hashes and matches the former encoder
+byte-for-byte for four shapes, four input patterns, IDR/non-IDR pictures, and
+frame-number wrap boundaries. Separate encoding-only measurements for two 64×64
+random inputs fell from 26.56 ms to 1.07 ms (five repetitions of 20 calls per
+implementation). This improves host serialization, not decoder arithmetic.
+
+Six [native demos](native_ops/README.md) verify **172,032 named-output pixels**
+across all three decoders. Their committed manifests, raw-plane PNGs, annotated
+hardware captures, and [results](native_ops/results.json) identify actual output
+frames and hashes. The [benchmark](native_ops/BENCHMARK.md) includes both
+separate-process and one-session fresh-input baselines. For 32 additions at
+64×64, Intel VA-API took 64.46 ms with fresh pairs in one session and 63.60 ms
+with resident references. These medians include startup, all-picture readback,
+and validation; the small difference does not establish a hardware speedup.
+Input packing for the complete workloads was 44.71 ms versus 1.39 ms.
+
+No NVIDIA device is present, so NVDEC and SDK 13.1 direct-array output remain
+untested. The native-demo README includes an explicitly untested NVIDIA command.
+The full 1,984-image MNIST accuracy and 256-image denoiser reports below are the
+previous v0.1 runs; this update reran their regression suites rather than those
+full datasets.
+
+Run from the repository root:
+
+```sh
+python3 -m unittest discover -s 05-h264-compiler -v
+python3 -m unittest decoder_core.test_native_bitstream -v
+```
+
+Run each original/compiled experiment's suite from its own directory using
+`03-denoising-decoder/.venv/bin/python -m unittest -v` (absolute interpreter path).
+
+## Initial v0.1 tests
 
 **48 new tests passed, with no skips** in the recorded environment:
 

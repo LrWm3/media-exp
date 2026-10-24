@@ -1,0 +1,298 @@
+{
+  "created_utc": "2026-10-24T01:51:07.382575+00:00",
+  "shape": [
+    64,
+    64
+  ],
+  "provenance": {
+    "python": "3.12.13",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+    "gstreamer": "gst-launch-1.0 version 1.24.2\nGStreamer 1.24.2\nhttps://launchpad.net/ubuntu/+source/gstreamer1.0",
+    "display_devices": [
+      "00:02.0 VGA compatible controller [0300]: Intel Corporation Raptor Lake-P [Iris Xe Graphics] [8086:a7a1] (rev 04)"
+    ],
+    "hardware_backend": "Intel VA-API (GStreamer vah264dec)",
+    "nvidia_tested": false
+  },
+  "cases": [
+    {
+      "name": "saturating-add",
+      "title": "Two input u8 saturating addition",
+      "pictures": 3,
+      "inputs": 2,
+      "prediction_pictures": 1,
+      "refresh_copies": 0,
+      "output_frames": {
+        "output": 2
+      },
+      "input_bytes": 32968,
+      "prediction_bytes": 625,
+      "stream_bytes": 33593,
+      "capture_backend": "vaapi",
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "6f1fddb5b54eb0517d2afd9580d48279b7e112698dba3f86ba06d8fba115cf29"
+          }
+        },
+        "vaapi": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "6f1fddb5b54eb0517d2afd9580d48279b7e112698dba3f86ba06d8fba115cf29"
+          }
+        },
+        "openh264": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "6f1fddb5b54eb0517d2afd9580d48279b7e112698dba3f86ba06d8fba115cf29"
+          }
+        }
+      }
+    },
+    {
+      "name": "affine",
+      "title": "Exposure and contrast",
+      "pictures": 3,
+      "inputs": 1,
+      "prediction_pictures": 2,
+      "refresh_copies": 0,
+      "output_frames": {
+        "exposure_plus_48": 1,
+        "contrast_2x_minus_64": 2
+      },
+      "input_bytes": 16502,
+      "prediction_bytes": 1083,
+      "stream_bytes": 17585,
+      "capture_backend": "vaapi",
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "outputs": 2,
+          "checked_output_pixels": 8192,
+          "output_sha256": {
+            "exposure_plus_48": "6cdcc87adb5133c3e6b66cd4532ed6133af5513a1d77f244da4a38f7f3c5a582",
+            "contrast_2x_minus_64": "8bf4b100223a244d6eb08dfd43ff65d55c7336a84ab4f49e638367f054c8d7eb"
+          }
+        },
+        "vaapi": {
+          "status": "pass",
+          "outputs": 2,
+          "checked_output_pixels": 8192,
+          "output_sha256": {
+            "exposure_plus_48": "6cdcc87adb5133c3e6b66cd4532ed6133af5513a1d77f244da4a38f7f3c5a582",
+            "contrast_2x_minus_64": "8bf4b100223a244d6eb08dfd43ff65d55c7336a84ab4f49e638367f054c8d7eb"
+          }
+        },
+        "openh264": {
+          "status": "pass",
+          "outputs": 2,
+          "checked_output_pixels": 8192,
+          "output_sha256": {
+            "exposure_plus_48": "6cdcc87adb5133c3e6b66cd4532ed6133af5513a1d77f244da4a38f7f3c5a582",
+            "contrast_2x_minus_64": "8bf4b100223a244d6eb08dfd43ff65d55c7336a84ab4f49e638367f054c8d7eb"
+          }
+        }
+      }
+    },
+    {
+      "name": "tile-permutation",
+      "title": "16 x 16 block permutation",
+      "pictures": 2,
+      "inputs": 1,
+      "prediction_pictures": 1,
+      "refresh_copies": 0,
+      "output_frames": {
+        "output": 1
+      },
+      "input_bytes": 16567,
+      "prediction_bytes": 565,
+      "stream_bytes": 17132,
+      "capture_backend": "vaapi",
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "97cbe7f74222350059e89b4364a893cba29ac689ff60e9766cfad08f4b682115"
+          }
+        },
+        "vaapi": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "97cbe7f74222350059e89b4364a893cba29ac689ff60e9766cfad08f4b682115"
+          }
+        },
+        "openh264": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "97cbe7f74222350059e89b4364a893cba29ac689ff60e9766cfad08f4b682115"
+          }
+        }
+      }
+    },
+    {
+      "name": "block-warp",
+      "title": "Blockwise shear / fractional warp",
+      "pictures": 2,
+      "inputs": 1,
+      "prediction_pictures": 1,
+      "refresh_copies": 0,
+      "output_frames": {
+        "output": 1
+      },
+      "input_bytes": 16502,
+      "prediction_bytes": 525,
+      "stream_bytes": 17027,
+      "capture_backend": "vaapi",
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "9a5a6099f52bf10cfcc55729935949646cb457c55adacf47aafdf6dcb196657e"
+          }
+        },
+        "vaapi": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "9a5a6099f52bf10cfcc55729935949646cb457c55adacf47aafdf6dcb196657e"
+          }
+        },
+        "openh264": {
+          "status": "pass",
+          "outputs": 1,
+          "checked_output_pixels": 4096,
+          "output_sha256": {
+            "output": "9a5a6099f52bf10cfcc55729935949646cb457c55adacf47aafdf6dcb196657e"
+          }
+        }
+      }
+    },
+    {
+      "name": "fractional-translation",
+      "title": "Native fractional luma interpolation",
+      "pictures": 4,
+      "inputs": 1,
+      "prediction_pictures": 3,
+      "refresh_copies": 0,
+      "output_frames": {
+        "integer_x_plus_1": 1,
+        "half_x": 2,
+        "quarter_x_half_y": 3
+      },
+      "input_bytes": 16502,
+      "prediction_bytes": 1565,
+      "stream_bytes": 18067,
+      "capture_backend": "vaapi",
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "outputs": 3,
+          "checked_output_pixels": 12288,
+          "output_sha256": {
+            "integer_x_plus_1": "0f45b826acf7f5a14c2a33f49456e58059e052b829865d6effbe0b0b93392366",
+            "half_x": "4a1944b492ce86de03cf5529c36c5d8f2bd54bd19b5be4fbc0a187be503198bb",
+            "quarter_x_half_y": "a767aa31821d5ddbced442e5909c36a1abc5c63dd014df82d87aad726476902b"
+          }
+        },
+        "vaapi": {
+          "status": "pass",
+          "outputs": 3,
+          "checked_output_pixels": 12288,
+          "output_sha256": {
+            "integer_x_plus_1": "0f45b826acf7f5a14c2a33f49456e58059e052b829865d6effbe0b0b93392366",
+            "half_x": "4a1944b492ce86de03cf5529c36c5d8f2bd54bd19b5be4fbc0a187be503198bb",
+            "quarter_x_half_y": "a767aa31821d5ddbced442e5909c36a1abc5c63dd014df82d87aad726476902b"
+          }
+        },
+        "openh264": {
+          "status": "pass",
+          "outputs": 3,
+          "checked_output_pixels": 12288,
+          "output_sha256": {
+            "integer_x_plus_1": "0f45b826acf7f5a14c2a33f49456e58059e052b829865d6effbe0b0b93392366",
+            "half_x": "4a1944b492ce86de03cf5529c36c5d8f2bd54bd19b5be4fbc0a187be503198bb",
+            "quarter_x_half_y": "a767aa31821d5ddbced442e5909c36a1abc5c63dd014df82d87aad726476902b"
+          }
+        }
+      }
+    },
+    {
+      "name": "resident-stages",
+      "title": "Chained stages and live-reference refresh",
+      "pictures": 53,
+      "inputs": 2,
+      "prediction_pictures": 51,
+      "refresh_copies": 6,
+      "output_frames": {
+        "mixed": 2,
+        "contrast": 3,
+        "fractional": 4,
+        "after_40_stages": 50,
+        "difference": 51,
+        "output": 52
+      },
+      "input_bytes": 32968,
+      "prediction_bytes": 26875,
+      "stream_bytes": 59843,
+      "capture_backend": "vaapi",
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "outputs": 6,
+          "checked_output_pixels": 24576,
+          "output_sha256": {
+            "mixed": "6f1fddb5b54eb0517d2afd9580d48279b7e112698dba3f86ba06d8fba115cf29",
+            "contrast": "c6120d0b659fce0c37a2378fcba5868241d6b925dea053ecf41716ee79c14098",
+            "fractional": "015585fd906e0b6173f220d01ededd1438698b8470d19b5221d8639742d0c9c5",
+            "after_40_stages": "13987329450f54975c7c2357bcab2fce90ffe2221b5ceea51068a993db876d35",
+            "difference": "fbcc3a3df3755c2f9798b81e7107a2fba899406351aa1e750557b5c5107ce856",
+            "output": "28e6c92313ca7c77df6c9772c0679ce9cbbf81b2d87295aa0f72912d4061d65d"
+          }
+        },
+        "vaapi": {
+          "status": "pass",
+          "outputs": 6,
+          "checked_output_pixels": 24576,
+          "output_sha256": {
+            "mixed": "6f1fddb5b54eb0517d2afd9580d48279b7e112698dba3f86ba06d8fba115cf29",
+            "contrast": "c6120d0b659fce0c37a2378fcba5868241d6b925dea053ecf41716ee79c14098",
+            "fractional": "015585fd906e0b6173f220d01ededd1438698b8470d19b5221d8639742d0c9c5",
+            "after_40_stages": "13987329450f54975c7c2357bcab2fce90ffe2221b5ceea51068a993db876d35",
+            "difference": "fbcc3a3df3755c2f9798b81e7107a2fba899406351aa1e750557b5c5107ce856",
+            "output": "28e6c92313ca7c77df6c9772c0679ce9cbbf81b2d87295aa0f72912d4061d65d"
+          }
+        },
+        "openh264": {
+          "status": "pass",
+          "outputs": 6,
+          "checked_output_pixels": 24576,
+          "output_sha256": {
+            "mixed": "6f1fddb5b54eb0517d2afd9580d48279b7e112698dba3f86ba06d8fba115cf29",
+            "contrast": "c6120d0b659fce0c37a2378fcba5868241d6b925dea053ecf41716ee79c14098",
+            "fractional": "015585fd906e0b6173f220d01ededd1438698b8470d19b5221d8639742d0c9c5",
+            "after_40_stages": "13987329450f54975c7c2357bcab2fce90ffe2221b5ceea51068a993db876d35",
+            "difference": "fbcc3a3df3755c2f9798b81e7107a2fba899406351aa1e750557b5c5107ce856",
+            "output": "28e6c92313ca7c77df6c9772c0679ce9cbbf81b2d87295aa0f72912d4061d65d"
+          }
+        }
+      }
+    }
+  ]
+}

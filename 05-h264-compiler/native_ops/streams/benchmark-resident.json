@@ -1,0 +1,1525 @@
+{
+  "format": "h264-python-0.2",
+  "width": 64,
+  "height": 64,
+  "input_range": null,
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "a",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    },
+    {
+      "name": "b",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 1,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 36,
+  "output_frames": {
+    "output": 35
+  },
+  "graph_outputs": {
+    "output": 33
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 34,
+    "graph_nodes": 34,
+    "cse_eliminated": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 32,
+    "traced_nodes": 34,
+    "dead_nodes": 0,
+    "reference_copies": 2,
+    "peak_live_values": 2,
+    "optimized": true
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "a"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "input",
+      "args": [],
+      "params": [
+        "b"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 2,
+      "op": "saturating_combine",
+      "args": [
+        0,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 2
+    },
+    {
+      "id": 3,
+      "op": "saturating_combine",
+      "args": [
+        2,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 3
+    },
+    {
+      "id": 4,
+      "op": "saturating_combine",
+      "args": [
+        3,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 4
+    },
+    {
+      "id": 5,
+      "op": "saturating_combine",
+      "args": [
+        4,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 5
+    },
+    {
+      "id": 6,
+      "op": "saturating_combine",
+      "args": [
+        5,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 6
+    },
+    {
+      "id": 7,
+      "op": "saturating_combine",
+      "args": [
+        6,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 7
+    },
+    {
+      "id": 8,
+      "op": "saturating_combine",
+      "args": [
+        7,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 8
+    },
+    {
+      "id": 9,
+      "op": "saturating_combine",
+      "args": [
+        8,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 9
+    },
+    {
+      "id": 10,
+      "op": "saturating_combine",
+      "args": [
+        9,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 10
+    },
+    {
+      "id": 11,
+      "op": "saturating_combine",
+      "args": [
+        10,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 11
+    },
+    {
+      "id": 12,
+      "op": "saturating_combine",
+      "args": [
+        11,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 12
+    },
+    {
+      "id": 13,
+      "op": "saturating_combine",
+      "args": [
+        12,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 13
+    },
+    {
+      "id": 14,
+      "op": "saturating_combine",
+      "args": [
+        13,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 14
+    },
+    {
+      "id": 15,
+      "op": "saturating_combine",
+      "args": [
+        14,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 15
+    },
+    {
+      "id": 16,
+      "op": "saturating_combine",
+      "args": [
+        15,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 16
+    },
+    {
+      "id": 17,
+      "op": "saturating_combine",
+      "args": [
+        16,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 18
+    },
+    {
+      "id": 18,
+      "op": "saturating_combine",
+      "args": [
+        17,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 19
+    },
+    {
+      "id": 19,
+      "op": "saturating_combine",
+      "args": [
+        18,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 20
+    },
+    {
+      "id": 20,
+      "op": "saturating_combine",
+      "args": [
+        19,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 21
+    },
+    {
+      "id": 21,
+      "op": "saturating_combine",
+      "args": [
+        20,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 22
+    },
+    {
+      "id": 22,
+      "op": "saturating_combine",
+      "args": [
+        21,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 23
+    },
+    {
+      "id": 23,
+      "op": "saturating_combine",
+      "args": [
+        22,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 24
+    },
+    {
+      "id": 24,
+      "op": "saturating_combine",
+      "args": [
+        23,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 25
+    },
+    {
+      "id": 25,
+      "op": "saturating_combine",
+      "args": [
+        24,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 26
+    },
+    {
+      "id": 26,
+      "op": "saturating_combine",
+      "args": [
+        25,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 27
+    },
+    {
+      "id": 27,
+      "op": "saturating_combine",
+      "args": [
+        26,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 28
+    },
+    {
+      "id": 28,
+      "op": "saturating_combine",
+      "args": [
+        27,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 29
+    },
+    {
+      "id": 29,
+      "op": "saturating_combine",
+      "args": [
+        28,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 30
+    },
+    {
+      "id": 30,
+      "op": "saturating_combine",
+      "args": [
+        29,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 31
+    },
+    {
+      "id": 31,
+      "op": "saturating_combine",
+      "args": [
+        30,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 32
+    },
+    {
+      "id": 32,
+      "op": "saturating_combine",
+      "args": [
+        31,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 34
+    },
+    {
+      "id": 33,
+      "op": "saturating_combine",
+      "args": [
+        32,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 35
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 2,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 3,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 2,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 4,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 3,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 5,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 4,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 6,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 5,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 7,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 6,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 8,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 7,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 9,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 8,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 10,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 9,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 11,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 10,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 12,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 11,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 13,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 12,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 14,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 13,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 15,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 14,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 16,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 15,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 17,
+      "label": "refresh live value",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 18,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 16,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 19,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 18,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 20,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 19,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 21,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 20,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 22,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 21,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 23,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 22,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 24,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 23,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 25,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 24,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 26,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 25,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 27,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 26,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 28,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 27,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 29,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 28,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 30,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 29,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 31,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 30,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 32,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 31,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 17,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 33,
+      "label": "refresh live value",
+      "sources": [
+        {
+          "frame": 17,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 34,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 32,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 33,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 35,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 34,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 33,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    }
+  ],
+  "refresh_frames": [
+    17,
+    33
+  ],
+  "stream_sha256": "12bdb76cef21fd53b2fc482019c969e8bcf9bb7954250d3964dcf28a6f62289b",
+  "prediction_sha256": "77ebeae1a173651d64292426738f5c39a317deef93e09219e034414794b5aa2d"
+}

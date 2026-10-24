@@ -27,6 +27,35 @@ The prediction bytes in `program.tail` are reusable with different inputs.
 integer graph interpreter. `decode()` returns actual decoder output without
 that reference calculation; `read(raw_yuv)` inspects an existing decode.
 
+## Native image operations
+
+Version 0.2 adds independent input pictures, explicit saturating affine
+arithmetic, per-block gathers, and exact quarter-pixel interpolation:
+
+```python
+program = h264.compile(
+    lambda a, b: h264.saturating_add(a, b),
+    width=64, height=64,
+    input_ranges={"a": (0, 255), "b": (0, 255)},
+)
+program.save("add.h264", {"a": image_a, "b": image_b})
+```
+
+This produces **three pictures**: two literal input pictures and one B-picture
+computing `min(255, a+b)`. Loading the second input preserves the first reference.
+
+[Six native-operation demos](native_ops/README.md) include addition,
+brightness/contrast, tile permutation, blockwise warp, fractional translation,
+and a chain retaining both original inputs. Each includes an executable stream,
+manifest, and captures from actual decoding. The [benchmark](native_ops/BENCHMARK.md)
+separates host input packing from decoding and compares fresh inputs with
+resident references. Tests run on FFmpeg, OpenH264, and Intel VA-API; NVDEC remains
+untested because this machine has no NVIDIA GPU.
+
+![Saturating addition captured from Intel decoding](native_ops/assets/saturating-add.png)
+
+## Original binary example
+
 ![Shifted OR captured from Intel hardware decoding](assets/shifted-or.png)
 
 This example needs **four pictures**: visible seed, binary normalization, fused
@@ -64,6 +93,6 @@ python3 -m unittest -v
 references, refresh copies, named output frame numbers, and hashes.
 See the [small example manifest](assets/shifted-or.json).
 
-The core is approximately **530 lines** across six modules. See [API and exact
-semantics](DESIGN.md) and [validation](VALIDATION.md), including all 48 new tests
-and full-data comparisons with the original neural models.
+See [API and exact semantics](DESIGN.md) and [validation](VALIDATION.md) for
+compiler tests, exhaustive byte arithmetic and interpolation checks, and
+comparisons with the original neural models.
