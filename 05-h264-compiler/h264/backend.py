@@ -8,7 +8,7 @@ from pathlib import Path
 import tempfile
 
 from decoder_core.bitstream import Writer
-from decoder_core.decode import decode
+from decoder_core.decode import decode, decode_batch
 from .graph import CompileError, integer, trace
 from .lower import lower
 from .schedule import schedule
@@ -63,6 +63,11 @@ class Program:
     @property
     def pictures(self):
         return len(self.operations)+self.input_count
+
+    @property
+    def output_picture_indices(self):
+        """Physical pictures required by all named outputs, with aliases deduplicated."""
+        return tuple(sorted(set(self.output_frames.values())))
 
     @cached_property
     def tail(self):
@@ -123,21 +128,29 @@ class Program:
         manifest_path.write_text(json.dumps(manifest, indent=2)+"\n")
         return path
 
-    def read(self, raw):
-        return read(raw, self)
+    def read(self, raw, *, selected_frames=None):
+        """Read packed I420 pictures in physical order, checking every named output."""
+        return read(raw, self, selected_frames=selected_frames)
 
-    def decode(self, image, backend="ffmpeg"):
+    def decode(self, image, backend="ffmpeg", *, readback="all"):
+        if readback not in ("all", "outputs"):
+            raise ValueError("readback must be 'all' or 'outputs'")
         with tempfile.TemporaryDirectory(prefix="h264-kernel-") as directory:
             path = Path(directory)/"program.h264"
             path.write_bytes(self.encode(image))
+            if readback == "outputs":
+                result = decode_batch([path], backend, selected_frames=self.output_picture_indices,
+                                      width=self.writer.width, height=self.writer.height,
+                                      pictures_per_job=self.pictures)
+                return self.read(b"".join(result.frames[0]), selected_frames=result.selected_frames)
             return self.read(decode(path, backend))
 
     def reference(self, image):
         self.validate(image)
         return evaluate(self.graph, self.graph_outputs, image)
 
-    def verify(self, image, backend="ffmpeg"):
-        actual = self.decode(image, backend)
+    def verify(self, image, backend="ffmpeg", *, readback="all"):
+        actual = self.decode(image, backend, readback=readback)
         expected = self.reference(image)
         for name in actual:
             if actual[name] != expected[name]:

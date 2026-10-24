@@ -99,16 +99,34 @@ def evaluate(graph, outputs, image):
             for name, index in outputs.items()}
 
 
-def read(raw, program):
+def read(raw, program, *, selected_frames=None):
+    """Validate packed I420 for all pictures or an explicit physical selection.
+
+    Each supplied picture is stored once, in increasing physical frame order.
+    Every named output must be covered; absent intermediates are never fabricated.
+    """
+    selection = tuple(range(program.pictures)) if selected_frames is None else tuple(selected_frames)
+    if not selection:
+        raise ValueError("selected_frames must be nonempty")
+    if any(type(frame) is not int for frame in selection):
+        raise ValueError("selected_frames must contain integer picture indices")
+    if any(frame < 0 or frame >= program.pictures for frame in selection):
+        raise ValueError("selected_frames picture index out of range")
+    if any(left >= right for left, right in zip(selection, selection[1:])):
+        raise ValueError("selected_frames must be strictly increasing without duplicates")
+    positions = {frame: index for index, frame in enumerate(selection)}
+    missing = [name for name, frame in program.output_frames.items() if frame not in positions]
+    if missing:
+        raise ValueError("selected_frames must cover every named output; missing: " + ", ".join(missing))
     width, height = program.writer.width, program.writer.height
     luma_size = width*height
     frame_size = luma_size*3//2
-    if len(raw) != program.pictures*frame_size:
+    if len(raw) != len(selection)*frame_size:
         raise AssertionError("Decoded picture count does not match manifest")
     view = memoryview(raw)
     neutral, edge, side = bytes([128])*(luma_size//2), bytes(width*16), bytes(16)
-    for frame in range(program.pictures):
-        start = frame*frame_size
+    for index, frame in enumerate(selection):
+        start = index*frame_size
         if view[start+luma_size:start+frame_size] != neutral:
             raise AssertionError(f"Chroma changed at frame {frame}")
         if view[start:start+len(edge)] != edge or view[start+luma_size-len(edge):start+luma_size] != edge:
@@ -118,7 +136,7 @@ def read(raw, program):
                 raise AssertionError(f"Guard changed at frame {frame}")
     outputs = {}
     for name, frame in program.output_frames.items():
-        offset = frame*frame_size
+        offset = positions[frame]*frame_size
         plane = [list(raw[offset+(y+16)*width+16:offset+(y+16)*width+16+program.width]) for y in range(program.height)]
         node = program.graph[program.graph_outputs[name]]
         if any(not node.lo <= value <= node.hi for row in plane for value in row):
