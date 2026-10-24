@@ -65,8 +65,16 @@ checks, and fresh-session versus warmed-session measurements.
 
 [CPU versus decoder](codec_compute/workloads/cpu_comparison/README.md):
 matched native CPU kernels, accelerated input serialization, resident chains
-and finite batches. CPU wins every elapsed-time comparison. One synthetic
-64-stage chain saves 14.2% host process CPU on NVDEC but finishes 6.22× slower.
+and finite batches. CPU wins every elapsed-time comparison. In this original
+comparison, one synthetic 64-stage chain saves 14.2% host process CPU on NVDEC
+but finishes 6.22× slower.
+
+[Zero-guard merging and CPU offload](codec_compute/workloads/guard_fusion/README.md):
+shared compiler row slices fall from 98 to 34 at 512×512, with identical pixels.
+For 64 stages, NVDEC elapsed time falls 60.3%; it uses 39.1% less process CPU
+than native CPU but remains 2.49× slower. Controlled contention shows a small
+1.85% median background-work gain, with all 60 merged requests within deadline;
+trial ranges overlap, so application benefit needs further validation.
 
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all

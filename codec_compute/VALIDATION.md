@@ -5,6 +5,45 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Zero-guard merging and CPU offload
+
+The shared compiler now enables compatible zero-guard row merging by default;
+the direct Writer preserves its previous default. Eligible 512×512 predictions
+fall from **98 to 34 slices**, while nonzero offsets, heterogeneous headers and
+macroblock mode retain the old layout. Regression suites pass **182 shared
+compiler tests and 89 decoder-core tests**, plus three paired-runtime and
+thirteen concurrency tests. Existing level/resource checks remain conservative.
+
+The [paired experiment](workloads/guard_fusion/README.md) freezes six recurrence
+depths (1, 4, 8, 16, 32 and 64), eight changing inputs and both slice layouts.
+Its **96 streams / 2,192 pictures** pass **288 local decoder checks**, with
+48 byte-identical paired I420 sequences. NVDEC verifies all **2,096 real
+pictures / 930,422,784 I420 bytes**, plus 96 counted completion fences. The
+committed capture subset retains twelve streams, 274 pictures and six pairs.
+
+The isolated report preserves **90 timing trials** against a CPU binary
+identical to the previous native/unrolled tuning winner. For 64 stages,
+merging lowers median decoder elapsed time **518.23 → 205.67 ms** (60.3%) and
+process CPU **71.13 → 49.85 ms** (29.9%). Relative to native CPU, it uses
+**39.1% less process CPU** but takes **2.49× longer**. Depth 32 is the earliest
+tested point with separated CPU-time ranges: **29.19 versus 41.00 ms**, a
+28.8% reduction. Depth 16 is inconclusive; every tested depth still loses CPU
+elapsed time. Setup, warmup and close are recorded outside warm timings, and
+process CPU excludes IRQs and kernel workqueues. Energy is unmeasured.
+
+A further **20 fixed-window contention trials** share one logical CPU among
+foreground work, helper threads and checked PBKDF2 background work. At 1 Hz and
+a 750 ms deadline, CPU and merged NVDEC each complete **60/60 requests within
+deadline**; baseline NVDEC misses **4/60**. Merged background throughput is
+**920.50 versus 903.75 chunks/s** by median, a **1.85% observed gain**; all five
+repeat-paired gains are positive, but absolute ranges overlap and the control
+varies. Treat this as a small synthetic benefit requiring longer application
+validation. Merged foreground process CPU is 37.6% lower under contention,
+while median response is slower (287.18 versus 158.64 ms). No jobs are dropped
+or complete beyond the observation window. Final fence counters, source hashes,
+thread affinity/scheduling and restored runner affinity all pass. Protocol
+success remains explicitly separate from deadline qualification.
+
 ## Matched native CPU and NVDEC comparison
 
 The [CPU comparison](workloads/cpu_comparison/README.md) adds independent native

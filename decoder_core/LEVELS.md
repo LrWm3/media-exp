@@ -77,8 +77,9 @@ level-3.1 sequence HRD validation remains outside this writer.
 
 A 256×256 active image becomes 288×288 coded pixels, or 324 macroblocks.
 At 30 fps this uses 9,720 macroblocks/s and 5,184 macroblocks of declared
-DPB storage. Row predictions use 50 slices; macroblock predictions use 324.
-Both fit level 4.1 at 30 fps, including its 10,240-slices/s bound.
+DPB storage. The default Writer row policy uses 50 slices; eligible zero-guard
+merging uses 18. Macroblock predictions use 324 slices. These fit level 4.1 at
+30 fps, including its 10,240-slices/s bound.
 
 The level-3.1 initial AU limit is 60,279 bytes. The all-zero 256×256 fixture
 requires 166,571 NAL-unit bytes and is rejected. Lowering fps does not change
@@ -93,9 +94,10 @@ the same checks and can reject an input.
 
 A 512×512 active image becomes 544×544 coded pixels, or 1,156 macroblocks.
 At 30 fps it uses 34,680 macroblocks/s and 18,496 macroblocks of declared
-DPB storage. Row predictions use 98 slices before any field-induced splits;
-even 1,156 individual macroblock slices fit the 1,365-slice per-picture
-budget. Table A-4 requires progressive frames and `direct_8x8_inference_flag=1`
+DPB storage. The default Writer row policy uses 98 slices before field-induced
+splits; eligible [zero-guard merging](GUARDS.md) reduces this to 34. Even 1,156
+individual macroblock slices fit the 1,365-slice per-picture budget. Table A-4
+requires progressive frames and `direct_8x8_inference_flag=1`
 at level 5.1; the writer already sets both flags and uses 16×16 predictions,
 which satisfy the 8×8 minimum bidirectional prediction block size.
 

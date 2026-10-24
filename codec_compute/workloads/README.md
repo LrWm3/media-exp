@@ -60,6 +60,14 @@ and the original semantic graph remains the independent interpreter's input.
 The current AV1 average-only catalog finds no full-byte absolute-difference
 plan within the default three-application bound.
 
+The later [native CPU comparison](cpu_comparison/README.md) and
+[guard-merging follow-up](guard_fusion/README.md) measure end-to-end costs.
+CPU remains faster in every elapsed-time comparison. After guard merging,
+longer synthetic resampling chains save process CPU; a controlled background
+workload shows a small observed gain with deadlines met. These measurements
+limit the architectural-fit claims here: exact decoder execution alone does
+not establish a useful performance advantage.
+
 ## What to pursue
 
 1. **Temporal blend and change preprocessing.** These have the shortest

@@ -115,10 +115,19 @@ on HEVC or AV1. See the
 ## Block routing and explicit H.264 sampling
 
 For larger uploads, pass `h264_level=41` or `h264_level=51` to `compile` or
-`compile_graph`. The default `31` preserves existing valid stream bytes. All
+`compile_graph`. The writer retains level `31` by default. All
 three supported levels have checked resource limits; levels 4.1 and 5.1 also
 use conservative per-AU bitrate caps. These enable the tested 256×256 and
 512×512 byte inputs, respectively, without promising arbitrary image sizes. See [level constraints](../decoder_core/LEVELS.md).
+
+The shared compiler also enables zero-guard row merging by default. Compatible
+zero-offset predictions reuse their headers across the border, reducing the
+512×512 row layout from 98 to 34 slices without changing any decoded pixels.
+Pass `h264_merge_zero_guards=False` to recover the baseline layout. The direct
+Writer defaults to disabled, preserving its previous stream bytes. Manifests
+record eligibility and actual merged-picture counts; biased or heterogeneous
+headers fall back. See [guard semantics](../decoder_core/GUARDS.md) and the
+[paired performance experiment](workloads/guard_fusion/README.md).
 
 `with program.session(helper="/path/to/nvdec_decode") as session:` keeps an
 NVDEC process and pipeline alive; `session.run(inputs)` returns named image
