@@ -73,6 +73,7 @@ def compile(function, *, target="h264", width=32, height=32, input_ranges=None):
 def compile_graph(graph, *, target="h264"):
     if not isinstance(graph, ir.Graph):
         raise TypeError("compile_graph requires a traced Graph")
+    ir.validate_graph(graph)
     if target == "h264":
         from .targets.h264 import H264Program
         native = H264Program(graph)

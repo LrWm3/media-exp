@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 import tempfile
 
-from decoder_core.bitstream import Writer
+from decoder_core.bitstream import Writer, Operation, Source
 from decoder_core.decode import decode as decode_file
 from ..ir import UnsupportedOperation
 
@@ -42,6 +42,14 @@ class H264Program:
         instructions, next_value = [], len(values)
         for graph_id, node in enumerate(graph.nodes):
             if node.op == "input":
+                continue
+            if node.op == "average":
+                # Keep the complete sum in the decoder's weighted predictor;
+                # materializing it as a u8 image would change full-range means.
+                operation = Operation("rounded average", tuple(Source(values[arg]) for arg in node.args))
+                instructions.append(legacy.lower.Instruction(next_value, operation, graph_id))
+                values[node] = next_value
+                next_value += 1
                 continue
             proxies = tuple(legacy.Input(f"x{i}", (arg.lo, arg.hi)) for i, arg in enumerate(node.args))
             try:

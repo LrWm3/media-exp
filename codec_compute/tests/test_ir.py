@@ -1,12 +1,42 @@
 """Mathematical contracts and the unchanged H.264 realization."""
 
 import unittest
+from dataclasses import replace
 from unittest.mock import patch
 
 import codec_compute as media
 
 
 class SemanticTests(unittest.TestCase):
+    def test__given_forged_range_proof__when_compiling__then_rejection_precedes_instruction_selection(self):
+        with self.assertRaisesRegex(media.CompileError, "Invalid range proof"):
+            media.compile(lambda x: media.threshold(media.Image("copy", (x,), (), 0, 0), 1),
+                          width=16, height=16)
+        graph = media.trace(lambda x: media.copy(x), width=16, height=16)
+        forged = media.Image("copy", (graph.inputs[0],), (), 0, 0)
+        with self.assertRaisesRegex(media.CompileError, "Invalid range proof"):
+            media.compile_graph(replace(graph, nodes=(*graph.inputs, forged), outputs=(("output", forged),)))
+
+    def test__given_positional_kernel__when_default_input_is_used__then_parameter_name_is_unrestricted(self):
+        graph = media.trace(lambda x: media.copy(x), width=1, height=1)
+        self.assertEqual(media.evaluate(graph, {"image": [[23]]}), {"output": [[23]]})
+
+    def test__given_nonimage_operands__when_building_operations__then_errors_are_compilation_errors(self):
+        for function in (media.copy, media.shift, lambda x: media.threshold(x, 1)):
+            with self.subTest(function=function), self.assertRaises(media.CompileError):
+                function(4)
+        with self.assertRaises(media.CompileError):
+            media.trace(lambda x: media.affine(x, weights=4), width=1, height=1)
+        for operands in ((3,), None):
+            with self.subTest(operands=operands), self.assertRaises(media.CompileError):
+                media.trace(lambda x: media.Image("copy", operands, (), 0, 255), width=1, height=1)
+
+    def test__given_full_range_average__when_interpreted__then_rounding_precedes_any_u8_storage(self):
+        graph = media.trace(media.average, width=4, height=1, input_ranges={"a": (0, 255), "b": (0, 255)})
+        self.assertEqual(media.evaluate(graph, {"a": [[255, 255, 0, 1]], "b": [[255, 254, 1, 2]]}),
+                         {"output": [[255, 255, 1, 2]]})
+        self.assertEqual(graph.manifest()["format"], "codec-compute-ir-2")
+
     def test__given_full_bytes__when_adding_exactly__then_overflow_requires_explicit_saturation(self):
         with self.assertRaisesRegex(media.CompileError, "exceeds u8"):
             media.trace(media.add, width=1, height=1, input_ranges={"a": (0, 255), "b": (0, 255)})

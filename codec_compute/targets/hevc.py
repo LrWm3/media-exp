@@ -16,7 +16,10 @@ class HEVCProgram:
         steps = []
 
         def emit(name, args, weights, bias=0, denominator=0):
-            steps.append(NativeStep(name, tuple(args), tuple(weights), bias, denominator))
+            try:
+                steps.append(NativeStep(name, tuple(args), tuple(weights), bias, denominator))
+            except ValueError as error:
+                raise UnsupportedOperation(self.target, "prediction", str(error)) from error
 
         for index, node in enumerate(graph.nodes):
             name, refs = ids[node], tuple(ids[arg] for arg in node.args)
@@ -33,6 +36,8 @@ class HEVCProgram:
                 emit(name, refs, tuple(w * (2 if len(refs) == 2 else 1) for w in weights), bias)
             elif node.op in ("and", "or"):
                 emit(name, refs, (2, 2) if node.op == "and" else (1, 1), -1 if node.op == "and" else 0)
+            elif node.op == "average":
+                emit(name, refs, (1, 1))
             elif node.op == "threshold":
                 source, cutoff = refs[0], node.params[0]
                 operand = node.args[0]
@@ -82,7 +87,7 @@ class HEVCProgram:
     def manifest(self):
         return {"target": self.target, "coded_shape": [self.graph.height, self.graph.width],
                 "output_frames": {name: self.program.output_frame_indices[key] for name, key in self.output_names.items()},
-                "picture_order_counts": self.program.picture_order_counts,
+                "picture_order_counts": dict(self.program.picture_order_counts),
                 "costs": {"input_pictures": len(self.graph.inputs),
                           "computation_pictures": len(self.program.steps),
                           "total_pictures": len(self.graph.inputs) + len(self.program.steps),

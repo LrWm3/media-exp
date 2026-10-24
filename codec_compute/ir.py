@@ -51,8 +51,15 @@ def _node(op, args, params, lo, hi):
     return Image(op, tuple(args), tuple(params), lo, hi)
 
 
+def _image(value):
+    if not isinstance(value, Image):
+        raise CompileError("Operands must be symbolic images")
+    return value
+
+
 def copy(image):
     """Return identical pixels; no requirement to allocate another picture."""
+    _image(image)
     return _node("copy", (image,), (), image.lo, image.hi)
 
 
@@ -64,7 +71,10 @@ def affine(*images, weights=None, bias=0, saturating=False):
     """
     if not images or any(not isinstance(image, Image) for image in images):
         raise CompileError("affine requires symbolic images")
-    weights = (1,) * len(images) if weights is None else tuple(weights)
+    try:
+        weights = (1,) * len(images) if weights is None else tuple(weights)
+    except TypeError as error:
+        raise CompileError("weights must be an iterable of integers") from error
     if len(weights) != len(images):
         raise CompileError("affine needs one weight per operand")
     integer(bias, "bias")
@@ -95,8 +105,20 @@ def sub_sat(a, b):
     return affine(a, b, weights=(1, -1), saturating=True)
 
 
+def average(a, b):
+    """Exact rounded average: floor((A+B+1)/2), including full-range bytes.
+
+    IR revision 2 keeps this operation intact: expanding through a u8 add
+    would overflow or clip before division. The rounding rule is serialized.
+    """
+    _image(a)
+    _image(b)
+    return _node("average", (a, b), ("half_up",), (a.lo + b.lo + 1) // 2, (a.hi + b.hi + 1) // 2)
+
+
 def shift(image, dx=0, dy=0, *, border="zero"):
     """Read image[y+dy,x+dx]; out-of-image positions use explicit border rules."""
+    _image(image)
     integer(dx, "dx")
     integer(dy, "dy")
     if border not in ("zero", "clamp"):
@@ -106,6 +128,7 @@ def shift(image, dx=0, dy=0, *, border="zero"):
 
 
 def threshold(image, cutoff):
+    _image(image)
     integer(cutoff, "cutoff")
     return _node("threshold", (image,), (cutoff,), int(image.lo >= cutoff), int(image.hi >= cutoff))
 
@@ -129,16 +152,24 @@ def bit_or(a, b):
 
 
 def postorder(roots):
-    visited, result = set(), []
+    visited, active, result = set(), set(), []
     stack = [(root, False) for root in reversed(tuple(roots))]
     while stack:
         item, expanded = stack.pop()
+        if not isinstance(item, Image):
+            raise CompileError("Graph operands must be Image values")
+        if not isinstance(item.args, tuple) or not isinstance(item.params, tuple):
+            raise CompileError("Image operands and parameters must be immutable tuples")
         if item in visited:
             continue
         if expanded:
+            active.remove(item)
             visited.add(item)
             result.append(item)
         else:
+            if item in active:
+                raise CompileError("Image graph must be acyclic")
+            active.add(item)
             stack.append((item, True))
             stack.extend((arg, False) for arg in reversed(item.args))
     return tuple(result)
@@ -167,7 +198,7 @@ class Graph:
 
     def manifest(self):
         ids = {node: index for index, node in enumerate(self.nodes)}
-        return {"format": "codec-compute-ir-1", "dtype": "u8", "shape": [self.height, self.width],
+        return {"format": "codec-compute-ir-2", "dtype": "u8", "shape": [self.height, self.width],
                 "inputs": [{"name": node.params[0], "id": ids[node], "range": [node.lo, node.hi]}
                            for node in self.inputs],
                 "outputs": {name: ids[node] for name, node in self.outputs},
@@ -193,7 +224,8 @@ def trace(function, *, width, height, input_ranges=None):
         if not 0 <= integer(lo, "lower bound") <= integer(hi, "upper bound") <= 255:
             raise CompileError("Input ranges must lie within u8")
         inputs.append(Image("input", (), (name,), lo, hi))
-    result = function(**{node.params[0]: node for node in inputs})
+    result = (function(inputs[0]) if input_ranges is None
+              else function(**{node.params[0]: node for node in inputs}))
     if isinstance(result, Image):
         result = {"output": result}
     if not isinstance(result, Mapping) or not result:
@@ -205,11 +237,84 @@ def trace(function, *, width, height, input_ranges=None):
     declared = set(inputs)
     if any(node.op == "input" and node not in declared for node in nodes):
         raise CompileError("Kernel uses an input from a different graph")
-    return Graph(width, height, tuple(inputs), tuple(result.items()), nodes)
+    graph = Graph(width, height, tuple(inputs), tuple(result.items()), nodes)
+    validate_graph(graph)
+    return graph
+
+
+def validate_graph(graph):
+    """Check topology and independently rederive all advertised range proofs.
+
+    Public IR objects are inspectable and constructible, but consumers must
+    never trust user-authored bounds when selecting arithmetic instructions.
+    """
+    if not isinstance(graph, Graph):
+        raise CompileError("Expected a Graph")
+    if integer(graph.width, "width") <= 0 or integer(graph.height, "height") <= 0:
+        raise CompileError("Image dimensions must be positive")
+    if any(not isinstance(value, tuple) for value in (graph.inputs, graph.outputs, graph.nodes)):
+        raise CompileError("Graph collections must be immutable tuples")
+    if not graph.inputs or not graph.outputs:
+        raise CompileError("Graph needs inputs and outputs")
+    if any(not isinstance(node, Image) for node in graph.inputs):
+        raise CompileError("Graph inputs must be Image values")
+    declared, seen, input_names = set(graph.inputs), set(), set()
+    if len(declared) != len(graph.inputs):
+        raise CompileError("Graph inputs must be unique")
+    for node in graph.nodes:
+        if not isinstance(node, Image) or node in seen:
+            raise CompileError("Graph nodes must be distinct Image values")
+        if not isinstance(node.args, tuple) or not isinstance(node.params, tuple):
+            raise CompileError("Image operands and parameters must be immutable tuples")
+        if any(arg not in seen for arg in node.args):
+            raise CompileError("Graph operands must precede their users")
+        if type(node.lo) is not int or type(node.hi) is not int or not 0 <= node.lo <= node.hi <= 255:
+            raise CompileError("Node range must lie within u8")
+        if node.op == "input":
+            if node not in declared or node.args or len(node.params) != 1:
+                raise CompileError("Graph uses an undeclared or malformed input")
+            name = node.params[0]
+            if not isinstance(name, str) or not name.isidentifier() or name in input_names:
+                raise CompileError("Graph input names must be unique identifiers")
+            input_names.add(name)
+        else:
+            args, params = node.args, node.params
+            try:
+                if node.op == "copy" and len(args) == 1 and not params:
+                    proof = copy(*args)
+                elif node.op in ("affine", "affine_sat") and len(params) == len(args) + 1:
+                    proof = affine(*args, weights=params[:-1], bias=params[-1], saturating=node.op == "affine_sat")
+                elif node.op == "average" and len(args) == 2 and params == ("half_up",):
+                    proof = average(*args)
+                elif node.op == "shift" and len(args) == 1 and len(params) == 3:
+                    proof = shift(*args, params[0], params[1], border=params[2])
+                elif node.op == "threshold" and len(args) == 1 and len(params) == 1:
+                    proof = threshold(*args, *params)
+                elif node.op in ("and", "or") and len(args) == 2 and not params:
+                    proof = (bit_and if node.op == "and" else bit_or)(*args)
+                else:
+                    raise CompileError(f"Unknown or malformed semantic operation: {node.op}")
+            except (TypeError, AttributeError) as error:
+                raise CompileError(f"Malformed semantic operation: {node.op}") from error
+            if (proof.lo, proof.hi) != (node.lo, node.hi):
+                raise CompileError(f"Invalid range proof for {node.op}: expected [{proof.lo},{proof.hi}]")
+        seen.add(node)
+    if not declared <= seen or any(node.op != "input" for node in declared):
+        raise CompileError("Declared inputs must occur in the graph")
+    names = set()
+    for output in graph.outputs:
+        if not isinstance(output, tuple) or len(output) != 2:
+            raise CompileError("Graph outputs must be (name, image) tuples")
+        name, node = output
+        if not isinstance(name, str) or not name or name in names or node not in seen:
+            raise CompileError("Outputs need unique names and defined image values")
+        names.add(name)
+    return graph
 
 
 def evaluate(graph, images):
     """Independent mathematical oracle; encoding and decoding never call this."""
+    validate_graph(graph)
     graph.validate(images)
     width, height, values = graph.width, graph.height, {}
     for node in graph.nodes:
@@ -225,6 +330,8 @@ def evaluate(graph, images):
                 value = [clip8(x) for x in value]
         elif node.op == "threshold":
             value = [int(x >= node.params[0]) for x in values[node.args[0]]]
+        elif node.op == "average":
+            value = [(a + b + 1) // 2 for a, b in zip(values[node.args[0]], values[node.args[1]])]
         elif node.op in ("and", "or"):
             value = [a & b if node.op == "and" else a | b
                      for a, b in zip(values[node.args[0]], values[node.args[1]])]
