@@ -40,6 +40,9 @@ smoothing picture counts. Captures, input-loading sizes, target
 restrictions, and exact-decoder evidence are included.
 The [temporal benchmark](workloads/temporal/README.md) separately measures input
 serialization, pre-encoded decoding, and complete host-input-to-output runs.
+The [resampling experiments](workloads/resampling/README.md) explore patch atlases,
+supplied-motion interpolation, bandwise correction, compensated residuals,
+dense polarity maps, and stereo cost candidates.
 
 ## Run locally
 
@@ -99,8 +102,48 @@ crop boundaries remain materialized. Both fused and unfused plans are scheduled;
 fusion is accepted only when computation pictures, prediction bytes, and distinct
 output readback pictures do not increase. The manifest records that decision.
 Pass `h264_fuse_shifts=False` to `compile` or `compile_graph` for the baseline;
-this target-specific option has no effect on HEVC or AV1. See the
+this compatibility flag now controls all spatial read fusion and has no effect
+on HEVC or AV1. See the
 [spatial comparison](workloads/motion-fusion/README.md).
+
+## Block routing and explicit H.264 sampling
+
+`gather(image, offsets, block_size=16, border="zero")` uses an immutable table
+of integer-pixel `(dx,dy)` offsets, one per output block in row-major order.
+Each pixel reads its original source at that relative position. The semantic
+oracle supports zero/clamp borders and partial edge blocks; the H.264 adapter
+currently requires 16×16 blocks, zero borders, and its existing aligned shape.
+The output retains the graph's shape, so packing a smaller ROI does not shrink
+the coded picture or hardware readback surface.
+
+`sample_h264(image, qx, qy)` and `gather_h264(image, offsets, block_size=16)`
+explicitly name the [H.264 luma interpolation rules](https://www.itu.int/rec/T-REC-H.264-202408-S/en)
+(8.4.2.2.1). Their offsets are integer **quarter-pixel** units. They extend the
+active image with zero before six-tap filtering, retain the specified diagonal
+intermediate precision, and apply codec-defined rounding and clipping. Fractional
+samples may overshoot an input's narrower range, so their proof is `[0,255]`.
+They are not generic bilinear resampling operations. Other targets currently
+reject these qualified operations.
+
+```python
+def halfway(a, b):
+    # Supplied motion, ±2.5 pixels; no optical-flow estimation in the decoder.
+    return media.average(media.sample_h264(a, 10, 0),
+                         media.sample_h264(b, -10, 0))
+
+program = media.compile(halfway, width=128, height=128,
+                        input_ranges={"a": (0, 255), "b": (0, 255)})
+assert program.manifest()["costs"]["computation_pictures"] == 1
+```
+
+Two independent per-block fields can likewise feed one rounded-average B
+prediction. The compiler schedules their parent references, then applies those
+physical frame identities to every block; each block has its own motion vectors.
+Gather or sampling results can also fold into affine arithmetic and threshold
+sequences. Nested motion/filter stages remain separate, as do named sampled
+outputs. Motion is bounded to ±508 quarter pixels per component. Fields are
+compile-time constants: changing them requires compiling a new prediction tail.
+Manifests include `spatial_read_fusion` decisions and prediction slice counts.
 
 The HEVC backend was implemented independently using lossless libx265 uploads,
 verified skip-CABAC templates, and compiler-written weighted-prediction headers.
@@ -128,8 +171,9 @@ results. Their native APIs remain available for codec-specific experiments:
 
 This IR is not the intersection of target capabilities: signed affine arithmetic,
 thresholds, and both border modes remain expressible even when one target cannot
-lower them. Codec-defined fractional sampling is intentionally not given a
-portable meaning; the original H.264 API remains available for those operations.
+lower them. Codec-defined fractional sampling uses explicitly qualified
+`sample_h264` and `gather_h264` operations; it does not acquire a portable
+bilinear meaning. The original H.264 API remains available too.
 
 ## Current capability matrix
 
@@ -150,6 +194,8 @@ portable meaning; the original H.264 API remains available for those operations.
 | Boolean NOT | Native | Native | Unimplemented |
 | Integer shift, zero border | Native | Unimplemented | Unimplemented |
 | Integer shift, clamp border | Unimplemented | Unimplemented | Native, each component ±16 |
+| Integer block gather, zero border | Native, 16×16 blocks | Unimplemented | Unimplemented |
+| Explicit H.264 fractional sample / block gather | Native, can fuse into scalar reads | Unimplemented | Unimplemented |
 
 | Implementation constraint | H.264 adapter | HEVC adapter | AV1 adapter |
 | --- | --- | --- | --- |
@@ -179,5 +225,5 @@ reference capacity and reuse, and verify long HEVC chains. See
 
 The next useful extensions are richer synthesis primitive catalogs,
 target-aware costs, broader reference allocation, controlled hardware validation,
-and codec-specific operations beyond this initial set. MLIR is not required for
+and additional codec-specific operations. MLIR is not required for
 the current graph size or pass structure.

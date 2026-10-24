@@ -1,4 +1,4 @@
-"""Fuse spatial reads, then reuse the H.264 selector, scheduler, and writer."""
+"""Fuse exact spatial reads, then reuse the H.264 selector and scheduler."""
 
 from collections import defaultdict
 from copy import deepcopy
@@ -30,6 +30,7 @@ def _legacy():
 class H264Program:
     target = "h264"
     suffix = ".h264"
+    movements = {"shift", "gather", "sample_h264", "gather_h264"}
 
     def __init__(self, graph, *, fuse_shifts=True):
         consumers = defaultdict(list)
@@ -38,10 +39,13 @@ class H264Program:
                 consumers[arg].append(node)
         named = {node for _, node in graph.outputs}
         scalar = {"copy", "affine", "affine_sat", "threshold", "and", "or", "average"}
-        # Do not compose movements: each materialized crop is observable. A
-        # named shift remains a real picture, as does any shift read by a shift.
-        eligible = {node for node in graph.nodes if node.op == "shift"
-                    and node.params[2] == "zero" and node not in named
+        # Validate even reads that will disappear into consumers. Native
+        # fractional filters have explicit IR semantics, not generic bilinear
+        # semantics. Never compose movements across a crop/filter boundary.
+        for node in graph.nodes:
+            if node.op in self.movements:
+                self._field(node, graph)
+        eligible = {node for node in graph.nodes if node.op in self.movements and node not in named
                     and consumers[node] and all(user.op in scalar for user in consumers[node])}
         baseline_error, baseline_cost = None, None
         try:
@@ -54,6 +58,7 @@ class H264Program:
             baseline, baseline_error = None, error
         chosen = baseline
         stats = {"enabled": fuse_shifts, "eligible_nodes": len(eligible), "fused_nodes": 0,
+                 "eligible_kinds": sorted({node.op for node in eligible}),
                  "reason": "disabled" if not fuse_shifts else "no eligible shifts"}
         if fuse_shifts and eligible:
             try:
@@ -74,7 +79,54 @@ class H264Program:
                 else:
                     stats.update(reason="scheduled cost regression")
         self.__dict__.update(chosen.__dict__)
-        self.optimizations = {"shift_read_fusion": stats}
+        # Preserve the original manifest key/compile flag for existing clients.
+        self.optimizations = {"spatial_read_fusion": stats, "shift_read_fusion": deepcopy(stats)}
+
+    @staticmethod
+    def _field(node, graph):
+        """One static quarter-pixel displacement per active output macroblock."""
+        if node.op == "shift":
+            dx, dy, border = node.params
+            if border != "zero":
+                raise UnsupportedOperation("h264", node.op, "this writer implements zero borders; clamp synthesis is unimplemented")
+            offsets = ((4 * dx, 4 * dy),)
+        elif node.op == "sample_h264":
+            offsets = (node.params,)
+        else:
+            offsets, block_size = node.params[:2]
+            if block_size != 16:
+                raise UnsupportedOperation("h264", node.op, "this adapter supports 16x16 output blocks")
+            if node.op == "gather":
+                if node.params[2] != "zero":
+                    raise UnsupportedOperation("h264", node.op, "this writer implements zero borders; clamp synthesis is unimplemented")
+                offsets = tuple((4 * dx, 4 * dy) for dx, dy in offsets)
+        if any(abs(component) > 508 for pair in offsets for component in pair):
+            raise UnsupportedOperation("h264", node.op, "motion offsets must lie within +/-127 pixels (+/-508 quarter pixels)")
+        if node.op in ("shift", "sample_h264"):
+            offsets *= ((graph.width + 15) // 16) * ((graph.height + 15) // 16)
+        return offsets
+
+    @staticmethod
+    def _prediction(operation, fields):
+        """Attach reads to scalar instructions without changing their rounding.
+
+        Every child reads exactly its corresponding parent reference. This
+        restricted form lets the existing scheduler see the full dependency
+        set through the parent, before child frames are remapped below.
+        """
+        def moving(source, offset):
+            dx, qx = divmod(4 * source.dx + source.qx + offset[0], 4)
+            dy, qy = divmod(4 * source.dy + source.qy + offset[1], 4)
+            return replace(source, dx=dx, dy=dy, qx=qx, qy=qy)
+
+        if all(field is None or all(pair == field[0] for pair in field) for field in fields):
+            return replace(operation, sources=tuple(moving(source, field[0]) if field else source
+                           for source, field in zip(operation.sources, fields)))
+        count = len(next(field for field in fields if field is not None))
+        blocks = tuple(replace(operation, sources=tuple(
+            moving(source, field[index]) if field else source
+            for source, field in zip(operation.sources, fields))) for index in range(count))
+        return replace(operation, block_operations=blocks)
 
     def _cost(self):
         try:
@@ -100,49 +152,60 @@ class H264Program:
         for graph_id, node in enumerate(graph.nodes):
             if node.op == "input" or node in fused:
                 continue
-            bases = tuple(arg.args[0] if arg in fused else arg for arg in node.args)
-            if node.op == "average":
-                # Keep the complete sum in the decoder's weighted predictor;
-                # materializing it as a u8 image would change full-range means.
-                refs = tuple(Source(values[base], dx=arg.params[0], dy=arg.params[1])
-                             if arg in fused else Source(values[base])
-                             for arg, base in zip(node.args, bases))
-                # Use the same motion limits as standalone shift selection.
-                for arg in node.args:
-                    if arg in fused:
-                        try:
-                            legacy.shift(legacy.Input(), *arg.params[:2])
-                        except legacy.CompileError as error:
-                            raise UnsupportedOperation(self.target, "shift", str(error)) from error
-                operation = Operation("rounded average", refs)
+            if node.op in self.movements:
+                operation = self._prediction(Operation(node.op, (Source(values[node.args[0]]),)),
+                                             (self._field(node, graph),))
                 instructions.append(legacy.lower.Instruction(next_value, operation, graph_id))
                 values[node] = next_value
                 next_value += 1
                 continue
-            proxies = tuple(legacy.Input(f"x{i}", (arg.lo, arg.hi)) for i, arg in enumerate(bases))
+            bases = tuple(arg.args[0] if arg in fused else arg for arg in node.args)
+            fields = tuple(self._field(arg, graph) if arg in fused else None for arg in node.args)
+            if node.op == "average":
+                # Keep the complete sum in the decoder's weighted predictor;
+                # materializing it as a u8 image would change full-range means.
+                refs = tuple(Source(values[base]) for base in bases)
+                operation = self._prediction(Operation("rounded average", refs), fields)
+                instructions.append(legacy.lower.Instruction(next_value, operation, graph_id))
+                values[node] = next_value
+                next_value += 1
+                continue
+            # Select pointwise math using the actual sampled ranges. Motion is
+            # carried separately so arbitrary block fields can fold into the
+            # same scalar selector as uniform translations.
+            proxies = tuple(legacy.Input(f"x{i}", (arg.lo, arg.hi)) for i, arg in enumerate(node.args))
             try:
-                # Wrapping a proxy in a shift lets the existing selector fold
-                # the moving read only at its first use in a scalar sequence.
-                operands = tuple(legacy.shift(proxy, *arg.params[:2]) if arg in fused else proxy
-                                 for proxy, arg in zip(proxies, node.args))
-                expression = self._expression(legacy, node, operands)
+                expression = self._expression(legacy, node, proxies)
                 selected, outputs, *_ = legacy.backend.lower(proxies, {"out": expression}, exact_search=False)
             except legacy.CompileError as error:
                 raise UnsupportedOperation(self.target, node.op, str(error)) from error
-            registers = {index: values[arg] for index, arg in enumerate(bases)}
+            registers = {index: (values[arg], field) for index, (arg, field) in enumerate(zip(bases, fields))}
             for instruction in selected:
-                refs = tuple(replace(source, frame=registers[source.frame]) for source in instruction.operation.sources)
+                refs = tuple(replace(source, frame=registers[source.frame][0]) for source in instruction.operation.sources)
+                reads = tuple(registers[source.frame][1] for source in instruction.operation.sources)
+                operation = self._prediction(replace(instruction.operation, sources=refs), reads)
                 instructions.append(legacy.lower.Instruction(next_value,
-                                    replace(instruction.operation, sources=refs), graph_id))
-                registers[instruction.result] = next_value
+                                    operation, graph_id))
+                registers[instruction.result] = next_value, None
                 next_value += 1
-            values[node] = registers[outputs["out"]]
+            result, field = registers[outputs["out"]]
+            if field is not None and any(qx or qy for qx, qy in field):
+                # An identity scalar may alias its operand, but a moving read
+                # still needs a picture; otherwise it would return its base.
+                operation = self._prediction(Operation("materialize sampled alias", (Source(result),)), (field,))
+                instructions.append(legacy.lower.Instruction(next_value, operation, graph_id))
+                result, next_value = next_value, next_value + 1
+            values[node] = result
         try:
             (self.operations, self.output_frames, self.refreshes, self.peak_live,
              _, self.reference_slots) = legacy.backend.schedule(
                 instructions, {name: values[node] for name, node in graph.outputs}, False,
                 input_count=len(graph.inputs), retain=True)
-            maximum = max((abs(value) for op in self.operations for source in op.sources
+            self.operations = [replace(op, block_operations=tuple(replace(block, sources=tuple(
+                replace(source, frame=op.sources[index].frame) for index, source in enumerate(block.sources)))
+                for block in op.block_operations)) if op.block_operations else op for op in self.operations]
+            maximum = max((abs(value) for op in self.operations for block in (op, *op.block_operations)
+                           for source in block.sources
                            for value in (4 * source.dx + source.qx, 4 * source.dy + source.qy)), default=0)
             self.writer = Writer(self.width, self.height, reference_slots=self.reference_slots,
                                  slice_mode="row", motion_bits=max(4, maximum.bit_length()))
@@ -198,7 +261,8 @@ class H264Program:
                 "output_frames": self.output_frames,
                 "costs": {"input_pictures": len(self.graph_spec.inputs),
                           "computation_pictures": len(self.operations), "total_pictures": self.pictures,
-                          "prediction_bytes": len(self.tail), "peak_live_references": self.peak_live},
+                          "prediction_bytes": len(self.tail), "peak_live_references": self.peak_live,
+                          "prediction_slices": sum(self.writer.slice_count(op) for op in self.operations)},
                 "reference_slots": self.reference_slots,
                 "optimizations": deepcopy(self.optimizations),
                 "scheduling": "H.264 retained long-term references", "guard": 16}
