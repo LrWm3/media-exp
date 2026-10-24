@@ -107,7 +107,8 @@ class Writer:
     MAX_REFS = 16
 
     def __init__(self, width, height, fps=30, motion_bits=4,
-                 reference_slots=None, slice_mode="macroblock", *, level_idc=31):
+                 reference_slots=None, slice_mode="macroblock", *, level_idc=31,
+                 merge_zero_guards=False):
         """Create a writer with an optional immutable physical-frame slot plan.
 
         A plan assigns every frame, starting at zero, a long-term slot in 0..15.
@@ -120,7 +121,17 @@ class Writer:
         High level 3.1 remains the byte-compatible default. Explicit levels 4.1
         and 5.1 permit larger PCM inputs and use a conservative per-access-unit
         bitrate budget, rather than simulating a stateful burst-buffer model.
+
+        Opt-in row guard merging requires every referenced picture to have
+        zero luma guards and neutral chroma, as this writer's inputs and
+        predictions establish. Uniform zero-offset headers can then cover
+        guards using zero motion and their original weights. External pictures
+        (including neutral_idr delimiters with nonzero guards) must not be
+        referenced under this contract. The default preserves legacy bytes.
         """
+        if type(merge_zero_guards) is not bool:
+            raise ValueError("merge_zero_guards must be Boolean")
+        self.merge_zero_guards = merge_zero_guards
         if type(level_idc) is not int or level_idc not in _LEVELS:
             raise ValueError("level_idc must be 31, 41, or 51")
         self.level_idc, self._limits = level_idc, _LEVELS[level_idc]
@@ -411,6 +422,22 @@ class Writer:
             raise ValueError(f"Motion vector exceeds level {self.level_name} component limit")
         return vector
 
+    @staticmethod
+    def _prediction_key(operation):
+        return (operation.denominator,
+                tuple((source.frame, source.weight, source.offset) for source in operation.sources))
+
+    def zero_guard_merge_eligible(self, operation):
+        """Whether a validated operation permits the zero-guard row policy.
+
+        This describes eligibility independently of the enable flag. Encoding
+        still validates every original parent/child source before using it.
+        """
+        key = self._prediction_key(operation)
+        return (self.slice_mode == "row"
+                and all(source.offset == 0 for source in operation.sources)
+                and all(self._prediction_key(block) == key for block in operation.block_operations))
+
     def _prediction_runs(self, operation):
         self._validate_operation(operation)
         for source in operation.sources:
@@ -443,7 +470,8 @@ class Writer:
                         any(not isinstance(value, int) or isinstance(value, bool) for value in offset)):
                     raise ValueError("Block offsets must be integer quarter-pixel pairs")
                 self._motion(replace(source, qx=source.qx + offset[0], qy=source.qy + offset[1]))
-        guard = replace(operation, sources=tuple(replace(s, weight=0, offset=0,
+        merge = self.merge_zero_guards and self.zero_guard_merge_eligible(operation)
+        guard = replace(operation, sources=tuple(replace(s, weight=s.weight if merge else 0, offset=0,
                         dx=0, dy=0, qx=0, qy=0) for s in operation.sources),
                         block_offsets=(), block_operations=())
         for my in range(self.mb_height):
@@ -463,7 +491,7 @@ class Writer:
                                  qx=operation.sources[0].qx + qx, qy=operation.sources[0].qy + qy),))
                 # Motion belongs to macroblocks; only weights/references/denom
                 # belong to the slice header and therefore split horizontal runs.
-                key = (op.denominator, tuple((s.frame, s.weight, s.offset) for s in op.sources))
+                key = self._prediction_key(op)
                 if run and (self.slice_mode == "macroblock" or key != previous_key):
                     yield run
                     run = []

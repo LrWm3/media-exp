@@ -40,7 +40,7 @@ class H264Program:
     suffix = ".h264"
     movements = {"shift", "gather", "sample_h264", "gather_h264"}
 
-    def __init__(self, graph, *, fuse_shifts=True, level_idc=31):
+    def __init__(self, graph, *, fuse_shifts=True, level_idc=31, merge_zero_guards=True):
         consumers = defaultdict(list)
         for node in graph.nodes:
             for arg in node.args:
@@ -57,7 +57,8 @@ class H264Program:
                     and consumers[node] and all(user.op in scalar for user in consumers[node])}
         baseline_error, baseline_cost = None, None
         try:
-            baseline = self._build(graph, set(), level_idc=level_idc)
+            baseline = self._build(graph, set(), level_idc=level_idc,
+                                   merge_zero_guards=merge_zero_guards)
             if fuse_shifts and eligible:
                 baseline_cost = baseline._cost()
         except UnsupportedOperation as error:
@@ -70,7 +71,8 @@ class H264Program:
                  "reason": "disabled" if not fuse_shifts else "no eligible shifts"}
         if fuse_shifts and eligible:
             try:
-                candidate = self._build(graph, eligible, level_idc=level_idc)
+                candidate = self._build(graph, eligible, level_idc=level_idc,
+                                        merge_zero_guards=merge_zero_guards)
                 candidate_cost = candidate._cost()
             except UnsupportedOperation as error:
                 if baseline is None:
@@ -89,6 +91,12 @@ class H264Program:
         self.__dict__.update(chosen.__dict__)
         # Preserve the original manifest key/compile flag for existing clients.
         self.optimizations = {"spatial_read_fusion": stats, "shift_read_fusion": deepcopy(stats)}
+        guard_eligible = sum(self.writer.zero_guard_merge_eligible(op) for op in self.operations)
+        guard_reduced = sum(self.writer.zero_guard_merge_eligible(op)
+                            and any(source.weight != 0 for source in op.sources) for op in self.operations)
+        self.optimizations["zero_guard_merge"] = {
+            "enabled": merge_zero_guards, "eligible_pictures": guard_eligible,
+            "merged_pictures": guard_reduced if merge_zero_guards else 0}
 
     @staticmethod
     def _field(node, graph, *, level_idc=31):
@@ -149,7 +157,7 @@ class H264Program:
                 "output_readback_pictures": len(set(self.output_frames.values()))}
 
     @classmethod
-    def _build(cls, graph, fused, *, level_idc=31):
+    def _build(cls, graph, fused, *, level_idc=31, merge_zero_guards=True):
         self = cls.__new__(cls)
         legacy = _legacy()
         if len(graph.inputs) > 15:
@@ -221,7 +229,8 @@ class H264Program:
                            for source in block.sources
                            for value in (4 * source.dx + source.qx, 4 * source.dy + source.qy)), default=0)
             self.writer = Writer(self.width, self.height, reference_slots=self.reference_slots,
-                                 slice_mode="row", motion_bits=max(4, maximum.bit_length()), level_idc=level_idc)
+                                 slice_mode="row", motion_bits=max(4, maximum.bit_length()), level_idc=level_idc,
+                                 merge_zero_guards=merge_zero_guards)
         except (ValueError, legacy.CompileError) as error:
             raise UnsupportedOperation(self.target, "resources", str(error)) from error
         self.pictures = len(graph.inputs) + len(self.operations)
@@ -293,6 +302,7 @@ class H264Program:
     def manifest(self):
         return {"target": self.target, "coded_shape": [self.writer.height, self.writer.width],
                 "level_idc": self.writer.level_idc,
+                "merge_zero_guards": self.writer.merge_zero_guards,
                 "output_frames": self.output_frames,
                 "costs": {"input_pictures": len(self.graph_spec.inputs),
                           "computation_pictures": len(self.operations), "total_pictures": self.pictures,
