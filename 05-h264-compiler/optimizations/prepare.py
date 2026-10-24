@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Recompile committed graphs and prepare a portable optimization comparison.
 
-The historical streams supply PCM inputs and baseline named outputs. Their saved
+The historical streams supply PCM inputs and verified named outputs. Their saved
 graphs independently evaluate every named output, then the current compiler
 replays exactly those graph semantics. No models, fixtures, or historical assets
 are regenerated. Each repeated graph execution becomes its own bundle case.
+The baseline can be historical streams or the current compiler with only exact
+instruction search disabled (--baseline no-exact-search).
 
 Example: python3 prepare.py --output out/bundle --cases native motion
 The resulting suite.json works with ../native_ops/nvdec/run.py. FFmpeg is always
@@ -98,7 +100,7 @@ def input_records(manifest):
              "encoding": manifest["seed_encoding"]}]
 
 
-def compile_saved_graph(manifest):
+def compile_saved_graph(manifest, **compiler_options):
     """Replay saved nodes inside tracing, substituting the supplied input nodes."""
     records = input_records(manifest)
     names = [record["name"] for record in records]
@@ -133,6 +135,7 @@ def compile_saved_graph(manifest):
         options["input_range"] = tuple(manifest["input_range"])
     else:
         options["input_ranges"] = {record["name"]: tuple(record["range"]) for record in records}
+    options.update(compiler_options)
     return h264.compile(replay, **options)
 
 
@@ -207,8 +210,10 @@ def sum_costs(cases, key):
                    else sum(item[name] for item in costs)) for name in costs[0]}
 
 
-def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
+def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264"), baseline="historical"):
     selected = selected_cases(cases)
+    if baseline not in ("historical", "no-exact-search"):
+        raise ValueError("Baseline must be historical or no-exact-search")
     if any(backend not in ("ffmpeg", "vaapi", "openh264") for backend in local_backends):
         raise ValueError("Local decoders must be ffmpeg, vaapi or openh264")
     backends = tuple(dict.fromkeys(("ffmpeg", *local_backends)))
@@ -237,6 +242,7 @@ def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
         if len(raw) != len(segments) * chunk_bytes:
             raise AssertionError(saved.name + ": historical decoded picture count differs from manifest")
         program = compile_saved_graph(manifest)
+        baseline_program = compile_saved_graph(manifest, exact_search=False) if baseline == "no-exact-search" else None
         for index, historical in enumerate(segments):
             name = saved.name if len(segments) == 1 else "{}-{:02d}".format(saved.name, index)
             original_raw = raw[index * chunk_bytes:(index + 1) * chunk_bytes]
@@ -244,6 +250,16 @@ def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
             inputs = extract_inputs(original_raw, manifest, program.named_inputs)
             if program.reference(inputs) != expected:
                 raise AssertionError(name + ": recompiled graph differs from historical graph semantics")
+            baseline_bytes, baseline_manifest, baseline_decoded = historical, manifest, original_raw
+            baseline_name = name if baseline_program is not None else saved.name
+            baseline_stream = bundle.output / "baseline" / (baseline_name + ".h264")
+            if baseline_program is not None:
+                baseline_program.save(baseline_stream, inputs)
+                baseline_bytes = baseline_stream.read_bytes()
+                baseline_manifest = json.loads(baseline_stream.with_suffix(".json").read_text())
+                baseline_decoded = decode(baseline_stream, "ffmpeg")
+                if baseline_program.read(baseline_decoded) != expected:
+                    raise AssertionError(name + ": no-exact-search FFmpeg named outputs differ from historical outputs")
             stream = program.save(bundle.output / "streams" / (name + ".h264"), inputs)
             optimized_manifest = json.loads(stream.with_suffix(".json").read_text())
             optimized_raw = decode(stream, "ffmpeg")
@@ -256,11 +272,16 @@ def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
                 if decoded != optimized_raw:
                     raise AssertionError(name + ": " + backend + " differs from optimized FFmpeg I420 bytes")
                 status[backend]["cases"] += 1
-            comparison = {"before": stream_costs(historical, manifest),
+            comparison = {"baseline": baseline, "before": stream_costs(baseline_bytes, baseline_manifest),
                           "after": stream_costs(stream.read_bytes(), optimized_manifest),
-                          "baseline_segment_sha256": sha256(historical),
-                          "baseline_decoded_sha256": sha256(original_raw),
+                          "baseline_segment_sha256": sha256(baseline_bytes),
+                          "baseline_decoded_sha256": sha256(baseline_decoded),
+                          "historical_segment_sha256": sha256(historical),
+                          "historical_decoded_sha256": sha256(original_raw),
                           "named_outputs_equal": True, "independent_graph_equal": True}
+            if baseline_program is not None:
+                comparison["baseline_stream"] = str(baseline_stream.relative_to(bundle.output))
+                comparison["baseline_manifest"] = str(baseline_stream.with_suffix(".json").relative_to(bundle.output))
             entry = bundle.add(name, "optimized-comparison", stream, optimized_manifest, optimized_raw, expected,
                        group=saved.group, graph=saved.name, segment_index=index,
                        source_stream=saved.stream, source_manifest=saved.manifest,
@@ -269,19 +290,18 @@ def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
                        local_decoders={backend: "pass" if status[backend]["status"] != "unavailable"
                                        else "unavailable" for backend in backends})
             if index == 0:
-                baseline_stream = bundle.output / "baseline" / (saved.name + ".h264")
                 baseline_raw = baseline_stream.with_suffix(".i420")
                 baseline_stream.parent.mkdir(parents=True, exist_ok=True)
-                baseline_stream.write_bytes(historical)
-                baseline_raw.write_bytes(original_raw)
+                baseline_stream.write_bytes(baseline_bytes)
+                baseline_raw.write_bytes(baseline_decoded)
                 representatives[saved.name] = {
                     "group": saved.group, "width": manifest["width"], "height": manifest["height"],
                     "coded_width": manifest["width"] + 32, "coded_height": manifest["height"] + 32,
                     "frame_bytes": frame_bytes,
                     "baseline": {"stream": str(baseline_stream.relative_to(bundle.output)),
                                  "expected": str(baseline_raw.relative_to(bundle.output)),
-                                 "stream_sha256": sha256(historical), "expected_sha256": sha256(original_raw),
-                                 "pictures": manifest["pictures"], "expected_bytes": len(original_raw)},
+                                 "stream_sha256": sha256(baseline_bytes), "expected_sha256": sha256(baseline_decoded),
+                                 "pictures": baseline_manifest["pictures"], "expected_bytes": len(baseline_decoded)},
                     "optimized": {key: entry[key] for key in ("name", "stream", "expected", "stream_sha256",
                                                                "expected_sha256", "pictures", "expected_bytes")}}
         if source.read_bytes() != source_bytes or manifest_path.read_bytes() != manifest_bytes:
@@ -296,7 +316,7 @@ def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
         entries = [case for case in bundle.cases if case["group"] == group]
         groups[group] = {"cases": len(entries), "items": sum(case["items"] for case in entries),
                          "before": sum_costs(entries, "before"), "after": sum_costs(entries, "after")}
-    summary = {"cases": len(bundle.cases), "graphs_compiled": len(selected), "groups": groups,
+    summary = {"baseline": baseline, "cases": len(bundle.cases), "graphs_compiled": len(selected), "groups": groups,
                "before": sum_costs(bundle.cases, "before"), "after": sum_costs(bundle.cases, "after"),
                "named_outputs": sum(len(case["named_outputs"]) for case in bundle.cases),
                "named_output_pixels": sum(case["width"] * case["height"] * len(case["named_outputs"])
@@ -311,7 +331,11 @@ def prepare(output, cases=None, local_backends=("ffmpeg", "vaapi", "openh264")):
              "python": platform.python_version(), "reference_decoder": version,
              "raw_format": "I420", "raw_order": "display order; full coded pictures including guard and chroma",
              "oracle": "historical FFmpeg named outputs and independent saved-graph integer evaluation",
-             "comparison": "Default optimized compiler; compile once per saved graph, encode every original segment",
+             "baseline": baseline,
+             "comparison": ("Current compiler exact_search=False vs exact_search=True; all other optimizations unchanged; "
+                            "compile each variant once per saved graph, encode every original segment"
+                            if baseline == "no-exact-search" else
+                            "Historical streams vs default optimized compiler; compile once per saved graph, encode every original segment"),
              "cost_definitions": {"prediction_slices": "NAL kind 1 or 5 count minus one PCM slice per input",
                                   "prediction_bytes": "Bytes after the final PCM input NAL, including the full prediction tail",
                                   "peak_live_values": "Per-graph scheduled live values; aggregate uses maximum",
@@ -334,12 +358,14 @@ def main():
     parser.add_argument("--cases", nargs="+", help="Groups life maze denoise mnist native motion, or native-NAME")
     parser.add_argument("--local-backends", nargs="+", choices=("ffmpeg", "vaapi", "openh264"),
                         default=["ffmpeg", "vaapi", "openh264"])
+    parser.add_argument("--baseline", choices=("historical", "no-exact-search"), default="historical",
+                        help="Compare historical streams or current compiler with exact instruction search disabled")
     args = parser.parse_args()
     try:
         selected_cases(args.cases)
     except ValueError as error:
         parser.error(str(error))
-    prepare(args.output, args.cases, args.local_backends)
+    prepare(args.output, args.cases, args.local_backends, args.baseline)
 
 
 if __name__ == "__main__":

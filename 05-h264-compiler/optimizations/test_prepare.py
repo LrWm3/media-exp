@@ -73,6 +73,19 @@ class PreparationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unknown"):
             prepare.selected_cases(["missing"])
 
+    def test__given_saved_life_graph__when_disabling_only_exact_search__then_682_pictures_become_402(self):
+        saved, = prepare.selected_cases(["life"])
+        manifest = json.loads((prepare.REPOSITORY / saved.manifest).read_text())
+        baseline = prepare.compile_saved_graph(manifest, exact_search=False)
+        optimized = prepare.compile_saved_graph(manifest, exact_search=True)
+        self.assertEqual(baseline.pictures, 682)
+        self.assertEqual(optimized.pictures, 402)
+        self.assertFalse(baseline.stats["exact_search_enabled"])
+        self.assertTrue(optimized.stats["exact_search_enabled"])
+        self.assertEqual(baseline.reference_mode, optimized.reference_mode)
+        self.assertEqual(baseline.slice_mode, optimized.slice_mode)
+        self.assertEqual(baseline.graph_outputs.keys(), optimized.graph_outputs.keys())
+
     @unittest.skipUnless(prepare.available("ffmpeg"), "FFmpeg unavailable")
     def test__given_committed_add_graph__when_preparing_comparison__then_portable_hashes_outputs_and_baselines_match(self):
         with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()):
@@ -94,6 +107,42 @@ class PreparationTests(unittest.TestCase):
             self.assertEqual(prepare.sha256((output / baseline["stream"]).read_bytes()), baseline["stream_sha256"])
             self.assertEqual(case["comparison"]["before"]["prediction_slices"], 36)
             self.assertLess(case["comparison"]["after"]["prediction_slices"], 36)
+
+    @unittest.skipUnless(prepare.available("ffmpeg"), "FFmpeg unavailable")
+    def test__given_no_search_baseline__when_preparing_comparison__then_fresh_stream_costs_and_full_raw_replace_history(self):
+        with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()):
+            output = Path(directory)
+            suite = prepare.prepare(output, ["native-saturating-add"], ["ffmpeg"], baseline="no-exact-search")
+            self.assertEqual(json.loads((output / "suite.json").read_text()), suite)
+            self.assertEqual(suite["baseline"], "no-exact-search")
+            self.assertEqual(suite["summary"]["baseline"], "no-exact-search")
+            self.assertIn("exact_search=False vs exact_search=True", suite["comparison"])
+            case, = suite["cases"]
+            comparison = case["comparison"]
+            representative = suite["representatives"][case["name"]]
+            baseline = representative["baseline"]
+            stream = (output / baseline["stream"]).read_bytes()
+            raw = (output / baseline["expected"]).read_bytes()
+            manifest = json.loads((output / comparison["baseline_manifest"]).read_text())
+            self.assertFalse(manifest["stats"]["exact_search_enabled"])
+            self.assertEqual(baseline["stream"], comparison["baseline_stream"])
+            self.assertEqual(comparison["before"], prepare.stream_costs(stream, manifest))
+            self.assertEqual(comparison["before"]["prediction_slices"], comparison["after"]["prediction_slices"])
+            self.assertLess(comparison["before"]["prediction_slices"], 36)
+            self.assertEqual(prepare.sha256(stream), baseline["stream_sha256"])
+            self.assertEqual(prepare.sha256(stream), comparison["baseline_segment_sha256"])
+            self.assertEqual(prepare.sha256(raw), baseline["expected_sha256"])
+            self.assertEqual(prepare.sha256(raw), comparison["baseline_decoded_sha256"])
+            self.assertEqual(len(raw), manifest["pictures"] * representative["frame_bytes"])
+            self.assertEqual(len(raw), baseline["expected_bytes"])
+            self.assertEqual(baseline["pictures"], manifest["pictures"])
+            self.assertEqual(raw, prepare.decode(output / baseline["stream"], "ffmpeg"))
+            self.assertTrue(comparison["named_outputs_equal"])
+            self.assertTrue(comparison["independent_graph_equal"])
+            historical = (prepare.REPOSITORY / case["source_stream"]).read_bytes()
+            self.assertEqual(prepare.sha256(historical), comparison["historical_segment_sha256"])
+            self.assertEqual(prepare.sha256(historical), suite["historical_source_sha256"][case["source_stream"]])
+            self.assertNotEqual(comparison["historical_segment_sha256"], comparison["baseline_segment_sha256"])
 
 
 if __name__ == "__main__":
