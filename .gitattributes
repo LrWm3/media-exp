@@ -1,0 +1,2 @@
+# Raw sample payloads must remain byte-exact, including on text-converting clients.
+*.u8 binary

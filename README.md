@@ -36,6 +36,9 @@
 - [10 — Decoder interface limits](10-decoder-interface-limits/README.md): opt-in
   prediction slice bands and explicit completion-only diagnostics distinguish
   instruction layout from input, output and consumer-interface costs.
+- [11 — Retained-reference streaming](11-retained-reference-streaming/README.md):
+  shared inputs feed many named outputs; bounded streaming and schedule-derived
+  reference declarations test completion behavior without resetting each output.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·

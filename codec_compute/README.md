@@ -149,6 +149,15 @@ The [interface experiment](../10-decoder-interface-limits/README.md) compares
 these layouts and separates complete host results from completion-only
 diagnostics.
 
+`h264_tight_dpb=True` separately minimizes the declared reference capacity to
+the highest scheduled long-term slot plus one. The default remains 16. This
+sets both SPS reference/buffer bounds and matching memory-management commands;
+it does not change slot assignments, lifetimes or pixel arithmetic. The
+manifest exposes `reference_capacity` and `optimizations.tight_dpb`. Check
+[experiment 11](../11-retained-reference-streaming/README.md) for measured
+retained-input behavior; a smaller declaration does not promise immediate
+completion.
+
 `with program.session(helper="/path/to/nvdec_decode") as session:` keeps an
 NVDEC process and pipeline alive; `session.run(inputs)` returns named image
 outputs after each independent job. It serializes new inputs, reuses cached
@@ -158,6 +167,13 @@ pictures and bytes. Close the context to validate delayed diagnostics and drain
 the final fence. Job references reset at IDR boundaries. This runtime is H.264/
 NVDEC only, with fixed shape and compile-time motion fields; it does not reuse
 camera frames or GPU reference arrays across jobs.
+
+For a bounded precompiled graph, `decoder_core.stream.NVDECStream` exposes
+experimental append/collect execution with one initial input IDR and one final
+EOS. It preserves prediction references between appends. A successful append
+only acknowledges queued input; bounded collect can report partial output.
+This interface does not import or expose GPU surfaces. See the
+[streaming contract](../decoder_core/STREAMING.md) before using it.
 
 `gather(image, offsets, block_size=16, border="zero")` uses an immutable table
 of integer-pixel `(dx,dy)` offsets, one per output block in row-major order.

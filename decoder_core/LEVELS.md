@@ -12,7 +12,7 @@ second = writer.input_luma(second_image, 1)
 ```
 
 The writer uses 8-bit 4:2:0 High profile, progressive frames, sixteen declared
-reference pictures, fixed integer frame rates from 1 through 60, and a
+reference pictures by default, fixed integer frame rates from 1 through 60, and a
 16-pixel zero guard on every side. Limits therefore apply to the complete
 coded image, including those guards. Selecting a higher level does not enable arbitrary
 image sizes or automatically select a decoder.
@@ -41,11 +41,26 @@ Table A-1 gives level-5.1 `MaxBR=240000` and `MaxCPB=240000`; Table A-2
 applies High-profile factors 1250 for VCL and 1500 for NAL.
 
 Both coded macroblock dimensions must have their square no greater than
-`8 * MaxFS`. Picture size, processing rate and the sixteen-picture DPB
-declaration are checked independently. Prediction slice counts must satisfy
+`8 * MaxFS`. Picture size, processing rate and the configured reference-capacity
+DPB declaration are checked independently. Prediction slice counts must satisfy
 `slices * fps * SliceRate <= MaxMBPS`, including extra splits introduced by
 per-block predictions. The initial PCM picture has one slice, which fits the
 initial-picture slice limit for all supported levels.
+
+`Writer(..., reference_capacity=N)` explicitly chooses an integer capacity in
+1..16. It changes `max_num_ref_frames`, `max_dec_frame_buffering`, MMCO4's
+maximum long-term index, permitted reference-slot indices, and the sliding
+reference-age bound together. Declared storage is
+`coded_macroblocks * reference_capacity`; other resource checks remain
+independent. Undersized slot plans and out-of-window references are rejected.
+The default 16 preserves previous stream bytes and the worked examples below.
+
+The shared compiler's opt-in `h264_tight_dpb=True` derives capacity as
+`max(scheduled_slots) + 1` for each candidate. It preserves slot assignments,
+input lifetimes and picture count. Sparse indices are not renumbered. This
+is a syntax/resource declaration, not a guarantee of immediate output or a
+decoder property that disables reference buffering. See
+[retained-reference measurements](../11-retained-reference-streaming/README.md).
 
 All supported levels limit horizontal luma motion to quarter-sample components
 `[-8192, 8191]` and vertical motion to `[-2048, 2047]`. The separately declared

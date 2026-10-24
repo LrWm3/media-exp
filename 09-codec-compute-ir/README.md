@@ -59,6 +59,7 @@ not established by the H.264/NVDEC measurements.
 | Native CPU baselines and larger inputs | [CPU comparison](../codec_compute/workloads/cpu_comparison/README.md) |
 | Fewer prediction slices and controlled CPU contention | [Guard merging](../codec_compute/workloads/guard_fusion/README.md) |
 | Opt-in slice bands and completion-only diagnostics | [Experiment 10: decoder interface limits](../10-decoder-interface-limits/README.md) |
+| Retained inputs, smaller reference bounds and output availability | [Experiment 11](../11-retained-reference-streaming/README.md) |
 | Retained legacy packing | [Experiment 05 packing](../05-h264-compiler/README.md#packing-independent-predictions), [experiment 07](../07-packed-denoising-decoder/README.md) |
 
 These are implementation comparisons with exact output checks. Decoder
@@ -73,6 +74,16 @@ chain uses 41.9% less process CPU while taking 18.3% longer than native CPU;
 practical single-stage tasks still lose, even with no host readback. This
 narrows the remaining research toward resident input surfaces and completion
 interfaces, rather than establishing a general application speedup.
+
+[Experiment 11](../11-retained-reference-streaming/README.md) loads inputs once
+for 1/8/32 distinct outputs. Schedule-derived reference bounds reduce 512×512,
+32-output interpolation latency **110.95 → 84.35 ms**, versus CPU **67.49 ms**.
+All host-output cases still lose on elapsed and process CPU time. Completion
+without host results reaches 62.44 ms, but exposes no consumer and uses a CPU
+baseline without cross-variant plane sharing. The separate continuous-stream
+probe preserves references and exact pixels, but every paused output boundary
+still needs more progress or final EOS. Explicit state-preserving drain/resume
+is the next interface test; hardware modification is not yet justified.
 
 ## Migrate from the experiment 05 frontend
 
@@ -145,9 +156,10 @@ Legacy compile controls `optimize`, `exact_search`, `semantic_ir`,
 `reference_mode` and `slice_mode` are not shared compile keywords. Shared
 `synthesis` and its search budgets control a different bounded pass; they do
 not reproduce the entire old optimizer. H.264-specific controls are
-`h264_fuse_shifts`, `h264_level`, `h264_merge_zero_guards` and
-`h264_prediction_slice_rows`. The shared target uses retained references and
-row slices, with compatible guard merging enabled by default. Disabling that
+`h264_fuse_shifts`, `h264_level`, `h264_merge_zero_guards`,
+`h264_prediction_slice_rows` and `h264_tight_dpb`. The shared target uses
+retained references and row slices, with compatible guard merging enabled by
+default. Disabling that
 pass alone does not promise old frontend bitstreams or instruction counts.
 
 `h264_prediction_slice_rows=1` preserves the current byte layout. Opt-in `N`
@@ -157,6 +169,12 @@ and uniform zero-offset headers; ineligible operations retain their previous
 slices. For eligible 512×512 predictions, `1`, `4` and `0` give 34, 9 and 1
 slices. Consult actual manifest slice/byte costs rather than inferring a
 performance gain from slice count. See [slice-band semantics](../decoder_core/GUARDS.md#opt-in-prediction-slice-bands).
+
+`h264_tight_dpb=True` declares only the capacity required by the scheduled
+reference-slot indices, while retaining their assignments and lifetimes. The
+default capacity stays 16. Both SPS bounds and MMCO4 agree with the chosen
+capacity. This is distinct from disabling decoder DPB management; output
+availability remains a measured runtime property.
 
 The shared `Program` does not expose the legacy `read(raw, selected_frames=...)`
 or `decode(..., readback="outputs")` interface. Its H.264/NVDEC `session()` API

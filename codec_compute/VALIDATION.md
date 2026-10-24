@@ -5,6 +5,56 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Retained inputs and declared reference capacity
+
+[Experiment 11](../11-retained-reference-streaming/README.md) compiles distinct
+1/8/32-output atlas and supplied-motion interpolation graphs through the shared
+IR. Each input set loads once and remains referenced beyond picture age 16.
+The opt-in `h264_tight_dpb=True` derives capacity from scheduled slot indices;
+SPS bounds, MMCO4 and writer resource checks agree. Default capacity 16 and
+existing default bytes are preserved. This changes declarations, not lifetimes
+or image semantics. The new bounded `NVDECStream` append/collect protocol keeps
+one sequence alive until final EOS and explicitly reports partial collection.
+
+Full suites pass **193 shared compiler tests** and **127 decoder-core tests**.
+The **31 stream/session tests** overlap the latter; **12 retained-runtime
+tests** and **three exporter tests** exercise semantic binding, provenance,
+exact guards/chroma, native CPU/PCM, partial output and lifecycle counts.
+Exporter smoke tests decode 32 streams and 144 named outputs through FFmpeg.
+
+The full frozen corpus has **96 streams, 1,456 pictures and 1,312 named
+outputs**, covering sizes 128/512, both workloads, three output counts, both
+reference declarations and four changing fixtures. All **288 local
+FFmpeg/OpenH264/VA-API checks** pass; 656 paired named outputs agree between
+declarations. Each complete I420 reference is assembled independently from
+native CPU results, zero guards and neutral chroma. No output answers are
+uploaded. Source commit `9e18edf`, 127 source hashes and artifact hashes bind
+the export. The representative capture subset preserves four streams,
+134 complete pictures and 128 named crops; omitted payloads are explicit.
+
+NVDEC validates all **96 continuous streams / 1,456 real pictures**, then
+another **1,456 real pictures plus 96 fences** in benchmark preflight. All
+**420 timing trials** pass. Completion-only trials copy zero timed pictures;
+480 new postflight requests validate **7,280 real pictures**, outside timing.
+Report, worker, native-build and source identities match. Closing every
+pipeline reconciles real pictures, copied results and final fences.
+
+Tight bounds reduce 512×512, 32-output interpolation from **110.95 to 84.35
+ms**, versus native CPU **67.49 ms**. Every host-output comparison at both
+sizes loses on elapsed and process CPU time, with separated trial ranges.
+The completion-only diagnostic reaches **62.44 ms** and **42.36 ms process
+CPU**, versus CPU **67.49 / 67.29 ms**, but returns no usable consumer result.
+CPU variant contexts do not share interpolation planes; that limitation can
+favor the decoder. No application or energy benefit follows from this result.
+
+Paused collection completes **0/1,312 output boundaries** within 50 ms.
+An extra 500 ms still leaves pictures pending in every sequence. At 32 outputs,
+tight declarations reduce final pending pictures from 16 to 2 for atlas and
+15 to 2 for interpolation. Final EOS releases all remaining exact pictures.
+Pending output does not establish unfinished hardware execution. The separate
+Linux state-preserving drain/restart contract has not been tested, so the
+result does not establish a hardware limitation or need for silicon changes.
+
 ## Prediction bands and decoder interfaces
 
 [Experiment 09](../09-codec-compute-ir/README.md) is now the numbered shared-IR
