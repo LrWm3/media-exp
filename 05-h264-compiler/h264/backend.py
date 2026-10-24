@@ -9,7 +9,7 @@ import tempfile
 
 from decoder_core.bitstream import Writer
 from decoder_core.decode import decode, decode_batch
-from .graph import CompileError, integer, trace
+from .graph import CompileError, integer, postorder, trace
 from .lower import lower
 from .schedule import schedule
 from .verify import evaluate, read
@@ -25,6 +25,11 @@ class Program:
         self.input_range = tuple(input_range) if not self.named_inputs else None
         self.binary_input = self.input_range == (0, 1)
         sources, outputs, traced_count = trace(function, input_range, input_ranges)
+        # Verification must interpret the user's traced expression, independent
+        # of semantic IR canonicalization and physical instruction selection.
+        self._reference_graph = postorder(outputs.values())
+        reference_ids = {node: index for index, node in enumerate(self._reference_graph)}
+        self._reference_outputs = {name: reference_ids[node] for name, node in outputs.items()}
         self.input_ranges = {source.params[0]: (source.lo, source.hi) for source in sources}
         self.input_count = len(sources)
         self.reference_mode = reference_mode or ("retained" if optimize else "sliding")
@@ -147,7 +152,7 @@ class Program:
 
     def reference(self, image):
         self.validate(image)
-        return evaluate(self.graph, self.graph_outputs, image)
+        return evaluate(self._reference_graph, self._reference_outputs, image)
 
     def verify(self, image, backend="ffmpeg", *, readback="all"):
         actual = self.decode(image, backend, readback=readback)

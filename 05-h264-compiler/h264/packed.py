@@ -75,7 +75,8 @@ class PackedProgram(Program):
         self.original = original
         self.mixed_predictions = mixed_predictions
         for name in ("width", "height", "named_inputs", "input_range", "binary_input",
-                     "input_ranges", "input_count", "graph", "graph_outputs"):
+                     "input_ranges", "input_count", "graph", "graph_outputs",
+                     "_reference_graph", "_reference_outputs"):
             setattr(self, name, getattr(original, name))
         self.reference_mode, self.slice_mode = "retained", "row"
         # Choose an exact factorization, avoiding extra unused rectangles. For

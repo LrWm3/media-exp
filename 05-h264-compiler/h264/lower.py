@@ -17,6 +17,28 @@ class Instruction:
     graph_id: int
 
 
+def _semantic_cost_guard(result, sources, outputs, optimize, exact_search):
+    """Compare with the requested search mode, including early search fallbacks."""
+    stats = result[3]
+    if not stats["semantic_ir_rewrites"]:
+        return result
+    try:
+        previous = lower(sources, outputs, optimize=optimize, exact_search=exact_search,
+                         semantic_ir=False)
+    except CompileError:
+        # Dead arithmetic may be unsupported even though its simplified result
+        # is legal. This case has no executable baseline cost to subtract.
+        stats["semantic_ir_baseline_unavailable"] = True
+        stats["semantic_ir_saved_instructions"] = None
+        return result
+    if len(result[0]) > len(previous[0]):
+        previous[3].update({"semantic_ir_enabled": True,
+                            "semantic_ir_rejected_rewrites": stats["semantic_ir_rewrites"]})
+        return previous
+    stats["semantic_ir_saved_instructions"] = len(previous[0])-len(result[0])
+    return result
+
+
 def lower(sources, outputs, optimize=True, exact_search=True, semantic_ir=True):
     from .ir import BooleanValues
     semantic = BooleanValues() if optimize and semantic_ir else None
@@ -319,7 +341,7 @@ def lower(sources, outputs, optimize=True, exact_search=True, semantic_ir=True):
         if len(instructions) >= len(baseline[0]):
             baseline[3]["exact_search_enabled"] = True
             baseline[3]["exact_search_attempts"] = search.attempts
-            return baseline
+            return _semantic_cost_guard(baseline, sources, outputs, optimize, exact_search) if semantic else baseline
     stats = {
         "reachable_nodes_before_cse": len(original), "graph_nodes": len(graph), **rewrites,
         "exact_search_enabled": bool(search), "exact_search_attempts": search.attempts if search else 0,
@@ -328,15 +350,6 @@ def lower(sources, outputs, optimize=True, exact_search=True, semantic_ir=True):
         "fused_shift_nodes": len(fused), "lowered_instructions": len(instructions),
         "semantic_ir_enabled": bool(semantic), "semantic_ir_saved_instructions": 0,
         **(semantic.stats() if semantic else BooleanValues().stats())}
-    if semantic and semantic.proofs:
-        # Sharing can obstruct later fusion. Retain the old instruction plan
-        # whenever semantic canonicalization would increase scalar work.
-        previous = lower(sources, outputs, optimize=optimize, exact_search=exact_search,
-                         semantic_ir=False)
-        if len(instructions) > len(previous[0]):
-            previous[3].update({"semantic_ir_enabled": True,
-                                "semantic_ir_rejected_rewrites": len(semantic.proofs)})
-            return previous
-        stats["semantic_ir_saved_instructions"] = len(previous[0])-len(instructions)
-    return instructions, {name: produced[item] for name, item in roots.items()}, graph, stats, {
+    result = instructions, {name: produced[item] for name, item in roots.items()}, graph, stats, {
         name: ids[item] for name, item in roots.items()}
+    return _semantic_cost_guard(result, sources, outputs, optimize, exact_search) if semantic else result

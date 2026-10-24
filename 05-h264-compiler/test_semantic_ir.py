@@ -3,6 +3,7 @@
 from itertools import product
 import random
 import unittest
+from unittest.mock import patch
 
 import h264
 from decoder_core.decode import available
@@ -182,6 +183,51 @@ class SemanticIRTests(unittest.TestCase):
         self.check(program, inputs, expected)
         with self.assertRaisesRegex(h264.CompileError, "weight sum"):
             self.compile(lambda a, b: h264.combine(a, b, 63, 63))
+
+    def test__given_unrepresentable_dead_arithmetic__when_folding_constants__then_legal_output_still_compiles(self):
+        for kernel in (lambda a, b: h264.weighted(h264.combine(a, b, 63, 63), 0),
+                       lambda a, b: h264.threshold(h264.combine(a, b, 63, 63), 127),
+                       lambda a, b: h264.weighted(h264.weighted(a, 200), 0)):
+            with self.subTest(kernel=kernel):
+                program = self.compile(kernel)
+                self.assertEqual(program.stats["lowered_instructions"], 1)
+                self.assertTrue(program.stats["semantic_ir_baseline_unavailable"])
+                self.assertIsNone(program.stats["semantic_ir_saved_instructions"])
+                with self.assertRaises(h264.CompileError):
+                    self.compile(kernel, semantic_ir=False)
+                self.check(program, self.inputs(), {"output": [[0]*16 for _ in range(16)]})
+
+    def test__given_an_incorrect_ir_rewrite__when_verifying__then_original_graph_oracle_detects_it(self):
+        from h264.ir import BooleanValues
+        original = BooleanValues.rewrite
+        def broken(values, node, identifier):
+            result = original(values, node, identifier)
+            if node.op == "threshold" and len(values.facts.get(node, ((),))[0]) == 2:
+                return values.anchor
+            return result
+        kernel = lambda a, b: h264.bit_or(a, b)
+        with patch.object(BooleanValues, "rewrite", broken):
+            program = self.compile(kernel)
+        expected = {"output": [[a | b for a, b in zip(arow, brow)]
+                                for arow, brow in zip(self.inputs()["a"], self.inputs()["b"])]}
+        for candidate in (program, h264.pack(program, tiles=2)):
+            self.assertEqual(candidate.reference(self.inputs()), expected)
+            with self.assertRaisesRegex(AssertionError, "differs from graph semantics"):
+                candidate.verify(self.inputs(), self.backends[0])
+
+    def test__given_exact_search_fallback__when_reporting_ir_savings__then_requested_baseline_is_used(self):
+        def kernel(a, b):
+            both = h264.bit_and(a, b)
+            absorbed = h264.bit_or(both, h264.bit_and(both, b))
+            return {"nand": h264.bit_not(both),
+                    "zero": h264.bit_and(a, h264.equal(h264.add(absorbed, absorbed), 1))}
+        for search in (False, True):
+            with self.subTest(exact_search=search):
+                program = self.compile(kernel, exact_search=search)
+                previous = self.compile(kernel, exact_search=search, semantic_ir=False)
+                self.assertEqual(program.stats["semantic_ir_saved_instructions"],
+                                 previous.stats["lowered_instructions"]-program.stats["lowered_instructions"])
+                self.check(program, self.inputs(), previous.reference(self.inputs()))
 
 
 if __name__ == "__main__":
