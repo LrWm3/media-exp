@@ -1,5 +1,7 @@
 # Binary MNIST through the shared compiler
 
+The current compiler includes [shared optimizations and measured comparisons](../../05-h264-compiler/optimizations/README.md). Saved assets below preserve the original compiler baseline.
+
 The original frozen 3-versus-8 network is expressed using shared compiler
 primitives: `shift`, `add`, `threshold`, and `binary_dot`. It retains the original
 2×2 pooling, 196 → 8 → 1 signed binary network, input preprocessing, and frozen

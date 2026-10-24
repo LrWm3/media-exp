@@ -1,0 +1,457 @@
+{
+  "format": "h264-optimization-timings-0.1",
+  "status": "pass",
+  "created_utc": "2026-10-24T03:20:48.464085+00:00",
+  "backend": "nvdec",
+  "python": "3.8.10",
+  "suite_sha256": "bc4ea40c113050f5a195f849e6183105e2eb1d73f34e15d6486a3b8626eeb3a1",
+  "runner_sha256": "837fe6bfb128e36aecc5c1ec75ab758a7183d2a3b9b0ad94c29a20fd7687d49e",
+  "helper_sha256": "42bdf4c5b2d3eddeb53a3d19324ab8f52eeb487bbc39bf9155f66e65d29ca4f0",
+  "repeats": 5,
+  "warmups_per_variant": 1,
+  "timed": "process startup, parsing, decoding, full readback, file I/O, diagnostics and exact byte comparison",
+  "excluded": "network transfer, compilation, input packing, loading reference files",
+  "order": "rotating group order; alternating baseline/optimized within every group",
+  "cases": {
+    "life": {
+      "baseline": {
+        "samples_ms": [
+          2192.111883079633,
+          2203.817593981512,
+          2199.7904839226976,
+          2203.0521139968187,
+          2217.9172460455447
+        ],
+        "stream": "baseline/life.h264",
+        "expected": "baseline/life.i420",
+        "stream_sha256": "1c2ce8fd1e6823932c32d6d0336059c50ef0f16b66be1c5a20697aeeda862f06",
+        "expected_sha256": "debb74f20aab41a4021433ec9ea110c56836b255f1dfb66ed62b9b81f448bf05",
+        "pictures": 922,
+        "expected_bytes": 5664768,
+        "median_ms": 2203.0521139968187,
+        "min_ms": 2192.111883079633,
+        "max_ms": 2217.9172460455447
+      },
+      "optimized": {
+        "samples_ms": [
+          1305.6215100223199,
+          1465.4798120027408,
+          1290.9105870639905,
+          1281.7458299687132,
+          1489.0716809313744
+        ],
+        "name": "life",
+        "stream": "streams/life.h264",
+        "expected": "expected/life.i420",
+        "stream_sha256": "c8b75ed5fc50961eb04d04e2cea6ce8f6de09001893b81bebf7424a038e09c89",
+        "expected_sha256": "be1a4b8f2c05502407d8497e9e10d8bb5537afd0e80bf98ddbcb13656c8396a4",
+        "pictures": 682,
+        "expected_bytes": 4190208,
+        "median_ms": 1305.6215100223199,
+        "min_ms": 1281.7458299687132,
+        "max_ms": 1489.0716809313744
+      },
+      "speedup": 1.6873589298932101
+    },
+    "maze": {
+      "baseline": {
+        "samples_ms": [
+          1537.0552040403709,
+          1476.4023460447788,
+          1660.483499057591,
+          1478.863392956555,
+          1501.044912962243
+        ],
+        "stream": "baseline/maze.h264",
+        "expected": "baseline/maze.i420",
+        "stream_sha256": "5615992b249a65ef4763d3988145d887be129f193c6995bd818f97b688d01b21",
+        "expected_sha256": "dc2efdf335b58faf9ed118e66b9ae0a925d7f1c83cb23fee9a8a955961e3a3a8",
+        "pictures": 560,
+        "expected_bytes": 3440640,
+        "median_ms": 1501.044912962243,
+        "min_ms": 1476.4023460447788,
+        "max_ms": 1660.483499057591
+      },
+      "optimized": {
+        "samples_ms": [
+          656.242995057255,
+          656.0337130213156,
+          737.8403380280361,
+          720.1274359831586,
+          688.1671990267932
+        ],
+        "name": "maze",
+        "stream": "streams/maze.h264",
+        "expected": "expected/maze.i420",
+        "stream_sha256": "c844800047fac32ed038413306952ce40d6404254066e4f00b2bbae76388a182",
+        "expected_sha256": "1eaad54f0bc3531ea2392cde6ea62a0d405704732970bb9fb17b0887ca6ada89",
+        "pictures": 265,
+        "expected_bytes": 1628160,
+        "median_ms": 688.1671990267932,
+        "min_ms": 656.0337130213156,
+        "max_ms": 737.8403380280361
+      },
+      "speedup": 2.1812212425774176
+    },
+    "denoise": {
+      "baseline": {
+        "samples_ms": [
+          466.3736920338124,
+          436.17951998021454,
+          456.1737560434267,
+          436.15254398901016,
+          443.325538886711
+        ],
+        "stream": "baseline/denoise.h264",
+        "expected": "baseline/denoise.i420",
+        "stream_sha256": "a136697bcba857559ddacf3630a3725f0d5c5d60f081199232309570c186253e",
+        "expected_sha256": "48d690eefaea08f3dc7c1aa84388fe8bdf3dd5d0046ebc66dbe77181b53c5413",
+        "pictures": 74,
+        "expected_bytes": 454656,
+        "median_ms": 443.325538886711,
+        "min_ms": 436.15254398901016,
+        "max_ms": 466.3736920338124
+      },
+      "optimized": {
+        "samples_ms": [
+          356.9898810237646,
+          367.5488920416683,
+          346.6661999700591,
+          383.3382889861241,
+          433.6399120511487
+        ],
+        "name": "denoise-00",
+        "stream": "streams/denoise-00.h264",
+        "expected": "expected/denoise-00.i420",
+        "stream_sha256": "520a0aea6d737428ba54e7af5e1262dc853686f8330a5c5eedd4d82e9ef19915",
+        "expected_sha256": "316d46ad44e2d088f6d4bdc0406e1d07529df9613bdf5b8be7d6f11a83887a30",
+        "pictures": 58,
+        "expected_bytes": 356352,
+        "median_ms": 367.5488920416683,
+        "min_ms": 346.6661999700591,
+        "max_ms": 433.6399120511487
+      },
+      "speedup": 1.2061675289622478
+    },
+    "mnist": {
+      "baseline": {
+        "samples_ms": [
+          14486.38443602249,
+          14473.021526937373,
+          14594.305833918042,
+          14418.531254981644,
+          14472.374096978456
+        ],
+        "stream": "baseline/mnist.h264",
+        "expected": "baseline/mnist.i420",
+        "stream_sha256": "9cb54a4b237a2a7345fdb0ecab76a52664dd5a61ec436382b198736a2dd5f13c",
+        "expected_sha256": "94e9cb6a5ad55f88c0f1ed0bf6ce3533f08c87d47bdff419cdae7249e3b0b72f",
+        "pictures": 1826,
+        "expected_bytes": 42071040,
+        "median_ms": 14473.021526937373,
+        "min_ms": 14418.531254981644,
+        "max_ms": 14594.305833918042
+      },
+      "optimized": {
+        "samples_ms": [
+          2911.63118602708,
+          2887.3322369763628,
+          2882.568383938633,
+          2715.0400270475075,
+          2712.145311990753
+        ],
+        "name": "mnist-00",
+        "stream": "streams/mnist-00.h264",
+        "expected": "expected/mnist-00.i420",
+        "stream_sha256": "ae9a0e3f2ce478c1ebe8eae93ced323f0a3c18bbf5c29e0e5a298c8df38f9891",
+        "expected_sha256": "eb2cb68f0c76111a4dd9c5a2f12dbee36cd17a9209de70565c6f48a3334ae845",
+        "pictures": 1591,
+        "expected_bytes": 36656640,
+        "median_ms": 2882.568383938633,
+        "min_ms": 2712.145311990753,
+        "max_ms": 2911.63118602708
+      },
+      "speedup": 5.020877078781382
+    },
+    "native-saturating-add": {
+      "baseline": {
+        "samples_ms": [
+          265.4051489662379,
+          266.05645089875907,
+          260.3418049402535,
+          258.0923759378493,
+          284.0481399325654
+        ],
+        "stream": "baseline/native-saturating-add.h264",
+        "expected": "baseline/native-saturating-add.i420",
+        "stream_sha256": "05a542c0bfa1a65f86dcc65362bd3a4051f48669f670d2d5f1a7c46d895479fe",
+        "expected_sha256": "152d033d8593c0c891a7e677881aee0b909df07311ceeaf0a2c0bf7550ab84b4",
+        "pictures": 3,
+        "expected_bytes": 41472,
+        "median_ms": 265.4051489662379,
+        "min_ms": 258.0923759378493,
+        "max_ms": 284.0481399325654
+      },
+      "optimized": {
+        "samples_ms": [
+          260.65182394813746,
+          274.8211419675499,
+          256.8686839658767,
+          259.6945670666173,
+          288.8411770109087
+        ],
+        "name": "native-saturating-add",
+        "stream": "streams/native-saturating-add.h264",
+        "expected": "expected/native-saturating-add.i420",
+        "stream_sha256": "b0e2ce8202c4c96db4ddeb669d06cbd90edeea0d7779d3488b7a8ddb08d5d549",
+        "expected_sha256": "152d033d8593c0c891a7e677881aee0b909df07311ceeaf0a2c0bf7550ab84b4",
+        "pictures": 3,
+        "expected_bytes": 41472,
+        "median_ms": 260.65182394813746,
+        "min_ms": 256.8686839658767,
+        "max_ms": 288.8411770109087
+      },
+      "speedup": 1.0182363006178166
+    },
+    "native-affine": {
+      "baseline": {
+        "samples_ms": [
+          262.5216339947656,
+          258.90339096076787,
+          264.30309005081654,
+          263.8547340175137,
+          323.4987190226093
+        ],
+        "stream": "baseline/native-affine.h264",
+        "expected": "baseline/native-affine.i420",
+        "stream_sha256": "abac00f3d1190f4ddd52a155b4b54db22748239af241b3985043b569428d39de",
+        "expected_sha256": "158445e41925f89604ebc4a080a8e8af6de2b59f3c6b34f6bb1620b2b494d424",
+        "pictures": 3,
+        "expected_bytes": 41472,
+        "median_ms": 263.8547340175137,
+        "min_ms": 258.90339096076787,
+        "max_ms": 323.4987190226093
+      },
+      "optimized": {
+        "samples_ms": [
+          273.02400406915694,
+          264.58382909186184,
+          261.2956059165299,
+          274.06174200586975,
+          279.8783719772473
+        ],
+        "name": "native-affine",
+        "stream": "streams/native-affine.h264",
+        "expected": "expected/native-affine.i420",
+        "stream_sha256": "9b1ed0fbbd3697527385b428fc671adbf4324cb635de369680030bfa6f1aa946",
+        "expected_sha256": "158445e41925f89604ebc4a080a8e8af6de2b59f3c6b34f6bb1620b2b494d424",
+        "pictures": 3,
+        "expected_bytes": 41472,
+        "median_ms": 273.02400406915694,
+        "min_ms": 261.2956059165299,
+        "max_ms": 279.8783719772473
+      },
+      "speedup": 0.9664158831641753
+    },
+    "native-tile-permutation": {
+      "baseline": {
+        "samples_ms": [
+          258.2861369010061,
+          262.9351729992777,
+          261.69356203172356,
+          452.9673259239644,
+          256.6495781065896
+        ],
+        "stream": "baseline/native-tile-permutation.h264",
+        "expected": "baseline/native-tile-permutation.i420",
+        "stream_sha256": "4fd9c1c16d435f2ff8063e77bdbeb51ebc633672cd00546f008131eaf247ae2d",
+        "expected_sha256": "515bfa66e9d7feeec98d857dd00dc58d2d15c49f890ceeea469f8838181c343f",
+        "pictures": 2,
+        "expected_bytes": 27648,
+        "median_ms": 261.69356203172356,
+        "min_ms": 256.6495781065896,
+        "max_ms": 452.9673259239644
+      },
+      "optimized": {
+        "samples_ms": [
+          271.9408259727061,
+          264.0114069217816,
+          256.6861870000139,
+          275.2912250580266,
+          258.3603470120579
+        ],
+        "name": "native-tile-permutation",
+        "stream": "streams/native-tile-permutation.h264",
+        "expected": "expected/native-tile-permutation.i420",
+        "stream_sha256": "180f6284fc78346bb0ed600753eb2b9ca4e1a35ccf2544c5429f0adae803beb7",
+        "expected_sha256": "515bfa66e9d7feeec98d857dd00dc58d2d15c49f890ceeea469f8838181c343f",
+        "pictures": 2,
+        "expected_bytes": 27648,
+        "median_ms": 264.0114069217816,
+        "min_ms": 256.6861870000139,
+        "max_ms": 275.2912250580266
+      },
+      "speedup": 0.9912206638452378
+    },
+    "native-block-warp": {
+      "baseline": {
+        "samples_ms": [
+          264.71582998055965,
+          264.42357094492763,
+          263.8258059741929,
+          258.03516001906246,
+          279.9391410080716
+        ],
+        "stream": "baseline/native-block-warp.h264",
+        "expected": "baseline/native-block-warp.i420",
+        "stream_sha256": "eeb1172d81866a31cdc5c1d90f5bd6925d810371ab1081e217a0f25737c8dcc6",
+        "expected_sha256": "80ca2c86abf4e85f950c1c3d663cf88338e2f89ca0e26b9a6ef08b43dbab48a0",
+        "pictures": 2,
+        "expected_bytes": 27648,
+        "median_ms": 264.42357094492763,
+        "min_ms": 258.03516001906246,
+        "max_ms": 279.9391410080716
+      },
+      "optimized": {
+        "samples_ms": [
+          270.2262180391699,
+          254.30562102701515,
+          255.78029092866927,
+          257.8081809915602,
+          265.9674260066822
+        ],
+        "name": "native-block-warp",
+        "stream": "streams/native-block-warp.h264",
+        "expected": "expected/native-block-warp.i420",
+        "stream_sha256": "cd32e391a4df07959ee8ebd9d4a5cd1e9280ae4f25e89ee5fb82965c42409f4d",
+        "expected_sha256": "80ca2c86abf4e85f950c1c3d663cf88338e2f89ca0e26b9a6ef08b43dbab48a0",
+        "pictures": 2,
+        "expected_bytes": 27648,
+        "median_ms": 257.8081809915602,
+        "min_ms": 254.30562102701515,
+        "max_ms": 270.2262180391699
+      },
+      "speedup": 1.025660124236259
+    },
+    "native-fractional-translation": {
+      "baseline": {
+        "samples_ms": [
+          280.9646549867466,
+          283.9263780042529,
+          266.4725499926135,
+          260.88299497496337,
+          266.6756249964237
+        ],
+        "stream": "baseline/native-fractional-translation.h264",
+        "expected": "baseline/native-fractional-translation.i420",
+        "stream_sha256": "253b12f7c5461bdc4a2445dc62c5559f2eabdf80b8a3ef95fb9a6c29b42d4aa0",
+        "expected_sha256": "4494d7e72d35cf9b892f8ddccbab3a39aae581f355b3255c865c4eb1f63f5e12",
+        "pictures": 4,
+        "expected_bytes": 55296,
+        "median_ms": 266.6756249964237,
+        "min_ms": 260.88299497496337,
+        "max_ms": 283.9263780042529
+      },
+      "optimized": {
+        "samples_ms": [
+          281.323058065027,
+          265.43446094729006,
+          271.3761799968779,
+          264.3079219851643,
+          261.3726949784905
+        ],
+        "name": "native-fractional-translation",
+        "stream": "streams/native-fractional-translation.h264",
+        "expected": "expected/native-fractional-translation.i420",
+        "stream_sha256": "eb2e3fe6208ac8a8f459f2f327b1c31825f6349b6c882ac62dae52909111879e",
+        "expected_sha256": "4494d7e72d35cf9b892f8ddccbab3a39aae581f355b3255c865c4eb1f63f5e12",
+        "pictures": 4,
+        "expected_bytes": 55296,
+        "median_ms": 265.43446094729006,
+        "min_ms": 261.3726949784905,
+        "max_ms": 281.323058065027
+      },
+      "speedup": 1.0046759717811475
+    },
+    "native-resident-stages": {
+      "baseline": {
+        "samples_ms": [
+          454.03946400620043,
+          446.24537497293204,
+          441.41563295852393,
+          470.9386631147936,
+          434.33089496102184
+        ],
+        "stream": "baseline/native-resident-stages.h264",
+        "expected": "baseline/native-resident-stages.i420",
+        "stream_sha256": "586577c6c6b2be5ed9ff9b1098caa69093dad218d26c83995b8f122e7e8fa4a0",
+        "expected_sha256": "3e3ff9a7a89b6ff46ef001d018cf8f9294742e8a6ee95c31fafe10cbf512a527",
+        "pictures": 53,
+        "expected_bytes": 732672,
+        "median_ms": 446.24537497293204,
+        "min_ms": 434.33089496102184,
+        "max_ms": 470.9386631147936
+      },
+      "optimized": {
+        "samples_ms": [
+          324.711274006404,
+          340.3551640221849,
+          340.2167949825525,
+          329.25342803355306,
+          328.52142106276006
+        ],
+        "name": "native-resident-stages",
+        "stream": "streams/native-resident-stages.h264",
+        "expected": "expected/native-resident-stages.i420",
+        "stream_sha256": "eaebc2e2fccce20d1d5351297314a8dde6e95f1434c02f0e313d1093075f6dda",
+        "expected_sha256": "79af3c393e71956dd47a868b9cb916fd77e27593d38ff8a39bf0589156edfc7e",
+        "pictures": 28,
+        "expected_bytes": 387072,
+        "median_ms": 329.25342803355306,
+        "min_ms": 324.711274006404,
+        "max_ms": 340.3551640221849
+      },
+      "speedup": 1.355324916852367
+    },
+    "motion": {
+      "baseline": {
+        "samples_ms": [
+          465.7367260660976,
+          462.7499140333384,
+          477.09603304974735,
+          478.68289600592107,
+          460.49635706003755
+        ],
+        "stream": "baseline/motion.h264",
+        "expected": "baseline/motion.i420",
+        "stream_sha256": "4f4003eb71f87396cc2931606d98c8466d9dab06c395e6c17a4f29c77033107e",
+        "expected_sha256": "6eab5a40cf823785101a30e2e7efd1b93a5615e3a3fdb7fec8e3f06c11279605",
+        "pictures": 40,
+        "expected_bytes": 737280,
+        "median_ms": 465.7367260660976,
+        "min_ms": 460.49635706003755,
+        "max_ms": 478.68289600592107
+      },
+      "optimized": {
+        "samples_ms": [
+          328.7709600990638,
+          307.94471607077867,
+          333.3591310074553,
+          314.70990006346256,
+          321.6838849475607
+        ],
+        "name": "motion-00",
+        "stream": "streams/motion-00.h264",
+        "expected": "expected/motion-00.i420",
+        "stream_sha256": "5546ca5a2fc9c7cdb479e63d60f115f6ca4a750eaa06ac4d5a441770e3a24927",
+        "expected_sha256": "1a0db47743b8e18f31b4af51311a0bc029cb71a614d434a518a1103f72b1f2c0",
+        "pictures": 23,
+        "expected_bytes": 423936,
+        "median_ms": 321.6838849475607,
+        "min_ms": 307.94471607077867,
+        "max_ms": 333.3591310074553
+      },
+      "speedup": 1.447808696236119
+    }
+  }
+}

@@ -1,0 +1,1397 @@
+{
+  "format": "h264-python-0.2",
+  "width": 96,
+  "height": 64,
+  "input_range": null,
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "previous",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    },
+    {
+      "name": "current",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 1,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 23,
+  "output_frames": {
+    "output": 22,
+    "difference": 4,
+    "raw_mask": 6,
+    "eroded": 10,
+    "opened": 14
+  },
+  "graph_outputs": {
+    "output": 45,
+    "difference": 4,
+    "raw_mask": 5,
+    "eroded": 15,
+    "opened": 25
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 46,
+    "graph_nodes": 46,
+    "cse_eliminated": 0,
+    "commutative_cse_eliminated": 0,
+    "double_not_eliminated": 0,
+    "direct_or_gates": 8,
+    "direct_and_gates": 8,
+    "boolean_sum_nodes_bypassed": 16,
+    "boolean_operands_deduplicated": 0,
+    "boolean_nodes_fused": 0,
+    "affine_nodes_fused": 0,
+    "identity_affines_eliminated": 0,
+    "threshold_negative_two_p": 1,
+    "fused_shift_nodes": 16,
+    "lowered_instructions": 21,
+    "traced_nodes": 46,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 3,
+    "optimized": true
+  },
+  "costs": {
+    "input_pictures": 2,
+    "normalization_pictures": 0,
+    "arithmetic_pictures": 21,
+    "refresh_pictures": 0,
+    "total_pictures": 23,
+    "prediction_slices": 294,
+    "prediction_bytes": 6926,
+    "peak_live_values": 3,
+    "reference_slots_used": 3
+  },
+  "reference_mode": "retained",
+  "slice_mode": "row",
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 1,
+    "8": 0,
+    "9": 1,
+    "10": 0,
+    "11": 1,
+    "12": 0,
+    "13": 1,
+    "14": 0,
+    "15": 1,
+    "16": 0,
+    "17": 1,
+    "18": 0,
+    "19": 1,
+    "20": 0,
+    "21": 1,
+    "22": 0
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "current"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "input",
+      "args": [],
+      "params": [
+        "previous"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 2,
+      "op": "saturating_combine",
+      "args": [
+        0,
+        1
+      ],
+      "params": [
+        1,
+        -1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 2
+    },
+    {
+      "id": 3,
+      "op": "saturating_combine",
+      "args": [
+        0,
+        1
+      ],
+      "params": [
+        -1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 3
+    },
+    {
+      "id": 4,
+      "op": "saturating_combine",
+      "args": [
+        2,
+        3
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 4
+    },
+    {
+      "id": 5,
+      "op": "threshold",
+      "args": [
+        4
+      ],
+      "params": [
+        32
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 6
+    },
+    {
+      "id": 6,
+      "op": "shift",
+      "args": [
+        5
+      ],
+      "params": [
+        -1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 7,
+      "op": "combine",
+      "args": [
+        5,
+        6
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 8,
+      "op": "shift",
+      "args": [
+        5
+      ],
+      "params": [
+        1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 9,
+      "op": "combine",
+      "args": [
+        7,
+        8
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 10,
+      "op": "threshold",
+      "args": [
+        9
+      ],
+      "params": [
+        3
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 8
+    },
+    {
+      "id": 11,
+      "op": "shift",
+      "args": [
+        10
+      ],
+      "params": [
+        0,
+        -1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 12,
+      "op": "combine",
+      "args": [
+        10,
+        11
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 13,
+      "op": "shift",
+      "args": [
+        10
+      ],
+      "params": [
+        0,
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 14,
+      "op": "combine",
+      "args": [
+        12,
+        13
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 15,
+      "op": "threshold",
+      "args": [
+        14
+      ],
+      "params": [
+        3
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 10
+    },
+    {
+      "id": 16,
+      "op": "shift",
+      "args": [
+        15
+      ],
+      "params": [
+        -1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 17,
+      "op": "combine",
+      "args": [
+        15,
+        16
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 18,
+      "op": "shift",
+      "args": [
+        15
+      ],
+      "params": [
+        1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 19,
+      "op": "combine",
+      "args": [
+        17,
+        18
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 20,
+      "op": "threshold",
+      "args": [
+        19
+      ],
+      "params": [
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 12
+    },
+    {
+      "id": 21,
+      "op": "shift",
+      "args": [
+        20
+      ],
+      "params": [
+        0,
+        -1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 22,
+      "op": "combine",
+      "args": [
+        20,
+        21
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 23,
+      "op": "shift",
+      "args": [
+        20
+      ],
+      "params": [
+        0,
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 24,
+      "op": "combine",
+      "args": [
+        22,
+        23
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 25,
+      "op": "threshold",
+      "args": [
+        24
+      ],
+      "params": [
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 14
+    },
+    {
+      "id": 26,
+      "op": "shift",
+      "args": [
+        25
+      ],
+      "params": [
+        -1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 27,
+      "op": "combine",
+      "args": [
+        25,
+        26
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 28,
+      "op": "shift",
+      "args": [
+        25
+      ],
+      "params": [
+        1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 29,
+      "op": "combine",
+      "args": [
+        27,
+        28
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 30,
+      "op": "threshold",
+      "args": [
+        29
+      ],
+      "params": [
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 16
+    },
+    {
+      "id": 31,
+      "op": "shift",
+      "args": [
+        30
+      ],
+      "params": [
+        0,
+        -1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 32,
+      "op": "combine",
+      "args": [
+        30,
+        31
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 33,
+      "op": "shift",
+      "args": [
+        30
+      ],
+      "params": [
+        0,
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 34,
+      "op": "combine",
+      "args": [
+        32,
+        33
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 35,
+      "op": "threshold",
+      "args": [
+        34
+      ],
+      "params": [
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 18
+    },
+    {
+      "id": 36,
+      "op": "shift",
+      "args": [
+        35
+      ],
+      "params": [
+        -1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 37,
+      "op": "combine",
+      "args": [
+        35,
+        36
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 38,
+      "op": "shift",
+      "args": [
+        35
+      ],
+      "params": [
+        1,
+        0
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 39,
+      "op": "combine",
+      "args": [
+        37,
+        38
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 40,
+      "op": "threshold",
+      "args": [
+        39
+      ],
+      "params": [
+        3
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 20
+    },
+    {
+      "id": 41,
+      "op": "shift",
+      "args": [
+        40
+      ],
+      "params": [
+        0,
+        -1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 42,
+      "op": "combine",
+      "args": [
+        40,
+        41
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        2
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 43,
+      "op": "shift",
+      "args": [
+        40
+      ],
+      "params": [
+        0,
+        1
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 44,
+      "op": "combine",
+      "args": [
+        42,
+        43
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 45,
+      "op": "threshold",
+      "args": [
+        44
+      ],
+      "params": [
+        3
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "last_lowered_frame": 22
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 2,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 0,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 3,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 1,
+          "weight": -2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 0,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 4,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 2,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 3,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 5,
+      "label": "threshold negative distance",
+      "sources": [
+        {
+          "frame": 4,
+          "weight": -1,
+          "offset": 32,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 6,
+      "label": "threshold >= 32",
+      "sources": [
+        {
+          "frame": 5,
+          "weight": -1,
+          "offset": 1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 7,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 6,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 6,
+          "weight": 2,
+          "offset": -1,
+          "dx": -1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 8,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 7,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 6,
+          "weight": 2,
+          "offset": -1,
+          "dx": 1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 9,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 8,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 8,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": -1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 10,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 9,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 8,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 11,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 10,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 10,
+          "weight": 1,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 12,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 11,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 10,
+          "weight": 1,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 13,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 12,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 12,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 14,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 13,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 12,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 15,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 14,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 14,
+          "weight": 1,
+          "offset": 0,
+          "dx": -1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 16,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 15,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 14,
+          "weight": 1,
+          "offset": 0,
+          "dx": 1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 17,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 16,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 16,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": -1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 18,
+      "label": "boolean or",
+      "sources": [
+        {
+          "frame": 17,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 16,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 19,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 18,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 18,
+          "weight": 2,
+          "offset": -1,
+          "dx": -1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 20,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 19,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 18,
+          "weight": 2,
+          "offset": -1,
+          "dx": 1,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 21,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 20,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 20,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": -1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    },
+    {
+      "frame": 22,
+      "label": "boolean and",
+      "sources": [
+        {
+          "frame": 21,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 20,
+          "weight": 2,
+          "offset": -1,
+          "dx": 0,
+          "dy": 1,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "5546ca5a2fc9c7cdb479e63d60f115f6ca4a750eaa06ac4d5a441770e3a24927",
+  "prediction_sha256": "24218e483a55963abcf200b373cb09cccd3149a126fa1659c0b5c28262ab0d80"
+}

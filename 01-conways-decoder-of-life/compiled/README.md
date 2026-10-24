@@ -1,5 +1,7 @@
 # Life through the shared H.264 compiler
 
+The current compiler includes [shared optimizations and measured comparisons](../../05-h264-compiler/optimizations/README.md). Saved assets below preserve the original compiler baseline.
+
 This variant expresses Conway's rule in [the shared compiler DSL](../../05-h264-compiler/README.md).
 The [kernel](life_kernel.py) sums eight shifted binary neighbors, tests counts
 equal to two and three, and combines those predicates with the current cell.

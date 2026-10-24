@@ -1,5 +1,9 @@
 # Validation and measurements
 
+This report records the original 40-picture baseline. The current compiler
+uses 23 pictures per pair; [optimization validation and fresh measurements](../05-h264-compiler/optimizations/README.md)
+compare the same 24 pairs and verify all named outputs remain identical.
+
 ## Correctness
 
 The deterministic 24-pair fixture has 25 grayscale inputs, 40 pictures per job,

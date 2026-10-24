@@ -79,9 +79,11 @@ translations, not arbitrary per-pixel affine transforms. There must be exactly
 
 `graph.py` defines immutable nodes, range propagation, helpers, and iterative
 traversal. `lower.py` visits reachable expressions, eliminates structurally
-identical expressions, removes simple identities, and folds a single shifted
-or fractional read into its consumer's motion vector. It does not reassociate rounded or
-clipped arithmetic.
+identical expressions (including commuted weighted pairs), removes Boolean
+duplicates and double negation, and folds a single shifted or fractional read
+into its consumer's motion vector. Exact affine chains fuse only when range
+proofs exclude intermediate clipping and the final coefficients fit the codec.
+Rounded operations and observable clipping remain separate.
 
 Nested shifts cannot generally be added: `shift(shift(x,+1),-1)` loses its first
 column at the intermediate boundary. The inner shift is materialized. Likewise,
@@ -92,7 +94,8 @@ Nested fractional samples also materialize: two interpolations round and clip
 twice and cannot be combined into one vector. A gather currently materializes
 one P-picture; a following operation can reuse that reference.
 
-Disabling optimization retains explicit shifts and repeated work. Some such
+`optimize=False` retains explicit shifts and repeated work, and selects the
+legacy sliding reference window and one slice per macroblock. Some such
 graphs exceed the reference budget even when their optimized forms fit; they
 fail with a resource error instead of silently changing semantics.
 
@@ -114,8 +117,15 @@ A candidate must give 0 below the cutoff, 1 at it, and at most 1 at the largest
 possible input. Monotonicity proves the intervening values. Negative results on
 the false side may clip safely to zero.
 
-For binary OR, the sum ranges from 0 to 2. The compiler finds
-`(64*sum+64)>>7`, mapping 0,1,2 to 0,1,1 in one picture.
+Binary OR lowers directly to one B prediction: weights `(1,1)`, denominator
+zero, and zero offsets compute `(a+b+1)>>1`. AND uses weights `(2,2)` and
+offsets `(-1,-1)` to compute `clip8(a+b-1)`. A threshold over an unnamed,
+single-use sum of binary leaves becomes a chain of these gates when its cutoff
+means OR or AND. Shared or named arithmetic sums keep their original values.
+
+If a one-picture threshold is unavailable, the compiler can use
+`clip8(1-clip8(t-x))`. This takes two P pictures with negative weights and is
+selected only when its offsets are legal and it saves a picture.
 
 When one prediction is insufficient, any byte comparison uses:
 
@@ -135,9 +145,11 @@ small convolutions and 196-input classifier neurons using the same lowering.
 
 ## Scheduling, output, and verification
 
-`schedule.py` computes last uses and drops dead values. Before an upcoming
-instruction would lose a live picture at age 16, an exact P copy refreshes it.
-References are resolved afterward; every emitted source is 1–16 pictures old.
+`schedule.py` computes last uses and assigns live pictures to explicit long-term
+reference slots. Reference-list modification selects each slot; memory-management
+commands replace a dead occupant after the current prediction finishes. A picture
+may remain available for more than 16 decoding steps, eliminating age-driven
+refresh copies. The 16-picture reference capacity is unchanged.
 At most 15 simultaneously live values are supported before an instruction.
 More demanding graphs fail explicitly; this version has no spill or
 recomputation strategy. Iterative graph traversal supports thousands of steps.
@@ -148,6 +160,14 @@ requires the initial pixel state, and rejects a path colliding with its sibling
 JSON manifest. Dimensions must be multiples of 16 and satisfy the writer's
 High-profile level-3.1 limits. Motion offsets are limited here to ±127 pixels.
 Every picture retains a 16-pixel zero guard and neutral chroma; deblocking is off.
+Prediction slices group consecutive macroblocks within a row that share weights
+and references. Their motion-vector differences account for the preceding
+macroblock; guard and active regions split when their prediction parameters differ.
+For the motion demo, this reduces 48 prediction slices to 14 per picture.
+
+For controlled comparisons, `compile(..., reference_mode="sliding")` restores
+age-based copies, and `slice_mode="macroblock"` restores independent slices.
+The optimized defaults are `"retained"` and `"row"` respectively.
 
 Input zero is an IDR I_PCM picture. Further inputs are non-IDR I_PCM references,
 preserving the pictures already loaded. Computation starts at frame `input_count`.
@@ -171,7 +191,10 @@ references across job boundaries. See [motion-mask timings](../06-motion-mask-de
 
 The manifest records logical graph IDs/ranges, physical instruction frame numbers,
 reference dependencies, weights/offsets/motion, output frames, refreshes, and
-optimization statistics. Folded nodes and aliases may have no standalone frame.
+optimization statistics. It also records slot assignments, execution modes and
+`costs`: input, normalization, arithmetic and refresh pictures, prediction slices
+and bytes, and peak live values. `program.costs` exposes the same information.
+Folded nodes and aliases may have no standalone frame.
 The prediction hash identifies reusable instructions; the stream hash also
 includes the particular seed.
 

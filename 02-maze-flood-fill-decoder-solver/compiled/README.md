@@ -1,5 +1,7 @@
 # Maze flood through the shared H.264 compiler
 
+The current compiler includes [shared optimizations and measured comparisons](../../05-h264-compiler/optimizations/README.md). Saved assets below preserve the original compiler baseline.
+
 This variant expresses flood propagation in [the shared compiler DSL](../../05-h264-compiler/README.md).
 The [kernel](maze_kernel.py) derives an open-cell mask and a start mask from the
 input, ORs reachability with four shifted neighbors, then ANDs with open cells.

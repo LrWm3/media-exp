@@ -1,0 +1,250 @@
+{
+  "format": "h264-python-0.2",
+  "width": 64,
+  "height": 64,
+  "input_range": [
+    0,
+    255
+  ],
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "image",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 2,
+  "output_frames": {
+    "output": 1
+  },
+  "graph_outputs": {
+    "output": 1
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 2,
+    "graph_nodes": 2,
+    "cse_eliminated": 0,
+    "commutative_cse_eliminated": 0,
+    "double_not_eliminated": 0,
+    "direct_or_gates": 0,
+    "direct_and_gates": 0,
+    "boolean_sum_nodes_bypassed": 0,
+    "boolean_operands_deduplicated": 0,
+    "boolean_nodes_fused": 0,
+    "affine_nodes_fused": 0,
+    "identity_affines_eliminated": 0,
+    "threshold_negative_two_p": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 1,
+    "traced_nodes": 2,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 1,
+    "optimized": true
+  },
+  "costs": {
+    "input_pictures": 1,
+    "normalization_pictures": 0,
+    "arithmetic_pictures": 1,
+    "refresh_pictures": 0,
+    "total_pictures": 2,
+    "prediction_slices": 14,
+    "prediction_bytes": 262,
+    "peak_live_values": 1,
+    "reference_slots_used": 1
+  },
+  "reference_mode": "retained",
+  "slice_mode": "row",
+  "reference_slots": {
+    "0": 0,
+    "1": 0
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "image"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "gather",
+      "args": [
+        0
+      ],
+      "params": [
+        [
+          [
+            -24,
+            -6
+          ],
+          [
+            -24,
+            -3
+          ],
+          [
+            -24,
+            0
+          ],
+          [
+            -24,
+            3
+          ],
+          [
+            -12,
+            -6
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            -12,
+            3
+          ],
+          [
+            0,
+            -6
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            12,
+            -6
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            12,
+            3
+          ]
+        ]
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 1
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 1,
+      "label": "gather",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 1,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": [
+        [
+          -24,
+          -6
+        ],
+        [
+          -24,
+          -3
+        ],
+        [
+          -24,
+          0
+        ],
+        [
+          -24,
+          3
+        ],
+        [
+          -12,
+          -6
+        ],
+        [
+          -12,
+          -3
+        ],
+        [
+          -12,
+          0
+        ],
+        [
+          -12,
+          3
+        ],
+        [
+          0,
+          -6
+        ],
+        [
+          0,
+          -3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          12,
+          -6
+        ],
+        [
+          12,
+          -3
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          12,
+          3
+        ]
+      ]
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "cd32e391a4df07959ee8ebd9d4a5cd1e9280ae4f25e89ee5fb82965c42409f4d",
+  "prediction_sha256": "499863f280fd37f4fa24f6cfc2a9a8aa2121dd903b32fae48e2bdac6a81ef61a"
+}

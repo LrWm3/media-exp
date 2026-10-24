@@ -1,5 +1,7 @@
 # Denoising through the shared compiler
 
+The current compiler includes [shared optimizations and measured comparisons](../../05-h264-compiler/optimizations/README.md). Saved assets below preserve the original compiler baseline.
+
 This version loads the original frozen `../model/weights.json` unchanged. Its
 eight 3×3 signed binary convolutions and learned 1×1 combination are expressed
 using `h264.conv2d_binary` and `h264.binary_dot`. The compiler generates decoder

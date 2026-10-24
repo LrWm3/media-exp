@@ -33,3 +33,7 @@ The experiments use the shared [H.264 writer and decoder tools](decoder_core).
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.
+
+[Compiler optimization results](05-h264-compiler/optimizations/README.md):
+Boolean and threshold lowering, grouped prediction slices, retained reference
+slots, and exact comparisons across all six experiments.

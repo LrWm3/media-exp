@@ -4,6 +4,11 @@ Write a restricted Python image kernel, compile it once, and let an ordinary
 video decoder execute its arithmetic. One shared graph, instruction selector,
 reference scheduler, and backend now serve variants of all four earlier experiments.
 
+[Compiler optimizations and measurements](optimizations/README.md) cover direct
+Boolean predictions, shorter thresholds, exact affine fusion, grouped slices,
+and retained reference slots. The same saved graphs use fewer pictures and
+bytes while preserving every named output.
+
 ```python
 import h264
 
@@ -64,24 +69,28 @@ execution and selective NVDEC output readback to the shared runtime.
 
 ![Shifted OR captured from Intel hardware decoding](assets/shifted-or.png)
 
-This example needs **four pictures**: visible seed, binary normalization, fused
-shifted addition, and threshold. Results are logical 0/1 values; the capture
+The current compiler needs **three pictures**: visible seed, binary normalization,
+and a direct shifted OR prediction. The saved original example uses four.
+Results are logical 0/1 values; the capture
 enlarges them and maps 1 to white. The executable stream contains computation
 pictures, not a precomputed presentation animation.
 
 ## Compiled experiments
 
-| Variant | Result | Original → compiled pictures |
-| --- | --- | ---: |
-| [01 Life](../01-conways-decoder-of-life/compiled/README.md) | Every generation matches; 40-generation capture | 561 → 922 |
-| [02 Maze](../02-maze-flood-fill-decoder-solver/compiled/README.md) | Same flood states, distances, and 50-hop route; 52 steps | 261 → 560 |
-| [03 Denoiser](../03-denoising-decoder/compiled/README.md) | All 256 held-out feature/output maps match; 3.2932% pixel error | 98 → **74** per image |
-| [04 MNIST](../04-binary-mnist-classification-decoder/compiled/README.md) | All 1,984 prediction/hidden records match; **94.96%** accuracy | 1,802 → 1,826 per 8-digit batch |
+| Variant | Workload | Specialized original | First compiler | Optimized compiler |
+| --- | --- | ---: | ---: | ---: |
+| [01 Life](../01-conways-decoder-of-life/compiled/README.md) | 40 generations | 561 | 922 | **682** |
+| [02 Maze](../02-maze-flood-fill-decoder-solver/compiled/README.md) | 52 steps | 261 | 560 | **265** |
+| [03 Denoiser](../03-denoising-decoder/compiled/README.md) | One image | 98 | 74 | **58** |
+| [04 MNIST](../04-binary-mnist-classification-decoder/compiled/README.md) | Eight digits | 1,802 | 1,826 | **1,591** |
 
 Each variant includes a kernel, CLI, tests, executable demo, instruction manifest,
 and actual hardware capture. Existing implementations and trained weights remain
-available unchanged. The denoiser benefits from common-expression elimination;
-the compiler is not yet as compact as every specialized schedule.
+available unchanged. Saved assets in those folders document the first compiler;
+running their kernels now uses the optimized compiler. The comparison suite
+checks all saved generations, flood states, denoiser features and classifier
+activations. Earlier full-dataset accuracy measurements remain in their reports;
+this optimization run uses the saved demo inputs.
 
 ## Run and inspect
 
@@ -98,7 +107,8 @@ python3 -m unittest -v
 
 `program.h264` contains the seed and prediction instructions. Its sibling
 `program.json` records the graph, proven ranges, scheduled pictures, physical
-references, refresh copies, named output frame numbers, and hashes.
+references, slot assignments, named output frame numbers, hashes, and execution
+costs. Inspect `program.costs` for picture, slice, byte and lifetime counts.
 See the [small example manifest](assets/shifted-or.json).
 
 See [API and exact semantics](DESIGN.md) and [validation](VALIDATION.md) for

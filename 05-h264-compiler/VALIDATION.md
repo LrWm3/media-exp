@@ -1,5 +1,10 @@
 # Validation
 
+The [compiler optimization report](optimizations/README.md) records a 124-test
+local regression run, exact comparisons of 42 saved demo executions, and fresh
+decoder measurements.
+The sections below preserve the earlier compiler and native-operation baselines.
+
 Recorded on 2026-10-23 with Python 3.12.13, FFmpeg 6.1.1, GStreamer 1.24.2,
 OpenH264, and Intel VA-API through `vah264dec`. Neural checkpoint comparisons
 used PyTorch 2.5.1+cpu. Original model weights were not retrained or modified.

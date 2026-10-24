@@ -2,7 +2,11 @@
 
 The decoder computes absolute differences between grayscale frames, thresholds
 them, and cleans the binary masks with 3 × 3 opening followed by closing.
-**All 24 frame pairs / 960 pictures matched exactly on NVDEC**,
+The [optimized compiler](../05-h264-compiler/optimizations/README.md) now uses
+**23 pictures per pair**, down from 40, with identical output masks.
+
+The original saved capture below uses the 40-picture baseline.
+**All 24 frame pairs / 960 baseline pictures matched exactly on NVDEC**,
 FFmpeg, Intel VA-API, and OpenH264. The NVDEC run checked 17,694,720 raw bytes
 and 120 named output planes.
 
@@ -30,7 +34,7 @@ previous + current → absolute difference → threshold ≥ 32
 - Opening erodes then dilates, removing isolated changes.
 - Closing dilates then erodes, filling small holes and gaps.
 
-Each pair uses **two PCM input pictures and 38 prediction pictures**. The same
+Each newly compiled pair uses **two PCM input pictures and 21 prediction pictures**. The same
 prediction bytes are reused for every pair. CPU work supplies inputs and writes
 instructions; the decoder computes the differences and morphology. The separate
 [pixel oracle](reference.py) and graph interpreter run only for verification.
@@ -55,12 +59,12 @@ from decoder_core.decode import decode_batch
 
 result = decode_batch(
     paths, backend="nvdec", width=128, height=96,
-    pictures_per_job=40, selected_frames=(39,),
+    pictures_per_job=23, selected_frames=(22,),
 )
 final_i420 = result.frames[0][0]  # First job, final picture; includes guard/chroma.
 ```
 
-NVDEC medians, five repetitions after warmup, for the same 24 frame pairs:
+Original baseline NVDEC medians, five repetitions after warmup, for 24 frame pairs:
 
 | Execution | Pictures copied | Total time |
 | --- | ---: | ---: |
@@ -75,6 +79,8 @@ here. The final-mask batch produces about **4.8 masks/s**, including startup,
 stream assembly, decoding, readback, and correctness checks. Compilation and
 input packing are excluded. These are small-workload measurements, not isolated
 NVDEC throughput. See [validation and full samples](VALIDATION.md).
+The [optimization report](../05-h264-compiler/optimizations/README.md) includes
+fresh baseline and optimized measurements, plus the smaller executable streams.
 
 ## Reproduce
 

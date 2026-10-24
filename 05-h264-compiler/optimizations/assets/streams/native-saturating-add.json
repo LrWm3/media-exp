@@ -1,0 +1,152 @@
+{
+  "format": "h264-python-0.2",
+  "width": 64,
+  "height": 64,
+  "input_range": null,
+  "seed_encoding": "literal u8",
+  "inputs": [
+    {
+      "name": "a",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 0,
+      "encoding": "literal u8"
+    },
+    {
+      "name": "b",
+      "range": [
+        0,
+        255
+      ],
+      "frame": 1,
+      "encoding": "literal u8"
+    }
+  ],
+  "guard": 16,
+  "pictures": 3,
+  "output_frames": {
+    "output": 2
+  },
+  "graph_outputs": {
+    "output": 2
+  },
+  "stats": {
+    "reachable_nodes_before_cse": 3,
+    "graph_nodes": 3,
+    "cse_eliminated": 0,
+    "commutative_cse_eliminated": 0,
+    "double_not_eliminated": 0,
+    "direct_or_gates": 0,
+    "direct_and_gates": 0,
+    "boolean_sum_nodes_bypassed": 0,
+    "boolean_operands_deduplicated": 0,
+    "boolean_nodes_fused": 0,
+    "affine_nodes_fused": 0,
+    "identity_affines_eliminated": 0,
+    "threshold_negative_two_p": 0,
+    "fused_shift_nodes": 0,
+    "lowered_instructions": 1,
+    "traced_nodes": 3,
+    "dead_nodes": 0,
+    "reference_copies": 0,
+    "peak_live_values": 2,
+    "optimized": true
+  },
+  "costs": {
+    "input_pictures": 2,
+    "normalization_pictures": 0,
+    "arithmetic_pictures": 1,
+    "refresh_pictures": 0,
+    "total_pictures": 3,
+    "prediction_slices": 14,
+    "prediction_bytes": 313,
+    "peak_live_values": 2,
+    "reference_slots_used": 2
+  },
+  "reference_mode": "retained",
+  "slice_mode": "row",
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 0
+  },
+  "graph": [
+    {
+      "id": 0,
+      "op": "input",
+      "args": [],
+      "params": [
+        "a"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 1,
+      "op": "input",
+      "args": [],
+      "params": [
+        "b"
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": null
+    },
+    {
+      "id": 2,
+      "op": "saturating_combine",
+      "args": [
+        0,
+        1
+      ],
+      "params": [
+        1,
+        1,
+        0
+      ],
+      "range": [
+        0,
+        255
+      ],
+      "last_lowered_frame": 2
+    }
+  ],
+  "instructions": [
+    {
+      "frame": 2,
+      "label": "saturating_combine",
+      "sources": [
+        {
+          "frame": 0,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        },
+        {
+          "frame": 1,
+          "weight": 2,
+          "offset": 0,
+          "dx": 0,
+          "dy": 0,
+          "qx": 0,
+          "qy": 0
+        }
+      ],
+      "denominator": 0,
+      "block_offsets": []
+    }
+  ],
+  "refresh_frames": [],
+  "stream_sha256": "b0e2ce8202c4c96db4ddeb669d06cbd90edeea0d7779d3488b7a8ddb08d5d549",
+  "prediction_sha256": "7629ad0bb46fddba2da0b76b89b28e596d0caebe2caec3829bc1b77a382d322d"
+}
