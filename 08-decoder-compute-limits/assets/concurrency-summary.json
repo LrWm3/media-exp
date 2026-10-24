@@ -1,0 +1,1296 @@
+{
+  "format": "h264-cuda-concurrency-0.1",
+  "status": "pass",
+  "created_utc": "2026-10-24T05:13:46.808960+00:00",
+  "bundle_sha256": "aab19ffb937c9f00ad54617e564a64d036321276f743c72fcc14ba95089e9d77",
+  "model_sha256": "ec8de200e9f598c3b6dcafd2503ab874620a2aecc56da2d146261263103ca32d",
+  "input_sha256": [
+    "2ac0f96b8e4e8536342dc435bb86267d8e5a82a6fd81820fba136c9a4a30c9d0",
+    "18910992ef43503b2a6539768f51fd147ff71cd560e89eb6e3e6c42367893940",
+    "ad67ec15074686055863b74e6cf811476e9af5e1f3a303e83fa06560fe35ad40",
+    "41a33e2990853e33df7131ef75c94d5808eaca59d1c21c51ea99f34ad3ea7bca",
+    "4163b7e215577fa69b077271d18cbe6fc5c1b3b199fae20725d32a75aebc4078",
+    "75d6e7126238c79c07be3587740191236181769569764148b4bfe4a72525c1ba",
+    "c3c7c8ed455ac5be6b77aaef94863de1890df207daa457690cb854f1360ce588",
+    "0d4cd940d501fcc11d6e4aaccb68328013b77b76a371f523cb3ca2a561ece1c5"
+  ],
+  "output_sha256": [
+    "61b36e40a3bf76220382e040f2d8465b16623567b4b99d8dbbc3a246fec4cfa0",
+    "f810040bf13cc396ff80f13f623543560505c79bb0c222c3b3aac4357a710054",
+    "52ce670243cebc48fe7bb3e3796fd535c47d6f812ba7ed9295c5af69fb244783",
+    "359e04ab76a52c346823f5d40cdbae9212bb7d6540e9be85f2fe0a747c467e93",
+    "09e40d9b3be4582b4bfe46fdd52eca1fb563ea1c6982e100cdf308ae4cd40bd5",
+    "880a9e15398f43ef177d0875f1afeb011b836aa311fedb293260cf43c88de2a8",
+    "4027d9258ce489ad753bab1dbe1d48ae8377b898ed1507ae025a09da4bee0166",
+    "53e53ee492857ef4c3668e02ab804ab234b6d6f9dc3fc92593e45f5e43c498b3"
+  ],
+  "cuda_helper_sha256": "fd8627d77c0560fd26447764c4a53e04cc122bd29a98f662c074fa67631b0cfe",
+  "ptx_sha256": "db5fd8bdb7dae312fb03a35bc52e489cc9d491749d9dcbd38adeca3bf6411a34",
+  "nvdec_helper_sha256": "42bdf4c5b2d3eddeb53a3d19324ab8f52eeb487bbc39bf9155f66e65d29ca4f0",
+  "source_sha256": {
+    "concurrency.py": "b62ce708c23517c3393983bdc8d62d4fb766419a76c188c309301a68e294b9b1",
+    "gpu_workload.cu": "5479aaa1ab6777f51586c72df672f2c656eafcda987f105a146a5d5aa91e7f54",
+    "build_gpu_workload.sh": "33f85220d3184c2a54bfdefa7d8092048555d6fabf32681342a2f38fc78cbafb"
+  },
+  "method": {
+    "repeats": 3,
+    "target_gpu_seconds": 2.0,
+    "batch_images": 8,
+    "input_dimensions": [
+      32,
+      32
+    ],
+    "final_picture_only": 16,
+    "decoded_pictures_per_batch": 136,
+    "copied_pictures_per_batch": 8,
+    "inference_validation": "every returned binary pixel against the frozen model bundle oracle, every run",
+    "cuda_initialization": "persistent shared context, independent nonblocking streams; allocations, pinned host buffers, PTX loading, model upload and process startup excluded",
+    "cuda_timed": "command IPC, 8192-byte input H2D, fused exact inference kernel, 8192-byte D2H, output file write/read, oracle check; stage CUDA events also reported",
+    "nvdec_timed": "decode_batch stream assembly, file I/O, process/pipeline startup, parse/decode, final-picture copies/readback, diagnostics and output extraction/oracle check",
+    "stress_timed": "fixed completed kernel count, per-kernel event synchronization; host unit intervals and CUDA events; work initialization and result validation excluded from stress work duration but included in combined host duration",
+    "comparison": "same calibrated fixed GPU units plus one eight-image inference batch; compare completion time and GPU work rate",
+    "order": "rotate five conditions and reverse on alternate repeats after warmups",
+    "clock": "CLOCK_MONOTONIC shared by Python and helper on Linux",
+    "limitation": "CUDA proxy for shader execution; no graphics API, occupancy, power or hardware execution-overlap claim",
+    "memory_elements": 16777216,
+    "memory_buffer_bytes_each": 67108864,
+    "memory_bytes_per_unit": 134217728,
+    "compute_elements": 262144,
+    "compute_cycles": 128,
+    "compute_work": "four independent unsigned integer arithmetic chains per element"
+  },
+  "modes": {
+    "compute": {
+      "fixed_gpu_units": 2700,
+      "calibration": {
+        "event": "stress",
+        "mode": "compute",
+        "start_ns": 830738702564593,
+        "end_ns": 830738704786982,
+        "completed_units": 3,
+        "sample_validation": "pass",
+        "sample_checksum": 10030609583812161715,
+        "unit_trace_records": 3
+      },
+      "samples": {
+        "gpu-only": [
+          {
+            "condition": "gpu-only",
+            "ready": {
+              "event": "started",
+              "start_ns": 830741887417677,
+              "ready_ns": 830741887974578
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830741887417677,
+              "end_ns": 830742729779980,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 842.362303,
+              "units_per_second": 3205.271639512102,
+              "summed_gpu_event_ms": 744.9073278719981,
+              "unit_trace_records": 2700
+            },
+            "start_ns": 830741885822206,
+            "end_ns": 830742739455495,
+            "completed_combined_ms": 853.633289,
+            "repetition": 1
+          },
+          {
+            "condition": "gpu-only",
+            "ready": {
+              "event": "started",
+              "start_ns": 830745238833763,
+              "ready_ns": 830745239458793
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830745238833763,
+              "end_ns": 830746091447619,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 852.613856,
+              "units_per_second": 3166.732490915559,
+              "summed_gpu_event_ms": 747.2903681019986,
+              "unit_trace_records": 2700
+            },
+            "start_ns": 830745237267540,
+            "end_ns": 830746099477135,
+            "completed_combined_ms": 862.209595,
+            "repetition": 2
+          },
+          {
+            "condition": "gpu-only",
+            "ready": {
+              "event": "started",
+              "start_ns": 830751207664585,
+              "ready_ns": 830751208323087
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830751207664585,
+              "end_ns": 830752051522135,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 843.85755,
+              "units_per_second": 3199.592158652844,
+              "summed_gpu_event_ms": 744.0356481849988,
+              "unit_trace_records": 2700
+            },
+            "start_ns": 830751206070970,
+            "end_ns": 830752059711556,
+            "completed_combined_ms": 853.640586,
+            "repetition": 3
+          }
+        ],
+        "nvdec-only": [
+          {
+            "condition": "nvdec-only",
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830742778026193,
+              "end_ns": 830743331881950,
+              "host_ms": 553.855757,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "start_ns": 830742778015217,
+            "end_ns": 830743331967071,
+            "completed_combined_ms": 553.951854,
+            "repetition": 1
+          },
+          {
+            "condition": "nvdec-only",
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830748302097962,
+              "end_ns": 830748865427536,
+              "host_ms": 563.329574,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "start_ns": 830748302085034,
+            "end_ns": 830748865520177,
+            "completed_combined_ms": 563.435143,
+            "repetition": 2
+          },
+          {
+            "condition": "nvdec-only",
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830752250897830,
+              "end_ns": 830752805304696,
+              "host_ms": 554.406866,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "start_ns": 830752250885542,
+            "end_ns": 830752805396345,
+            "completed_combined_ms": 554.510803,
+            "repetition": 3
+          }
+        ],
+        "cuda-only": [
+          {
+            "condition": "cuda-only",
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830743367860144,
+              "end_ns": 830743369048187,
+              "host_ms": 1.188043,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830743367934928,
+                "gpu_completed_ns": 830743368580918,
+                "end_ns": 830743368792504,
+                "h2d_ms": 0.504224002,
+                "kernel_ms": 0.0216959994,
+                "d2h_ms": 0.00396799995,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "start_ns": 830743367851856,
+            "end_ns": 830743369084315,
+            "completed_combined_ms": 1.232459,
+            "repetition": 1
+          },
+          {
+            "condition": "cuda-only",
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830748167948767,
+              "end_ns": 830748169917010,
+              "host_ms": 1.968243,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830748168530949,
+                "gpu_completed_ns": 830748169185739,
+                "end_ns": 830748169494254,
+                "h2d_ms": 0.491519988,
+                "kernel_ms": 0.0207359996,
+                "d2h_ms": 0.00790399965,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "start_ns": 830748167933535,
+            "end_ns": 830748169965554,
+            "completed_combined_ms": 2.032019,
+            "repetition": 2
+          },
+          {
+            "condition": "cuda-only",
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830749008799985,
+              "end_ns": 830749010270591,
+              "host_ms": 1.470606,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830749008871186,
+                "gpu_completed_ns": 830749009506840,
+                "end_ns": 830749009753530,
+                "h2d_ms": 0.488671988,
+                "kernel_ms": 0.0218240004,
+                "d2h_ms": 0.00377600011,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "start_ns": 830749008788081,
+            "end_ns": 830749010313311,
+            "completed_combined_ms": 1.52523,
+            "repetition": 3
+          }
+        ],
+        "gpu+nvdec": [
+          {
+            "condition": "gpu+nvdec",
+            "ready": {
+              "event": "started",
+              "start_ns": 830743393015388,
+              "ready_ns": 830743393644930
+            },
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830743393735810,
+              "end_ns": 830743939965480,
+              "host_ms": 546.22967,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830743393015388,
+              "end_ns": 830744252717150,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 859.701762,
+              "units_per_second": 3140.62401561066,
+              "summed_gpu_event_ms": 748.7465917380011,
+              "unit_trace_records": 2700
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830743393735810,
+                830743939965480
+              ],
+              "work_interval_ns": [
+                830743393015388,
+                830744252717150
+              ],
+              "intersecting_units": 1701,
+              "fully_contained_units": 1699,
+              "host_interval_overlap_ms": 546.038373,
+              "inference_interval_covered_fraction": 0.9996497865083015,
+              "contained_units_per_second": 3110.41324430436,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830743391520558,
+            "end_ns": 830744258173905,
+            "completed_combined_ms": 866.653347,
+            "repetition": 1
+          },
+          {
+            "condition": "gpu+nvdec",
+            "ready": {
+              "event": "started",
+              "start_ns": 830747148582242,
+              "ready_ns": 830747149209832
+            },
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830747149398602,
+              "end_ns": 830747703389816,
+              "host_ms": 553.991214,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830747148582242,
+              "end_ns": 830748007038585,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 858.456343,
+              "units_per_second": 3145.1803251455503,
+              "summed_gpu_event_ms": 746.9109759810001,
+              "unit_trace_records": 2700
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830747149398602,
+                830747703389816
+              ],
+              "work_interval_ns": [
+                830747148582242,
+                830748007038585
+              ],
+              "intersecting_units": 1727,
+              "fully_contained_units": 1725,
+              "host_interval_overlap_ms": 553.803341,
+              "inference_interval_covered_fraction": 0.9996608736830978,
+              "contained_units_per_second": 3113.767793436522,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830747147024372,
+            "end_ns": 830748018935561,
+            "completed_combined_ms": 871.911189,
+            "repetition": 2
+          },
+          {
+            "condition": "gpu+nvdec",
+            "ready": {
+              "event": "started",
+              "start_ns": 830749139619324,
+              "ready_ns": 830749140230146
+            },
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830749140356931,
+              "end_ns": 830749680351246,
+              "host_ms": 539.994315,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830749139619324,
+              "end_ns": 830749998860891,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 859.241567,
+              "units_per_second": 3142.3060797988605,
+              "summed_gpu_event_ms": 747.7137923120005,
+              "unit_trace_records": 2700
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830749140356931,
+                830749680351246
+              ],
+              "work_interval_ns": [
+                830749139619324,
+                830749998860891
+              ],
+              "intersecting_units": 1685,
+              "fully_contained_units": 1683,
+              "host_interval_overlap_ms": 539.795306,
+              "inference_interval_covered_fraction": 0.9996314609349174,
+              "contained_units_per_second": 3116.6994785861775,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830749138054190,
+            "end_ns": 830750009065883,
+            "completed_combined_ms": 871.011693,
+            "repetition": 3
+          }
+        ],
+        "gpu+cuda": [
+          {
+            "condition": "gpu+cuda",
+            "ready": {
+              "event": "started",
+              "start_ns": 830744305352780,
+              "ready_ns": 830744305975794
+            },
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830744306093683,
+              "end_ns": 830744306793274,
+              "host_ms": 0.699591,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830744306115155,
+                "gpu_completed_ns": 830744306330389,
+                "end_ns": 830744306551351,
+                "h2d_ms": 0.042431999,
+                "kernel_ms": 0.111584,
+                "d2h_ms": 0.0044160001,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830744305352780,
+              "end_ns": 830745163718242,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 858.365462,
+              "units_per_second": 3145.5133268164977,
+              "summed_gpu_event_ms": 742.8773763139984,
+              "unit_trace_records": 2700
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830744306093683,
+                830744306793274
+              ],
+              "work_interval_ns": [
+                830744305352780,
+                830745163718242
+              ],
+              "intersecting_units": 3,
+              "fully_contained_units": 1,
+              "host_interval_overlap_ms": 0.699431,
+              "inference_interval_covered_fraction": 0.9997712949423306,
+              "contained_units_per_second": 1429.4066104338106,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830744303804862,
+            "end_ns": 830745170110110,
+            "completed_combined_ms": 866.305248,
+            "repetition": 1
+          },
+          {
+            "condition": "gpu+cuda",
+            "ready": {
+              "event": "started",
+              "start_ns": 830746186043803,
+              "ready_ns": 830746186695329
+            },
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830746186920899,
+              "end_ns": 830746187595305,
+              "host_ms": 0.674406,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830746186956259,
+                "gpu_completed_ns": 830746187089829,
+                "end_ns": 830746187331879,
+                "h2d_ms": 0.0320959985,
+                "kernel_ms": 0.0296960007,
+                "d2h_ms": 0.0124479998,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830746186043803,
+              "end_ns": 830747030542127,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 844.498324,
+              "units_per_second": 3197.1644268177374,
+              "summed_gpu_event_ms": 745.1898552719988,
+              "unit_trace_records": 2700
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830746186920899,
+                830746187595305
+              ],
+              "work_interval_ns": [
+                830746186043803,
+                830747030542127
+              ],
+              "intersecting_units": 3,
+              "fully_contained_units": 1,
+              "host_interval_overlap_ms": 0.67415,
+              "inference_interval_covered_fraction": 0.9996204066986355,
+              "contained_units_per_second": 1482.7863334549218,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830746184504972,
+            "end_ns": 830747038522906,
+            "completed_combined_ms": 854.017934,
+            "repetition": 2
+          },
+          {
+            "condition": "gpu+cuda",
+            "ready": {
+              "event": "started",
+              "start_ns": 830750181906384,
+              "ready_ns": 830750182524566
+            },
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830750182707544,
+              "end_ns": 830750183523999,
+              "host_ms": 0.816455,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830750182743576,
+                "gpu_completed_ns": 830750182915866,
+                "end_ns": 830750183231197,
+                "h2d_ms": 0.0359040014,
+                "kernel_ms": 0.0545919985,
+                "d2h_ms": 0.00777600007,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "compute",
+              "start_ns": 830750181906384,
+              "end_ns": 830751025298074,
+              "completed_units": 2700,
+              "sample_validation": "pass",
+              "sample_checksum": 10030609583812161715,
+              "work_ms": 843.39169,
+              "units_per_second": 3201.359501182659,
+              "summed_gpu_event_ms": 745.1903357219994,
+              "unit_trace_records": 2700
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830750182707544,
+                830750183523999
+              ],
+              "work_interval_ns": [
+                830750181906384,
+                830751025298074
+              ],
+              "intersecting_units": 4,
+              "fully_contained_units": 2,
+              "host_interval_overlap_ms": 0.816103,
+              "inference_interval_covered_fraction": 0.9995688678494222,
+              "contained_units_per_second": 2449.6144919193343,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830750180335586,
+            "end_ns": 830751033286821,
+            "completed_combined_ms": 852.951235,
+            "repetition": 3
+          }
+        ]
+      },
+      "summary": {
+        "gpu-only": {
+          "median_combined_ms": 853.640586,
+          "median_gpu_work_ms": 843.85755,
+          "median_gpu_units_per_second": 3199.592158652844
+        },
+        "nvdec-only": {
+          "median_combined_ms": 554.510803,
+          "median_inference_ms": 554.406866
+        },
+        "cuda-only": {
+          "median_combined_ms": 1.52523,
+          "median_inference_ms": 1.470606
+        },
+        "gpu+nvdec": {
+          "median_combined_ms": 871.011693,
+          "median_inference_ms": 546.22967,
+          "median_gpu_work_ms": 859.241567,
+          "median_gpu_units_per_second": 3142.3060797988605,
+          "min_host_overlap_ms": 539.795306,
+          "gpu_work_rate_fraction_of_alone": 0.9820958184626558,
+          "combined_time_vs_gpu_alone_ratio": 1.020349438961657,
+          "inference_slowdown_vs_alone": 0.985250550630807,
+          "serial_gpu_plus_inference_estimate_ms": 1408.047452,
+          "speedup_vs_serial_estimate": 1.6165654988514602
+        },
+        "gpu+cuda": {
+          "median_combined_ms": 854.017934,
+          "median_inference_ms": 0.699591,
+          "median_gpu_work_ms": 844.498324,
+          "median_gpu_units_per_second": 3197.1644268177374,
+          "min_host_overlap_ms": 0.67415,
+          "gpu_work_rate_fraction_of_alone": 0.9992412370968778,
+          "combined_time_vs_gpu_alone_ratio": 1.000442045523829,
+          "inference_slowdown_vs_alone": 0.4757161333491091,
+          "serial_gpu_plus_inference_estimate_ms": 855.111192,
+          "speedup_vs_serial_estimate": 1.001280134709677
+        }
+      }
+    },
+    "memory": {
+      "fixed_gpu_units": 738,
+      "calibration": {
+        "event": "stress",
+        "mode": "memory",
+        "start_ns": 830753209868780,
+        "end_ns": 830753218004792,
+        "completed_units": 3,
+        "sample_validation": "pass",
+        "sample_checksum": 9714400044822881800,
+        "unit_trace_records": 3
+      },
+      "samples": {
+        "gpu-only": [
+          {
+            "condition": "gpu-only",
+            "ready": {
+              "event": "started",
+              "start_ns": 830759637580996,
+              "ready_ns": 830759640475679
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830759637580996,
+              "end_ns": 830761531924050,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1894.343054,
+              "units_per_second": 389.5809676297417,
+              "summed_gpu_event_ms": 1855.0827842600002,
+              "unit_trace_records": 738
+            },
+            "start_ns": 830759635984117,
+            "end_ns": 830761533729571,
+            "completed_combined_ms": 1897.745454,
+            "repetition": 1
+          },
+          {
+            "condition": "gpu-only",
+            "ready": {
+              "event": "started",
+              "start_ns": 830766917221845,
+              "ready_ns": 830766920048624
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830766917221845,
+              "end_ns": 830768815856940,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1898.635095,
+              "units_per_second": 388.7002836635125,
+              "summed_gpu_event_ms": 1856.899969979997,
+              "unit_trace_records": 738
+            },
+            "start_ns": 830766915590886,
+            "end_ns": 830768819096106,
+            "completed_combined_ms": 1903.50522,
+            "repetition": 2
+          },
+          {
+            "condition": "gpu-only",
+            "ready": {
+              "event": "started",
+              "start_ns": 830778863645075,
+              "ready_ns": 830778866511758
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830778863645075,
+              "end_ns": 830780772551787,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1908.906712,
+              "units_per_second": 386.60873020179315,
+              "summed_gpu_event_ms": 1857.0306882000002,
+              "unit_trace_records": 738
+            },
+            "start_ns": 830778862047972,
+            "end_ns": 830780776462543,
+            "completed_combined_ms": 1914.414571,
+            "repetition": 3
+          }
+        ],
+        "nvdec-only": [
+          {
+            "condition": "nvdec-only",
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830761750871065,
+              "end_ns": 830762289074931,
+              "host_ms": 538.203866,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "start_ns": 830761750857497,
+            "end_ns": 830762289166036,
+            "completed_combined_ms": 538.308539,
+            "repetition": 1
+          },
+          {
+            "condition": "nvdec-only",
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830773535462824,
+              "end_ns": 830774089090387,
+              "host_ms": 553.627563,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "start_ns": 830773535447784,
+            "end_ns": 830774089181108,
+            "completed_combined_ms": 553.733324,
+            "repetition": 2
+          },
+          {
+            "condition": "nvdec-only",
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830781025293966,
+              "end_ns": 830781576508546,
+              "host_ms": 551.21458,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "start_ns": 830781025280910,
+            "end_ns": 830781576568835,
+            "completed_combined_ms": 551.287925,
+            "repetition": 3
+          }
+        ],
+        "cuda-only": [
+          {
+            "condition": "cuda-only",
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830762499245863,
+              "end_ns": 830762500948087,
+              "host_ms": 1.702224,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830762499322920,
+                "gpu_completed_ns": 830762499960046,
+                "end_ns": 830762500261136,
+                "h2d_ms": 0.490431994,
+                "kernel_ms": 0.0214399993,
+                "d2h_ms": 0.00972799957,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "start_ns": 830762499232103,
+            "end_ns": 830762501165881,
+            "completed_combined_ms": 1.933778,
+            "repetition": 1
+          },
+          {
+            "condition": "cuda-only",
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830773305494075,
+              "end_ns": 830773307027945,
+              "host_ms": 1.53387,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830773305567419,
+                "gpu_completed_ns": 830773306200577,
+                "end_ns": 830773306438788,
+                "h2d_ms": 0.488000005,
+                "kernel_ms": 0.0216959994,
+                "d2h_ms": 0.0044160001,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "start_ns": 830773305479739,
+            "end_ns": 830773307172298,
+            "completed_combined_ms": 1.692559,
+            "repetition": 2
+          },
+          {
+            "condition": "cuda-only",
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830774330997585,
+              "end_ns": 830774332363582,
+              "host_ms": 1.365997,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830774331072946,
+                "gpu_completed_ns": 830774331723768,
+                "end_ns": 830774331981018,
+                "h2d_ms": 0.488415986,
+                "kernel_ms": 0.0211200006,
+                "d2h_ms": 0.00543999998,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "start_ns": 830774330984017,
+            "end_ns": 830774332406814,
+            "completed_combined_ms": 1.422797,
+            "repetition": 3
+          }
+        ],
+        "gpu+nvdec": [
+          {
+            "condition": "gpu+nvdec",
+            "ready": {
+              "event": "started",
+              "start_ns": 830762701762707,
+              "ready_ns": 830762704642094
+            },
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830762704786063,
+              "end_ns": 830763274594546,
+              "host_ms": 569.808483,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830762701762707,
+              "end_ns": 830764595501596,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1893.738889,
+              "units_per_second": 389.7052567736544,
+              "summed_gpu_event_ms": 1855.7515524399992,
+              "unit_trace_records": 738
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830762704786063,
+                830763274594546
+              ],
+              "work_interval_ns": [
+                830762701762707,
+                830764595501596
+              ],
+              "intersecting_units": 222,
+              "fully_contained_units": 220,
+              "host_interval_overlap_ms": 569.770563,
+              "inference_interval_covered_fraction": 0.9999334513242057,
+              "contained_units_per_second": 386.0946380470085,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830762700195364,
+            "end_ns": 830764597605104,
+            "completed_combined_ms": 1897.40974,
+            "repetition": 1
+          },
+          {
+            "condition": "gpu+nvdec",
+            "ready": {
+              "event": "started",
+              "start_ns": 830771164580706,
+              "ready_ns": 830771167422877
+            },
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830771167608863,
+              "end_ns": 830771713012732,
+              "host_ms": 545.403869,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830771164580706,
+              "end_ns": 830773059527831,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1894.947125,
+              "units_per_second": 389.4567770591488,
+              "summed_gpu_event_ms": 1854.4971527699997,
+              "unit_trace_records": 738
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830771167608863,
+                830771713012732
+              ],
+              "work_interval_ns": [
+                830771164580706,
+                830773059527831
+              ],
+              "intersecting_units": 212,
+              "fully_contained_units": 210,
+              "host_interval_overlap_ms": 545.371676,
+              "inference_interval_covered_fraction": 0.9999409740160827,
+              "contained_units_per_second": 385.03577245433877,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830771162988051,
+            "end_ns": 830773061578954,
+            "completed_combined_ms": 1898.590903,
+            "repetition": 2
+          },
+          {
+            "condition": "gpu+nvdec",
+            "ready": {
+              "event": "started",
+              "start_ns": 830774565175014,
+              "ready_ns": 830774568056993
+            },
+            "inference": {
+              "backend": "nvdec",
+              "start_ns": 830774568234467,
+              "end_ns": 830775115736340,
+              "host_ms": 547.501873,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "decoded_pictures": 136,
+                "copied_pictures": 8,
+                "copied_i420_bytes": 279552
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830774565175014,
+              "end_ns": 830776467668962,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1902.493948,
+              "units_per_second": 387.91187786737703,
+              "summed_gpu_event_ms": 1858.424033950002,
+              "unit_trace_records": 738
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830774568234467,
+                830775115736340
+              ],
+              "work_interval_ns": [
+                830774565175014,
+                830776467668962
+              ],
+              "intersecting_units": 211,
+              "fully_contained_units": 209,
+              "host_interval_overlap_ms": 547.474289,
+              "inference_interval_covered_fraction": 0.9999496184371958,
+              "contained_units_per_second": 381.7338539040943,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830774563598072,
+            "end_ns": 830776469773621,
+            "completed_combined_ms": 1906.175549,
+            "repetition": 3
+          }
+        ],
+        "gpu+cuda": [
+          {
+            "condition": "gpu+cuda",
+            "ready": {
+              "event": "started",
+              "start_ns": 830764805874674,
+              "ready_ns": 830764808758349
+            },
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830764809094128,
+              "end_ns": 830764812068876,
+              "host_ms": 2.974748,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830764809167409,
+                "gpu_completed_ns": 830764811415270,
+                "end_ns": 830764811739753,
+                "h2d_ms": 0.0430720001,
+                "kernel_ms": 2.12460804,
+                "d2h_ms": 0.00425599981,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830764805874674,
+              "end_ns": 830766703644385,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1897.769711,
+              "units_per_second": 388.8775312000962,
+              "summed_gpu_event_ms": 1857.1154248099976,
+              "unit_trace_records": 738
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830764809094128,
+                830764812068876
+              ],
+              "work_interval_ns": [
+                830764805874674,
+                830766703644385
+              ],
+              "intersecting_units": 2,
+              "fully_contained_units": 0,
+              "host_interval_overlap_ms": 2.97462,
+              "inference_interval_covered_fraction": 0.9999569711451188,
+              "contained_units_per_second": null,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830764804256227,
+            "end_ns": 830766705666164,
+            "completed_combined_ms": 1901.409937,
+            "repetition": 1
+          },
+          {
+            "condition": "gpu+cuda",
+            "ready": {
+              "event": "started",
+              "start_ns": 830769035798268,
+              "ready_ns": 830769038599766
+            },
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830769038744343,
+              "end_ns": 830769041662131,
+              "host_ms": 2.917788,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830769038767160,
+                "gpu_completed_ns": 830769041189358,
+                "end_ns": 830769041427217,
+                "h2d_ms": 0.0396480002,
+                "kernel_ms": 2.32329607,
+                "d2h_ms": 0.00524799991,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830769035798268,
+              "end_ns": 830770940294634,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1904.496366,
+              "units_per_second": 387.50402110244823,
+              "summed_gpu_event_ms": 1858.4634544199976,
+              "unit_trace_records": 738
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830769038744343,
+                830769041662131
+              ],
+              "work_interval_ns": [
+                830769035798268,
+                830770940294634
+              ],
+              "intersecting_units": 2,
+              "fully_contained_units": 0,
+              "host_interval_overlap_ms": 2.917628,
+              "inference_interval_covered_fraction": 0.9999451639392581,
+              "contained_units_per_second": null,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830769034166476,
+            "end_ns": 830770942277916,
+            "completed_combined_ms": 1908.11144,
+            "repetition": 2
+          },
+          {
+            "condition": "gpu+cuda",
+            "ready": {
+              "event": "started",
+              "start_ns": 830776727735946,
+              "ready_ns": 830776730546884
+            },
+            "inference": {
+              "backend": "cuda",
+              "start_ns": 830776730695174,
+              "end_ns": 830776733696962,
+              "host_ms": 3.001788,
+              "validation": "pass",
+              "output_sha256": "d8a833ac79d7331804e0fdc72cb87a12d7ef9d202e6378621acaa7ae2fe1beb6",
+              "details": {
+                "event": "inference",
+                "start_ns": 830776730720230,
+                "gpu_completed_ns": 830776733155549,
+                "end_ns": 830776733392735,
+                "h2d_ms": 0.0374080017,
+                "kernel_ms": 2.32406402,
+                "d2h_ms": 0.00611199997,
+                "copied_bytes_each_way": 8192
+              }
+            },
+            "stress": {
+              "event": "stress",
+              "mode": "memory",
+              "start_ns": 830776727735946,
+              "end_ns": 830778619853764,
+              "completed_units": 738,
+              "sample_validation": "pass",
+              "sample_checksum": 9974027147073836616,
+              "work_ms": 1892.117818,
+              "units_per_second": 390.0391365586728,
+              "summed_gpu_event_ms": 1854.3303674199997,
+              "unit_trace_records": 738
+            },
+            "overlap": {
+              "inference_interval_ns": [
+                830776730695174,
+                830776733696962
+              ],
+              "work_interval_ns": [
+                830776727735946,
+                830778619853764
+              ],
+              "intersecting_units": 2,
+              "fully_contained_units": 0,
+              "host_interval_overlap_ms": 3.001627,
+              "inference_interval_covered_fraction": 0.9999463652996148,
+              "contained_units_per_second": null,
+              "meaning": "overlapping host submission/completion intervals; not proof of simultaneous GPU instructions"
+            },
+            "start_ns": 830776726110555,
+            "end_ns": 830778623143843,
+            "completed_combined_ms": 1897.033288,
+            "repetition": 3
+          }
+        ]
+      },
+      "summary": {
+        "gpu-only": {
+          "median_combined_ms": 1903.50522,
+          "median_gpu_work_ms": 1898.635095,
+          "median_gpu_units_per_second": 388.7002836635125
+        },
+        "nvdec-only": {
+          "median_combined_ms": 551.287925,
+          "median_inference_ms": 551.21458
+        },
+        "cuda-only": {
+          "median_combined_ms": 1.692559,
+          "median_inference_ms": 1.53387
+        },
+        "gpu+nvdec": {
+          "median_combined_ms": 1898.590903,
+          "median_inference_ms": 547.501873,
+          "median_gpu_work_ms": 1894.947125,
+          "median_gpu_units_per_second": 389.4567770591488,
+          "min_host_overlap_ms": 545.371676,
+          "gpu_work_rate_fraction_of_alone": 1.0019462126152991,
+          "combined_time_vs_gpu_alone_ratio": 0.9974182802608758,
+          "inference_slowdown_vs_alone": 0.9932644978295024,
+          "serial_gpu_plus_inference_estimate_ms": 2454.7198,
+          "speedup_vs_serial_estimate": 1.2929166552527191
+        },
+        "gpu+cuda": {
+          "median_combined_ms": 1901.409937,
+          "median_inference_ms": 2.974748,
+          "median_gpu_work_ms": 1897.769711,
+          "median_gpu_units_per_second": 388.8775312000962,
+          "min_host_overlap_ms": 2.917628,
+          "gpu_work_rate_fraction_of_alone": 1.0004560005331438,
+          "combined_time_vs_gpu_alone_ratio": 0.9988992501948589,
+          "inference_slowdown_vs_alone": 1.9393742624863906,
+          "serial_gpu_plus_inference_estimate_ms": 1905.03909,
+          "speedup_vs_serial_estimate": 1.0019086641598844
+        }
+      }
+    }
+  },
+  "trace_archive": {
+    "path": "concurrency-traces.json.gz",
+    "sha256": "50f0de8ac895302dd9a12a2de51c30186b571af3feb5c72e33a9c44c27e24f83",
+    "uncompressed_sha256": "b3ac7675717c3f898bc0d36ec723981d292e096b967a5744f5eb1170df1e3b02",
+    "note": "This summary omits per-unit interval arrays only; all intervals remain in the exact compressed raw report."
+  }
+}

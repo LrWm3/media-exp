@@ -1,0 +1,4702 @@
+{
+  "atlas": "atlas.json",
+  "atlas_sha256": "cc8da61ef0eb25e15871bf4616d5209758563b95fef5700f4531f5b571fee893",
+  "cases": [
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 74,
+        "prediction_pictures": 1,
+        "prediction_slices": 4,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-00-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-00-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "expected_sha256": "482ff2b3e8b8ef6afd073a612aec9640dc4246d7b57d97883a479a1f4d69d0a1",
+      "first_tail_ms": 0.32441299845231697,
+      "frame_bytes": 6144,
+      "function": "FALSE",
+      "height": 32,
+      "id": "atlas-00-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.1067309969803318,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-00-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-00-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.7118020002963021,
+      "manifest": "cases/atlas-00-scalar-32x32-r1/program.json",
+      "manifest_sha256": "151e414bb3e3b36c27bd3c48c1e907eb3fc124f3debe2ccdefd81d6b20d1fc51",
+      "mask": 0,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 74,
+        "path": "cases/atlas-00-scalar-32x32-r1/prediction.h264",
+        "sha256": "c22b3d0911a19a806a540083db3de02d9ac107f6e7e48c45c3fbfc30a8f6ce2e"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-00-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15881,
+      "stream_sha256": "5827d3441dbb43c2549a46720ee69ec5fc8383498b4563a002e3e62a0b98aa41",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 74,
+        "prediction_pictures": 1,
+        "prediction_slices": 4,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-00-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-00-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "expected_sha256": "482ff2b3e8b8ef6afd073a612aec9640dc4246d7b57d97883a479a1f4d69d0a1",
+      "first_tail_ms": 0.30331600282806903,
+      "frame_bytes": 6144,
+      "function": "FALSE",
+      "height": 32,
+      "id": "atlas-00-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.016845999401994,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-00-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-00-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6315060018096119,
+      "manifest": "cases/atlas-00-packed-32x32-r1/program.json",
+      "manifest_sha256": "60df347674b4afd6394a1933151694de3b6d38ffe38aaa7f69a7489d3cdee54f",
+      "mask": 0,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 74,
+        "path": "cases/atlas-00-packed-32x32-r1/prediction.h264",
+        "sha256": "c22b3d0911a19a806a540083db3de02d9ac107f6e7e48c45c3fbfc30a8f6ce2e"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-00-packed-32x32-r1/program.h264",
+      "stream_bytes": 15881,
+      "stream_sha256": "5827d3441dbb43c2549a46720ee69ec5fc8383498b4563a002e3e62a0b98aa41",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 173,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-01-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-01-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "49aa4bbd09923b7d59897ca67008d85cd3a9558a3c4cc39e0046fce1aaa96b57",
+      "expected_sha256": "aede741a709259c3758dfab49f2ab02ba19ce77f6f540aaf6584e56e91d37126",
+      "first_tail_ms": 0.595015000726562,
+      "frame_bytes": 6144,
+      "function": "NOR",
+      "height": 32,
+      "id": "atlas-01-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0428370005683973,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-01-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-01-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6422079968615435,
+      "manifest": "cases/atlas-01-scalar-32x32-r1/program.json",
+      "manifest_sha256": "4a94d56049a27849a30aa4a945820aae7828a1cecb83e95d24bd4fe6142efdc6",
+      "mask": 1,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 173,
+        "path": "cases/atlas-01-scalar-32x32-r1/prediction.h264",
+        "sha256": "074c268f87471569a1453947b7adcba6401074ef8405c8e76e18f42dfae27976"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-01-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15980,
+      "stream_sha256": "20d3165ae1811be8a785e86652ecccb45194fd47f70fce91f0698df05a7654ee",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 173,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-01-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-01-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "49aa4bbd09923b7d59897ca67008d85cd3a9558a3c4cc39e0046fce1aaa96b57",
+      "expected_sha256": "aede741a709259c3758dfab49f2ab02ba19ce77f6f540aaf6584e56e91d37126",
+      "first_tail_ms": 0.5958780020591803,
+      "frame_bytes": 6144,
+      "function": "NOR",
+      "height": 32,
+      "id": "atlas-01-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0670490009943023,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-01-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-01-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6934440025361255,
+      "manifest": "cases/atlas-01-packed-32x32-r1/program.json",
+      "manifest_sha256": "f00ee1d68498c2da9fe4892d1076a59681f3bfcf0ea808f8664fe59609fb2be9",
+      "mask": 1,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 173,
+        "path": "cases/atlas-01-packed-32x32-r1/prediction.h264",
+        "sha256": "074c268f87471569a1453947b7adcba6401074ef8405c8e76e18f42dfae27976"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-01-packed-32x32-r1/program.h264",
+      "stream_bytes": 15980,
+      "stream_sha256": "20d3165ae1811be8a785e86652ecccb45194fd47f70fce91f0698df05a7654ee",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-02-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-02-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "e79df563bb58255671c8109633d0683325e1ac935c5d5d1351934784097f9c12",
+      "expected_sha256": "f6641dbe9a1bbaf13190bb822ee31826ea8830d4fece75932ed1ad11e9ba8ce3",
+      "first_tail_ms": 0.38129800668684766,
+      "frame_bytes": 6144,
+      "function": "NOT_A_AND_B",
+      "height": 32,
+      "id": "atlas-02-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6471879969467409,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-02-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-02-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6670180009678006,
+      "manifest": "cases/atlas-02-scalar-32x32-r1/program.json",
+      "manifest_sha256": "6525426b8cf29b952654a64533a862696d211e6e0f99ff9f1c2ebd248d87563b",
+      "mask": 2,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-02-scalar-32x32-r1/prediction.h264",
+        "sha256": "3273c848ce6efee0ff77131e75beb7cb1a8375c72ae073dd57025f5c9ee328b7"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-02-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "e934ab3652a2a8c84d2f2d9b480ae087aae72244795ca0a95b8765d4ad75c554",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-02-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-02-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "e79df563bb58255671c8109633d0683325e1ac935c5d5d1351934784097f9c12",
+      "expected_sha256": "f6641dbe9a1bbaf13190bb822ee31826ea8830d4fece75932ed1ad11e9ba8ce3",
+      "first_tail_ms": 0.5833370014443062,
+      "frame_bytes": 6144,
+      "function": "NOT_A_AND_B",
+      "height": 32,
+      "id": "atlas-02-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.070159996743314,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-02-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-02-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6668689966318198,
+      "manifest": "cases/atlas-02-packed-32x32-r1/program.json",
+      "manifest_sha256": "fac1be3823df4ccb48d09a4512a6195b90da94c2b480343635761925eaa0a6be",
+      "mask": 2,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-02-packed-32x32-r1/prediction.h264",
+        "sha256": "3273c848ce6efee0ff77131e75beb7cb1a8375c72ae073dd57025f5c9ee328b7"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-02-packed-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "e934ab3652a2a8c84d2f2d9b480ae087aae72244795ca0a95b8765d4ad75c554",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 141,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-03-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-03-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "4d6b51cc1f0c47136c01e40cfeaad278dc62e24e62cc4022ea602116d8c36295",
+      "expected_sha256": "dbb9bc75ecf22623cf6b5c94798a5cdf782fdd9861dcafaa914bc1bf6da4930e",
+      "first_tail_ms": 0.4502079973462969,
+      "frame_bytes": 6144,
+      "function": "NOT_A",
+      "height": 32,
+      "id": "atlas-03-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0238609975203872,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-03-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-03-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6379999977070838,
+      "manifest": "cases/atlas-03-scalar-32x32-r1/program.json",
+      "manifest_sha256": "92799068cfd3a733efd2dc6fc1e5d73f7ec6ad3e390bee5dce3010119749da0b",
+      "mask": 3,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 141,
+        "path": "cases/atlas-03-scalar-32x32-r1/prediction.h264",
+        "sha256": "885347d8940d16407c5016607f2b663150b8ce374362d18e1697e39dad2fd2b8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-03-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15948,
+      "stream_sha256": "a7b5ce8fee0a492aeb0aeeb5501473e53fe28e3aac12c386073b10f2305b0557",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 141,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-03-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-03-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "4d6b51cc1f0c47136c01e40cfeaad278dc62e24e62cc4022ea602116d8c36295",
+      "expected_sha256": "dbb9bc75ecf22623cf6b5c94798a5cdf782fdd9861dcafaa914bc1bf6da4930e",
+      "first_tail_ms": 0.45841300016036257,
+      "frame_bytes": 6144,
+      "function": "NOT_A",
+      "height": 32,
+      "id": "atlas-03-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.1149339989060536,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-03-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-03-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6949240050744265,
+      "manifest": "cases/atlas-03-packed-32x32-r1/program.json",
+      "manifest_sha256": "f365fcfceece717d6e5cb26c74aeb3bde0b3526393005bce5a0edffd3fd50955",
+      "mask": 3,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 141,
+        "path": "cases/atlas-03-packed-32x32-r1/prediction.h264",
+        "sha256": "885347d8940d16407c5016607f2b663150b8ce374362d18e1697e39dad2fd2b8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-03-packed-32x32-r1/program.h264",
+      "stream_bytes": 15948,
+      "stream_sha256": "a7b5ce8fee0a492aeb0aeeb5501473e53fe28e3aac12c386073b10f2305b0557",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-04-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-04-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "1747590739abc6dba38e93d9d26c33797f529fbdeea188a09117a34eb4ef639c",
+      "expected_sha256": "16386c9c05a9c3f83082ac554ef33b93c882d9373f7988fe00e3919570289be8",
+      "first_tail_ms": 0.6393479998223484,
+      "frame_bytes": 6144,
+      "function": "A_AND_NOT_B",
+      "height": 32,
+      "id": "atlas-04-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.1786859977291897,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-04-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-04-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6933600016054697,
+      "manifest": "cases/atlas-04-scalar-32x32-r1/program.json",
+      "manifest_sha256": "87e9a48156b306904f42c4c001ba821da83f478bf4d1448dcb17567ae768f974",
+      "mask": 4,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-04-scalar-32x32-r1/prediction.h264",
+        "sha256": "65921a683edb1a056a634d504d3f6be17eeba216ca9d1365855aa90876021294"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-04-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "a3dc447be41e753aa51b2c5876dd84b4ee5fe97074f42aa92f1b5ef26bc7431d",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-04-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-04-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "1747590739abc6dba38e93d9d26c33797f529fbdeea188a09117a34eb4ef639c",
+      "expected_sha256": "16386c9c05a9c3f83082ac554ef33b93c882d9373f7988fe00e3919570289be8",
+      "first_tail_ms": 0.5726440067519434,
+      "frame_bytes": 6144,
+      "function": "A_AND_NOT_B",
+      "height": 32,
+      "id": "atlas-04-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0062220026156865,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-04-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-04-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6641360014327802,
+      "manifest": "cases/atlas-04-packed-32x32-r1/program.json",
+      "manifest_sha256": "8c98d1bb6481be7936b4ac5110300744674b93db7f3442188fa3993e5a001ea8",
+      "mask": 4,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-04-packed-32x32-r1/prediction.h264",
+        "sha256": "65921a683edb1a056a634d504d3f6be17eeba216ca9d1365855aa90876021294"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-04-packed-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "a3dc447be41e753aa51b2c5876dd84b4ee5fe97074f42aa92f1b5ef26bc7431d",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 141,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 1,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-05-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-05-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "ef56d90659ebc45519cd8d3c26db9ae9b6bf3ef1f9edd61b9ec89ca93cff7a8b",
+      "expected_sha256": "b1c7ff80c0e25a2f53eafacb4767c7023844089997e2aeedcdb3597d52d3fc92",
+      "first_tail_ms": 0.4656950040953234,
+      "frame_bytes": 6144,
+      "function": "NOT_B",
+      "height": 32,
+      "id": "atlas-05-scalar-32x32-r1",
+      "input_bytes": 15806,
+      "input_packing_ms": 1.063513002009131,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-05-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-05-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6583739959751256,
+      "manifest": "cases/atlas-05-scalar-32x32-r1/program.json",
+      "manifest_sha256": "f90647870cbb918d79da29274f610199a12db8b2983c5335052436420f345cfd",
+      "mask": 5,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 141,
+        "path": "cases/atlas-05-scalar-32x32-r1/prediction.h264",
+        "sha256": "885347d8940d16407c5016607f2b663150b8ce374362d18e1697e39dad2fd2b8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-05-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15947,
+      "stream_sha256": "7a70f3b1a15808dde665d7b39be38e700f1be84f4bfa68d4e69295e3216f34c0",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 141,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 1,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-05-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-05-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "ef56d90659ebc45519cd8d3c26db9ae9b6bf3ef1f9edd61b9ec89ca93cff7a8b",
+      "expected_sha256": "b1c7ff80c0e25a2f53eafacb4767c7023844089997e2aeedcdb3597d52d3fc92",
+      "first_tail_ms": 0.44639800034929067,
+      "frame_bytes": 6144,
+      "function": "NOT_B",
+      "height": 32,
+      "id": "atlas-05-packed-32x32-r1",
+      "input_bytes": 15806,
+      "input_packing_ms": 1.0229680046904832,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-05-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-05-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6390760026988573,
+      "manifest": "cases/atlas-05-packed-32x32-r1/program.json",
+      "manifest_sha256": "bc3e5a15afee1ad5919071d389822f9cc0502fd66e854847633b7ee2ed0cd42d",
+      "mask": 5,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 141,
+        "path": "cases/atlas-05-packed-32x32-r1/prediction.h264",
+        "sha256": "885347d8940d16407c5016607f2b663150b8ce374362d18e1697e39dad2fd2b8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-05-packed-32x32-r1/program.h264",
+      "stream_bytes": 15947,
+      "stream_sha256": "7a70f3b1a15808dde665d7b39be38e700f1be84f4bfa68d4e69295e3216f34c0",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 20480,
+        "coded_macroblocks": 80,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 30720,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 515,
+        "prediction_pictures": 3,
+        "prediction_slices": 24,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 5
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 30720,
+          "output_pixels": 1024,
+          "pictures": 5,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 30720,
+          "output_pixels": 1024,
+          "pictures": 5,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 30720,
+          "output_pixels": 1024,
+          "pictures": 5,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-06-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 30720,
+      "expected_output": "cases/atlas-06-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "27695d32bb162bdfed402c8d637a323c32a61750f8c7942b1bfef8445604da28",
+      "expected_sha256": "c8bb4200ee8c2819607f0ca33bb9dbf22c58531a881f9129fb08ba45a33b99ce",
+      "first_tail_ms": 1.0622320041875355,
+      "frame_bytes": 6144,
+      "function": "XOR",
+      "height": 32,
+      "id": "atlas-06-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6048680006642826,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-06-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-06-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.7659890034119599,
+      "manifest": "cases/atlas-06-scalar-32x32-r1/program.json",
+      "manifest_sha256": "5ed2933d0c5c9d93a684bd704d297dac776dc03c16d49a97468b6b4014118ca1",
+      "mask": 6,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 4
+      },
+      "output_regions": {
+        "output": {
+          "frame": 4,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 5,
+      "prediction": {
+        "bytes": 515,
+        "path": "cases/atlas-06-scalar-32x32-r1/prediction.h264",
+        "sha256": "f11dd1a62a9b35f28ba0d98d2d660f2fb9df6946938de8db21f59e09e04facc6"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/atlas-06-scalar-32x32-r1/program.h264",
+      "stream_bytes": 16322,
+      "stream_sha256": "9a82ccce6a9ff7d104d6d9a9551ddf9ed496e680bdc08d12412dafb819219dde",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 112,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 28672,
+        "coded_macroblocks": 112,
+        "coded_width": 112,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 43008,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 10752,
+        "prediction_bytes": 466,
+        "prediction_pictures": 2,
+        "prediction_slices": 20,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 4
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 43008,
+          "output_pixels": 1024,
+          "pictures": 4,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 43008,
+          "output_pixels": 1024,
+          "pictures": 4,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 43008,
+          "output_pixels": 1024,
+          "pictures": 4,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-06-packed-32x32-r1/expected.i420",
+      "expected_bytes": 43008,
+      "expected_output": "cases/atlas-06-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "27695d32bb162bdfed402c8d637a323c32a61750f8c7942b1bfef8445604da28",
+      "expected_sha256": "8a0d4f07dc244e11e8c1d4f2aa112ab07abff28bdb785e6471ce6ff108782c46",
+      "first_tail_ms": 2.1365959983086213,
+      "frame_bytes": 10752,
+      "function": "XOR",
+      "height": 32,
+      "id": "atlas-06-packed-32x32-r1",
+      "input_bytes": 28144,
+      "input_packing_ms": 1.8687929987208918,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-06-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-06-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 1.2578820023918524,
+      "manifest": "cases/atlas-06-packed-32x32-r1/program.json",
+      "manifest_sha256": "9c3829d9684a5e45132effec1ca0ad889939e2c53db280e6033cbd53e8a98e55",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 3
+      },
+      "output_regions": {
+        "output": {
+          "frame": 3,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 4,
+      "prediction": {
+        "bytes": 466,
+        "path": "cases/atlas-06-packed-32x32-r1/prediction.h264",
+        "sha256": "f1e6bf8ec537e18fa71b0ce0d4b2391c1f1cf4e0963776805783798942fe1864"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/atlas-06-packed-32x32-r1/program.h264",
+      "stream_bytes": 28610,
+      "stream_sha256": "3c5e4eaa4bab514809d8705b430250b0a141a19c58ad1c2aa74aaad5ef943314",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-07-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-07-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "83558a895f3d1ecfba168384c54e613db631d680ab18d3999c7280a716fbc0ee",
+      "expected_sha256": "3da57be0ba7f94a3c93f6a2c03eea72b58980539df3038a5e126a5009aca1cc2",
+      "first_tail_ms": 0.40304099820787087,
+      "frame_bytes": 6144,
+      "function": "NAND",
+      "height": 32,
+      "id": "atlas-07-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6207660044310614,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-07-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-07-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.5011609973735176,
+      "manifest": "cases/atlas-07-scalar-32x32-r1/program.json",
+      "manifest_sha256": "ffdb72f4ebb420837fe4ebdf9ae01efa12b662a975c4ebc5d216268594d7bf6d",
+      "mask": 7,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-07-scalar-32x32-r1/prediction.h264",
+        "sha256": "52aa81f8e7527fa2ff71cf1d8a16c014a979cb3224b168ce679a22dcec83fda8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-07-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "b2b2e6a5b66ab0fb608ce343c1f738f7151aa3cf257ce4e3ba29fabaea0a09e3",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-07-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-07-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "83558a895f3d1ecfba168384c54e613db631d680ab18d3999c7280a716fbc0ee",
+      "expected_sha256": "3da57be0ba7f94a3c93f6a2c03eea72b58980539df3038a5e126a5009aca1cc2",
+      "first_tail_ms": 0.38771900290157646,
+      "frame_bytes": 6144,
+      "function": "NAND",
+      "height": 32,
+      "id": "atlas-07-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6560039983014576,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-07-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-07-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6627780021517538,
+      "manifest": "cases/atlas-07-packed-32x32-r1/program.json",
+      "manifest_sha256": "e9d506f97b0ba2edef6e3dd3421554f16d3629f615c91c2527ff02a07c88190c",
+      "mask": 7,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-07-packed-32x32-r1/prediction.h264",
+        "sha256": "52aa81f8e7527fa2ff71cf1d8a16c014a979cb3224b168ce679a22dcec83fda8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-07-packed-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "b2b2e6a5b66ab0fb608ce343c1f738f7151aa3cf257ce4e3ba29fabaea0a09e3",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 172,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-08-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-08-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "91343fef7c5474503a413433cfb495dc9b44cbbf7144e4cfe0eba887c5372d62",
+      "expected_sha256": "169c613947f2a2cae9bde551181c67a1e45f16fb6042079be1b0a4122650a604",
+      "first_tail_ms": 0.3784529981203377,
+      "frame_bytes": 6144,
+      "function": "AND",
+      "height": 32,
+      "id": "atlas-08-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6248080026125535,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-08-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-08-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.42634100100258365,
+      "manifest": "cases/atlas-08-scalar-32x32-r1/program.json",
+      "manifest_sha256": "15d0e8819e1ceae1062d261be17064d9639f139b32cb0780c3adf533929006c7",
+      "mask": 8,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 172,
+        "path": "cases/atlas-08-scalar-32x32-r1/prediction.h264",
+        "sha256": "404978b4e61b5628d86b95d3b2d636350e4e99cfbd5e6fb48c502637fccdfabd"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-08-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15979,
+      "stream_sha256": "7c62fa880da22b2e2f238097f494d49bc1f40985a93b10ca77dcf3f6779d4b87",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 172,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-08-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-08-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "91343fef7c5474503a413433cfb495dc9b44cbbf7144e4cfe0eba887c5372d62",
+      "expected_sha256": "169c613947f2a2cae9bde551181c67a1e45f16fb6042079be1b0a4122650a604",
+      "first_tail_ms": 0.5859869997948408,
+      "frame_bytes": 6144,
+      "function": "AND",
+      "height": 32,
+      "id": "atlas-08-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0866989978239872,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-08-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-08-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6608140029129572,
+      "manifest": "cases/atlas-08-packed-32x32-r1/program.json",
+      "manifest_sha256": "674cbab166d903a0fd6e55f40c5e70ace91dc1abfc940f007cf1821183bb990c",
+      "mask": 8,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 172,
+        "path": "cases/atlas-08-packed-32x32-r1/prediction.h264",
+        "sha256": "404978b4e61b5628d86b95d3b2d636350e4e99cfbd5e6fb48c502637fccdfabd"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-08-packed-32x32-r1/program.h264",
+      "stream_bytes": 15979,
+      "stream_sha256": "7c62fa880da22b2e2f238097f494d49bc1f40985a93b10ca77dcf3f6779d4b87",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 20480,
+        "coded_macroblocks": 80,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 30720,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 518,
+        "prediction_pictures": 3,
+        "prediction_slices": 24,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 5
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 30720,
+          "output_pixels": 1024,
+          "pictures": 5,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 30720,
+          "output_pixels": 1024,
+          "pictures": 5,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 30720,
+          "output_pixels": 1024,
+          "pictures": 5,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-09-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 30720,
+      "expected_output": "cases/atlas-09-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "dee13325019e9503d14098db7150513dcd8b1bccb59207cf5c9c88170ca5b4f7",
+      "expected_sha256": "f1b9f267f9728aa903b7402934988eff2940cced85cd4d1c2e812d50d96ab062",
+      "first_tail_ms": 1.7057759978342801,
+      "frame_bytes": 6144,
+      "function": "XNOR",
+      "height": 32,
+      "id": "atlas-09-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.7819530001142994,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-09-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-09-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.7951349980430678,
+      "manifest": "cases/atlas-09-scalar-32x32-r1/program.json",
+      "manifest_sha256": "f2382c6bd04f6daa85b60c1b2e5d4e50dc81c3d036598753f1d64e816631c087",
+      "mask": 9,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 4
+      },
+      "output_regions": {
+        "output": {
+          "frame": 4,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 5,
+      "prediction": {
+        "bytes": 518,
+        "path": "cases/atlas-09-scalar-32x32-r1/prediction.h264",
+        "sha256": "f6ef0a96d9c6155681537b4a10480ecd431d9d551310ad62ee21353671df7bf8"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/atlas-09-scalar-32x32-r1/program.h264",
+      "stream_bytes": 16325,
+      "stream_sha256": "fe79bea8c56e9d180ae5a058b2f95dab5c86fb98b99ea72f51da4391c549b071",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 112,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 28672,
+        "coded_macroblocks": 112,
+        "coded_width": 112,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 43008,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 10752,
+        "prediction_bytes": 468,
+        "prediction_pictures": 2,
+        "prediction_slices": 20,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 4
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 43008,
+          "output_pixels": 1024,
+          "pictures": 4,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 43008,
+          "output_pixels": 1024,
+          "pictures": 4,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 43008,
+          "output_pixels": 1024,
+          "pictures": 4,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-09-packed-32x32-r1/expected.i420",
+      "expected_bytes": 43008,
+      "expected_output": "cases/atlas-09-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "dee13325019e9503d14098db7150513dcd8b1bccb59207cf5c9c88170ca5b4f7",
+      "expected_sha256": "fd140f797c8f98f7ecf8822fb6dae8308031689f90d396143d19bf34156c095c",
+      "first_tail_ms": 0.9973560008802451,
+      "frame_bytes": 10752,
+      "function": "XNOR",
+      "height": 32,
+      "id": "atlas-09-packed-32x32-r1",
+      "input_bytes": 28144,
+      "input_packing_ms": 0.9663659948273562,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-09-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-09-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.7069909988786094,
+      "manifest": "cases/atlas-09-packed-32x32-r1/program.json",
+      "manifest_sha256": "2b136b505b59ecb1ffe2831208e4799bb38a04618c9008621c95062dfbcefa6b",
+      "mask": 9,
+      "mode": "packed",
+      "output_frames": {
+        "output": 3
+      },
+      "output_regions": {
+        "output": {
+          "frame": 3,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 4,
+      "prediction": {
+        "bytes": 468,
+        "path": "cases/atlas-09-packed-32x32-r1/prediction.h264",
+        "sha256": "a9519676379e000f32951cdf87752dd24f5327679a95eaf03e1add2a8bdbd24c"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/atlas-09-packed-32x32-r1/program.h264",
+      "stream_bytes": 28612,
+      "stream_sha256": "0a4a0a48aed3323acb023e93a66021609c6a56d36cb34a6224085390ba1aea23",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 8192,
+        "coded_macroblocks": 32,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 12288,
+        "input_pictures": 2,
+        "logical_instructions": 0,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 0,
+        "prediction_pictures": 0,
+        "prediction_slices": 0,
+        "reference_slots_used": 1,
+        "tile_capacity": 1,
+        "total_pictures": 2
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-10-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 12288,
+      "expected_output": "cases/atlas-10-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4",
+      "expected_sha256": "146cc8c092644b47b545ca8e780dcec26c1020ba7f3242ab2056624ff87e94e1",
+      "first_tail_ms": 0.005894005880691111,
+      "frame_bytes": 6144,
+      "function": "B",
+      "height": 32,
+      "id": "atlas-10-scalar-32x32-r1",
+      "input_bytes": 15806,
+      "input_packing_ms": 1.019940995320212,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-10-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-10-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.5971459977445193,
+      "manifest": "cases/atlas-10-scalar-32x32-r1/program.json",
+      "manifest_sha256": "10205c8257a5310205567923a3e2ad285ac56f847b1c64c2ffbb68a4b43378f9",
+      "mask": 10,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 1
+      },
+      "output_regions": {
+        "output": {
+          "frame": 1,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 2,
+      "prediction": {
+        "bytes": 0,
+        "path": "cases/atlas-10-scalar-32x32-r1/prediction.h264",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 0,
+        "scalar_instructions": 0
+      },
+      "stream": "cases/atlas-10-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15806,
+      "stream_sha256": "a730a56742284c12a9f855f7e3ee9457a5678558df1e8425240df239762e7f3c",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 8192,
+        "coded_macroblocks": 32,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 12288,
+        "input_pictures": 2,
+        "logical_instructions": 0,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 0,
+        "prediction_pictures": 0,
+        "prediction_slices": 0,
+        "reference_slots_used": 1,
+        "tile_capacity": 1,
+        "total_pictures": 2
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-10-packed-32x32-r1/expected.i420",
+      "expected_bytes": 12288,
+      "expected_output": "cases/atlas-10-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4",
+      "expected_sha256": "146cc8c092644b47b545ca8e780dcec26c1020ba7f3242ab2056624ff87e94e1",
+      "first_tail_ms": 0.006280999514274299,
+      "frame_bytes": 6144,
+      "function": "B",
+      "height": 32,
+      "id": "atlas-10-packed-32x32-r1",
+      "input_bytes": 15806,
+      "input_packing_ms": 1.032431006024126,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-10-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-10-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.5774689998361282,
+      "manifest": "cases/atlas-10-packed-32x32-r1/program.json",
+      "manifest_sha256": "3bddd01d295ed7d691d46c34ba6966e4a05f897bc3e012450cd917e5d33648d5",
+      "mask": 10,
+      "mode": "packed",
+      "output_frames": {
+        "output": 1
+      },
+      "output_regions": {
+        "output": {
+          "frame": 1,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 2,
+      "prediction": {
+        "bytes": 0,
+        "path": "cases/atlas-10-packed-32x32-r1/prediction.h264",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 0,
+        "scalar_instructions": 0
+      },
+      "stream": "cases/atlas-10-packed-32x32-r1/program.h264",
+      "stream_bytes": 15806,
+      "stream_sha256": "a730a56742284c12a9f855f7e3ee9457a5678558df1e8425240df239762e7f3c",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 174,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-11-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-11-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "2e4a1a1e9ca84d38be3c569eda65496df65b4d2622d86f25e8f9322d16220fb9",
+      "expected_sha256": "242c4202661a012baeefecc9fd9d9d4b43dcc7e068fd50642658c7293aafeca0",
+      "first_tail_ms": 0.5947879981249571,
+      "frame_bytes": 6144,
+      "function": "A_IMPLIES_B",
+      "height": 32,
+      "id": "atlas-11-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0837180016096681,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-11-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-11-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6586460003745742,
+      "manifest": "cases/atlas-11-scalar-32x32-r1/program.json",
+      "manifest_sha256": "6bda6b152d74c5c6be9acde4cafe426cbce4bb5828501ec10a4e9184285ae83d",
+      "mask": 11,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 174,
+        "path": "cases/atlas-11-scalar-32x32-r1/prediction.h264",
+        "sha256": "d9ef05595dce981f7c26dbf21abfdcddffa23c9e85e09c4d5a915e043e1ab64e"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-11-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15981,
+      "stream_sha256": "d499973a3e0283aae1fc51f2ac2ed56171fdd9a10d5578c96dc2aa7cf983cc5c",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 174,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-11-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-11-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "2e4a1a1e9ca84d38be3c569eda65496df65b4d2622d86f25e8f9322d16220fb9",
+      "expected_sha256": "242c4202661a012baeefecc9fd9d9d4b43dcc7e068fd50642658c7293aafeca0",
+      "first_tail_ms": 0.5938110043643974,
+      "frame_bytes": 6144,
+      "function": "A_IMPLIES_B",
+      "height": 32,
+      "id": "atlas-11-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0895139930653386,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-11-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-11-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6656570039922372,
+      "manifest": "cases/atlas-11-packed-32x32-r1/program.json",
+      "manifest_sha256": "39bf1882520d7674528ed4a34a37100b927338b0e1aca6491f211a586612c7da",
+      "mask": 11,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 174,
+        "path": "cases/atlas-11-packed-32x32-r1/prediction.h264",
+        "sha256": "d9ef05595dce981f7c26dbf21abfdcddffa23c9e85e09c4d5a915e043e1ab64e"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-11-packed-32x32-r1/program.h264",
+      "stream_bytes": 15981,
+      "stream_sha256": "d499973a3e0283aae1fc51f2ac2ed56171fdd9a10d5578c96dc2aa7cf983cc5c",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 8192,
+        "coded_macroblocks": 32,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 12288,
+        "input_pictures": 2,
+        "logical_instructions": 0,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 0,
+        "prediction_pictures": 0,
+        "prediction_slices": 0,
+        "reference_slots_used": 1,
+        "tile_capacity": 1,
+        "total_pictures": 2
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-12-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 12288,
+      "expected_output": "cases/atlas-12-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09",
+      "expected_sha256": "146cc8c092644b47b545ca8e780dcec26c1020ba7f3242ab2056624ff87e94e1",
+      "first_tail_ms": 0.004547997377812862,
+      "frame_bytes": 6144,
+      "function": "A",
+      "height": 32,
+      "id": "atlas-12-scalar-32x32-r1",
+      "input_bytes": 15806,
+      "input_packing_ms": 0.5926539961365052,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-12-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-12-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.3345560035086237,
+      "manifest": "cases/atlas-12-scalar-32x32-r1/program.json",
+      "manifest_sha256": "656aaffa6cf80a54344094fcdcda793e97b9a0a555e25f7faae9190e306d409e",
+      "mask": 12,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 0
+      },
+      "output_regions": {
+        "output": {
+          "frame": 0,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 2,
+      "prediction": {
+        "bytes": 0,
+        "path": "cases/atlas-12-scalar-32x32-r1/prediction.h264",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 0,
+        "scalar_instructions": 0
+      },
+      "stream": "cases/atlas-12-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15806,
+      "stream_sha256": "a730a56742284c12a9f855f7e3ee9457a5678558df1e8425240df239762e7f3c",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 8192,
+        "coded_macroblocks": 32,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 12288,
+        "input_pictures": 2,
+        "logical_instructions": 0,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 0,
+        "prediction_pictures": 0,
+        "prediction_slices": 0,
+        "reference_slots_used": 1,
+        "tile_capacity": 1,
+        "total_pictures": 2
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 12288,
+          "output_pixels": 1024,
+          "pictures": 2,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-12-packed-32x32-r1/expected.i420",
+      "expected_bytes": 12288,
+      "expected_output": "cases/atlas-12-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09",
+      "expected_sha256": "146cc8c092644b47b545ca8e780dcec26c1020ba7f3242ab2056624ff87e94e1",
+      "first_tail_ms": 0.006141002813819796,
+      "frame_bytes": 6144,
+      "function": "A",
+      "height": 32,
+      "id": "atlas-12-packed-32x32-r1",
+      "input_bytes": 15806,
+      "input_packing_ms": 1.063217998307664,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-12-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-12-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.5928120008320548,
+      "manifest": "cases/atlas-12-packed-32x32-r1/program.json",
+      "manifest_sha256": "04ea667309a4655feab03d581b4c0a23b1a755bb214ceee86b3e8ed6f4854eb6",
+      "mask": 12,
+      "mode": "packed",
+      "output_frames": {
+        "output": 0
+      },
+      "output_regions": {
+        "output": {
+          "frame": 0,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 2,
+      "prediction": {
+        "bytes": 0,
+        "path": "cases/atlas-12-packed-32x32-r1/prediction.h264",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 0,
+        "scalar_instructions": 0
+      },
+      "stream": "cases/atlas-12-packed-32x32-r1/program.h264",
+      "stream_bytes": 15806,
+      "stream_sha256": "a730a56742284c12a9f855f7e3ee9457a5678558df1e8425240df239762e7f3c",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 174,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-13-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-13-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "bc11e3bae043d3be7e11624c9830cc389d402cf8719f374f6fa6b21418e501ef",
+      "expected_sha256": "896a739a4dcfd0d53f162075612c66d71fb63364f5a8d7afffa50d742a11ca81",
+      "first_tail_ms": 0.5899579991819337,
+      "frame_bytes": 6144,
+      "function": "B_IMPLIES_A",
+      "height": 32,
+      "id": "atlas-13-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0645709990058094,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-13-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-13-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6621780048590153,
+      "manifest": "cases/atlas-13-scalar-32x32-r1/program.json",
+      "manifest_sha256": "5b4420ebcf356e135063a422e0d1c9f533a97c861392ec57e48c724e8ad3ca9e",
+      "mask": 13,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 174,
+        "path": "cases/atlas-13-scalar-32x32-r1/prediction.h264",
+        "sha256": "643174a4337bf0c84776600e0279919e9c7171788da0c526daaa72f4593cbb13"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-13-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15981,
+      "stream_sha256": "b8c9666b4bce77b1ac1e78a64746600a485dcbd4f9ee98c43e2e413f99b7eb8a",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 174,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-13-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-13-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "bc11e3bae043d3be7e11624c9830cc389d402cf8719f374f6fa6b21418e501ef",
+      "expected_sha256": "896a739a4dcfd0d53f162075612c66d71fb63364f5a8d7afffa50d742a11ca81",
+      "first_tail_ms": 0.3613799999584444,
+      "frame_bytes": 6144,
+      "function": "B_IMPLIES_A",
+      "height": 32,
+      "id": "atlas-13-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.5906199949095026,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-13-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-13-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6784229990444146,
+      "manifest": "cases/atlas-13-packed-32x32-r1/program.json",
+      "manifest_sha256": "8c70032ab66691052606b1339825cb2bbbc2c93de63b5c6422e49a2b3ecfba6e",
+      "mask": 13,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 174,
+        "path": "cases/atlas-13-packed-32x32-r1/prediction.h264",
+        "sha256": "643174a4337bf0c84776600e0279919e9c7171788da0c526daaa72f4593cbb13"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-13-packed-32x32-r1/program.h264",
+      "stream_bytes": 15981,
+      "stream_sha256": "b8c9666b4bce77b1ac1e78a64746600a485dcbd4f9ee98c43e2e413f99b7eb8a",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-14-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-14-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "8f0daff3374473e81e99acbe62f2cf3348bed80dc6f12715191adfc7f2db8693",
+      "expected_sha256": "e5ab7a31af681d43e80b0dbb32f359c0dc3aafa179ce94e1f0e3074e0da72647",
+      "first_tail_ms": 0.6028940042597242,
+      "frame_bytes": 6144,
+      "function": "OR",
+      "height": 32,
+      "id": "atlas-14-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0716610049712472,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-14-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-14-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6564209979842417,
+      "manifest": "cases/atlas-14-scalar-32x32-r1/program.json",
+      "manifest_sha256": "58cea6063de53b7f34f025f0d2aece5222fe9cf29d94b11ee981a9393453519f",
+      "mask": 14,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-14-scalar-32x32-r1/prediction.h264",
+        "sha256": "8012c00bf9b64eeb9f99f2acc09ab5567421f24f0214c8139b95735a6235850a"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-14-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "db71b5113164010288bbb16527745c8f355b1097563e2f71772d484a640c5775",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 171,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-14-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-14-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "8f0daff3374473e81e99acbe62f2cf3348bed80dc6f12715191adfc7f2db8693",
+      "expected_sha256": "e5ab7a31af681d43e80b0dbb32f359c0dc3aafa179ce94e1f0e3074e0da72647",
+      "first_tail_ms": 0.6681340018985793,
+      "frame_bytes": 6144,
+      "function": "OR",
+      "height": 32,
+      "id": "atlas-14-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0800429954542778,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-14-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-14-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.7757179992040619,
+      "manifest": "cases/atlas-14-packed-32x32-r1/program.json",
+      "manifest_sha256": "139da78bcd641aa7d0b86febff710ddc027c7e1923beefa664d985f989fa8057",
+      "mask": 14,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 171,
+        "path": "cases/atlas-14-packed-32x32-r1/prediction.h264",
+        "sha256": "8012c00bf9b64eeb9f99f2acc09ab5567421f24f0214c8139b95735a6235850a"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-14-packed-32x32-r1/program.h264",
+      "stream_bytes": 15978,
+      "stream_sha256": "db71b5113164010288bbb16527745c8f355b1097563e2f71772d484a640c5775",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 140,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-15-scalar-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-15-scalar-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "5a648d8015900d89664e00e125df179636301a2d8fa191c1aa2bd9358ea53a69",
+      "expected_sha256": "888fa681a045896afdbf2e03cafde37ff1b2836f3043875a317950ab76eb31ca",
+      "first_tail_ms": 0.25478900352027267,
+      "frame_bytes": 6144,
+      "function": "TRUE",
+      "height": 32,
+      "id": "atlas-15-scalar-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.5791290022898465,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-15-scalar-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-15-scalar-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.3882990058627911,
+      "manifest": "cases/atlas-15-scalar-32x32-r1/program.json",
+      "manifest_sha256": "572fb292643fa12fed3b77c5dfd77cbf7fa7243a6748aa88157bc545ae9dd818",
+      "mask": 15,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 140,
+        "path": "cases/atlas-15-scalar-32x32-r1/prediction.h264",
+        "sha256": "dfc9a6371440bf3dd0e1f56c534a77b4c1a39d8045f3fa53e065fea3fee4f200"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-15-scalar-32x32-r1/program.h264",
+      "stream_bytes": 15947,
+      "stream_sha256": "ef829989a1eef6f929259fdfff091456ba880c283165521ffbc7d148f8af4814",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 12288,
+        "coded_macroblocks": 48,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 18432,
+        "input_pictures": 2,
+        "logical_instructions": 1,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 140,
+        "prediction_pictures": 1,
+        "prediction_slices": 8,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 3
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 18432,
+          "output_pixels": 1024,
+          "pictures": 3,
+          "status": "pass"
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/atlas-15-packed-32x32-r1/expected.i420",
+      "expected_bytes": 18432,
+      "expected_output": "cases/atlas-15-packed-32x32-r1/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "5a648d8015900d89664e00e125df179636301a2d8fa191c1aa2bd9358ea53a69",
+      "expected_sha256": "888fa681a045896afdbf2e03cafde37ff1b2836f3043875a317950ab76eb31ca",
+      "first_tail_ms": 0.4573359983623959,
+      "frame_bytes": 6144,
+      "function": "TRUE",
+      "height": 32,
+      "id": "atlas-15-packed-32x32-r1",
+      "input_bytes": 15807,
+      "input_packing_ms": 1.0647079980117269,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/atlas-15-packed-32x32-r1/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/atlas-15-packed-32x32-r1/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 0.6538390007335693,
+      "manifest": "cases/atlas-15-packed-32x32-r1/program.json",
+      "manifest_sha256": "83fb395a8b05e4fc0fffc0aa9333c7657d76cb744e756892cee7aff104510783",
+      "mask": 15,
+      "mode": "packed",
+      "output_frames": {
+        "output": 2
+      },
+      "output_regions": {
+        "output": {
+          "frame": 2,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 3,
+      "prediction": {
+        "bytes": 140,
+        "path": "cases/atlas-15-packed-32x32-r1/prediction.h264",
+        "sha256": "dfc9a6371440bf3dd0e1f56c534a77b4c1a39d8045f3fa53e065fea3fee4f200"
+      },
+      "purpose": "atlas",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 1,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/atlas-15-packed-32x32-r1/program.h264",
+      "stream_bytes": 15947,
+      "stream_sha256": "ef829989a1eef6f929259fdfff091456ba880c283165521ffbc7d148f8af4814",
+      "width": 32
+    },
+    {
+      "coded_height": 48,
+      "coded_width": 48,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 48,
+        "coded_luma_samples": 299520,
+        "coded_macroblocks": 1170,
+        "coded_width": 48,
+        "computational_evaluations": 32768,
+        "full_readback_bytes": 449280,
+        "input_pictures": 2,
+        "logical_instructions": 128,
+        "output_readback_bytes": 3456,
+        "prediction_bytes": 13568,
+        "prediction_pictures": 128,
+        "prediction_slices": 640,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 130
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 449280,
+          "output_pixels": 256,
+          "pictures": 130,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 449280,
+          "output_pixels": 256,
+          "pictures": 130,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 449280,
+          "output_pixels": 256,
+          "pictures": 130,
+          "status": "pass"
+        }
+      },
+      "evaluations": 32768,
+      "expected": "cases/throughput-07-scalar-16x16-r128/expected.i420",
+      "expected_bytes": 449280,
+      "expected_output": "cases/throughput-07-scalar-16x16-r128/output.u8",
+      "expected_output_bytes": 256,
+      "expected_output_sha256": "8296939a1dd5d1b62f13be1fdc8e85029f3b89aa692ba7aac47a30f950165f1b",
+      "expected_sha256": "7b99c8e66024e1f3f4c79fd4431c7ea00797d4994c0273149c8bd1befa6f4697",
+      "first_tail_ms": 35.989028998301364,
+      "frame_bytes": 3456,
+      "function": "NAND",
+      "height": 16,
+      "id": "throughput-07-scalar-16x16-r128",
+      "input_bytes": 9144,
+      "input_packing_ms": 0.32629899942548946,
+      "inputs": {
+        "a": {
+          "bytes": 256,
+          "path": "cases/throughput-07-scalar-16x16-r128/a.u8",
+          "sha256": "6042e1f13383b89fc4df113f8a1986e51898203aa870daa76bbe321079c7fe70"
+        },
+        "b": {
+          "bytes": 256,
+          "path": "cases/throughput-07-scalar-16x16-r128/b.u8",
+          "sha256": "6a646a465cde009a166155742d40c92660ba0713dead0e788a2358344f29fe6e"
+        }
+      },
+      "lowering_ms": 5.43564600229729,
+      "manifest": "cases/throughput-07-scalar-16x16-r128/program.json",
+      "manifest_sha256": "2f4d9614937ae1b5582eaef49ffb78d15c7aaf49ef5a2504ef17f66a3df89698",
+      "mask": 7,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 129
+      },
+      "output_regions": {
+        "output": {
+          "frame": 129,
+          "height": 16,
+          "tile": 0,
+          "width": 16,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 130,
+      "prediction": {
+        "bytes": 13568,
+        "path": "cases/throughput-07-scalar-16x16-r128/prediction.h264",
+        "sha256": "ac445e62c830a53b59c82a5b7ffaa78863ab49b65736d735b95e5a47802d64e3"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/throughput-07-scalar-16x16-r128/program.h264",
+      "stream_bytes": 22712,
+      "stream_sha256": "4ea7c25469c0f4e89aa34361a948c70c1f10296f059d51d907170b95d7cdf036",
+      "width": 16
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 532480,
+        "coded_macroblocks": 2080,
+        "coded_width": 64,
+        "computational_evaluations": 131072,
+        "full_readback_bytes": 798720,
+        "input_pictures": 2,
+        "logical_instructions": 128,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 21888,
+        "prediction_pictures": 128,
+        "prediction_slices": 1024,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 130
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 798720,
+          "output_pixels": 1024,
+          "pictures": 130,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 798720,
+          "output_pixels": 1024,
+          "pictures": 130,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 798720,
+          "output_pixels": 1024,
+          "pictures": 130,
+          "status": "pass"
+        }
+      },
+      "evaluations": 131072,
+      "expected": "cases/throughput-07-scalar-32x32-r128/expected.i420",
+      "expected_bytes": 798720,
+      "expected_output": "cases/throughput-07-scalar-32x32-r128/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "bc11e3bae043d3be7e11624c9830cc389d402cf8719f374f6fa6b21418e501ef",
+      "expected_sha256": "48adb2c50b10ec6da971466847116b52bb6432402b7c0680490225f0df3b01ec",
+      "first_tail_ms": 44.81783200026257,
+      "frame_bytes": 6144,
+      "function": "NAND",
+      "height": 32,
+      "id": "throughput-07-scalar-32x32-r128",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6647980044363067,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/throughput-07-scalar-32x32-r128/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/throughput-07-scalar-32x32-r128/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 3.132523001113441,
+      "manifest": "cases/throughput-07-scalar-32x32-r128/program.json",
+      "manifest_sha256": "0ae25471edec6253b5e4ba15bd7d1f5cba438ae40ce025cd0921aae707893853",
+      "mask": 7,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 129
+      },
+      "output_regions": {
+        "output": {
+          "frame": 129,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 130,
+      "prediction": {
+        "bytes": 21888,
+        "path": "cases/throughput-07-scalar-32x32-r128/prediction.h264",
+        "sha256": "cfab95dbde2ac49d491d211a27cc23a4137da1f3d9fa1af691364db3ada73e4a"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/throughput-07-scalar-32x32-r128/program.h264",
+      "stream_bytes": 37695,
+      "stream_sha256": "6b7d65edb2243d52605046e0972760f0a19e112b13de094b02a83aa293a632c8",
+      "width": 32
+    },
+    {
+      "coded_height": 96,
+      "coded_width": 96,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 96,
+        "coded_luma_samples": 1198080,
+        "coded_macroblocks": 4680,
+        "coded_width": 96,
+        "computational_evaluations": 524288,
+        "full_readback_bytes": 1797120,
+        "input_pictures": 2,
+        "logical_instructions": 128,
+        "output_readback_bytes": 13824,
+        "prediction_bytes": 40064,
+        "prediction_pictures": 128,
+        "prediction_slices": 1792,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 130
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 1797120,
+          "output_pixels": 4096,
+          "pictures": 130,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 1797120,
+          "output_pixels": 4096,
+          "pictures": 130,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 1797120,
+          "output_pixels": 4096,
+          "pictures": 130,
+          "status": "pass"
+        }
+      },
+      "evaluations": 524288,
+      "expected": "cases/throughput-07-scalar-64x64-r128/expected.i420",
+      "expected_bytes": 1797120,
+      "expected_output": "cases/throughput-07-scalar-64x64-r128/output.u8",
+      "expected_output_bytes": 4096,
+      "expected_output_sha256": "561ff43b002f36904cade91b7f6a20ee1c52e409a58c2199d5d0ebd53404c345",
+      "expected_sha256": "aca6568f4b64c2a4508c8956bca9c677e653e6a36c4cbb8a6b2e93c25a9e324e",
+      "first_tail_ms": 82.92536000226391,
+      "frame_bytes": 13824,
+      "function": "NAND",
+      "height": 64,
+      "id": "throughput-07-scalar-64x64-r128",
+      "input_bytes": 34274,
+      "input_packing_ms": 1.4770940033486113,
+      "inputs": {
+        "a": {
+          "bytes": 4096,
+          "path": "cases/throughput-07-scalar-64x64-r128/a.u8",
+          "sha256": "c408a8e004f21d9e32fb227623900ad771ef6025940960df6b3582c9e63dfdf7"
+        },
+        "b": {
+          "bytes": 4096,
+          "path": "cases/throughput-07-scalar-64x64-r128/b.u8",
+          "sha256": "2cc7218c86340a336e9544dbfbd873dbfaf372f6cec29a386a61c1baee153c49"
+        }
+      },
+      "lowering_ms": 7.239509002829436,
+      "manifest": "cases/throughput-07-scalar-64x64-r128/program.json",
+      "manifest_sha256": "d830151d57d958a087f057e19de8fabd5acfdf7dc426a658e2fe6b1266beba40",
+      "mask": 7,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 129
+      },
+      "output_regions": {
+        "output": {
+          "frame": 129,
+          "height": 64,
+          "tile": 0,
+          "width": 64,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 130,
+      "prediction": {
+        "bytes": 40064,
+        "path": "cases/throughput-07-scalar-64x64-r128/prediction.h264",
+        "sha256": "8c815c6562ba6afaba76e68f83587b87b57019855a4a09e5a6e06fa929995bd1"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/throughput-07-scalar-64x64-r128/program.h264",
+      "stream_bytes": 74338,
+      "stream_sha256": "8f4d3c5ac60f04316032426a75d5005d120bd8cc94965d6cbb0a9dcf05c8b1e6",
+      "width": 64
+    },
+    {
+      "coded_height": 48,
+      "coded_width": 48,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 48,
+        "coded_luma_samples": 889344,
+        "coded_macroblocks": 3474,
+        "coded_width": 48,
+        "computational_evaluations": 32768,
+        "full_readback_bytes": 1334016,
+        "input_pictures": 2,
+        "logical_instructions": 384,
+        "output_readback_bytes": 3456,
+        "prediction_bytes": 40704,
+        "prediction_pictures": 384,
+        "prediction_slices": 1920,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 386
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 1334016,
+          "output_pixels": 256,
+          "pictures": 386,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 1334016,
+          "output_pixels": 256,
+          "pictures": 386,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 1334016,
+          "output_pixels": 256,
+          "pictures": 386,
+          "status": "pass"
+        }
+      },
+      "evaluations": 32768,
+      "expected": "cases/throughput-06-scalar-16x16-r128/expected.i420",
+      "expected_bytes": 1334016,
+      "expected_output": "cases/throughput-06-scalar-16x16-r128/output.u8",
+      "expected_output_bytes": 256,
+      "expected_output_sha256": "6042e1f13383b89fc4df113f8a1986e51898203aa870daa76bbe321079c7fe70",
+      "expected_sha256": "a230eb1effb19236ace0edea5d73be378990f4998abb5a868d1a5cd1a0b089ae",
+      "first_tail_ms": 88.27063000353519,
+      "frame_bytes": 3456,
+      "function": "XOR",
+      "height": 16,
+      "id": "throughput-06-scalar-16x16-r128",
+      "input_bytes": 9144,
+      "input_packing_ms": 0.386262996471487,
+      "inputs": {
+        "a": {
+          "bytes": 256,
+          "path": "cases/throughput-06-scalar-16x16-r128/a.u8",
+          "sha256": "6042e1f13383b89fc4df113f8a1986e51898203aa870daa76bbe321079c7fe70"
+        },
+        "b": {
+          "bytes": 256,
+          "path": "cases/throughput-06-scalar-16x16-r128/b.u8",
+          "sha256": "6a646a465cde009a166155742d40c92660ba0713dead0e788a2358344f29fe6e"
+        }
+      },
+      "lowering_ms": 9.99237100040773,
+      "manifest": "cases/throughput-06-scalar-16x16-r128/program.json",
+      "manifest_sha256": "a126ea544e81682ebff727bedcb85eb86fabaabfabcd3b7cae2dbcaa08cf8c5e",
+      "mask": 6,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 385
+      },
+      "output_regions": {
+        "output": {
+          "frame": 385,
+          "height": 16,
+          "tile": 0,
+          "width": 16,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 386,
+      "prediction": {
+        "bytes": 40704,
+        "path": "cases/throughput-06-scalar-16x16-r128/prediction.h264",
+        "sha256": "886508d50c6501e9bfc2ebb44758214ab7c5077d2b2b2d4c5a8e5904499a9366"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-scalar-16x16-r128/program.h264",
+      "stream_bytes": 49848,
+      "stream_sha256": "be91e4216e2b7527bc94793bb8081c2d87fb881adb9bd52675ba7fb7a4001a45",
+      "width": 16
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 1581056,
+        "coded_macroblocks": 6176,
+        "coded_width": 64,
+        "computational_evaluations": 131072,
+        "full_readback_bytes": 2371584,
+        "input_pictures": 2,
+        "logical_instructions": 384,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 65920,
+        "prediction_pictures": 384,
+        "prediction_slices": 3072,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 386
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 2371584,
+          "output_pixels": 1024,
+          "pictures": 386,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 2371584,
+          "output_pixels": 1024,
+          "pictures": 386,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 2371584,
+          "output_pixels": 1024,
+          "pictures": 386,
+          "status": "pass"
+        }
+      },
+      "evaluations": 131072,
+      "expected": "cases/throughput-06-scalar-32x32-r128/expected.i420",
+      "expected_bytes": 2371584,
+      "expected_output": "cases/throughput-06-scalar-32x32-r128/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09",
+      "expected_sha256": "84c4f43221134de410dc3d968a724caf914b9c5982fd1b7690f9fcd85211cd8e",
+      "first_tail_ms": 142.3839209965081,
+      "frame_bytes": 6144,
+      "function": "XOR",
+      "height": 32,
+      "id": "throughput-06-scalar-32x32-r128",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6401540013030171,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-scalar-32x32-r128/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-scalar-32x32-r128/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 15.290082003048155,
+      "manifest": "cases/throughput-06-scalar-32x32-r128/program.json",
+      "manifest_sha256": "55485011c27a5c4bf9a3672caed0a2ba3764ce0e3d78e39939f43abd5aa0ee25",
+      "mask": 6,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 385
+      },
+      "output_regions": {
+        "output": {
+          "frame": 385,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 386,
+      "prediction": {
+        "bytes": 65920,
+        "path": "cases/throughput-06-scalar-32x32-r128/prediction.h264",
+        "sha256": "049b4a847d48280c6b288027346bf83ea1dc81ba4fdee9fcd75da168afbaed44"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-scalar-32x32-r128/program.h264",
+      "stream_bytes": 81727,
+      "stream_sha256": "427a934c8173cf44531a4823f153a19bd0089bf6a5efdb8639580ac44d521bc2",
+      "width": 32
+    },
+    {
+      "coded_height": 96,
+      "coded_width": 96,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 96,
+        "coded_luma_samples": 3557376,
+        "coded_macroblocks": 13896,
+        "coded_width": 96,
+        "computational_evaluations": 524288,
+        "full_readback_bytes": 5336064,
+        "input_pictures": 2,
+        "logical_instructions": 384,
+        "output_readback_bytes": 13824,
+        "prediction_bytes": 121088,
+        "prediction_pictures": 384,
+        "prediction_slices": 5376,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 386
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 5336064,
+          "output_pixels": 4096,
+          "pictures": 386,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 5336064,
+          "output_pixels": 4096,
+          "pictures": 386,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 5336064,
+          "output_pixels": 4096,
+          "pictures": 386,
+          "status": "pass"
+        }
+      },
+      "evaluations": 524288,
+      "expected": "cases/throughput-06-scalar-64x64-r128/expected.i420",
+      "expected_bytes": 5336064,
+      "expected_output": "cases/throughput-06-scalar-64x64-r128/output.u8",
+      "expected_output_bytes": 4096,
+      "expected_output_sha256": "c408a8e004f21d9e32fb227623900ad771ef6025940960df6b3582c9e63dfdf7",
+      "expected_sha256": "96ce668ffab1712d16a596c2872b36b29331cc33bfc7e38eb06c419abdaf3cbf",
+      "first_tail_ms": 390.7015440054238,
+      "frame_bytes": 13824,
+      "function": "XOR",
+      "height": 64,
+      "id": "throughput-06-scalar-64x64-r128",
+      "input_bytes": 34274,
+      "input_packing_ms": 2.7203169956919737,
+      "inputs": {
+        "a": {
+          "bytes": 4096,
+          "path": "cases/throughput-06-scalar-64x64-r128/a.u8",
+          "sha256": "c408a8e004f21d9e32fb227623900ad771ef6025940960df6b3582c9e63dfdf7"
+        },
+        "b": {
+          "bytes": 4096,
+          "path": "cases/throughput-06-scalar-64x64-r128/b.u8",
+          "sha256": "2cc7218c86340a336e9544dbfbd873dbfaf372f6cec29a386a61c1baee153c49"
+        }
+      },
+      "lowering_ms": 19.70290199824376,
+      "manifest": "cases/throughput-06-scalar-64x64-r128/program.json",
+      "manifest_sha256": "766f4751e696144e640db9f0a4c5c924f2abc6fa385f1be434553c8b96920906",
+      "mask": 6,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 385
+      },
+      "output_regions": {
+        "output": {
+          "frame": 385,
+          "height": 64,
+          "tile": 0,
+          "width": 64,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 386,
+      "prediction": {
+        "bytes": 121088,
+        "path": "cases/throughput-06-scalar-64x64-r128/prediction.h264",
+        "sha256": "59b3a93c189ef518f5231754aa312a6aaa066b9cb04fd58f78cc6abd4e63654c"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-scalar-64x64-r128/program.h264",
+      "stream_bytes": 155362,
+      "stream_sha256": "6d3892e7cdea6274b1c58ae31354c091626b308419a1544ba818394156a54cef",
+      "width": 64
+    },
+    {
+      "coded_height": 48,
+      "coded_width": 80,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 48,
+        "coded_luma_samples": 990720,
+        "coded_macroblocks": 3870,
+        "coded_width": 80,
+        "computational_evaluations": 32768,
+        "full_readback_bytes": 1486080,
+        "input_pictures": 2,
+        "logical_instructions": 384,
+        "output_readback_bytes": 5760,
+        "prediction_bytes": 34944,
+        "prediction_pictures": 256,
+        "prediction_slices": 1536,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 258
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 1486080,
+          "output_pixels": 256,
+          "pictures": 258,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 1486080,
+          "output_pixels": 256,
+          "pictures": 258,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 1486080,
+          "output_pixels": 256,
+          "pictures": 258,
+          "status": "pass"
+        }
+      },
+      "evaluations": 32768,
+      "expected": "cases/throughput-06-packed-16x16-r128/expected.i420",
+      "expected_bytes": 1486080,
+      "expected_output": "cases/throughput-06-packed-16x16-r128/output.u8",
+      "expected_output_bytes": 256,
+      "expected_output_sha256": "6042e1f13383b89fc4df113f8a1986e51898203aa870daa76bbe321079c7fe70",
+      "expected_sha256": "d07b5fc552eb3aa97703d5489245ed34656b07cc1a4a3d6a4702ba96af24870e",
+      "first_tail_ms": 73.5189539991552,
+      "frame_bytes": 5760,
+      "function": "XOR",
+      "height": 16,
+      "id": "throughput-06-packed-16x16-r128",
+      "input_bytes": 15313,
+      "input_packing_ms": 0.5340000061551109,
+      "inputs": {
+        "a": {
+          "bytes": 256,
+          "path": "cases/throughput-06-packed-16x16-r128/a.u8",
+          "sha256": "6042e1f13383b89fc4df113f8a1986e51898203aa870daa76bbe321079c7fe70"
+        },
+        "b": {
+          "bytes": 256,
+          "path": "cases/throughput-06-packed-16x16-r128/b.u8",
+          "sha256": "6a646a465cde009a166155742d40c92660ba0713dead0e788a2358344f29fe6e"
+        }
+      },
+      "lowering_ms": 9.595162999175955,
+      "manifest": "cases/throughput-06-packed-16x16-r128/program.json",
+      "manifest_sha256": "1b031e8914bbcc01782391754fc435cf527996a939f925b04a5f14ddff02157f",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 257
+      },
+      "output_regions": {
+        "output": {
+          "frame": 257,
+          "height": 16,
+          "tile": 0,
+          "width": 16,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 258,
+      "prediction": {
+        "bytes": 34944,
+        "path": "cases/throughput-06-packed-16x16-r128/prediction.h264",
+        "sha256": "bd7186972781de8d27afe8e5d6e32e781ac1fbabcd26266aa4990e50ca494acf"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-packed-16x16-r128/program.h264",
+      "stream_bytes": 50257,
+      "stream_sha256": "673fc3a35542cd20cd2096f9e164725d5f0dc6f67988583a5e55206b14f8eaa8",
+      "width": 16
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 112,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 1849344,
+        "coded_macroblocks": 7224,
+        "coded_width": 112,
+        "computational_evaluations": 131072,
+        "full_readback_bytes": 2774016,
+        "input_pictures": 2,
+        "logical_instructions": 384,
+        "output_readback_bytes": 10752,
+        "prediction_bytes": 59648,
+        "prediction_pictures": 256,
+        "prediction_slices": 2560,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 258
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 2774016,
+          "output_pixels": 1024,
+          "pictures": 258,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 2774016,
+          "output_pixels": 1024,
+          "pictures": 258,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 2774016,
+          "output_pixels": 1024,
+          "pictures": 258,
+          "status": "pass"
+        }
+      },
+      "evaluations": 131072,
+      "expected": "cases/throughput-06-packed-32x32-r128/expected.i420",
+      "expected_bytes": 2774016,
+      "expected_output": "cases/throughput-06-packed-32x32-r128/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09",
+      "expected_sha256": "e511c52084574efbf09c591f7436504481bae97521233d66665e09b0e82a1d25",
+      "first_tail_ms": 132.61321999743814,
+      "frame_bytes": 10752,
+      "function": "XOR",
+      "height": 32,
+      "id": "throughput-06-packed-32x32-r128",
+      "input_bytes": 28144,
+      "input_packing_ms": 1.110525001422502,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-packed-32x32-r128/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-packed-32x32-r128/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 20.254038005077746,
+      "manifest": "cases/throughput-06-packed-32x32-r128/program.json",
+      "manifest_sha256": "93313994eeaa30885e20c1d65dcd1dee41fb0595c260772d2224cf623ceac574",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 257
+      },
+      "output_regions": {
+        "output": {
+          "frame": 257,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 258,
+      "prediction": {
+        "bytes": 59648,
+        "path": "cases/throughput-06-packed-32x32-r128/prediction.h264",
+        "sha256": "5ff63ce3b395a764d5c9c358118e783b1fd139fe8bed4c9e037d60f0dc3258fa"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-packed-32x32-r128/program.h264",
+      "stream_bytes": 87792,
+      "stream_sha256": "83d059bc0e2b549a982c1a5e4a695285bccd73e430f48f215c47ddcc9ebd400b",
+      "width": 32
+    },
+    {
+      "coded_height": 96,
+      "coded_width": 176,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 96,
+        "coded_luma_samples": 4359168,
+        "coded_macroblocks": 17028,
+        "coded_width": 176,
+        "computational_evaluations": 524288,
+        "full_readback_bytes": 6538752,
+        "input_pictures": 2,
+        "logical_instructions": 384,
+        "output_readback_bytes": 25344,
+        "prediction_bytes": 115328,
+        "prediction_pictures": 256,
+        "prediction_slices": 4608,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 258
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 6538752,
+          "output_pixels": 4096,
+          "pictures": 258,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 6538752,
+          "output_pixels": 4096,
+          "pictures": 258,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 6538752,
+          "output_pixels": 4096,
+          "pictures": 258,
+          "status": "pass"
+        }
+      },
+      "evaluations": 524288,
+      "expected": "cases/throughput-06-packed-64x64-r128/expected.i420",
+      "expected_bytes": 6538752,
+      "expected_output": "cases/throughput-06-packed-64x64-r128/output.u8",
+      "expected_output_bytes": 4096,
+      "expected_output_sha256": "c408a8e004f21d9e32fb227623900ad771ef6025940960df6b3582c9e63dfdf7",
+      "expected_sha256": "7ecf66d014ae733f4f1180c26e011f57fdbbe3242833a7795eab567739d17bc2",
+      "first_tail_ms": 333.4507840045262,
+      "frame_bytes": 25344,
+      "function": "XOR",
+      "height": 64,
+      "id": "throughput-06-packed-64x64-r128",
+      "input_bytes": 65115,
+      "input_packing_ms": 3.641069997684099,
+      "inputs": {
+        "a": {
+          "bytes": 4096,
+          "path": "cases/throughput-06-packed-64x64-r128/a.u8",
+          "sha256": "c408a8e004f21d9e32fb227623900ad771ef6025940960df6b3582c9e63dfdf7"
+        },
+        "b": {
+          "bytes": 4096,
+          "path": "cases/throughput-06-packed-64x64-r128/b.u8",
+          "sha256": "2cc7218c86340a336e9544dbfbd873dbfaf372f6cec29a386a61c1baee153c49"
+        }
+      },
+      "lowering_ms": 33.221467994735576,
+      "manifest": "cases/throughput-06-packed-64x64-r128/program.json",
+      "manifest_sha256": "08a3cd8711c2149ccb16756f8a35de16ef3bfd41d7294097346b52626d4b4537",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 257
+      },
+      "output_regions": {
+        "output": {
+          "frame": 257,
+          "height": 64,
+          "tile": 0,
+          "width": 64,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 258,
+      "prediction": {
+        "bytes": 115328,
+        "path": "cases/throughput-06-packed-64x64-r128/prediction.h264",
+        "sha256": "7389212416da5f69dfdcd6e31465d7539e43857aebd750f6b081f972e87bb048"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 128,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-packed-64x64-r128/program.h264",
+      "stream_bytes": 180443,
+      "stream_sha256": "ae56e358a346b01f812c47c28b65e025af6b10faab70c10e85664947586a5ff0",
+      "width": 64
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 139264,
+        "coded_macroblocks": 544,
+        "coded_width": 64,
+        "computational_evaluations": 32768,
+        "full_readback_bytes": 208896,
+        "input_pictures": 2,
+        "logical_instructions": 32,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 5472,
+        "prediction_pictures": 32,
+        "prediction_slices": 256,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 34
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 208896,
+          "output_pixels": 1024,
+          "pictures": 34,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 208896,
+          "output_pixels": 1024,
+          "pictures": 34,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 208896,
+          "output_pixels": 1024,
+          "pictures": 34,
+          "status": "pass"
+        }
+      },
+      "evaluations": 32768,
+      "expected": "cases/throughput-07-scalar-32x32-r32/expected.i420",
+      "expected_bytes": 208896,
+      "expected_output": "cases/throughput-07-scalar-32x32-r32/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "bc11e3bae043d3be7e11624c9830cc389d402cf8719f374f6fa6b21418e501ef",
+      "expected_sha256": "f2467cb979e2aff3b7b205b297d6473e444c018c2c29c86236b1c8601f73f0ab",
+      "first_tail_ms": 10.502605000510812,
+      "frame_bytes": 6144,
+      "function": "NAND",
+      "height": 32,
+      "id": "throughput-07-scalar-32x32-r32",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.5939260008744895,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/throughput-07-scalar-32x32-r32/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/throughput-07-scalar-32x32-r32/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 1.255489005416166,
+      "manifest": "cases/throughput-07-scalar-32x32-r32/program.json",
+      "manifest_sha256": "9b308dc9a0dc2f6a674aa6941213b7392a835df5cadbb240084a7e30af4db0b9",
+      "mask": 7,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 33
+      },
+      "output_regions": {
+        "output": {
+          "frame": 33,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 34,
+      "prediction": {
+        "bytes": 5472,
+        "path": "cases/throughput-07-scalar-32x32-r32/prediction.h264",
+        "sha256": "f1944800187aa965e6503cfeb881f806049986d1470ec6dcdbffb84552ee5c3f"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 32,
+      "single_evaluation_minima": {
+        "packed_pictures": 1,
+        "scalar_instructions": 1
+      },
+      "stream": "cases/throughput-07-scalar-32x32-r32/program.h264",
+      "stream_bytes": 21279,
+      "stream_sha256": "c66eb3166abf2b01f78ae202fbb25d0d2a14da8e70640b22f4ffc08a1bf44c0b",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 64,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 401408,
+        "coded_macroblocks": 1568,
+        "coded_width": 64,
+        "computational_evaluations": 32768,
+        "full_readback_bytes": 602112,
+        "input_pictures": 2,
+        "logical_instructions": 96,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 16480,
+        "prediction_pictures": 96,
+        "prediction_slices": 768,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 98
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 602112,
+          "output_pixels": 1024,
+          "pictures": 98,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 602112,
+          "output_pixels": 1024,
+          "pictures": 98,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 602112,
+          "output_pixels": 1024,
+          "pictures": 98,
+          "status": "pass"
+        }
+      },
+      "evaluations": 32768,
+      "expected": "cases/throughput-06-scalar-32x32-r32/expected.i420",
+      "expected_bytes": 602112,
+      "expected_output": "cases/throughput-06-scalar-32x32-r32/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09",
+      "expected_sha256": "4a4dbf3858865c9992e51a83328e47ddef1cd4636fee9491ec1cd16eee2d8b35",
+      "first_tail_ms": 31.322494003688917,
+      "frame_bytes": 6144,
+      "function": "XOR",
+      "height": 32,
+      "id": "throughput-06-scalar-32x32-r32",
+      "input_bytes": 15807,
+      "input_packing_ms": 0.6715499985148199,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-scalar-32x32-r32/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-scalar-32x32-r32/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 2.936822005722206,
+      "manifest": "cases/throughput-06-scalar-32x32-r32/program.json",
+      "manifest_sha256": "13053a01170cb3346bc29a22a175690e78e289180272daadcedfdf5da4a10656",
+      "mask": 6,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 97
+      },
+      "output_regions": {
+        "output": {
+          "frame": 97,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 98,
+      "prediction": {
+        "bytes": 16480,
+        "path": "cases/throughput-06-scalar-32x32-r32/prediction.h264",
+        "sha256": "3f168af2650cb1d67436d9e0ce4ff5839362865c487ab5bcd15f0efbd201322d"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 32,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-scalar-32x32-r32/program.h264",
+      "stream_bytes": 32287,
+      "stream_sha256": "4542c04ba7c4b1ba6eaf0039543424aa734658996975a9bd8e3d38f2d689f11a",
+      "width": 32
+    },
+    {
+      "coded_height": 64,
+      "coded_width": 112,
+      "cost_scope": "executed witness counts across all rounds",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 473088,
+        "coded_macroblocks": 1848,
+        "coded_width": 112,
+        "computational_evaluations": 32768,
+        "full_readback_bytes": 709632,
+        "input_pictures": 2,
+        "logical_instructions": 96,
+        "output_readback_bytes": 10752,
+        "prediction_bytes": 14912,
+        "prediction_pictures": 64,
+        "prediction_slices": 640,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 66
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_planes_compared": true,
+          "i420_bytes": 709632,
+          "output_pixels": 1024,
+          "pictures": 66,
+          "status": "pass"
+        },
+        "openh264": {
+          "full_planes_compared": true,
+          "i420_bytes": 709632,
+          "output_pixels": 1024,
+          "pictures": 66,
+          "status": "pass"
+        },
+        "vaapi": {
+          "full_planes_compared": true,
+          "i420_bytes": 709632,
+          "output_pixels": 1024,
+          "pictures": 66,
+          "status": "pass"
+        }
+      },
+      "evaluations": 32768,
+      "expected": "cases/throughput-06-packed-32x32-r32/expected.i420",
+      "expected_bytes": 709632,
+      "expected_output": "cases/throughput-06-packed-32x32-r32/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09",
+      "expected_sha256": "1bcd65f77724f855811a2da256fd067a848e9fdec8291273723a2b70fb508c44",
+      "first_tail_ms": 32.57835300610168,
+      "frame_bytes": 10752,
+      "function": "XOR",
+      "height": 32,
+      "id": "throughput-06-packed-32x32-r32",
+      "input_bytes": 28144,
+      "input_packing_ms": 1.0063800000352785,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-packed-32x32-r32/a.u8",
+          "sha256": "a60192ee72b59272e9f6e325c1314a9146af0e84c30228d86201ad0c31511b09"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/throughput-06-packed-32x32-r32/b.u8",
+          "sha256": "d41cc292049d15405ecdff5c22751122653f9f9c2db3717b7d4c2f1564c67ce4"
+        }
+      },
+      "lowering_ms": 3.951284998038318,
+      "manifest": "cases/throughput-06-packed-32x32-r32/program.json",
+      "manifest_sha256": "a758ceb6fce0428e6229cdf83256ef1b2b53dac96552bfe1c8e64a4e7afed3f4",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 65
+      },
+      "output_regions": {
+        "output": {
+          "frame": 65,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 66,
+      "prediction": {
+        "bytes": 14912,
+        "path": "cases/throughput-06-packed-32x32-r32/prediction.h264",
+        "sha256": "e8f1edf46d8f78c227d8b5caad343285a8e8bd136682b20daa871f22310a9d0d"
+      },
+      "purpose": "throughput",
+      "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+      "rounds": 32,
+      "single_evaluation_minima": {
+        "packed_pictures": 2,
+        "scalar_instructions": 3
+      },
+      "stream": "cases/throughput-06-packed-32x32-r32/program.h264",
+      "stream_bytes": 43056,
+      "stream_sha256": "236569bb2da49bce439f0f7c50ccc1a8851b512639cf2b63d2f7a6b8bc798dcd",
+      "width": 32
+    }
+  ],
+  "created_utc": "2026-10-24T05:09:10.039634+00:00",
+  "decoders": {
+    "ffmpeg": "available",
+    "openh264": "available",
+    "vaapi": "available"
+  },
+  "format": "h264-compute-limits-bundle-0.1",
+  "input_encoding": "literal Boolean luma 0/1",
+  "input_seed": 80008,
+  "model": "model.json",
+  "model_sha256": "34c14d7019dbb5cb93e1b5052732cc4f138fb78c665526b953b9837a8cbd8c0f",
+  "proofs": "PROOFS.md",
+  "proofs_sha256": "6c76b37e5c5157a19416343b860d3f7ae8e9c009a52a763ad5fe165f4461fe24",
+  "provenance": "provenance.json",
+  "provenance_sha256": "3c783a1f54a9f0dcdcf1d27aca9f6b71e6e749bb363240085f833d59722e3b04",
+  "source_commit": "d683dc4868fc63ddc4773fe93aec2f8d4cf7b357",
+  "source_sha256": {
+    "08-decoder-compute-limits/PROOFS.md": "6c76b37e5c5157a19416343b860d3f7ae8e9c009a52a763ad5fe165f4461fe24",
+    "08-decoder-compute-limits/atlas.py": "df9a9f17ad9fbfcdbe212074eae6414b329d56536b8a00a7b26c4cede14bfcd8",
+    "08-decoder-compute-limits/benchmark.py": "2d9aefda8c31d40cabf091c899146159f85e4fcaff59ea31552e8079793bd9d9",
+    "08-decoder-compute-limits/capture.py": "aa0c67203a83ff4b899c5e78304bbcc2914be9dc9041f02f7aa487053b11a9b0",
+    "08-decoder-compute-limits/concurrency.py": "b62ce708c23517c3393983bdc8d62d4fb766419a76c188c309301a68e294b9b1",
+    "08-decoder-compute-limits/prepare.py": "525b243df16c7b64455e6756f0e752498a2febdcdf59b66a801579bea17ee426",
+    "08-decoder-compute-limits/program.py": "05c61cd496bf33799ca1e5be458e2457b388675d039f11eb771d7640d06e4077",
+    "08-decoder-compute-limits/test_atlas.py": "d95aa4685f338a00fd0ec597964208b6241212f05f2e3c6d1d3a3fd53a252e5a",
+    "08-decoder-compute-limits/test_benchmark.py": "06af4b7aa80bdc82fc1220ed9e88790664495329a624ce2ab6684b1683390ab6",
+    "08-decoder-compute-limits/test_concurrency.py": "1a99e0bed8bceb8d060db67e0a82fb9499b6979051725db15a48886a18f5c7fa",
+    "08-decoder-compute-limits/test_program.py": "d02c606003f6ec9acf526529e49303c58b1dadaaab1780f1f02e0ca7cdf91462",
+    "decoder_core/bitstream.py": "754428de6b58e11e675d613787b5f9a4d06234d0549926a1fec732f469750491",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed"
+  },
+  "working_tree_dirty": false
+}

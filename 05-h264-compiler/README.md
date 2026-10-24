@@ -99,6 +99,13 @@ fewer pictures can require more pixels, larger PCM inputs, and more readback.
 eight tiles on the unchanged denoiser. Eight tiles reduce 52 pictures to 17,
 while increasing decoded luma samples by 1.86×.
 
+[Experiment 08](../08-decoder-compute-limits/README.md) establishes exact minima
+for all 16 two-input Boolean functions under an explicit P/B model. XOR and XNOR
+need three scalar instructions or two packed computation pictures. It also
+compares alternative instruction dependencies, measures decoder costs, and
+tests denoising alongside CUDA workloads. Its witness emitter is experimental;
+it does not replace the compiler's current lowering or scheduler.
+
 ## Original binary example
 
 ![Shifted OR captured from Intel hardware decoding](assets/shifted-or.png)

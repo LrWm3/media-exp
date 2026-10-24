@@ -25,6 +25,9 @@
 - [07 — Packed denoising decoder](07-packed-denoising-decoder/README.md): independent
   neural feature calculations share picture tiles, reducing 52 pictures to 17;
   unchanged weights, exact outputs, and paired NVDEC measurements.
+- [08 — Decoder computation limits](08-decoder-compute-limits/README.md): proved
+  minima for all 16 two-input Boolean functions, synthesis/scheduling tradeoffs,
+  measured decoder costs, and exact denoising alongside CUDA workloads.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·

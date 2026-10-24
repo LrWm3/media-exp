@@ -1,0 +1,1168 @@
+{
+  "functions": [
+    {
+      "id": 0,
+      "minimum_status": "proved",
+      "name": "FALSE",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0
+          ],
+          "weights": [
+            0
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 1,
+      "minimum_status": "proved",
+      "name": "NOR",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            -2
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "minimum_status": "proved",
+      "name": "NOT_A_AND_B",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -1,
+            1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 3,
+      "minimum_status": "proved",
+      "name": "NOT_A",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0
+          ],
+          "weights": [
+            -1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 4,
+      "minimum_status": "proved",
+      "name": "A_AND_NOT_B",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            1,
+            -1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 5,
+      "minimum_status": "proved",
+      "name": "NOT_B",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            1
+          ],
+          "weights": [
+            -1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 6,
+      "minimum_status": "proved",
+      "name": "XOR",
+      "output_index": 4,
+      "packed_minimum": 2,
+      "packed_schedule": [
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            -2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "scalar_minimum": 3,
+      "truth": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 7,
+      "minimum_status": "proved",
+      "name": "NAND",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -1,
+            -1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 8,
+      "minimum_status": "proved",
+      "name": "AND",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 1,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            1,
+            1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 9,
+      "minimum_status": "proved",
+      "name": "XNOR",
+      "output_index": 4,
+      "packed_minimum": 2,
+      "packed_schedule": [
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "plan": [
+        {
+          "bias": -1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        },
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            -2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "scalar_minimum": 3,
+      "truth": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 10,
+      "minimum_status": "proved",
+      "name": "B",
+      "output_index": 1,
+      "packed_minimum": 0,
+      "packed_schedule": [],
+      "plan": [],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions"
+      ],
+      "scalar_minimum": 0,
+      "truth": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 11,
+      "minimum_status": "proved",
+      "name": "A_IMPLIES_B",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 1,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -3,
+            1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 12,
+      "minimum_status": "proved",
+      "name": "A",
+      "output_index": 0,
+      "packed_minimum": 0,
+      "packed_schedule": [],
+      "plan": [],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions"
+      ],
+      "scalar_minimum": 0,
+      "truth": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 13,
+      "minimum_status": "proved",
+      "name": "B_IMPLIES_A",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 1,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            1,
+            -3
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 14,
+      "minimum_status": "proved",
+      "name": "OR",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            1,
+            1
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 15,
+      "minimum_status": "proved",
+      "name": "TRUE",
+      "output_index": 2,
+      "packed_minimum": 1,
+      "packed_schedule": [
+        [
+          2
+        ]
+      ],
+      "plan": [
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0
+          ],
+          "weights": [
+            0
+          ]
+        }
+      ],
+      "proof_refs": [
+        "PROOFS.md#zero-instructions",
+        "PROOFS.md#exhaustive-single-instruction-certificate"
+      ],
+      "scalar_minimum": 1,
+      "truth": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "minimum_histograms": {
+    "packed": {
+      "0": 2,
+      "1": 12,
+      "2": 2
+    },
+    "scalar": {
+      "0": 2,
+      "1": 12,
+      "3": 2
+    }
+  },
+  "model": {
+    "B": "clip_u8(round_shift(w0*x+w1*y,d+1)+(o0+o1+1)//2)",
+    "P": "clip_u8(round_shift(w*x,d)+bias)",
+    "denominators": [
+      0,
+      7
+    ],
+    "excluded": [
+      "residuals",
+      "deblocking",
+      "fractional motion/interpolation",
+      "precomputed intermediate inputs",
+      "data-dependent parameter or source selection"
+    ],
+    "free_operations": "only original input aliases; constant generation costs one instruction",
+    "input_state": "two original input planes already resident",
+    "input_values": [
+      0,
+      1
+    ],
+    "intermediate_values": [
+      0,
+      255
+    ],
+    "offsets": [
+      -128,
+      127
+    ],
+    "packed_cost": "computation pictures after inputs; independent tiles may share a picture and read only earlier pictures",
+    "packed_residency": "original source planes may occupy separated tiles in an input picture; per-tile legal parameters via slices are allowed",
+    "round_shift": "n if shift=0, otherwise (n+2**(shift-1))//2**shift",
+    "scalar_cost": "number of uniform scalar P/B operations",
+    "scope": "local scalar predictions applied uniformly over arbitrary input pixels; no cross-pixel information",
+    "sources": "one or two original inputs or earlier instruction results; repeated sources permitted",
+    "weights": [
+      -128,
+      127
+    ]
+  },
+  "proof_document": "PROOFS.md",
+  "schema_version": 1,
+  "single_instruction_certificate": {
+    "argmax_mask_histograms": {
+      "B_distinct": {
+        "1": 87637,
+        "10": 18796,
+        "11": 2667,
+        "12": 18796,
+        "13": 2667,
+        "14": 2794,
+        "15": 65535,
+        "2": 90752,
+        "3": 18923,
+        "4": 90752,
+        "5": 18923,
+        "7": 11050,
+        "8": 94996
+      },
+      "B_repeated": {
+        "10": 1785,
+        "12": 1785,
+        "15": 1020,
+        "3": 1793,
+        "5": 1793
+      },
+      "P": {
+        "10": 896,
+        "12": 896,
+        "15": 510,
+        "3": 897,
+        "5": 897
+      }
+    },
+    "effective_B_offsets": [
+      -128,
+      -127,
+      -126,
+      -125,
+      -124,
+      -123,
+      -122,
+      -121,
+      -120,
+      -119,
+      -118,
+      -117,
+      -116,
+      -115,
+      -114,
+      -113,
+      -112,
+      -111,
+      -110,
+      -109,
+      -108,
+      -107,
+      -106,
+      -105,
+      -104,
+      -103,
+      -102,
+      -101,
+      -100,
+      -99,
+      -98,
+      -97,
+      -96,
+      -95,
+      -94,
+      -93,
+      -92,
+      -91,
+      -90,
+      -89,
+      -88,
+      -87,
+      -86,
+      -85,
+      -84,
+      -83,
+      -82,
+      -81,
+      -80,
+      -79,
+      -78,
+      -77,
+      -76,
+      -75,
+      -74,
+      -73,
+      -72,
+      -71,
+      -70,
+      -69,
+      -68,
+      -67,
+      -66,
+      -65,
+      -64,
+      -63,
+      -62,
+      -61,
+      -60,
+      -59,
+      -58,
+      -57,
+      -56,
+      -55,
+      -54,
+      -53,
+      -52,
+      -51,
+      -50,
+      -49,
+      -48,
+      -47,
+      -46,
+      -45,
+      -44,
+      -43,
+      -42,
+      -41,
+      -40,
+      -39,
+      -38,
+      -37,
+      -36,
+      -35,
+      -34,
+      -33,
+      -32,
+      -31,
+      -30,
+      -29,
+      -28,
+      -27,
+      -26,
+      -25,
+      -24,
+      -23,
+      -22,
+      -21,
+      -20,
+      -19,
+      -18,
+      -17,
+      -16,
+      -15,
+      -14,
+      -13,
+      -12,
+      -11,
+      -10,
+      -9,
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127
+    ],
+    "method": "exhaustive legal weights and denominators with proved exact offset/source reductions",
+    "missing_single_instruction_masks": [
+      6,
+      9
+    ],
+    "offset_reduction": "Any binary output containing one requires bias=1-max(rounded values); zero is explicit",
+    "parameter_classes": {
+      "B_distinct": 524288,
+      "B_repeated": 8176,
+      "P": 4096
+    },
+    "parameter_classes_total": 536560,
+    "raw_B_offset_pairs_checked": 65536,
+    "raw_effective_offset_parameterizations": {
+      "B": 536870912,
+      "P": 1048576
+    },
+    "sha256": "76ca2554533103238c2c65d1bde1f26af7b3d51fdb1d5a5d2bbc442fd99f690e",
+    "single_instruction_masks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "source_reduction": "B(1,0) swaps weights; repeated B sources use every weight sum [-256,254]",
+    "witnesses": {
+      "0": {
+        "bias": 0,
+        "denominator": 0,
+        "inputs": [
+          0
+        ],
+        "weights": [
+          0
+        ]
+      },
+      "1": {
+        "bias": 1,
+        "denominator": 0,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          -2,
+          -2
+        ]
+      },
+      "10": {
+        "bias": 0,
+        "denominator": 0,
+        "inputs": [
+          1
+        ],
+        "weights": [
+          1
+        ]
+      },
+      "11": {
+        "bias": 1,
+        "denominator": 1,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          -3,
+          1
+        ]
+      },
+      "12": {
+        "bias": 0,
+        "denominator": 0,
+        "inputs": [
+          0
+        ],
+        "weights": [
+          1
+        ]
+      },
+      "13": {
+        "bias": 1,
+        "denominator": 1,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          1,
+          -3
+        ]
+      },
+      "14": {
+        "bias": 0,
+        "denominator": 0,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          1,
+          1
+        ]
+      },
+      "15": {
+        "bias": 1,
+        "denominator": 0,
+        "inputs": [
+          0
+        ],
+        "weights": [
+          0
+        ]
+      },
+      "2": {
+        "bias": 0,
+        "denominator": 0,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          -1,
+          1
+        ]
+      },
+      "3": {
+        "bias": 1,
+        "denominator": 0,
+        "inputs": [
+          0
+        ],
+        "weights": [
+          -1
+        ]
+      },
+      "4": {
+        "bias": 0,
+        "denominator": 0,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          1,
+          -1
+        ]
+      },
+      "5": {
+        "bias": 1,
+        "denominator": 0,
+        "inputs": [
+          1
+        ],
+        "weights": [
+          -1
+        ]
+      },
+      "7": {
+        "bias": 1,
+        "denominator": 0,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          -1,
+          -1
+        ]
+      },
+      "8": {
+        "bias": 0,
+        "denominator": 1,
+        "inputs": [
+          0,
+          1
+        ],
+        "weights": [
+          1,
+          1
+        ]
+      }
+    },
+    "witnesses_checked_on_all_four_inputs": 14
+  },
+  "title": "Exact two-input Boolean weighted-prediction atlas",
+  "truth_table_encoding": "mask=sum(f(a,b) << (2*a+b)); inputs A=index0, B=index1",
+  "truth_table_order": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ]
+}

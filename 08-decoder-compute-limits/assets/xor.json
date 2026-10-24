@@ -1,0 +1,778 @@
+{
+  "canvas_height": 32,
+  "canvas_width": 80,
+  "coded_height": 64,
+  "coded_width": 112,
+  "computational_evaluations": 1024,
+  "compute_pictures": 2,
+  "cost_scope": "executed witness counts across all rounds",
+  "costs": {
+    "coded_height": 64,
+    "coded_luma_samples": 28672,
+    "coded_macroblocks": 112,
+    "coded_width": 112,
+    "computational_evaluations": 1024,
+    "full_readback_bytes": 43008,
+    "input_pictures": 2,
+    "logical_instructions": 3,
+    "output_readback_bytes": 10752,
+    "prediction_bytes": 466,
+    "prediction_pictures": 2,
+    "prediction_slices": 20,
+    "reference_slots_used": 2,
+    "tile_capacity": 2,
+    "total_pictures": 4
+  },
+  "format": "h264-compute-limits-program-0.1",
+  "frame_tiles": {
+    "0": [
+      0
+    ],
+    "1": [
+      0
+    ],
+    "2": [
+      0,
+      1
+    ],
+    "3": [
+      0
+    ]
+  },
+  "function": "XOR",
+  "guard": 16,
+  "height": 32,
+  "input_count": 2,
+  "input_frames": {
+    "a": 0,
+    "b": 1
+  },
+  "instructions": [
+    {
+      "block_offsets": [],
+      "block_operations": [
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 1",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 1",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 2",
+          "sources": [
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            },
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 2",
+          "sources": [
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            },
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 1",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 1",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 2",
+          "sources": [
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            },
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 2",
+          "sources": [
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 0,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": -2
+            },
+            {
+              "dx": -48,
+              "dy": 0,
+              "frame": 1,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        }
+      ],
+      "denominator": 0,
+      "frame": 2,
+      "label": "round 1 step 1; round 1 step 2",
+      "sources": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 0,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 1,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 0
+        }
+      ]
+    },
+    {
+      "block_offsets": [],
+      "block_operations": [
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 3",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 48,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 3",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 48,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 3",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 48,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "round 1 step 3",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            },
+            {
+              "dx": 48,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "block_offsets": [],
+          "block_operations": [],
+          "denominator": 0,
+          "label": "zero padding",
+          "sources": [
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            },
+            {
+              "dx": 0,
+              "dy": 0,
+              "frame": 2,
+              "offset": 0,
+              "qx": 0,
+              "qy": 0,
+              "weight": 0
+            }
+          ]
+        }
+      ],
+      "denominator": 0,
+      "frame": 3,
+      "label": "round 1 step 3",
+      "sources": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 2,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 2,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 0
+        }
+      ]
+    }
+  ],
+  "mask": 6,
+  "mode": "packed",
+  "output_frames": {
+    "output": 3
+  },
+  "output_regions": {
+    "output": {
+      "frame": 3,
+      "height": 32,
+      "tile": 0,
+      "width": 32,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "pictures": 4,
+  "prediction_bytes": 466,
+  "prediction_slices": 20,
+  "recurrence_note": "Rounds execute the single-evaluation witness repeatedly with original b retained. Composition can simplify algebraically; for example, an even number of XOR rounds is the identity on a. Executed instruction and picture counts are not minimum costs for the composed function.",
+  "reference_mode": "retained",
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 0,
+    "3": 0
+  },
+  "round_count": 1,
+  "rounds": 1,
+  "single_evaluation_minima": {
+    "packed_pictures": 2,
+    "scalar_instructions": 3
+  },
+  "slice_mode": "row",
+  "steps": [
+    {
+      "block_offsets": [],
+      "block_operations": [],
+      "denominator": 0,
+      "frame": 2,
+      "index": 2,
+      "label": "round 1 step 1",
+      "round": 1,
+      "sources": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 0,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 2
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 1,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": -2
+        }
+      ],
+      "tile": 0
+    },
+    {
+      "block_offsets": [],
+      "block_operations": [],
+      "denominator": 0,
+      "frame": 2,
+      "index": 3,
+      "label": "round 1 step 2",
+      "round": 1,
+      "sources": [
+        {
+          "dx": -48,
+          "dy": 0,
+          "frame": 0,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": -2
+        },
+        {
+          "dx": -48,
+          "dy": 0,
+          "frame": 1,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 2
+        }
+      ],
+      "tile": 1
+    },
+    {
+      "block_offsets": [],
+      "block_operations": [],
+      "denominator": 0,
+      "frame": 3,
+      "index": 4,
+      "label": "round 1 step 3",
+      "round": 1,
+      "sources": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "frame": 2,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 2
+        },
+        {
+          "dx": 48,
+          "dy": 0,
+          "frame": 2,
+          "offset": 0,
+          "qx": 0,
+          "qy": 0,
+          "weight": 2
+        }
+      ],
+      "tile": 0
+    }
+  ],
+  "tile_gap": 16,
+  "tiles": [
+    {
+      "height": 32,
+      "tile": 0,
+      "width": 32,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 32,
+      "tile": 1,
+      "width": 32,
+      "x": 48,
+      "y": 0
+    }
+  ],
+  "truth": [
+    0,
+    1,
+    1,
+    0
+  ],
+  "width": 32,
+  "stream_sha256": "3c5e4eaa4bab514809d8705b430250b0a141a19c58ad1c2aa74aaad5ef943314"
+}

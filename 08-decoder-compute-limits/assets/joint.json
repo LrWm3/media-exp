@@ -1,0 +1,1884 @@
+{
+  "atlas": "atlas.json",
+  "atlas_sha256": "cc8da61ef0eb25e15871bf4616d5209758563b95fef5700f4531f5b571fee893",
+  "cases": [
+    {
+      "actual_schedule_pictures": 2,
+      "all_four_truth_oracle": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "coded_height": 64,
+      "coded_width": 112,
+      "construction": "parallel",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 28672,
+        "coded_macroblocks": 112,
+        "coded_width": 112,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 43008,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 10752,
+        "prediction_bytes": 466,
+        "prediction_coded_luma_samples": 14336,
+        "prediction_pictures": 2,
+        "prediction_slices": 20,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 4
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_i420_bytes": 43008,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "openh264": {
+          "full_i420_bytes": 43008,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "vaapi": {
+          "full_i420_bytes": 43008,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/xor-parallel-packed/truth-pattern/expected.i420",
+      "expected_bytes": 43008,
+      "expected_output": "cases/xor-parallel-packed/truth-pattern/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "d81ebfdf637471435fe788ac4ce06fbd2eeeb6f17109c24c8f25a97a1d3fd5a9",
+      "expected_sha256": "e5f492e6bf98093ae9ddf4a3538e9bd5956cf396babbf70ca6fefe49f6459b31",
+      "fixed_construction_depth": 2,
+      "fixed_construction_earliest_schedule": [
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "frame_bytes": 10752,
+      "function": "XOR",
+      "function_global_packed_minimum": 2,
+      "height": 32,
+      "id": "xor-parallel-packed",
+      "input_bytes": 28092,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/xor-parallel-packed/truth-pattern/a.u8",
+          "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/xor-parallel-packed/truth-pattern/b.u8",
+          "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+        }
+      },
+      "manifest": "cases/xor-parallel-packed/program.json",
+      "manifest_sha256": "516f1e80049801d1b2343e914f45ca496e502ed5dcd53430f7c807a781e27c45",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 3
+      },
+      "output_index": 4,
+      "output_regions": {
+        "output": {
+          "frame": 3,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 4,
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            -2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        }
+      ],
+      "prediction": {
+        "bytes": 466,
+        "path": "cases/xor-parallel-packed/prediction.h264",
+        "sha256": "f1e6bf8ec537e18fa71b0ce0d4b2391c1f1cf4e0963776805783798942fe1864"
+      },
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "purpose": "joint",
+      "rounds": 1,
+      "scalar_instructions": 3,
+      "scalar_minimum": 3,
+      "scalar_minimum_status": "proved function-global minimum attained",
+      "stream": "cases/xor-parallel-packed/truth-pattern/program.h264",
+      "stream_bytes": 28558,
+      "stream_sha256": "bcd2ed2ff796abb203338696c02a3860c22e7d2e7a3da85284309680d5feb95d",
+      "truth": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "validation_fixtures": [
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xor-parallel-packed/truth-pattern/expected.i420",
+          "expected_bytes": 43008,
+          "expected_output": "cases/xor-parallel-packed/truth-pattern/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "d81ebfdf637471435fe788ac4ce06fbd2eeeb6f17109c24c8f25a97a1d3fd5a9",
+          "expected_sha256": "e5f492e6bf98093ae9ddf4a3538e9bd5956cf396babbf70ca6fefe49f6459b31",
+          "input_bytes": 28092,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-packed/truth-pattern/a.u8",
+              "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-packed/truth-pattern/b.u8",
+              "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+            }
+          },
+          "label": "truth-pattern",
+          "stream": "cases/xor-parallel-packed/truth-pattern/program.h264",
+          "stream_bytes": 28558,
+          "stream_sha256": "bcd2ed2ff796abb203338696c02a3860c22e7d2e7a3da85284309680d5feb95d",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xor-parallel-packed/seeded-random/expected.i420",
+          "expected_bytes": 43008,
+          "expected_output": "cases/xor-parallel-packed/seeded-random/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "b4eec36c2585f477c611d0b77dc01f9ea8582d19e7b3e3d032d511d853b91ab1",
+          "expected_sha256": "c0c9a18cc9308c99342570082a0f871a8302c8fb9075434fee65da0e6aecba21",
+          "input_bytes": 28188,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-packed/seeded-random/a.u8",
+              "sha256": "eff26e2f8f20c74e3c34428990381fa1c3602e0d6263be0935666c0a2323ca3c"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-packed/seeded-random/b.u8",
+              "sha256": "df03fc064656622d532fda95577576bfdb7d588d61c7bc8ddf607eb3b0752862"
+            }
+          },
+          "label": "seeded-random",
+          "stream": "cases/xor-parallel-packed/seeded-random/program.h264",
+          "stream_bytes": 28654,
+          "stream_sha256": "0e7185932a7230b8fbd223ad571d72a2d5c32956d89c9784636ce71d62a30840",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ],
+      "width": 32
+    },
+    {
+      "actual_schedule_pictures": 3,
+      "all_four_truth_oracle": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "coded_height": 64,
+      "coded_width": 64,
+      "construction": "parallel",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 20480,
+        "coded_macroblocks": 80,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 30720,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 515,
+        "prediction_coded_luma_samples": 12288,
+        "prediction_pictures": 3,
+        "prediction_slices": 24,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 5
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "openh264": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "vaapi": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/xor-parallel-unpacked/truth-pattern/expected.i420",
+      "expected_bytes": 30720,
+      "expected_output": "cases/xor-parallel-unpacked/truth-pattern/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "d81ebfdf637471435fe788ac4ce06fbd2eeeb6f17109c24c8f25a97a1d3fd5a9",
+      "expected_sha256": "97ab756dd2e33d51e3074ad90a29e438a2fcfb1c32ed8fa26be77b769f5c3a8a",
+      "fixed_construction_depth": 2,
+      "fixed_construction_earliest_schedule": [
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "frame_bytes": 6144,
+      "function": "XOR",
+      "function_global_packed_minimum": 2,
+      "height": 32,
+      "id": "xor-parallel-unpacked",
+      "input_bytes": 15755,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/xor-parallel-unpacked/truth-pattern/a.u8",
+          "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/xor-parallel-unpacked/truth-pattern/b.u8",
+          "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+        }
+      },
+      "manifest": "cases/xor-parallel-unpacked/program.json",
+      "manifest_sha256": "2a19f902fefb21c0d55d9dabc3739708d833e6b0f1649214ece93b53f61b1273",
+      "mask": 6,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 4
+      },
+      "output_index": 4,
+      "output_regions": {
+        "output": {
+          "frame": 4,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 5,
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            -2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        }
+      ],
+      "prediction": {
+        "bytes": 515,
+        "path": "cases/xor-parallel-unpacked/prediction.h264",
+        "sha256": "f11dd1a62a9b35f28ba0d98d2d660f2fb9df6946938de8db21f59e09e04facc6"
+      },
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "purpose": "joint",
+      "rounds": 1,
+      "scalar_instructions": 3,
+      "scalar_minimum": 3,
+      "scalar_minimum_status": "proved function-global minimum attained",
+      "stream": "cases/xor-parallel-unpacked/truth-pattern/program.h264",
+      "stream_bytes": 16270,
+      "stream_sha256": "8af302457b93e0633743bc07b02fbed9e0838fa4480b39c8f14e8bdf090579f1",
+      "truth": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "validation_fixtures": [
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xor-parallel-unpacked/truth-pattern/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xor-parallel-unpacked/truth-pattern/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "d81ebfdf637471435fe788ac4ce06fbd2eeeb6f17109c24c8f25a97a1d3fd5a9",
+          "expected_sha256": "97ab756dd2e33d51e3074ad90a29e438a2fcfb1c32ed8fa26be77b769f5c3a8a",
+          "input_bytes": 15755,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-unpacked/truth-pattern/a.u8",
+              "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-unpacked/truth-pattern/b.u8",
+              "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+            }
+          },
+          "label": "truth-pattern",
+          "stream": "cases/xor-parallel-unpacked/truth-pattern/program.h264",
+          "stream_bytes": 16270,
+          "stream_sha256": "8af302457b93e0633743bc07b02fbed9e0838fa4480b39c8f14e8bdf090579f1",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xor-parallel-unpacked/seeded-random/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xor-parallel-unpacked/seeded-random/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "b4eec36c2585f477c611d0b77dc01f9ea8582d19e7b3e3d032d511d853b91ab1",
+          "expected_sha256": "99c226cb78be368302b9949002b3b243e4e66a54244515655756ef23047f2913",
+          "input_bytes": 15851,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-unpacked/seeded-random/a.u8",
+              "sha256": "eff26e2f8f20c74e3c34428990381fa1c3602e0d6263be0935666c0a2323ca3c"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xor-parallel-unpacked/seeded-random/b.u8",
+              "sha256": "df03fc064656622d532fda95577576bfdb7d588d61c7bc8ddf607eb3b0752862"
+            }
+          },
+          "label": "seeded-random",
+          "stream": "cases/xor-parallel-unpacked/seeded-random/program.h264",
+          "stream_bytes": 16366,
+          "stream_sha256": "53c129cce298228e9eb51f7c6033dd8454b14357711309cd86d71e9c243788c5",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ],
+      "width": 32
+    },
+    {
+      "actual_schedule_pictures": 3,
+      "all_four_truth_oracle": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "coded_height": 64,
+      "coded_width": 64,
+      "construction": "serial",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 20480,
+        "coded_macroblocks": 80,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 30720,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 484,
+        "prediction_coded_luma_samples": 12288,
+        "prediction_pictures": 3,
+        "prediction_slices": 24,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 5
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "openh264": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "vaapi": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/xor-serial-packed/truth-pattern/expected.i420",
+      "expected_bytes": 30720,
+      "expected_output": "cases/xor-serial-packed/truth-pattern/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "d81ebfdf637471435fe788ac4ce06fbd2eeeb6f17109c24c8f25a97a1d3fd5a9",
+      "expected_sha256": "d931bade8612a37f985873b81b759bba5e1e3c948837e410a81342988ede4e7b",
+      "fixed_construction_depth": 3,
+      "fixed_construction_earliest_schedule": [
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "frame_bytes": 6144,
+      "function": "XOR",
+      "function_global_packed_minimum": 2,
+      "height": 32,
+      "id": "xor-serial-packed",
+      "input_bytes": 15755,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/xor-serial-packed/truth-pattern/a.u8",
+          "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/xor-serial-packed/truth-pattern/b.u8",
+          "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+        }
+      },
+      "manifest": "cases/xor-serial-packed/program.json",
+      "manifest_sha256": "9a0da97283211103db142dba24cd644e0aafbe59c83260e3c413ed8630c16589",
+      "mask": 6,
+      "mode": "packed",
+      "output_frames": {
+        "output": 4
+      },
+      "output_index": 4,
+      "output_regions": {
+        "output": {
+          "frame": 4,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 5,
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        },
+        {
+          "bias": -1,
+          "denominator": 0,
+          "inputs": [
+            2
+          ],
+          "weights": [
+            1
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            -4
+          ]
+        }
+      ],
+      "prediction": {
+        "bytes": 484,
+        "path": "cases/xor-serial-packed/prediction.h264",
+        "sha256": "b51793ba098794ebe58f22726e53ae864b496e0d58314061dfd2dd77b725555e"
+      },
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "purpose": "joint",
+      "rounds": 1,
+      "scalar_instructions": 3,
+      "scalar_minimum": 3,
+      "scalar_minimum_status": "proved function-global minimum attained",
+      "stream": "cases/xor-serial-packed/truth-pattern/program.h264",
+      "stream_bytes": 16239,
+      "stream_sha256": "561f07c1eecb3b66fc5cdc8cfc7b99a6cb42b3a0abd310019b6f87cddd4480ca",
+      "truth": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "validation_fixtures": [
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xor-serial-packed/truth-pattern/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xor-serial-packed/truth-pattern/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "d81ebfdf637471435fe788ac4ce06fbd2eeeb6f17109c24c8f25a97a1d3fd5a9",
+          "expected_sha256": "d931bade8612a37f985873b81b759bba5e1e3c948837e410a81342988ede4e7b",
+          "input_bytes": 15755,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xor-serial-packed/truth-pattern/a.u8",
+              "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xor-serial-packed/truth-pattern/b.u8",
+              "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+            }
+          },
+          "label": "truth-pattern",
+          "stream": "cases/xor-serial-packed/truth-pattern/program.h264",
+          "stream_bytes": 16239,
+          "stream_sha256": "561f07c1eecb3b66fc5cdc8cfc7b99a6cb42b3a0abd310019b6f87cddd4480ca",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xor-serial-packed/seeded-random/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xor-serial-packed/seeded-random/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "b4eec36c2585f477c611d0b77dc01f9ea8582d19e7b3e3d032d511d853b91ab1",
+          "expected_sha256": "e1a31918a9c743ae62a1356785e37f6f44f43d1fc3d7270eccaf30d80d10237d",
+          "input_bytes": 15851,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xor-serial-packed/seeded-random/a.u8",
+              "sha256": "eff26e2f8f20c74e3c34428990381fa1c3602e0d6263be0935666c0a2323ca3c"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xor-serial-packed/seeded-random/b.u8",
+              "sha256": "df03fc064656622d532fda95577576bfdb7d588d61c7bc8ddf607eb3b0752862"
+            }
+          },
+          "label": "seeded-random",
+          "stream": "cases/xor-serial-packed/seeded-random/program.h264",
+          "stream_bytes": 16335,
+          "stream_sha256": "2d17c10575e4c70981fdb502cc3a5245e646114bbacf0cf238fcf4a16485c3af",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ],
+      "width": 32
+    },
+    {
+      "actual_schedule_pictures": 2,
+      "all_four_truth_oracle": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "coded_height": 64,
+      "coded_width": 112,
+      "construction": "parallel",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 28672,
+        "coded_macroblocks": 112,
+        "coded_width": 112,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 43008,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 10752,
+        "prediction_bytes": 468,
+        "prediction_coded_luma_samples": 14336,
+        "prediction_pictures": 2,
+        "prediction_slices": 20,
+        "reference_slots_used": 2,
+        "tile_capacity": 2,
+        "total_pictures": 4
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_i420_bytes": 43008,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "openh264": {
+          "full_i420_bytes": 43008,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "vaapi": {
+          "full_i420_bytes": 43008,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/xnor-parallel-packed/truth-pattern/expected.i420",
+      "expected_bytes": 43008,
+      "expected_output": "cases/xnor-parallel-packed/truth-pattern/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a046b4a07eb04f58019cf1b948bee4582f891305d9877cb104f2bcc12b20e50c",
+      "expected_sha256": "69cdab7a2680dc95c5e788851111b404a9dbf82da49a0652a404d67b38f63879",
+      "fixed_construction_depth": 2,
+      "fixed_construction_earliest_schedule": [
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "frame_bytes": 10752,
+      "function": "XNOR",
+      "function_global_packed_minimum": 2,
+      "height": 32,
+      "id": "xnor-parallel-packed",
+      "input_bytes": 28092,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/xnor-parallel-packed/truth-pattern/a.u8",
+          "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/xnor-parallel-packed/truth-pattern/b.u8",
+          "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+        }
+      },
+      "manifest": "cases/xnor-parallel-packed/program.json",
+      "manifest_sha256": "2c9d87c0a86fcf619dbdc144cfcf3a21f3e3fcca5ae33dd6ebdd3f90c76f1042",
+      "mask": 9,
+      "mode": "packed",
+      "output_frames": {
+        "output": 3
+      },
+      "output_index": 4,
+      "output_regions": {
+        "output": {
+          "frame": 3,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 4,
+      "plan": [
+        {
+          "bias": -1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        },
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            -2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        }
+      ],
+      "prediction": {
+        "bytes": 468,
+        "path": "cases/xnor-parallel-packed/prediction.h264",
+        "sha256": "a9519676379e000f32951cdf87752dd24f5327679a95eaf03e1add2a8bdbd24c"
+      },
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "purpose": "joint",
+      "rounds": 1,
+      "scalar_instructions": 3,
+      "scalar_minimum": 3,
+      "scalar_minimum_status": "proved function-global minimum attained",
+      "stream": "cases/xnor-parallel-packed/truth-pattern/program.h264",
+      "stream_bytes": 28560,
+      "stream_sha256": "8e474ece57f23b400bb7b8f4a37a9dc870446df847285b30f8ef1e4fb57c3dd5",
+      "truth": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "validation_fixtures": [
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xnor-parallel-packed/truth-pattern/expected.i420",
+          "expected_bytes": 43008,
+          "expected_output": "cases/xnor-parallel-packed/truth-pattern/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "a046b4a07eb04f58019cf1b948bee4582f891305d9877cb104f2bcc12b20e50c",
+          "expected_sha256": "69cdab7a2680dc95c5e788851111b404a9dbf82da49a0652a404d67b38f63879",
+          "input_bytes": 28092,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-packed/truth-pattern/a.u8",
+              "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-packed/truth-pattern/b.u8",
+              "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+            }
+          },
+          "label": "truth-pattern",
+          "stream": "cases/xnor-parallel-packed/truth-pattern/program.h264",
+          "stream_bytes": 28560,
+          "stream_sha256": "8e474ece57f23b400bb7b8f4a37a9dc870446df847285b30f8ef1e4fb57c3dd5",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 43008,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xnor-parallel-packed/seeded-random/expected.i420",
+          "expected_bytes": 43008,
+          "expected_output": "cases/xnor-parallel-packed/seeded-random/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "496aebe27da9da3d29f7c61354aeb8785b88a0c066ec676326b539cc10400394",
+          "expected_sha256": "eefbad35b13cf5a071af54e4aa16474f13c4c4f7856415a63165695b27ac94fc",
+          "input_bytes": 28188,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-packed/seeded-random/a.u8",
+              "sha256": "eff26e2f8f20c74e3c34428990381fa1c3602e0d6263be0935666c0a2323ca3c"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-packed/seeded-random/b.u8",
+              "sha256": "df03fc064656622d532fda95577576bfdb7d588d61c7bc8ddf607eb3b0752862"
+            }
+          },
+          "label": "seeded-random",
+          "stream": "cases/xnor-parallel-packed/seeded-random/program.h264",
+          "stream_bytes": 28656,
+          "stream_sha256": "0ab42218f9ad74b8a8023294998b6f546704d5a5c670a56bc6201b863f37d0a3",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ],
+      "width": 32
+    },
+    {
+      "actual_schedule_pictures": 3,
+      "all_four_truth_oracle": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "coded_height": 64,
+      "coded_width": 64,
+      "construction": "parallel",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 20480,
+        "coded_macroblocks": 80,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 30720,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 518,
+        "prediction_coded_luma_samples": 12288,
+        "prediction_pictures": 3,
+        "prediction_slices": 24,
+        "reference_slots_used": 3,
+        "tile_capacity": 1,
+        "total_pictures": 5
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "openh264": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "vaapi": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/xnor-parallel-unpacked/truth-pattern/expected.i420",
+      "expected_bytes": 30720,
+      "expected_output": "cases/xnor-parallel-unpacked/truth-pattern/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a046b4a07eb04f58019cf1b948bee4582f891305d9877cb104f2bcc12b20e50c",
+      "expected_sha256": "c4455feb816b486cd5695835c0908cb64e4f0167262089f953353d587da7e20f",
+      "fixed_construction_depth": 2,
+      "fixed_construction_earliest_schedule": [
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "frame_bytes": 6144,
+      "function": "XNOR",
+      "function_global_packed_minimum": 2,
+      "height": 32,
+      "id": "xnor-parallel-unpacked",
+      "input_bytes": 15755,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/xnor-parallel-unpacked/truth-pattern/a.u8",
+          "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/xnor-parallel-unpacked/truth-pattern/b.u8",
+          "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+        }
+      },
+      "manifest": "cases/xnor-parallel-unpacked/program.json",
+      "manifest_sha256": "19fd4d43f86511a1dbe199dd4abc01069722dec4fa8a13e8ab07fd1e6bf4b649",
+      "mask": 9,
+      "mode": "scalar",
+      "output_frames": {
+        "output": 4
+      },
+      "output_index": 4,
+      "output_regions": {
+        "output": {
+          "frame": 4,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 5,
+      "plan": [
+        {
+          "bias": -1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        },
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            -2,
+            -2
+          ]
+        },
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        }
+      ],
+      "prediction": {
+        "bytes": 518,
+        "path": "cases/xnor-parallel-unpacked/prediction.h264",
+        "sha256": "f6ef0a96d9c6155681537b4a10480ecd431d9d551310ad62ee21353671df7bf8"
+      },
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "purpose": "joint",
+      "rounds": 1,
+      "scalar_instructions": 3,
+      "scalar_minimum": 3,
+      "scalar_minimum_status": "proved function-global minimum attained",
+      "stream": "cases/xnor-parallel-unpacked/truth-pattern/program.h264",
+      "stream_bytes": 16273,
+      "stream_sha256": "ceac255f46cb5434265f11629a53eb62d2613718f18fbefbb99c07407f067942",
+      "truth": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "validation_fixtures": [
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xnor-parallel-unpacked/truth-pattern/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xnor-parallel-unpacked/truth-pattern/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "a046b4a07eb04f58019cf1b948bee4582f891305d9877cb104f2bcc12b20e50c",
+          "expected_sha256": "c4455feb816b486cd5695835c0908cb64e4f0167262089f953353d587da7e20f",
+          "input_bytes": 15755,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-unpacked/truth-pattern/a.u8",
+              "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-unpacked/truth-pattern/b.u8",
+              "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+            }
+          },
+          "label": "truth-pattern",
+          "stream": "cases/xnor-parallel-unpacked/truth-pattern/program.h264",
+          "stream_bytes": 16273,
+          "stream_sha256": "ceac255f46cb5434265f11629a53eb62d2613718f18fbefbb99c07407f067942",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xnor-parallel-unpacked/seeded-random/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xnor-parallel-unpacked/seeded-random/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "496aebe27da9da3d29f7c61354aeb8785b88a0c066ec676326b539cc10400394",
+          "expected_sha256": "4bbbf4a49156a2c30e97e336668fabb38f2bffa1fc2698573073042ab084e4c2",
+          "input_bytes": 15851,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-unpacked/seeded-random/a.u8",
+              "sha256": "eff26e2f8f20c74e3c34428990381fa1c3602e0d6263be0935666c0a2323ca3c"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xnor-parallel-unpacked/seeded-random/b.u8",
+              "sha256": "df03fc064656622d532fda95577576bfdb7d588d61c7bc8ddf607eb3b0752862"
+            }
+          },
+          "label": "seeded-random",
+          "stream": "cases/xnor-parallel-unpacked/seeded-random/program.h264",
+          "stream_bytes": 16369,
+          "stream_sha256": "7befa12b033d12f1a7a0873603436c6d33c51dd47e878c3199fe2a0e74cdda99",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ],
+      "width": 32
+    },
+    {
+      "actual_schedule_pictures": 3,
+      "all_four_truth_oracle": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "coded_height": 64,
+      "coded_width": 64,
+      "construction": "serial",
+      "costs": {
+        "coded_height": 64,
+        "coded_luma_samples": 20480,
+        "coded_macroblocks": 80,
+        "coded_width": 64,
+        "computational_evaluations": 1024,
+        "full_readback_bytes": 30720,
+        "input_pictures": 2,
+        "logical_instructions": 3,
+        "output_readback_bytes": 6144,
+        "prediction_bytes": 485,
+        "prediction_coded_luma_samples": 12288,
+        "prediction_pictures": 3,
+        "prediction_slices": 24,
+        "reference_slots_used": 2,
+        "tile_capacity": 1,
+        "total_pictures": 5
+      },
+      "decoders": {
+        "ffmpeg": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "openh264": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        },
+        "vaapi": {
+          "full_i420_bytes": 30720,
+          "full_planes_compared": true,
+          "status": "pass",
+          "truth_output_compared": true
+        }
+      },
+      "evaluations": 1024,
+      "expected": "cases/xnor-serial-packed/truth-pattern/expected.i420",
+      "expected_bytes": 30720,
+      "expected_output": "cases/xnor-serial-packed/truth-pattern/output.u8",
+      "expected_output_bytes": 1024,
+      "expected_output_sha256": "a046b4a07eb04f58019cf1b948bee4582f891305d9877cb104f2bcc12b20e50c",
+      "expected_sha256": "e9c98059221032b386abc15c354fb7d3ef9e93105347b8b9e1bbff1cb030e70c",
+      "fixed_construction_depth": 3,
+      "fixed_construction_earliest_schedule": [
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "frame_bytes": 6144,
+      "function": "XNOR",
+      "function_global_packed_minimum": 2,
+      "height": 32,
+      "id": "xnor-serial-packed",
+      "input_bytes": 15755,
+      "inputs": {
+        "a": {
+          "bytes": 1024,
+          "path": "cases/xnor-serial-packed/truth-pattern/a.u8",
+          "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+        },
+        "b": {
+          "bytes": 1024,
+          "path": "cases/xnor-serial-packed/truth-pattern/b.u8",
+          "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+        }
+      },
+      "manifest": "cases/xnor-serial-packed/program.json",
+      "manifest_sha256": "61b7de05be42d9ca8fccfa9b6ed553f565fd6233d345560e46cca7ecf1804b93",
+      "mask": 9,
+      "mode": "packed",
+      "output_frames": {
+        "output": 4
+      },
+      "output_index": 4,
+      "output_regions": {
+        "output": {
+          "frame": 4,
+          "height": 32,
+          "tile": 0,
+          "width": 32,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "pictures": 5,
+      "plan": [
+        {
+          "bias": 0,
+          "denominator": 0,
+          "inputs": [
+            0,
+            1
+          ],
+          "weights": [
+            2,
+            2
+          ]
+        },
+        {
+          "bias": -1,
+          "denominator": 0,
+          "inputs": [
+            2
+          ],
+          "weights": [
+            1
+          ]
+        },
+        {
+          "bias": 1,
+          "denominator": 0,
+          "inputs": [
+            2,
+            3
+          ],
+          "weights": [
+            -2,
+            4
+          ]
+        }
+      ],
+      "prediction": {
+        "bytes": 485,
+        "path": "cases/xnor-serial-packed/prediction.h264",
+        "sha256": "4ba0d1eaf0e4e6723504dc37dcbb820ff057cd1fd819481b676b5c8403ca925f"
+      },
+      "proof_refs": [
+        "PROOFS.md#no-one-instruction-parity",
+        "PROOFS.md#no-two-instruction-parity",
+        "PROOFS.md#packed-pictures"
+      ],
+      "purpose": "joint",
+      "rounds": 1,
+      "scalar_instructions": 3,
+      "scalar_minimum": 3,
+      "scalar_minimum_status": "proved function-global minimum attained",
+      "stream": "cases/xnor-serial-packed/truth-pattern/program.h264",
+      "stream_bytes": 16240,
+      "stream_sha256": "430e37b4b03a237b68b5a27b305377f0d6c65cafc4a654871978eceb82650bcd",
+      "truth": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "validation_fixtures": [
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xnor-serial-packed/truth-pattern/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xnor-serial-packed/truth-pattern/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "a046b4a07eb04f58019cf1b948bee4582f891305d9877cb104f2bcc12b20e50c",
+          "expected_sha256": "e9c98059221032b386abc15c354fb7d3ef9e93105347b8b9e1bbff1cb030e70c",
+          "input_bytes": 15755,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xnor-serial-packed/truth-pattern/a.u8",
+              "sha256": "3d21ea17e1b1a9629d930bf1fe4a9ee2682aaaa4d0baff6451b26eb0769f4b16"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xnor-serial-packed/truth-pattern/b.u8",
+              "sha256": "ff484e64fe04a37279c2ba5bc01d6dd52527ff34e052f2c1490ec7232de9d7ca"
+            }
+          },
+          "label": "truth-pattern",
+          "stream": "cases/xnor-serial-packed/truth-pattern/program.h264",
+          "stream_bytes": 16240,
+          "stream_sha256": "430e37b4b03a237b68b5a27b305377f0d6c65cafc4a654871978eceb82650bcd",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "decoders": {
+            "ffmpeg": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "openh264": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            },
+            "vaapi": {
+              "full_i420_bytes": 30720,
+              "full_planes_compared": true,
+              "status": "pass",
+              "truth_output_compared": true
+            }
+          },
+          "expected": "cases/xnor-serial-packed/seeded-random/expected.i420",
+          "expected_bytes": 30720,
+          "expected_output": "cases/xnor-serial-packed/seeded-random/output.u8",
+          "expected_output_bytes": 1024,
+          "expected_output_sha256": "496aebe27da9da3d29f7c61354aeb8785b88a0c066ec676326b539cc10400394",
+          "expected_sha256": "fe36068b92404cfce2cf3933453d307aab3f212f864bece373e891c8816340f7",
+          "input_bytes": 15851,
+          "inputs": {
+            "a": {
+              "bytes": 1024,
+              "path": "cases/xnor-serial-packed/seeded-random/a.u8",
+              "sha256": "eff26e2f8f20c74e3c34428990381fa1c3602e0d6263be0935666c0a2323ca3c"
+            },
+            "b": {
+              "bytes": 1024,
+              "path": "cases/xnor-serial-packed/seeded-random/b.u8",
+              "sha256": "df03fc064656622d532fda95577576bfdb7d588d61c7bc8ddf607eb3b0752862"
+            }
+          },
+          "label": "seeded-random",
+          "stream": "cases/xnor-serial-packed/seeded-random/program.h264",
+          "stream_bytes": 16336,
+          "stream_sha256": "41b982c637208ba1feb30367ab8fb14cdedc988569afe440e9ee096394306e9f",
+          "truth_pairs_present": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ],
+      "width": 32
+    }
+  ],
+  "certificate_sha256": "76ca2554533103238c2c65d1bde1f26af7b3d51fdb1d5a5d2bbc442fd99f690e",
+  "created_utc": "2026-10-24T05:14:17.925806+00:00",
+  "decision_metrics": [
+    "prediction_pictures",
+    "prediction_coded_luma_samples",
+    "prediction_slices",
+    "prediction_bytes",
+    "reference_slots_used"
+  ],
+  "decisions": [
+    {
+      "decision": "Choose the parallel packed candidate for fewer pictures; choose a narrow candidate for fewer coded samples. Byte, slice, and retained-slot costs also differ. No candidate is best for every metric.",
+      "function": "XOR",
+      "mask": 6,
+      "metric_winners": {
+        "prediction_bytes": [
+          "xor-parallel-packed"
+        ],
+        "prediction_coded_luma_samples": [
+          "xor-parallel-unpacked",
+          "xor-serial-packed"
+        ],
+        "prediction_pictures": [
+          "xor-parallel-packed"
+        ],
+        "prediction_slices": [
+          "xor-parallel-packed"
+        ],
+        "reference_slots_used": [
+          "xor-parallel-packed",
+          "xor-serial-packed"
+        ]
+      },
+      "pareto_candidate_ids": [
+        "xor-parallel-packed",
+        "xor-serial-packed"
+      ],
+      "qualification": "Bounded comparison of two hand-specified scalar-minimum constructions and three construction/schedule combinations per function. Candidate enumeration is not exhaustive; Pareto results apply only to these candidates and this geometry, writer, and retained-reference policy. No general joint optimizer or global optimum for bytes, slices, area, or reference slots is claimed.",
+      "single_best_candidate": null
+    },
+    {
+      "decision": "Choose the parallel packed candidate for fewer pictures; choose a narrow candidate for fewer coded samples. Byte, slice, and retained-slot costs also differ. No candidate is best for every metric.",
+      "function": "XNOR",
+      "mask": 9,
+      "metric_winners": {
+        "prediction_bytes": [
+          "xnor-parallel-packed"
+        ],
+        "prediction_coded_luma_samples": [
+          "xnor-parallel-unpacked",
+          "xnor-serial-packed"
+        ],
+        "prediction_pictures": [
+          "xnor-parallel-packed"
+        ],
+        "prediction_slices": [
+          "xnor-parallel-packed"
+        ],
+        "reference_slots_used": [
+          "xnor-parallel-packed",
+          "xnor-serial-packed"
+        ]
+      },
+      "pareto_candidate_ids": [
+        "xnor-parallel-packed",
+        "xnor-serial-packed"
+      ],
+      "qualification": "Bounded comparison of two hand-specified scalar-minimum constructions and three construction/schedule combinations per function. Candidate enumeration is not exhaustive; Pareto results apply only to these candidates and this geometry, writer, and retained-reference policy. No general joint optimizer or global optimum for bytes, slices, area, or reference slots is claimed.",
+      "single_best_candidate": null
+    }
+  ],
+  "decoders": {
+    "ffmpeg": "available",
+    "openh264": "available",
+    "vaapi": "available"
+  },
+  "experiment": "bounded-joint-candidate-comparison",
+  "format": "h264-compute-limits-bundle-0.1",
+  "height": 32,
+  "input_seed": 808080,
+  "metric_meaning": {
+    "coded_luma_samples": "all pictures including the two literal input pictures",
+    "prediction_bytes": "actual encoded immutable prediction tail bytes",
+    "prediction_coded_luma_samples": "coded width times height times prediction pictures, including guards/unused tiles",
+    "prediction_pictures": "computation pictures after two input pictures",
+    "prediction_slices": "actual VCL prediction slices from the writer",
+    "reference_slots_used": "distinct retained-reference slots used by this emitted stream"
+  },
+  "model": "model.json",
+  "model_sha256": "63a2283e70726949a5eeacadcc445112083e476539318c0a12df1fd438e05980",
+  "proofs": "PROOFS.md",
+  "proofs_sha256": "6c76b37e5c5157a19416343b860d3f7ae8e9c009a52a763ad5fe165f4461fe24",
+  "provenance": "provenance.json",
+  "provenance_sha256": "00c6dacf91803b30e30e08bb77a4b272e57384d7a3a79df44b8419498e75aa59",
+  "scope": "Bounded comparison of two hand-specified scalar-minimum constructions and three construction/schedule combinations per function. Candidate enumeration is not exhaustive; Pareto results apply only to these candidates and this geometry, writer, and retained-reference policy. No general joint optimizer or global optimum for bytes, slices, area, or reference slots is claimed.",
+  "source_commit": "71b67077fd0749a1242968cd6b5a22c614c30c92",
+  "source_sha256": {
+    "08-decoder-compute-limits/PROOFS.md": "6c76b37e5c5157a19416343b860d3f7ae8e9c009a52a763ad5fe165f4461fe24",
+    "08-decoder-compute-limits/atlas.py": "df9a9f17ad9fbfcdbe212074eae6414b329d56536b8a00a7b26c4cede14bfcd8",
+    "08-decoder-compute-limits/joint.py": "39dbfdd5d584cea29630123a74d08a26e56a870e09d7723173c4b8ce05030346",
+    "08-decoder-compute-limits/program.py": "05c61cd496bf33799ca1e5be458e2457b388675d039f11eb771d7640d06e4077",
+    "08-decoder-compute-limits/test_joint.py": "2fd8db50d5868efad9fec6ae030cdbca825e5c71d28bddff4e03fa3ca42a8f47",
+    "decoder_core/bitstream.py": "754428de6b58e11e675d613787b5f9a4d06234d0549926a1fec732f469750491",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed"
+  },
+  "status": "pass",
+  "width": 32,
+  "working_tree_dirty": true
+}
