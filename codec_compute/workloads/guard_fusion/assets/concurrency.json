@@ -1,0 +1,5684 @@
+{
+  "format": "codec-compute-guard-concurrency-1",
+  "status": "pass",
+  "created_utc": "2026-10-24T19:25:48.997069+00:00",
+  "script_sha256": "7494808a266fb7c227328e1764e3a40c1d043296a04a03a519f37d391061ec08",
+  "group": "512/resident-chain-64",
+  "repeats": 5,
+  "window_seconds": 12,
+  "release_period_seconds": 1,
+  "deadline_seconds": 0.75,
+  "trials": [
+    {
+      "mode": "background-only",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 0,
+      "completed_jobs": 0,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11579,
+        "checked_chunks": 11580,
+        "chunks_per_second": 964.9166666666666,
+        "last_completion_offset_s": 11.999908152036369,
+        "start_lateness_ms": 0.8499829564243555,
+        "finish_overrun_ms": 1.15466199349612,
+        "work_process_cpu_ms": 11804.635616,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.911832041107,
+          "finish_offset_ms": 12001.13974895794,
+          "cpu_ms": 1.0379839999998808,
+          "overrun_ms": 1.139748957939446
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.007935200000000364,
+        "parent_user_s": 0.007934000000000552,
+        "parent_system_s": 3.999999999892978e-06
+      },
+      "foreground_process_cpu_ms": 7.935200000000364,
+      "background_live_process_cpu_ms": 11805.134528,
+      "combined_process_cpu_ms": 11813.069728,
+      "accounting_start_lateness_ms": 0.1123109832406044,
+      "accounting_end_overrun_ms": 2.2414569975808263,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.002752058207988739,
+      "excluded_warmup_ms": 0.0005119945853948593,
+      "decoder_stats_before_close": null,
+      "repeat": 0,
+      "order": 0
+    },
+    {
+      "mode": "cpu",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0007439659675583243,
+          "finish_offset_s": 0.16632136597763747,
+          "release_lateness_ms": 0.7439659675583243,
+          "service_ms": 165.57740001007915,
+          "release_to_completion_ms": 166.32136597763747,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0001033109147102,
+          "finish_offset_s": 1.1582037369953468,
+          "release_lateness_ms": 0.10331091471016407,
+          "service_ms": 158.10042608063668,
+          "release_to_completion_ms": 158.20373699534684,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0000873029930517,
+          "finish_offset_s": 2.1590406979667023,
+          "release_lateness_ms": 0.08730299305170774,
+          "service_ms": 158.95339497365057,
+          "release_to_completion_ms": 159.04069796670228,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.0000922878971323,
+          "finish_offset_s": 3.15760761895217,
+          "release_lateness_ms": 0.0922878971323371,
+          "service_ms": 157.51533105503768,
+          "release_to_completion_ms": 157.60761895217001,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000098071992397,
+          "finish_offset_s": 4.1523766439640895,
+          "release_lateness_ms": 0.09807199239730835,
+          "service_ms": 152.27857197169214,
+          "release_to_completion_ms": 152.37664396408945,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000100463978015,
+          "finish_offset_s": 5.167937632999383,
+          "release_lateness_ms": 0.10046397801488638,
+          "service_ms": 167.83716902136803,
+          "release_to_completion_ms": 167.9376329993829,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.00007437588647,
+          "finish_offset_s": 6.162430942989886,
+          "release_lateness_ms": 0.07437588647007942,
+          "service_ms": 162.35656710341573,
+          "release_to_completion_ms": 162.4309429898858,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000079296994954,
+          "finish_offset_s": 7.149202634929679,
+          "release_lateness_ms": 0.07929699495434761,
+          "service_ms": 149.123337934725,
+          "release_to_completion_ms": 149.20263492967933,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.00008693698328,
+          "finish_offset_s": 8.162434767000377,
+          "release_lateness_ms": 0.08693698327988386,
+          "service_ms": 162.3478300170973,
+          "release_to_completion_ms": 162.43476700037718,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000075888936408,
+          "finish_offset_s": 9.158594526932575,
+          "release_lateness_ms": 0.0758889364078641,
+          "service_ms": 158.51863799616694,
+          "release_to_completion_ms": 158.5945269325748,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.00010551395826,
+          "finish_offset_s": 10.16235059092287,
+          "release_lateness_ms": 0.10551395826041698,
+          "service_ms": 162.24507696460932,
+          "release_to_completion_ms": 162.35059092286974,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000093217939138,
+          "finish_offset_s": 11.160138143924996,
+          "release_lateness_ms": 0.09321793913841248,
+          "service_ms": 160.04492598585784,
+          "release_to_completion_ms": 160.13814392499626,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10966,
+        "checked_chunks": 10967,
+        "chunks_per_second": 913.8333333333334,
+        "last_completion_offset_s": 11.999466707929969,
+        "start_lateness_ms": 9.969630977138877,
+        "finish_overrun_ms": 0.7075848989188671,
+        "work_process_cpu_ms": 10886.165472,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.469107948244,
+          "finish_offset_ms": 12000.69276895374,
+          "cpu_ms": 1.0206720000009994,
+          "overrun_ms": 0.6927689537405968
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.99676352,
+        "parent_user_s": 0.9960109999999993,
+        "parent_system_s": 0.0007589999999999542
+      },
+      "foreground_process_cpu_ms": 996.76352,
+      "background_live_process_cpu_ms": 10886.680832,
+      "combined_process_cpu_ms": 11883.444352,
+      "accounting_start_lateness_ms": 0.09253493044525385,
+      "accounting_end_overrun_ms": 1.7997239483520389,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.003168010152876377,
+      "excluded_warmup_ms": 86.69000607915223,
+      "decoder_stats_before_close": null,
+      "repeat": 0,
+      "order": 1
+    },
+    {
+      "mode": "nvdec-baseline",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 1,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.000915199052542448,
+          "finish_offset_s": 0.6485249020624906,
+          "release_lateness_ms": 0.915199052542448,
+          "service_ms": 647.6097030099481,
+          "release_to_completion_ms": 648.5249020624906,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000686229905114,
+          "finish_offset_s": 1.5141144479857758,
+          "release_lateness_ms": 0.06862299051135778,
+          "service_ms": 514.0458249952644,
+          "release_to_completion_ms": 514.1144479857758,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000085190986283,
+          "finish_offset_s": 2.528726338990964,
+          "release_lateness_ms": 0.0851909862831235,
+          "service_ms": 528.6411480046809,
+          "release_to_completion_ms": 528.726338990964,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.0000793910585344,
+          "finish_offset_s": 3.6478575440123677,
+          "release_lateness_ms": 0.07939105853438377,
+          "service_ms": 647.7781529538333,
+          "release_to_completion_ms": 647.8575440123677,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000076152035035,
+          "finish_offset_s": 4.6465226099826396,
+          "release_lateness_ms": 0.07615203503519297,
+          "service_ms": 646.4464579476044,
+          "release_to_completion_ms": 646.5226099826396,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000079471967183,
+          "finish_offset_s": 5.638432629057206,
+          "release_lateness_ms": 0.0794719671830535,
+          "service_ms": 638.3531570900232,
+          "release_to_completion_ms": 638.4326290572062,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000076488009654,
+          "finish_offset_s": 6.649068188969977,
+          "release_lateness_ms": 0.0764880096539855,
+          "service_ms": 648.9917009603232,
+          "release_to_completion_ms": 649.0681889699772,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000071648973972,
+          "finish_offset_s": 7.638243074994534,
+          "release_lateness_ms": 0.0716489739716053,
+          "service_ms": 638.1714260205626,
+          "release_to_completion_ms": 638.2430749945343,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000081081059761,
+          "finish_offset_s": 8.645550664979964,
+          "release_lateness_ms": 0.08108105976134539,
+          "service_ms": 645.4695839202031,
+          "release_to_completion_ms": 645.5506649799645,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000099600991234,
+          "finish_offset_s": 9.792691766982898,
+          "release_lateness_ms": 0.09960099123418331,
+          "service_ms": 792.5921659916639,
+          "release_to_completion_ms": 792.6917669828981,
+          "deadline_miss": true
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000077801989391,
+          "finish_offset_s": 10.654764699051157,
+          "release_lateness_ms": 0.07780198939144611,
+          "service_ms": 654.6868970617652,
+          "release_to_completion_ms": 654.7646990511566,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000081186066382,
+          "finish_offset_s": 11.644846666022204,
+          "release_lateness_ms": 0.08118606638163328,
+          "service_ms": 644.7654799558222,
+          "release_to_completion_ms": 644.8466660222039,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10971,
+        "checked_chunks": 10972,
+        "chunks_per_second": 914.25,
+        "last_completion_offset_s": 11.999099120032042,
+        "start_lateness_ms": 9.893342037685215,
+        "finish_overrun_ms": 0.30908500775694847,
+        "work_process_cpu_ms": 11040.820512,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.101744033396,
+          "finish_offset_ms": 12000.293788034469,
+          "cpu_ms": 1.0197759999996947,
+          "overrun_ms": 0.29378803446888924
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.22028150399999902,
+        "parent_user_s": 0.19171700000000058,
+        "parent_system_s": 0.028567999999999927,
+        "worker_cpu_s": 0.513644576,
+        "worker_user_s": 0.25,
+        "worker_system_s": 0.27
+      },
+      "foreground_process_cpu_ms": 733.926079999999,
+      "background_live_process_cpu_ms": 11041.333472,
+      "combined_process_cpu_ms": 11775.259552,
+      "accounting_start_lateness_ms": 0.10027899406850338,
+      "accounting_end_overrun_ms": 1.5933860559016466,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 216.5699410252273,
+      "excluded_warmup_ms": 807.8324859961867,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 0,
+      "order": 2
+    },
+    {
+      "mode": "nvdec-merged",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0011770909186452627,
+          "finish_offset_s": 0.3139226729981601,
+          "release_lateness_ms": 1.1770909186452627,
+          "service_ms": 312.74558207951486,
+          "release_to_completion_ms": 313.9226729981601,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000869599170983,
+          "finish_offset_s": 1.276519964914769,
+          "release_lateness_ms": 0.08695991709828377,
+          "service_ms": 276.43300499767065,
+          "release_to_completion_ms": 276.51996491476893,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000074983923696,
+          "finish_offset_s": 2.296993773896247,
+          "release_lateness_ms": 0.0749839236959815,
+          "service_ms": 296.91878997255117,
+          "release_to_completion_ms": 296.99377389624715,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000078175915405,
+          "finish_offset_s": 3.2859672179911286,
+          "release_lateness_ms": 0.07817591540515423,
+          "service_ms": 285.8890420757234,
+          "release_to_completion_ms": 285.96721799112856,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000077591976151,
+          "finish_offset_s": 4.28144521091599,
+          "release_lateness_ms": 0.07759197615087032,
+          "service_ms": 281.3676189398393,
+          "release_to_completion_ms": 281.4452109159902,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000078480923548,
+          "finish_offset_s": 5.28756533190608,
+          "release_lateness_ms": 0.0784809235483408,
+          "service_ms": 287.4868509825319,
+          "release_to_completion_ms": 287.56533190608025,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000099816941656,
+          "finish_offset_s": 6.4588097599335015,
+          "release_lateness_ms": 0.09981694165617228,
+          "service_ms": 458.7099429918453,
+          "release_to_completion_ms": 458.8097599335015,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000080480938777,
+          "finish_offset_s": 7.293650692910887,
+          "release_lateness_ms": 0.08048093877732754,
+          "service_ms": 293.57021197211,
+          "release_to_completion_ms": 293.6506929108873,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000081625999883,
+          "finish_offset_s": 8.283712979988195,
+          "release_lateness_ms": 0.08162599988281727,
+          "service_ms": 283.6313539883122,
+          "release_to_completion_ms": 283.712979988195,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000075825955719,
+          "finish_offset_s": 9.291880770004354,
+          "release_lateness_ms": 0.07582595571875572,
+          "service_ms": 291.80494404863566,
+          "release_to_completion_ms": 291.8807700043544,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000075273914263,
+          "finish_offset_s": 10.287189448950812,
+          "release_lateness_ms": 0.0752739142626524,
+          "service_ms": 287.11417503654957,
+          "release_to_completion_ms": 287.1894489508122,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000092770904303,
+          "finish_offset_s": 11.280906366999261,
+          "release_lateness_ms": 0.09277090430259705,
+          "service_ms": 280.8135960949585,
+          "release_to_completion_ms": 280.9063669992611,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11029,
+        "checked_chunks": 11030,
+        "chunks_per_second": 919.0833333333334,
+        "last_completion_offset_s": 11.999729686998762,
+        "start_lateness_ms": 17.35870190896094,
+        "finish_overrun_ms": 0.9457319974899292,
+        "work_process_cpu_ms": 11121.352256,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.73202298861,
+          "finish_offset_ms": 12000.932067981921,
+          "cpu_ms": 1.0271040000002785,
+          "overrun_ms": 0.9320679819211364
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.17004009599999925,
+        "parent_user_s": 0.13389500000000076,
+        "parent_system_s": 0.036149999999999904,
+        "worker_cpu_s": 0.454815616,
+        "worker_user_s": 0.22999999999999998,
+        "worker_system_s": 0.23000000000000004
+      },
+      "foreground_process_cpu_ms": 624.8557119999992,
+      "background_live_process_cpu_ms": 11121.870719999999,
+      "combined_process_cpu_ms": 11746.726431999998,
+      "accounting_start_lateness_ms": 0.12024794705212116,
+      "accounting_end_overrun_ms": 2.2632499458268285,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 195.6070300657302,
+      "excluded_warmup_ms": 440.3439889429137,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 0,
+      "order": 3
+    },
+    {
+      "mode": "cpu",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0007792300311848521,
+          "finish_offset_s": 0.1615553320152685,
+          "release_lateness_ms": 0.7792300311848521,
+          "service_ms": 160.77610198408365,
+          "release_to_completion_ms": 161.5553320152685,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000941590406,
+          "finish_offset_s": 1.1586821411037818,
+          "release_lateness_ms": 0.09415904060006142,
+          "service_ms": 158.5879820631817,
+          "release_to_completion_ms": 158.68214110378176,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0000873670214787,
+          "finish_offset_s": 2.1613180660642684,
+          "release_lateness_ms": 0.08736702147871256,
+          "service_ms": 161.23069904278964,
+          "release_to_completion_ms": 161.31806606426835,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000095488037914,
+          "finish_offset_s": 3.159963643993251,
+          "release_lateness_ms": 0.0954880379140377,
+          "service_ms": 159.868155955337,
+          "release_to_completion_ms": 159.96364399325103,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000080247991718,
+          "finish_offset_s": 4.158913673018105,
+          "release_lateness_ms": 0.08024799171835184,
+          "service_ms": 158.83342502638698,
+          "release_to_completion_ms": 158.91367301810533,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.0000749280443415,
+          "finish_offset_s": 5.1613954190397635,
+          "release_lateness_ms": 0.07492804434150457,
+          "service_ms": 161.320490995422,
+          "release_to_completion_ms": 161.3954190397635,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000073768082075,
+          "finish_offset_s": 6.165408286033198,
+          "release_lateness_ms": 0.073768082074821,
+          "service_ms": 165.33451795112342,
+          "release_to_completion_ms": 165.40828603319824,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000087680993602,
+          "finish_offset_s": 7.152484110090882,
+          "release_lateness_ms": 0.0876809936016798,
+          "service_ms": 152.3964290972799,
+          "release_to_completion_ms": 152.4841100908816,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000073145027272,
+          "finish_offset_s": 8.162306894082576,
+          "release_lateness_ms": 0.07314502727240324,
+          "service_ms": 162.23374905530363,
+          "release_to_completion_ms": 162.30689408257604,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000094065093435,
+          "finish_offset_s": 9.155448030098341,
+          "release_lateness_ms": 0.09406509343534708,
+          "service_ms": 155.35396500490606,
+          "release_to_completion_ms": 155.4480300983414,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000086890067905,
+          "finish_offset_s": 10.15839166904334,
+          "release_lateness_ms": 0.0868900679051876,
+          "service_ms": 158.3047789754346,
+          "release_to_completion_ms": 158.3916690433398,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000095682102256,
+          "finish_offset_s": 11.150830173050053,
+          "release_lateness_ms": 0.0956821022555232,
+          "service_ms": 150.7344909477979,
+          "release_to_completion_ms": 150.83017305005342,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10797,
+        "checked_chunks": 10798,
+        "chunks_per_second": 899.75,
+        "last_completion_offset_s": 11.99940862704534,
+        "start_lateness_ms": 10.160289006307721,
+        "finish_overrun_ms": 0.6761919939890504,
+        "work_process_cpu_ms": 10875.672992,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.41009900067,
+          "finish_offset_ms": 12000.659423996694,
+          "cpu_ms": 1.0319039999995283,
+          "overrun_ms": 0.659423996694386
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.9957026240000015,
+        "parent_user_s": 0.9870619999999999,
+        "parent_system_s": 0.00864699999999985
+      },
+      "foreground_process_cpu_ms": 995.7026240000015,
+      "background_live_process_cpu_ms": 10876.20176,
+      "combined_process_cpu_ms": 11871.904384000001,
+      "accounting_start_lateness_ms": 0.12421503197401762,
+      "accounting_end_overrun_ms": 1.7399800708517432,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.0029440270736813545,
+      "excluded_warmup_ms": 88.56461790855974,
+      "decoder_stats_before_close": null,
+      "repeat": 1,
+      "order": 0
+    },
+    {
+      "mode": "nvdec-baseline",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 1,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0010706899920478463,
+          "finish_offset_s": 0.6581236919155344,
+          "release_lateness_ms": 1.0706899920478463,
+          "service_ms": 657.0530019234866,
+          "release_to_completion_ms": 658.1236919155344,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000959519529715,
+          "finish_offset_s": 1.6570650489302352,
+          "release_lateness_ms": 0.09595195297151804,
+          "service_ms": 656.9690969772637,
+          "release_to_completion_ms": 657.0650489302352,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000091623980552,
+          "finish_offset_s": 2.6232049389509484,
+          "release_lateness_ms": 0.09162398055195808,
+          "service_ms": 623.1133149703965,
+          "release_to_completion_ms": 623.2049389509484,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.0000707199797034,
+          "finish_offset_s": 3.514684038935229,
+          "release_lateness_ms": 0.07071997970342636,
+          "service_ms": 514.6133189555258,
+          "release_to_completion_ms": 514.6840389352292,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000084855942987,
+          "finish_offset_s": 4.5172998670022935,
+          "release_lateness_ms": 0.08485594298690557,
+          "service_ms": 517.2150110593066,
+          "release_to_completion_ms": 517.2998670022935,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000082384911366,
+          "finish_offset_s": 5.654190459987149,
+          "release_lateness_ms": 0.08238491136580706,
+          "service_ms": 654.1080750757828,
+          "release_to_completion_ms": 654.1904599871486,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000104552949779,
+          "finish_offset_s": 6.643794181989506,
+          "release_lateness_ms": 0.10455294977873564,
+          "service_ms": 643.6896290397272,
+          "release_to_completion_ms": 643.7941819895059,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000085568986833,
+          "finish_offset_s": 7.6522952559171245,
+          "release_lateness_ms": 0.08556898683309555,
+          "service_ms": 652.2096869302914,
+          "release_to_completion_ms": 652.2952559171245,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000083929975517,
+          "finish_offset_s": 8.646901528001763,
+          "release_lateness_ms": 0.08392997551709414,
+          "service_ms": 646.8175980262458,
+          "release_to_completion_ms": 646.9015280017629,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000074769952334,
+          "finish_offset_s": 9.642075228970498,
+          "release_lateness_ms": 0.0747699523344636,
+          "service_ms": 642.0004590181634,
+          "release_to_completion_ms": 642.0752289704978,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000087018008344,
+          "finish_offset_s": 10.801206120988354,
+          "release_lateness_ms": 0.08701800834387541,
+          "service_ms": 801.1191029800102,
+          "release_to_completion_ms": 801.2061209883541,
+          "deadline_miss": true
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.00010000297334,
+          "finish_offset_s": 11.636924759019166,
+          "release_lateness_ms": 0.10000297334045172,
+          "service_ms": 636.8247560458258,
+          "release_to_completion_ms": 636.9247590191662,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10925,
+        "checked_chunks": 10926,
+        "chunks_per_second": 910.4166666666666,
+        "last_completion_offset_s": 11.999390866956674,
+        "start_lateness_ms": 8.159948978573084,
+        "finish_overrun_ms": 0.5956799723207951,
+        "work_process_cpu_ms": 11000.017824,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.392274999991,
+          "finish_offset_ms": 12000.5818560021,
+          "cpu_ms": 1.0129919999997128,
+          "overrun_ms": 0.581856002099812
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.22592352000000027,
+        "parent_user_s": 0.18810700000000047,
+        "parent_system_s": 0.037819999999999965,
+        "worker_cpu_s": 0.53231648,
+        "worker_user_s": 0.27999999999999997,
+        "worker_system_s": 0.25
+      },
+      "foreground_process_cpu_ms": 758.2400000000002,
+      "background_live_process_cpu_ms": 11000.509536,
+      "combined_process_cpu_ms": 11758.749536,
+      "accounting_start_lateness_ms": 0.11669495142996311,
+      "accounting_end_overrun_ms": 1.732843928039074,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 197.0841019647196,
+      "excluded_warmup_ms": 676.8837400013581,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 1,
+      "order": 1
+    },
+    {
+      "mode": "nvdec-merged",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0012552039697766304,
+          "finish_offset_s": 0.30460660601966083,
+          "release_lateness_ms": 1.2552039697766304,
+          "service_ms": 303.3514020498842,
+          "release_to_completion_ms": 304.60660601966083,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000783189898357,
+          "finish_offset_s": 1.2918197109829634,
+          "release_lateness_ms": 0.07831898983567953,
+          "service_ms": 291.74139199312776,
+          "release_to_completion_ms": 291.81971098296344,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000075591960922,
+          "finish_offset_s": 2.291067088022828,
+          "release_lateness_ms": 0.07559196092188358,
+          "service_ms": 290.9914960619062,
+          "release_to_completion_ms": 291.0670880228281,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000074303941801,
+          "finish_offset_s": 3.2903175039682537,
+          "release_lateness_ms": 0.07430394180119038,
+          "service_ms": 290.24320002645254,
+          "release_to_completion_ms": 290.31750396825373,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000085304025561,
+          "finish_offset_s": 4.284239224041812,
+          "release_lateness_ms": 0.08530402556061745,
+          "service_ms": 284.1539200162515,
+          "release_to_completion_ms": 284.2392240418121,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000077264965512,
+          "finish_offset_s": 5.2885285740485415,
+          "release_lateness_ms": 0.07726496551185846,
+          "service_ms": 288.4513090830296,
+          "release_to_completion_ms": 288.5285740485415,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000072904978879,
+          "finish_offset_s": 6.284982064040378,
+          "release_lateness_ms": 0.0729049788787961,
+          "service_ms": 284.90915906149894,
+          "release_to_completion_ms": 284.98206404037774,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000095137045719,
+          "finish_offset_s": 7.463178758975118,
+          "release_lateness_ms": 0.0951370457187295,
+          "service_ms": 463.08362192939967,
+          "release_to_completion_ms": 463.1787589751184,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000073625007644,
+          "finish_offset_s": 8.290482650976628,
+          "release_lateness_ms": 0.07362500764429569,
+          "service_ms": 290.40902596898377,
+          "release_to_completion_ms": 290.48265097662807,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.00007380999159,
+          "finish_offset_s": 9.277111590025015,
+          "release_lateness_ms": 0.07380999159067869,
+          "service_ms": 277.0377800334245,
+          "release_to_completion_ms": 277.1115900250152,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000074377981946,
+          "finish_offset_s": 10.30529636098072,
+          "release_lateness_ms": 0.0743779819458723,
+          "service_ms": 305.22198299877346,
+          "release_to_completion_ms": 305.2963609807193,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000075937947258,
+          "finish_offset_s": 11.283339801011607,
+          "release_lateness_ms": 0.07593794725835323,
+          "service_ms": 283.2638630643487,
+          "release_to_completion_ms": 283.33980101160705,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11013,
+        "checked_chunks": 11014,
+        "chunks_per_second": 917.75,
+        "last_completion_offset_s": 11.99910292797722,
+        "start_lateness_ms": 11.459024040959775,
+        "finish_overrun_ms": 0.32255693804472685,
+        "work_process_cpu_ms": 11168.242528,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.104463960975,
+          "finish_offset_ms": 12000.308029004373,
+          "cpu_ms": 1.024192000000923,
+          "overrun_ms": 0.30802900437265635
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.16276531200000122,
+        "parent_user_s": 0.125788,
+        "parent_system_s": 0.03698000000000001,
+        "worker_cpu_s": 0.44296992,
+        "worker_user_s": 0.18,
+        "worker_system_s": 0.26
+      },
+      "foreground_process_cpu_ms": 605.7352320000012,
+      "background_live_process_cpu_ms": 11168.753472,
+      "combined_process_cpu_ms": 11774.488704000001,
+      "accounting_start_lateness_ms": 0.11493498459458351,
+      "accounting_end_overrun_ms": 1.5288740396499634,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 196.13081205170602,
+      "excluded_warmup_ms": 462.8657309804112,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 1,
+      "order": 2
+    },
+    {
+      "mode": "background-only",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 0,
+      "completed_jobs": 0,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11972,
+        "checked_chunks": 11973,
+        "chunks_per_second": 997.6666666666666,
+        "last_completion_offset_s": 11.999254993977956,
+        "start_lateness_ms": 0.7480939384549856,
+        "finish_overrun_ms": 0.4772149259224534,
+        "work_process_cpu_ms": 11864.811360000002,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.25637000706,
+          "finish_offset_ms": 12000.460573937744,
+          "cpu_ms": 1.024063999999214,
+          "overrun_ms": 0.4605739377439022
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.007704992000000743,
+        "parent_user_s": 0.0037629999999992947,
+        "parent_system_s": 0.003944999999999865
+      },
+      "foreground_process_cpu_ms": 7.704992000000743,
+      "background_live_process_cpu_ms": 11865.30992,
+      "combined_process_cpu_ms": 11873.014912,
+      "accounting_start_lateness_ms": 0.09864696767181158,
+      "accounting_end_overrun_ms": 1.574185909703374,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.002751941792666912,
+      "excluded_warmup_ms": 0.0005119945853948593,
+      "decoder_stats_before_close": null,
+      "repeat": 1,
+      "order": 3
+    },
+    {
+      "mode": "nvdec-baseline",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 1,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0008870399324223399,
+          "finish_offset_s": 0.5189620270393789,
+          "release_lateness_ms": 0.8870399324223399,
+          "service_ms": 518.0749871069565,
+          "release_to_completion_ms": 518.9620270393789,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000925599597394,
+          "finish_offset_s": 1.6558407479897141,
+          "release_lateness_ms": 0.09255995973944664,
+          "service_ms": 655.7481880299747,
+          "release_to_completion_ms": 655.8407479897141,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000089831999503,
+          "finish_offset_s": 2.516013276996091,
+          "release_lateness_ms": 0.08983199950307608,
+          "service_ms": 515.9234449965879,
+          "release_to_completion_ms": 516.013276996091,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000088575994596,
+          "finish_offset_s": 3.5067784510320053,
+          "release_lateness_ms": 0.08857599459588528,
+          "service_ms": 506.68987503740937,
+          "release_to_completion_ms": 506.77845103200525,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000083799939603,
+          "finish_offset_s": 4.627073253039271,
+          "release_lateness_ms": 0.08379993960261345,
+          "service_ms": 626.989453099668,
+          "release_to_completion_ms": 627.0732530392706,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000069872941822,
+          "finish_offset_s": 5.515582688967697,
+          "release_lateness_ms": 0.06987294182181358,
+          "service_ms": 515.5128160258755,
+          "release_to_completion_ms": 515.5826889676973,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000082056969404,
+          "finish_offset_s": 6.516323328949511,
+          "release_lateness_ms": 0.08205696940422058,
+          "service_ms": 516.2412719801068,
+          "release_to_completion_ms": 516.323328949511,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.00008720101323,
+          "finish_offset_s": 7.645520017016679,
+          "release_lateness_ms": 0.08720101322978735,
+          "service_ms": 645.4328160034493,
+          "release_to_completion_ms": 645.520017016679,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000073016970418,
+          "finish_offset_s": 8.645329255028628,
+          "release_lateness_ms": 0.07301697041839361,
+          "service_ms": 645.2562380582094,
+          "release_to_completion_ms": 645.3292550286278,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000074833980761,
+          "finish_offset_s": 9.643735887017101,
+          "release_lateness_ms": 0.07483398076146841,
+          "service_ms": 643.6610530363396,
+          "release_to_completion_ms": 643.735887017101,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.00011517899111,
+          "finish_offset_s": 10.66589428903535,
+          "release_lateness_ms": 0.11517899110913277,
+          "service_ms": 665.779110044241,
+          "release_to_completion_ms": 665.8942890353501,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000095714931376,
+          "finish_offset_s": 11.781100173015147,
+          "release_lateness_ms": 0.0957149313762784,
+          "service_ms": 781.0044580837712,
+          "release_to_completion_ms": 781.1001730151474,
+          "deadline_miss": true
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10891,
+        "checked_chunks": 10892,
+        "chunks_per_second": 907.5833333333334,
+        "last_completion_offset_s": 11.999031151994132,
+        "start_lateness_ms": 9.785213973373175,
+        "finish_overrun_ms": 0.04652200732380152,
+        "work_process_cpu_ms": 11045.521728000002,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.0332640009,
+          "finish_offset_ms": 12000.03714603372,
+          "cpu_ms": 0.9993279999989113,
+          "overrun_ms": 0.037146033719182014
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.2197121279999994,
+        "parent_user_s": 0.16101600000000005,
+        "parent_system_s": 0.058698999999999835,
+        "worker_cpu_s": 0.5151623999999999,
+        "worker_user_s": 0.21,
+        "worker_system_s": 0.3
+      },
+      "foreground_process_cpu_ms": 734.8745279999993,
+      "background_live_process_cpu_ms": 11046.041184000002,
+      "combined_process_cpu_ms": 11780.915712,
+      "accounting_start_lateness_ms": 0.10709499474614859,
+      "accounting_end_overrun_ms": 1.5078180003911257,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 285.47828597947955,
+      "excluded_warmup_ms": 655.0784220453352,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 2,
+      "order": 0
+    },
+    {
+      "mode": "nvdec-merged",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0009746559662744403,
+          "finish_offset_s": 0.29730393702629954,
+          "release_lateness_ms": 0.9746559662744403,
+          "service_ms": 296.3292810600251,
+          "release_to_completion_ms": 297.30393702629954,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000813270453364,
+          "finish_offset_s": 1.278729747980833,
+          "release_lateness_ms": 0.0813270453363657,
+          "service_ms": 278.6484209354967,
+          "release_to_completion_ms": 278.72974798083305,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000076422933489,
+          "finish_offset_s": 2.2991489650448784,
+          "release_lateness_ms": 0.07642293348908424,
+          "service_ms": 299.07254211138934,
+          "release_to_completion_ms": 299.1489650448784,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000079263933003,
+          "finish_offset_s": 3.281577026937157,
+          "release_lateness_ms": 0.07926393300294876,
+          "service_ms": 281.49776300415397,
+          "release_to_completion_ms": 281.5770269371569,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.00007813598495,
+          "finish_offset_s": 4.284899357939139,
+          "release_lateness_ms": 0.07813598494976759,
+          "service_ms": 284.82122195418924,
+          "release_to_completion_ms": 284.899357939139,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000075952033512,
+          "finish_offset_s": 5.289173059980385,
+          "release_lateness_ms": 0.07595203351229429,
+          "service_ms": 289.0971079468727,
+          "release_to_completion_ms": 289.173059980385,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000107944943011,
+          "finish_offset_s": 6.275747054023668,
+          "release_lateness_ms": 0.10794494301080704,
+          "service_ms": 275.63910908065736,
+          "release_to_completion_ms": 275.74705402366817,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.0000967689557,
+          "finish_offset_s": 7.294266570941545,
+          "release_lateness_ms": 0.09676895570009947,
+          "service_ms": 294.16980198584497,
+          "release_to_completion_ms": 294.26657094154507,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.00009087298531,
+          "finish_offset_s": 8.462589912000112,
+          "release_lateness_ms": 0.09087298531085253,
+          "service_ms": 462.4990390148014,
+          "release_to_completion_ms": 462.58991200011224,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.00010641803965,
+          "finish_offset_s": 9.334298211033456,
+          "release_lateness_ms": 0.10641803964972496,
+          "service_ms": 334.1917929938063,
+          "release_to_completion_ms": 334.298211033456,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000073194038123,
+          "finish_offset_s": 10.29302074201405,
+          "release_lateness_ms": 0.07319403812289238,
+          "service_ms": 292.9475479759276,
+          "release_to_completion_ms": 293.0207420140505,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000075457966886,
+          "finish_offset_s": 11.279116682941094,
+          "release_lateness_ms": 0.07545796688646078,
+          "service_ms": 279.0412249742076,
+          "release_to_completion_ms": 279.11668294109404,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11046,
+        "checked_chunks": 11047,
+        "chunks_per_second": 920.5,
+        "last_completion_offset_s": 11.999643989955075,
+        "start_lateness_ms": 11.440783040598035,
+        "finish_overrun_ms": 0.878338934853673,
+        "work_process_cpu_ms": 11114.888927999998,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.645653995685,
+          "finish_offset_ms": 12000.86528295651,
+          "cpu_ms": 1.0291519999992005,
+          "overrun_ms": 0.8652829565107822
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.16722140799999963,
+        "parent_user_s": 0.1260779999999997,
+        "parent_system_s": 0.041143999999999625,
+        "worker_cpu_s": 0.454677696,
+        "worker_user_s": 0.27,
+        "worker_system_s": 0.18
+      },
+      "foreground_process_cpu_ms": 621.8991039999997,
+      "background_live_process_cpu_ms": 11115.371360000001,
+      "combined_process_cpu_ms": 11737.270464000001,
+      "accounting_start_lateness_ms": 0.08872698526829481,
+      "accounting_end_overrun_ms": 2.0527190063148737,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 196.9754599267617,
+      "excluded_warmup_ms": 438.1613419391215,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 2,
+      "order": 1
+    },
+    {
+      "mode": "background-only",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 0,
+      "completed_jobs": 0,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11802,
+        "checked_chunks": 11803,
+        "chunks_per_second": 983.5,
+        "last_completion_offset_s": 11.99903435097076,
+        "start_lateness_ms": 0.759870046749711,
+        "finish_overrun_ms": 0.03746605943888426,
+        "work_process_cpu_ms": 11805.940448,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.037806992419,
+          "finish_offset_ms": 12000.029050046578,
+          "cpu_ms": 0.9912639999996031,
+          "overrun_ms": 0.02905004657804966
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.0077800320000012135,
+        "parent_user_s": 0.003842000000000567,
+        "parent_system_s": 0.003946000000000005
+      },
+      "foreground_process_cpu_ms": 7.7800320000012135,
+      "background_live_process_cpu_ms": 11806.446624,
+      "combined_process_cpu_ms": 11814.226656,
+      "accounting_start_lateness_ms": 0.09663100354373455,
+      "accounting_end_overrun_ms": 1.2456390541046858,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.004959991201758385,
+      "excluded_warmup_ms": 0.0005760230123996735,
+      "decoder_stats_before_close": null,
+      "repeat": 2,
+      "order": 2
+    },
+    {
+      "mode": "cpu",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.000754558015614748,
+          "finish_offset_s": 0.16730086505413055,
+          "release_lateness_ms": 0.754558015614748,
+          "service_ms": 166.5463070385158,
+          "release_to_completion_ms": 167.30086505413055,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000822549918666,
+          "finish_offset_s": 1.1545027369866148,
+          "release_lateness_ms": 0.0822549918666482,
+          "service_ms": 154.42048199474812,
+          "release_to_completion_ms": 154.50273698661476,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.000081798993051,
+          "finish_offset_s": 2.1545569060835987,
+          "release_lateness_ms": 0.0817989930510521,
+          "service_ms": 154.47510709054768,
+          "release_to_completion_ms": 154.55690608359873,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.0000971520785242,
+          "finish_offset_s": 3.1550295440247282,
+          "release_lateness_ms": 0.09715207852423191,
+          "service_ms": 154.932391946204,
+          "release_to_completion_ms": 155.02954402472824,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000095703988336,
+          "finish_offset_s": 4.1598314750008285,
+          "release_lateness_ms": 0.09570398833602667,
+          "service_ms": 159.73577101249248,
+          "release_to_completion_ms": 159.8314750008285,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000089872046374,
+          "finish_offset_s": 5.160639251000248,
+          "release_lateness_ms": 0.08987204637378454,
+          "service_ms": 160.5493789538741,
+          "release_to_completion_ms": 160.6392510002479,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000088487984613,
+          "finish_offset_s": 6.157988560036756,
+          "release_lateness_ms": 0.08848798461258411,
+          "service_ms": 157.9000720521435,
+          "release_to_completion_ms": 157.9885600367561,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000066049047746,
+          "finish_offset_s": 7.154260385083035,
+          "release_lateness_ms": 0.06604904774576426,
+          "service_ms": 154.19433603528887,
+          "release_to_completion_ms": 154.26038508303463,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.00008444103878,
+          "finish_offset_s": 8.150400464073755,
+          "release_lateness_ms": 0.08444103877991438,
+          "service_ms": 150.31602303497493,
+          "release_to_completion_ms": 150.40046407375485,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000091857044026,
+          "finish_offset_s": 9.158269979991019,
+          "release_lateness_ms": 0.09185704402625561,
+          "service_ms": 158.17812294699252,
+          "release_to_completion_ms": 158.26997999101877,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000080586061813,
+          "finish_offset_s": 10.159900325001217,
+          "release_lateness_ms": 0.08058606181293726,
+          "service_ms": 159.8197389394045,
+          "release_to_completion_ms": 159.90032500121742,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000078690005466,
+          "finish_offset_s": 11.15730553807225,
+          "release_lateness_ms": 0.07869000546634197,
+          "service_ms": 157.22684806678444,
+          "release_to_completion_ms": 157.30553807225078,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10845,
+        "checked_chunks": 10846,
+        "chunks_per_second": 903.75,
+        "last_completion_offset_s": 11.99934308999218,
+        "start_lateness_ms": 8.652816992253065,
+        "finish_overrun_ms": 0.5781430518254638,
+        "work_process_cpu_ms": 10860.378944,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.344722018577,
+          "finish_offset_ms": 12000.56307099294,
+          "cpu_ms": 1.0230720000006244,
+          "overrun_ms": 0.5630709929391742
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.9960942400000015,
+        "parent_user_s": 0.9896130000000003,
+        "parent_system_s": 0.006485000000000074
+      },
+      "foreground_process_cpu_ms": 996.0942400000015,
+      "background_live_process_cpu_ms": 10860.896799999999,
+      "combined_process_cpu_ms": 11856.99104,
+      "accounting_start_lateness_ms": 0.107127008959651,
+      "accounting_end_overrun_ms": 1.712939003482461,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.00342389103025198,
+      "excluded_warmup_ms": 82.66877906862646,
+      "decoder_stats_before_close": null,
+      "repeat": 2,
+      "order": 3
+    },
+    {
+      "mode": "nvdec-merged",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0009375039953738451,
+          "finish_offset_s": 0.30145217292010784,
+          "release_lateness_ms": 0.9375039953738451,
+          "service_ms": 300.514668924734,
+          "release_to_completion_ms": 301.45217292010784,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0001155679346994,
+          "finish_offset_s": 1.2825701090041548,
+          "release_lateness_ms": 0.11556793469935656,
+          "service_ms": 282.45454106945544,
+          "release_to_completion_ms": 282.5701090041548,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0000710469903424,
+          "finish_offset_s": 2.3002520489972085,
+          "release_lateness_ms": 0.07104699034243822,
+          "service_ms": 300.18100200686604,
+          "release_to_completion_ms": 300.2520489972085,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000076288008131,
+          "finish_offset_s": 3.287177501944825,
+          "release_lateness_ms": 0.07628800813108683,
+          "service_ms": 287.10121393669397,
+          "release_to_completion_ms": 287.17750194482505,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000077207922004,
+          "finish_offset_s": 4.280021514976397,
+          "release_lateness_ms": 0.07720792200416327,
+          "service_ms": 279.944307054393,
+          "release_to_completion_ms": 280.02151497639716,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000078512006439,
+          "finish_offset_s": 5.290616146987304,
+          "release_lateness_ms": 0.07851200643926859,
+          "service_ms": 290.5376349808648,
+          "release_to_completion_ms": 290.6161469873041,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000076552969404,
+          "finish_offset_s": 6.2775343370158225,
+          "release_lateness_ms": 0.07655296940356493,
+          "service_ms": 277.45778404641896,
+          "release_to_completion_ms": 277.53433701582253,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000076384982094,
+          "finish_offset_s": 7.2920485630165786,
+          "release_lateness_ms": 0.07638498209416866,
+          "service_ms": 291.9721780344844,
+          "release_to_completion_ms": 292.04856301657856,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000074360985309,
+          "finish_offset_s": 8.282772392965853,
+          "release_lateness_ms": 0.07436098530888557,
+          "service_ms": 282.69803198054433,
+          "release_to_completion_ms": 282.7723929658532,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000084113911726,
+          "finish_offset_s": 9.290447923005559,
+          "release_lateness_ms": 0.08411391172558069,
+          "service_ms": 290.36380909383297,
+          "release_to_completion_ms": 290.44792300555855,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000090985908173,
+          "finish_offset_s": 10.298031130922027,
+          "release_lateness_ms": 0.09098590817302465,
+          "service_ms": 297.9401450138539,
+          "release_to_completion_ms": 298.03113092202693,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000070306006819,
+          "finish_offset_s": 11.278737959917635,
+          "release_lateness_ms": 0.07030600681900978,
+          "service_ms": 278.6676539108157,
+          "release_to_completion_ms": 278.7379599176347,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11058,
+        "checked_chunks": 11059,
+        "chunks_per_second": 921.5,
+        "last_completion_offset_s": 11.999794582952745,
+        "start_lateness_ms": 11.551951989531517,
+        "finish_overrun_ms": 1.0511729633435607,
+        "work_process_cpu_ms": 11129.797664,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.797942931764,
+          "finish_offset_ms": 12001.035301014781,
+          "cpu_ms": 1.0248320000005862,
+          "overrun_ms": 1.0353010147809982
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.16652553600000175,
+        "parent_user_s": 0.13541399999999904,
+        "parent_system_s": 0.03110400000000002,
+        "worker_cpu_s": 0.449568128,
+        "worker_user_s": 0.20999999999999996,
+        "worker_system_s": 0.24999999999999997
+      },
+      "foreground_process_cpu_ms": 616.0936640000018,
+      "background_live_process_cpu_ms": 11130.336288,
+      "combined_process_cpu_ms": 11746.429952000002,
+      "accounting_start_lateness_ms": 0.12546300422400236,
+      "accounting_end_overrun_ms": 2.6905499398708344,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 196.02847495116293,
+      "excluded_warmup_ms": 439.80209494475275,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 3,
+      "order": 0
+    },
+    {
+      "mode": "background-only",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 0,
+      "completed_jobs": 0,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11869,
+        "checked_chunks": 11870,
+        "chunks_per_second": 989.0833333333334,
+        "last_completion_offset_s": 11.999815638992004,
+        "start_lateness_ms": 0.8041899418458343,
+        "finish_overrun_ms": 1.0015720035880804,
+        "work_process_cpu_ms": 11822.305568000002,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.817206989974,
+          "finish_offset_ms": 12000.98829192575,
+          "cpu_ms": 1.0153279999993714,
+          "overrun_ms": 0.9882919257506728
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.007877343999997066,
+        "parent_user_s": 0.0011310000000008813,
+        "parent_system_s": 0.006753000000000231
+      },
+      "foreground_process_cpu_ms": 7.877343999997066,
+      "background_live_process_cpu_ms": 11822.783104,
+      "combined_process_cpu_ms": 11830.660447999997,
+      "accounting_start_lateness_ms": 0.12069498188793659,
+      "accounting_end_overrun_ms": 1.9763018935918808,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.0044800108298659325,
+      "excluded_warmup_ms": 0.0005440087988972664,
+      "decoder_stats_before_close": null,
+      "repeat": 3,
+      "order": 1
+    },
+    {
+      "mode": "cpu",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0006582050118595362,
+          "finish_offset_s": 0.15554016397800297,
+          "release_lateness_ms": 0.6582050118595362,
+          "service_ms": 154.88195896614343,
+          "release_to_completion_ms": 155.54016397800297,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.000074959010817,
+          "finish_offset_s": 1.1543194389669225,
+          "release_lateness_ms": 0.07495901081711054,
+          "service_ms": 154.24447995610535,
+          "release_to_completion_ms": 154.31943896692246,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0000660869991407,
+          "finish_offset_s": 2.1541240699589252,
+          "release_lateness_ms": 0.06608699914067984,
+          "service_ms": 154.05798295978457,
+          "release_to_completion_ms": 154.12406995892525,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.00007020693738,
+          "finish_offset_s": 3.1493993080221117,
+          "release_lateness_ms": 0.07020693738013506,
+          "service_ms": 149.32910108473152,
+          "release_to_completion_ms": 149.39930802211165,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000077432021499,
+          "finish_offset_s": 4.155049151973799,
+          "release_lateness_ms": 0.07743202149868011,
+          "service_ms": 154.9717199523002,
+          "release_to_completion_ms": 155.04915197379887,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000078383949585,
+          "finish_offset_s": 5.158259897958487,
+          "release_lateness_ms": 0.07838394958525896,
+          "service_ms": 158.181514008902,
+          "release_to_completion_ms": 158.25989795848727,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000071367947385,
+          "finish_offset_s": 6.150298685999587,
+          "release_lateness_ms": 0.07136794738471508,
+          "service_ms": 150.22731805220246,
+          "release_to_completion_ms": 150.29868599958718,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.0000787529861555,
+          "finish_offset_s": 7.1622267089551315,
+          "release_lateness_ms": 0.07875298615545034,
+          "service_ms": 162.14795596897602,
+          "release_to_completion_ms": 162.22670895513147,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.0000641529914,
+          "finish_offset_s": 8.159307086025365,
+          "release_lateness_ms": 0.06415299139916897,
+          "service_ms": 159.24293303396553,
+          "release_to_completion_ms": 159.3070860253647,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000065841013566,
+          "finish_offset_s": 9.154234320973046,
+          "release_lateness_ms": 0.06584101356565952,
+          "service_ms": 154.16847995948046,
+          "release_to_completion_ms": 154.23432097304612,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000065320986323,
+          "finish_offset_s": 10.150116701959632,
+          "release_lateness_ms": 0.0653209863230586,
+          "service_ms": 150.05138097330928,
+          "release_to_completion_ms": 150.11670195963234,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000067745917477,
+          "finish_offset_s": 11.162214741925709,
+          "release_lateness_ms": 0.06774591747671366,
+          "service_ms": 162.14699600823224,
+          "release_to_completion_ms": 162.21474192570895,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11027,
+        "checked_chunks": 11028,
+        "chunks_per_second": 918.9166666666666,
+        "last_completion_offset_s": 11.999171696952544,
+        "start_lateness_ms": 11.957044014707208,
+        "finish_overrun_ms": 0.3760929685086012,
+        "work_process_cpu_ms": 10949.088096000001,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.173137010075,
+          "finish_offset_ms": 12000.363645027392,
+          "cpu_ms": 1.0293120000000044,
+          "overrun_ms": 0.36364502739161253
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.99029904,
+        "parent_user_s": 0.9854900000000004,
+        "parent_system_s": 0.004814000000000096
+      },
+      "foreground_process_cpu_ms": 990.29904,
+      "background_live_process_cpu_ms": 10949.535232,
+      "combined_process_cpu_ms": 11939.834272,
+      "accounting_start_lateness_ms": 0.1106469426304102,
+      "accounting_end_overrun_ms": 1.3390149688348174,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.0025919871404767036,
+      "excluded_warmup_ms": 91.02550696115941,
+      "decoder_stats_before_close": null,
+      "repeat": 3,
+      "order": 2
+    },
+    {
+      "mode": "nvdec-baseline",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0009102079784497619,
+          "finish_offset_s": 0.5174907469190657,
+          "release_lateness_ms": 0.9102079784497619,
+          "service_ms": 516.580538940616,
+          "release_to_completion_ms": 517.4907469190657,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000799190020189,
+          "finish_offset_s": 1.6676004889886826,
+          "release_lateness_ms": 0.07991900201886892,
+          "service_ms": 667.5205699866638,
+          "release_to_completion_ms": 667.6004889886826,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0000701840035617,
+          "finish_offset_s": 2.5186215279391035,
+          "release_lateness_ms": 0.07018400356173515,
+          "service_ms": 518.5513439355418,
+          "release_to_completion_ms": 518.6215279391035,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000068479916081,
+          "finish_offset_s": 3.5102079909993336,
+          "release_lateness_ms": 0.06847991608083248,
+          "service_ms": 510.1395110832527,
+          "release_to_completion_ms": 510.20799099933356,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000069560017437,
+          "finish_offset_s": 4.516505969921127,
+          "release_lateness_ms": 0.06956001743674278,
+          "service_ms": 516.4364099036902,
+          "release_to_completion_ms": 516.505969921127,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000082224956714,
+          "finish_offset_s": 5.522120389970951,
+          "release_lateness_ms": 0.08222495671361685,
+          "service_ms": 522.0381650142372,
+          "release_to_completion_ms": 522.1203899709508,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000070089008659,
+          "finish_offset_s": 6.516713029006496,
+          "release_lateness_ms": 0.07008900865912437,
+          "service_ms": 516.642939997837,
+          "release_to_completion_ms": 516.7130290064961,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000067744986154,
+          "finish_offset_s": 7.5162480239523575,
+          "release_lateness_ms": 0.06774498615413904,
+          "service_ms": 516.1802789662033,
+          "release_to_completion_ms": 516.2480239523575,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000070456997491,
+          "finish_offset_s": 8.51627464091871,
+          "release_lateness_ms": 0.07045699749141932,
+          "service_ms": 516.2041839212179,
+          "release_to_completion_ms": 516.2746409187093,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.00006766594015,
+          "finish_offset_s": 9.516532395966351,
+          "release_lateness_ms": 0.06766594015061855,
+          "service_ms": 516.4647300262004,
+          "release_to_completion_ms": 516.532395966351,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000067977933213,
+          "finish_offset_s": 10.513722406933084,
+          "release_lateness_ms": 0.06797793321311474,
+          "service_ms": 513.654428999871,
+          "release_to_completion_ms": 513.7224069330841,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.00008579401765,
+          "finish_offset_s": 11.665233282954432,
+          "release_lateness_ms": 0.08579401765018702,
+          "service_ms": 665.1474889367819,
+          "release_to_completion_ms": 665.2332829544321,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11182,
+        "checked_chunks": 11183,
+        "chunks_per_second": 931.8333333333334,
+        "last_completion_offset_s": 11.99970223091077,
+        "start_lateness_ms": 10.098945000208914,
+        "finish_overrun_ms": 0.8965149754658341,
+        "work_process_cpu_ms": 11223.718784,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.703574925661,
+          "finish_offset_ms": 12000.88374700863,
+          "cpu_ms": 1.017984000000638,
+          "overrun_ms": 0.8837470086291432
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.20046864000000042,
+        "parent_user_s": 0.1638470000000023,
+        "parent_system_s": 0.03662699999999974,
+        "worker_cpu_s": 0.46471072,
+        "worker_user_s": 0.23000000000000004,
+        "worker_system_s": 0.24000000000000002
+      },
+      "foreground_process_cpu_ms": 665.1793600000004,
+      "background_live_process_cpu_ms": 11224.156224000002,
+      "combined_process_cpu_ms": 11889.335584000002,
+      "accounting_start_lateness_ms": 0.09589490946382284,
+      "accounting_end_overrun_ms": 1.9972629379481077,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 294.5237569510937,
+      "excluded_warmup_ms": 675.5305100232363,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 3,
+      "order": 3
+    },
+    {
+      "mode": "background-only",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 0,
+      "completed_jobs": 0,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11842,
+        "checked_chunks": 11843,
+        "chunks_per_second": 986.8333333333334,
+        "last_completion_offset_s": 11.99942776397802,
+        "start_lateness_ms": 0.7598060183227062,
+        "finish_overrun_ms": 0.6247359560802579,
+        "work_process_cpu_ms": 11880.590048,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.42920403555,
+          "finish_offset_ms": 12000.612767995335,
+          "cpu_ms": 1.029439999999937,
+          "overrun_ms": 0.6127679953351617
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.0076789439999984666,
+        "parent_user_s": 2.800000000036107e-05,
+        "parent_system_s": 0.007657000000000025
+      },
+      "foreground_process_cpu_ms": 7.6789439999984666,
+      "background_live_process_cpu_ms": 11881.036064,
+      "combined_process_cpu_ms": 11888.715008,
+      "accounting_start_lateness_ms": 0.10875903535634279,
+      "accounting_end_overrun_ms": 1.571626984514296,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.00425602775067091,
+      "excluded_warmup_ms": 0.00115192960947752,
+      "decoder_stats_before_close": null,
+      "repeat": 4,
+      "order": 0
+    },
+    {
+      "mode": "cpu",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0008123499574139714,
+          "finish_offset_s": 0.1639948459342122,
+          "release_lateness_ms": 0.8123499574139714,
+          "service_ms": 163.18249597679824,
+          "release_to_completion_ms": 163.9948459342122,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000904470216483,
+          "finish_offset_s": 1.15044317394495,
+          "release_lateness_ms": 0.09044702164828777,
+          "service_ms": 150.35272692330182,
+          "release_to_completion_ms": 150.4431739449501,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0000971269328147,
+          "finish_offset_s": 2.1600195879582316,
+          "release_lateness_ms": 0.09712693281471729,
+          "service_ms": 159.92246102541685,
+          "release_to_completion_ms": 160.01958795823157,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.0000839680433273,
+          "finish_offset_s": 3.1606680669356138,
+          "release_lateness_ms": 0.08396804332733154,
+          "service_ms": 160.58409889228642,
+          "release_to_completion_ms": 160.66806693561375,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000078200013377,
+          "finish_offset_s": 4.158394371974282,
+          "release_lateness_ms": 0.0782000133767724,
+          "service_ms": 158.3161719609052,
+          "release_to_completion_ms": 158.39437197428197,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000094127957709,
+          "finish_offset_s": 5.1638567260233685,
+          "release_lateness_ms": 0.09412795770913363,
+          "service_ms": 163.7625980656594,
+          "release_to_completion_ms": 163.85672602336854,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000096776988357,
+          "finish_offset_s": 6.163454217952676,
+          "release_lateness_ms": 0.09677698835730553,
+          "service_ms": 163.3574409643188,
+          "release_to_completion_ms": 163.45421795267612,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.0001173770288005,
+          "finish_offset_s": 7.151740069966763,
+          "release_lateness_ms": 0.11737702880054712,
+          "service_ms": 151.6226929379627,
+          "release_to_completion_ms": 151.74006996676326,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000087608932517,
+          "finish_offset_s": 8.158865930046886,
+          "release_lateness_ms": 0.08760893251746893,
+          "service_ms": 158.77832111436874,
+          "release_to_completion_ms": 158.8659300468862,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000090481014922,
+          "finish_offset_s": 9.172318864031695,
+          "release_lateness_ms": 0.09048101492226124,
+          "service_ms": 172.22838301677257,
+          "release_to_completion_ms": 172.31886403169483,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000080810044892,
+          "finish_offset_s": 10.158991900039837,
+          "release_lateness_ms": 0.08081004489213228,
+          "service_ms": 158.91108999494463,
+          "release_to_completion_ms": 158.99190003983676,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000078113982454,
+          "finish_offset_s": 11.158392525976524,
+          "release_lateness_ms": 0.0781139824539423,
+          "service_ms": 158.31441199406981,
+          "release_to_completion_ms": 158.39252597652376,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10774,
+        "checked_chunks": 10775,
+        "chunks_per_second": 897.8333333333334,
+        "last_completion_offset_s": 11.999844408011995,
+        "start_lateness_ms": 11.759505956433713,
+        "finish_overrun_ms": 1.1493819765746593,
+        "work_process_cpu_ms": 10736.42272,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.846647959203,
+          "finish_offset_ms": 12001.131972996518,
+          "cpu_ms": 1.0188800000001663,
+          "overrun_ms": 1.1319729965180159
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.9984179839999996,
+        "parent_user_s": 0.9881670000000007,
+        "parent_system_s": 0.010256000000000043
+      },
+      "foreground_process_cpu_ms": 998.4179839999996,
+      "background_live_process_cpu_ms": 10737.002464000001,
+      "combined_process_cpu_ms": 11735.420448,
+      "accounting_start_lateness_ms": 0.11499901302158833,
+      "accounting_end_overrun_ms": 2.265585004352033,
+      "affinity_before": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 0.002303975634276867,
+      "excluded_warmup_ms": 88.37728702928871,
+      "decoder_stats_before_close": null,
+      "repeat": 4,
+      "order": 1
+    },
+    {
+      "mode": "nvdec-baseline",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 1,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0010301449801772833,
+          "finish_offset_s": 0.6445307800313458,
+          "release_lateness_ms": 1.0301449801772833,
+          "service_ms": 643.5006350511685,
+          "release_to_completion_ms": 644.5307800313458,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000771669438109,
+          "finish_offset_s": 1.654930209973827,
+          "release_lateness_ms": 0.07716694381088018,
+          "service_ms": 654.8530430300161,
+          "release_to_completion_ms": 654.930209973827,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.0001006480306387,
+          "finish_offset_s": 2.787351700011641,
+          "release_lateness_ms": 0.10064803063869476,
+          "service_ms": 787.2510519810021,
+          "release_to_completion_ms": 787.3517000116408,
+          "deadline_miss": true
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.0000863360473886,
+          "finish_offset_s": 3.6539157839724794,
+          "release_lateness_ms": 0.08633604738861322,
+          "service_ms": 653.8294479250908,
+          "release_to_completion_ms": 653.9157839724794,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.000086936051957,
+          "finish_offset_s": 4.648904843954369,
+          "release_lateness_ms": 0.08693605195730925,
+          "service_ms": 648.8179079024121,
+          "release_to_completion_ms": 648.9048439543694,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.000078800949268,
+          "finish_offset_s": 5.643800494028255,
+          "release_lateness_ms": 0.07880094926804304,
+          "service_ms": 643.7216930789873,
+          "release_to_completion_ms": 643.8004940282553,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000078920973465,
+          "finish_offset_s": 6.647251114947721,
+          "release_lateness_ms": 0.07892097346484661,
+          "service_ms": 647.1721939742565,
+          "release_to_completion_ms": 647.2511149477214,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.000076640979387,
+          "finish_offset_s": 7.635749864974059,
+          "release_lateness_ms": 0.07664097938686609,
+          "service_ms": 635.6732239946723,
+          "release_to_completion_ms": 635.7498649740592,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000076793017797,
+          "finish_offset_s": 8.648648586007766,
+          "release_lateness_ms": 0.07679301779717207,
+          "service_ms": 648.5717929899693,
+          "release_to_completion_ms": 648.6485860077664,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.00007592199836,
+          "finish_offset_s": 9.642921605962329,
+          "release_lateness_ms": 0.07592199835926294,
+          "service_ms": 642.8456839639693,
+          "release_to_completion_ms": 642.9216059623286,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.000085258041508,
+          "finish_offset_s": 10.659726960002445,
+          "release_lateness_ms": 0.08525804150849581,
+          "service_ms": 659.6417019609362,
+          "release_to_completion_ms": 659.7269600024447,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000140803051181,
+          "finish_offset_s": 11.648081740946509,
+          "release_lateness_ms": 0.14080305118113756,
+          "service_ms": 647.9409378953278,
+          "release_to_completion_ms": 648.081740946509,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 10923,
+        "checked_chunks": 10924,
+        "chunks_per_second": 910.25,
+        "last_completion_offset_s": 11.999460372026078,
+        "start_lateness_ms": 10.071745025925338,
+        "finish_overrun_ms": 0.6648330017924309,
+        "work_process_cpu_ms": 10949.310464,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.467956018634,
+          "finish_offset_ms": 12000.649824971333,
+          "cpu_ms": 1.0152960000002764,
+          "overrun_ms": 0.6498249713331461
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.21831664000000117,
+        "parent_user_s": 0.18462800000000001,
+        "parent_system_s": 0.03368800000000016,
+        "worker_cpu_s": 0.501497856,
+        "worker_user_s": 0.26,
+        "worker_system_s": 0.24
+      },
+      "foreground_process_cpu_ms": 719.8144960000011,
+      "background_live_process_cpu_ms": 10949.864832,
+      "combined_process_cpu_ms": 11669.679328,
+      "accounting_start_lateness_ms": 0.10207097511738539,
+      "accounting_end_overrun_ms": 2.2196329664438963,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 219.03921500779688,
+      "excluded_warmup_ms": 805.680335033685,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 9280803,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 4,
+      "order": 2
+    },
+    {
+      "mode": "nvdec-merged",
+      "window_seconds": 12.0,
+      "scheduled_jobs": 12,
+      "completed_jobs": 12,
+      "deadline_misses": 0,
+      "foreground_window_overrun_ms": 0,
+      "foreground_jobs": [
+        {
+          "index": 0,
+          "fixture": 0,
+          "release_offset_s": 0.0,
+          "start_offset_s": 0.0010321930749341846,
+          "finish_offset_s": 0.4607155540725216,
+          "release_lateness_ms": 1.0321930749341846,
+          "service_ms": 459.68336099758744,
+          "release_to_completion_ms": 460.7155540725216,
+          "deadline_miss": false
+        },
+        {
+          "index": 1,
+          "fixture": 1,
+          "release_offset_s": 1.0,
+          "start_offset_s": 1.0000860310392454,
+          "finish_offset_s": 1.2806812250055373,
+          "release_lateness_ms": 0.08603103924542665,
+          "service_ms": 280.59519396629184,
+          "release_to_completion_ms": 280.68122500553727,
+          "deadline_miss": false
+        },
+        {
+          "index": 2,
+          "fixture": 2,
+          "release_offset_s": 2.0,
+          "start_offset_s": 2.00007245503366,
+          "finish_offset_s": 2.230579439084977,
+          "release_lateness_ms": 0.072455033659935,
+          "service_ms": 230.50698405131698,
+          "release_to_completion_ms": 230.5794390849769,
+          "deadline_miss": false
+        },
+        {
+          "index": 3,
+          "fixture": 3,
+          "release_offset_s": 3.0,
+          "start_offset_s": 3.000068991095759,
+          "finish_offset_s": 3.2175457570701838,
+          "release_lateness_ms": 0.06899109575897455,
+          "service_ms": 217.47676597442478,
+          "release_to_completion_ms": 217.54575707018375,
+          "deadline_miss": false
+        },
+        {
+          "index": 4,
+          "fixture": 4,
+          "release_offset_s": 4.0,
+          "start_offset_s": 4.00006991205737,
+          "finish_offset_s": 4.219874861999415,
+          "release_lateness_ms": 0.06991205736994743,
+          "service_ms": 219.8049499420449,
+          "release_to_completion_ms": 219.87486199941486,
+          "deadline_miss": false
+        },
+        {
+          "index": 5,
+          "fixture": 5,
+          "release_offset_s": 5.0,
+          "start_offset_s": 5.0000703521072865,
+          "finish_offset_s": 5.219623972079717,
+          "release_lateness_ms": 0.07035210728645325,
+          "service_ms": 219.55361997243017,
+          "release_to_completion_ms": 219.62397207971662,
+          "deadline_miss": false
+        },
+        {
+          "index": 6,
+          "fixture": 6,
+          "release_offset_s": 6.0,
+          "start_offset_s": 6.000068488065153,
+          "finish_offset_s": 6.21724313904997,
+          "release_lateness_ms": 0.06848806515336037,
+          "service_ms": 217.17465098481625,
+          "release_to_completion_ms": 217.2431390499696,
+          "deadline_miss": false
+        },
+        {
+          "index": 7,
+          "fixture": 7,
+          "release_offset_s": 7.0,
+          "start_offset_s": 7.0001074890606105,
+          "finish_offset_s": 7.222644307999872,
+          "release_lateness_ms": 0.10748906061053276,
+          "service_ms": 222.53681893926114,
+          "release_to_completion_ms": 222.64430799987167,
+          "deadline_miss": false
+        },
+        {
+          "index": 8,
+          "fixture": 0,
+          "release_offset_s": 8.0,
+          "start_offset_s": 8.000068025081418,
+          "finish_offset_s": 8.219027975108474,
+          "release_lateness_ms": 0.06802508141845465,
+          "service_ms": 218.95995002705604,
+          "release_to_completion_ms": 219.0279751084745,
+          "deadline_miss": false
+        },
+        {
+          "index": 9,
+          "fixture": 1,
+          "release_offset_s": 9.0,
+          "start_offset_s": 9.000087953056209,
+          "finish_offset_s": 9.390373908099718,
+          "release_lateness_ms": 0.08795305620878935,
+          "service_ms": 390.2859550435096,
+          "release_to_completion_ms": 390.3739080997184,
+          "deadline_miss": false
+        },
+        {
+          "index": 10,
+          "fixture": 2,
+          "release_offset_s": 10.0,
+          "start_offset_s": 10.0000659620855,
+          "finish_offset_s": 10.2282990970416,
+          "release_lateness_ms": 0.06596208550035954,
+          "service_ms": 228.2331349560991,
+          "release_to_completion_ms": 228.29909704159945,
+          "deadline_miss": false
+        },
+        {
+          "index": 11,
+          "fixture": 3,
+          "release_offset_s": 11.0,
+          "start_offset_s": 11.000065666041337,
+          "finish_offset_s": 11.215851693996228,
+          "release_lateness_ms": 0.06566604133695364,
+          "service_ms": 215.78602795489132,
+          "release_to_completion_ms": 215.85169399622828,
+          "deadline_miss": false
+        }
+      ],
+      "background": {
+        "status": "done",
+        "completed_chunks": 11132,
+        "checked_chunks": 11133,
+        "chunks_per_second": 927.6666666666666,
+        "last_completion_offset_s": 11.999167793081142,
+        "start_lateness_ms": 12.561531038954854,
+        "finish_overrun_ms": 0.3531490219756961,
+        "work_process_cpu_ms": 11148.095648,
+        "boundary_chunk": {
+          "start_offset_ms": 11999.169233022258,
+          "finish_offset_ms": 12000.339677091688,
+          "cpu_ms": 1.013760000001085,
+          "overrun_ms": 0.3396770916879177
+        },
+        "affinity": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "foreground_cpu_deltas_s": {
+        "parent_cpu_s": 0.1613681920000012,
+        "parent_user_s": 0.12577900000000142,
+        "parent_system_s": 0.0355970000000001,
+        "worker_cpu_s": 0.46885168000000005,
+        "worker_user_s": 0.25,
+        "worker_system_s": 0.22999999999999998
+      },
+      "foreground_process_cpu_ms": 630.2198720000011,
+      "background_live_process_cpu_ms": 11148.570656,
+      "combined_process_cpu_ms": 11778.790528000001,
+      "accounting_start_lateness_ms": 0.12367102317512035,
+      "accounting_end_overrun_ms": 1.5089689986780286,
+      "affinity_before": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "affinity_after": {
+        "runner": {
+          "threads": 3,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "background": {
+          "threads": 1,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        },
+        "decoder": {
+          "threads": 8,
+          "allowed_logical_cpus": [
+            0
+          ],
+          "nice": 0,
+          "scheduler_policy": 0,
+          "thread_nice_values": [
+            0
+          ],
+          "thread_scheduler_policies": [
+            0
+          ]
+        }
+      },
+      "excluded_setup_ms": 204.2503539705649,
+      "excluded_warmup_ms": 619.3608590401709,
+      "decoder_stats_before_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 857,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 12,
+        "pending_fences": 1,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_stats_after_close": {
+        "requests": 13,
+        "submitted_frames": 858,
+        "decoded_frames": 858,
+        "copied_frames": 13,
+        "fence_pictures": 13,
+        "fence_bytes": 15678,
+        "decoded_fences": 13,
+        "pending_fences": 0,
+        "input_bytes": 8269923,
+        "pipeline_starts": 1
+      },
+      "decoder_counter_scope": "Includes one warmup request; final close and counter check are outside timing.",
+      "repeat": 4,
+      "order": 3
+    }
+  ],
+  "protocol": {
+    "affinity": "One first-allowed logical CPU shared by runner, decoder threads and one spawned background worker; masks verified; runner masks restored.",
+    "releases": "Twelve absolute 1 Hz releases per foreground trial, sequential execution without drops; deadline measured from release including queueing.",
+    "background": "Same public PBKDF2 input and iteration count in every mode; checksum checked each chunk; count only completions within the fixed 12-second window.",
+    "barrier": "Worker ready after setup/warmup, then armed acknowledgement and common future monotonic start/end timestamps.",
+    "overload": "All scheduled foreground jobs finish, even after window end; background stops independently at fixed end; overruns and boundary chunks remain explicit.",
+    "cpu_scope": "Live parent, decoder worker and background process CPU clocks. Accounting extends through foreground backlog and final boundary chunk; offsets recorded separately.",
+    "excluded": "Initialization, warmup, process creation and final close excluded. Required foreground work and output checks included. No clocks, priorities or global settings changed.",
+    "limits": "No energy inference. Accounting covers named processes; other processes and spawn bookkeeping are excluded. Driver IRQs/kernel workqueues are not constrained by process affinity. Raw ranges retained; small/noisy or null effects are valid outcomes.",
+    "status": "Pass means protocol, outputs and provenance verified. Deadline qualification is reported separately; throughput gains with missed deadlines do not establish the requested service level."
+  },
+  "logical_cpu": 0,
+  "background_specification": {
+    "algorithm": "PBKDF2-HMAC-SHA256",
+    "password_ascii": "codec-compute-public-background-work",
+    "salt_ascii": "fixed-window-public-salt-v1",
+    "derived_key_bytes": 32,
+    "iterations": 2252,
+    "expected_hex": "4cb1f9a114b77e69b1cc1901e29ece96c3c4439e8124d732b4110767ff5142b6",
+    "target_chunk_ms": 1.0,
+    "calibration": [
+      {
+        "iterations": 2048,
+        "wall_ms": [
+          0.9305700659751892,
+          0.9040089789777994,
+          0.9205859387293458,
+          0.8993059163913131,
+          0.9076250717043877
+        ]
+      },
+      {
+        "iterations": 2256,
+        "wall_ms": [
+          1.004074001684785,
+          0.999402953311801,
+          1.0017380118370056,
+          0.9915309492498636,
+          1.0060910135507584
+        ]
+      },
+      {
+        "iterations": 2252,
+        "wall_ms": [
+          0.998473959043622,
+          0.9868270717561245,
+          0.9910819353535771,
+          0.9938350412994623,
+          1.0059300111606717
+        ]
+      }
+    ]
+  },
+  "identity": {
+    "source_commit": "90823cc769f995240acaf4bbffbf0ecb8f08ef2f",
+    "source_sha256": {
+      "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+      "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
+      "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+      "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+      "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+      "05-h264-compiler/h264/packed.py": "31f232f58a463d25bf0767ccd6d01b39df5692e0cb98f4c9b1d2ac0d5197daeb",
+      "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+      "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+      "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
+      "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770",
+      "codec_compute/__init__.py": "44cfe5a4e0759dd9315a63e2d11ea1600adb2873fae95a942a7ab430eef8bab0",
+      "codec_compute/av1/__init__.py": "b79a63600905f7831b0750ccd23faa2ebc5f112b08bcccd242c2e9143ad41677",
+      "codec_compute/av1/bootstrap.py": "218ae23fca2e2eaf1fe42552aa2d1d77f4d6d85b806332b0b412050420568856",
+      "codec_compute/compiler.py": "6d0b1dfa4e387e205d15bf9fe9f976620de652aeab5786047dc27d83e00954c5",
+      "codec_compute/demo.py": "9a096e724f0e91c92298f69e48f292bc9f8a73e53089ef219e88e4bda9ba29a8",
+      "codec_compute/hevc/__init__.py": "8cf7d30ea505c0ef8aa62eb9cef71d867e58d170cd0a27b81f8cf7547b53c280",
+      "codec_compute/hevc/native.py": "8d35e57eaf4969fb3b3562312a43e2016a82ff4ab83d52772966769d48149ef8",
+      "codec_compute/hevc/program.py": "3fdb399e9d54919481bc5dc575f2e7fe0588da92bfb6ce20b5989d323c9db4b0",
+      "codec_compute/ir.py": "746f6635b39cecc4089b3d5a51e6e73b756e27b672292785403e9100ebc77ef5",
+      "codec_compute/runtime.py": "5f7aca941ed1a310f6fec3b740f95146aadb242c664ad2885351cbc82f7f5a1d",
+      "codec_compute/sampling.py": "5303746e2c2d329fff93f4a3157cba8a1451d6fc46af3e6a0ca4a23a3fe6d627",
+      "codec_compute/synthesis/__init__.py": "ef35f6385758a1907493ea9bd2c95657fcf9d31960c8196277631e18acb61df6",
+      "codec_compute/synthesis/demo.py": "4a3e42c3cef2d837c5a926df9fd964416608ec38a08aef1a880780291f5d7a91",
+      "codec_compute/synthesis/lower.py": "b509ba7447923dbcb1063f703f6c35a8ccd034f7dfeb45d080ce21c1bb0f8bca",
+      "codec_compute/synthesis/model.py": "03ffe4f117fbdf2231edfa96005727c3654059981b47b48a432f20f62684ddce",
+      "codec_compute/synthesis/search.py": "626385b4f1b4e9e33168e52fb6c717cafeb340aa337cea9283d7ea233685f000",
+      "codec_compute/synthesis/verify.py": "291c6e3f5b17b39e56a128eaa7c279e4819de074726b05111a57bc77445ce5dd",
+      "codec_compute/targets/__init__.py": "34e7368d1c8648a2867b98863741e66cca96695ce3f5d910d8c310c8db73a465",
+      "codec_compute/targets/av1.py": "aa9e3052d0c1985b870962abeab71ac8467e73af1845f87a9e34ab35ada85aee",
+      "codec_compute/targets/h264.py": "a2f711caf15718e179874c371f7c48deb202a879db14306ee150c7b874caa3d7",
+      "codec_compute/targets/hevc.py": "5ec8346040e2b9bb052f11b94697ddfe6ae7a079d9bd3e1b01169ca3982ba883",
+      "codec_compute/workloads/__init__.py": "92f92f5a0db0585928120bc79f7d5acb264ac7d6cea9df072ec8198533e7cb86",
+      "codec_compute/workloads/benchmark.py": "c8074f02d15115dcec908397939b82284dec7dc5080baa786ca21b1cf7e3acaa",
+      "codec_compute/workloads/capture.py": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+      "codec_compute/workloads/cpu_comparison/__init__.py": "b9ad94760b67e701931b727b92ab521b3fe8092e09d737b82cc5b5982bef9a0c",
+      "codec_compute/workloads/cpu_comparison/benchmark.py": "1537af3eaec40f1a24aaf158ec02804e050431618da3692742be9a9d15b09cdb",
+      "codec_compute/workloads/cpu_comparison/build.py": "fc0b22b7e9367f15b393b20a513ccfd31a1a92cbba14fd93446b16a052667db9",
+      "codec_compute/workloads/cpu_comparison/build_cpu.sh": "b31fcaefe821e7102ab448b78809ac92d884501deb25ae41434ee6bf8cdca441",
+      "codec_compute/workloads/cpu_comparison/capture.py": "3a22c383cbaafc3587b959b5612802bb7419e2b5991f905289c9d14987c63334",
+      "codec_compute/workloads/cpu_comparison/cpu.cpp": "7b2d32f65af592f5701ff165c90a41ad9f90017c02b510cafcabf04a86139c6a",
+      "codec_compute/workloads/cpu_comparison/cpu_planes.cpp": "45fdc48e8a39c624730e63f6b678b741d6a74c7846a227f095e700ec90bca105",
+      "codec_compute/workloads/cpu_comparison/native.py": "74630d36364643a63e26a72fa1af53b4e22b6b02582ecb92b839c9d68d191e7b",
+      "codec_compute/workloads/cpu_comparison/prepare.py": "70aa8c2a818b88537df353f8edb8b55518dcdae0904e3d710136b845556bd3d7",
+      "codec_compute/workloads/cpu_comparison/tasks.py": "82d5950621dee6f0a8ab5e4c1dabecf1dc35459a52187a82031612909a0b7954",
+      "codec_compute/workloads/cpu_comparison/test_comparison.py": "f997adfbec0d97f33f88f9e4e08854bcf7ce4d69f792efa73b8657d257c3d411",
+      "codec_compute/workloads/cpu_comparison/test_cpu.py": "42330bedb730a6c80051f7810b480e8f0481c81d062103803d6412a8be57ae0f",
+      "codec_compute/workloads/cpu_comparison/test_planes.py": "916292360af77ba652dfb225f7687496182544addc215e3ca86fe448ce01b663",
+      "codec_compute/workloads/cpu_comparison/tune_cpu.py": "fb3ec27b2ebe275480dc8034aa92f7e27514338d04e20b002207c0013b48cbff",
+      "codec_compute/workloads/demo.py": "50295bf1d823dee38f5d279c56d5da28d2f3560acbe447ec33dba1cc3d411bc7",
+      "codec_compute/workloads/export_h264.py": "b402922c4c77d6fd7e3b1b47328bb653f9439103977dd865b94f9e45127c5930",
+      "codec_compute/workloads/fusion.py": "c9b12e9e84361ee600fa6706252ced4a882e33af92db036be53659bab74c62f0",
+      "codec_compute/workloads/guard_fusion/__init__.py": "e4b7b3b7b8e27df7dc9dc5745bcb7f4cf7a2d2f9a268170780ed69c362603918",
+      "codec_compute/workloads/guard_fusion/benchmark.py": "3f9325d40d8990e990cb38a96149fbfcecaf1af4e4bff381a2f399d246f716e2",
+      "codec_compute/workloads/guard_fusion/build.py": "8254fafa3023fd0f50db3b68d76ecc0ec0564c4d9752df7046202af500f03e3e",
+      "codec_compute/workloads/guard_fusion/capture.py": "1c267181d15986f30f4a6186903d0188fdb05df9eb1d1523eab96bcdb434fcdc",
+      "codec_compute/workloads/guard_fusion/concurrency.py": "7494808a266fb7c227328e1764e3a40c1d043296a04a03a519f37d391061ec08",
+      "codec_compute/workloads/guard_fusion/prepare.py": "01854d1cd1b48bb64633c5531d797dc56c8cd1feaad79ecbb9fa44907b708930",
+      "codec_compute/workloads/guard_fusion/runtime.py": "081ea21224dc06c5fcf1f1340bbd38803fee134cc21c01cb5a26abdd00c84fa8",
+      "codec_compute/workloads/guard_fusion/test_concurrency.py": "6180b5b8b990762db42adec58301c12f6fbb1735ecf308573f3b9f2c1befe7e0",
+      "codec_compute/workloads/guard_fusion/test_runtime.py": "fbb05a6f625ba733dd03706aa872cff64cd2a169c3a0b49c643149be83567a2d",
+      "codec_compute/workloads/kernels.py": "5690ab7d914f02a3b14e2204876747cdd6a21e18703393dc5a208f083716fa80",
+      "codec_compute/workloads/resampling/__init__.py": "45e7687cf1553a1429daa5c3b79eedcb5b542aa2094b853102e52ed6e6120ee6",
+      "codec_compute/workloads/resampling/benchmark.py": "a6c45b84f728fce5c586a53b1fb36f58b7843d99e2c5b44a98c567bebb918149",
+      "codec_compute/workloads/resampling/capture.py": "064510d5a8823591c04d7baa55696006e137e21b498f45daaf2371d148a31531",
+      "codec_compute/workloads/resampling/demo.py": "befc85fc764ea3e5f3adcc14cb5f2d7ebd5bc6333ec399160d10e4564a1ffd48",
+      "codec_compute/workloads/resampling/kernels.py": "40c6c88028adcd70c366737209659824d03fb291555316ce6bb1b12b85a26e92",
+      "codec_compute/workloads/resident/__init__.py": "f4c519efc8925d031ad65d7915be01af68a1f2dbaf5af96e324845a442163c7e",
+      "codec_compute/workloads/resident/benchmark.py": "b1e2cb9702707085fda5b9f866c62dfa7143e0dacb90f6e2624493ca2df9e2ae",
+      "codec_compute/workloads/resident/capture.py": "bb6d4de41a46e12450bacbd62856c850be1b73b84abf551f9979f83b185f8515",
+      "codec_compute/workloads/resident/prepare.py": "08230543b5d5d79bacd65bb39ecf5d0db954cc1e29eaae502d05aa598ab4607d",
+      "codec_compute/workloads/temporal_benchmark.py": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+      "decoder_core/__init__.py": "f06f0bd5998852da1c539e8b9000abb0e543eb3d271ddb798808403eb502d9ab",
+      "decoder_core/bitstream.py": "9155a8881abad10196e4d3c5c4da7b2df77de1e47881eb064ab30a33af467712",
+      "decoder_core/build_nvdec.sh": "e6b183183623ee787d7284fd99cd2f690fbd215c41d9051f91967f5e0281f143",
+      "decoder_core/build_pcm.sh": "32bcab4440aea4340464cc0815976d8cf322ff3b8321453e2769143c49153eea",
+      "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+      "decoder_core/fence.py": "a573db67b7c13f62fbd4d6424d69652f87975594be00df326c6a9057ca53eb75",
+      "decoder_core/nvdec_decode.cpp": "13f6674abd3aeb60379745f11ae7cdfe3752b65708afe3fbbd735e004e8f6d74",
+      "decoder_core/pcm.py": "2efa0fc969936a55c8bc663539714df0492288eb2a4cafb5c9e2c8f053f71faa",
+      "decoder_core/pcm_native.cpp": "d368407d7ba3f67574f10fc0005d844f5562dd9eb5cc78807b708a57a19b32a5",
+      "decoder_core/session.py": "6469c34b1a92add6fd7beba23a838263ed83a75e5ed03f3b893cc2838db0cfb0",
+      "decoder_core/test_block_predictions.py": "66b2e6b05ec39a705908d31a73eda937d5c6ab892c30546c3109deffd0004514",
+      "decoder_core/test_decode.py": "acf45dc440832716bd9c8afd8e2737b1f006f5228cd9d81f1a88f663561007aa",
+      "decoder_core/test_fence.py": "e4d88ccc1066eac1b7a61d11a542a9ecd10b233ffbf94aa774e18e514cfa86f6",
+      "decoder_core/test_guard_fusion.py": "0df2531984a37877f83c7fefa0b7f9069bf5009eb85e46afec0a23d9ee01b7a6",
+      "decoder_core/test_levels.py": "2b9d1e2082ff0f01b58251e9f6d68b9afb2516606cc48a71e75ecbb417addc91",
+      "decoder_core/test_native_bitstream.py": "78bf41de9507d06ad77b1cc7be0d76dd941aec005b7b498abc5dcfbe952f3f19",
+      "decoder_core/test_optimizations.py": "2ea42e8cbe044b6874110a210c42979e72ab647913704f7cedbc797233237ca4",
+      "decoder_core/test_pcm.py": "f2da291cdc62fe515ca73f47360dd7c1e9ee9fc7ec11217240343bd5fd4ace83",
+      "decoder_core/test_session.py": "08ef6c1d2b3f5e0933b2a261fb34628997aeea8fe8316d67b2a547b83527cdc7",
+      "decoder_core/test_weight_limits.py": "ec2c83690e1a277f7014ebb32001bf0df981bb88d1dbe1303069cd4f2df217b8"
+    },
+    "bundle_sha256": "f9a63a38428904d41600d85af357be465813786c2e0e352e6f5251413ec5638a",
+    "native_build": {
+      "compiler": "c++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+      "flags": {
+        "cpu": [
+          "-std=c++17",
+          "-O3",
+          "-DNDEBUG",
+          "-fPIC",
+          "-shared",
+          "-Wall",
+          "-Wextra",
+          "-mcpu=native",
+          "-funroll-loops",
+          "-fopt-info-vec-optimized"
+        ],
+        "pcm": [
+          "-std=c++17",
+          "-O3",
+          "-DNDEBUG",
+          "-fPIC",
+          "-shared",
+          "-Wall",
+          "-Wextra"
+        ]
+      },
+      "source_sha256": {
+        "codec_compute/workloads/cpu_comparison/cpu_planes.cpp": "45fdc48e8a39c624730e63f6b678b741d6a74c7846a227f095e700ec90bca105",
+        "decoder_core/pcm_native.cpp": "d368407d7ba3f67574f10fc0005d844f5562dd9eb5cc78807b708a57a19b32a5"
+      },
+      "helper_sha256": {
+        "cpu": "ac040ce28f010910d224dfa0fb98b09885026d72c3ae1fc72fd078decbcfa00d",
+        "pcm": "58900b6d1909f7fd42bbb66091c54fdd6a7a5b2b5be2749e0551c712e1ce44b8"
+      },
+      "diagnostics": {
+        "cpu": "codec_compute/workloads/cpu_comparison/cpu_planes.cpp:82:31: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:82:31: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:51:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:51:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:45:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:45:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:36:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:36:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:71:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:71:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:51:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:51:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:45:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:45:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:36:27: optimized: loop vectorized using 16 byte vectors\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:36:27: optimized:  loop versioned for vectorization because of possible aliasing\ncodec_compute/workloads/cpu_comparison/cpu_planes.cpp:94:9: optimized: basic block part vectorized using 16 byte vectors\n",
+        "pcm": ""
+      }
+    },
+    "helper_sha256": {
+      "cpu": "ac040ce28f010910d224dfa0fb98b09885026d72c3ae1fc72fd078decbcfa00d",
+      "pcm": "58900b6d1909f7fd42bbb66091c54fdd6a7a5b2b5be2749e0551c712e1ce44b8",
+      "nvdec": "c77f1fd634ee1e0b9bd9e4c5c15841f57b9aee323dcdc9fbb211618656636cf5"
+    }
+  },
+  "validation": {
+    "status": "pass",
+    "cpu_jobs": 8,
+    "nvdec_jobs": {
+      "baseline": 8,
+      "merged": 8
+    },
+    "full_i420": true,
+    "affinity": {
+      "baseline": {
+        "threads": 8,
+        "allowed_logical_cpus": [
+          0
+        ],
+        "nice": 0,
+        "scheduler_policy": 0,
+        "thread_nice_values": [
+          0
+        ],
+        "thread_scheduler_policies": [
+          0
+        ]
+      },
+      "merged": {
+        "threads": 8,
+        "allowed_logical_cpus": [
+          0
+        ],
+        "nice": 0,
+        "scheduler_policy": 0,
+        "thread_nice_values": [
+          0
+        ],
+        "thread_scheduler_policies": [
+          0
+        ]
+      }
+    },
+    "decoder_stats_after_close": {
+      "baseline": {
+        "requests": 8,
+        "submitted_frames": 528,
+        "decoded_frames": 528,
+        "copied_frames": 520,
+        "fence_pictures": 8,
+        "fence_bytes": 9648,
+        "decoded_fences": 8,
+        "pending_fences": 0,
+        "input_bytes": 5681016,
+        "pipeline_starts": 1
+      },
+      "merged": {
+        "requests": 8,
+        "submitted_frames": 528,
+        "decoded_frames": 528,
+        "copied_frames": 520,
+        "fence_pictures": 8,
+        "fence_bytes": 9648,
+        "decoded_fences": 8,
+        "pending_fences": 0,
+        "input_bytes": 5058936,
+        "pipeline_starts": 1
+      }
+    }
+  },
+  "summary": {
+    "background-only": {
+      "background_chunks_per_second": {
+        "samples": [
+          964.9166666666666,
+          997.6666666666666,
+          983.5,
+          989.0833333333334,
+          986.8333333333334
+        ],
+        "median": 986.8333333333334,
+        "range": [
+          964.9166666666666,
+          997.6666666666666
+        ]
+      },
+      "deadline_misses": 0,
+      "foreground_jobs": 0,
+      "foreground_cpu_ms": {
+        "samples": [
+          7.935200000000364,
+          7.704992000000743,
+          7.7800320000012135,
+          7.877343999997066,
+          7.6789439999984666
+        ],
+        "median": 7.7800320000012135,
+        "range": [
+          7.6789439999984666,
+          7.935200000000364
+        ]
+      },
+      "background_cpu_ms": {
+        "samples": [
+          11805.134528,
+          11865.30992,
+          11806.446624,
+          11822.783104,
+          11881.036064
+        ],
+        "median": 11822.783104,
+        "range": [
+          11805.134528,
+          11881.036064
+        ]
+      },
+      "combined_cpu_ms": {
+        "samples": [
+          11813.069728,
+          11873.014912,
+          11814.226656,
+          11830.660447999997,
+          11888.715008
+        ],
+        "median": 11830.660447999997,
+        "range": [
+          11813.069728,
+          11888.715008
+        ]
+      },
+      "background_rate_difference_vs_cpu": {
+        "samples": [
+          51.08333333333326,
+          97.91666666666663,
+          79.75,
+          70.16666666666674,
+          89.0
+        ],
+        "median": 79.75,
+        "range": [
+          51.08333333333326,
+          97.91666666666663
+        ]
+      },
+      "deadline_status": "not-applicable",
+      "background_fraction_of_control": {
+        "samples": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "median": 1.0,
+        "range": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "cpu": {
+      "background_chunks_per_second": {
+        "samples": [
+          913.8333333333334,
+          899.75,
+          903.75,
+          918.9166666666666,
+          897.8333333333334
+        ],
+        "median": 903.75,
+        "range": [
+          897.8333333333334,
+          918.9166666666666
+        ]
+      },
+      "deadline_misses": 0,
+      "foreground_jobs": 60,
+      "foreground_cpu_ms": {
+        "samples": [
+          996.76352,
+          995.7026240000015,
+          996.0942400000015,
+          990.29904,
+          998.4179839999996
+        ],
+        "median": 996.0942400000015,
+        "range": [
+          990.29904,
+          998.4179839999996
+        ]
+      },
+      "background_cpu_ms": {
+        "samples": [
+          10886.680832,
+          10876.20176,
+          10860.896799999999,
+          10949.535232,
+          10737.002464000001
+        ],
+        "median": 10876.20176,
+        "range": [
+          10737.002464000001,
+          10949.535232
+        ]
+      },
+      "combined_cpu_ms": {
+        "samples": [
+          11883.444352,
+          11871.904384000001,
+          11856.99104,
+          11939.834272,
+          11735.420448
+        ],
+        "median": 11871.904384000001,
+        "range": [
+          11735.420448,
+          11939.834272
+        ]
+      },
+      "background_rate_difference_vs_cpu": {
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "median": 0.0,
+        "range": [
+          0.0,
+          0.0
+        ]
+      },
+      "deadline_status": "met",
+      "background_fraction_of_control": {
+        "samples": [
+          0.9470593315484931,
+          0.9018543267624457,
+          0.9189120488052872,
+          0.9290588929143145,
+          0.9098125316669482
+        ],
+        "median": 0.9189120488052872,
+        "range": [
+          0.9018543267624457,
+          0.9470593315484931
+        ]
+      },
+      "release_to_completion_ms": {
+        "samples": [
+          166.32136597763747,
+          158.20373699534684,
+          159.04069796670228,
+          157.60761895217001,
+          152.37664396408945,
+          167.9376329993829,
+          162.4309429898858,
+          149.20263492967933,
+          162.43476700037718,
+          158.5945269325748,
+          162.35059092286974,
+          160.13814392499626,
+          161.5553320152685,
+          158.68214110378176,
+          161.31806606426835,
+          159.96364399325103,
+          158.91367301810533,
+          161.3954190397635,
+          165.40828603319824,
+          152.4841100908816,
+          162.30689408257604,
+          155.4480300983414,
+          158.3916690433398,
+          150.83017305005342,
+          167.30086505413055,
+          154.50273698661476,
+          154.55690608359873,
+          155.02954402472824,
+          159.8314750008285,
+          160.6392510002479,
+          157.9885600367561,
+          154.26038508303463,
+          150.40046407375485,
+          158.26997999101877,
+          159.90032500121742,
+          157.30553807225078,
+          155.54016397800297,
+          154.31943896692246,
+          154.12406995892525,
+          149.39930802211165,
+          155.04915197379887,
+          158.25989795848727,
+          150.29868599958718,
+          162.22670895513147,
+          159.3070860253647,
+          154.23432097304612,
+          150.11670195963234,
+          162.21474192570895,
+          163.9948459342122,
+          150.4431739449501,
+          160.01958795823157,
+          160.66806693561375,
+          158.39437197428197,
+          163.85672602336854,
+          163.45421795267612,
+          151.74006996676326,
+          158.8659300468862,
+          172.31886403169483,
+          158.99190003983676,
+          158.39252597652376
+        ],
+        "median": 158.63833401817828,
+        "range": [
+          149.20263492967933,
+          172.31886403169483
+        ]
+      }
+    },
+    "nvdec-baseline": {
+      "background_chunks_per_second": {
+        "samples": [
+          914.25,
+          910.4166666666666,
+          907.5833333333334,
+          931.8333333333334,
+          910.25
+        ],
+        "median": 910.4166666666666,
+        "range": [
+          907.5833333333334,
+          931.8333333333334
+        ]
+      },
+      "deadline_misses": 4,
+      "foreground_jobs": 60,
+      "foreground_cpu_ms": {
+        "samples": [
+          733.926079999999,
+          758.2400000000002,
+          734.8745279999993,
+          665.1793600000004,
+          719.8144960000011
+        ],
+        "median": 733.926079999999,
+        "range": [
+          665.1793600000004,
+          758.2400000000002
+        ]
+      },
+      "background_cpu_ms": {
+        "samples": [
+          11041.333472,
+          11000.509536,
+          11046.041184000002,
+          11224.156224000002,
+          10949.864832
+        ],
+        "median": 11041.333472,
+        "range": [
+          10949.864832,
+          11224.156224000002
+        ]
+      },
+      "combined_cpu_ms": {
+        "samples": [
+          11775.259552,
+          11758.749536,
+          11780.915712,
+          11889.335584000002,
+          11669.679328
+        ],
+        "median": 11775.259552,
+        "range": [
+          11669.679328,
+          11889.335584000002
+        ]
+      },
+      "background_rate_difference_vs_cpu": {
+        "samples": [
+          0.41666666666662877,
+          10.666666666666629,
+          3.8333333333333712,
+          12.916666666666742,
+          12.416666666666629
+        ],
+        "median": 10.666666666666629,
+        "range": [
+          0.41666666666662877,
+          12.916666666666742
+        ]
+      },
+      "deadline_status": "missed",
+      "background_fraction_of_control": {
+        "samples": [
+          0.9474911477675102,
+          0.9125459405278984,
+          0.9228096932723268,
+          0.9421181228410144,
+          0.9223948657321398
+        ],
+        "median": 0.9228096932723268,
+        "range": [
+          0.9125459405278984,
+          0.9474911477675102
+        ]
+      },
+      "release_to_completion_ms": {
+        "samples": [
+          648.5249020624906,
+          514.1144479857758,
+          528.726338990964,
+          647.8575440123677,
+          646.5226099826396,
+          638.4326290572062,
+          649.0681889699772,
+          638.2430749945343,
+          645.5506649799645,
+          792.6917669828981,
+          654.7646990511566,
+          644.8466660222039,
+          658.1236919155344,
+          657.0650489302352,
+          623.2049389509484,
+          514.6840389352292,
+          517.2998670022935,
+          654.1904599871486,
+          643.7941819895059,
+          652.2952559171245,
+          646.9015280017629,
+          642.0752289704978,
+          801.2061209883541,
+          636.9247590191662,
+          518.9620270393789,
+          655.8407479897141,
+          516.013276996091,
+          506.77845103200525,
+          627.0732530392706,
+          515.5826889676973,
+          516.323328949511,
+          645.520017016679,
+          645.3292550286278,
+          643.735887017101,
+          665.8942890353501,
+          781.1001730151474,
+          517.4907469190657,
+          667.6004889886826,
+          518.6215279391035,
+          510.20799099933356,
+          516.505969921127,
+          522.1203899709508,
+          516.7130290064961,
+          516.2480239523575,
+          516.2746409187093,
+          516.532395966351,
+          513.7224069330841,
+          665.2332829544321,
+          644.5307800313458,
+          654.930209973827,
+          787.3517000116408,
+          653.9157839724794,
+          648.9048439543694,
+          643.8004940282553,
+          647.2511149477214,
+          635.7498649740592,
+          648.6485860077664,
+          642.9216059623286,
+          659.7269600024447,
+          648.081740946509
+        ],
+        "median": 644.1656370298006,
+        "range": [
+          506.77845103200525,
+          801.2061209883541
+        ]
+      }
+    },
+    "nvdec-merged": {
+      "background_chunks_per_second": {
+        "samples": [
+          919.0833333333334,
+          917.75,
+          920.5,
+          921.5,
+          927.6666666666666
+        ],
+        "median": 920.5,
+        "range": [
+          917.75,
+          927.6666666666666
+        ]
+      },
+      "deadline_misses": 0,
+      "foreground_jobs": 60,
+      "foreground_cpu_ms": {
+        "samples": [
+          624.8557119999992,
+          605.7352320000012,
+          621.8991039999997,
+          616.0936640000018,
+          630.2198720000011
+        ],
+        "median": 621.8991039999997,
+        "range": [
+          605.7352320000012,
+          630.2198720000011
+        ]
+      },
+      "background_cpu_ms": {
+        "samples": [
+          11121.870719999999,
+          11168.753472,
+          11115.371360000001,
+          11130.336288,
+          11148.570656
+        ],
+        "median": 11130.336288,
+        "range": [
+          11115.371360000001,
+          11168.753472
+        ]
+      },
+      "combined_cpu_ms": {
+        "samples": [
+          11746.726431999998,
+          11774.488704000001,
+          11737.270464000001,
+          11746.429952000002,
+          11778.790528000001
+        ],
+        "median": 11746.726431999998,
+        "range": [
+          11737.270464000001,
+          11778.790528000001
+        ]
+      },
+      "background_rate_difference_vs_cpu": {
+        "samples": [
+          5.25,
+          18.0,
+          16.75,
+          2.5833333333333712,
+          29.833333333333258
+        ],
+        "median": 16.75,
+        "range": [
+          2.5833333333333712,
+          29.833333333333258
+        ]
+      },
+      "deadline_status": "met",
+      "background_fraction_of_control": {
+        "samples": [
+          0.9525002159081096,
+          0.9198964249916473,
+          0.9359430604982206,
+          0.9316707388996546,
+          0.9400439115014355
+        ],
+        "median": 0.9359430604982206,
+        "range": [
+          0.9198964249916473,
+          0.9525002159081096
+        ]
+      },
+      "release_to_completion_ms": {
+        "samples": [
+          313.9226729981601,
+          276.51996491476893,
+          296.99377389624715,
+          285.96721799112856,
+          281.4452109159902,
+          287.56533190608025,
+          458.8097599335015,
+          293.6506929108873,
+          283.712979988195,
+          291.8807700043544,
+          287.1894489508122,
+          280.9063669992611,
+          304.60660601966083,
+          291.81971098296344,
+          291.0670880228281,
+          290.31750396825373,
+          284.2392240418121,
+          288.5285740485415,
+          284.98206404037774,
+          463.1787589751184,
+          290.48265097662807,
+          277.1115900250152,
+          305.2963609807193,
+          283.33980101160705,
+          297.30393702629954,
+          278.72974798083305,
+          299.1489650448784,
+          281.5770269371569,
+          284.899357939139,
+          289.173059980385,
+          275.74705402366817,
+          294.26657094154507,
+          462.58991200011224,
+          334.298211033456,
+          293.0207420140505,
+          279.11668294109404,
+          301.45217292010784,
+          282.5701090041548,
+          300.2520489972085,
+          287.17750194482505,
+          280.02151497639716,
+          290.6161469873041,
+          277.53433701582253,
+          292.04856301657856,
+          282.7723929658532,
+          290.44792300555855,
+          298.03113092202693,
+          278.7379599176347,
+          460.7155540725216,
+          280.68122500553727,
+          230.5794390849769,
+          217.54575707018375,
+          219.87486199941486,
+          219.62397207971662,
+          217.2431390499696,
+          222.64430799987167,
+          219.0279751084745,
+          390.3739080997184,
+          228.29909704159945,
+          215.85169399622828
+        ],
+        "median": 287.18347544781864,
+        "range": [
+          215.85169399622828,
+          463.1787589751184
+        ]
+      }
+    }
+  },
+  "deadline_qualification": {
+    "background-only": {
+      "status": "not-applicable",
+      "misses": 0,
+      "jobs": 0
+    },
+    "cpu": {
+      "status": "met",
+      "misses": 0,
+      "jobs": 60
+    },
+    "nvdec-baseline": {
+      "status": "missed",
+      "misses": 4,
+      "jobs": 60
+    },
+    "nvdec-merged": {
+      "status": "met",
+      "misses": 0,
+      "jobs": 60
+    }
+  },
+  "runner_affinity_restored": true
+}
