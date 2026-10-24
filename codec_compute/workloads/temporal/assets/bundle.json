@@ -1,0 +1,2812 @@
+{
+  "format": "codec-compute-temporal-bundle-1",
+  "status": "pass",
+  "target": "h264",
+  "repository_commit": "d479dc31c282c8dd026aaa4dff0b50ae596e794b",
+  "source_sha256": {
+    "codec_compute/__init__.py": "06603016bc99b50387db5cd57c8bc20f2334c686e8fde815eaf8067a1fd75e9e",
+    "codec_compute/av1/__init__.py": "b79a63600905f7831b0750ccd23faa2ebc5f112b08bcccd242c2e9143ad41677",
+    "codec_compute/av1/bootstrap.py": "218ae23fca2e2eaf1fe42552aa2d1d77f4d6d85b806332b0b412050420568856",
+    "codec_compute/compiler.py": "7bb7d07837656e380ba65dca9ea0fd67acf9116f0e92a0161e22a35835850948",
+    "codec_compute/demo.py": "9a096e724f0e91c92298f69e48f292bc9f8a73e53089ef219e88e4bda9ba29a8",
+    "codec_compute/hevc/__init__.py": "8cf7d30ea505c0ef8aa62eb9cef71d867e58d170cd0a27b81f8cf7547b53c280",
+    "codec_compute/hevc/native.py": "8d35e57eaf4969fb3b3562312a43e2016a82ff4ab83d52772966769d48149ef8",
+    "codec_compute/hevc/program.py": "3fdb399e9d54919481bc5dc575f2e7fe0588da92bfb6ce20b5989d323c9db4b0",
+    "codec_compute/ir.py": "f0a198e224b31c2f9764baf7dcc9c71cfd43d41576bab9dd7603d5718ad802dc",
+    "codec_compute/synthesis/__init__.py": "ef35f6385758a1907493ea9bd2c95657fcf9d31960c8196277631e18acb61df6",
+    "codec_compute/synthesis/demo.py": "4a3e42c3cef2d837c5a926df9fd964416608ec38a08aef1a880780291f5d7a91",
+    "codec_compute/synthesis/lower.py": "527b54897c0f964427943e4bbe582850bb4ed60a4cc6575ac4100c7dffe1a3f2",
+    "codec_compute/synthesis/model.py": "03ffe4f117fbdf2231edfa96005727c3654059981b47b48a432f20f62684ddce",
+    "codec_compute/synthesis/search.py": "626385b4f1b4e9e33168e52fb6c717cafeb340aa337cea9283d7ea233685f000",
+    "codec_compute/synthesis/verify.py": "291c6e3f5b17b39e56a128eaa7c279e4819de074726b05111a57bc77445ce5dd",
+    "codec_compute/targets/__init__.py": "34e7368d1c8648a2867b98863741e66cca96695ce3f5d910d8c310c8db73a465",
+    "codec_compute/targets/av1.py": "aa9e3052d0c1985b870962abeab71ac8467e73af1845f87a9e34ab35ada85aee",
+    "codec_compute/targets/h264.py": "d2bb7024d4d04a35b14940f57d486cbd3cea16866cdea4330ad5ce8a689a0c37",
+    "codec_compute/targets/hevc.py": "5ec8346040e2b9bb052f11b94697ddfe6ae7a079d9bd3e1b01169ca3982ba883",
+    "codec_compute/workloads/__init__.py": "92f92f5a0db0585928120bc79f7d5acb264ac7d6cea9df072ec8198533e7cb86",
+    "codec_compute/workloads/benchmark.py": "c8074f02d15115dcec908397939b82284dec7dc5080baa786ca21b1cf7e3acaa",
+    "codec_compute/workloads/capture.py": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+    "codec_compute/workloads/demo.py": "50295bf1d823dee38f5d279c56d5da28d2f3560acbe447ec33dba1cc3d411bc7",
+    "codec_compute/workloads/export_h264.py": "b402922c4c77d6fd7e3b1b47328bb653f9439103977dd865b94f9e45127c5930",
+    "codec_compute/workloads/fusion.py": "c9b12e9e84361ee600fa6706252ced4a882e33af92db036be53659bab74c62f0",
+    "codec_compute/workloads/kernels.py": "5690ab7d914f02a3b14e2204876747cdd6a21e18703393dc5a208f083716fa80",
+    "codec_compute/workloads/temporal_benchmark.py": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+    "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+    "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
+    "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+    "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+    "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+    "05-h264-compiler/h264/packed.py": "31f232f58a463d25bf0767ccd6d01b39df5692e0cb98f4c9b1d2ac0d5197daeb",
+    "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+    "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+    "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
+    "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770",
+    "decoder_core/bitstream.py": "75a7c92e8a090f3fc9179e9c76160f778bb46a54eb70a4920481b67fc9dcc6f5",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed"
+  },
+  "runtime_source_sha256": {
+    "runner": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+    "decoder": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+    "writer": "75a7c92e8a090f3fc9179e9c76160f778bb46a54eb70a4920481b67fc9dcc6f5"
+  },
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "width": 128,
+  "height": 128,
+  "job_count": 16,
+  "input_generation": "Independent deterministic byte pairs; local 32-bit LCG plus scene motion and exact arithmetic boundary pixels",
+  "validation": "Every named output equals independent task formula and semantic IR; full saved FFmpeg I420 includes all inputs/intermediates, zero guards and neutral chroma",
+  "tasks": {
+    "positive-change": {
+      "description": "One-sided brightness increase: max(current-reference,0).",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 644,
+        "peak_live_references": 2
+      },
+      "manifest": {
+        "path": "positive-change/manifest.json",
+        "sha256": "e0c094852ecca53fbe4d36592a04516fc2e818065968f81581d3dd87bafe5c1c",
+        "bytes": 2758
+      },
+      "tail": {
+        "path": "positive-change/prediction.h264",
+        "sha256": "486f829c6be3c83a57d26f727b810c950126d78d550fc8189d2df578d1913e02",
+        "bytes": 644
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        },
+        "slice_mode": "row"
+      },
+      "jobs": [
+        {
+          "index": 0,
+          "inputs": {
+            "a": {
+              "path": "inputs/000-a.u8",
+              "sha256": "87431259bc425e1296a8e3b6d2fd4fba5aff26d27a0cd8dbb36be3fe6694287e",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/000-b.u8",
+              "sha256": "6b0cb18ec6a500abaac82f7c01ccc15f10578b70ba23a77da702d22d0c645ab4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/000.prefix",
+            "sha256": "4229c19b2a916437e179b8a987390aa782b447f58d70763865900f79398fe726",
+            "bytes": 86487
+          },
+          "stream": {
+            "path": "positive-change/000.h264",
+            "sha256": "ba3af119b1a7fc4c7ec41c7dd1fb544a29ef66b83392dfad595d56d87ad122b1",
+            "bytes": 87131
+          },
+          "expected": {
+            "path": "positive-change/000.i420",
+            "sha256": "d9919089b7ac4c113cf54d2cb4efe0fa067693eaf5c8004f62a817f21a0eb868",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/000-output.u8",
+              "sha256": "3766c0c371779ed0b45c0f770efa2630d4d34b0f7492ad1a3a76b81ccd3853db",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 1,
+          "inputs": {
+            "a": {
+              "path": "inputs/001-a.u8",
+              "sha256": "9d141227e0a2a6c775a3ad7d0c54944209100f1634a05c995331a3ae576e8e66",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/001-b.u8",
+              "sha256": "b9dcc43df8fb0ac58be2299a12cfb4ebd7cff14f547ca22ee5a83a2f927688ad",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/001.prefix",
+            "sha256": "2c96846de18774d6536fd114193e48c8012fd07563ac66c973c4cffb741f7a21",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/001.h264",
+            "sha256": "04ab730dd28727d657627bba8364d31c12ef8f66ce864ea103319e177701f1a7",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/001.i420",
+            "sha256": "40befd4481f26a8e73fe10c8c8221bf0dff5fe9ec4d333c5cccb87294eccbb33",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/001-output.u8",
+              "sha256": "07ed7bc83eb107fc9592c746a79215baf477020809872a97cfe04db0e1c66b2c",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 2,
+          "inputs": {
+            "a": {
+              "path": "inputs/002-a.u8",
+              "sha256": "13db89712689f4f2833d8defb7ed881cad2afa03108ab252707a3e36366ff68c",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/002-b.u8",
+              "sha256": "c6afbf15e8c6fc98a6c4290239982c38484a8e630f94008b10b06cf95a007e4d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/002.prefix",
+            "sha256": "8e4fee741ee52055103e49ca1444c6d0eed19056150d352fc000f2f03843000a",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/002.h264",
+            "sha256": "a50a844cf8db05a7ba4f892e8228aa50f01b7c680de97ee38870fdda90a22f72",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/002.i420",
+            "sha256": "1b1e3b8219669c44e521e7429f012cf30a713d57225760835d3934d92c47e6c3",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/002-output.u8",
+              "sha256": "3e15d617594dd12c17bd34795bf3b8ba57c387916a801d55716d3f7cba372713",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 3,
+          "inputs": {
+            "a": {
+              "path": "inputs/003-a.u8",
+              "sha256": "4833b5e29275c5d2e395e083b529e4257207cb3ffc77290b8ec1549125a709d7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/003-b.u8",
+              "sha256": "7659efe6ef3fd8e3c1ab1d172ec3d9e063556a6914214bf19a847f5933ae870b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/003.prefix",
+            "sha256": "3ae4bdd7b45b5d6e09c4ec24cb280015e593102b323e8daf8e2d642c9b97e8fc",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/003.h264",
+            "sha256": "ac34f250611719b134a69c6484c6aeab369a75449cf501a9784a00e39efa4c5d",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/003.i420",
+            "sha256": "73337b9894c7c6199eb7197028eedf42267a93eb78d336910d0384def3501ca8",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/003-output.u8",
+              "sha256": "c2069ef66aba9147d1c895fe3de38c4ca9a84656ed8a1628b3cf384c39ddcc43",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 4,
+          "inputs": {
+            "a": {
+              "path": "inputs/004-a.u8",
+              "sha256": "3f1a3104bbb76d4c06364e95fc610e4c95c790b63da3a366b35fbf50526c3728",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/004-b.u8",
+              "sha256": "733519fa6b7fd34930efacae4db9444f4d27f67489b8bd359eb49a6b65abaa2f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/004.prefix",
+            "sha256": "0d208e3f8fdaccd9a31c3aa28fd5398172ab82fa52613aadb3a2b2936b1f9b07",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/004.h264",
+            "sha256": "52e18332441cac754683d7b576da37b023caabdf890c834e5780f05957397dcd",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/004.i420",
+            "sha256": "7a05884e0129bf69fe78a4349cf3442073d6a81626d8f7d6e269ab9f8a679322",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/004-output.u8",
+              "sha256": "4d3826ede7744105a29d2496cd7c2e7444df4bf5de14550b1a065fa435021ab3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 5,
+          "inputs": {
+            "a": {
+              "path": "inputs/005-a.u8",
+              "sha256": "cbfdacf085cb3be77fe7a4b489ffa8a7a28ec2c071698779c16bc51c0a226d2a",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/005-b.u8",
+              "sha256": "379749e8d69c5709ec71a7ad458dee9922b36d97eaa5bf5c1df71884071b44ce",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/005.prefix",
+            "sha256": "3989cc6aaca7d9ea5e4c71ae579f41c2fb4d649e022b800a265759f18baf530e",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/005.h264",
+            "sha256": "ce589c58fa134e44088026900b42828b5d060626d7d0e4b3eba4f6b0d1c00516",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/005.i420",
+            "sha256": "8ebe214b8d27339c8e9daadf15962f729410ffba5e1a116e9b968ac7f1cd02de",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/005-output.u8",
+              "sha256": "ce14b5147570412699f0ac8af8b96ce43262bf194ed00125b68287ffc80b729e",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 6,
+          "inputs": {
+            "a": {
+              "path": "inputs/006-a.u8",
+              "sha256": "360d570b1bc6e763d7875143d56ed9fd5d6662d77a6a2d24e7ec4ab7758395df",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/006-b.u8",
+              "sha256": "b7ec0b666d509fae0af10a31a237fa9d6c9a95907967fee85ae489484b742ca3",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/006.prefix",
+            "sha256": "a447e27f3b00881ef4897b51d981071c60de7a7d27783049e81baa6ea712594b",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/006.h264",
+            "sha256": "700cca2292191995f29516fead46d72c227e59abd360a2dd97e3d1d78dceebbb",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/006.i420",
+            "sha256": "ee60a58ef9c06b8e79e483b3f90518a2f5b642684db6091bb7325ec933f2e727",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/006-output.u8",
+              "sha256": "646478c2cd150c85a7761b581cb857da11f0b60d72b2fe8a2f14dd0a180e6a99",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 7,
+          "inputs": {
+            "a": {
+              "path": "inputs/007-a.u8",
+              "sha256": "db480467ae5b68669a678dfbf52ad48ef9a4e57fc070f81406eaa48dcc192ef3",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/007-b.u8",
+              "sha256": "b736ca2d0530bbe0c839853b7f36a4a825b31de6ad4645ac20970b639dabf95f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/007.prefix",
+            "sha256": "583b49bb9740badf539083c7633d51e8dcb6221845e1040246cf7b7ce9fbaa08",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/007.h264",
+            "sha256": "1c74f688a5e48210d182627d6196543c1265a12d16c93ed24909941fbf7eb74c",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/007.i420",
+            "sha256": "2d9e32eed22ff6a74fa3e6e8956568e68c38c60d09f431529186596ba6659766",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/007-output.u8",
+              "sha256": "9b438fa230ebf7e778a848b84ef3dc8cea1c0e066cfc5191c4efcfc6406c1a8d",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 8,
+          "inputs": {
+            "a": {
+              "path": "inputs/008-a.u8",
+              "sha256": "457c0275af14ab93afd6b782c9754585cdcb0af2d2a15139d0b0dff65aa43875",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/008-b.u8",
+              "sha256": "0c6255637cb70931346a0ea67906b8de4856530b7779c20f08b07e41ac9c7ad4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/008.prefix",
+            "sha256": "e562edcd176e2160c6c8b8e35bed1dc7cd13059ebb447beb4c50814dc99c6312",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/008.h264",
+            "sha256": "9772618bfe6fc347f8689f96596b8c1fdc7975c5dec5502edb2d9f2cf991013b",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/008.i420",
+            "sha256": "7a3d705f093bc4d00b58f7a0f6e204fb999a128197747f38db2fcfa1ee3b722d",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/008-output.u8",
+              "sha256": "8da86a97c22774fb0005b402bf5b87f558cdf9345de261f1e17a5adfecbdfd6d",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 9,
+          "inputs": {
+            "a": {
+              "path": "inputs/009-a.u8",
+              "sha256": "119becc8b444b741ffc55274f4dd282a81dbdc9a0770b31e8ce172c5bae5b5f7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/009-b.u8",
+              "sha256": "6b6bf6682e9ad2c98a8a60123f680d2b88f5110e6762d2d64c69b268438b105d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/009.prefix",
+            "sha256": "a322593a3c5078180d3bea4f526951b82b08ea4d669f4fe97a47bb10dbb44ef7",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/009.h264",
+            "sha256": "39e34c5b356a09d6e27cd2a21c8d156a6fa6d205e60e30da7f5878e2d16b0cbe",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/009.i420",
+            "sha256": "8bd4273be19dfe1db613f07e1b00236c4802827b074220389155936c311ceb58",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/009-output.u8",
+              "sha256": "c3d1a625970d57db0e8e90d01843b58711b3513a5318abb7960c3d2c491c524d",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 10,
+          "inputs": {
+            "a": {
+              "path": "inputs/010-a.u8",
+              "sha256": "5e6481ae1a1d37d13939756123a6bf179d2ffd2f3fb17fd2b23f50981d8043cc",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/010-b.u8",
+              "sha256": "1fa2c855795d1dd6ab24d040f6e8e94107c3135c5f79318dc9ce9054b65ab0eb",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/010.prefix",
+            "sha256": "775d04c3758d043e3a4569dcb08edafde839dd16d6846562e7be2b32d92e9780",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/010.h264",
+            "sha256": "e03c1a53f47ee87d30905dd43f300c7570ee85bb44ba21530512066dc48f8665",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/010.i420",
+            "sha256": "b4013b2fc40c7edaa2ad08f4122603e36804553397c82035fec6a205d994c937",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/010-output.u8",
+              "sha256": "72832b3fb4b92f64873237b7771bb74deca45f5c451b4f3f769b0514347a8d1a",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 11,
+          "inputs": {
+            "a": {
+              "path": "inputs/011-a.u8",
+              "sha256": "f13cbd377d2d504e202239923739c63f010f248d93fd750b4a6e970d80c6987d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/011-b.u8",
+              "sha256": "ce07dcb9a168587f78f103c214a87b6acaac57beeb8c175df239f1eb5566fa6b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/011.prefix",
+            "sha256": "f99bf601532f57638ba8048caabce7f5716d94b394b0a33fee26558e3c4d56e6",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/011.h264",
+            "sha256": "edcb4b69344f153e87c0b2a31932f0586425e45e8e642bf7cf7a1e0cfe974815",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/011.i420",
+            "sha256": "09fed00f1f67a51a1ebb1a3a4927cceff5361a0e13a234ee80e97a110d8acb14",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/011-output.u8",
+              "sha256": "f9361a9a26c567849ba73025458b552f5bd8d41f497f0faa61cd6595952127ba",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 12,
+          "inputs": {
+            "a": {
+              "path": "inputs/012-a.u8",
+              "sha256": "1e75431d7e80544b9be05f229b471ea4b3fd4198384501f9e3685f5377824a23",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/012-b.u8",
+              "sha256": "51cc180c8d22935415486655e328f20492297150ae329df1f46c61ba20d10e00",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/012.prefix",
+            "sha256": "d8411fe443355443e3e5ccb0f935c96ce66a69ae07dd7c91dd9504ebccf77d85",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/012.h264",
+            "sha256": "1bebbefb505a41512903f4db4bd7a7261eac35131ae9efc085b975a4fa5107f7",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/012.i420",
+            "sha256": "75017e358574b6698326a6feb9c448caca36e98e7c7a00c275ca23bbea1e1475",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/012-output.u8",
+              "sha256": "c709ec2f075137a6dcd579eb976f3ca0955867e7e9b82f5b7c0e4c5dbed584bf",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 13,
+          "inputs": {
+            "a": {
+              "path": "inputs/013-a.u8",
+              "sha256": "aaa70ca9631e59223e9aa9d4515f9d7a0ad8e631591238b32236443c72ee1fca",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/013-b.u8",
+              "sha256": "71039749ae6c7cb72902732b4335ff7b3fc6f8f1cec43b4496257404f25e1423",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/013.prefix",
+            "sha256": "8aa52d27e5c642ee86b8338426216942584441b8bc92ed03b52ea2be10ad01d3",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/013.h264",
+            "sha256": "fcdbaae1a4e8f4cf8b5427312cf754a0a9d23fd3256a4f95e86614a3799fb671",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/013.i420",
+            "sha256": "544aa0e6efcfc3b226719d6d396f6f0af91245a59500df57a152831462c35a79",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/013-output.u8",
+              "sha256": "1d95da3c56258666850523887d19fefab38066f2210688edaed5e71cd9998498",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 14,
+          "inputs": {
+            "a": {
+              "path": "inputs/014-a.u8",
+              "sha256": "af51813c47d32ecf370c7b342a89d6b881a8366a75c3279b6baf1c97746683d0",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/014-b.u8",
+              "sha256": "4b891863d1d964d76d0410dad61946de148487993106607948b449847fc09cd8",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/014.prefix",
+            "sha256": "1c510f8b61decc898ae18444d334f10f6c10eb1a32293ea59d27e7103509d9ed",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/014.h264",
+            "sha256": "e5a342834ca61e91c932b39918ae70d20a9c1e66a1b39bbeb176abe104863a2a",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/014.i420",
+            "sha256": "fa0867059b46965ede0d5689786a98f41dc698d2ec6738fcc8dba67397494435",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/014-output.u8",
+              "sha256": "f860e5a9f3b60084ab5c29f704bbd0eddf71bdba6b922e3e77ca89aaa4da1f39",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 15,
+          "inputs": {
+            "a": {
+              "path": "inputs/015-a.u8",
+              "sha256": "79adcf27472a8a7d2272f8b74ef04ba3fa9ba19fd0e06aa4acc77447b732b55d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/015-b.u8",
+              "sha256": "f7b1ef1beaf3ee1942269699782adc81abe0905f1081e6264dce97447075d54c",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "positive-change/015.prefix",
+            "sha256": "7d73de0c985d4a21a26d79b0887ce59d663c115197ba5d0dfc5d92ea0a310c15",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "positive-change/015.h264",
+            "sha256": "e5d71b7bc69fbe925753893e7ae9de3ddfb39febc6b9387a892ce653e62d6418",
+            "bytes": 87121
+          },
+          "expected": {
+            "path": "positive-change/015.i420",
+            "sha256": "2bdaa4bbc1cacf527264bae75ce5542fdccde8d346ec29f662ae8aea9d14d461",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "positive-change/015-output.u8",
+              "sha256": "50602d769d709e79e46661f9bdccbc93975b8b9f4899094f0a133d7a675cb257",
+              "bytes": 16384
+            }
+          }
+        }
+      ]
+    },
+    "absolute-change": {
+      "description": "Absolute frame difference and a >=24 change mask.",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 2942,
+        "peak_live_references": 3
+      },
+      "manifest": {
+        "path": "absolute-change/manifest.json",
+        "sha256": "e6542be307b3fe17d2b0fba66aa1f84d9b15a346b30845fe0451d6e006349996",
+        "bytes": 9751
+      },
+      "tail": {
+        "path": "absolute-change/prediction.h264",
+        "sha256": "eb94732635da6b074a0477f18e0cd6d61c9526665c70c20da6bb079c4a777f7e",
+        "bytes": 2942
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0
+        },
+        "slice_mode": "row"
+      },
+      "jobs": [
+        {
+          "index": 0,
+          "inputs": {
+            "a": {
+              "path": "inputs/000-a.u8",
+              "sha256": "87431259bc425e1296a8e3b6d2fd4fba5aff26d27a0cd8dbb36be3fe6694287e",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/000-b.u8",
+              "sha256": "6b0cb18ec6a500abaac82f7c01ccc15f10578b70ba23a77da702d22d0c645ab4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/000.prefix",
+            "sha256": "4229c19b2a916437e179b8a987390aa782b447f58d70763865900f79398fe726",
+            "bytes": 86487
+          },
+          "stream": {
+            "path": "absolute-change/000.h264",
+            "sha256": "9b78d2c10c08eba23840b649099e795544801baba36dd521e81020642c33be87",
+            "bytes": 89429
+          },
+          "expected": {
+            "path": "absolute-change/000.i420",
+            "sha256": "df1f5c4db2309809de392c80d8977a5d87b432ba6f3a5a4a012ba3ec82b017a0",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/000-output.u8",
+              "sha256": "68d0d3c560322f2997e43bb320031384b13b225ea693f5e3573e54dda902e8f5",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/000-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 1,
+          "inputs": {
+            "a": {
+              "path": "inputs/001-a.u8",
+              "sha256": "9d141227e0a2a6c775a3ad7d0c54944209100f1634a05c995331a3ae576e8e66",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/001-b.u8",
+              "sha256": "b9dcc43df8fb0ac58be2299a12cfb4ebd7cff14f547ca22ee5a83a2f927688ad",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/001.prefix",
+            "sha256": "2c96846de18774d6536fd114193e48c8012fd07563ac66c973c4cffb741f7a21",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/001.h264",
+            "sha256": "cea9b08c316b8184b2375960caa0eb1c7bb0d0b4ba2fa174c7d3e431a838f3e8",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/001.i420",
+            "sha256": "3ca7d0c5e6798d7e3110dbf93932138082e410f5209e99458aedc8ea886c6d1e",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/001-output.u8",
+              "sha256": "347057c86d07dcd07e7917fc01452a258d4da63d37992ce615736885b179d96c",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/001-mask.u8",
+              "sha256": "98da92007b7a280149490f829b1c949a7adea512a6c3c9e858e7b50c8205c02a",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 2,
+          "inputs": {
+            "a": {
+              "path": "inputs/002-a.u8",
+              "sha256": "13db89712689f4f2833d8defb7ed881cad2afa03108ab252707a3e36366ff68c",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/002-b.u8",
+              "sha256": "c6afbf15e8c6fc98a6c4290239982c38484a8e630f94008b10b06cf95a007e4d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/002.prefix",
+            "sha256": "8e4fee741ee52055103e49ca1444c6d0eed19056150d352fc000f2f03843000a",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/002.h264",
+            "sha256": "29121fd175d7a262f1e0164f5983a10ae5ac87100b984a17e31c154c735b8416",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/002.i420",
+            "sha256": "9323b552be1e49907582d1ef0992f9094a0fcd4c839073dcdb0a9d02b191b17f",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/002-output.u8",
+              "sha256": "77a1f29d99a499836177300a09c0a710190e391cc4f6352fd9a12fa9fa2b11b7",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/002-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 3,
+          "inputs": {
+            "a": {
+              "path": "inputs/003-a.u8",
+              "sha256": "4833b5e29275c5d2e395e083b529e4257207cb3ffc77290b8ec1549125a709d7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/003-b.u8",
+              "sha256": "7659efe6ef3fd8e3c1ab1d172ec3d9e063556a6914214bf19a847f5933ae870b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/003.prefix",
+            "sha256": "3ae4bdd7b45b5d6e09c4ec24cb280015e593102b323e8daf8e2d642c9b97e8fc",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/003.h264",
+            "sha256": "6e0148b86c68eca3c7c244ba8deb77d54c2df14b773bf9a0d3932f3641c67487",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/003.i420",
+            "sha256": "909fb50dcf6b131d4eaf4f208bc4f3c1855f450681970f74d0e6d927f4ed94c6",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/003-output.u8",
+              "sha256": "59ea554509b1be714a9f8bb8487b115ebfc505dbd4b96186e38b24ef246b2c17",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/003-mask.u8",
+              "sha256": "336ca993b4b812f815701e7e2c2aef3fa42e94fe1d70aca3da3a243746a0b4af",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 4,
+          "inputs": {
+            "a": {
+              "path": "inputs/004-a.u8",
+              "sha256": "3f1a3104bbb76d4c06364e95fc610e4c95c790b63da3a366b35fbf50526c3728",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/004-b.u8",
+              "sha256": "733519fa6b7fd34930efacae4db9444f4d27f67489b8bd359eb49a6b65abaa2f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/004.prefix",
+            "sha256": "0d208e3f8fdaccd9a31c3aa28fd5398172ab82fa52613aadb3a2b2936b1f9b07",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/004.h264",
+            "sha256": "899dac469309f5ded178b62f7293e4098f433a1de64568258f34c2b93308db5b",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/004.i420",
+            "sha256": "c4ad1a219f1bc48326412b5dadaa840f6fee78862e1c03a816ec06956342598b",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/004-output.u8",
+              "sha256": "a112cd227c8b32bd9504c751f8839865b7867d042117f844bb4a207fd48ab0c6",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/004-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 5,
+          "inputs": {
+            "a": {
+              "path": "inputs/005-a.u8",
+              "sha256": "cbfdacf085cb3be77fe7a4b489ffa8a7a28ec2c071698779c16bc51c0a226d2a",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/005-b.u8",
+              "sha256": "379749e8d69c5709ec71a7ad458dee9922b36d97eaa5bf5c1df71884071b44ce",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/005.prefix",
+            "sha256": "3989cc6aaca7d9ea5e4c71ae579f41c2fb4d649e022b800a265759f18baf530e",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/005.h264",
+            "sha256": "14f1e6f7139c85d30a98416159f53ac36b08cb17cf7fa9414a791c8267a3f8bf",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/005.i420",
+            "sha256": "726e1c7144f99dc2ac5a2a575d19c50934653d08cbf991a20643b43bfea5a5ba",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/005-output.u8",
+              "sha256": "b7604225fde06fc9693d3838ddf39287777d6599cc6c7432ad2bd2dc1c742e62",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/005-mask.u8",
+              "sha256": "c41e6be039cc76fa7abcce536bc79df6f649deb5bb691ed9690b14f70d75fa88",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 6,
+          "inputs": {
+            "a": {
+              "path": "inputs/006-a.u8",
+              "sha256": "360d570b1bc6e763d7875143d56ed9fd5d6662d77a6a2d24e7ec4ab7758395df",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/006-b.u8",
+              "sha256": "b7ec0b666d509fae0af10a31a237fa9d6c9a95907967fee85ae489484b742ca3",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/006.prefix",
+            "sha256": "a447e27f3b00881ef4897b51d981071c60de7a7d27783049e81baa6ea712594b",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/006.h264",
+            "sha256": "9d2331f82bed88ff846095f04e674b206df3c811a8f62f50f3e79301fd0ac408",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/006.i420",
+            "sha256": "c2f9ce9d32d57d849750e854d121976151a4f8c176b89042c741b0b29e63ee3c",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/006-output.u8",
+              "sha256": "ba4043d6c1e11c509f3479a924ba1dfd5ceab6651ff1667c1f174be3875e92d3",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/006-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 7,
+          "inputs": {
+            "a": {
+              "path": "inputs/007-a.u8",
+              "sha256": "db480467ae5b68669a678dfbf52ad48ef9a4e57fc070f81406eaa48dcc192ef3",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/007-b.u8",
+              "sha256": "b736ca2d0530bbe0c839853b7f36a4a825b31de6ad4645ac20970b639dabf95f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/007.prefix",
+            "sha256": "583b49bb9740badf539083c7633d51e8dcb6221845e1040246cf7b7ce9fbaa08",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/007.h264",
+            "sha256": "53a087cc106e3576a5021d88ff83b0e422c56e35b323991180fd1c7e348518d4",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/007.i420",
+            "sha256": "017e837f2e2d14440a25ff342d59fafd63c5a2856113721f8c30d49713900926",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/007-output.u8",
+              "sha256": "21fe517ee656778a51729948d3e5faedcecb36f96539eac8473a53f73283bf2b",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/007-mask.u8",
+              "sha256": "8159a16faaad1481b30d53f6d0b59b5b9fd2016f7fbf6fec00c803db911274cd",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 8,
+          "inputs": {
+            "a": {
+              "path": "inputs/008-a.u8",
+              "sha256": "457c0275af14ab93afd6b782c9754585cdcb0af2d2a15139d0b0dff65aa43875",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/008-b.u8",
+              "sha256": "0c6255637cb70931346a0ea67906b8de4856530b7779c20f08b07e41ac9c7ad4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/008.prefix",
+            "sha256": "e562edcd176e2160c6c8b8e35bed1dc7cd13059ebb447beb4c50814dc99c6312",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/008.h264",
+            "sha256": "6dbbf2d1f8b09cf01b5da7398a9644c10f4ab21e78e80c43961d64968f4867b3",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/008.i420",
+            "sha256": "47daa39209ae92c9fa1bc7d429fabab658a6c6dd998bc3f90bbf1df81f6cf41f",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/008-output.u8",
+              "sha256": "0aa333cd96888ec5ba24116f38de8578d8c30556167ab54bb7350513afb368ea",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/008-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 9,
+          "inputs": {
+            "a": {
+              "path": "inputs/009-a.u8",
+              "sha256": "119becc8b444b741ffc55274f4dd282a81dbdc9a0770b31e8ce172c5bae5b5f7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/009-b.u8",
+              "sha256": "6b6bf6682e9ad2c98a8a60123f680d2b88f5110e6762d2d64c69b268438b105d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/009.prefix",
+            "sha256": "a322593a3c5078180d3bea4f526951b82b08ea4d669f4fe97a47bb10dbb44ef7",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/009.h264",
+            "sha256": "e11debdedbdf1f5ca20e277c7ad973d4fdc955e314998f818ae6f048f78cea8c",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/009.i420",
+            "sha256": "892dc3c755553f18a56470e1cc35b399fc07933bb1c7300d1e4a4e7b74f34afd",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/009-output.u8",
+              "sha256": "ba07b931910443deb4ab41588dc4e9b3086ca33fba3624163a3ddf2b14103c9d",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/009-mask.u8",
+              "sha256": "0dae8e8b477a221eb194591c1a960434112aa9bba688f0a585d65fe4a9b956c8",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 10,
+          "inputs": {
+            "a": {
+              "path": "inputs/010-a.u8",
+              "sha256": "5e6481ae1a1d37d13939756123a6bf179d2ffd2f3fb17fd2b23f50981d8043cc",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/010-b.u8",
+              "sha256": "1fa2c855795d1dd6ab24d040f6e8e94107c3135c5f79318dc9ce9054b65ab0eb",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/010.prefix",
+            "sha256": "775d04c3758d043e3a4569dcb08edafde839dd16d6846562e7be2b32d92e9780",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/010.h264",
+            "sha256": "bbd2c0159feb43cd8ef016d4d2cf1e3ff6ea3a736c9d0d9c2fd60547906c4dcf",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/010.i420",
+            "sha256": "b939bccc18a9175bb9421a0812ff29d87f6cf90822b4f54f96c6c5839a32df9b",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/010-output.u8",
+              "sha256": "14ff3437e9b6161427655caeb86801a544c9285b6c240ae3f3dbb6ce12a195d9",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/010-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 11,
+          "inputs": {
+            "a": {
+              "path": "inputs/011-a.u8",
+              "sha256": "f13cbd377d2d504e202239923739c63f010f248d93fd750b4a6e970d80c6987d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/011-b.u8",
+              "sha256": "ce07dcb9a168587f78f103c214a87b6acaac57beeb8c175df239f1eb5566fa6b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/011.prefix",
+            "sha256": "f99bf601532f57638ba8048caabce7f5716d94b394b0a33fee26558e3c4d56e6",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/011.h264",
+            "sha256": "fa9c2affe6a186209328f6db6dd0390b7034a550a8205d0b4236531fb26c6ed5",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/011.i420",
+            "sha256": "7fdd32230a7c2396462e94d5b77edc2ae8ced6b4362cc392d8db554949eeaaed",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/011-output.u8",
+              "sha256": "eb92c1ca1873c08275d5e20e378c9871d6648a0340b5d1da0760c38f5336d320",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/011-mask.u8",
+              "sha256": "e3f28cb9e0b68e2ee6b80e7247728ebe9fff77a7cfd02e92ea4c058e9962c146",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 12,
+          "inputs": {
+            "a": {
+              "path": "inputs/012-a.u8",
+              "sha256": "1e75431d7e80544b9be05f229b471ea4b3fd4198384501f9e3685f5377824a23",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/012-b.u8",
+              "sha256": "51cc180c8d22935415486655e328f20492297150ae329df1f46c61ba20d10e00",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/012.prefix",
+            "sha256": "d8411fe443355443e3e5ccb0f935c96ce66a69ae07dd7c91dd9504ebccf77d85",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/012.h264",
+            "sha256": "e524c8aa941176468cb03ebf8dbf377e9cc680bcdb4fdc676e6c30549ec5815e",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/012.i420",
+            "sha256": "e82780149e1b41a3675d6a10b1955833e2c1418c2e75d2db78edf570c2746144",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/012-output.u8",
+              "sha256": "8dd275423567de6ff15f3680705b7cc30e4210d6a67eb1ab6c43df5062ea6aa1",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/012-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 13,
+          "inputs": {
+            "a": {
+              "path": "inputs/013-a.u8",
+              "sha256": "aaa70ca9631e59223e9aa9d4515f9d7a0ad8e631591238b32236443c72ee1fca",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/013-b.u8",
+              "sha256": "71039749ae6c7cb72902732b4335ff7b3fc6f8f1cec43b4496257404f25e1423",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/013.prefix",
+            "sha256": "8aa52d27e5c642ee86b8338426216942584441b8bc92ed03b52ea2be10ad01d3",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/013.h264",
+            "sha256": "e9c6a0ca8044c88d16edf8d479e9ccc319bc52293328193ee6511eca8ea68158",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/013.i420",
+            "sha256": "58c0bd0585aef69d74d3cf465ffa1b4a8661511d1c9c330afbf41ea3a355ee9a",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/013-output.u8",
+              "sha256": "b07f41ed5ed9616d7abb5c7efcb47f50717ae4f40305df04bbb1977c0d3436ea",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/013-mask.u8",
+              "sha256": "91300fa4c87e42c97453456b84fa1afef8fa81618a5727a9d1f68fc1146e726e",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 14,
+          "inputs": {
+            "a": {
+              "path": "inputs/014-a.u8",
+              "sha256": "af51813c47d32ecf370c7b342a89d6b881a8366a75c3279b6baf1c97746683d0",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/014-b.u8",
+              "sha256": "4b891863d1d964d76d0410dad61946de148487993106607948b449847fc09cd8",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/014.prefix",
+            "sha256": "1c510f8b61decc898ae18444d334f10f6c10eb1a32293ea59d27e7103509d9ed",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/014.h264",
+            "sha256": "61ead4c8e6e0c8dfec2415b7a1c9591c5a01b3ff1c035bae0317e5dca7fa7b18",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/014.i420",
+            "sha256": "342e6af233d6fb533f2396849404172a9ae666504b441e0f309babc1897f9357",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/014-output.u8",
+              "sha256": "95b3913134061a25482746a92516c14f29b26f942a1b53529b783d2707b7bd2c",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/014-mask.u8",
+              "sha256": "20dc0068763c70505c853fe32497e025efa637b86da771df4c3949eb00cba6e3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 15,
+          "inputs": {
+            "a": {
+              "path": "inputs/015-a.u8",
+              "sha256": "79adcf27472a8a7d2272f8b74ef04ba3fa9ba19fd0e06aa4acc77447b732b55d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/015-b.u8",
+              "sha256": "f7b1ef1beaf3ee1942269699782adc81abe0905f1081e6264dce97447075d54c",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "absolute-change/015.prefix",
+            "sha256": "7d73de0c985d4a21a26d79b0887ce59d663c115197ba5d0dfc5d92ea0a310c15",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "absolute-change/015.h264",
+            "sha256": "b1267736f51ab326d970055fa412fbb952d59165ff83472b574265d7b9d498e1",
+            "bytes": 89419
+          },
+          "expected": {
+            "path": "absolute-change/015.i420",
+            "sha256": "abbf97d13537f7baf862b5b84bd00d2ead834845b4bad734ef5659c6ec44be2c",
+            "bytes": 268800
+          },
+          "outputs": {
+            "output": {
+              "path": "absolute-change/015-output.u8",
+              "sha256": "014eb32a759039084a33b28756780fe7d91be627ab0d5416a03ba0c25797d72d",
+              "bytes": 16384
+            },
+            "mask": {
+              "path": "absolute-change/015-mask.u8",
+              "sha256": "7e27edc9a1f64d800c0f9cc06cd20b44cfc421172838f33d315036fa2f5bbfa8",
+              "bytes": 16384
+            }
+          }
+        }
+      ]
+    },
+    "temporal-envelope": {
+      "description": "Two-frame minimum, maximum, and observed range; no persistent host-side state.",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 3238,
+        "peak_live_references": 3
+      },
+      "manifest": {
+        "path": "temporal-envelope/manifest.json",
+        "sha256": "440cf1ec72e46decdeb32a7e3d2133e0174b139d824aad044834ec4197c934b3",
+        "bytes": 15753
+      },
+      "tail": {
+        "path": "temporal-envelope/prediction.h264",
+        "sha256": "306ab89b6dad5723bebff4495c4bdde39d61a620c731a7ac3bfd8821a71a4e9c",
+        "bytes": 3238
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 2,
+          "4": 1,
+          "5": 0,
+          "6": 0
+        },
+        "slice_mode": "row"
+      },
+      "jobs": [
+        {
+          "index": 0,
+          "inputs": {
+            "a": {
+              "path": "inputs/000-a.u8",
+              "sha256": "87431259bc425e1296a8e3b6d2fd4fba5aff26d27a0cd8dbb36be3fe6694287e",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/000-b.u8",
+              "sha256": "6b0cb18ec6a500abaac82f7c01ccc15f10578b70ba23a77da702d22d0c645ab4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/000.prefix",
+            "sha256": "4229c19b2a916437e179b8a987390aa782b447f58d70763865900f79398fe726",
+            "bytes": 86487
+          },
+          "stream": {
+            "path": "temporal-envelope/000.h264",
+            "sha256": "b686113b95b4a920ec202b2cc32eaecce3d26c0cd280e23e96fd5442aaa70820",
+            "bytes": 89725
+          },
+          "expected": {
+            "path": "temporal-envelope/000.i420",
+            "sha256": "5a80fa1fb90728f9d12b285551e1601a612ca8e996e40cc0c530d889831fdd58",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/000-low.u8",
+              "sha256": "b7f81f17e8644fa9b7b8f6787a9300ad4c3b8899c45b2256629cf8cebb72d0a3",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/000-high.u8",
+              "sha256": "2b8dac3618d65ffdde39c10d2a768cf344b182beee09bf1be3f070e9e29c7644",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/000-output.u8",
+              "sha256": "68d0d3c560322f2997e43bb320031384b13b225ea693f5e3573e54dda902e8f5",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 1,
+          "inputs": {
+            "a": {
+              "path": "inputs/001-a.u8",
+              "sha256": "9d141227e0a2a6c775a3ad7d0c54944209100f1634a05c995331a3ae576e8e66",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/001-b.u8",
+              "sha256": "b9dcc43df8fb0ac58be2299a12cfb4ebd7cff14f547ca22ee5a83a2f927688ad",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/001.prefix",
+            "sha256": "2c96846de18774d6536fd114193e48c8012fd07563ac66c973c4cffb741f7a21",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/001.h264",
+            "sha256": "8c2a9c7972d2dda773f57033f00adf754cbb3918a281c31e329ce31719c7f5bc",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/001.i420",
+            "sha256": "5a4ec35edbd9de6fad8f8ccb29e1ee1b62c75c3e71ba1a64eff6d2f7a9b4b7f2",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/001-low.u8",
+              "sha256": "eca95ca1fedbfa293c601254687e36dc11ed68a29fb98848e8b4411efde1ff8b",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/001-high.u8",
+              "sha256": "44d4220a322333b919b089444ce63eb911357c6a61a606e4ced6ecd9ebc200fd",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/001-output.u8",
+              "sha256": "347057c86d07dcd07e7917fc01452a258d4da63d37992ce615736885b179d96c",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 2,
+          "inputs": {
+            "a": {
+              "path": "inputs/002-a.u8",
+              "sha256": "13db89712689f4f2833d8defb7ed881cad2afa03108ab252707a3e36366ff68c",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/002-b.u8",
+              "sha256": "c6afbf15e8c6fc98a6c4290239982c38484a8e630f94008b10b06cf95a007e4d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/002.prefix",
+            "sha256": "8e4fee741ee52055103e49ca1444c6d0eed19056150d352fc000f2f03843000a",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/002.h264",
+            "sha256": "206fbd13171a0253707e95a5b44242fce7cbfff85d1606788cd9284f7d279b9e",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/002.i420",
+            "sha256": "851690286d2632ff5babedd43c2daf0ea5be5e4f52f167a386b252046cd70a5c",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/002-low.u8",
+              "sha256": "7e52afe153a69d8687c84780c1da33e747c2f90f9f231e345b29e3b41e83d615",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/002-high.u8",
+              "sha256": "c77d31bf71fe9e4b0545d7a93f57dd7f17a54f30085119f32d0644ad1fef63ce",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/002-output.u8",
+              "sha256": "77a1f29d99a499836177300a09c0a710190e391cc4f6352fd9a12fa9fa2b11b7",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 3,
+          "inputs": {
+            "a": {
+              "path": "inputs/003-a.u8",
+              "sha256": "4833b5e29275c5d2e395e083b529e4257207cb3ffc77290b8ec1549125a709d7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/003-b.u8",
+              "sha256": "7659efe6ef3fd8e3c1ab1d172ec3d9e063556a6914214bf19a847f5933ae870b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/003.prefix",
+            "sha256": "3ae4bdd7b45b5d6e09c4ec24cb280015e593102b323e8daf8e2d642c9b97e8fc",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/003.h264",
+            "sha256": "47e7e97c7330be83c6d0b40e3c7a8dcaf4a1e8418d700970537a022627764464",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/003.i420",
+            "sha256": "763f380c56f0d76f63b9efb544238b6037e93104ca0ce509f4894c52bf7c46a1",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/003-low.u8",
+              "sha256": "be23e78c51ff7b4169f33fc221ea5f60db8bf661d9078957f0dcf8fbecbeeadc",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/003-high.u8",
+              "sha256": "31e2f831a5d8965fcbd80561a95483c7fde96f1c4d52b80fe7ac742dc7fa22b4",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/003-output.u8",
+              "sha256": "59ea554509b1be714a9f8bb8487b115ebfc505dbd4b96186e38b24ef246b2c17",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 4,
+          "inputs": {
+            "a": {
+              "path": "inputs/004-a.u8",
+              "sha256": "3f1a3104bbb76d4c06364e95fc610e4c95c790b63da3a366b35fbf50526c3728",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/004-b.u8",
+              "sha256": "733519fa6b7fd34930efacae4db9444f4d27f67489b8bd359eb49a6b65abaa2f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/004.prefix",
+            "sha256": "0d208e3f8fdaccd9a31c3aa28fd5398172ab82fa52613aadb3a2b2936b1f9b07",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/004.h264",
+            "sha256": "ccf54ca9a5daa637122585064e1396a7534e8979f7973c69423aa5ff083f20ea",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/004.i420",
+            "sha256": "5e9eda96d3353a4d0369fd4740cd7851a8ceb902857e4dbd3a9af772c33d18f2",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/004-low.u8",
+              "sha256": "d19e40086ddd43cf54b16b1b71bd5783a6ad4b7ffd2985001590ca5bfe82c36c",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/004-high.u8",
+              "sha256": "d42e9588c14c31f705e5dc6f495387ae51e8dba513f0c1f6b0f64ca93e478135",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/004-output.u8",
+              "sha256": "a112cd227c8b32bd9504c751f8839865b7867d042117f844bb4a207fd48ab0c6",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 5,
+          "inputs": {
+            "a": {
+              "path": "inputs/005-a.u8",
+              "sha256": "cbfdacf085cb3be77fe7a4b489ffa8a7a28ec2c071698779c16bc51c0a226d2a",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/005-b.u8",
+              "sha256": "379749e8d69c5709ec71a7ad458dee9922b36d97eaa5bf5c1df71884071b44ce",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/005.prefix",
+            "sha256": "3989cc6aaca7d9ea5e4c71ae579f41c2fb4d649e022b800a265759f18baf530e",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/005.h264",
+            "sha256": "a6e2515a81c41df5f2babcf53a938b4e388f09d93e552c6daaf470528384dc51",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/005.i420",
+            "sha256": "8a0a89504edebda808457e8cc60d1a152e084fca813615e9ef12220c11593202",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/005-low.u8",
+              "sha256": "6ff99f000b4c406156fb65cee504c8bcaf40c568dad0fcb19e9154dc5e47a4d7",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/005-high.u8",
+              "sha256": "5b81bbdce2a28f43750a5ee8dd248f0ffaca5b72b3a029e8b34c67c7b7f584bf",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/005-output.u8",
+              "sha256": "b7604225fde06fc9693d3838ddf39287777d6599cc6c7432ad2bd2dc1c742e62",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 6,
+          "inputs": {
+            "a": {
+              "path": "inputs/006-a.u8",
+              "sha256": "360d570b1bc6e763d7875143d56ed9fd5d6662d77a6a2d24e7ec4ab7758395df",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/006-b.u8",
+              "sha256": "b7ec0b666d509fae0af10a31a237fa9d6c9a95907967fee85ae489484b742ca3",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/006.prefix",
+            "sha256": "a447e27f3b00881ef4897b51d981071c60de7a7d27783049e81baa6ea712594b",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/006.h264",
+            "sha256": "fe778576bb3205e577469c076384e32d07bb64143844a22fc3a8ebdeb5a7597f",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/006.i420",
+            "sha256": "8526f2c5d1eeba388a6e4fe4f00c18cbc328884f87cab592b7487d88384edb83",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/006-low.u8",
+              "sha256": "0f72d7719ba91e3f3478a1a82880f87a1672e77113fab2032e539883cedd0d15",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/006-high.u8",
+              "sha256": "20a3ba00bb790577c10c9473c970c5125b81f424a22b32db3d850f24275a73f8",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/006-output.u8",
+              "sha256": "ba4043d6c1e11c509f3479a924ba1dfd5ceab6651ff1667c1f174be3875e92d3",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 7,
+          "inputs": {
+            "a": {
+              "path": "inputs/007-a.u8",
+              "sha256": "db480467ae5b68669a678dfbf52ad48ef9a4e57fc070f81406eaa48dcc192ef3",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/007-b.u8",
+              "sha256": "b736ca2d0530bbe0c839853b7f36a4a825b31de6ad4645ac20970b639dabf95f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/007.prefix",
+            "sha256": "583b49bb9740badf539083c7633d51e8dcb6221845e1040246cf7b7ce9fbaa08",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/007.h264",
+            "sha256": "7f01dfa15dc0c8eb178f94e6cfdf58e95ff8b5e9821250c612783cd5913d315a",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/007.i420",
+            "sha256": "0b84ad82ce75e6cc1b70068070300216ac16d63526a607bfa33ff078e8f67bc3",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/007-low.u8",
+              "sha256": "9287d295ebdcb6a52b2740614732a101bbac421ff6e8907bf6d5c4c0de3b9e9a",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/007-high.u8",
+              "sha256": "bdf8deb651446f4f5159d1be5f9b793c307f4695072f6e338a5e96e725f93ca7",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/007-output.u8",
+              "sha256": "21fe517ee656778a51729948d3e5faedcecb36f96539eac8473a53f73283bf2b",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 8,
+          "inputs": {
+            "a": {
+              "path": "inputs/008-a.u8",
+              "sha256": "457c0275af14ab93afd6b782c9754585cdcb0af2d2a15139d0b0dff65aa43875",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/008-b.u8",
+              "sha256": "0c6255637cb70931346a0ea67906b8de4856530b7779c20f08b07e41ac9c7ad4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/008.prefix",
+            "sha256": "e562edcd176e2160c6c8b8e35bed1dc7cd13059ebb447beb4c50814dc99c6312",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/008.h264",
+            "sha256": "8d101c28837809eb19eaef36bb01c8de68bfc2361d715dea2ba633ade55b8631",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/008.i420",
+            "sha256": "241492895e39a7c2155d3a797a8ff29f4cc45758d100c5b17a774bc06423b6d7",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/008-low.u8",
+              "sha256": "e1e612ce94696d769525aefe3a76e0da769ad351ab18eed1d9cf44a70210753f",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/008-high.u8",
+              "sha256": "4f0c2b0f82f3325e8b64cfdf2a667a7ae3c9347c958a5c81ae481256538baa07",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/008-output.u8",
+              "sha256": "0aa333cd96888ec5ba24116f38de8578d8c30556167ab54bb7350513afb368ea",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 9,
+          "inputs": {
+            "a": {
+              "path": "inputs/009-a.u8",
+              "sha256": "119becc8b444b741ffc55274f4dd282a81dbdc9a0770b31e8ce172c5bae5b5f7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/009-b.u8",
+              "sha256": "6b6bf6682e9ad2c98a8a60123f680d2b88f5110e6762d2d64c69b268438b105d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/009.prefix",
+            "sha256": "a322593a3c5078180d3bea4f526951b82b08ea4d669f4fe97a47bb10dbb44ef7",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/009.h264",
+            "sha256": "327abaefc90d76cecb90da55413120363e8bef08ae280abfafff88ea3c6aa7b2",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/009.i420",
+            "sha256": "7574f1fe6765fe3cfdd1a2e346a2014c1afe31dd2a43be92bdb1c2500f199b49",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/009-low.u8",
+              "sha256": "3efb21b2a7ef63ee4a2dda0edd7e897661877c76780de0789a49ec3c695de529",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/009-high.u8",
+              "sha256": "e728bb7b12b9d9fe8a1444f1ae535fbd509ba1ccc2aabe38a618d290353555c2",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/009-output.u8",
+              "sha256": "ba07b931910443deb4ab41588dc4e9b3086ca33fba3624163a3ddf2b14103c9d",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 10,
+          "inputs": {
+            "a": {
+              "path": "inputs/010-a.u8",
+              "sha256": "5e6481ae1a1d37d13939756123a6bf179d2ffd2f3fb17fd2b23f50981d8043cc",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/010-b.u8",
+              "sha256": "1fa2c855795d1dd6ab24d040f6e8e94107c3135c5f79318dc9ce9054b65ab0eb",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/010.prefix",
+            "sha256": "775d04c3758d043e3a4569dcb08edafde839dd16d6846562e7be2b32d92e9780",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/010.h264",
+            "sha256": "5594a80cbacc33ed00acc3e0dd07300d53f94e0e8d432039063b21470153f1e0",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/010.i420",
+            "sha256": "a6a9e11aeb5514399da7e29513dbbd5f1271ea2e508c39e2c4ff2220cb01c1d7",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/010-low.u8",
+              "sha256": "d3951e892da47141c1a17226f73a79359255ae149a1b0018be7469caeb60ad35",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/010-high.u8",
+              "sha256": "1fe245d571c5db70f5d6657f5b76068cb44716a0faa1f4d0e6f45eb23265428d",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/010-output.u8",
+              "sha256": "14ff3437e9b6161427655caeb86801a544c9285b6c240ae3f3dbb6ce12a195d9",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 11,
+          "inputs": {
+            "a": {
+              "path": "inputs/011-a.u8",
+              "sha256": "f13cbd377d2d504e202239923739c63f010f248d93fd750b4a6e970d80c6987d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/011-b.u8",
+              "sha256": "ce07dcb9a168587f78f103c214a87b6acaac57beeb8c175df239f1eb5566fa6b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/011.prefix",
+            "sha256": "f99bf601532f57638ba8048caabce7f5716d94b394b0a33fee26558e3c4d56e6",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/011.h264",
+            "sha256": "b674caf732ca550e7f491238209402fe804904b62df4a6da8f66bcdb6673752c",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/011.i420",
+            "sha256": "3ab9cb91664c376075a456803619910b7012a50cb6ce8e27ee551e7e2658ec28",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/011-low.u8",
+              "sha256": "0618cff17a4947fff0636e01499d7f1ca959a47331e40f3419affcb47a44334e",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/011-high.u8",
+              "sha256": "eaedcd413944a6a692fa2c61cfd43077340e5e8ec915e9240cbe95c2e29c4027",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/011-output.u8",
+              "sha256": "eb92c1ca1873c08275d5e20e378c9871d6648a0340b5d1da0760c38f5336d320",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 12,
+          "inputs": {
+            "a": {
+              "path": "inputs/012-a.u8",
+              "sha256": "1e75431d7e80544b9be05f229b471ea4b3fd4198384501f9e3685f5377824a23",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/012-b.u8",
+              "sha256": "51cc180c8d22935415486655e328f20492297150ae329df1f46c61ba20d10e00",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/012.prefix",
+            "sha256": "d8411fe443355443e3e5ccb0f935c96ce66a69ae07dd7c91dd9504ebccf77d85",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/012.h264",
+            "sha256": "1674d33903d2760d4a325f6919f09f4044dc919c9d7a463f1e91424c1d380899",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/012.i420",
+            "sha256": "b870c063a66db74b9e886bb3e89ac6a1a68e6dce7137ec024c2a2501a948e925",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/012-low.u8",
+              "sha256": "05e365df6aab74ab89761641bdfb14d67df392eb1d1b92fd373afe069436a22d",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/012-high.u8",
+              "sha256": "2eb2458aea358fe42a57d94b2e626eddd1844b765a4a79b4816cf24ea94327f8",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/012-output.u8",
+              "sha256": "8dd275423567de6ff15f3680705b7cc30e4210d6a67eb1ab6c43df5062ea6aa1",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 13,
+          "inputs": {
+            "a": {
+              "path": "inputs/013-a.u8",
+              "sha256": "aaa70ca9631e59223e9aa9d4515f9d7a0ad8e631591238b32236443c72ee1fca",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/013-b.u8",
+              "sha256": "71039749ae6c7cb72902732b4335ff7b3fc6f8f1cec43b4496257404f25e1423",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/013.prefix",
+            "sha256": "8aa52d27e5c642ee86b8338426216942584441b8bc92ed03b52ea2be10ad01d3",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/013.h264",
+            "sha256": "738f1064a72793a90bd64648232ee1093573629d0643a62bf72dbd71df5711fb",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/013.i420",
+            "sha256": "838536e92c2e3b61beaa92b834c3086b59b686c419b7d418a10db8a6e40680ef",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/013-low.u8",
+              "sha256": "58b1b093d20a5fd89c55fee82d762ff8e0be7ac18046944bb23b177957d3111d",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/013-high.u8",
+              "sha256": "164d35058e3d9ab53cdeedbc25d8494bbcf2c2ea414cd66b3c455c0bb16ad101",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/013-output.u8",
+              "sha256": "b07f41ed5ed9616d7abb5c7efcb47f50717ae4f40305df04bbb1977c0d3436ea",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 14,
+          "inputs": {
+            "a": {
+              "path": "inputs/014-a.u8",
+              "sha256": "af51813c47d32ecf370c7b342a89d6b881a8366a75c3279b6baf1c97746683d0",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/014-b.u8",
+              "sha256": "4b891863d1d964d76d0410dad61946de148487993106607948b449847fc09cd8",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/014.prefix",
+            "sha256": "1c510f8b61decc898ae18444d334f10f6c10eb1a32293ea59d27e7103509d9ed",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/014.h264",
+            "sha256": "9c8474c865bab725f7f97b67780155cd540249b94228585911771f80d15ff2b8",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/014.i420",
+            "sha256": "c7f5babdfbcf988b6bfbbf4f6f8a80a8accca7859cc031f2cda21c0c8f9ef897",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/014-low.u8",
+              "sha256": "2405786688667034e5f60ebdc8190b094c7e73dd24a7b81887fe6b5f6433ca45",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/014-high.u8",
+              "sha256": "44582d302258074d6a231cc981342345734ebb932821aebd13639ff45e7d5a4b",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/014-output.u8",
+              "sha256": "95b3913134061a25482746a92516c14f29b26f942a1b53529b783d2707b7bd2c",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 15,
+          "inputs": {
+            "a": {
+              "path": "inputs/015-a.u8",
+              "sha256": "79adcf27472a8a7d2272f8b74ef04ba3fa9ba19fd0e06aa4acc77447b732b55d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/015-b.u8",
+              "sha256": "f7b1ef1beaf3ee1942269699782adc81abe0905f1081e6264dce97447075d54c",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-envelope/015.prefix",
+            "sha256": "7d73de0c985d4a21a26d79b0887ce59d663c115197ba5d0dfc5d92ea0a310c15",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-envelope/015.h264",
+            "sha256": "94f837f97cae60dc8957bebbbfa46f6f21ea63f0ec13ae8eaf7af45e8ea665a8",
+            "bytes": 89715
+          },
+          "expected": {
+            "path": "temporal-envelope/015.i420",
+            "sha256": "34e64bbd18a022946621472df2daae656f1e2b967bc2b5c0517b37dbaaa53e02",
+            "bytes": 268800
+          },
+          "outputs": {
+            "low": {
+              "path": "temporal-envelope/015-low.u8",
+              "sha256": "5360ded9479652894940b289de0d3c14d7f7eaf4b62a1d5856d7ae527b0ad4f2",
+              "bytes": 16384
+            },
+            "high": {
+              "path": "temporal-envelope/015-high.u8",
+              "sha256": "a4db9098f2a197a6ad14049037587099ea48d843398f2d1ab505d1c47682dc95",
+              "bytes": 16384
+            },
+            "output": {
+              "path": "temporal-envelope/015-output.u8",
+              "sha256": "014eb32a759039084a33b28756780fe7d91be627ab0d5416a03ba0c25797d72d",
+              "bytes": 16384
+            }
+          }
+        }
+      ]
+    },
+    "temporal-average": {
+      "description": "Two-frame blend with exact half-up rounding.",
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 642,
+        "peak_live_references": 2
+      },
+      "manifest": {
+        "path": "temporal-average/manifest.json",
+        "sha256": "7f6e7d18863426d14016027dc8118ab79939f5526b20a3f1b1246839885971d9",
+        "bytes": 2714
+      },
+      "tail": {
+        "path": "temporal-average/prediction.h264",
+        "sha256": "5fc49c0342d9680fde943bb5cfb3114a63b186099f622a2280ab7a8848aaa154",
+        "bytes": 642
+      },
+      "writer": {
+        "width": 128,
+        "height": 128,
+        "fps": 30,
+        "motion_bits": 4,
+        "reference_slots": {
+          "0": 0,
+          "1": 1,
+          "2": 0
+        },
+        "slice_mode": "row"
+      },
+      "jobs": [
+        {
+          "index": 0,
+          "inputs": {
+            "a": {
+              "path": "inputs/000-a.u8",
+              "sha256": "87431259bc425e1296a8e3b6d2fd4fba5aff26d27a0cd8dbb36be3fe6694287e",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/000-b.u8",
+              "sha256": "6b0cb18ec6a500abaac82f7c01ccc15f10578b70ba23a77da702d22d0c645ab4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/000.prefix",
+            "sha256": "4229c19b2a916437e179b8a987390aa782b447f58d70763865900f79398fe726",
+            "bytes": 86487
+          },
+          "stream": {
+            "path": "temporal-average/000.h264",
+            "sha256": "7bef121b4f1fcf2a9d0e5d218f51409bee6f93b3f79ace64ef96e12e27d3c4df",
+            "bytes": 87129
+          },
+          "expected": {
+            "path": "temporal-average/000.i420",
+            "sha256": "077a1157c36dc24526afd670458756877569656b6b3ad56f19b5dd51031419c0",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/000-output.u8",
+              "sha256": "5a09dcf7467d83b3c8bb7cd70a3bf3e6839a1b76a797eadca98da202fd31f2c1",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 1,
+          "inputs": {
+            "a": {
+              "path": "inputs/001-a.u8",
+              "sha256": "9d141227e0a2a6c775a3ad7d0c54944209100f1634a05c995331a3ae576e8e66",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/001-b.u8",
+              "sha256": "b9dcc43df8fb0ac58be2299a12cfb4ebd7cff14f547ca22ee5a83a2f927688ad",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/001.prefix",
+            "sha256": "2c96846de18774d6536fd114193e48c8012fd07563ac66c973c4cffb741f7a21",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/001.h264",
+            "sha256": "1461bdf91dd1c79a91bd73f6512ef141299ae7bec020ba95a1d373e5e0e6ae1b",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/001.i420",
+            "sha256": "f81f618f348765c5710c826fbe5f4eb995da849288b1920bfd67981509461be7",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/001-output.u8",
+              "sha256": "c3011033767209b29027da173021dd52e58ead98b82b94f3f093133855f89ba8",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 2,
+          "inputs": {
+            "a": {
+              "path": "inputs/002-a.u8",
+              "sha256": "13db89712689f4f2833d8defb7ed881cad2afa03108ab252707a3e36366ff68c",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/002-b.u8",
+              "sha256": "c6afbf15e8c6fc98a6c4290239982c38484a8e630f94008b10b06cf95a007e4d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/002.prefix",
+            "sha256": "8e4fee741ee52055103e49ca1444c6d0eed19056150d352fc000f2f03843000a",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/002.h264",
+            "sha256": "5caf64f263b6076b67d842b6bc77fc54291a595af36210392d3cb7e3d3f108b5",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/002.i420",
+            "sha256": "364f9ea8463e43d665657e6411d13f6a086ba34992940625e099116a34fb24a5",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/002-output.u8",
+              "sha256": "ada0f2dc065da642c9ed2c6c9bb19540ba4b9e3ce17ec2706b38d37ca44f2a5f",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 3,
+          "inputs": {
+            "a": {
+              "path": "inputs/003-a.u8",
+              "sha256": "4833b5e29275c5d2e395e083b529e4257207cb3ffc77290b8ec1549125a709d7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/003-b.u8",
+              "sha256": "7659efe6ef3fd8e3c1ab1d172ec3d9e063556a6914214bf19a847f5933ae870b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/003.prefix",
+            "sha256": "3ae4bdd7b45b5d6e09c4ec24cb280015e593102b323e8daf8e2d642c9b97e8fc",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/003.h264",
+            "sha256": "58442e49862fe5f168eab99423ce7f3b5d21cddb259555a4d574b5b550bafc4c",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/003.i420",
+            "sha256": "ce73600a776921766bea328891d6b8f5c52408765e8567c28879001765237b77",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/003-output.u8",
+              "sha256": "48c16965b2505750f29c2f1c992fec7bf3e9e23522781a2f5eecda7d3f35b8b4",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 4,
+          "inputs": {
+            "a": {
+              "path": "inputs/004-a.u8",
+              "sha256": "3f1a3104bbb76d4c06364e95fc610e4c95c790b63da3a366b35fbf50526c3728",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/004-b.u8",
+              "sha256": "733519fa6b7fd34930efacae4db9444f4d27f67489b8bd359eb49a6b65abaa2f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/004.prefix",
+            "sha256": "0d208e3f8fdaccd9a31c3aa28fd5398172ab82fa52613aadb3a2b2936b1f9b07",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/004.h264",
+            "sha256": "a8971bdde176a353d60283040032622c02742fabde33ad97bca9006bac99c005",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/004.i420",
+            "sha256": "ec4483b6e0fc6e142e7aaa79832c282641f4d66746322aa9c5d472899ecc173b",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/004-output.u8",
+              "sha256": "ad623ad3765cbc4ba382d6013e2611bda8ab53e8234e1623bcf675f877251cb0",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 5,
+          "inputs": {
+            "a": {
+              "path": "inputs/005-a.u8",
+              "sha256": "cbfdacf085cb3be77fe7a4b489ffa8a7a28ec2c071698779c16bc51c0a226d2a",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/005-b.u8",
+              "sha256": "379749e8d69c5709ec71a7ad458dee9922b36d97eaa5bf5c1df71884071b44ce",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/005.prefix",
+            "sha256": "3989cc6aaca7d9ea5e4c71ae579f41c2fb4d649e022b800a265759f18baf530e",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/005.h264",
+            "sha256": "40a4cff49352521587f38f82d8d383457bb91e56ce75bb3eac1863f795f31d73",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/005.i420",
+            "sha256": "b1c9cca8ec08b03ab0c455d1d7074ddfa2c5141b5ebe5deb38169594293163c7",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/005-output.u8",
+              "sha256": "b9bf2c919fe43d631bc2e412d3b512d8af0875478bf64dd3e8e4c54bded6353a",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 6,
+          "inputs": {
+            "a": {
+              "path": "inputs/006-a.u8",
+              "sha256": "360d570b1bc6e763d7875143d56ed9fd5d6662d77a6a2d24e7ec4ab7758395df",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/006-b.u8",
+              "sha256": "b7ec0b666d509fae0af10a31a237fa9d6c9a95907967fee85ae489484b742ca3",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/006.prefix",
+            "sha256": "a447e27f3b00881ef4897b51d981071c60de7a7d27783049e81baa6ea712594b",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/006.h264",
+            "sha256": "6915d8463870e3f70ccb7e0b0a8a4fe39b8f84551748fe22f9e74faa934b99ed",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/006.i420",
+            "sha256": "aa73e9d12894bfd6e2c1add33ebb09b99dd4b044a215f31974cf41d68a736e38",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/006-output.u8",
+              "sha256": "7d14da7ecbdb4073f3d23f28f861ac0541b850d75a78d2c3b934dfcac3768b73",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 7,
+          "inputs": {
+            "a": {
+              "path": "inputs/007-a.u8",
+              "sha256": "db480467ae5b68669a678dfbf52ad48ef9a4e57fc070f81406eaa48dcc192ef3",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/007-b.u8",
+              "sha256": "b736ca2d0530bbe0c839853b7f36a4a825b31de6ad4645ac20970b639dabf95f",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/007.prefix",
+            "sha256": "583b49bb9740badf539083c7633d51e8dcb6221845e1040246cf7b7ce9fbaa08",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/007.h264",
+            "sha256": "bc846ab9c660c05d9a56a9c9ee305fbd3da4d71cfdf40b99e41818a2185eeece",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/007.i420",
+            "sha256": "25451b8ab41a07e842b452873b9ed9331b5211be1a64200ea27c22c327469c65",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/007-output.u8",
+              "sha256": "858ed50257ebec749d55f9acfece3b2f940a47c7296168dfaeb1be2303ec307e",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 8,
+          "inputs": {
+            "a": {
+              "path": "inputs/008-a.u8",
+              "sha256": "457c0275af14ab93afd6b782c9754585cdcb0af2d2a15139d0b0dff65aa43875",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/008-b.u8",
+              "sha256": "0c6255637cb70931346a0ea67906b8de4856530b7779c20f08b07e41ac9c7ad4",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/008.prefix",
+            "sha256": "e562edcd176e2160c6c8b8e35bed1dc7cd13059ebb447beb4c50814dc99c6312",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/008.h264",
+            "sha256": "de1a099e5de558704fb725a2fb78da3d2ab3901156560525ad5a76372d4c2773",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/008.i420",
+            "sha256": "8890eb645a3b6fec0c70b17ae001d075327135f3fafbdd2b36aab98b583c05b5",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/008-output.u8",
+              "sha256": "9c33de4aeb57c5b52c1232145ad6ec1a331ee1af337d6fbf7458073d65052e84",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 9,
+          "inputs": {
+            "a": {
+              "path": "inputs/009-a.u8",
+              "sha256": "119becc8b444b741ffc55274f4dd282a81dbdc9a0770b31e8ce172c5bae5b5f7",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/009-b.u8",
+              "sha256": "6b6bf6682e9ad2c98a8a60123f680d2b88f5110e6762d2d64c69b268438b105d",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/009.prefix",
+            "sha256": "a322593a3c5078180d3bea4f526951b82b08ea4d669f4fe97a47bb10dbb44ef7",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/009.h264",
+            "sha256": "f5b5f61e9e9ed9ea101e9446f4d41d98f78f6549a987c9be1bbdbda2e070058e",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/009.i420",
+            "sha256": "13b89c0dc2389415a8ee7cc8ed23fc38795dc6431d845e5d7e5fa6183a465554",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/009-output.u8",
+              "sha256": "7a6f961b899d6d982e81fa2d6c31728b941c2e217c92eaf8ad6ec1b44feda963",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 10,
+          "inputs": {
+            "a": {
+              "path": "inputs/010-a.u8",
+              "sha256": "5e6481ae1a1d37d13939756123a6bf179d2ffd2f3fb17fd2b23f50981d8043cc",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/010-b.u8",
+              "sha256": "1fa2c855795d1dd6ab24d040f6e8e94107c3135c5f79318dc9ce9054b65ab0eb",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/010.prefix",
+            "sha256": "775d04c3758d043e3a4569dcb08edafde839dd16d6846562e7be2b32d92e9780",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/010.h264",
+            "sha256": "55cb7bbb669c87624821e0e8d4b629888026405a719a906a13bea5b3ab68e9a2",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/010.i420",
+            "sha256": "d309e4a282baecf3cbf9f651f4f1fa0ecdaa1d8948106219ecc0ccc939a79135",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/010-output.u8",
+              "sha256": "a688b541d30fbb1cca5a301557f31535b74b217acc58fc981d214709c41dbe37",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 11,
+          "inputs": {
+            "a": {
+              "path": "inputs/011-a.u8",
+              "sha256": "f13cbd377d2d504e202239923739c63f010f248d93fd750b4a6e970d80c6987d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/011-b.u8",
+              "sha256": "ce07dcb9a168587f78f103c214a87b6acaac57beeb8c175df239f1eb5566fa6b",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/011.prefix",
+            "sha256": "f99bf601532f57638ba8048caabce7f5716d94b394b0a33fee26558e3c4d56e6",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/011.h264",
+            "sha256": "f7381b7e19e0cf194f74344a6bfe2c0d3c571c03c20fe1bd22668fab4030ed46",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/011.i420",
+            "sha256": "87695e0dd8531f65cd93dd76bef134a680b39750fbcc8307ff1bfc06d62e6c77",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/011-output.u8",
+              "sha256": "e9018f249c63e5f70bc1c8b39dee2dbe2ea80472373d3a1dab0af326899ee231",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 12,
+          "inputs": {
+            "a": {
+              "path": "inputs/012-a.u8",
+              "sha256": "1e75431d7e80544b9be05f229b471ea4b3fd4198384501f9e3685f5377824a23",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/012-b.u8",
+              "sha256": "51cc180c8d22935415486655e328f20492297150ae329df1f46c61ba20d10e00",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/012.prefix",
+            "sha256": "d8411fe443355443e3e5ccb0f935c96ce66a69ae07dd7c91dd9504ebccf77d85",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/012.h264",
+            "sha256": "6a41ea69daa90f8466c429b6475dca1a819393792f60f16a218b44450df93deb",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/012.i420",
+            "sha256": "364b70731a17d8c53d92b73aa333f2e68ea00fa2dee4c93fbe44d1439df9cc36",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/012-output.u8",
+              "sha256": "ef32a3695575ad428f96498228ef7f14e87f4941796899147b55f03f0139f253",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 13,
+          "inputs": {
+            "a": {
+              "path": "inputs/013-a.u8",
+              "sha256": "aaa70ca9631e59223e9aa9d4515f9d7a0ad8e631591238b32236443c72ee1fca",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/013-b.u8",
+              "sha256": "71039749ae6c7cb72902732b4335ff7b3fc6f8f1cec43b4496257404f25e1423",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/013.prefix",
+            "sha256": "8aa52d27e5c642ee86b8338426216942584441b8bc92ed03b52ea2be10ad01d3",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/013.h264",
+            "sha256": "846472e18f4b41ec6c1e62a9baa69d4dfe9ff2832cf260b3da3c673b56dbcddf",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/013.i420",
+            "sha256": "5d2aba622c7a35c9114382e4794dfbb0c581db1b716cc4b4eea1f0af97dc7665",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/013-output.u8",
+              "sha256": "445b8cb69a383f19c4d121664045970154d59bcef554da4e9c17d38ba1033a1b",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 14,
+          "inputs": {
+            "a": {
+              "path": "inputs/014-a.u8",
+              "sha256": "af51813c47d32ecf370c7b342a89d6b881a8366a75c3279b6baf1c97746683d0",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/014-b.u8",
+              "sha256": "4b891863d1d964d76d0410dad61946de148487993106607948b449847fc09cd8",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/014.prefix",
+            "sha256": "1c510f8b61decc898ae18444d334f10f6c10eb1a32293ea59d27e7103509d9ed",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/014.h264",
+            "sha256": "9e932cfdca8d71b8694cdcb489e6582f07cd56ed4d208a53116510509333738b",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/014.i420",
+            "sha256": "1ff509a5455f0db06d9dca18750cd6408293ab0782540d0bc9d75fa845bc57eb",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/014-output.u8",
+              "sha256": "e019c3003064c8fee081a78e804e88a2d0b6b66d4750339acd0519ec5ddf97cc",
+              "bytes": 16384
+            }
+          }
+        },
+        {
+          "index": 15,
+          "inputs": {
+            "a": {
+              "path": "inputs/015-a.u8",
+              "sha256": "79adcf27472a8a7d2272f8b74ef04ba3fa9ba19fd0e06aa4acc77447b732b55d",
+              "bytes": 16384
+            },
+            "b": {
+              "path": "inputs/015-b.u8",
+              "sha256": "f7b1ef1beaf3ee1942269699782adc81abe0905f1081e6264dce97447075d54c",
+              "bytes": 16384
+            }
+          },
+          "input_prefix": {
+            "path": "temporal-average/015.prefix",
+            "sha256": "7d73de0c985d4a21a26d79b0887ce59d663c115197ba5d0dfc5d92ea0a310c15",
+            "bytes": 86477
+          },
+          "stream": {
+            "path": "temporal-average/015.h264",
+            "sha256": "585f95af455d22e891a3e2863f13387b6f3c0350ae441f0020b6978728636362",
+            "bytes": 87119
+          },
+          "expected": {
+            "path": "temporal-average/015.i420",
+            "sha256": "8e5e4af944ffc6f9c79c65758c569b258b97b287d8e1d8e619d7254797901e21",
+            "bytes": 115200
+          },
+          "outputs": {
+            "output": {
+              "path": "temporal-average/015-output.u8",
+              "sha256": "021fbcce6cd6601c8ba7991008f32131addb06947158f2535232e601265c03fe",
+              "bytes": 16384
+            }
+          }
+        }
+      ]
+    }
+  }
+}

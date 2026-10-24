@@ -1,0 +1,931 @@
+{
+  "format": "codec-compute-temporal-benchmark-1",
+  "status": "pass",
+  "backend": "nvdec",
+  "created_utc": "2026-10-24T15:09:54.045953+00:00",
+  "python": "3.8.10",
+  "bundle_sha256": "272d7e69ff2f1114e1a40bb2cf78e937852db12daa0f8a6c40ef2710be25e95f",
+  "repository_commit": "d479dc31c282c8dd026aaa4dff0b50ae596e794b",
+  "runtime_source_sha256": {
+    "runner": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+    "decoder": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+    "writer": "75a7c92e8a090f3fc9179e9c76160f778bb46a54eb70a4920481b67fc9dcc6f5"
+  },
+  "repeats": 5,
+  "warmups_per_mode": 1,
+  "batch_sizes": [
+    1,
+    16
+  ],
+  "tasks": {
+    "positive-change": {
+      "geometry": {
+        "width": 128,
+        "height": 128,
+        "coded_width": 160,
+        "coded_height": 160,
+        "guard": 16,
+        "pictures_per_job": 3,
+        "frame_bytes": 38400,
+        "output_frames": {
+          "output": 2
+        },
+        "output_picture_indices": [
+          2
+        ]
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 644,
+        "peak_live_references": 2
+      },
+      "validation": {
+        "status": "pass",
+        "decoder_sessions": 1,
+        "decoded_pictures": 48,
+        "copied_pictures": 48,
+        "decoded_i420_bytes": 1843200,
+        "copied_i420_bytes": 1843200,
+        "returned_pictures": 48,
+        "returned_i420_bytes": 1843200,
+        "guard_bytes": 442368,
+        "chroma_bytes": 614400,
+        "named_outputs": 16
+      },
+      "batches": {
+        "1": {
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 3,
+            "copied_pictures": 3,
+            "decoded_i420_bytes": 115200,
+            "copied_i420_bytes": 115200,
+            "returned_pictures": 3,
+            "returned_i420_bytes": 115200,
+            "jobs": 1,
+            "samples_ms": [
+              267.05587306059897,
+              260.49686898477376,
+              270.00604395288974,
+              264.76964401081204,
+              264.94052598718554
+            ],
+            "median_ms": 264.94052598718554,
+            "min_ms": 260.49686898477376,
+            "max_ms": 270.00604395288974,
+            "amortized_ms_per_job": 264.94052598718554,
+            "jobs_per_second": 3.7744320023293354
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 3,
+            "copied_pictures": 1,
+            "decoded_i420_bytes": 115200,
+            "copied_i420_bytes": 38400,
+            "returned_pictures": 1,
+            "returned_i420_bytes": 38400,
+            "jobs": 1,
+            "samples_ms": [
+              264.8113410687074,
+              270.1313260477036,
+              258.35675396956503,
+              261.5673750406131,
+              287.0905860327184
+            ],
+            "median_ms": 264.8113410687074,
+            "min_ms": 258.35675396956503,
+            "max_ms": 287.0905860327184,
+            "amortized_ms_per_job": 264.8113410687074,
+            "jobs_per_second": 3.776273312027607
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 3,
+            "copied_pictures": 1,
+            "decoded_i420_bytes": 115200,
+            "copied_i420_bytes": 38400,
+            "returned_pictures": 1,
+            "returned_i420_bytes": 38400,
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "jobs": 1,
+            "samples_ms": [
+              306.67403095867485,
+              296.3420960586518,
+              303.961397963576,
+              303.146671038121,
+              297.15842299629
+            ],
+            "median_ms": 303.146671038121,
+            "min_ms": 296.3420960586518,
+            "max_ms": 306.67403095867485,
+            "amortized_ms_per_job": 303.146671038121,
+            "jobs_per_second": 3.2987332388494184
+          },
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "decoder_sessions": 0,
+            "jobs": 1,
+            "samples_ms": [
+              23.61231402028352,
+              27.878753026016057,
+              30.742716044187546,
+              23.261878988705575,
+              27.896034065634012
+            ],
+            "median_ms": 27.878753026016057,
+            "min_ms": 23.261878988705575,
+            "max_ms": 30.742716044187546,
+            "amortized_ms_per_job": 27.878753026016057,
+            "jobs_per_second": 35.869610059919616
+          }
+        },
+        "16": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "decoder_sessions": 0,
+            "jobs": 16,
+            "samples_ms": [
+              313.14663495868444,
+              318.45631601754576,
+              321.06581202242523,
+              318.82323196623474,
+              321.5824250364676
+            ],
+            "median_ms": 318.82323196623474,
+            "min_ms": 313.14663495868444,
+            "max_ms": 321.5824250364676,
+            "amortized_ms_per_job": 19.92645199788967,
+            "jobs_per_second": 50.18454866455433
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 48,
+            "copied_pictures": 48,
+            "decoded_i420_bytes": 1843200,
+            "copied_i420_bytes": 1843200,
+            "returned_pictures": 48,
+            "returned_i420_bytes": 1843200,
+            "jobs": 16,
+            "samples_ms": [
+              537.2935039922595,
+              375.1127430004999,
+              373.1443409342319,
+              367.75232304353267,
+              383.79295205231756
+            ],
+            "median_ms": 375.1127430004999,
+            "min_ms": 367.75232304353267,
+            "max_ms": 537.2935039922595,
+            "amortized_ms_per_job": 23.444546437531244,
+            "jobs_per_second": 42.6538428740574
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 48,
+            "copied_pictures": 16,
+            "decoded_i420_bytes": 1843200,
+            "copied_i420_bytes": 614400,
+            "returned_pictures": 16,
+            "returned_i420_bytes": 614400,
+            "jobs": 16,
+            "samples_ms": [
+              377.3862679954618,
+              369.8893029941246,
+              363.8914549956098,
+              388.4716830216348,
+              386.30567805375904
+            ],
+            "median_ms": 377.3862679954618,
+            "min_ms": 363.8914549956098,
+            "max_ms": 388.4716830216348,
+            "amortized_ms_per_job": 23.586641749716364,
+            "jobs_per_second": 42.39687915775569
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 48,
+            "copied_pictures": 16,
+            "decoded_i420_bytes": 1843200,
+            "copied_i420_bytes": 614400,
+            "returned_pictures": 16,
+            "returned_i420_bytes": 614400,
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "jobs": 16,
+            "samples_ms": [
+              710.2918699383736,
+              712.9464859608561,
+              710.7697939500213,
+              694.8722719680518,
+              698.9584850380197
+            ],
+            "median_ms": 710.2918699383736,
+            "min_ms": 694.8722719680518,
+            "max_ms": 712.9464859608561,
+            "amortized_ms_per_job": 44.39324187114835,
+            "jobs_per_second": 22.52595120001612
+          }
+        }
+      }
+    },
+    "absolute-change": {
+      "geometry": {
+        "width": 128,
+        "height": 128,
+        "coded_width": 160,
+        "coded_height": 160,
+        "guard": 16,
+        "pictures_per_job": 7,
+        "frame_bytes": 38400,
+        "output_frames": {
+          "output": 4,
+          "mask": 6
+        },
+        "output_picture_indices": [
+          4,
+          6
+        ]
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 2942,
+        "peak_live_references": 3
+      },
+      "validation": {
+        "status": "pass",
+        "decoder_sessions": 1,
+        "decoded_pictures": 112,
+        "copied_pictures": 112,
+        "decoded_i420_bytes": 4300800,
+        "copied_i420_bytes": 4300800,
+        "returned_pictures": 112,
+        "returned_i420_bytes": 4300800,
+        "guard_bytes": 1032192,
+        "chroma_bytes": 1433600,
+        "named_outputs": 32
+      },
+      "batches": {
+        "1": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "decoder_sessions": 0,
+            "jobs": 1,
+            "samples_ms": [
+              31.76698205061257,
+              30.930205015465617,
+              28.552743955515325,
+              30.492761987261474,
+              27.104409993626177
+            ],
+            "median_ms": 30.492761987261474,
+            "min_ms": 27.104409993626177,
+            "max_ms": 31.76698205061257,
+            "amortized_ms_per_job": 30.492761987261474,
+            "jobs_per_second": 32.794667810602256
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 7,
+            "copied_pictures": 7,
+            "decoded_i420_bytes": 268800,
+            "copied_i420_bytes": 268800,
+            "returned_pictures": 7,
+            "returned_i420_bytes": 268800,
+            "jobs": 1,
+            "samples_ms": [
+              269.1643090220168,
+              276.62533801048994,
+              272.6769170258194,
+              280.77091195154935,
+              273.9640969084576
+            ],
+            "median_ms": 273.9640969084576,
+            "min_ms": 269.1643090220168,
+            "max_ms": 280.77091195154935,
+            "amortized_ms_per_job": 273.9640969084576,
+            "jobs_per_second": 3.650113322455315
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 7,
+            "copied_pictures": 2,
+            "decoded_i420_bytes": 268800,
+            "copied_i420_bytes": 76800,
+            "returned_pictures": 2,
+            "returned_i420_bytes": 76800,
+            "jobs": 1,
+            "samples_ms": [
+              285.1117530371994,
+              281.81533701717854,
+              282.2594059398398,
+              277.17459108680487,
+              277.7593960054219
+            ],
+            "median_ms": 281.81533701717854,
+            "min_ms": 277.17459108680487,
+            "max_ms": 285.1117530371994,
+            "amortized_ms_per_job": 281.81533701717854,
+            "jobs_per_second": 3.5484229161702556
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 7,
+            "copied_pictures": 2,
+            "decoded_i420_bytes": 268800,
+            "copied_i420_bytes": 76800,
+            "returned_pictures": 2,
+            "returned_i420_bytes": 76800,
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "jobs": 1,
+            "samples_ms": [
+              318.5359010240063,
+              298.68726991117,
+              308.1074849469587,
+              322.37203302793205,
+              308.28636593651026
+            ],
+            "median_ms": 308.28636593651026,
+            "min_ms": 298.68726991117,
+            "max_ms": 322.37203302793205,
+            "amortized_ms_per_job": 308.28636593651026,
+            "jobs_per_second": 3.2437373510249365
+          }
+        },
+        "16": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "decoder_sessions": 0,
+            "jobs": 16,
+            "samples_ms": [
+              320.2435969142243,
+              322.0977259334177,
+              320.35598100628704,
+              314.3494619289413,
+              318.79951898008585
+            ],
+            "median_ms": 320.2435969142243,
+            "min_ms": 314.3494619289413,
+            "max_ms": 322.0977259334177,
+            "amortized_ms_per_job": 20.01522480713902,
+            "jobs_per_second": 49.96196693445684
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 112,
+            "copied_pictures": 112,
+            "decoded_i420_bytes": 4300800,
+            "copied_i420_bytes": 4300800,
+            "returned_pictures": 112,
+            "returned_i420_bytes": 4300800,
+            "jobs": 16,
+            "samples_ms": [
+              533.9118089759722,
+              555.6951459730044,
+              518.0433429777622,
+              529.4928560033441,
+              527.0874899579212
+            ],
+            "median_ms": 529.4928560033441,
+            "min_ms": 518.0433429777622,
+            "max_ms": 555.6951459730044,
+            "amortized_ms_per_job": 33.093303500209004,
+            "jobs_per_second": 30.217593719336133
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 112,
+            "copied_pictures": 32,
+            "decoded_i420_bytes": 4300800,
+            "copied_i420_bytes": 1228800,
+            "returned_pictures": 32,
+            "returned_i420_bytes": 1228800,
+            "jobs": 16,
+            "samples_ms": [
+              533.7290239986032,
+              516.3196150679141,
+              520.0490250717849,
+              517.5396900158376,
+              504.8174930270761
+            ],
+            "median_ms": 517.5396900158376,
+            "min_ms": 504.8174930270761,
+            "max_ms": 533.7290239986032,
+            "amortized_ms_per_job": 32.34623062598985,
+            "jobs_per_second": 30.915503310500444
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 112,
+            "copied_pictures": 32,
+            "decoded_i420_bytes": 4300800,
+            "copied_i420_bytes": 1228800,
+            "returned_pictures": 32,
+            "returned_i420_bytes": 1228800,
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "jobs": 16,
+            "samples_ms": [
+              856.9616079330444,
+              840.4730709735304,
+              829.3013839283958,
+              824.7678069164976,
+              1000.1399219036102
+            ],
+            "median_ms": 840.4730709735304,
+            "min_ms": 824.7678069164976,
+            "max_ms": 1000.1399219036102,
+            "amortized_ms_per_job": 52.52956693584565,
+            "jobs_per_second": 19.036897852618885
+          }
+        }
+      }
+    },
+    "temporal-envelope": {
+      "geometry": {
+        "width": 128,
+        "height": 128,
+        "coded_width": 160,
+        "coded_height": 160,
+        "guard": 16,
+        "pictures_per_job": 7,
+        "frame_bytes": 38400,
+        "output_frames": {
+          "low": 3,
+          "high": 5,
+          "output": 6
+        },
+        "output_picture_indices": [
+          3,
+          5,
+          6
+        ]
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 5,
+        "total_pictures": 7,
+        "prediction_bytes": 3238,
+        "peak_live_references": 3
+      },
+      "validation": {
+        "status": "pass",
+        "decoder_sessions": 1,
+        "decoded_pictures": 112,
+        "copied_pictures": 112,
+        "decoded_i420_bytes": 4300800,
+        "copied_i420_bytes": 4300800,
+        "returned_pictures": 112,
+        "returned_i420_bytes": 4300800,
+        "guard_bytes": 1032192,
+        "chroma_bytes": 1433600,
+        "named_outputs": 48
+      },
+      "batches": {
+        "1": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "decoder_sessions": 0,
+            "jobs": 1,
+            "samples_ms": [
+              24.738403968513012,
+              29.906323994509876,
+              25.085862958803773,
+              25.136520038358867,
+              21.087042056024075
+            ],
+            "median_ms": 25.085862958803773,
+            "min_ms": 21.087042056024075,
+            "max_ms": 29.906323994509876,
+            "amortized_ms_per_job": 25.085862958803773,
+            "jobs_per_second": 39.86308948758147
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 7,
+            "copied_pictures": 7,
+            "decoded_i420_bytes": 268800,
+            "copied_i420_bytes": 268800,
+            "returned_pictures": 7,
+            "returned_i420_bytes": 268800,
+            "jobs": 1,
+            "samples_ms": [
+              271.86577394604683,
+              275.8380339946598,
+              277.8186289360747,
+              276.2896870262921,
+              280.3147799568251
+            ],
+            "median_ms": 276.2896870262921,
+            "min_ms": 271.86577394604683,
+            "max_ms": 280.3147799568251,
+            "amortized_ms_per_job": 276.2896870262921,
+            "jobs_per_second": 3.6193895282991098
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 7,
+            "copied_pictures": 3,
+            "decoded_i420_bytes": 268800,
+            "copied_i420_bytes": 115200,
+            "returned_pictures": 3,
+            "returned_i420_bytes": 115200,
+            "jobs": 1,
+            "samples_ms": [
+              278.57127494644374,
+              288.6916568968445,
+              280.7405119528994,
+              295.5091280164197,
+              283.0011729383841
+            ],
+            "median_ms": 283.0011729383841,
+            "min_ms": 278.57127494644374,
+            "max_ms": 295.5091280164197,
+            "amortized_ms_per_job": 283.0011729383841,
+            "jobs_per_second": 3.5335542592175866
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 7,
+            "copied_pictures": 3,
+            "decoded_i420_bytes": 268800,
+            "copied_i420_bytes": 115200,
+            "returned_pictures": 3,
+            "returned_i420_bytes": 115200,
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "jobs": 1,
+            "samples_ms": [
+              310.0484940223396,
+              309.6171309007332,
+              318.4278999688104,
+              323.5304430127144,
+              305.4582440527156
+            ],
+            "median_ms": 310.0484940223396,
+            "min_ms": 305.4582440527156,
+            "max_ms": 323.5304430127144,
+            "amortized_ms_per_job": 310.0484940223396,
+            "jobs_per_second": 3.2253019101197378
+          }
+        },
+        "16": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "decoder_sessions": 0,
+            "jobs": 16,
+            "samples_ms": [
+              321.59221707843244,
+              308.9544689282775,
+              309.64900203980505,
+              311.54210795648396,
+              321.0828360170126
+            ],
+            "median_ms": 311.54210795648396,
+            "min_ms": 308.9544689282775,
+            "max_ms": 321.59221707843244,
+            "amortized_ms_per_job": 19.471381747280248,
+            "jobs_per_second": 51.35742357573979
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 112,
+            "copied_pictures": 112,
+            "decoded_i420_bytes": 4300800,
+            "copied_i420_bytes": 4300800,
+            "returned_pictures": 112,
+            "returned_i420_bytes": 4300800,
+            "jobs": 16,
+            "samples_ms": [
+              529.2949350550771,
+              542.995412950404,
+              546.2846279842779,
+              643.7914801063016,
+              541.7489059036598
+            ],
+            "median_ms": 542.995412950404,
+            "min_ms": 529.2949350550771,
+            "max_ms": 643.7914801063016,
+            "amortized_ms_per_job": 33.93721330940025,
+            "jobs_per_second": 29.466178937061123
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 112,
+            "copied_pictures": 48,
+            "decoded_i420_bytes": 4300800,
+            "copied_i420_bytes": 1843200,
+            "returned_pictures": 48,
+            "returned_i420_bytes": 1843200,
+            "jobs": 16,
+            "samples_ms": [
+              567.006643046625,
+              536.2919589970261,
+              549.377167946659,
+              539.0881130006164,
+              533.7546879891306
+            ],
+            "median_ms": 539.0881130006164,
+            "min_ms": 533.7546879891306,
+            "max_ms": 567.006643046625,
+            "amortized_ms_per_job": 33.69300706253853,
+            "jobs_per_second": 29.679749217511876
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 112,
+            "copied_pictures": 48,
+            "decoded_i420_bytes": 4300800,
+            "copied_i420_bytes": 1843200,
+            "returned_pictures": 48,
+            "returned_i420_bytes": 1843200,
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "jobs": 16,
+            "samples_ms": [
+              1022.4925440270454,
+              864.6281419787556,
+              861.2881760345772,
+              864.409995963797,
+              858.9100419776514
+            ],
+            "median_ms": 864.409995963797,
+            "min_ms": 858.9100419776514,
+            "max_ms": 1022.4925440270454,
+            "amortized_ms_per_job": 54.02562474773731,
+            "jobs_per_second": 18.50973505016028
+          }
+        }
+      }
+    },
+    "temporal-average": {
+      "geometry": {
+        "width": 128,
+        "height": 128,
+        "coded_width": 160,
+        "coded_height": 160,
+        "guard": 16,
+        "pictures_per_job": 3,
+        "frame_bytes": 38400,
+        "output_frames": {
+          "output": 2
+        },
+        "output_picture_indices": [
+          2
+        ]
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 642,
+        "peak_live_references": 2
+      },
+      "validation": {
+        "status": "pass",
+        "decoder_sessions": 1,
+        "decoded_pictures": 48,
+        "copied_pictures": 48,
+        "decoded_i420_bytes": 1843200,
+        "copied_i420_bytes": 1843200,
+        "returned_pictures": 48,
+        "returned_i420_bytes": 1843200,
+        "guard_bytes": 442368,
+        "chroma_bytes": 614400,
+        "named_outputs": 16
+      },
+      "batches": {
+        "1": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "decoder_sessions": 0,
+            "jobs": 1,
+            "samples_ms": [
+              25.286249932833016,
+              19.54984397161752,
+              25.609867996536195,
+              24.327296996489167,
+              25.95870301593095
+            ],
+            "median_ms": 25.286249932833016,
+            "min_ms": 19.54984397161752,
+            "max_ms": 25.95870301593095,
+            "amortized_ms_per_job": 25.286249932833016,
+            "jobs_per_second": 39.5471848398345
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 3,
+            "copied_pictures": 3,
+            "decoded_i420_bytes": 115200,
+            "copied_i420_bytes": 115200,
+            "returned_pictures": 3,
+            "returned_i420_bytes": 115200,
+            "jobs": 1,
+            "samples_ms": [
+              264.1771270427853,
+              274.280835990794,
+              265.55112400092185,
+              262.7640899736434,
+              262.5980720622465
+            ],
+            "median_ms": 264.1771270427853,
+            "min_ms": 262.5980720622465,
+            "max_ms": 274.280835990794,
+            "amortized_ms_per_job": 264.1771270427853,
+            "jobs_per_second": 3.785339068503244
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 3,
+            "copied_pictures": 1,
+            "decoded_i420_bytes": 115200,
+            "copied_i420_bytes": 38400,
+            "returned_pictures": 1,
+            "returned_i420_bytes": 38400,
+            "jobs": 1,
+            "samples_ms": [
+              276.14715800154954,
+              286.5647890139371,
+              263.52025696542114,
+              273.29471497796476,
+              268.0665069492534
+            ],
+            "median_ms": 273.29471497796476,
+            "min_ms": 263.52025696542114,
+            "max_ms": 286.5647890139371,
+            "amortized_ms_per_job": 273.29471497796476,
+            "jobs_per_second": 3.659053560844117
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 3,
+            "copied_pictures": 1,
+            "decoded_i420_bytes": 115200,
+            "copied_i420_bytes": 38400,
+            "returned_pictures": 1,
+            "returned_i420_bytes": 38400,
+            "encoded_input_pictures": 2,
+            "encoded_input_bytes": 86487,
+            "jobs": 1,
+            "samples_ms": [
+              302.90388397406787,
+              358.0365850357339,
+              304.30069705471396,
+              298.4935720451176,
+              309.9982859566808
+            ],
+            "median_ms": 304.30069705471396,
+            "min_ms": 298.4935720451176,
+            "max_ms": 358.0365850357339,
+            "amortized_ms_per_job": 304.30069705471396,
+            "jobs_per_second": 3.286223165700464
+          }
+        },
+        "16": {
+          "input-serialization": {
+            "status": "pass",
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "decoder_sessions": 0,
+            "jobs": 16,
+            "samples_ms": [
+              323.9088469417766,
+              310.0347340805456,
+              324.8092709109187,
+              324.9497200595215,
+              322.60601909365505
+            ],
+            "median_ms": 323.9088469417766,
+            "min_ms": 310.0347340805456,
+            "max_ms": 324.9497200595215,
+            "amortized_ms_per_job": 20.244302933861036,
+            "jobs_per_second": 49.39661312454377
+          },
+          "preencoded-all": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 48,
+            "copied_pictures": 48,
+            "decoded_i420_bytes": 1843200,
+            "copied_i420_bytes": 1843200,
+            "returned_pictures": 48,
+            "returned_i420_bytes": 1843200,
+            "jobs": 16,
+            "samples_ms": [
+              367.39865597337484,
+              395.73910902254283,
+              368.4340260224417,
+              382.78804591391236,
+              377.9728020308539
+            ],
+            "median_ms": 377.9728020308539,
+            "min_ms": 367.39865597337484,
+            "max_ms": 395.73910902254283,
+            "amortized_ms_per_job": 23.62330012692837,
+            "jobs_per_second": 42.331088147167584
+          },
+          "preencoded-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 48,
+            "copied_pictures": 16,
+            "decoded_i420_bytes": 1843200,
+            "copied_i420_bytes": 614400,
+            "returned_pictures": 16,
+            "returned_i420_bytes": 614400,
+            "jobs": 16,
+            "samples_ms": [
+              358.769552083686,
+              373.5957369208336,
+              369.27995295263827,
+              377.7199679752812,
+              370.204473962076
+            ],
+            "median_ms": 370.204473962076,
+            "min_ms": 358.769552083686,
+            "max_ms": 377.7199679752812,
+            "amortized_ms_per_job": 23.13777962262975,
+            "jobs_per_second": 43.219358828275666
+          },
+          "host-to-outputs": {
+            "status": "pass",
+            "decoder_sessions": 1,
+            "decoded_pictures": 48,
+            "copied_pictures": 16,
+            "decoded_i420_bytes": 1843200,
+            "copied_i420_bytes": 614400,
+            "returned_pictures": 16,
+            "returned_i420_bytes": 614400,
+            "encoded_input_pictures": 32,
+            "encoded_input_bytes": 1383642,
+            "jobs": 16,
+            "samples_ms": [
+              767.3209080239758,
+              701.4074680628255,
+              698.0936769396067,
+              691.2674059858546,
+              695.5632540630177
+            ],
+            "median_ms": 698.0936769396067,
+            "min_ms": 691.2674059858546,
+            "max_ms": 767.3209080239758,
+            "amortized_ms_per_job": 43.63085480872542,
+            "jobs_per_second": 22.919560122851806
+          }
+        }
+      }
+    }
+  },
+  "protocol": {
+    "input-serialization": "Two I_PCM input pictures per job, Writer validation and exact prefix comparison; inputs already loaded as integer boards; no disk I/O, compile or decode",
+    "preencoded-all": "Batch file assembly/I/O, one process and decoder startup, parsing, all picture decode/readback, diagnostics, exact I420 comparison and named-output extraction/comparison",
+    "preencoded-outputs": "Same decode scope, requesting only deduplicated named-output pictures; NVDEC copies selected surfaces, FFmpeg copies every picture then selects in Python",
+    "host-to-outputs": "Measured together: input serialization and exact prefix comparison, stream assembly/write, then preencoded-outputs scope; fixed prediction tail is cached",
+    "excluded": "Compilation, fixture/reference generation and loading, source/hash audit, initial full guard/chroma validation, network, capture writing",
+    "ordering": "Rotate task/batch/mode order each repetition, after one warmup each",
+    "caveat": "Finite synchronous batches to EOS, each with startup. Per-job values are amortized throughput, not single-job latency. No resident stream, GPU baseline or concurrent GPU workload is measured.",
+    "writer_compatibility": "Identical Writer source compiled with postponed annotations for Python 3.8; executable encoder logic unchanged and every generated prefix checked byte for byte"
+  },
+  "decoder_helper_sha256": "42bdf4c5b2d3eddeb53a3d19324ab8f52eeb487bbc39bf9155f66e65d29ca4f0"
+}

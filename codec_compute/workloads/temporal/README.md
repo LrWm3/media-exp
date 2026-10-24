@@ -14,6 +14,62 @@ and odd sums. Every task receives the same pairs. The existing writer rejects
 256×256 and 160×160 logical I_PCM inputs at its High level 3.1 initial access-unit
 size limit; this benchmark keeps that limit intact.
 
+## Measured results
+
+The saved [FFmpeg](assets/ffmpeg.json) and [NVDEC](assets/nvdec.json) runs both
+pass exact validation of **64 streams, 320 pictures, 12,288,000 I420 bytes, and
+112 named outputs containing 1,835,008 pixels** before timing. Every measured
+trial also passes exact returned-I420 and named-output comparisons. The full
+shared-IR test suite passes **133 tests**, including four benchmark protocol
+checks; the portable runner was additionally exercised on Python 3.8.
+
+Median elapsed milliseconds for **sixteen independent jobs per batch**:
+
+| Backend | Task | Input serialization | Saved streams, all pictures | Saved streams, named outputs | Host inputs to named outputs |
+| --- | --- | ---: | ---: | ---: | ---: |
+| FFmpeg | Positive change | 51.88 | 40.68 | 50.14 | 92.80 |
+| FFmpeg | Absolute change + mask | 52.74 | 42.49 | 47.38 | 97.97 |
+| FFmpeg | Temporal envelope | 54.66 | 44.71 | 43.03 | 101.72 |
+| FFmpeg | Temporal average | 57.24 | 41.47 | 37.08 | 90.88 |
+| NVDEC | Positive change | 318.82 | 375.11 | 377.39 | 710.29 |
+| NVDEC | Absolute change + mask | 320.24 | 529.49 | 517.54 | 840.47 |
+| NVDEC | Temporal envelope | 311.54 | 543.00 | 539.09 | 864.41 |
+| NVDEC | Temporal average | 323.91 | 377.97 | 370.20 | 698.09 |
+
+The backends ran in different environments and Python versions, so this table
+does not isolate hardware decode performance. All modes include the checks
+described below. **Input loading and startup are substantial costs**: on the
+NVDEC environment, serializing sixteen input pairs alone took 312–324 ms. A
+single-job saved-stream run with named-output readback took 265–283 ms, versus
+370–539 ms for sixteen jobs. Those values include process/pipeline startup,
+I/O, parsing, decoding, copies, and exact checks.
+
+Selected NVDEC readback reduces copied pictures and bytes exactly, but did not
+produce a consistent elapsed-time win in this finite-batch setup. FFmpeg's
+selected mode still copies every decoded picture. These results establish the
+current standalone-job costs; they do not establish an acceleration benefit.
+
+Static costs per independent job, including the two input pictures:
+
+| Task / first-job stream | Compute pictures | Total pictures | Named-output pictures | Prediction bytes | NVDEC I420 copied: all → outputs |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| [Positive change](assets/positive-change/000.h264) | 1 | 3 | 1 | 644 | 115,200 → 38,400 B |
+| [Absolute change + mask](assets/absolute-change/000.h264) | 5 | 7 | 2 | 2,942 | 268,800 → 76,800 B |
+| [Temporal envelope](assets/temporal-envelope/000.h264) | 5 | 7 | 3 | 3,238 | 268,800 → 115,200 B |
+| [Temporal average](assets/temporal-average/000.h264) | 1 | 3 | 1 | 642 | 115,200 → 38,400 B |
+
+Each job's input prefix is **86,477–86,487 bytes**, shared byte for byte across
+the four tasks for each input pair. Prediction tails are fixed across inputs.
+Selected readback still decodes every picture and copies complete guarded I420
+surfaces for the selected outputs, not just the active output pixels.
+
+The [bundle index](assets/bundle.json) records source commit `d479dc3` and exact
+artifact hashes. Both timing reports pin its SHA256
+`272d7e69ff2f1114e1a40bb2cf78e937852db12daa0f8a6c40ef2710be25e95f`.
+The committed evidence includes both full timing reports, the complete bundle
+index, and each task's first-job stream and manifest. Regenerate the full ignored
+bundle for all sixteen jobs and their input, output, and full-I420 files.
+
 ## Protocol
 
 Each task is measured with finite batches of **one and sixteen jobs**, one warmup
