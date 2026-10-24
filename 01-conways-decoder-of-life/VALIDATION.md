@@ -44,6 +44,15 @@ python3 run.py --generations 120 --verify --preview --output out/r-pentomino.h26
   including the intermediate calculations: 23,238,144 bytes each.
 - GIF preview: 110,847 bytes, generated from FFmpeg-decoded generation pixels.
 
+The committed `assets/decoder-capture.gif` was regenerated from Intel hardware
+output using the command below. All 121 states passed verification again, and
+the resulting GIF is byte-identical to the original FFmpeg preview. The matching
+executable stream is committed as `assets/conways-life.h264`.
+
+```sh
+python3 run.py --generations 120 --verify --decoder vaapi --preview --output out/capture.h264
+```
+
 Stream SHA-256:
 
 ```text
