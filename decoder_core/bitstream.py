@@ -1,6 +1,6 @@
 """Small Annex B writer: High profile, I_PCM inputs, weighted P/B predictions.
 
-Prediction slices cover individual macroblocks or compatible horizontal runs.
+Prediction slices cover macroblocks, horizontal runs, or eligible row bands.
 Prediction pictures contain no transform coefficients or residual samples.
 """
 
@@ -108,7 +108,7 @@ class Writer:
 
     def __init__(self, width, height, fps=30, motion_bits=4,
                  reference_slots=None, slice_mode="macroblock", *, level_idc=31,
-                 merge_zero_guards=False):
+                 merge_zero_guards=False, prediction_slice_rows=1):
         """Create a writer with an optional immutable physical-frame slot plan.
 
         A plan assigns every frame, starting at zero, a long-term slot in 0..15.
@@ -128,10 +128,18 @@ class Writer:
         guards using zero motion and their original weights. External pictures
         (including neutral_idr delimiters with nonzero guards) must not be
         referenced under this contract. The default preserves legacy bytes.
+
+        prediction_slice_rows=1 preserves row boundaries. Larger values group
+        that many coded macroblock rows; zero requests the complete picture.
+        Grouping requires enabled guard merging and uniform eligible headers;
+        other operations retain their existing slices. Inputs are unchanged.
         """
         if type(merge_zero_guards) is not bool:
             raise ValueError("merge_zero_guards must be Boolean")
         self.merge_zero_guards = merge_zero_guards
+        if type(prediction_slice_rows) is not int or prediction_slice_rows < 0:
+            raise ValueError("prediction_slice_rows must be a nonnegative integer")
+        self.prediction_slice_rows = prediction_slice_rows
         if type(level_idc) is not int or level_idc not in _LEVELS:
             raise ValueError("level_idc must be 31, 41, or 51")
         self.level_idc, self._limits = level_idc, _LEVELS[level_idc]
@@ -438,6 +446,37 @@ class Writer:
                 and all(source.offset == 0 for source in operation.sources)
                 and all(self._prediction_key(block) == key for block in operation.block_operations))
 
+    def _prediction_band_rows(self, operation):
+        if not self.merge_zero_guards or not self.zero_guard_merge_eligible(operation):
+            return 1
+        return min(self.prediction_slice_rows or self.mb_height, self.mb_height)
+
+    def _motion_prediction(self, address, previous, source_index):
+        """H.264 8.4.1.3 for frame-only 16x16 blocks with one entry per list.
+
+        A previous vector exists only for macroblocks in this slice. Every
+        available block uses the same list and reference index zero, so its
+        availability also determines whether the reference index matches.
+        """
+        x, y = address % self.mb_width, address // self.mb_width
+
+        def neighbor(nx, ny):
+            if not 0 <= nx < self.mb_width or ny < 0:
+                return None
+            return previous.get(ny * self.mb_width + nx)
+
+        a, b = neighbor(x - 1, y), neighbor(x, y - 1)
+        c = neighbor(x + 1, y - 1)
+        if c is None:
+            c = neighbor(x - 1, y - 1)
+        if b is None and c is None and a is not None:
+            return a[source_index]
+        available = [item[source_index] for item in (a, b, c) if item is not None]
+        if len(available) == 1:
+            return available[0]
+        vectors = [item[source_index] if item is not None else (0, 0) for item in (a, b, c)]
+        return tuple(sorted(vector[axis] for vector in vectors)[1] for axis in (0, 1))
+
     def _prediction_runs(self, operation):
         self._validate_operation(operation)
         for source in operation.sources:
@@ -474,8 +513,9 @@ class Writer:
         guard = replace(operation, sources=tuple(replace(s, weight=s.weight if merge else 0, offset=0,
                         dx=0, dy=0, qx=0, qy=0) for s in operation.sources),
                         block_offsets=(), block_operations=())
+        band_rows = self._prediction_band_rows(operation)
+        run, previous_key = [], None
         for my in range(self.mb_height):
-            run, previous_key = [], None
             for mx in range(self.mb_width):
                 border = mx in (0, self.mb_width - 1) or my in (0, self.mb_height - 1)
                 op = operation
@@ -497,7 +537,9 @@ class Writer:
                     run = []
                 run.append((my * self.mb_width + mx, op))
                 previous_key = key
-            yield run
+            if (my + 1) % band_rows == 0 or my + 1 == self.mb_height:
+                yield run
+                run, previous_key = [], None
 
     def slice_count(self, operation):
         """Return prediction VCL slice count without encoding or changing state."""
@@ -521,17 +563,22 @@ class Writer:
         for run in runs:
             b = self.header(run[0][0], frame, run[0][1])
             previous = [(0, 0)] * len(operation.sources)
-            for _, op in run:
+            multirow = run[0][0] // self.mb_width != run[-1][0] // self.mb_width
+            history = {}
+            for address, op in run:
                 b.ue(0)  # mb_skip_run
                 b.ue(0 if len(op.sources) == 1 else 3)  # P_L0_16x16 / B_Bi_16x16
                 for index, source in enumerate(op.sources):
-                    # Runs never cross a row. Only the left neighbor is available;
-                    # its vector predicts this list's 16x16 vector (H.264 8.4.1.3).
                     qx, qy = self._motion(source)
-                    px, py = previous[index]
+                    # Preserve the historical row encoding exactly. Across
+                    # rows, top and diagonal neighbors become available too.
+                    px, py = (self._motion_prediction(address, history, index)
+                              if multirow else previous[index])
                     b.se(qx - px)
                     b.se(qy - py)
                     previous[index] = (qx, qy)
+                if multirow:
+                    history[address] = tuple(previous)
                 b.ue(0)  # coded_block_pattern: no residual
             out.extend(nal(1, b))
         return self._checked_access_unit(frame, bytes(out), "Prediction")
