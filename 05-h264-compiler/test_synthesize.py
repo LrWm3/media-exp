@@ -4,10 +4,14 @@ from dataclasses import FrozenInstanceError
 from fractions import Fraction
 from itertools import product
 from math import floor
+from pathlib import Path
+import tempfile
 import unittest
 
 from h264.synthesize import (CACHE_SIZE, MAX_DOMAIN_SIZE, Step, evaluate_plan,
                              synthesize)
+from decoder_core.bitstream import Operation, Source, Writer
+from decoder_core.decode import available, decode
 
 
 class SynthesizeTests(unittest.TestCase):
@@ -27,6 +31,36 @@ class SynthesizeTests(unittest.TestCase):
                 plan = synthesize(((0, 1), (0, 1)), target)
                 self.assertIsNotNone(plan)
                 self.assertEqual(tuple(evaluate_plan(plan, values) for values in domain), target)
+                for step in plan:
+                    if len(step.weights) == 2:
+                        self.assertTrue(-128 <= sum(step.weights) <= (127 if step.denominator == 7 else 128))
+
+    def test__given_nor_and_nand__when_synthesizing_one_prediction__then_legal_weights_decode_exactly(self):
+        backends = tuple(name for name in ("ffmpeg", "openh264", "vaapi") if available(name))
+        if not backends:
+            self.skipTest("No H.264 decoder available")
+        inputs = [[[((y*16+x) >> bit) & 1 for x in range(16)] for y in range(16)] for bit in (1, 0)]
+        for target in ((1, 0, 0, 0), (1, 1, 1, 0)):
+            plan = synthesize(((0, 1), (0, 1)), target, 1)
+            self.assertIsNotNone(plan)
+            self.assertEqual(len(plan), 1)
+            step = plan[0]
+            self.assertTrue(-128 <= sum(step.weights) <= (127 if step.denominator == 7 else 128))
+            writer = Writer(16, 16, slice_mode="row")
+            operation = Operation("synthesized gate", tuple(Source(index, weight, step.bias)
+                                  for index, weight in zip(step.inputs, step.weights)), step.denominator)
+            stream = b"".join(writer.input_luma(board, frame) for frame, board in enumerate(inputs))
+            stream += writer.prediction(2, operation)
+            with tempfile.TemporaryDirectory(prefix="synthesized-gates-") as directory:
+                path = Path(directory)/"gate.h264"
+                path.write_bytes(stream)
+                for backend in backends:
+                    with self.subTest(target=target, backend=backend):
+                        raw = decode(path, backend)
+                        start = 2*writer.width*writer.height*3//2
+                        actual = [list(raw[start+(y+16)*writer.width+16:start+(y+16)*writer.width+32])
+                                  for y in range(16)]
+                        self.assertEqual(actual, [[target[(y*16+x) % 4] for x in range(16)] for y in range(16)])
 
     def test__given_projected_window__when_searching__then_three_predictions_suffice(self):
         ranges = ((0, 8), (0, 1))
@@ -70,6 +104,8 @@ class SynthesizeTests(unittest.TestCase):
             for denominator, weights, bias in product(
                     range(8), product((-128, -3, -1, 0, 1, 3, 127), repeat=sources),
                     (-128, -1, 0, 1, 127)):
+                if sources == 2 and not -128 <= sum(weights) <= (127 if denominator == 7 else 128):
+                    continue
                 step = Step(tuple(range(sources)), weights, bias, denominator)
                 for values in product(samples, repeat=sources):
                     total = sum(value * weight for value, weight in zip(values, weights))
@@ -80,6 +116,16 @@ class SynthesizeTests(unittest.TestCase):
         # Early clipping of the negative product would change this result.
         self.assertEqual(evaluate_plan((Step((0,), (-1,), 1, 1),), (1,)), 1)
         self.assertEqual(evaluate_plan((Step((0, 1), (1, -4), 0, 1),), (5, 2)), 0)
+
+    def test__given_combined_b_weights_at_or_outside_limits__when_constructing_steps__then_only_legal_sums_pass(self):
+        for denominator in range(8):
+            maximum = 127 if denominator == 7 else 128
+            for weights in ((-128, 0), (-64, -64), (127, maximum-127)):
+                with self.subTest(denominator=denominator, weights=weights):
+                    self.assertIsInstance(Step((0, 1), weights, denominator=denominator), Step)
+            for weights in ((-128, -1), (-128, -128), (127, maximum-126), (127, 127)):
+                with self.subTest(denominator=denominator, weights=weights), self.assertRaisesRegex(ValueError, "weight sum"):
+                    Step((0, 1), weights, denominator=denominator)
 
     def test__given_clipped_intermediates__when_evaluating__then_later_steps_use_clipped_values(self):
         plan = (Step((0,), (127,), 127), Step((1,), (-1,), 127))

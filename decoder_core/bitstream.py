@@ -168,6 +168,12 @@ class Writer:
             if (type(source.weight) is not int or type(source.offset) is not int
                     or not -128 <= source.weight <= 127 or not -128 <= source.offset <= 127):
                 raise ValueError("Weight or offset outside signed 8-bit range")
+        if len(operation.sources) == 2:
+            # Explicit weighted biprediction constrains the combined weight
+            # as well as each signed byte (H.264 8.4.2.3).
+            maximum = 127 if operation.denominator == 7 else 128
+            if not -128 <= sum(source.weight for source in operation.sources) <= maximum:
+                raise ValueError("B prediction weight sum outside legal range")
 
     def parameter_sets(self):
         b = Bits()

@@ -5,7 +5,8 @@ Costs are searched in order, but neither failure nor a returned cost proves
 anything about programs outside this grammar:
 
 * One instruction: any signed-byte P weight; B weights from
-  ``ONE_STEP_BINARY_WEIGHTS``; all denominators and all useful signed offsets.
+  ``ONE_STEP_BINARY_WEIGHTS`` with a legal combined weight; all denominators
+  and all useful signed offsets.
 * Two instructions: a rounded scalar projection with coefficients in [-4, 4],
   clipped at a target-derived offset, followed by P(weight=-1, offset=1).
 * Three instructions: two unrounded, clipped versions of such a projection,
@@ -62,6 +63,8 @@ class Step:
             raise ValueError("Step bias must be a signed-byte integer")
         if type(self.denominator) is not int or not 0 <= self.denominator <= 7:
             raise ValueError("Step denominator must be an integer from 0 through 7")
+        if len(self.weights) == 2 and not -128 <= sum(self.weights) <= (127 if self.denominator == 7 else 128):
+            raise ValueError("B prediction weight sum outside legal range")
 
 
 def _clip(value):
@@ -113,6 +116,8 @@ def _fit_prediction(inputs, columns, weight_vectors, domain, target):
                            for weight, column in zip(weights, columns))
                        for index in range(len(target)))
         for denominator in range(8):
+            if len(weights) == 2 and not -128 <= sum(weights) <= (127 if denominator == 7 else 128):
+                continue
             quantized = _rounded(totals[anchor], denominator, len(inputs))
             bias = 1 - quantized
             if not -128 <= bias <= 127:
