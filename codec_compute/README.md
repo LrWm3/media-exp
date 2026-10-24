@@ -43,6 +43,9 @@ serialization, pre-encoded decoding, and complete host-input-to-output runs.
 The [resampling experiments](workloads/resampling/README.md) explore patch atlases,
 supplied-motion interpolation, bandwise correction, compensated residuals,
 dense polarity maps, and stereo cost candidates.
+The [resident runtime experiment](workloads/resident/README.md) adds explicit
+High level 4.1 for 256×256 input uploads and sequential NVDEC requests through
+one live pipeline, with tiny counted IDR fences and exact output validation.
 
 ## Run locally
 
@@ -107,6 +110,22 @@ on HEVC or AV1. See the
 [spatial comparison](workloads/motion-fusion/README.md).
 
 ## Block routing and explicit H.264 sampling
+
+For larger uploads, pass `h264_level=41` to `compile` or `compile_graph`.
+The default `31` preserves existing valid stream bytes. Both supported levels
+have checked resource limits; level 4.1 additionally uses conservative per-AU
+bitrate caps. This enables the tested 256×256 byte inputs, without promising
+arbitrary image sizes. See [level constraints](../decoder_core/LEVELS.md).
+
+`with program.session(helper="/path/to/nvdec_decode") as session:` keeps an
+NVDEC process and pipeline alive; `session.run(inputs)` returns named image
+outputs after each independent job. It serializes new inputs, reuses cached
+instruction bytes, and checks selected I420 guards, chroma and output ranges.
+A tiny extra IDR completes each request; `session.stats` counts those fence
+pictures and bytes. Close the context to validate delayed diagnostics and drain
+the final fence. Job references reset at IDR boundaries. This runtime is H.264/
+NVDEC only, with fixed shape and compile-time motion fields; it does not reuse
+camera frames or GPU reference arrays across jobs.
 
 `gather(image, offsets, block_size=16, border="zero")` uses an immutable table
 of integer-pixel `(dx,dy)` offsets, one per output block in row-major order.

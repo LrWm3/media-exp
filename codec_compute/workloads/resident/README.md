@@ -31,11 +31,11 @@ not unrestricted large-image support or a complete HRD simulator. See
 The tested NVDEC pipeline retains the end of a short reference chain until
 another IDR or EOS. An ordinary P prediction, access-unit delimiter, and
 end-of-sequence NAL did not release it in our probes. The runtime appends a tiny,
-discarded IDR fence, encoded with constant128 intra prediction and zero residual.
+discarded IDR fence, encoded with constant-128 intra prediction and zero residual.
 It costs **one additional decoded picture**, but only **149 bytes at 128×128**
 or **372 bytes at 256×256**, with the coded guard geometry included.
 
-Input IDRs use identifier0; fences use1, as consecutive IDRs must have distinct
+Input IDRs use identifier 0; fences use 1, as consecutive IDRs must have distinct
 identifiers. The following job resets references again. Intermediate computation
 pictures remain in the DPB within each job; the fence deliberately prevents
 references from carrying between jobs. This is session reuse, not streaming
@@ -80,10 +80,78 @@ resident modes use the same AU protocol, inputs, instruction bytes, fences and
 output selection. Compilation, reference generation/loading, initial source and
 artifact audits, network transfer and report writes are excluded. Raw per-request
 and per-trial samples and actual copy/fence counters remain in the report.
+The public `Program.session.run` additionally validates graph inputs and converts
+named output planes to Python lists; those application-level conversions are
+outside this portable low-level benchmark.
 
 These results measure this implementation, including socket copies, diagnostics
 and correctness checks. They do not establish a CUDA advantage, zero-copy output,
 concurrent GPU performance, changing motion fields, or reuse of camera references.
+
+## Results
+
+The [complete NVDEC report](assets/nvdec.json) passes all five timing repeats
+and all **64 correctness jobs**: **256 decoded pictures including 64 fences**,
+with every real picture checked (**192 I420 readbacks, 15,630,336 bytes**).
+Local verification passes 192 checks through three decoders. The shared compiler
+and decoder-core suites pass 172 and 68 tests, respectively.
+
+For fused interpolation, timings below are milliseconds per request: the median
+of five eight-request trials, divided by eight. Inputs change each request.
+
+| Active size | Input serialization | Cold, pre-encoded | Warm resident, pre-encoded | Cold, host input | Warm resident, host input |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 128×128 | 19.40 | 276.33 | 10.60 | 297.40 | 29.05 |
+| 256×256 | 65.15 | 276.43 | 15.17 | 342.22 | 78.99 |
+
+Cold measurements include creation and shutdown for every request. Warm resident
+measurements exclude each trial's creation, one complete warmup, and final close.
+Including those recorded phases and the extra warmup, amortized over the eight
+timed requests, resident host-input medians are **64.97 and 132.82 ms/request**,
+respectively. These are computed by summing phases *within each trial* before
+taking the median, not by adding independent medians. Startup therefore matters
+for short sessions; the smaller warm values describe ongoing use.
+
+Fusion remains useful after startup is removed. Three computation pictures become
+one (six total pictures including inputs/fence become four). Warm pre-encoded
+interpolation falls **14.51 → 10.60 ms** at 128×128 and **21.91 → 15.17 ms** at
+256×256, about 27% and 31%. With host input, the same comparisons are
+**33.27 → 29.05 ms** and **85.92 → 78.99 ms**, about 13% and 8%. The matched
+unwarped-average control measures 10.25/14.00 ms pre-encoded; single-input
+passthrough measures 5.95/7.99 ms. Each control still includes its IDR fence.
+
+The clearest next performance target is input serialization: its separately
+measured 65.15 ms at 256×256 is large relative to the measured 78.99 ms complete
+warm host-input path. This identifies a substantial host-side cost; subtracting
+independent mode medians would not establish decoder-only time. Five repeats on
+one NVDEC setup do not establish performance across hardware or production
+reliability. Raw per-trial ranges remain in the report; for example, 256×256
+resident host-input trials span 78.04–95.27 ms/request.
+
+![Actual decoded interpolation at both input sizes](assets/capture.png)
+
+The [capture provenance](assets/capture.json) binds panels to decoded pixels.
+The committed [representative bundle](assets/bundle.json) contains one fixture
+per case: eight streams and 32 pictures. The benchmark instead binds to the
+[full 64-stream bundle index](assets/full-bundle.json); regenerate its complete
+fixtures with `prepare` below. Its source revision is `c7f0b4d`, and the report
+also records every relevant source hash and the helper binary hash.
+
+## Reliability observation
+
+An earlier full benchmark stopped during a cold host-input session's shutdown,
+after all 64 correctness jobs and the first timing repeat passed. Its wrapper
+reported EOF before the final response but discarded the native diagnostic,
+so the cause remains unknown. That interrupted run is preserved as
+[raw partial results](assets/interrupted-run.json) with its
+[original bundle index](assets/interrupted-bundle.json); its partial timings are
+not used for performance conclusions. The runtime now preserves worker diagnostics
+and exit status on failure. These changes improve diagnosis; the original
+shutdown failure remains unresolved. During investigation, 360 targeted
+reproduction sessions completed without reproducing the failure; their console
+logs were not retained. They are an observation, not a second archived benchmark.
+The subsequent full five-repeat run linked above passed on the runtime with
+improved failure reporting.
 
 ## Reproduce
 

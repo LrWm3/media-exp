@@ -5,9 +5,70 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Larger inputs and resident decoder requests
+
+The complete shared compiler suite passes **172 tests in 42.737 s, with no
+skips**. The decoder-core suite passes **68 tests in 5.672 s**. New checks cover
+explicit High level 4.1 limits, arbitrary 256×256 inputs, constant intra IDR
+fences, socket framing, worker failure/timeout handling, selected-frame guard
+and chroma validation, named aliases, and runtime execution without host graph
+evaluation or instruction emission. Default level-3.1 stream bytes remain
+unchanged for the validated historical fixtures.
+
+The [resident experiment](workloads/resident/README.md) exports **64 streams,
+256 pictures, and 20,840,448 full I420 bytes**, with **192 local checks** through
+FFmpeg, OpenH264 and VA-API. Inputs range over scenes, noise, zero and 255 at
+128×128 and 256×256. Baseline/fused interpolation and matched unwarped averaging
+use identical inputs; passthrough is a separate single-input control. Both the
+semantic interpreter and independent task formulas agree with every named output.
+The committed representative subset preserves eight streams and 32 pictures.
+
+The live NVDEC path requires a subsequent IDR to release a short reference
+chain. The runtime therefore appends one discarded, constant-128 IDR per job:
+**149 bytes at 128×128 and 372 bytes at 256×256**, including the coded guard
+geometry. Input IDR identifier 0 and fence identifier 1 alternate correctly.
+The fence costs a real decoded picture and resets references between jobs.
+Each request completes before the next submission; only shutdown sends EOS.
+Successful close validates delayed diagnostics and drains the final fence.
+The ordinary saved program and its compute-picture count remain separate from
+this explicitly counted runtime overhead.
+
+NVDEC validates all **64 changing jobs** through eight live sessions, including
+both shapes and every baseline/control. It decodes **256 pictures including
+64 fences**, and reads back every one of the **192 real computation/input
+pictures** for exact I420 comparison. Discarded fences are counted and checked
+for decoder errors but are not copied back by the resident path. Earlier native
+probes also rejected malformed IDR boundaries and overflowing dimensions, and
+confirmed compatibility with the existing finite-file CLI.
+
+The [complete NVDEC report](workloads/resident/assets/nvdec.json) passes five
+repeats of all five modes and eight cases. For fused interpolation, fresh-session
+host-input medians are **297.40/342.22 ms per request** at 128×128/256×256;
+warmed resident medians are **29.05/78.99 ms**. Warm pre-encoded medians are
+**10.60/15.17 ms**; input serialization alone measures **19.40/65.15 ms**.
+These values are median eight-request trial durations divided by eight. Fresh
+requests include startup and shutdown; resident timings exclude creation,
+one complete warmup and close, which are recorded separately. Including those
+phases within each resident host trial gives **64.97/132.82 ms per timed request**
+with setup/warmup/close amortized over eight requests. No decoder-only or CUDA
+speedup is inferred. Each request uploads fresh inputs and decodes one fence.
+
+One earlier run passed full correctness and its first timing repeat, then failed
+at cold-session shutdown. Its original wrapper lost the native diagnostic; the
+cause remains unknown. The runtime now preserves failure diagnostics and exit
+status. The subsequent complete benchmark passes, but does not establish that
+the original shutdown issue is fixed. The experiment archives the interrupted
+report separately and excludes its partial timings from these conclusions.
+
+```sh
+python3 -m unittest discover -s codec_compute/tests -v
+python3 -m unittest discover -s decoder_core -p 'test_*.py' -v
+python3 -m codec_compute.workloads.resident.prepare --sizes 128 256 --jobs 8
+```
+
 ## Block routing and codec-defined fractional sampling
 
-The current complete suite passes **165 tests in 34.244 s, with no skips**.
+At this milestone, the complete suite passed **165 tests in 34.244 s, with no skips**.
 New semantic and target tests cover integer block gathers, all sixteen H.264
 fractional luma phases, negative coordinates, diagonal filter precision, image
 boundaries, immutable fields, and conservative range proofs. Target tests also

@@ -58,6 +58,11 @@ residuals, dense polarity maps, and stereo cost candidates. Adds explicit
 H.264 fractional sampling and per-block routing to the shared IR, including
 two independently warped references blended in one prediction picture.
 
+[Resident IR runtime](codec_compute/workloads/resident/README.md): explicit
+level-4.1 support for 256×256 inputs and sequential NVDEC requests through one
+live decoder pipeline. Includes counted IDR completion fences, exact output
+checks, and fresh-session versus warmed-session measurements.
+
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.
