@@ -33,6 +33,9 @@
   frontend for new work, with exact image semantics, bounded synthesis, H.264/
   HEVC/AV1 targets, resident execution and measured CPU comparisons. Includes
   migration guidance; the `codec_compute` package keeps its existing path.
+- [10 — Decoder interface limits](10-decoder-interface-limits/README.md): opt-in
+  prediction slice bands and explicit completion-only diagnostics distinguish
+  instruction layout from input, output and consumer-interface costs.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·

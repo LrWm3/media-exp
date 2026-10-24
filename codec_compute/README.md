@@ -134,6 +134,21 @@ record eligibility and actual merged-picture counts; biased or heterogeneous
 headers fall back. See [guard semantics](../decoder_core/GUARDS.md) and the
 [paired performance experiment](workloads/guard_fusion/README.md).
 
+Prediction row banding is separately opt-in:
+`h264_prediction_slice_rows=1` preserves the current stream bytes, a positive
+`N` groups up to `N` coded macroblock rows per prediction slice, and `0`
+requests a whole-picture slice. Guard rows count toward each band. This
+requires enabled guard merging and uniform zero-offset headers; other
+operations retain their existing slices. For an eligible 512×512 prediction,
+values `1`, `4` and `0` produce 34, 9 and 1 slices respectively, with unchanged
+input uploads, picture count and decoded pixels. The manifest records the
+requested layout, eligible/banded picture counts and actual prediction
+slice/byte costs. Fewer slices alone do not establish a byte-size or timing
+improvement. See [slice-band semantics](../decoder_core/GUARDS.md#opt-in-prediction-slice-bands).
+The [interface experiment](../10-decoder-interface-limits/README.md) compares
+these layouts and separates complete host results from completion-only
+diagnostics.
+
 `with program.session(helper="/path/to/nvdec_decode") as session:` keeps an
 NVDEC process and pipeline alive; `session.run(inputs)` returns named image
 outputs after each independent job. It serializes new inputs, reuses cached

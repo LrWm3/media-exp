@@ -58,6 +58,7 @@ not established by the H.264/NVDEC measurements.
 | Repeated jobs through one decoder pipeline | [Resident runtime](../codec_compute/workloads/resident/README.md) |
 | Native CPU baselines and larger inputs | [CPU comparison](../codec_compute/workloads/cpu_comparison/README.md) |
 | Fewer prediction slices and controlled CPU contention | [Guard merging](../codec_compute/workloads/guard_fusion/README.md) |
+| Opt-in slice bands and completion-only diagnostics | [Experiment 10: decoder interface limits](../10-decoder-interface-limits/README.md) |
 | Retained legacy packing | [Experiment 05 packing](../05-h264-compiler/README.md#packing-independent-predictions), [experiment 07](../07-packed-denoising-decoder/README.md) |
 
 These are implementation comparisons with exact output checks. Decoder
@@ -137,10 +138,18 @@ Legacy compile controls `optimize`, `exact_search`, `semantic_ir`,
 `reference_mode` and `slice_mode` are not shared compile keywords. Shared
 `synthesis` and its search budgets control a different bounded pass; they do
 not reproduce the entire old optimizer. H.264-specific controls are
-`h264_fuse_shifts`, `h264_level` and `h264_merge_zero_guards`. The shared target
-uses retained references and row slices, with compatible guard merging enabled
-by default. Disabling that pass alone does not promise old frontend bitstreams
-or instruction counts.
+`h264_fuse_shifts`, `h264_level`, `h264_merge_zero_guards` and
+`h264_prediction_slice_rows`. The shared target uses retained references and
+row slices, with compatible guard merging enabled by default. Disabling that
+pass alone does not promise old frontend bitstreams or instruction counts.
+
+`h264_prediction_slice_rows=1` preserves the current byte layout. Opt-in `N`
+groups up to `N` coded macroblock rows, including guards, per prediction slice;
+`0` requests the whole coded picture. Banding requires enabled guard merging
+and uniform zero-offset headers; ineligible operations retain their previous
+slices. For eligible 512×512 predictions, `1`, `4` and `0` give 34, 9 and 1
+slices. Consult actual manifest slice/byte costs rather than inferring a
+performance gain from slice count. See [slice-band semantics](../decoder_core/GUARDS.md#opt-in-prediction-slice-bands).
 
 The shared `Program` does not expose the legacy `read(raw, selected_frames=...)`
 or `decode(..., readback="outputs")` interface. Its H.264/NVDEC `session()` API

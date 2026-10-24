@@ -116,6 +116,15 @@ Use `Writer(512, 512, slice_mode="row", level_idc=51)` directly or
 `codec_compute.compile(kernel, width=512, height=512, h264_level=51)`.
 Hardware decoder support must be checked separately from bitstream legality.
 
+Opt-in [prediction slice bands](GUARDS.md#opt-in-prediction-slice-bands) can
+reduce eligible prediction slice counts further: a 512×512 picture uses 34
+slices with the default `prediction_slice_rows=1`, 9 with `4`, or 1 with `0`.
+This groups coded macroblock rows only when zero-guard merging is enabled and
+headers are uniform with zero offsets. Other predictions retain their existing
+layout. Banding does not reduce coded dimensions, DPB use or input-upload
+budgets; all actual emitted-byte limits and conservative constructor checks
+still apply.
+
 `python3 -m unittest decoder_core.test_levels codec_compute.tests.test_runtime`
 checks exact budget boundaries,
 level rejection, historical default bytes and full I420 decoding. Decoder
