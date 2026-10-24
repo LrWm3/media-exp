@@ -99,6 +99,40 @@ legacy sliding reference window and one slice per macroblock. Some such
 graphs exceed the reference budget even when their optimized forms fit; they
 fail with a resource error instead of silently changing semantics.
 
+### Bounded exact instruction search
+
+`search.py` discovers scalar subgraphs with binary outputs and one or two input
+values. It considers at most 24 cuts per graph node, 32 internal nodes per cut,
+and 64 combinations in the complete Cartesian input domain. Movement operations
+form boundaries. Named results and intermediates used outside a cut cannot
+disappear. Repeated internal uses are allowed, so reconvergent predicates such
+as Life's survival/birth expression can be optimized together.
+
+`synthesize.py` searches a finite grammar of one, two, or three exact weighted
+predictions. Single predictions explore every signed P weight and a documented
+subset of B weights. Longer candidates use small integer projections, clipping,
+and rounded combinations of one or two clipped projections. Integer constraints
+fit legal offsets and final weights. Every candidate is then checked against
+every input combination using the codec's signed arithmetic, rounding, and
+saturation. Results and failures share a bounded 512-entry cache. This proves
+equivalence within declared ranges; it does not prove global optimality or
+that an unsupported function has no H.264 implementation.
+
+A replacement must beat the existing lowering for its cut. A final whole-graph
+comparison also rejects changes that fail to reduce instruction count, including
+lost fusion opportunities at cut boundaries. The original graph remains intact
+for independent verification. `compile(..., exact_search=False)` disables only
+this pass; `optimize=False` also disables it. No actual input pixels are needed
+for search, and the resulting prediction tail remains reusable.
+
+Manifest statistics include `exact_search_rewrites`,
+`exact_search_saved_instructions`, and `exact_search_proofs`. Each proof records
+the root and frontier graph IDs, inclusive ranges, complete truth table, old
+instruction count, and replacement steps. Step inputs index frontier values
+first, then preceding step results; weights are actual codec weights, and bias
+is applied to both source offsets for B prediction. Physical frame assignments
+remain in the ordinary instruction manifest.
+
 ## Exact lowering
 
 With denominator zero, weighted P prediction computes `clip8(w*x+offset)`.
@@ -206,7 +240,8 @@ enumerate it starting at `program.input_count` to obtain physical frame numbers.
 `verify.py` interprets graph semantics independently of lowering. `verify()`
 compares every named output pixel with actual decoding. Extraction checks picture
 count, zero guards, neutral chroma, and proven output ranges. No reference
-evaluation occurs in `compile()`, `encode()`, `save()`, or `decode()`.
+evaluation of supplied images occurs in `compile()`, `encode()`, `save()`, or
+`decode()`. Compilation may enumerate small scalar truth tables to prove rewrites.
 
 Binary computational outputs contain 0/1; previews scale them afterward. Maze
 paths are extracted from decoded arrival times. MNIST reads one decoded class

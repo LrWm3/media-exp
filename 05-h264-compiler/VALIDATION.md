@@ -1,5 +1,10 @@
 # Validation
 
+The latest [exact-search report](optimizations/exact-search/README.md) records
+148 passing tests and 42 saved cases verified on FFmpeg, OpenH264, VA-API and
+NVDEC: 4,855 pictures and all 323 named output planes. Paired measurements
+compare the same compiler with only exact instruction search enabled/disabled.
+
 The [compiler optimization report](optimizations/README.md) records a 124-test
 local regression run, exact comparisons of 42 saved demo executions, and fresh
 decoder measurements.

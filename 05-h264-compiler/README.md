@@ -9,6 +9,11 @@ Boolean predictions, shorter thresholds, exact affine fusion, grouped slices,
 and retained reference slots. The same saved graphs use fewer pictures and
 bytes while preserving every named output.
 
+[Bounded exact instruction search](optimizations/exact-search/README.md) now
+replaces small scalar subgraphs with exhaustively verified prediction sequences.
+Life's rule drops from ten predictions to three; denoising also becomes smaller.
+Pass `exact_search=False` to isolate the earlier optimizations.
+
 ```python
 import h264
 
@@ -79,10 +84,10 @@ pictures, not a precomputed presentation animation.
 
 | Variant | Workload | Specialized original | First compiler | Optimized compiler |
 | --- | --- | ---: | ---: | ---: |
-| [01 Life](../01-conways-decoder-of-life/compiled/README.md) | 40 generations | 561 | 922 | **682** |
+| [01 Life](../01-conways-decoder-of-life/compiled/README.md) | 40 generations | 561 | 922 | **402** |
 | [02 Maze](../02-maze-flood-fill-decoder-solver/compiled/README.md) | 52 steps | 261 | 560 | **265** |
-| [03 Denoiser](../03-denoising-decoder/compiled/README.md) | One image | 98 | 74 | **58** |
-| [04 MNIST](../04-binary-mnist-classification-decoder/compiled/README.md) | Eight digits | 1,802 | 1,826 | **1,591** |
+| [03 Denoiser](../03-denoising-decoder/compiled/README.md) | One image | 98 | 74 | **52** |
+| [04 MNIST](../04-binary-mnist-classification-decoder/compiled/README.md) | Eight digits | 1,802 | 1,826 | **1,589** |
 
 Each variant includes a kernel, CLI, tests, executable demo, instruction manifest,
 and actual hardware capture. Existing implementations and trained weights remain

@@ -1,5 +1,9 @@
 # Compiler optimizations
 
+The newer [exact instruction search](exact-search/README.md) further reduces
+Life to 402 pictures and denoising to 52. The measurements below preserve the
+earlier optimization milestone and its historical baseline.
+
 The compiler now emits direct Boolean predictions, shorter exact thresholds,
 fused affine operations, grouped slices, and explicit retained references.
 Recompiling the saved demonstrations preserves all **323 named output planes**

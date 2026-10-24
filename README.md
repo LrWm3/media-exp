@@ -37,3 +37,7 @@ four compiled experiments. Captures, timings, and reproduction commands included
 [Compiler optimization results](05-h264-compiler/optimizations/README.md):
 Boolean and threshold lowering, grouped prediction slices, retained reference
 slots, and exact comparisons across all six experiments.
+
+[Exact instruction search](05-h264-compiler/optimizations/exact-search/README.md):
+proved small-domain replacements reduce Life from 682 to 402 pictures and
+denoising from 58 to 52, with decoder captures and paired NVDEC measurements.

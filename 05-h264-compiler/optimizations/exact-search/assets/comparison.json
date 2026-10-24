@@ -1,0 +1,450 @@
+{
+  "baseline": "no-exact-search",
+  "cases": 42,
+  "graphs_compiled": 11,
+  "groups": {
+    "life": {
+      "cases": 1,
+      "items": 1,
+      "before": {
+        "pictures": 682,
+        "input_pictures": 1,
+        "prediction_slices": 5448,
+        "refresh_copies": 0,
+        "stream_bytes": 120410,
+        "prediction_bytes": 112146,
+        "peak_live_values": 4
+      },
+      "after": {
+        "pictures": 402,
+        "input_pictures": 1,
+        "prediction_slices": 3208,
+        "refresh_copies": 0,
+        "stream_bytes": 78330,
+        "prediction_bytes": 70066,
+        "peak_live_values": 3
+      }
+    },
+    "maze": {
+      "cases": 1,
+      "items": 1,
+      "before": {
+        "pictures": 265,
+        "input_pictures": 1,
+        "prediction_slices": 2112,
+        "refresh_copies": 0,
+        "stream_bytes": 53536,
+        "prediction_bytes": 45551,
+        "peak_live_values": 3
+      },
+      "after": {
+        "pictures": 265,
+        "input_pictures": 1,
+        "prediction_slices": 2112,
+        "refresh_copies": 0,
+        "stream_bytes": 53536,
+        "prediction_bytes": 45551,
+        "peak_live_values": 3
+      }
+    },
+    "denoise": {
+      "cases": 8,
+      "items": 8,
+      "before": {
+        "pictures": 464,
+        "input_pictures": 8,
+        "prediction_slices": 3648,
+        "refresh_copies": 0,
+        "stream_bytes": 143710,
+        "prediction_bytes": 79640,
+        "peak_live_values": 6
+      },
+      "after": {
+        "pictures": 416,
+        "input_pictures": 8,
+        "prediction_slices": 3264,
+        "refresh_copies": 0,
+        "stream_bytes": 136710,
+        "prediction_bytes": 72640,
+        "peak_live_values": 6
+      }
+    },
+    "mnist": {
+      "cases": 2,
+      "items": 16,
+      "before": {
+        "pictures": 3182,
+        "input_pictures": 2,
+        "prediction_slices": 44520,
+        "refresh_copies": 0,
+        "stream_bytes": 1229408,
+        "prediction_bytes": 1168936,
+        "peak_live_values": 4
+      },
+      "after": {
+        "pictures": 3178,
+        "input_pictures": 2,
+        "prediction_slices": 44464,
+        "refresh_copies": 0,
+        "stream_bytes": 1228332,
+        "prediction_bytes": 1167860,
+        "peak_live_values": 4
+      }
+    },
+    "native": {
+      "cases": 6,
+      "items": 6,
+      "before": {
+        "pictures": 42,
+        "input_pictures": 8,
+        "prediction_slices": 476,
+        "refresh_copies": 0,
+        "stream_bytes": 141178,
+        "prediction_bytes": 9163,
+        "peak_live_values": 3
+      },
+      "after": {
+        "pictures": 42,
+        "input_pictures": 8,
+        "prediction_slices": 476,
+        "refresh_copies": 0,
+        "stream_bytes": 141178,
+        "prediction_bytes": 9163,
+        "peak_live_values": 3
+      }
+    },
+    "motion": {
+      "cases": 24,
+      "items": 24,
+      "before": {
+        "pictures": 552,
+        "input_pictures": 48,
+        "prediction_slices": 7056,
+        "refresh_copies": 0,
+        "stream_bytes": 1204464,
+        "prediction_bytes": 166224,
+        "peak_live_values": 3
+      },
+      "after": {
+        "pictures": 552,
+        "input_pictures": 48,
+        "prediction_slices": 7056,
+        "refresh_copies": 0,
+        "stream_bytes": 1204464,
+        "prediction_bytes": 166224,
+        "peak_live_values": 3
+      }
+    }
+  },
+  "before": {
+    "pictures": 5187,
+    "input_pictures": 68,
+    "prediction_slices": 63260,
+    "refresh_copies": 0,
+    "stream_bytes": 2892706,
+    "prediction_bytes": 1581660,
+    "peak_live_values": 6
+  },
+  "after": {
+    "pictures": 4855,
+    "input_pictures": 68,
+    "prediction_slices": 60580,
+    "refresh_copies": 0,
+    "stream_bytes": 2842550,
+    "prediction_bytes": 1531504,
+    "peak_live_values": 6
+  },
+  "named_outputs": 323,
+  "named_output_pixels": 1131520,
+  "local_backends": {
+    "ffmpeg": {
+      "status": "pass",
+      "cases": 42
+    },
+    "vaapi": {
+      "status": "pass",
+      "cases": 42
+    },
+    "openh264": {
+      "status": "pass",
+      "cases": 42
+    }
+  },
+  "representatives": {
+    "life": {
+      "group": "life",
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "baseline": {
+        "stream": "baseline/life.h264",
+        "expected": "baseline/life.i420",
+        "stream_sha256": "c8b75ed5fc50961eb04d04e2cea6ce8f6de09001893b81bebf7424a038e09c89",
+        "expected_sha256": "be1a4b8f2c05502407d8497e9e10d8bb5537afd0e80bf98ddbcb13656c8396a4",
+        "pictures": 682,
+        "expected_bytes": 4190208
+      },
+      "optimized": {
+        "name": "life",
+        "stream": "streams/life.h264",
+        "expected": "expected/life.i420",
+        "stream_sha256": "9393cab06d0f3f243506dfe4dab295cc8c5b98b6f86e67e455dd2869578c66eb",
+        "expected_sha256": "a48af01c04d19fbd31250cb6725197aa72476bb37e56c77fdfb9e5e6d6ca191d",
+        "pictures": 402,
+        "expected_bytes": 2469888
+      }
+    },
+    "maze": {
+      "group": "maze",
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "baseline": {
+        "stream": "baseline/maze.h264",
+        "expected": "baseline/maze.i420",
+        "stream_sha256": "c844800047fac32ed038413306952ce40d6404254066e4f00b2bbae76388a182",
+        "expected_sha256": "1eaad54f0bc3531ea2392cde6ea62a0d405704732970bb9fb17b0887ca6ada89",
+        "pictures": 265,
+        "expected_bytes": 1628160
+      },
+      "optimized": {
+        "name": "maze",
+        "stream": "streams/maze.h264",
+        "expected": "expected/maze.i420",
+        "stream_sha256": "c844800047fac32ed038413306952ce40d6404254066e4f00b2bbae76388a182",
+        "expected_sha256": "1eaad54f0bc3531ea2392cde6ea62a0d405704732970bb9fb17b0887ca6ada89",
+        "pictures": 265,
+        "expected_bytes": 1628160
+      }
+    },
+    "denoise": {
+      "group": "denoise",
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "baseline": {
+        "stream": "baseline/denoise-00.h264",
+        "expected": "baseline/denoise-00.i420",
+        "stream_sha256": "520a0aea6d737428ba54e7af5e1262dc853686f8330a5c5eedd4d82e9ef19915",
+        "expected_sha256": "316d46ad44e2d088f6d4bdc0406e1d07529df9613bdf5b8be7d6f11a83887a30",
+        "pictures": 58,
+        "expected_bytes": 356352
+      },
+      "optimized": {
+        "name": "denoise-00",
+        "stream": "streams/denoise-00.h264",
+        "expected": "expected/denoise-00.i420",
+        "stream_sha256": "c8e2f3222c9984b85e5768770373f43add7b333391519813f862edb6843bd6ef",
+        "expected_sha256": "e88c47b209bbfebb016be7b6287d795dafc8ed5191172ab3b1b1dc5d39d10401",
+        "pictures": 52,
+        "expected_bytes": 319488
+      }
+    },
+    "mnist": {
+      "group": "mnist",
+      "width": 128,
+      "height": 64,
+      "coded_width": 160,
+      "coded_height": 96,
+      "frame_bytes": 23040,
+      "baseline": {
+        "stream": "baseline/mnist-00.h264",
+        "expected": "baseline/mnist-00.i420",
+        "stream_sha256": "ae9a0e3f2ce478c1ebe8eae93ced323f0a3c18bbf5c29e0e5a298c8df38f9891",
+        "expected_sha256": "eb2cb68f0c76111a4dd9c5a2f12dbee36cd17a9209de70565c6f48a3334ae845",
+        "pictures": 1591,
+        "expected_bytes": 36656640
+      },
+      "optimized": {
+        "name": "mnist-00",
+        "stream": "streams/mnist-00.h264",
+        "expected": "expected/mnist-00.i420",
+        "stream_sha256": "5486b658f7594325da02f0cea1decdf0a1137c8b35f8cfa1675e903834c9c0a1",
+        "expected_sha256": "f5f7a9472db4af14a0f55f79662616fa62e81e71b7feced244735fbea71c0599",
+        "pictures": 1589,
+        "expected_bytes": 36610560
+      }
+    },
+    "native-saturating-add": {
+      "group": "native",
+      "width": 64,
+      "height": 64,
+      "coded_width": 96,
+      "coded_height": 96,
+      "frame_bytes": 13824,
+      "baseline": {
+        "stream": "baseline/native-saturating-add.h264",
+        "expected": "baseline/native-saturating-add.i420",
+        "stream_sha256": "b0e2ce8202c4c96db4ddeb669d06cbd90edeea0d7779d3488b7a8ddb08d5d549",
+        "expected_sha256": "152d033d8593c0c891a7e677881aee0b909df07311ceeaf0a2c0bf7550ab84b4",
+        "pictures": 3,
+        "expected_bytes": 41472
+      },
+      "optimized": {
+        "name": "native-saturating-add",
+        "stream": "streams/native-saturating-add.h264",
+        "expected": "expected/native-saturating-add.i420",
+        "stream_sha256": "b0e2ce8202c4c96db4ddeb669d06cbd90edeea0d7779d3488b7a8ddb08d5d549",
+        "expected_sha256": "152d033d8593c0c891a7e677881aee0b909df07311ceeaf0a2c0bf7550ab84b4",
+        "pictures": 3,
+        "expected_bytes": 41472
+      }
+    },
+    "native-affine": {
+      "group": "native",
+      "width": 64,
+      "height": 64,
+      "coded_width": 96,
+      "coded_height": 96,
+      "frame_bytes": 13824,
+      "baseline": {
+        "stream": "baseline/native-affine.h264",
+        "expected": "baseline/native-affine.i420",
+        "stream_sha256": "9b1ed0fbbd3697527385b428fc671adbf4324cb635de369680030bfa6f1aa946",
+        "expected_sha256": "158445e41925f89604ebc4a080a8e8af6de2b59f3c6b34f6bb1620b2b494d424",
+        "pictures": 3,
+        "expected_bytes": 41472
+      },
+      "optimized": {
+        "name": "native-affine",
+        "stream": "streams/native-affine.h264",
+        "expected": "expected/native-affine.i420",
+        "stream_sha256": "9b1ed0fbbd3697527385b428fc671adbf4324cb635de369680030bfa6f1aa946",
+        "expected_sha256": "158445e41925f89604ebc4a080a8e8af6de2b59f3c6b34f6bb1620b2b494d424",
+        "pictures": 3,
+        "expected_bytes": 41472
+      }
+    },
+    "native-tile-permutation": {
+      "group": "native",
+      "width": 64,
+      "height": 64,
+      "coded_width": 96,
+      "coded_height": 96,
+      "frame_bytes": 13824,
+      "baseline": {
+        "stream": "baseline/native-tile-permutation.h264",
+        "expected": "baseline/native-tile-permutation.i420",
+        "stream_sha256": "180f6284fc78346bb0ed600753eb2b9ca4e1a35ccf2544c5429f0adae803beb7",
+        "expected_sha256": "515bfa66e9d7feeec98d857dd00dc58d2d15c49f890ceeea469f8838181c343f",
+        "pictures": 2,
+        "expected_bytes": 27648
+      },
+      "optimized": {
+        "name": "native-tile-permutation",
+        "stream": "streams/native-tile-permutation.h264",
+        "expected": "expected/native-tile-permutation.i420",
+        "stream_sha256": "180f6284fc78346bb0ed600753eb2b9ca4e1a35ccf2544c5429f0adae803beb7",
+        "expected_sha256": "515bfa66e9d7feeec98d857dd00dc58d2d15c49f890ceeea469f8838181c343f",
+        "pictures": 2,
+        "expected_bytes": 27648
+      }
+    },
+    "native-block-warp": {
+      "group": "native",
+      "width": 64,
+      "height": 64,
+      "coded_width": 96,
+      "coded_height": 96,
+      "frame_bytes": 13824,
+      "baseline": {
+        "stream": "baseline/native-block-warp.h264",
+        "expected": "baseline/native-block-warp.i420",
+        "stream_sha256": "cd32e391a4df07959ee8ebd9d4a5cd1e9280ae4f25e89ee5fb82965c42409f4d",
+        "expected_sha256": "80ca2c86abf4e85f950c1c3d663cf88338e2f89ca0e26b9a6ef08b43dbab48a0",
+        "pictures": 2,
+        "expected_bytes": 27648
+      },
+      "optimized": {
+        "name": "native-block-warp",
+        "stream": "streams/native-block-warp.h264",
+        "expected": "expected/native-block-warp.i420",
+        "stream_sha256": "cd32e391a4df07959ee8ebd9d4a5cd1e9280ae4f25e89ee5fb82965c42409f4d",
+        "expected_sha256": "80ca2c86abf4e85f950c1c3d663cf88338e2f89ca0e26b9a6ef08b43dbab48a0",
+        "pictures": 2,
+        "expected_bytes": 27648
+      }
+    },
+    "native-fractional-translation": {
+      "group": "native",
+      "width": 64,
+      "height": 64,
+      "coded_width": 96,
+      "coded_height": 96,
+      "frame_bytes": 13824,
+      "baseline": {
+        "stream": "baseline/native-fractional-translation.h264",
+        "expected": "baseline/native-fractional-translation.i420",
+        "stream_sha256": "eb2e3fe6208ac8a8f459f2f327b1c31825f6349b6c882ac62dae52909111879e",
+        "expected_sha256": "4494d7e72d35cf9b892f8ddccbab3a39aae581f355b3255c865c4eb1f63f5e12",
+        "pictures": 4,
+        "expected_bytes": 55296
+      },
+      "optimized": {
+        "name": "native-fractional-translation",
+        "stream": "streams/native-fractional-translation.h264",
+        "expected": "expected/native-fractional-translation.i420",
+        "stream_sha256": "eb2e3fe6208ac8a8f459f2f327b1c31825f6349b6c882ac62dae52909111879e",
+        "expected_sha256": "4494d7e72d35cf9b892f8ddccbab3a39aae581f355b3255c865c4eb1f63f5e12",
+        "pictures": 4,
+        "expected_bytes": 55296
+      }
+    },
+    "native-resident-stages": {
+      "group": "native",
+      "width": 64,
+      "height": 64,
+      "coded_width": 96,
+      "coded_height": 96,
+      "frame_bytes": 13824,
+      "baseline": {
+        "stream": "baseline/native-resident-stages.h264",
+        "expected": "baseline/native-resident-stages.i420",
+        "stream_sha256": "eaebc2e2fccce20d1d5351297314a8dde6e95f1434c02f0e313d1093075f6dda",
+        "expected_sha256": "79af3c393e71956dd47a868b9cb916fd77e27593d38ff8a39bf0589156edfc7e",
+        "pictures": 28,
+        "expected_bytes": 387072
+      },
+      "optimized": {
+        "name": "native-resident-stages",
+        "stream": "streams/native-resident-stages.h264",
+        "expected": "expected/native-resident-stages.i420",
+        "stream_sha256": "eaebc2e2fccce20d1d5351297314a8dde6e95f1434c02f0e313d1093075f6dda",
+        "expected_sha256": "79af3c393e71956dd47a868b9cb916fd77e27593d38ff8a39bf0589156edfc7e",
+        "pictures": 28,
+        "expected_bytes": 387072
+      }
+    },
+    "motion": {
+      "group": "motion",
+      "width": 96,
+      "height": 64,
+      "coded_width": 128,
+      "coded_height": 96,
+      "frame_bytes": 18432,
+      "baseline": {
+        "stream": "baseline/motion-00.h264",
+        "expected": "baseline/motion-00.i420",
+        "stream_sha256": "5546ca5a2fc9c7cdb479e63d60f115f6ca4a750eaa06ac4d5a441770e3a24927",
+        "expected_sha256": "1a0db47743b8e18f31b4af51311a0bc029cb71a614d434a518a1103f72b1f2c0",
+        "pictures": 23,
+        "expected_bytes": 423936
+      },
+      "optimized": {
+        "name": "motion-00",
+        "stream": "streams/motion-00.h264",
+        "expected": "expected/motion-00.i420",
+        "stream_sha256": "5546ca5a2fc9c7cdb479e63d60f115f6ca4a750eaa06ac4d5a441770e3a24927",
+        "expected_sha256": "1a0db47743b8e18f31b4af51311a0bc029cb71a614d434a518a1103f72b1f2c0",
+        "pictures": 23,
+        "expected_bytes": 423936
+      }
+    }
+  }
+}
