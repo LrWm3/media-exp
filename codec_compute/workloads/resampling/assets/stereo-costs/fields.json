@@ -1,0 +1,20 @@
+{
+  "block_size": 16,
+  "border": "zero",
+  "fields": {
+    "uniform_quarter": [
+      [
+        -2,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        6,
+        0
+      ]
+    ]
+  }
+}

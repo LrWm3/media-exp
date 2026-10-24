@@ -12,6 +12,8 @@ produce asynchronous/logarithmic sensor events. The compiler specializes each
 field into a cached prediction tail; changing input pixels does not change that
 tail. Updating a field requires another compile/export.
 
+![Actual decoded resampling outputs and known-motion witness](assets/capture.png)
+
 ## Tasks and exact costs
 
 All tasks operate on **128×128 byte images**, with **160×160 coded I420 surfaces**.
@@ -66,6 +68,88 @@ filter support at image edges. The witness demonstrates the value of supplied
 motion on this texture; it is not evidence about estimated flow, real video
 quality, disocclusions, or a broad image distribution. The capture labels the
 analytic midpoint separately from actual decoded outputs.
+
+Actual FFmpeg, OpenH264, VA-API, and NVDEC output gives an interior mean absolute
+error of **14.55692** for the naive average and **0.0602679** for the compensated
+average, in byte sample units. The compensated maximum absolute error is **1**.
+NVDEC independently reproduces the complete saved I420 and recomputes both error
+metrics from its returned output pixels. This controlled nonlinear witness
+therefore demonstrates more than the linear-ramp identity that an unwarped
+average could already satisfy.
+
+## Measured finite-batch costs
+
+The [NVDEC report](assets/nvdec.json) records these median elapsed milliseconds
+for **eight independent 128×128 jobs**, with one warmup and five repetitions:
+
+| Case | Input serialization | Saved streams, all pictures | Saved streams, named outputs | Host inputs to named outputs |
+| --- | ---: | ---: | ---: | ---: |
+| Patch atlas, fused | 85.94 | 315.52 | 327.93 | 411.78 |
+| Interpolation, unfused | 166.60 | 369.71 | 368.41 | 533.35 |
+| Interpolation, fused | 164.43 | 330.05 | 342.99 | 490.91 |
+| Bandwise correction, fused | 89.45 | 306.30 | 310.41 | 394.34 |
+| Compensated residual, fused | 166.42 | 373.11 | 368.48 | 537.10 |
+| Dense polarity maps, fused | 159.88 | 420.91 | 413.50 | 573.20 |
+| Stereo candidate costs, fused | 162.39 | 512.11 | 490.28 | 659.56 |
+| Passthrough control | 87.60 | 283.16 | 275.97 | 364.21 |
+| Unwarped average control | 161.22 | 340.66 | 343.01 | 495.92 |
+
+In this run, interpolation fusion reduces the selected-readback median from
+**368.41 to 342.99 ms**, and the directly measured host-to-output median from
+**533.35 to 490.91 ms**. Its matched unwarped-average control is similar at
+343.01/495.92 ms. These are bounded finite-batch measurements with startup,
+serialization, I/O, and exact validation included as described below.
+
+The [FFmpeg report](assets/ffmpeg.json) contains the same protocol and counters.
+Its interpolation unfused → fused medians are **41.17 → 38.52 ms** for saved
+streams with selected outputs and **65.60 → 64.41 ms** for host inputs to outputs;
+the average control is 39.54/60.43 ms. Across all nine timed cases, FFmpeg's
+selected-output medians span 35.52–41.75 ms. The two decoder environments differ,
+so these numbers are not a controlled CPU-versus-hardware speed comparison.
+The five-sample FFmpeg ranges overlap; those measurements do not establish a
+reliable timing gain from fusion.
+
+Startup and uploads remain large costs: a single-job NVDEC selected-output run
+takes 258–292 ms across the cases, while serializing eight two-input jobs alone
+takes 160–167 ms. Selected NVDEC copies can be much smaller than full copies
+without a corresponding timing win. For fused interpolation, eight jobs decode
+24 pictures but copy eight selected pictures, **921,600 → 307,200 I420 bytes**.
+The unfused plan decodes 40 pictures and returns the same eight output pictures.
+Both paths still upload every input. FFmpeg always copies all decoded pictures.
+
+Architectural fit and measured benefit therefore differ. Supplied-field
+interpolation shows the clearest combination of a native one-picture mapping,
+controlled quality evidence, and a measured reduction against materialized
+warps. Atlas routing and bandwise correction fit the native read mechanism but
+show no smaller surfaces or proven application speedup. Residuals are compact
+enough to keep investigating. The six- and nine-picture polarity/stereo chains
+are less attractive runtime candidates here. There is **no CUDA, optimized CPU
+image-kernel, or concurrent-workload baseline**, and no claim of general GPU
+acceleration or steady-state video throughput.
+
+## Saved evidence
+
+The full [bundle index](assets/bundle.json) contains **113 streams, 588 pictures,
+and 162 named outputs covering 2,654,208 pixels**. The three local decoders perform
+**339 stream checks**. Both benchmark environments independently validate every
+saved stream before timing, including the quality witness, totaling **22,579,200
+I420 bytes per environment**. Every timed trial also compares every returned I420
+byte and named output with its frozen exact reference. The final shared-IR suite
+passes **165 tests with no skips**, including six workload/capture tests.
+
+The committed subset contains **15 representative streams and 77 pictures**:
+the first fixture of every baseline/fused task, both controls, and the quality
+witness. Its [suite index](assets/suite.json), matching manifests, full I420
+references, inputs/outputs, motion fields, and prediction tails are included.
+Both complete timing reports, the full bundle index, the capture, and its
+[provenance](assets/capture.capture.json) are also committed. The full eight-job
+corpus stays under ignored `codec_compute/artifacts/resampling`; regenerate it
+for the benchmark. The capture can also be regenerated directly from `assets`.
+
+All reports pin source commit `b40e3c4` and bundle SHA256
+`0652fb43cd00990e8e91155672ef4a180d6687735c2d1746e0a318b00958d0dc`.
+Source hashes, exact artifact hashes, raw timing samples, decoder/helper hashes,
+and actual decoded/copied/returned byte counters remain in the JSON evidence.
 
 ## Validation and benchmark protocol
 

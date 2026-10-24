@@ -1,0 +1,985 @@
+{
+  "format": "codec-compute-program-1",
+  "ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      128,
+      128
+    ],
+    "inputs": [
+      {
+        "name": "a",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "name": "b",
+        "id": 1,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 3
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "gather_h264",
+        "args": [
+          1
+        ],
+        "params": [
+          [
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ]
+          ],
+          16
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 3,
+        "op": "absdiff",
+        "args": [
+          0,
+          2
+        ],
+        "params": [],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "lowered_ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      128,
+      128
+    ],
+    "inputs": [
+      {
+        "name": "a",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "name": "b",
+        "id": 1,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 5
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "a"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "input",
+        "args": [],
+        "params": [
+          "b"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "gather_h264",
+        "args": [
+          1
+        ],
+        "params": [
+          [
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              7,
+              3
+            ]
+          ],
+          16
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 3,
+        "op": "affine_sat",
+        "args": [
+          0,
+          2
+        ],
+        "params": [
+          1,
+          -1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 4,
+        "op": "affine_sat",
+        "args": [
+          2,
+          0
+        ],
+        "params": [
+          1,
+          -1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 5,
+        "op": "affine_sat",
+        "args": [
+          3,
+          4
+        ],
+        "params": [
+          1,
+          1,
+          0
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "synthesis": [
+    {
+      "source_node": 3,
+      "operation": "absdiff",
+      "source_operands": [
+        0,
+        2
+      ],
+      "search": {
+        "format": "bounded-scalar-synthesis-1",
+        "status": "found",
+        "detail": "A candidate passed exhaustive verification over the declared input domain.",
+        "name": "absdiff",
+        "grammar": "input leaves; supplied unary/binary primitives; bounded expression-tree applications before structural sharing; no implicit constants or conditionals",
+        "bound_metric": "primitive applications in expression tree before sharing",
+        "prototype_max_instructions": 8,
+        "optimality": "no global native-instruction or target-cost optimality claim",
+        "input_ranges": [
+          [
+            0,
+            255
+          ],
+          [
+            0,
+            255
+          ]
+        ],
+        "max_instructions": 3,
+        "max_candidates": 50000,
+        "candidates": 166,
+        "rounds": 1,
+        "restarts": 0,
+        "sample_count": 60,
+        "verification_attempts": 1,
+        "counterexamples": [],
+        "library_fingerprint": "700a1e89d0a61255303fef0e6eef2180b332e99c19764bac0694d225bcd576b6",
+        "largest_tree_size_considered": 3,
+        "plan": {
+          "format": "scalar-plan-1",
+          "input_count": 2,
+          "instructions": [
+            {
+              "primitive": "sat_sub",
+              "operands": [
+                0,
+                1
+              ]
+            },
+            {
+              "primitive": "sat_sub",
+              "operands": [
+                1,
+                0
+              ]
+            },
+            {
+              "primitive": "sat_add",
+              "operands": [
+                2,
+                3
+              ]
+            }
+          ],
+          "output": 4
+        },
+        "verification": {
+          "schema": "codec-compute.scalar-verification.v1",
+          "method": "exhaustive_cartesian_enumeration",
+          "scope": "scalar_primitive_model",
+          "status": "verified",
+          "verified": true,
+          "bitstream_verified": false,
+          "target": "h264",
+          "domains": [
+            {
+              "name": "input0",
+              "minimum": 0,
+              "maximum": 255,
+              "size": 256
+            },
+            {
+              "name": "input1",
+              "minimum": 0,
+              "maximum": 255,
+              "size": 256
+            }
+          ],
+          "input_order": [
+            "input0",
+            "input1"
+          ],
+          "enumeration_order": "lexicographic_ascending_last_input_varies_fastest",
+          "combinations_total": 65536,
+          "combinations_checked": 65536,
+          "mismatch_count": 0,
+          "primitive_model_fingerprint": "700a1e89d0a61255303fef0e6eef2180b332e99c19764bac0694d225bcd576b6",
+          "plan_fingerprint": "c2a17c8d706c3d8142b5c0fd7ce5bc61042cf841a9a3b126850e02564d9e6963",
+          "primitive_model": {
+            "primitives": [
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": true,
+                "cost": 1,
+                "divisor_shift": 0,
+                "integer_precision": "unbounded",
+                "name": "sat_add",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": false,
+                "cost": 1,
+                "divisor_shift": 0,
+                "integer_precision": "unbounded",
+                "name": "sat_sub",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "arity": 2,
+                "bias_after_rounding": 0,
+                "commutative": true,
+                "cost": 1,
+                "divisor_shift": 1,
+                "integer_precision": "unbounded",
+                "name": "rounded_average",
+                "rounding": "floor(n/2**shift + 1/2) when shift>0; exact otherwise",
+                "saturation": [
+                  0,
+                  255
+                ],
+                "weights": [
+                  1,
+                  1
+                ]
+              }
+            ],
+            "reference_model": "previous instruction values; physical scheduling checked separately",
+            "scope": "pointwise scalar u8; operands at identical image coordinates",
+            "target": "h264",
+            "version": "scalar-u8-v1"
+          },
+          "plan": {
+            "format": "scalar-plan-1",
+            "input_count": 2,
+            "instructions": [
+              {
+                "operands": [
+                  0,
+                  1
+                ],
+                "primitive": "sat_sub"
+              },
+              {
+                "operands": [
+                  1,
+                  0
+                ],
+                "primitive": "sat_sub"
+              },
+              {
+                "operands": [
+                  2,
+                  3
+                ],
+                "primitive": "sat_add"
+              }
+            ],
+            "output": 4
+          },
+          "hash_algorithm": "sha256",
+          "hash_encoding": "one_u8_output_byte_per_domain_tuple",
+          "hash_scope": "complete_domain",
+          "expected_sha256": "eb7214b20e33f69a01fda08c2bf032c318ac1e77aeed441dfbe467dc6ed220d3",
+          "actual_sha256": "eb7214b20e33f69a01fda08c2bf032c318ac1e77aeed441dfbe467dc6ed220d3",
+          "counterexample": null
+        }
+      },
+      "lowered_output_node": 5
+    }
+  ],
+  "target": "h264",
+  "coded_shape": [
+    160,
+    160
+  ],
+  "output_frames": {
+    "output": 4
+  },
+  "costs": {
+    "input_pictures": 2,
+    "computation_pictures": 3,
+    "total_pictures": 5,
+    "prediction_bytes": 2094,
+    "peak_live_references": 3,
+    "prediction_slices": 78
+  },
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 0,
+    "4": 0
+  },
+  "optimizations": {
+    "spatial_read_fusion": {
+      "enabled": true,
+      "eligible_nodes": 1,
+      "fused_nodes": 1,
+      "eligible_kinds": [
+        "gather_h264"
+      ],
+      "reason": "accepted",
+      "baseline_cost": {
+        "computation_pictures": 4,
+        "prediction_bytes": 2526,
+        "output_readback_pictures": 1
+      },
+      "candidate_cost": {
+        "computation_pictures": 3,
+        "prediction_bytes": 2094,
+        "output_readback_pictures": 1
+      }
+    },
+    "shift_read_fusion": {
+      "enabled": true,
+      "eligible_nodes": 1,
+      "fused_nodes": 1,
+      "eligible_kinds": [
+        "gather_h264"
+      ],
+      "reason": "accepted",
+      "baseline_cost": {
+        "computation_pictures": 4,
+        "prediction_bytes": 2526,
+        "output_readback_pictures": 1
+      },
+      "candidate_cost": {
+        "computation_pictures": 3,
+        "prediction_bytes": 2094,
+        "output_readback_pictures": 1
+      }
+    }
+  },
+  "scheduling": "H.264 retained long-term references",
+  "guard": 16,
+  "prediction_sha256": "004fa99b015b84b52b550374286e671db21d5d5f0cc996c6ab616c6cb619c225"
+}

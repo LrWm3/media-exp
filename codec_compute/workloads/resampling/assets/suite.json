@@ -1,0 +1,572 @@
+{
+  "format": "h264-ir-suite-0.1",
+  "selection": "First fixture of every baseline/fused task, both controls, and known-motion witness",
+  "comparison_sha256": "0652fb43cd00990e8e91155672ef4a180d6687735c2d1746e0a318b00958d0dc",
+  "exporter_sha256": "befc85fc764ea3e5f3adcc14cb5f2d7ebd5bc6333ec399160d10e4564a1ffd48",
+  "case_count": 15,
+  "cases": [
+    {
+      "name": "patch-atlas/baseline/000",
+      "stream": "patch-atlas/baseline/000.h264",
+      "stream_sha256": "58c1415e71f95626233b301069a58914ba94d35b0db4f85612b771ee76683887",
+      "manifest": "patch-atlas/baseline/manifest.json",
+      "manifest_sha256": "70e0989413ebc148eafe0ee520bc0e9eb1f831f60cfc82c9e752adc7f2d1f846",
+      "expected": "patch-atlas/baseline/000.i420",
+      "expected_sha256": "904779ba28942a23d286ed62a4d37eb8d910cddf75ea93cab0a53bdd13f45fec",
+      "pictures": 2,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "patch-atlas/baseline/000-output.u8",
+          "sha256": "8ac8c6fdfb624b7dde867f1a3eb0820b05db7827774d2529b38f1aa9257a1373",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 1,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "patch-atlas/fused/000",
+      "stream": "patch-atlas/fused/000.h264",
+      "stream_sha256": "58c1415e71f95626233b301069a58914ba94d35b0db4f85612b771ee76683887",
+      "manifest": "patch-atlas/fused/manifest.json",
+      "manifest_sha256": "b6ab194e700a3ea109bc82abf91d5322e69544450cf6f63fa73e525917aeef0d",
+      "expected": "patch-atlas/fused/000.i420",
+      "expected_sha256": "904779ba28942a23d286ed62a4d37eb8d910cddf75ea93cab0a53bdd13f45fec",
+      "pictures": 2,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "patch-atlas/fused/000-output.u8",
+          "sha256": "8ac8c6fdfb624b7dde867f1a3eb0820b05db7827774d2529b38f1aa9257a1373",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 1,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "motion-interpolation/baseline/000",
+      "stream": "motion-interpolation/baseline/000.h264",
+      "stream_sha256": "e6f730fe57b88cb2c64aac11a3edf70ae2e6b8724d5f8e8412c1e05f65a008c1",
+      "manifest": "motion-interpolation/baseline/manifest.json",
+      "manifest_sha256": "3028645f55cd8d7327a9f5bec1aa44d91ac1caa15c66ea757597e40af49cae77",
+      "expected": "motion-interpolation/baseline/000.i420",
+      "expected_sha256": "54f4a1f06b3cccbb4e95574bf4848bfe0e78547c0ffd4715eef06183a0de1fc4",
+      "pictures": 5,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "motion-interpolation/baseline/000-output.u8",
+          "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "motion-interpolation/fused/000",
+      "stream": "motion-interpolation/fused/000.h264",
+      "stream_sha256": "50c1256a2aabdaf26c518a0b7b54e8d7aa4948e7ac34fef6aca8164c692281c8",
+      "manifest": "motion-interpolation/fused/manifest.json",
+      "manifest_sha256": "8c337738aa3f4cc3a953e4a65cf67940c7faab80dc2460176fd3db60957685eb",
+      "expected": "motion-interpolation/fused/000.i420",
+      "expected_sha256": "1faa73d15d69de3463462df93a37a278f698ca069a0da22c3ad93122fba5e042",
+      "pictures": 3,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "motion-interpolation/fused/000-output.u8",
+          "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 2,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "rolling-shutter/baseline/000",
+      "stream": "rolling-shutter/baseline/000.h264",
+      "stream_sha256": "63db40f404a091d7e972d6141b0f570e1257cf218e9647590b0146cf9f79969d",
+      "manifest": "rolling-shutter/baseline/manifest.json",
+      "manifest_sha256": "41d5a7a050c906d37f2dcea62831b4dfee2ecef1b20c0c6e150c6eee246bd1e0",
+      "expected": "rolling-shutter/baseline/000.i420",
+      "expected_sha256": "1c8f93d5bf597970c3298ecafb9f50158add5cbbeae2c603fac9fea5c92df92c",
+      "pictures": 2,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "rolling-shutter/baseline/000-output.u8",
+          "sha256": "0bf4bd3b621c00a38c39648d17c2673be8e94d526fcb145c9ee00c9ff6d73358",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 1,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "rolling-shutter/fused/000",
+      "stream": "rolling-shutter/fused/000.h264",
+      "stream_sha256": "63db40f404a091d7e972d6141b0f570e1257cf218e9647590b0146cf9f79969d",
+      "manifest": "rolling-shutter/fused/manifest.json",
+      "manifest_sha256": "8bbe3cbb4946ffc9dba141c37da3ff6f251f6247b8d5ce09bac350f52b14b2d8",
+      "expected": "rolling-shutter/fused/000.i420",
+      "expected_sha256": "1c8f93d5bf597970c3298ecafb9f50158add5cbbeae2c603fac9fea5c92df92c",
+      "pictures": 2,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "rolling-shutter/fused/000-output.u8",
+          "sha256": "0bf4bd3b621c00a38c39648d17c2673be8e94d526fcb145c9ee00c9ff6d73358",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 1,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "motion-residual/baseline/000",
+      "stream": "motion-residual/baseline/000.h264",
+      "stream_sha256": "7d4fbde5cf55305eee15bef3e542e495ccab55cddba7bbb18a2b52748c5a09bb",
+      "manifest": "motion-residual/baseline/manifest.json",
+      "manifest_sha256": "18bd643d09c9f9a9cead366d00a34acb29f6b6a3b73ce5c849b7a9dbd1324a87",
+      "expected": "motion-residual/baseline/000.i420",
+      "expected_sha256": "f09f27c988ed4a51b809d40459ada867ffdcde8bd3004ca3df817da323d43783",
+      "pictures": 6,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "motion-residual/baseline/000-output.u8",
+          "sha256": "f18b33e96ca7130803ed5b217142efe2dc81da944e475d3c818f761c0a17542a",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 5,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "motion-residual/fused/000",
+      "stream": "motion-residual/fused/000.h264",
+      "stream_sha256": "4c627c9f9f35a585111e7921b46cc8f83d4495b5f814cc342cebe2fbe48cbd44",
+      "manifest": "motion-residual/fused/manifest.json",
+      "manifest_sha256": "833645e40518d660970a5d1e779753ca28c8158fe639806849d4299dac37b11f",
+      "expected": "motion-residual/fused/000.i420",
+      "expected_sha256": "c913ce073114b579f3d732625c8813f6564e4b2dce282defb1888a20cb8d4d9f",
+      "pictures": 5,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "motion-residual/fused/000-output.u8",
+          "sha256": "f18b33e96ca7130803ed5b217142efe2dc81da944e475d3c818f761c0a17542a",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "bipolar-events/baseline/000",
+      "stream": "bipolar-events/baseline/000.h264",
+      "stream_sha256": "8b9d84eb428aa403037d521c06b0bd7bf24985abd1e3a51b1c9236b33d9ba4b5",
+      "manifest": "bipolar-events/baseline/manifest.json",
+      "manifest_sha256": "57a483470aee46e137fde287ff2e306734325143ae80736cf3fbb355f002d984",
+      "expected": "bipolar-events/baseline/000.i420",
+      "expected_sha256": "9d42029265ebb8db7946d7257a34319816b191622a2c58717f8a01a0c5c4de05",
+      "pictures": 9,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "positive": {
+          "path": "bipolar-events/baseline/000-positive.u8",
+          "sha256": "a976f5ef46c166ad4b365d054701828492b6b44573dd7c718587b129f253b98f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 5,
+          "x": 16,
+          "y": 16
+        },
+        "negative": {
+          "path": "bipolar-events/baseline/000-negative.u8",
+          "sha256": "de64b6a552dece2350e285d0ee32147e718e0f44f141048425fc80d12eeb0efe",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "bipolar-events/fused/000",
+      "stream": "bipolar-events/fused/000.h264",
+      "stream_sha256": "ab3fac6e57b30cc8f56037ae6a4e3daf5fb6ee19888e175cecdd65269154fbf8",
+      "manifest": "bipolar-events/fused/manifest.json",
+      "manifest_sha256": "5eee5a30750f68a97288c40649bcef97c94147991656a4983e06ef107a43395a",
+      "expected": "bipolar-events/fused/000.i420",
+      "expected_sha256": "9d911cff14d963ee9c2315ec24af3b3244614be0a983b945412c49629737a918",
+      "pictures": 8,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "positive": {
+          "path": "bipolar-events/fused/000-positive.u8",
+          "sha256": "a976f5ef46c166ad4b365d054701828492b6b44573dd7c718587b129f253b98f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        },
+        "negative": {
+          "path": "bipolar-events/fused/000-negative.u8",
+          "sha256": "de64b6a552dece2350e285d0ee32147e718e0f44f141048425fc80d12eeb0efe",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 7,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "stereo-costs/baseline/000",
+      "stream": "stereo-costs/baseline/000.h264",
+      "stream_sha256": "6a28d6e392c585f24fe23cf85e850b5b4c5bca29e844efb48fe4bd8a6802c9ee",
+      "manifest": "stereo-costs/baseline/manifest.json",
+      "manifest_sha256": "45fd6f9666b7bb737939ed2a19e0cfe9e0c0ea7f2980d83aa48db3130b224b56",
+      "expected": "stereo-costs/baseline/000.i420",
+      "expected_sha256": "d90adcc6fa484bcecfdb47ec8950f700aae2632504eedaf8d2c168e6a527f33d",
+      "pictures": 14,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "cost_mhalf": {
+          "path": "stereo-costs/baseline/000-cost_mhalf.u8",
+          "sha256": "555f2b2c1e1e77bfc3388f040984290db8a18b16bb8910456310ae8c6aa247ee",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 5,
+          "x": 16,
+          "y": 16
+        },
+        "cost_phalf": {
+          "path": "stereo-costs/baseline/000-cost_phalf.u8",
+          "sha256": "d4345dcdb817db0e9d3484caf7eb8f4ce5db268b729455711d248ee15383ee8c",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 9,
+          "x": 16,
+          "y": 16
+        },
+        "cost_pthreehalf": {
+          "path": "stereo-costs/baseline/000-cost_pthreehalf.u8",
+          "sha256": "9be6170a5d4e944bed701c352bd687ffdafe0806ee80184d3547e74cc76c92f5",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 13,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "stereo-costs/fused/000",
+      "stream": "stereo-costs/fused/000.h264",
+      "stream_sha256": "4f8b3134e9297dca0f0b4f7dac9e0b80092cdfd79f6bd191de87b373e56eb6a3",
+      "manifest": "stereo-costs/fused/manifest.json",
+      "manifest_sha256": "a2d7e1e9e03a65e8932ccb96e110799a9b40a0299158728df98d9552ad78c578",
+      "expected": "stereo-costs/fused/000.i420",
+      "expected_sha256": "3c74e6cea722d3a7e9727545f11b4a7bd08ddeb8e14e2afea74bda54bd376cdb",
+      "pictures": 11,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "cost_mhalf": {
+          "path": "stereo-costs/fused/000-cost_mhalf.u8",
+          "sha256": "555f2b2c1e1e77bfc3388f040984290db8a18b16bb8910456310ae8c6aa247ee",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        },
+        "cost_phalf": {
+          "path": "stereo-costs/fused/000-cost_phalf.u8",
+          "sha256": "d4345dcdb817db0e9d3484caf7eb8f4ce5db268b729455711d248ee15383ee8c",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 7,
+          "x": 16,
+          "y": 16
+        },
+        "cost_pthreehalf": {
+          "path": "stereo-costs/fused/000-cost_pthreehalf.u8",
+          "sha256": "9be6170a5d4e944bed701c352bd687ffdafe0806ee80184d3547e74cc76c92f5",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 10,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "control/fused/000",
+      "stream": "control/fused/000.h264",
+      "stream_sha256": "8ee4466283b693dceb30b41612af9d552767654fdf9e4bfd03bb4ccbf17868ba",
+      "manifest": "control/fused/manifest.json",
+      "manifest_sha256": "6fe6d825f892d548569586ff5bb0bd139afb5548b5250137285d463dbfdbef0e",
+      "expected": "control/fused/000.i420",
+      "expected_sha256": "badcda8e6bc4856b64d83df94300334191a9e64d884c55baaf45e8b4ff092dfb",
+      "pictures": 1,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "control/fused/000-output.u8",
+          "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 0,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "average-control/fused/000",
+      "stream": "average-control/fused/000.h264",
+      "stream_sha256": "c4c18ad61eaf93114ce980fb5fc3795c66fa20bf2faf87ad4ab5e519ecc8f590",
+      "manifest": "average-control/fused/manifest.json",
+      "manifest_sha256": "c20d73c6e229bf1c3ed11226f807e6a94de242cb22f9df68e2f681eb96ed9c36",
+      "expected": "average-control/fused/000.i420",
+      "expected_sha256": "9853dbd2ff04b3b6774eed1fd969043f126811f93f762f7492eade7c36a06097",
+      "pictures": 3,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "output": {
+          "path": "average-control/fused/000-output.u8",
+          "sha256": "2863bf41c09c6e3e98fcd2081b5749b73a2eac9b1474dd9933f0d86931a4fbc5",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 2,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "quality",
+      "stream": "quality/known-motion.h264",
+      "stream_sha256": "6d23619bb5c9b4c0951b292a4d0cad817fb9136f6330a1c3a572756d3a02ec0b",
+      "manifest": "quality/manifest.json",
+      "manifest_sha256": "bc6be1ce2c31abf8542629c62d7de2ed698be8dea5f0ae0a49c20a82666c8746",
+      "expected": "quality/known-motion.i420",
+      "expected_sha256": "0032bbb599c7dba1d6cb716279bbbf839ca5972aee060bc947fb841de555eed0",
+      "pictures": 4,
+      "width": 128,
+      "height": 128,
+      "coded_width": 160,
+      "coded_height": 160,
+      "frame_bytes": 38400,
+      "named_outputs": {
+        "compensated": {
+          "path": "quality/compensated.u8",
+          "sha256": "bd34bee68114c4ebc39082575d7e773eb793f19d563dd3a1dbabd2e90aec275f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 2,
+          "x": 16,
+          "y": 16
+        },
+        "naive": {
+          "path": "quality/naive.u8",
+          "sha256": "fecd009b5f37576b07df9f0be759b4b493ed85209c884d2216bf6d7cb7444d37",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 3,
+          "x": 16,
+          "y": 16
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "format": "codec-compute-resampling-capture-1",
+  "bundle_sha256": "0652fb43cd00990e8e91155672ef4a180d6687735c2d1746e0a318b00958d0dc",
+  "repository_commit": "b40e3c45ba1ba35b10e25e13c32c56439bddeb98",
+  "script_sha256": "064510d5a8823591c04d7baa55696006e137e21b498f45daaf2371d148a31531",
+  "capture_sha256": "74084cf4a2548e33fe6193af75a114fd86f8fcf7beffb0278f0a2e1bb80cb6a0",
+  "size": [
+    1330,
+    1629
+  ],
+  "rows": [
+    {
+      "case": "patch-atlas",
+      "stream": {
+        "path": "patch-atlas/fused/000.h264",
+        "sha256": "58c1415e71f95626233b301069a58914ba94d35b0db4f85612b771ee76683887",
+        "bytes": 43844
+      },
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 1,
+        "total_pictures": 2,
+        "prediction_bytes": 587,
+        "peak_live_references": 1,
+        "prediction_slices": 26
+      },
+      "planes": [
+        {
+          "label": "Input",
+          "path": "patch-atlas/inputs/000-image.u8",
+          "sha256": "bb745861133f343a5a37fa429108aa87a84eb2a1d34e8a78f22c0a78b5788d5a",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Decoded output",
+          "path": "patch-atlas/fused/000-output.u8",
+          "sha256": "8ac8c6fdfb624b7dde867f1a3eb0820b05db7827774d2529b38f1aa9257a1373",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        }
+      ]
+    },
+    {
+      "case": "motion-interpolation",
+      "stream": {
+        "path": "motion-interpolation/fused/000.h264",
+        "sha256": "50c1256a2aabdaf26c518a0b7b54e8d7aa4948e7ac34fef6aca8164c692281c8",
+        "bytes": 87248
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 1,
+        "total_pictures": 3,
+        "prediction_bytes": 771,
+        "peak_live_references": 2,
+        "prediction_slices": 26
+      },
+      "planes": [
+        {
+          "label": "Input A",
+          "path": "motion-interpolation/inputs/000-a.u8",
+          "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Input B",
+          "path": "motion-interpolation/inputs/000-b.u8",
+          "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Decoded output",
+          "path": "motion-interpolation/fused/000-output.u8",
+          "sha256": "e703261b21993a7dc724bb84ea27dd71063b99a50ddc8dc272a3f63b9719c49f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        }
+      ]
+    },
+    {
+      "case": "known-motion",
+      "stream": {
+        "path": "quality/known-motion.h264",
+        "sha256": "6d23619bb5c9b4c0951b292a4d0cad817fb9136f6330a1c3a572756d3a02ec0b",
+        "bytes": 87782
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 2,
+        "total_pictures": 4,
+        "prediction_bytes": 1305,
+        "peak_live_references": 2,
+        "prediction_slices": 52
+      },
+      "planes": [
+        {
+          "label": "Input A",
+          "path": "quality/input-a.u8",
+          "sha256": "b499fe86e69bbb6c9070e9257cbd540e051e3647ca3bef1ea864e317b1b707ce",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Input B",
+          "path": "quality/input-b.u8",
+          "sha256": "d077885f653af3d72ec91c9aac95e0d2e1014756334ad2ab6ae73dc4e07000ac",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Naive average",
+          "path": "quality/naive.u8",
+          "sha256": "fecd009b5f37576b07df9f0be759b4b493ed85209c884d2216bf6d7cb7444d37",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Compensated",
+          "path": "quality/compensated.u8",
+          "sha256": "bd34bee68114c4ebc39082575d7e773eb793f19d563dd3a1dbabd2e90aec275f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Analytic midpoint",
+          "path": "quality/analytic-midpoint.u8",
+          "sha256": "15b67571cb90447e651f54771eff89f82bffe7da4b5b20b9e69c58de08771121",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        }
+      ]
+    },
+    {
+      "case": "rolling-shutter",
+      "stream": {
+        "path": "rolling-shutter/fused/000.h264",
+        "sha256": "63db40f404a091d7e972d6141b0f570e1257cf218e9647590b0146cf9f79969d",
+        "bytes": 43908
+      },
+      "costs": {
+        "input_pictures": 1,
+        "computation_pictures": 1,
+        "total_pictures": 2,
+        "prediction_bytes": 505,
+        "peak_live_references": 1,
+        "prediction_slices": 26
+      },
+      "planes": [
+        {
+          "label": "Input",
+          "path": "rolling-shutter/inputs/000-image.u8",
+          "sha256": "5e2403b69acc0cb83586fecd33bfc3eaaf0d34599991483c064af8217201980e",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Decoded output",
+          "path": "rolling-shutter/fused/000-output.u8",
+          "sha256": "0bf4bd3b621c00a38c39648d17c2673be8e94d526fcb145c9ee00c9ff6d73358",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        }
+      ]
+    },
+    {
+      "case": "motion-residual",
+      "stream": {
+        "path": "motion-residual/fused/000.h264",
+        "sha256": "4c627c9f9f35a585111e7921b46cc8f83d4495b5f814cc342cebe2fbe48cbd44",
+        "bytes": 88571
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 3,
+        "total_pictures": 5,
+        "prediction_bytes": 2094,
+        "peak_live_references": 3,
+        "prediction_slices": 78
+      },
+      "planes": [
+        {
+          "label": "Input A",
+          "path": "motion-residual/inputs/000-a.u8",
+          "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Input B",
+          "path": "motion-residual/inputs/000-b.u8",
+          "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Decoded output",
+          "path": "motion-residual/fused/000-output.u8",
+          "sha256": "f18b33e96ca7130803ed5b217142efe2dc81da944e475d3c818f761c0a17542a",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        }
+      ]
+    },
+    {
+      "case": "bipolar-events",
+      "stream": {
+        "path": "bipolar-events/fused/000.h264",
+        "sha256": "ab3fac6e57b30cc8f56037ae6a4e3daf5fb6ee19888e175cecdd65269154fbf8",
+        "bytes": 89969
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 6,
+        "total_pictures": 8,
+        "prediction_bytes": 3492,
+        "peak_live_references": 3,
+        "prediction_slices": 156
+      },
+      "planes": [
+        {
+          "label": "Input A",
+          "path": "bipolar-events/inputs/000-a.u8",
+          "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Input B",
+          "path": "bipolar-events/inputs/000-b.u8",
+          "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Positive >=20",
+          "path": "bipolar-events/fused/000-positive.u8",
+          "sha256": "a976f5ef46c166ad4b365d054701828492b6b44573dd7c718587b129f253b98f",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            1
+          ],
+          "integer_zoom": 1,
+          "display": "binary0/1-to-0/255"
+        },
+        {
+          "label": "Negative >=20",
+          "path": "bipolar-events/fused/000-negative.u8",
+          "sha256": "de64b6a552dece2350e285d0ee32147e718e0f44f141048425fc80d12eeb0efe",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            1
+          ],
+          "integer_zoom": 1,
+          "display": "binary0/1-to-0/255"
+        }
+      ]
+    },
+    {
+      "case": "stereo-costs",
+      "stream": {
+        "path": "stereo-costs/fused/000.h264",
+        "sha256": "4f8b3134e9297dca0f0b4f7dac9e0b80092cdfd79f6bd191de87b373e56eb6a3",
+        "bytes": 92378
+      },
+      "costs": {
+        "input_pictures": 2,
+        "computation_pictures": 9,
+        "total_pictures": 11,
+        "prediction_bytes": 5901,
+        "peak_live_references": 4,
+        "prediction_slices": 234
+      },
+      "planes": [
+        {
+          "label": "Input A",
+          "path": "stereo-costs/inputs/000-a.u8",
+          "sha256": "4cc512072f794315b7034ec0525ae5de27823f71afa8e14eb3be4138df35d028",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Input B",
+          "path": "stereo-costs/inputs/000-b.u8",
+          "sha256": "74da5e7615d72d2672e656abf124fc7b5f9a85acfecd93887ef908815325e315",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Cost -0.5 px",
+          "path": "stereo-costs/fused/000-cost_mhalf.u8",
+          "sha256": "555f2b2c1e1e77bfc3388f040984290db8a18b16bb8910456310ae8c6aa247ee",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Cost +0.5 px",
+          "path": "stereo-costs/fused/000-cost_phalf.u8",
+          "sha256": "d4345dcdb817db0e9d3484caf7eb8f4ce5db268b729455711d248ee15383ee8c",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        },
+        {
+          "label": "Cost +1.5 px",
+          "path": "stereo-costs/fused/000-cost_pthreehalf.u8",
+          "sha256": "9be6170a5d4e944bed701c352bd687ffdafe0806ee80184d3547e74cc76c92f5",
+          "bytes": 16384,
+          "width": 128,
+          "height": 128,
+          "range": [
+            0,
+            255
+          ],
+          "integer_zoom": 1,
+          "display": "literal u8"
+        }
+      ]
+    }
+  ]
+}
