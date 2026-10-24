@@ -44,10 +44,8 @@ observable and must survive transformations.
 Before integration, 33 tests passed in 5.877 seconds:
 
 ```sh
-PYTHONPATH="$PWD:$PWD/05-h264-compiler" python -m unittest discover \
-  -s 05-h264-compiler -p test_native_ops.py
-# The complete recorded baseline also ran test_compiler, test_interpolation,
-# and test_schedule using unittest's module selection.
+PYTHONPATH="$PWD:$PWD/05-h264-compiler" python3 -m unittest -v \
+  test_compiler test_native_ops test_interpolation test_schedule
 ```
 
 Available decoder paths exercised by those tests: FFmpeg, OpenH264, and VA-API.
