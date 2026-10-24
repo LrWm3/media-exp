@@ -44,7 +44,9 @@ intermediates. `encode_inputs(inputs)` returns only an IVF input prefix;
 `decode(stream, decoder="libdav1d")` returns an `AV1Execution`; and
 `run(inputs, decoder=...)` combines encode and decode. Input values may be
 row lists/tuples of integers or row-major bytes. `AV1Execution.frames` contains
-ordinary Python lists extracted from decoder output.
+ordinary Python lists extracted from decoder output. Native serialization has a
+180-second timeout; decoding has a 60-second timeout. FFmpeg runs with `-xerror`,
+and any error-level stderr or nonzero process status fails explicitly.
 
 ## Exact supported semantics
 
@@ -100,9 +102,16 @@ frames **only**. The compute packet bytes are immutable across real inputs.
 Tests independently compare all decoded samples against arithmetic written only
 in the tests. They cover 0/255, ramps, alternating extrema, random inputs, odd
 average sums, positive/negative edge translations, multiple blocks, repeated
-reference-slot reuse, and changed inputs. Both libdav1d and libaom-av1 must
-produce the expected composed results. A serializer spy checks that runtime
-encoding receives input instructions only.
+reference-slot reuse, and changed inputs. The 256x256 exhaustive case covers all
+65,536 possible input pairs for rounded average through both libdav1d and
+libaom-av1. An eight-input retention case keeps all eight reference slots live,
+replaces each only after its final read, and validates every displayed result
+through both decoders. It also verifies that a complete encode with real input
+bytes exactly matches the separately generated input prefix plus neutral-compiled
+tail. FFmpeg `trace_headers` confirms zero quantizers, disabled CDF adaptation,
+no inherited primary entropy context, disabled filtering/order hints/frame IDs,
+and each precise one-bit reference refresh mask. A serializer spy checks that
+production runtime encoding receives input instructions only.
 
 The normative basis is the AV1 specification's inter-prediction and compound
 prediction processes, including `COMPOUND_AVERAGE` rounding:
