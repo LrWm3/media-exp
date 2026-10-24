@@ -63,6 +63,11 @@ level-4.1 support for 256×256 inputs and sequential NVDEC requests through one
 live decoder pipeline. Includes counted IDR completion fences, exact output
 checks, and fresh-session versus warmed-session measurements.
 
+[CPU versus decoder](codec_compute/workloads/cpu_comparison/README.md):
+matched native CPU kernels, accelerated input serialization, resident chains
+and finite batches. CPU wins every elapsed-time comparison. One synthetic
+64-stage chain saves 14.2% host process CPU on NVDEC but finishes 6.22× slower.
+
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.

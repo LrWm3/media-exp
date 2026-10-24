@@ -5,6 +5,47 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Matched native CPU and NVDEC comparison
+
+The [CPU comparison](workloads/cpu_comparison/README.md) adds independent native
+CPU baselines for copy, averaging, patch atlases, fractional interpolation, and
+16/64-stage retained-image recurrences. Optional native I_PCM serialization
+matches the original Python writer byte-for-byte. All timed results are checked,
+process CPU is measured separately from elapsed time, and the live helper's CPU
+clock is read directly instead of relying on reaped-child accounting.
+
+The initial 128×128/256×256 corpus passes **96 streams, 1,552 pictures and 288
+local decoder checks**. Live NVDEC checks all **1,456 real pictures / 118,530,048
+I420 bytes**, plus counts 96 discarded completion fences. The report preserves
+**270 timing trials**, source/build/binary hashes and a full input index. Every
+case loses to the native CPU in both measured metrics, including native uploads,
+prepared inputs and finite 64-job batching. See its README for the exact scope.
+
+The larger source-pinned follow-up passes **48 streams, 776 pictures and 144
+local checks**. NVDEC verifies all **728 real pictures / 323,162,112 I420 bytes**,
+plus counts 48 discarded fences. Its report contains **160 further timing
+trials**. Together the two corpora cover 144 hardware jobs, 2,328 decoded
+pictures, 2,184 complete real-picture readbacks and 430 timing trials. There is
+no decoder elapsed-time win. The 512×512/64-stage synthetic recurrence consumes
+14.6% less measured host process CPU than the shared-filter portable baseline,
+but finishes 6.19× slower; other cases lose both metrics. A further **60 CPU-only
+trials** test portable, native and native/unrolled builds of both CPU kernels.
+The narrow gap survives: **70.078 ms NVDEC versus 81.703 ms CPU** process time
+(14.2% less), but **509.032 versus 81.840 ms** elapsed (6.22× slower). All 636
+initial/warmup/timed tuning calls match exact outputs. These findings do not
+establish energy savings or application-throughput gains.
+
+This milestone's shared compiler suite passes **178 tests**; decoder-core passes
+**82 tests**, with no skips. Explicit High level 5.1 adds normative resource
+checks and enables arbitrary 512×512 PCM at the tested 30 fps. Default level 3.1
+bytes remain unchanged. Spatial field validation now uses the writer's true
+motion limits rather than the frontend's smaller historical bound. Nine tests
+cover a stronger CPU recurrence which shares separable half-sample calculations;
+three integration tests compare all six workloads against the IR and FFmpeg.
+The generic CPU kernel's seven tests and the native serializer's thirteen tests
+also pass. Native address/undefined-behavior checks cover the new serializers
+and recurrence kernel; the generic CPU tests pass under UBSan.
+
 ## Larger inputs and resident decoder requests
 
 The complete shared compiler suite passes **172 tests in 42.737 s, with no

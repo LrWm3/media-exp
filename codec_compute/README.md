@@ -46,6 +46,9 @@ dense polarity maps, and stereo cost candidates.
 The [resident runtime experiment](workloads/resident/README.md) adds explicit
 High level 4.1 for 256×256 input uploads and sequential NVDEC requests through
 one live pipeline, with tiny counted IDR fences and exact output validation.
+The [CPU comparison](workloads/cpu_comparison/README.md) tests optimized CPU
+kernels against warm decoding, native input serialization, retained intermediate
+chains and finite batches, with separate elapsed and process-CPU measurements.
 
 ## Run locally
 
@@ -111,11 +114,11 @@ on HEVC or AV1. See the
 
 ## Block routing and explicit H.264 sampling
 
-For larger uploads, pass `h264_level=41` to `compile` or `compile_graph`.
-The default `31` preserves existing valid stream bytes. Both supported levels
-have checked resource limits; level 4.1 additionally uses conservative per-AU
-bitrate caps. This enables the tested 256×256 byte inputs, without promising
-arbitrary image sizes. See [level constraints](../decoder_core/LEVELS.md).
+For larger uploads, pass `h264_level=41` or `h264_level=51` to `compile` or
+`compile_graph`. The default `31` preserves existing valid stream bytes. All
+three supported levels have checked resource limits; levels 4.1 and 5.1 also
+use conservative per-AU bitrate caps. These enable the tested 256×256 and
+512×512 byte inputs, respectively, without promising arbitrary image sizes. See [level constraints](../decoder_core/LEVELS.md).
 
 `with program.session(helper="/path/to/nvdec_decode") as session:` keeps an
 NVDEC process and pipeline alive; `session.run(inputs)` returns named image
@@ -160,8 +163,9 @@ prediction. The compiler schedules their parent references, then applies those
 physical frame identities to every block; each block has its own motion vectors.
 Gather or sampling results can also fold into affine arithmetic and threshold
 sequences. Nested motion/filter stages remain separate, as do named sampled
-outputs. Motion is bounded to ±508 quarter pixels per component. Fields are
-compile-time constants: changing them requires compiling a new prediction tail.
+outputs. Motion follows the shared writer limits: horizontal quarter-pixel
+components lie in `[-8192, 8191]`, vertical components in `[-2048, 2047]`.
+Fields are compile-time constants: changing them requires compiling a new prediction tail.
 Manifests include `spatial_read_fusion` decisions and prediction slice counts.
 
 The HEVC backend was implemented independently using lossless libx265 uploads,
