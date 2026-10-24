@@ -270,8 +270,10 @@ class Writer:
         b.u(0)  # redundant_pic_cnt_present_flag
         return sps + nal(8, b)
 
-    def header(self, address, frame, operation=None):
+    def header(self, address, frame, operation=None, *, idr_pic_id=0):
         self._validate_frame(frame)
+        if type(idr_pic_id) is not int or not 0 <= idr_pic_id <= 65535:
+            raise ValueError("idr_pic_id must be an integer from 0 through 65535")
         b = Bits()
         sources = operation.sources if operation else ()
         if operation is not None:
@@ -282,7 +284,9 @@ class Writer:
         b.u(frame % 65536, 16)
         idr = not sources and frame == 0
         if idr:
-            b.ue(0)  # idr_pic_id
+            b.ue(idr_pic_id)
+        elif idr_pic_id:
+            raise ValueError("idr_pic_id applies only to IDR pictures")
         b.u((2 * frame) % 65536, 16)
         if len(sources) == 2:
             b.u(1)  # direct_spatial_mv_pred_flag (direct mode unused)

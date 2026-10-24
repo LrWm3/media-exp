@@ -32,7 +32,7 @@ class H264Program:
     suffix = ".h264"
     movements = {"shift", "gather", "sample_h264", "gather_h264"}
 
-    def __init__(self, graph, *, fuse_shifts=True):
+    def __init__(self, graph, *, fuse_shifts=True, level_idc=31):
         consumers = defaultdict(list)
         for node in graph.nodes:
             for arg in node.args:
@@ -49,7 +49,7 @@ class H264Program:
                     and consumers[node] and all(user.op in scalar for user in consumers[node])}
         baseline_error, baseline_cost = None, None
         try:
-            baseline = self._build(graph, set())
+            baseline = self._build(graph, set(), level_idc=level_idc)
             if fuse_shifts and eligible:
                 baseline_cost = baseline._cost()
         except UnsupportedOperation as error:
@@ -62,7 +62,7 @@ class H264Program:
                  "reason": "disabled" if not fuse_shifts else "no eligible shifts"}
         if fuse_shifts and eligible:
             try:
-                candidate = self._build(graph, eligible)
+                candidate = self._build(graph, eligible, level_idc=level_idc)
                 candidate_cost = candidate._cost()
             except UnsupportedOperation as error:
                 if baseline is None:
@@ -137,7 +137,7 @@ class H264Program:
                 "output_readback_pictures": len(set(self.output_frames.values()))}
 
     @classmethod
-    def _build(cls, graph, fused):
+    def _build(cls, graph, fused, *, level_idc=31):
         self = cls.__new__(cls)
         legacy = _legacy()
         if len(graph.inputs) > 15:
@@ -208,7 +208,7 @@ class H264Program:
                            for source in block.sources
                            for value in (4 * source.dx + source.qx, 4 * source.dy + source.qy)), default=0)
             self.writer = Writer(self.width, self.height, reference_slots=self.reference_slots,
-                                 slice_mode="row", motion_bits=max(4, maximum.bit_length()))
+                                 slice_mode="row", motion_bits=max(4, maximum.bit_length()), level_idc=level_idc)
         except (ValueError, legacy.CompileError) as error:
             raise UnsupportedOperation(self.target, "resources", str(error)) from error
         self.pictures = len(graph.inputs) + len(self.operations)
@@ -239,9 +239,30 @@ class H264Program:
         raise UnsupportedOperation("h264", node.op, "no exact lowering implemented")
 
     @cached_property
+    def prediction_units(self):
+        return tuple(self.writer.prediction(frame, operation)
+                     for frame, operation in enumerate(self.operations, len(self.graph_spec.inputs)))
+
+    @cached_property
     def tail(self):
-        return b"".join(self.writer.prediction(frame, operation)
-                        for frame, operation in enumerate(self.operations, len(self.graph_spec.inputs)))
+        return b"".join(self.prediction_units)
+
+    def access_units(self, images):
+        """Keep compiler-known picture boundaries for live decoder submission."""
+        inputs = tuple(self.writer.input_luma(images[node.params[0]], frame)
+                       for frame, node in enumerate(self.graph_spec.inputs))
+        return inputs + self.prediction_units
+
+    @cached_property
+    def fence_unit(self):
+        """One discarded IDR releases the preceding live computation sequence.
+
+        The tested NVDEC path needs a subsequent IDR to release short sequences.
+        A separate runtime fence preserves the ordinary saved stream and IR
+        costs. It is always counted as additional work by resident execution.
+        """
+        from decoder_core.fence import neutral_idr
+        return neutral_idr(self.writer)
 
     def encode_inputs(self, images):
         return b"".join(self.writer.input_luma(images[node.params[0]], frame)
@@ -258,6 +279,7 @@ class H264Program:
 
     def manifest(self):
         return {"target": self.target, "coded_shape": [self.writer.height, self.writer.width],
+                "level_idc": self.writer.level_idc,
                 "output_frames": self.output_frames,
                 "costs": {"input_pictures": len(self.graph_spec.inputs),
                           "computation_pictures": len(self.operations), "total_pictures": self.pictures,

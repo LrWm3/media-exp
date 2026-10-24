@@ -66,10 +66,10 @@ class H264FusionSelectionTests(unittest.TestCase):
         baseline = media.compile_graph(graph, h264_fuse_shifts=False)
         build = H264Program._build.__func__
 
-        def reject_candidate(cls, graph, fused):
+        def reject_candidate(cls, graph, fused, **options):
             if fused:
                 raise media.UnsupportedOperation("h264", "resources", "candidate schedule exhausted reference slots")
-            return build(cls, graph, fused)
+            return build(cls, graph, fused, **options)
 
         with patch.object(H264Program, "_build", classmethod(reject_candidate)):
             selected = media.compile_graph(graph)
@@ -84,10 +84,10 @@ class H264FusionSelectionTests(unittest.TestCase):
         expected = media.compile_graph(graph)
         build = H264Program._build.__func__
 
-        def reject_baseline(cls, graph, fused):
+        def reject_baseline(cls, graph, fused, **options):
             if not fused:
                 raise media.UnsupportedOperation("h264", "resources", "baseline schedule exhausted reference slots")
-            return build(cls, graph, fused)
+            return build(cls, graph, fused, **options)
 
         with patch.object(H264Program, "_build", classmethod(reject_baseline)):
             selected = media.compile_graph(graph)

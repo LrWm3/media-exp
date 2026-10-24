@@ -30,6 +30,9 @@ class Program:
     def decode(self, inputs, *, decoder="ffmpeg"):
         self.graph.validate(inputs)
         result = self.native.decode(inputs, decoder)
+        return self._validate_outputs(result)
+
+    def _validate_outputs(self, result):
         if set(result) != {name for name, _ in self.graph.outputs}:
             raise AssertionError("Decoder did not produce exactly the named outputs")
         for name, node in self.graph.outputs:
@@ -39,6 +42,18 @@ class Program:
             if any(not node.lo <= value <= node.hi for row in board for value in row):
                 raise AssertionError(f"Decoded output {name} violates its proven range")
         return result
+
+    def session(self, *, decoder="nvdec", helper=None, timeout=30):
+        """Keep one decoder pipeline alive across sequential input submissions.
+
+        Only H.264/NVDEC is currently implemented. Close the context to check
+        final hardware diagnostics; each request independently uploads inputs
+        and resets reference state with an IDR. No computation runs on the host.
+        """
+        from .runtime import H264Session
+        if self.target != "h264" or decoder != "nvdec":
+            raise ir.UnsupportedOperation(self.target, "session", "resident execution currently requires H.264/NVDEC")
+        return H264Session(self, helper=helper, timeout=timeout)
 
     def reference(self, inputs):
         return ir.evaluate(self.graph, inputs)
@@ -75,17 +90,17 @@ class Program:
 
 def compile(function, *, target="h264", width=32, height=32, input_ranges=None,
             synthesis=True, synthesis_max_instructions=3, synthesis_max_candidates=50000,
-            h264_fuse_shifts=True):
+            h264_fuse_shifts=True, h264_level=31):
     graph = ir.trace(function, width=width, height=height, input_ranges=input_ranges)
     return compile_graph(graph, target=target, synthesis=synthesis,
                          synthesis_max_instructions=synthesis_max_instructions,
                          synthesis_max_candidates=synthesis_max_candidates,
-                         h264_fuse_shifts=h264_fuse_shifts)
+                         h264_fuse_shifts=h264_fuse_shifts, h264_level=h264_level)
 
 
 def compile_graph(graph, *, target="h264", synthesis=True,
                   synthesis_max_instructions=3, synthesis_max_candidates=50000,
-                  h264_fuse_shifts=True):
+                  h264_fuse_shifts=True, h264_level=31):
     if not isinstance(graph, ir.Graph):
         raise TypeError("compile_graph requires a traced Graph")
     ir.validate_graph(graph)
@@ -95,6 +110,10 @@ def compile_graph(graph, *, target="h264", synthesis=True,
         raise ir.CompileError("synthesis must be Boolean")
     if type(h264_fuse_shifts) is not bool:
         raise ir.CompileError("h264_fuse_shifts must be Boolean")
+    if type(h264_level) is not int or h264_level not in (31, 41):
+        raise ir.CompileError("h264_level must be 31 or 41")
+    if target != "h264" and h264_level != 31:
+        raise ir.CompileError("h264_level applies only to the H.264 target")
     for name, value in (("synthesis_max_instructions", synthesis_max_instructions),
                         ("synthesis_max_candidates", synthesis_max_candidates)):
         if type(value) is not int or value < 0:
@@ -106,7 +125,7 @@ def compile_graph(graph, *, target="h264", synthesis=True,
                                       max_candidates=synthesis_max_candidates)
     if target == "h264":
         from .targets.h264 import H264Program
-        native = H264Program(lowered, fuse_shifts=h264_fuse_shifts)
+        native = H264Program(lowered, fuse_shifts=h264_fuse_shifts, level_idc=h264_level)
     elif target in ("hevc", "h265"):
         from .targets.hevc import HEVCProgram
         native = HEVCProgram(lowered)
