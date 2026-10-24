@@ -13,6 +13,22 @@ from .backend import Program
 from .graph import CompileError
 
 
+def _promote_prediction(operation):
+    """Return an exact legal B prediction, or None when P must stay unary."""
+    source, = operation.sources
+    if operation.denominator:
+        # B adds one divisor bit, so w*x + 0*x at d-1 has P's divisor
+        # and rounding. Equal offsets still average back to the P offset.
+        return replace(operation, sources=(source, replace(source, weight=0)),
+                       denominator=operation.denominator-1)
+    # At d=0, duplication rounds back to the exact integer weighted sum.
+    # H.264 8.4.2.3 restricts B's weight sum to [-128,128] (127 at d=7).
+    # Larger signed P weights therefore cannot be duplicated legally.
+    if -64 <= source.weight <= 64:
+        return replace(operation, sources=(source, source))
+    return None
+
+
 def _slots(operations, input_count):
     """Allocate complete pictures; a last-use picture may be replaced in place."""
     count = input_count + len(operations)
@@ -43,11 +59,13 @@ class PackedProgram(Program):
     Named outputs retain their logical dimensions and independent ranges.
     """
 
-    def __init__(self, original, tiles=8):
+    def __init__(self, original, tiles=8, mixed_predictions=True):
         if not isinstance(original, Program) or isinstance(original, PackedProgram):
             raise CompileError("pack expects an unpacked compiled Program")
         if type(tiles) is not int or not 1 <= tiles <= 16:
             raise CompileError("tiles must be an integer from 1 through 16")
+        if type(mixed_predictions) is not bool:
+            raise CompileError("mixed_predictions must be a bool")
         for op in original.operations:
             if op.block_offsets or op.block_operations:
                 raise CompileError("Packing does not yet support per-block motion or predictions")
@@ -55,6 +73,7 @@ class PackedProgram(Program):
                    for value in (4*ref.dx+ref.qx, 4*ref.dy+ref.qy)):
                 raise CompileError("Packing requires integer motion within its 16-pixel halo")
         self.original = original
+        self.mixed_predictions = mixed_predictions
         for name in ("width", "height", "named_inputs", "input_range", "binary_input",
                      "input_ranges", "input_count", "graph", "graph_outputs"):
             setattr(self, name, getattr(original, name))
@@ -73,19 +92,34 @@ class PackedProgram(Program):
         locations = {frame: (frame, 0) for frame in range(self.input_count)}
         pending = dict(enumerate(original.operations, self.input_count))
         self.operations, self.groups = [], []
+        promotions = mixed_pictures = 0
         while pending:
             ready = [frame for frame, op in pending.items()
                      if all(source.frame in locations for source in op.sources)]
             if not ready:
                 raise CompileError("Prediction graph has an unresolved dependency")
             arity = len(pending[ready[0]].sources)
-            group = [frame for frame in ready if len(pending[frame].sources) == arity][:tiles]
+            group = (ready[:tiles] if mixed_predictions else
+                     [frame for frame in ready if len(pending[frame].sources) == arity][:tiles])
+            if (any(len(pending[frame].sources) == 2 for frame in group) and
+                    any(len(pending[frame].sources) == 1 and _promote_prediction(pending[frame]) is None
+                        for frame in group)):
+                # Keep an unrepresentable unary prediction in a P picture,
+                # using the same stable homogeneous rule as disabled mixing.
+                group = [frame for frame in ready if len(pending[frame].sources) == arity][:tiles]
+            arities = {len(pending[frame].sources) for frame in group}
+            mixed = len(arities) > 1
+            mixed_pictures += mixed
             physical = self.input_count + len(self.operations)
             children = []
             # Source locations are looked up before publishing any result in
             # this group: a picture cannot read its own unfinished pixels.
             for tile, frame in enumerate(group):
                 op, target = pending[frame], self.tiles[tile]
+                if mixed and len(op.sources) == 1:
+                    # Keep a pure-P picture unary to avoid needless B syntax.
+                    op = _promote_prediction(op)
+                    promotions += 1
                 sources = []
                 for source in op.sources:
                     source_frame, source_tile = locations[source.frame]
@@ -135,7 +169,9 @@ class PackedProgram(Program):
             raise CompileError(str(error)) from error
         self.stats = {"original_pictures": original.pictures, "tile_capacity": tiles,
                       "peak_live_values": peak, "scheduled_operations": len(original.operations),
-                      "packed_prediction_pictures": len(self.operations)}
+                      "packed_prediction_pictures": len(self.operations),
+                      "mixed_predictions": mixed_predictions, "p_to_b_promotions": promotions,
+                      "mixed_prediction_pictures": mixed_pictures}
 
     @cached_property
     def costs(self):
@@ -222,6 +258,6 @@ class PackedProgram(Program):
         return outputs
 
 
-def pack(program, tiles=8):
-    """Pack independent predictions; fewer pictures can still mean more work."""
-    return PackedProgram(program, tiles)
+def pack(program, tiles=8, mixed_predictions=True):
+    """Pack ready predictions; disable mixing to retain separate P/B groups."""
+    return PackedProgram(program, tiles, mixed_predictions)
