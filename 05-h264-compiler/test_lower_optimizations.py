@@ -45,7 +45,10 @@ class LowerOptimizationTests(unittest.TestCase):
         )
         for name, kernel, reference, gates, kind, duplicates in cases:
             with self.subTest(case=name):
-                program = h264.compile(kernel, 16, 16, input_ranges=dict.fromkeys(inputs, (0, 1)))
+                # Exercise this gate-selection pass independently of the
+                # earlier semantic IR pass, which now proves these identities.
+                program = h264.compile(kernel, 16, 16, input_ranges=dict.fromkeys(inputs, (0, 1)),
+                                       semantic_ir=False)
                 expected = {"output": [[reference(*(inputs[name][y][x] for name in inputs))
                                          for x in range(16)] for y in range(16)]}
                 self.assertEqual(program.stats["lowered_instructions"], gates)

@@ -17,7 +17,9 @@ class Instruction:
     graph_id: int
 
 
-def lower(sources, outputs, optimize=True, exact_search=True):
+def lower(sources, outputs, optimize=True, exact_search=True, semantic_ir=True):
+    from .ir import BooleanValues
+    semantic = BooleanValues() if optimize and semantic_ir else None
     canonical, interned, original_keys, ranks = {}, {}, {}, {}
     original = postorder(outputs.values())
     rewrites = dict.fromkeys(("cse_eliminated", "commutative_cse_eliminated",
@@ -26,7 +28,7 @@ def lower(sources, outputs, optimize=True, exact_search=True):
                              "boolean_nodes_fused",
                              "affine_nodes_fused", "identity_affines_eliminated",
                              "threshold_negative_two_p"), 0)
-    for item in original:
+    for original_id, item in enumerate(original):
         args, params = tuple(canonical[arg] for arg in item.args), item.params
         if (optimize and item.op == "weighted" and params == (-1, 1) and
                 args[0].op == "weighted" and args[0].params == (-1, 1)):
@@ -46,8 +48,9 @@ def lower(sources, outputs, optimize=True, exact_search=True):
             if original_keys[key] != original_key:
                 rewrites["commutative_cse_eliminated"] += 1
         else:
-            canonical[item] = interned[key] = Image(item.op, args, params, item.lo, item.hi)
-            ranks[canonical[item]] = len(ranks)
+            value = Image(item.op, args, params, item.lo, item.hi)
+            canonical[item] = interned[key] = semantic.rewrite(value, original_id) if semantic else value
+            ranks.setdefault(canonical[item], len(ranks))
             original_keys[key] = original_key
     roots = {name: canonical[item] for name, item in outputs.items()}
     graph = postorder(roots.values())
@@ -59,7 +62,8 @@ def lower(sources, outputs, optimize=True, exact_search=True):
     search = None
     if optimize and exact_search:
         from .search import ExactSearch
-        search = ExactSearch(graph, named, lambda sources, outputs: lower(sources, outputs, exact_search=False))
+        search = ExactSearch(graph, named, lambda sources, outputs: lower(
+            sources, outputs, exact_search=False, semantic_ir=False))
     for index, source in enumerate(sources):
         if source in canonical:
             produced[canonical[source]] = index
@@ -121,6 +125,8 @@ def lower(sources, outputs, optimize=True, exact_search=True):
         limits = (-128, 127) if len(args) == 1 else (-64, 63)
         if not 1 <= len(args) <= 2 or any(not limits[0] <= w <= limits[1] for w in weights):
             return False
+        if len(args) == 2 and not -64 <= sum(weights) <= 64:
+            return False  # B hardware weights are doubled at denominator zero.
         if saturating:
             return -128 <= bias <= 127
         first_bias = max(-128, min(127, bias))
@@ -183,6 +189,8 @@ def lower(sources, outputs, optimize=True, exact_search=True):
 
     def emit(label, operands, weights, bias=0, denominator=0, graph_id=0, block_offsets=()):
         nonlocal next_value
+        if len(operands) == 2 and not -128 <= sum(weights) <= (127 if denominator == 7 else 128):
+            raise CompileError("B-prediction weight sum exceeds H.264 limits")
         refs = tuple(replace(ref, weight=weight, offset=bias) for ref, weight in zip(operands, weights))
         instructions.append(Instruction(next_value, Operation(label, refs, denominator, block_offsets), graph_id))
         next_value += 1
@@ -306,15 +314,29 @@ def lower(sources, outputs, optimize=True, exact_search=True):
     # A frontier can change an older fusion opportunity. Check the whole graph
     # as well as each isolated cut so enabling search never adds instructions.
     if proofs:
-        baseline = lower(sources, outputs, optimize=optimize, exact_search=False)
+        baseline = lower(sources, outputs, optimize=optimize, exact_search=False,
+                         semantic_ir=semantic_ir)
         if len(instructions) >= len(baseline[0]):
             baseline[3]["exact_search_enabled"] = True
             baseline[3]["exact_search_attempts"] = search.attempts
             return baseline
-    return instructions, {name: produced[item] for name, item in roots.items()}, graph, {
+    stats = {
         "reachable_nodes_before_cse": len(original), "graph_nodes": len(graph), **rewrites,
         "exact_search_enabled": bool(search), "exact_search_attempts": search.attempts if search else 0,
         "exact_search_rewrites": len(proofs), "exact_search_proofs": proofs,
         "exact_search_saved_instructions": (len(baseline[0]) - len(instructions)) if proofs else 0,
-        "fused_shift_nodes": len(fused), "lowered_instructions": len(instructions)}, {
+        "fused_shift_nodes": len(fused), "lowered_instructions": len(instructions),
+        "semantic_ir_enabled": bool(semantic), "semantic_ir_saved_instructions": 0,
+        **(semantic.stats() if semantic else BooleanValues().stats())}
+    if semantic and semantic.proofs:
+        # Sharing can obstruct later fusion. Retain the old instruction plan
+        # whenever semantic canonicalization would increase scalar work.
+        previous = lower(sources, outputs, optimize=optimize, exact_search=exact_search,
+                         semantic_ir=False)
+        if len(instructions) > len(previous[0]):
+            previous[3].update({"semantic_ir_enabled": True,
+                                "semantic_ir_rejected_rewrites": len(semantic.proofs)})
+            return previous
+        stats["semantic_ir_saved_instructions"] = len(previous[0])-len(instructions)
+    return instructions, {name: produced[item] for name, item in roots.items()}, graph, stats, {
         name: ids[item] for name, item in roots.items()}
