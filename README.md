@@ -36,6 +36,12 @@ Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 
 The experiments use the shared [H.264 writer and decoder tools](decoder_core).
 
+[Multi-codec compute IR](codec_compute/README.md): an isolated extension preserves
+the H.264 compiler, adds resident HEVC weighted-prediction programs and an AV1
+copy/translation/average target, and separates exact image semantics from
+codec-specific instruction selection and reference scheduling. Includes real
+decoder validation, explicit unsupported operations, and reusable computation tails.
+
 [NVDEC validation](05-h264-compiler/native_ops/nvdec/README.md):
 34 cases and 6,116 decoded pictures matched exactly on NVDEC, including all
 four compiled experiments. Captures, timings, and reproduction commands included.

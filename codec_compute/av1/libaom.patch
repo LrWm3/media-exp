@@ -1,0 +1,81 @@
+diff --git a/av1/encoder/encodeframe.c b/av1/encoder/encodeframe.c
+index 215b571..7140c6d 100644
+--- a/av1/encoder/encodeframe.c
++++ b/av1/encoder/encodeframe.c
+@@ -2368,7 +2368,13 @@ static inline void encode_frame_internal(AV1_COMP *cpi) {
+  *
+  * \param[in]    cpi    Top-level encoder structure
+  */
++extern int codec_compute_mode;
+ void av1_encode_frame(AV1_COMP *cpi) {
++  cpi->sf.part_sf.partition_search_type = FIXED_PARTITION;
++  cpi->sf.part_sf.fixed_partition_size = BLOCK_16X16;
++  cpi->sf.rt_sf.use_fast_fixed_part = 0;
++  cpi->sf.rt_sf.use_comp_ref_nonrd = codec_compute_mode == 2;
++
+   AV1_COMMON *const cm = &cpi->common;
+   CurrentFrame *const current_frame = &cm->current_frame;
+   FeatureFlags *const features = &cm->features;
+diff --git a/av1/encoder/nonrd_pickmode.c b/av1/encoder/nonrd_pickmode.c
+index fd01565..f55e8f9 100644
+--- a/av1/encoder/nonrd_pickmode.c
++++ b/av1/encoder/nonrd_pickmode.c
+@@ -3201,6 +3201,9 @@ static inline bool enable_palette(AV1_COMP *cpi, bool is_mode_intra,
+  * in this function. The rd_cost struct is also updated with the RD stats
+  * corresponding to the best mode found.
+  */
++/* Compiler controls: 0=input, 1=copy/translation, 2=rounded average. */
++extern int codec_compute_mode, codec_compute_dx, codec_compute_dy;
++
+ void av1_nonrd_pick_inter_mode_sb(AV1_COMP *cpi, TileDataEnc *tile_data,
+                                   MACROBLOCK *x, RD_STATS *rd_cost,
+                                   BLOCK_SIZE bsize, PICK_MODE_CONTEXT *ctx) {
+@@ -3295,6 +3298,34 @@ void av1_nonrd_pick_inter_mode_sb(AV1_COMP *cpi, TileDataEnc *tile_data,
+ #endif
+   );
+ 
++  if (codec_compute_mode) {
++    const int compound = codec_compute_mode == 2;
++    init_mbmi_nonrd(mi, compound ? GLOBAL_GLOBALMV : NEWMV,
++                    LAST_FRAME, compound ? ALTREF_FRAME : NONE_FRAME, cm);
++    mi->tx_size = TX_4X4;
++    mi->skip_txfm = 1;
++    mi->skip_mode = 0;
++    mi->mv[0].as_mv.row = codec_compute_dy * 8;
++    mi->mv[0].as_mv.col = codec_compute_dx * 8;
++    mi->comp_group_idx = 0;
++    mi->compound_idx = 1;
++    mi->interinter_comp.type = COMPOUND_AVERAGE;
++    if (compound) {
++      int unused;
++      setup_compound_prediction(cm, x, search_state.yv12_mb,
++                                search_state.use_ref_frame_mask,
++                                mi->ref_frame, &unused);
++    }
++    x->reuse_inter_pred = 0;
++    txfm_info->skip_txfm = 1;
++    memset(ctx->blk_skip, 1, sizeof(ctx->blk_skip[0]) * ctx->num_4x4_blk);
++    av1_init_rd_stats(rd_cost);
++    rd_cost->skip_txfm = 1;
++    store_coding_context_nonrd(x, ctx);
++    set_ref_ptrs(cm, xd, mi->ref_frame[0], mi->ref_frame[1]);
++    return;
++  }
++
+   if (rt_sf->use_comp_ref_nonrd && is_comp_ref_allowed(bsize)) {
+     // Only search compound if bsize \gt BLOCK_16X16.
+     if (bsize > BLOCK_16X16) {
+diff --git a/av1/encoder/partition_search.c b/av1/encoder/partition_search.c
+index 53c14fc..cbf1fca 100644
+--- a/av1/encoder/partition_search.c
++++ b/av1/encoder/partition_search.c
+@@ -2305,7 +2305,8 @@ static void pick_sb_modes_nonrd(AV1_COMP *const cpi, TileDataEnc *tile_data,
+   av1_set_error_per_bit(&x->errorperbit, x->rdmult);
+   // Find best coding mode & reconstruct the MB so it is available
+   // as a predictor for MBs that follow in the SB
+-  if (frame_is_intra_only(cm)) {
++  extern int codec_compute_mode;
++  if (frame_is_intra_only(cm) || !codec_compute_mode) {
+ #if CONFIG_COLLECT_COMPONENT_TIMING
+     start_timing(cpi, hybrid_intra_mode_search_time);
+ #endif
