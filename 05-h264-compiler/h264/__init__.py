@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from .graph import (CompileError, Image, Input, kernel, shift, weighted, combine, add,
+                    sample, gather, saturating_add, saturating_weighted, saturating_combine,
                     threshold, bit_not, bit_or, bit_and, equal, repeat,
                     binary_dot, conv2d_binary)
 from .backend import Program, compile
@@ -13,3 +14,4 @@ from .backend import Program, compile
 __all__ = ["CompileError", "Image", "Input", "kernel", "shift", "weighted", "combine",
            "add", "threshold", "bit_not", "bit_or", "bit_and", "equal", "repeat",
            "binary_dot", "conv2d_binary", "Program", "compile"]
+__all__ += ["sample", "gather", "saturating_add", "saturating_weighted", "saturating_combine"]

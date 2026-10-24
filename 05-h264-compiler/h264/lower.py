@@ -1,6 +1,6 @@
 """Select exact P/B predictions and fuse single shifted reads, never nested shifts."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from decoder_core.bitstream import Operation, Source
 from .graph import CompileError, Image, postorder, bounds
@@ -13,7 +13,7 @@ class Instruction:
     graph_id: int
 
 
-def lower(source, outputs, optimize=True):
+def lower(sources, outputs, optimize=True):
     graph, canonical, interned = [], {}, {}
     original = postorder(outputs.values())
     # Intern only identical expressions; rounding/clipping algebra is not rewritten.
@@ -27,31 +27,32 @@ def lower(source, outputs, optimize=True):
             canonical[item] = interned[key] = new
             graph.append(new)
     roots = {name: canonical[item] for name, item in outputs.items()}
-    source = canonical.get(source)
     ids = {item: index for index, item in enumerate(graph)}
     instructions, produced, fused = [], {}, set()
-    if source is not None:
-        produced[source] = 0
-    next_value = 1
+    for index, source in enumerate(sources):
+        if source in canonical:
+            produced[canonical[source]] = index
+    next_value = len(sources)
 
     def shifted(arg):
-        return optimize and arg.op == "shift"
+        return optimize and arg.op in ("shift", "sample")
 
     def dependencies(item):
-        if item.op == "shift":
-            return item.args  # Materialize inner shift: crop boundaries are observable.
+        if item.op in ("shift", "sample", "gather"):
+            return item.args  # Materialize inner movement: crop/filter boundaries are observable.
         return tuple(arg.args[0] if shifted(arg) else arg for arg in item.args)
 
     def read(arg, fold=True):
         if fold and shifted(arg):
             fused.add(arg)
-            return Source(produced[arg.args[0]], dx=arg.params[0], dy=arg.params[1])
+            fields = ("dx", "dy") if arg.op == "shift" else ("qx", "qy")
+            return Source(produced[arg.args[0]], **dict(zip(fields, arg.params)))
         return Source(produced[arg])
 
-    def emit(label, operands, weights, bias=0, denominator=0, graph_id=0):
+    def emit(label, operands, weights, bias=0, denominator=0, graph_id=0, block_offsets=()):
         nonlocal next_value
-        refs = tuple(Source(ref.frame, weight, bias, ref.dx, ref.dy) for ref, weight in zip(operands, weights))
-        instructions.append(Instruction(next_value, Operation(label, refs, denominator), graph_id))
+        refs = tuple(replace(ref, weight=weight, offset=bias) for ref, weight in zip(operands, weights))
+        instructions.append(Instruction(next_value, Operation(label, refs, denominator, block_offsets), graph_id))
         next_value += 1
         return Source(next_value-1)
 
@@ -61,12 +62,15 @@ def lower(source, outputs, optimize=True):
         limits = (-128, 127) if len(refs) == 1 else (-64, 63)
         if any(not limits[0] <= weight <= limits[1] for weight in weights):
             raise CompileError(f"{item.op} coefficient cannot be represented by a single prediction")
-        if optimize and len(refs) == 1 and weights == (1,) and bias == 0 and not (refs[0].dx or refs[0].dy):
+        if optimize and len(refs) == 1 and weights == (1,) and bias == 0 and not (refs[0].dx or refs[0].dy or refs[0].qx or refs[0].qy):
             return refs[0]
+        saturating = item.op.startswith("saturating_")
+        if saturating and not -128 <= bias <= 127:
+            raise CompileError("Saturating affine bias must lie in [-128,127]; splitting would change clipping")
         first_bias = max(-128, min(127, bias))
         lo = sum(bounds(arg, w)[0] for arg, w in zip(item.args, weights)) + first_bias
         hi = sum(bounds(arg, w)[1] for arg, w in zip(item.args, weights)) + first_bias
-        if not 0 <= lo <= hi <= 255:
+        if not saturating and not 0 <= lo <= hi <= 255:
             raise CompileError("Splitting affine bias would clip an intermediate; this form is not supported")
         hardware_weights = weights if len(refs) == 1 else tuple(2*w for w in weights)
         result = emit(item.op, refs, hardware_weights, first_bias, graph_id=ids[item])
@@ -114,7 +118,15 @@ def lower(source, outputs, optimize=True):
             ref = read(item.args[0], fold=False)
             ref = Source(ref.frame, dx=item.params[0], dy=item.params[1])
             result = emit("shift", [ref], [1], graph_id=ids[item])
-        elif item.op in ("weighted", "combine"):
+        elif item.op in ("sample", "gather"):
+            ref = read(item.args[0], fold=False)
+            offsets = ()
+            if item.op == "sample":
+                ref = replace(ref, qx=item.params[0], qy=item.params[1])
+            else:
+                offsets = item.params[0]
+            result = emit(item.op, [ref], [1], graph_id=ids[item], block_offsets=offsets)
+        elif item.op in ("weighted", "combine", "saturating_weighted", "saturating_combine"):
             result = affine(item)
         elif item.op == "threshold":
             result = compare(item)

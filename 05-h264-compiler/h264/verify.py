@@ -1,12 +1,66 @@
 """Independent graph semantics and actual decoded-picture extraction."""
 
 
+def clip(value):
+    return min(255, max(0, value))
+
+
+def interpolate(plane, width, height, x_q, y_q):
+    """H.264 8.4.2.2.1 luma interpolation at an absolute quarter-pel position.
+
+    The flat plane contains only the active image. The coded picture surrounds
+    it with a zero guard, whose outer edges also extend as zero. Consequently
+    every integer sample outside the active image is zero, at any distance.
+    Python divmod supplies the required floor for negative motion coordinates.
+    """
+    x, fx = divmod(x_q, 4)
+    y, fy = divmod(y_q, 4)
+    taps = (1, -5, 20, 20, -5, 1)
+
+    def pixel(px, py):
+        return plane[py*width+px] if 0 <= px < width and 0 <= py < height else 0
+
+    def horizontal_raw(px, py):
+        return sum(weight*pixel(px+offset-2, py) for offset, weight in enumerate(taps))
+
+    def half(hx, hy):
+        """Sample the 3x3 half-pel grid around (x, y)."""
+        px, py = x+hx//2, y+hy//2
+        if hx != 1 and hy != 1:
+            return pixel(px, py)
+        if hy != 1:
+            return clip((horizontal_raw(px, py)+16) >> 5)
+        if hx != 1:
+            return clip((sum(weight*pixel(px, py+offset-2)
+                             for offset, weight in enumerate(taps))+16) >> 5)
+        # Keep the complete first six-tap sum: clipping or rounding between
+        # horizontal and vertical passes changes diagonal half-pel samples.
+        total = sum(weight*horizontal_raw(px, py+offset-2)
+                    for offset, weight in enumerate(taps))
+        return clip((total+512) >> 10)
+
+    if fx % 2 == 0 and fy % 2 == 0:
+        return half(fx//2, fy//2)
+    if fx % 2 and fy % 2:
+        # The four diagonal quarter-pels average perpendicular half-pels,
+        # not an integer sample and the diagonal half-pel.
+        first, second = half(1, 2 if fy == 3 else 0), half(2 if fx == 3 else 0, 1)
+    elif fx % 2:
+        first, second = half(fx//2, fy//2), half(fx//2+1, fy//2)
+    else:
+        first, second = half(fx//2, fy//2), half(fx//2, fy//2+1)
+    return (first+second+1) >> 1
+
+
 def evaluate(graph, outputs, image):
-    height, width = len(image), len(image[0])
+    boards = image if isinstance(image, dict) else None
+    first = next(iter(boards.values())) if boards is not None else image
+    height, width = len(first), len(first[0])
     planes = {}
     for item in graph:
         if item.op == "input":
-            result = bytearray(value for row in image for value in row)
+            board = boards[item.params[0]] if boards is not None else image
+            result = bytearray(value for row in board for value in row)
         elif item.op == "shift":
             dx, dy = item.params
             source = planes[item.args[0]]
@@ -16,12 +70,26 @@ def evaluate(graph, outputs, image):
                     for x in range(width):
                         if 0 <= x+dx < width:
                             result[y*width+x] = source[(y+dy)*width+x+dx]
+        elif item.op in ("sample", "gather"):
+            source = planes[item.args[0]]
+            result = bytearray(width*height)
+            for y in range(height):
+                for x in range(width):
+                    qx, qy = (item.params if item.op == "sample"
+                              else item.params[0][(y//16)*(width//16)+x//16])
+                    result[y*width+x] = interpolate(source, width, height, 4*x+qx, 4*y+qy)
         elif item.op == "weighted":
             weight, bias = item.params
             result = bytearray(weight*value+bias for value in planes[item.args[0]])
         elif item.op == "combine":
             wa, wb, bias = item.params
             result = bytearray(wa*a+wb*b+bias for a, b in zip(planes[item.args[0]], planes[item.args[1]]))
+        elif item.op == "saturating_weighted":
+            weight, bias = item.params
+            result = bytearray(clip(weight*value+bias) for value in planes[item.args[0]])
+        elif item.op == "saturating_combine":
+            wa, wb, bias = item.params
+            result = bytearray(clip(wa*a+wb*b+bias) for a, b in zip(planes[item.args[0]], planes[item.args[1]]))
         elif item.op == "threshold":
             result = bytearray(int(value >= item.params[0]) for value in planes[item.args[0]])
         else:
