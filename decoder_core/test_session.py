@@ -40,6 +40,9 @@ submitted=copied=requests=0
 while True:
     op,ident,n,k,fence,res=h.unpack(read(h.size))
     if op==2:
+        if mode=='workerclose':
+            os.write(2,b'NVDEC_DECODE_ERROR: test final fence drain failure\n')
+            sys.exit(23)
         send(h.pack(magic,ident,submitted,copied,requests,0))
         if mode=='diagnostic':print('ErrorType= 1 Decoded MBs= 1 Concealed MBs= 0 FrameDecodeTime 0',file=sys.stderr)
         if mode=='partial':os.write(1,b'BLOCKING MODE \n')
@@ -147,6 +150,14 @@ class SessionTests(unittest.TestCase):
             with self.subTest(mode=mode), self.assertRaisesRegex(RuntimeError, 'diagnostic'):
                 with NVDECSession(16, 16, helper=self.helper(mode)) as session:
                     session.submit((_IDR,), fence=_FENCE)
+
+    def test__given_worker_failure_before_close_reply__when_cleanup_drains_stderr__then_native_error_survives(self):
+        with self.assertRaisesRegex(RuntimeError, 'test final fence drain failure'):
+            with NVDECSession(16, 16, helper=self.helper('workerclose')) as session:
+                session.submit((_IDR,), fence=_FENCE)
+        self.assertEqual(session._process.returncode, 23)
+        with self.assertRaisesRegex(RuntimeError, 'closed or poisoned'):
+            session.submit((_IDR,), fence=_FENCE)
 
 
 if __name__ == '__main__':

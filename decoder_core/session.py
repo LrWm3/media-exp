@@ -116,6 +116,7 @@ class NVDECSession:
             raise RuntimeError('Build decoder_core/build_nvdec.sh or supply an executable NVDEC helper')
         self._socket, child = socket.socketpair()
         self._process = None
+        self._failure_exit_status = None
         self._threads = []
         try:
             self._process = subprocess.Popen(
@@ -130,9 +131,10 @@ class NVDECSession:
             if hello != (_MAGIC, 1, width, height, self.frame_bytes, _LIMIT):
                 raise RuntimeError('Invalid NVDEC session handshake')
             self._stats['pipeline_starts'] = 1
-        except BaseException:
+        except BaseException as error:
             child.close()
             self._abort()
+            self._raise_worker_error(error)
             raise
 
     def _drain(self, index, pipe):
@@ -251,8 +253,9 @@ class NVDECSession:
                                input_bytes=self._stats['input_bytes'] + total_bytes)
             self._validate_logs(final=False)
             return result
-        except BaseException:
+        except BaseException as error:
             self._abort()
+            self._raise_worker_error(error)
             raise
         finally:
             self._lock.release()
@@ -272,7 +275,11 @@ class NVDECSession:
         self._closed = True
         self._socket.close()
         if self._process is not None:
-            if self._process.poll() is None:
+            try:
+                # EOF may precede waitpid readiness by a few scheduling ticks.
+                # Let an already-exiting worker preserve its real status/logs.
+                self._failure_exit_status = self._process.wait(timeout=0.2)
+            except subprocess.TimeoutExpired:
                 self._process.kill()
             self._process.wait(timeout=5)
         for thread in self._threads:
@@ -280,6 +287,20 @@ class NVDECSession:
         if self._process is not None:
             for pipe in (self._process.stdout, self._process.stderr):
                 pipe.close()
+
+    def _raise_worker_error(self, original):
+        """Preserve the actual worker failure after pipes finish draining."""
+        if not isinstance(original, (RuntimeError, OSError)):
+            return
+        with self._diagnostic_lock:
+            diagnostic = self._diagnostic_error
+        details = []
+        if diagnostic is not None and diagnostic not in str(original):
+            details.append(diagnostic)
+        if self._failure_exit_status is not None:
+            details.append('worker exit status ' + str(self._failure_exit_status))
+        if details:
+            raise RuntimeError(str(original) + '; ' + '; '.join(details)) from original
 
     def close(self):
         if self._closed:
@@ -306,8 +327,9 @@ class NVDECSession:
             for pipe in (self._process.stdout, self._process.stderr):
                 pipe.close()
             self._closed = True
-        except BaseException:
+        except BaseException as error:
             self._abort()
+            self._raise_worker_error(error)
             raise
         finally:
             self._lock.release()
