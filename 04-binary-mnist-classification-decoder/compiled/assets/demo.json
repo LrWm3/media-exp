@@ -1,0 +1,295 @@
+{
+  "implementation": "shared-h264-compiler",
+  "decoder": "vaapi",
+  "dataset": "checked-in MNIST test fixture",
+  "samples": 16,
+  "classes": [
+    3,
+    8
+  ],
+  "verified": true,
+  "checkpoint_verified": true,
+  "correct": 16,
+  "accuracy": 1.0,
+  "confusion_matrix_rows_true_columns_predicted": [
+    [
+      12,
+      0
+    ],
+    [
+      0,
+      4
+    ]
+  ],
+  "batch_capacity": 8,
+  "batches": 2,
+  "pictures_per_batch": 1826,
+  "stream_bytes": 4211220,
+  "model_sha256": "260525f39a96214890e0044e02a8ba46fdb15865ffdc54ba5b214fe846e45eb7",
+  "instruction_tail_sha256": "109be08fdd5d3b3413b58e99ceed9bba78f04044d55cc5b0dc53956523bb46d2",
+  "stream_sha256": "866c53dd02f500a70fb11f84420bc6c18e2ca5691432ab6f66ddc76e385e0a3a",
+  "decoded_raw_sha256": "4060e1afc792dafa2536a5d2ed05b442f5386b3a8e1e7c7045666ed80dfb4d4c",
+  "instruction_compile_seconds": 0.038225668999075424,
+  "seed_encode_seconds": 3.918755537000834,
+  "decode_and_readback_seconds": 2.3660617070054286,
+  "verify_seconds": 0.0066863040046882816,
+  "predictions": [
+    {
+      "test_index": 18,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 30,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 32,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 44,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 51,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 61,
+      "label": 8,
+      "prediction": 8,
+      "correct": true,
+      "hidden": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "test_index": 63,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 68,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "test_index": 76,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 84,
+      "label": 8,
+      "prediction": 8,
+      "correct": true,
+      "hidden": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "test_index": 87,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 90,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 93,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 110,
+      "label": 8,
+      "prediction": 8,
+      "correct": true,
+      "hidden": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "test_index": 112,
+      "label": 3,
+      "prediction": 3,
+      "correct": true,
+      "hidden": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "test_index": 128,
+      "label": 8,
+      "prediction": 8,
+      "correct": true,
+      "hidden": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    }
+  ],
+  "checkpoint_sha256": "4f19470ffddfd0d99e7d8f47656193214fcf9a476a82aebf64df631c55c46e03"
+}

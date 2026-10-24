@@ -1,0 +1,13 @@
+{
+  "samples": 1984,
+  "original_predictions_csv_sha256": "458db29aa487c8d52457a649b9bf3792f55d97529b795ec7093dedc9b4429f17",
+  "compiled_report_sha256": "0b0f0774a6c5ae07c1c96cff5a0a86c9380c6b1079ea6d8090527fc7296f3b23",
+  "matched_fields": [
+    "test_index",
+    "label",
+    "prediction",
+    "correct",
+    "hidden"
+  ],
+  "every_record_matches": true
+}
