@@ -27,9 +27,7 @@ REPOSITORY = COMPILER.parent
 sys.path[:0] = [str(COMPILER), str(NATIVE_OPS)]
 
 import h264
-from benchmark import inputs as benchmark_inputs, kernels as benchmark_kernels
 from decoder_core.decode import decode
-from demos import cases as demo_cases
 from h264.graph import Image
 from h264.verify import evaluate, read
 
@@ -183,6 +181,8 @@ class Bundle:
 
 
 def prepare_correctness(bundle):
+    from demos import cases as demo_cases
+
     for name, title, kernel, options, inputs in demo_cases():
         bundle.compiled(f"demo-{name}", "native-demo", h264.compile(kernel, **options), inputs, title=title)
 
@@ -247,6 +247,8 @@ def prepare_correctness(bundle):
 
 
 def prepare_benchmarks(bundle):
+    from benchmark import inputs as benchmark_inputs, kernels as benchmark_kernels
+
     config = json.loads((NATIVE_OPS / "benchmark.json").read_text())["configuration"]
     width, height, steps = config["width"], config["height"], config["steps"]
     if steps != 32:
