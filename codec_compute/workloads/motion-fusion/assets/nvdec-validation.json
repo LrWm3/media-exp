@@ -1,0 +1,95 @@
+{
+  "status": "pass",
+  "backend": "nvdec",
+  "suite_sha256": "458905386fb00cc1d7c66519d89c74c992a7a467175d19cbb7e03b34c5561efd",
+  "validator_sha256": "cd28c742b4e9afac4dfb37e292d8523f5e534e517dfd418115550bf1eb845d0c",
+  "decode_module_sha256": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+  "stream_count": 12,
+  "cases": [
+    {
+      "name": "baseline/dilate-zero-0",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 1,
+      "actual_sha256": "c90e4678603c5389f6c79112338244fa3f5548bdda4aa8ca0402d0cfef4e5ed3"
+    },
+    {
+      "name": "baseline/dilate-zero-1",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 1,
+      "actual_sha256": "83939da1dd45318726a41e82ba028e8fd54b05e6b9682f461983d4a401341660"
+    },
+    {
+      "name": "baseline/smooth-zero-0",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 1,
+      "actual_sha256": "7b339bb93c4ddff78174974e7b339f56638de15bff4a8d8bf1cbb24dadd2685e"
+    },
+    {
+      "name": "baseline/smooth-zero-1",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 1,
+      "actual_sha256": "6dc475e989c7cb3a9b84db933ef44942660b2eaf2cc5dfb577608fb2027b9e6f"
+    },
+    {
+      "name": "baseline/local-range-0",
+      "status": "pass",
+      "pictures": 22,
+      "named_outputs": 3,
+      "actual_sha256": "09186052095e14839f63eefdfd67676c7b8477ac182b62f8b30bff346d647e11"
+    },
+    {
+      "name": "baseline/local-range-1",
+      "status": "pass",
+      "pictures": 22,
+      "named_outputs": 3,
+      "actual_sha256": "624046e8a9f5567e06976ccd7b99d2dcc0ea8827e5d94988596ba1ed21d2b7a7"
+    },
+    {
+      "name": "fused/dilate-zero-0",
+      "status": "pass",
+      "pictures": 5,
+      "named_outputs": 1,
+      "actual_sha256": "1bfbbe50d205699a04e094aba2302bcc2c9f49f459eb8c45d90a3fc74c3f71d1"
+    },
+    {
+      "name": "fused/dilate-zero-1",
+      "status": "pass",
+      "pictures": 5,
+      "named_outputs": 1,
+      "actual_sha256": "8f335a02e6d3f1911d562c3e2f75b883c7e60998385857cc13696b32a94e9864"
+    },
+    {
+      "name": "fused/smooth-zero-0",
+      "status": "pass",
+      "pictures": 5,
+      "named_outputs": 1,
+      "actual_sha256": "ef3cce3331521d94e5744e5cec77fe431388502ecd575dd1a4f047bada4df6f3"
+    },
+    {
+      "name": "fused/smooth-zero-1",
+      "status": "pass",
+      "pictures": 5,
+      "named_outputs": 1,
+      "actual_sha256": "08ccd6ffcaf7c19820834bd076c59a5fc0c777f8916105bac47cb8e252b2e08d"
+    },
+    {
+      "name": "fused/local-range-0",
+      "status": "pass",
+      "pictures": 18,
+      "named_outputs": 3,
+      "actual_sha256": "9ce75274e2e754ee32854989c437dd15ba0e888f1a838f1584a9dba1eaac79cc"
+    },
+    {
+      "name": "fused/local-range-1",
+      "status": "pass",
+      "pictures": 18,
+      "named_outputs": 3,
+      "actual_sha256": "77ca71add157c2a1d2dd64688ce77ad247ad05c3b0ae860b88bdc4ecd86f342f"
+    }
+  ],
+  "helper_sha256": "42bdf4c5b2d3eddeb53a3d19324ab8f52eeb487bbc39bf9155f66e65d29ca4f0"
+}

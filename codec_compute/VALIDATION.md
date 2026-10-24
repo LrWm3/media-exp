@@ -5,9 +5,51 @@ v3.12.1 (`10aece4157eb79315da205f39e19bf6ab3ee30d0`). The AV1 serializer
 was built using the documented bootstrap and its second invocation reused the
 cached executable. Video decoders are unmodified.
 
+## Spatial read fusion and temporal benchmarks
+
+The current complete suite passes **133 tests in 29.709 s, with no skips**.
+Sixteen fusion tests cover zero borders, nonzero input minima, successive crops,
+named aliases, shared reads, threshold stages, synthesized extrema, motion limits,
+and fallback after either schedule or stream-cost validation fails. Four
+benchmark protocol tests check independent references, selected readback,
+copy accounting, and artifact validation.
+
+The [spatial comparison](workloads/motion-fusion/README.md) validates both plans
+and both input fixtures: **12 saved streams, 136 pictures, and 36 local checks**
+through FFmpeg, OpenH264, and VA-API. Dilation and smoothing fall from eight to
+four computation pictures; local min/max/range falls from 21 to 17. Named
+outputs remain exact. These are static cost reductions; spatial latency was
+not measured. NVDEC also passes all **12 spatial streams: 136 pictures and
+835,584 full I420 bytes**, matching the software-decoded reference exactly.
+
+The [temporal benchmark](workloads/temporal/README.md) measures four tasks at
+128×128 logical pixels using batches of one and sixteen independent jobs.
+Input serialization, pre-encoded full/selected readback, and a directly timed
+host-input-to-output path have separate measurements. Every task uses the same
+sixteen deterministic input pairs, and every returned picture is checked
+exactly. Reports include raw samples, medians, costs, counters, source hashes,
+and the precise timing boundary. Finite batch throughput includes startup;
+it does not establish persistent-stream latency or concurrent GPU performance.
+
+Each temporal backend, FFmpeg and NVDEC, first validates **64 streams, 320
+pictures, and 12,288,000 I420 bytes**, plus all 112 named output planes.
+Every measured trial also checks all returned bytes. On the NVDEC benchmark
+host, sixteen-job batches measure **43.6–54.0 ms per job** for the complete
+host-input-to-output path, including roughly **19.5–20.2 ms per job** for the
+separately measured serialization mode. The two medians must not be subtracted
+to infer decoder-only time. Selected readback reduces copied pictures without
+a consistent timing improvement. FFmpeg timings come from a different host;
+these measurements are not a controlled software/hardware speed comparison.
+
+```sh
+python3 -m unittest discover -s codec_compute/tests -v
+python3 -m codec_compute.workloads.fusion
+python3 -m codec_compute.workloads.benchmark
+```
+
 ## Shared-IR workload survey
 
-The current complete suite passes **113 tests in 25.769 s, with no skips**.
+At this milestone, the complete suite passed **113 tests in 25.769 s, with no skips**.
 The new `absdiff` semantic operation is synthesized for H.264 and HEVC, verified
 over all 65,536 byte pairs, and decoded across the complete byte-pair domain on
 both targets. It uses three computation pictures. The AV1 average-only library
@@ -33,7 +75,7 @@ reasons. Reproduce with:
 
 ```sh
 python3 -m unittest discover -s codec_compute/tests -v
-python3 -m codec_compute.workloads.demo
+python3 -m codec_compute.workloads.demo --no-h264-fuse-shifts
 ```
 
 The sections below preserve earlier milestone results.

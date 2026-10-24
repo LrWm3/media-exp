@@ -50,3 +50,16 @@ task formulas. It also creates the portable suite for the second command;
 copy the prepared bundle and decoder validator to an NVDEC environment first.
 Full I420 references, including guards and chroma, remain in the regenerated
 bundle under ignored `codec_compute/artifacts/motion-fusion`.
+
+The recorded [comparison](assets/comparison.json) passes **12 saved streams and
+36 local decoder checks**, using FFmpeg, OpenH264, and VA-API. Both plans and
+both fixtures produce identical named output pixels. The
+[suite](assets/suite.json) indexes all **136 pictures** and exact output hashes.
+Saved streams, manifests, and detailed per-plan reports are included under
+`assets`; regenerate the bundle for full I420 references and named output planes.
+Source hashes and commit identify the compilation snapshot.
+
+[NVDEC validation](assets/nvdec-validation.json) also passes all **12 streams**:
+**136 pictures and 835,584 full I420 bytes**, including intermediate pictures,
+zero guards, neutral chroma, and every named output. This validates the actual
+fused streams on NVDEC; it is separate from the temporal timing experiment.

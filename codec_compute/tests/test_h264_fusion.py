@@ -96,6 +96,61 @@ class H264FusionSelectionTests(unittest.TestCase):
         self.assertEqual(fusion(selected)["fused_nodes"], 1)
         self.assertIsNone(fusion(selected)["baseline_cost"])
 
+    def test__given_successfully_built_plans__when_costing_reports_resource_failure__then_only_legal_plan_is_selected(self):
+        graph = media.trace(lambda image: media.average(image, media.shift(image, 1)), width=16, height=16)
+        expected = {"baseline": media.compile_graph(graph, h264_fuse_shifts=False),
+                    "candidate": media.compile_graph(graph)}
+        cost = H264Program._cost
+        for failures in ({"baseline"}, {"candidate"}, {"baseline", "candidate"}):
+            calls = []
+
+            def reject_cost(program):
+                # Real construction and scheduling have already succeeded.
+                plan = "baseline" if len(program.operations) == 2 else "candidate"
+                calls.append(plan)
+                if plan in failures:
+                    raise media.UnsupportedOperation("h264", "resources", f"{plan} prediction emission failed")
+                return cost(program)
+
+            with self.subTest(failures=failures), patch.object(H264Program, "_cost", reject_cost):
+                if len(failures) == 2:
+                    with self.assertRaises(media.UnsupportedOperation) as caught:
+                        media.compile_graph(graph)
+                    self.assertEqual(caught.exception.operation, "resources")
+                    self.assertIn("baseline prediction emission failed", str(caught.exception))
+                    self.assertIsInstance(caught.exception.__cause__, media.UnsupportedOperation)
+                    self.assertIn("candidate prediction emission failed", str(caught.exception.__cause__))
+                else:
+                    selected = media.compile_graph(graph)
+                    survivor = "candidate" if "baseline" in failures else "baseline"
+                    self.assertEqual(selected.tail, expected[survivor].tail)
+                    self.assertEqual(selected.manifest()["output_frames"], expected[survivor].manifest()["output_frames"])
+                    stats = fusion(selected)
+                    self.assertEqual(stats["fused_nodes"], int(survivor == "candidate"))
+                    self.assertEqual(stats["reason"], "accepted" if survivor == "candidate" else "candidate rejected")
+                    if survivor == "candidate":
+                        self.assertIsNone(stats["baseline_cost"])
+                self.assertEqual(calls, ["baseline", "candidate"])
+
+    def test__given_motion_outside_backend_limit__when_average_folds_shift__then_candidate_and_baseline_reject_same_shift(self):
+        for dx, dy in ((128, 0), (-128, 0), (0, 128), (0, -128)):
+            graph = media.trace(lambda image: media.average(image, media.shift(image, dx, dy)),
+                                width=16, height=16)
+            moved = next(node for node in graph.nodes if node.op == "shift")
+            with self.subTest(dx=dx, dy=dy):
+                with self.assertRaises(media.UnsupportedOperation) as baseline:
+                    media.compile_graph(graph, h264_fuse_shifts=False)
+                with self.assertRaises(media.UnsupportedOperation) as enabled:
+                    media.compile_graph(graph)
+                # Compile rejects the baseline before trying fusion. Build the
+                # candidate directly so the special average path is exercised.
+                with self.assertRaises(media.UnsupportedOperation) as candidate:
+                    H264Program._build(graph, {moved})
+                self.assertEqual(baseline.exception.operation, "shift")
+                self.assertIn("127", str(baseline.exception))
+                self.assertEqual(str(enabled.exception), str(baseline.exception))
+                self.assertEqual(str(candidate.exception), str(baseline.exception))
+
     def test__given_clamp_border__when_compiling_with_either_flag__then_fusion_does_not_change_unsupported_semantics(self):
         graph = media.trace(lambda image: media.average(image, media.shift(image, 1, border="clamp")),
                             width=16, height=16)

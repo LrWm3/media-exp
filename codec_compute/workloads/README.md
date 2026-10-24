@@ -65,7 +65,8 @@ plan within the default three-application bound.
 1. **Temporal blend and change preprocessing.** These have the shortest
    resident arithmetic chains. Directional change is sufficient when only
    brightening matters; absolute difference covers both directions. The mask
-   remains decoder-computed. This is the best next family to benchmark.
+   remains decoder-computed. The [temporal benchmark](temporal/README.md) now
+   measures this family with both input serialization and decoding included.
 2. **Background or exposure envelopes.** The two-frame extrema task exposes
    both bounds and their span within HEVC's three-reference limit. If only the
    span matters, use the cheaper three-picture absolute difference. These are
@@ -78,8 +79,9 @@ plan within the default three-application bound.
    H.264 but still requires 17 computation pictures after fusion. Keep it as an exploratory
    workload until a shorter implementation or measured benefit justifies it.
 
-These results establish exact execution. Decoder latency and concurrent GPU
-workloads were **not measured** here. Every standalone program uploads its inputs.
+The original survey establishes exact execution; its latency was not measured.
+The separate temporal benchmark measures finite jobs, while concurrent GPU
+workloads remain unmeasured. Every standalone program uploads its inputs.
 For these fixtures, H.264's two-input prefix is **15,483 bytes**, versus **171
 prediction bytes** for a one-picture blend or positive-change operation.
 Input loading can dominate such a small computation. A future pipeline that

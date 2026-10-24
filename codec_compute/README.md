@@ -38,6 +38,8 @@ Fourteen task/target combinations execute exactly. Absolute difference needs
 three computation pictures. H.264 spatial read fusion halves the dilation and
 smoothing picture counts. Captures, input-loading sizes, target
 restrictions, and exact-decoder evidence are included.
+The [temporal benchmark](workloads/temporal/README.md) separately measures input
+serialization, pre-encoded decoding, and complete host-input-to-output runs.
 
 ## Run locally
 

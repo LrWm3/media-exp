@@ -1,0 +1,493 @@
+{
+  "format": "h264-ir-suite-0.1",
+  "selection": "Both fusion plans; all spatial tasks and both fixtures",
+  "comparison_sha256": "0067cf494c55a178aab15c4b2086ae9779b226e7466c6c438341b377ab9658ce",
+  "exporter_sha256": "c9b12e9e84361ee600fa6706252ced4a882e33af92db036be53659bab74c62f0",
+  "case_count": 12,
+  "cases": [
+    {
+      "name": "baseline/dilate-zero-0",
+      "stream": "baseline/streams/dilate-zero-h264-0.h264",
+      "stream_sha256": "d8c0457e146d9e8fa382dc6f19ee46731b95df7f0df96e0f5374e92e0078fd03",
+      "manifest": "baseline/streams/dilate-zero-h264-0.json",
+      "manifest_sha256": "7558e3d031575f26fde1e9abd687e1319a09d36d0e9c358b947aeb9dffd1884e",
+      "expected": "baseline/raw/dilate-zero-h264-0.i420",
+      "expected_sha256": "c90e4678603c5389f6c79112338244fa3f5548bdda4aa8ca0402d0cfef4e5ed3",
+      "pictures": 9,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "baseline/planes/dilate-zero-h264-0/output-output.u8",
+          "sha256": "de77b121f1c6bea10c53864c64a3b5906f67c5561377d9dcc7d7ad6cafadca03",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "baseline/dilate-zero-1",
+      "stream": "baseline/streams/dilate-zero-h264-1.h264",
+      "stream_sha256": "59ebac7cda6c05163b464492b280ab5b27916bd5a00c4e50175281ab36b61584",
+      "manifest": "baseline/streams/dilate-zero-h264-1.json",
+      "manifest_sha256": "41209d2d9a5a55d4257383e3d636334a87af8b3fe74d6e7846cd698c48c49e88",
+      "expected": "baseline/raw/dilate-zero-h264-1.i420",
+      "expected_sha256": "83939da1dd45318726a41e82ba028e8fd54b05e6b9682f461983d4a401341660",
+      "pictures": 9,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "baseline/planes/dilate-zero-h264-1/output-output.u8",
+          "sha256": "2103ace62f9ea5a7ee0dcf933c8131b77ac053bd7f6c3832c7400b1d0a858588",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "baseline/smooth-zero-0",
+      "stream": "baseline/streams/smooth-zero-h264-0.h264",
+      "stream_sha256": "631540d51bbca2ef4775410ffd59f8b68d67aa9abafa1297b41f90414075fc83",
+      "manifest": "baseline/streams/smooth-zero-h264-0.json",
+      "manifest_sha256": "8110676c1265e25c9d1f00d04921335b06276882479ab1641b13ce8706a4799e",
+      "expected": "baseline/raw/smooth-zero-h264-0.i420",
+      "expected_sha256": "7b339bb93c4ddff78174974e7b339f56638de15bff4a8d8bf1cbb24dadd2685e",
+      "pictures": 9,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "baseline/planes/smooth-zero-h264-0/output-output.u8",
+          "sha256": "58f1dc3146474b2748ce7ad45dd7fcfc9027b4ac2bc4d622ee21849fdf616edd",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "baseline/smooth-zero-1",
+      "stream": "baseline/streams/smooth-zero-h264-1.h264",
+      "stream_sha256": "d733eaeeb7fd37d3508dfee8bac550902968f632c8f437614fe058785ddd5963",
+      "manifest": "baseline/streams/smooth-zero-h264-1.json",
+      "manifest_sha256": "9f9c79f41850e03899d1190042341b5e859b9830534e2d456c724cd57c3cf39c",
+      "expected": "baseline/raw/smooth-zero-h264-1.i420",
+      "expected_sha256": "6dc475e989c7cb3a9b84db933ef44942660b2eaf2cc5dfb577608fb2027b9e6f",
+      "pictures": 9,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "baseline/planes/smooth-zero-h264-1/output-output.u8",
+          "sha256": "360fdd895f4214a0cfe84d6a3490ec4b9c0589385c8e95c5510cdd8513d5baa4",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "baseline/local-range-0",
+      "stream": "baseline/streams/local-range-h264-0.h264",
+      "stream_sha256": "46d85eca5ae76eaef74cc4f31e0b15ef2a7f250d0c4406fd20a198869955b30f",
+      "manifest": "baseline/streams/local-range-h264-0.json",
+      "manifest_sha256": "9f75ab005a5ae744473b461ecc00381df8732bc3b2478afa95a24c090333962e",
+      "expected": "baseline/raw/local-range-h264-0.i420",
+      "expected_sha256": "09186052095e14839f63eefdfd67676c7b8477ac182b62f8b30bff346d647e11",
+      "pictures": 22,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "low": {
+          "path": "baseline/planes/local-range-h264-0/output-low.u8",
+          "sha256": "fb0699bbd79955289c20f33b406c2a3c3055c2a042a60f3e71eb3efbf9457823",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 12,
+          "x": 16,
+          "y": 16
+        },
+        "high": {
+          "path": "baseline/planes/local-range-h264-0/output-high.u8",
+          "sha256": "79c001b11e0378c566354a66d5fdad6135e1bbbcdd50d42020c5687541d943d8",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 20,
+          "x": 16,
+          "y": 16
+        },
+        "output": {
+          "path": "baseline/planes/local-range-h264-0/output-output.u8",
+          "sha256": "23b22a1f5a00b0c540372bcc963df751141771116def55ef7c9f5dfb4e352907",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 21,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "baseline/local-range-1",
+      "stream": "baseline/streams/local-range-h264-1.h264",
+      "stream_sha256": "65d08c7c89faafc16a78b3059b0139ef970e505ae1ad49973ca7b5447f615673",
+      "manifest": "baseline/streams/local-range-h264-1.json",
+      "manifest_sha256": "be669660e713358c9ef4008cbf98016039843452318bc27e2d1ac5acfa84980e",
+      "expected": "baseline/raw/local-range-h264-1.i420",
+      "expected_sha256": "624046e8a9f5567e06976ccd7b99d2dcc0ea8827e5d94988596ba1ed21d2b7a7",
+      "pictures": 22,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "low": {
+          "path": "baseline/planes/local-range-h264-1/output-low.u8",
+          "sha256": "a556ee78e4b6ee55bf9f7e63feaf248c7f86e0b32d76bdd2fe6ad30362155b8c",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 12,
+          "x": 16,
+          "y": 16
+        },
+        "high": {
+          "path": "baseline/planes/local-range-h264-1/output-high.u8",
+          "sha256": "e9b632b6f1806694effaa5ea684f833a49db16a80c4375ae7b28f9ec0847d32a",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 20,
+          "x": 16,
+          "y": 16
+        },
+        "output": {
+          "path": "baseline/planes/local-range-h264-1/output-output.u8",
+          "sha256": "44c90929fc71b4803f1e1431e9188c461d8c84d1986ad6c24653d331b6749865",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 21,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "fused/dilate-zero-0",
+      "stream": "fused/streams/dilate-zero-h264-0.h264",
+      "stream_sha256": "da0f74e7d0189d810f881c05568ca594dc7d4c297fac98c6f6885048473369ad",
+      "manifest": "fused/streams/dilate-zero-h264-0.json",
+      "manifest_sha256": "e041d7616790a213956524cbb5a50d61bf9f17496cc936dfdc8d139e69290bf2",
+      "expected": "fused/raw/dilate-zero-h264-0.i420",
+      "expected_sha256": "1bfbbe50d205699a04e094aba2302bcc2c9f49f459eb8c45d90a3fc74c3f71d1",
+      "pictures": 5,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "fused/planes/dilate-zero-h264-0/output-output.u8",
+          "sha256": "de77b121f1c6bea10c53864c64a3b5906f67c5561377d9dcc7d7ad6cafadca03",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "fused/dilate-zero-1",
+      "stream": "fused/streams/dilate-zero-h264-1.h264",
+      "stream_sha256": "ce9f65d11749a69edcf8d4dbb48298ae6c2d78cb0248bbabdae7ef71bf7bfb3a",
+      "manifest": "fused/streams/dilate-zero-h264-1.json",
+      "manifest_sha256": "8ed970cf6639bce6e4d9bd4cce236724a150194468bb0ebd1dac60b562bbba4c",
+      "expected": "fused/raw/dilate-zero-h264-1.i420",
+      "expected_sha256": "8f335a02e6d3f1911d562c3e2f75b883c7e60998385857cc13696b32a94e9864",
+      "pictures": 5,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "fused/planes/dilate-zero-h264-1/output-output.u8",
+          "sha256": "2103ace62f9ea5a7ee0dcf933c8131b77ac053bd7f6c3832c7400b1d0a858588",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            1
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "fused/smooth-zero-0",
+      "stream": "fused/streams/smooth-zero-h264-0.h264",
+      "stream_sha256": "20e401758ae6a446594ab13cde15c4cf6c3962d3430a920799d6c0f8ba21bb06",
+      "manifest": "fused/streams/smooth-zero-h264-0.json",
+      "manifest_sha256": "c7643a487b4a1cf3e9b71d2cf924aab63149b95c3960f75de675a6c55c4b814f",
+      "expected": "fused/raw/smooth-zero-h264-0.i420",
+      "expected_sha256": "ef3cce3331521d94e5744e5cec77fe431388502ecd575dd1a4f047bada4df6f3",
+      "pictures": 5,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "fused/planes/smooth-zero-h264-0/output-output.u8",
+          "sha256": "58f1dc3146474b2748ce7ad45dd7fcfc9027b4ac2bc4d622ee21849fdf616edd",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "fused/smooth-zero-1",
+      "stream": "fused/streams/smooth-zero-h264-1.h264",
+      "stream_sha256": "8958c7a491c8b207bf731651c2788be3b9d0416223c603596b099a422b69db89",
+      "manifest": "fused/streams/smooth-zero-h264-1.json",
+      "manifest_sha256": "d9f656412064e307cadf18d2231d5bad13531afb822273c7258d7881a8e3f741",
+      "expected": "fused/raw/smooth-zero-h264-1.i420",
+      "expected_sha256": "08ccd6ffcaf7c19820834bd076c59a5fc0c777f8916105bac47cb8e252b2e08d",
+      "pictures": 5,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "output": {
+          "path": "fused/planes/smooth-zero-h264-1/output-output.u8",
+          "sha256": "360fdd895f4214a0cfe84d6a3490ec4b9c0589385c8e95c5510cdd8513d5baa4",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 4,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "fused/local-range-0",
+      "stream": "fused/streams/local-range-h264-0.h264",
+      "stream_sha256": "fa6b4637bb5d32e61f2a15662250a5dde58f8861a98ec16813feaeef16bcd4cc",
+      "manifest": "fused/streams/local-range-h264-0.json",
+      "manifest_sha256": "7e0c4bfc1abb81c7ec6443ad1ccaef87c368eb24287433fda33c67080fc6df9a",
+      "expected": "fused/raw/local-range-h264-0.i420",
+      "expected_sha256": "9ce75274e2e754ee32854989c437dd15ba0e888f1a838f1584a9dba1eaac79cc",
+      "pictures": 18,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "low": {
+          "path": "fused/planes/local-range-h264-0/output-low.u8",
+          "sha256": "fb0699bbd79955289c20f33b406c2a3c3055c2a042a60f3e71eb3efbf9457823",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        },
+        "high": {
+          "path": "fused/planes/local-range-h264-0/output-high.u8",
+          "sha256": "79c001b11e0378c566354a66d5fdad6135e1bbbcdd50d42020c5687541d943d8",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 16,
+          "x": 16,
+          "y": 16
+        },
+        "output": {
+          "path": "fused/planes/local-range-h264-0/output-output.u8",
+          "sha256": "23b22a1f5a00b0c540372bcc963df751141771116def55ef7c9f5dfb4e352907",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 17,
+          "x": 16,
+          "y": 16
+        }
+      }
+    },
+    {
+      "name": "fused/local-range-1",
+      "stream": "fused/streams/local-range-h264-1.h264",
+      "stream_sha256": "aaa745e078cd0317cf2c14953e4af01e680616d696dc5fbc2528600276d862cc",
+      "manifest": "fused/streams/local-range-h264-1.json",
+      "manifest_sha256": "b14dce56c97824b03ff10dc9b064ea97c317176ec351b7880ab529993d1c59b4",
+      "expected": "fused/raw/local-range-h264-1.i420",
+      "expected_sha256": "77ca71add157c2a1d2dd64688ce77ad247ad05c3b0ae860b88bdc4ecd86f342f",
+      "pictures": 18,
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "frame_bytes": 6144,
+      "named_outputs": {
+        "low": {
+          "path": "fused/planes/local-range-h264-1/output-low.u8",
+          "sha256": "a556ee78e4b6ee55bf9f7e63feaf248c7f86e0b32d76bdd2fe6ad30362155b8c",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 8,
+          "x": 16,
+          "y": 16
+        },
+        "high": {
+          "path": "fused/planes/local-range-h264-1/output-high.u8",
+          "sha256": "e9b632b6f1806694effaa5ea684f833a49db16a80c4375ae7b28f9ec0847d32a",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 16,
+          "x": 16,
+          "y": 16
+        },
+        "output": {
+          "path": "fused/planes/local-range-h264-1/output-output.u8",
+          "sha256": "44c90929fc71b4803f1e1431e9188c461d8c84d1986ad6c24653d331b6749865",
+          "bytes": 1024,
+          "width": 32,
+          "height": 32,
+          "range": [
+            0,
+            255
+          ],
+          "frame": 17,
+          "x": 16,
+          "y": 16
+        }
+      }
+    }
+  ]
+}

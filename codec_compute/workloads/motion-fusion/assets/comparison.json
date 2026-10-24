@@ -1,0 +1,121 @@
+{
+  "format": "codec-compute-motion-fusion-1",
+  "status": "pass",
+  "timings": "not measured; savings are decoded pictures and prediction bytes",
+  "repository_commit": "d479dc31c282c8dd026aaa4dff0b50ae596e794b",
+  "source_sha256": {
+    "codec_compute/__init__.py": "06603016bc99b50387db5cd57c8bc20f2334c686e8fde815eaf8067a1fd75e9e",
+    "codec_compute/av1/__init__.py": "b79a63600905f7831b0750ccd23faa2ebc5f112b08bcccd242c2e9143ad41677",
+    "codec_compute/av1/bootstrap.py": "218ae23fca2e2eaf1fe42552aa2d1d77f4d6d85b806332b0b412050420568856",
+    "codec_compute/compiler.py": "7bb7d07837656e380ba65dca9ea0fd67acf9116f0e92a0161e22a35835850948",
+    "codec_compute/demo.py": "9a096e724f0e91c92298f69e48f292bc9f8a73e53089ef219e88e4bda9ba29a8",
+    "codec_compute/hevc/__init__.py": "8cf7d30ea505c0ef8aa62eb9cef71d867e58d170cd0a27b81f8cf7547b53c280",
+    "codec_compute/hevc/native.py": "8d35e57eaf4969fb3b3562312a43e2016a82ff4ab83d52772966769d48149ef8",
+    "codec_compute/hevc/program.py": "3fdb399e9d54919481bc5dc575f2e7fe0588da92bfb6ce20b5989d323c9db4b0",
+    "codec_compute/ir.py": "f0a198e224b31c2f9764baf7dcc9c71cfd43d41576bab9dd7603d5718ad802dc",
+    "codec_compute/synthesis/__init__.py": "ef35f6385758a1907493ea9bd2c95657fcf9d31960c8196277631e18acb61df6",
+    "codec_compute/synthesis/demo.py": "4a3e42c3cef2d837c5a926df9fd964416608ec38a08aef1a880780291f5d7a91",
+    "codec_compute/synthesis/lower.py": "527b54897c0f964427943e4bbe582850bb4ed60a4cc6575ac4100c7dffe1a3f2",
+    "codec_compute/synthesis/model.py": "03ffe4f117fbdf2231edfa96005727c3654059981b47b48a432f20f62684ddce",
+    "codec_compute/synthesis/search.py": "626385b4f1b4e9e33168e52fb6c717cafeb340aa337cea9283d7ea233685f000",
+    "codec_compute/synthesis/verify.py": "291c6e3f5b17b39e56a128eaa7c279e4819de074726b05111a57bc77445ce5dd",
+    "codec_compute/targets/__init__.py": "34e7368d1c8648a2867b98863741e66cca96695ce3f5d910d8c310c8db73a465",
+    "codec_compute/targets/av1.py": "aa9e3052d0c1985b870962abeab71ac8467e73af1845f87a9e34ab35ada85aee",
+    "codec_compute/targets/h264.py": "d2bb7024d4d04a35b14940f57d486cbd3cea16866cdea4330ad5ce8a689a0c37",
+    "codec_compute/targets/hevc.py": "5ec8346040e2b9bb052f11b94697ddfe6ae7a079d9bd3e1b01169ca3982ba883",
+    "codec_compute/workloads/__init__.py": "92f92f5a0db0585928120bc79f7d5acb264ac7d6cea9df072ec8198533e7cb86",
+    "codec_compute/workloads/benchmark.py": "c8074f02d15115dcec908397939b82284dec7dc5080baa786ca21b1cf7e3acaa",
+    "codec_compute/workloads/capture.py": "e0d8aba10848b4ef32c24e0726d5c619cfb1efccaf99cf63b13694552b06e388",
+    "codec_compute/workloads/demo.py": "50295bf1d823dee38f5d279c56d5da28d2f3560acbe447ec33dba1cc3d411bc7",
+    "codec_compute/workloads/export_h264.py": "b402922c4c77d6fd7e3b1b47328bb653f9439103977dd865b94f9e45127c5930",
+    "codec_compute/workloads/fusion.py": "c9b12e9e84361ee600fa6706252ced4a882e33af92db036be53659bab74c62f0",
+    "codec_compute/workloads/kernels.py": "5690ab7d914f02a3b14e2204876747cdd6a21e18703393dc5a208f083716fa80",
+    "codec_compute/workloads/temporal_benchmark.py": "1ff94af0c25282e872c302346c422c8365ced5889fc82139e54391864c824935",
+    "decoder_core/bitstream.py": "75a7c92e8a090f3fc9179e9c76160f778bb46a54eb70a4920481b67fc9dcc6f5",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+    "codec_compute/av1/bridge.c": "874c82de6ce7308937ab7831aa92601f577e26319acd3a2d915d0d410636b136",
+    "codec_compute/av1/libaom.patch": "cba0b29e6d95b1ebdc67eaab025d4280e8743aa708baeb4ca578ce9a92095a80",
+    "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+    "05-h264-compiler/h264/backend.py": "d5e3dc5b30993e219a2fc99e7262ee93f551fa3f2e318b262ed57dcf99bc3ef8",
+    "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+    "05-h264-compiler/h264/ir.py": "a8ed2bd8db89c7405104a9b2dcfbbce02e1e32068a0a7cf5a40b6ff335534753",
+    "05-h264-compiler/h264/lower.py": "711d1361b1f324fdc3c07d7549f01c7bc60e0c8ff6914b1f41b62086acd42bae",
+    "05-h264-compiler/h264/packed.py": "31f232f58a463d25bf0767ccd6d01b39df5692e0cb98f4c9b1d2ac0d5197daeb",
+    "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+    "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+    "05-h264-compiler/h264/synthesize.py": "ce3053020e5f8f1e8af2dfd579a00587fb1cf7405281c7ebc3ca926524c66ced",
+    "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770"
+  },
+  "reports": {
+    "baseline": {
+      "path": "baseline/validation.json",
+      "sha256": "d1dbf033ab28eb881d1f119400eec20f9f01f629c217ced587bd8b25efcc498c"
+    },
+    "fused": {
+      "path": "fused/validation.json",
+      "sha256": "21f406bc0c894d646314a27d26be786a37a387becf7062c861d4fc6c7532b6be"
+    }
+  },
+  "streams": 12,
+  "pictures": 136,
+  "decoder_runs": 36,
+  "cases": [
+    {
+      "task": "dilate-zero",
+      "baseline": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 1262,
+        "peak_live_references": 3
+      },
+      "fused": {
+        "input_pictures": 1,
+        "computation_pictures": 4,
+        "total_pictures": 5,
+        "prediction_bytes": 692,
+        "peak_live_references": 2
+      },
+      "fixtures": 2,
+      "named_outputs_equal": true
+    },
+    {
+      "task": "smooth-zero",
+      "baseline": {
+        "input_pictures": 1,
+        "computation_pictures": 8,
+        "total_pictures": 9,
+        "prediction_bytes": 1262,
+        "peak_live_references": 3
+      },
+      "fused": {
+        "input_pictures": 1,
+        "computation_pictures": 4,
+        "total_pictures": 5,
+        "prediction_bytes": 688,
+        "peak_live_references": 2
+      },
+      "fixtures": 2,
+      "named_outputs_equal": true
+    },
+    {
+      "task": "local-range",
+      "baseline": {
+        "input_pictures": 1,
+        "computation_pictures": 21,
+        "total_pictures": 22,
+        "prediction_bytes": 3553,
+        "peak_live_references": 7
+      },
+      "fused": {
+        "input_pictures": 1,
+        "computation_pictures": 17,
+        "total_pictures": 18,
+        "prediction_bytes": 2979,
+        "peak_live_references": 4
+      },
+      "fixtures": 2,
+      "named_outputs_equal": true
+    }
+  ]
+}

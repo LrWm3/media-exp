@@ -1,0 +1,366 @@
+{
+  "format": "codec-compute-program-1",
+  "ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "image",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 8
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "image"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          -1,
+          0,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          1,
+          0,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 3,
+        "op": "average",
+        "args": [
+          1,
+          2
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 4,
+        "op": "average",
+        "args": [
+          3,
+          0
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 5,
+        "op": "shift",
+        "args": [
+          4
+        ],
+        "params": [
+          0,
+          -1,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 6,
+        "op": "shift",
+        "args": [
+          4
+        ],
+        "params": [
+          0,
+          1,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 7,
+        "op": "average",
+        "args": [
+          5,
+          6
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 8,
+        "op": "average",
+        "args": [
+          7,
+          4
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "lowered_ir": {
+    "format": "codec-compute-ir-2",
+    "dtype": "u8",
+    "shape": [
+      32,
+      32
+    ],
+    "inputs": [
+      {
+        "name": "image",
+        "id": 0,
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "outputs": {
+      "output": 8
+    },
+    "nodes": [
+      {
+        "id": 0,
+        "op": "input",
+        "args": [],
+        "params": [
+          "image"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 1,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          -1,
+          0,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 2,
+        "op": "shift",
+        "args": [
+          0
+        ],
+        "params": [
+          1,
+          0,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 3,
+        "op": "average",
+        "args": [
+          1,
+          2
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 4,
+        "op": "average",
+        "args": [
+          3,
+          0
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 5,
+        "op": "shift",
+        "args": [
+          4
+        ],
+        "params": [
+          0,
+          -1,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 6,
+        "op": "shift",
+        "args": [
+          4
+        ],
+        "params": [
+          0,
+          1,
+          "zero"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 7,
+        "op": "average",
+        "args": [
+          5,
+          6
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "id": 8,
+        "op": "average",
+        "args": [
+          7,
+          4
+        ],
+        "params": [
+          "half_up"
+        ],
+        "range": [
+          0,
+          255
+        ]
+      }
+    ]
+  },
+  "synthesis": [],
+  "target": "h264",
+  "coded_shape": [
+    64,
+    64
+  ],
+  "output_frames": {
+    "output": 4
+  },
+  "costs": {
+    "input_pictures": 1,
+    "computation_pictures": 4,
+    "total_pictures": 5,
+    "prediction_bytes": 688,
+    "peak_live_references": 2
+  },
+  "reference_slots": {
+    "0": 0,
+    "1": 1,
+    "2": 0,
+    "3": 1,
+    "4": 0
+  },
+  "optimizations": {
+    "shift_read_fusion": {
+      "enabled": true,
+      "eligible_nodes": 4,
+      "fused_nodes": 4,
+      "reason": "accepted",
+      "baseline_cost": {
+        "computation_pictures": 8,
+        "prediction_bytes": 1262,
+        "output_readback_pictures": 1
+      },
+      "candidate_cost": {
+        "computation_pictures": 4,
+        "prediction_bytes": 688,
+        "output_readback_pictures": 1
+      }
+    }
+  },
+  "scheduling": "H.264 retained long-term references",
+  "guard": 16,
+  "prediction_sha256": "2d741c736e22fc4760065664dfccb202d49717f3c1ed86cb9367290ab4befbba",
+  "stream_sha256": "8958c7a491c8b207bf731651c2788be3b9d0416223c603596b099a422b69db89"
+}
