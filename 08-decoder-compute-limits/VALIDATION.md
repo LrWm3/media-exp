@@ -5,6 +5,11 @@ in scalar and packed modes, plus 12 dependent-update microbenchmarks. The
 [NVDEC report](assets/nvdec-results.json) contains individual timings, counters,
 output hashes, and the hash of that exact index.
 
+These historical hashes refer to [the archived original atlas](assets/atlas-legacy.json).
+The [certificate correction](CERTIFICATE-CORRECTION.md) narrows the enumerated
+grammar to legal B-weight sums; all saved executable witnesses and results
+remain identical.
+
 ## Correctness
 
 FFmpeg, OpenH264, VA-API, and NVDEC agree on **2,618 complete decoded pictures**,

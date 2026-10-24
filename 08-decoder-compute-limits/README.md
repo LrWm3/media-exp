@@ -32,7 +32,7 @@ Independent operations can occupy different tiles in one picture; all reads
 come from earlier pictures. Input loading and readback are outside the minima.
 The executable examples additionally load two PCM input pictures.
 
-[atlas.py](atlas.py) exhausts **536,560 reduced single-prediction classes**, with
+[atlas.py](atlas.py) exhausts **402,311 reduced single-prediction classes**, with
 proved reductions covering all legal weights, denominators, source choices,
 and offsets. Only XOR and XNOR cannot be expressed by one prediction.
 A separate monotonicity argument rules out every two-instruction parity
@@ -40,6 +40,10 @@ construction, including those using nonbinary intermediates.
 The complete model, reductions, witnesses, and lower bounds are in
 [PROOFS.md](PROOFS.md). These are bounds for this instruction model, not every
 mechanism available in H.264.
+
+The original certificate overcounted legal B-weight pairs. The corrected
+certificate preserves every saved witness and minimum; see the
+[correction and archived provenance](CERTIFICATE-CORRECTION.md).
 
 For example, XOR computes `u = clip(A-B)` and `v = clip(B-A)` independently,
 then `u+v`. Two tiles execute the first two operations in one picture, followed
