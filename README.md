@@ -22,6 +22,9 @@
 - [06 — Motion-mask decoder](06-motion-mask-decoder/README.md): frame differences,
   thresholding, and binary mask cleanup; persistent NVDEC batches and selective
   output readback, with exact captures and measured costs.
+- [07 — Packed denoising decoder](07-packed-denoising-decoder/README.md): independent
+  neural feature calculations share picture tiles, reducing 52 pictures to 17;
+  unchanged weights, exact outputs, and paired NVDEC measurements.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·

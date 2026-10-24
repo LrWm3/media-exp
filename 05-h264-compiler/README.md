@@ -70,6 +70,35 @@ experiments. Desktop CUVID and SDK 13.1 direct-array output remain untested.
 thresholding, and morphology into motion masks. It also adds one-session batch
 execution and selective NVDEC output readback to the shared runtime.
 
+## Packing independent predictions
+
+`h264.pack(program, tiles=8)` schedules independent lowered operations into
+separate rectangles of shared pictures. It preserves named outputs and reuses
+the same frozen prediction tail across inputs:
+
+```python
+packed = h264.pack(program, tiles=8)
+packed.save("packed.h264", image)
+outputs = packed.verify(image, readback="outputs")
+```
+
+Logical `width`/`height` stay unchanged; `writer.width`/`writer.height` describe
+the larger coded canvas. `output_regions` locates each named output by picture,
+tile, and rectangle. Coordinates exclude the outer 16-pixel guard. The manifest
+also records active tiles, original instruction locations, and reference slots.
+
+The first version supports 1–16 tiles, uniform integer motion within ±16 pixels,
+and the existing P/B arithmetic. It rejects fractional interpolation, block
+gathers, nested packing, oversized canvases, and excessive reference or slice
+costs. Zero gaps prevent shifted reads from reaching another logical image;
+`read()` checks those gaps and unused tiles as well as chroma and outer guards.
+Selected readback validates only the supplied pictures. Packing is opt-in:
+fewer pictures can require more pixels, larger PCM inputs, and more readback.
+
+[Experiment 07](../07-packed-denoising-decoder/README.md) compares two, four, and
+eight tiles on the unchanged denoiser. Eight tiles reduce 52 pictures to 17,
+while increasing decoded luma samples by 1.86×.
+
 ## Original binary example
 
 ![Shifted OR captured from Intel hardware decoding](assets/shifted-or.png)

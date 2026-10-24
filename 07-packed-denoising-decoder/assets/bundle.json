@@ -1,0 +1,1552 @@
+{
+  "format": "h264-packed-denoiser-bundle-0.1",
+  "created_utc": "2026-10-24T04:35:13.035631+00:00",
+  "job_count": 8,
+  "input_seed": 200000,
+  "input_description": "the original deterministic noisy binary shapes",
+  "model_sha256": "ec8de200e9f598c3b6dcafd2503ab874620a2aecc56da2d146261263103ca32d",
+  "source_commit": "9aba0237f2018951fde9ba9b9060941cb39dc0a5",
+  "working_tree_dirty": false,
+  "source_sha256": {
+    "03-denoising-decoder/compiled/denoiser.py": "3b4adcb4019965f2b9a18e61bd259ae2f2163f514d4f34d56f86b13b147ba96f",
+    "03-denoising-decoder/data.py": "c3b2dc9b0048574e0fff57b04f06276563f0a9cc0781d39049f7b54ac2f2affc",
+    "03-denoising-decoder/network.py": "f67205e792264e773caed5af3a094d38f22f53d0003f85e6960217c520bddb0d",
+    "05-h264-compiler/h264/__init__.py": "367ce4ff09ac878924a9dec0b23c932380748e414ae80d24f3b2a2cc2ff7230b",
+    "05-h264-compiler/h264/backend.py": "065a24071f4deae3995b2ab143283c736fa9362a8bafd9b6e96bc1073185da8c",
+    "05-h264-compiler/h264/graph.py": "5137c1aac056d7b4165a2ab088ed19601689baa0aa057253fe0960f241374a61",
+    "05-h264-compiler/h264/lower.py": "0152ebf1775cbd9e13e521dc34268183dbc74828bc323e66e10e801b194126eb",
+    "05-h264-compiler/h264/packed.py": "d823f4af52113270250686fbc851988c7cfa9ef6f4e8ae81c3d7628cf044db36",
+    "05-h264-compiler/h264/schedule.py": "fde2c4d5c6bf13b856615dc5b14938040fe7f3785101675f2032a53473093c25",
+    "05-h264-compiler/h264/search.py": "991ef539f271a963d41cf9b6d854f58fd20c8bab5996826712e6d62257ec62ba",
+    "05-h264-compiler/h264/synthesize.py": "f65d607bd1d09bb3ea19323e85cc029f0ddc145d5a535b6fd829fc49fd736092",
+    "05-h264-compiler/h264/verify.py": "bb458edc311381d3698cdc31426d8fde74ec609699124d37de8727113d118770",
+    "07-packed-denoising-decoder/benchmark.py": "3ba4261a657086397f34e871203353110fd50832a67f577fea4fe1f3ed2d5444",
+    "07-packed-denoising-decoder/capture.py": "55bf402ecd63f9fc863dc367963a6fe5039c81e7be805b893346e63bf93b0489",
+    "07-packed-denoising-decoder/kernel.py": "dd626e07ca610fe1d14ff55e16a061c70e6868e1e844235f008228c160f7838e",
+    "07-packed-denoising-decoder/prepare.py": "880e37b0f103962f5078cc3c2d5e5e4c5dcc03ed4616bc6b7d865e9462a979ad",
+    "07-packed-denoising-decoder/reference.py": "37f67e61d1aaaa069dbcce9596c1a668e63295b62d3e609c84fc0c5c15535837",
+    "07-packed-denoising-decoder/test_packed.py": "f00cb9adde49aef72c7db7f8607394e93102704629de00a267ff3ec9c7e72172",
+    "decoder_core/bitstream.py": "754428de6b58e11e675d613787b5f9a4d06234d0549926a1fec732f469750491",
+    "decoder_core/decode.py": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed"
+  },
+  "decoders": {
+    "ffmpeg": "available",
+    "openh264": "available",
+    "vaapi": "available"
+  },
+  "inputs": [
+    {
+      "index": 0,
+      "path": "inputs/000.u8",
+      "sha256": "2ac0f96b8e4e8536342dc435bb86267d8e5a82a6fd81820fba136c9a4a30c9d0",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/000-clean.u8",
+        "sha256": "dbe2575ae091ba3fd2b51168865ff12664d4906d935572fce4257ce3e91ddbdf",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/000/output.u8",
+          "sha256": "61b36e40a3bf76220382e040f2d8465b16623567b4b99d8dbbc3a246fec4cfa0",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/000/feature_0.u8",
+          "sha256": "234284c9b17f7b798ff334c5a35d469db45b2eb49fa49d628284560ec0000e3a",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/000/feature_1.u8",
+          "sha256": "4aed53b62a3588bfce743937627cedc136ac62a3a561895c0bb0e18d836cfe90",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/000/feature_2.u8",
+          "sha256": "4aed53b62a3588bfce743937627cedc136ac62a3a561895c0bb0e18d836cfe90",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/000/feature_3.u8",
+          "sha256": "456e006236f280718665eb2c170e76b7364aff04f9c8999ad3695ac2dc73f00a",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/000/feature_4.u8",
+          "sha256": "a795c043ac35e543bb8f64395b0cc46dad58cc62de76ee3ad4d4e931930074a4",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/000/feature_5.u8",
+          "sha256": "930456f108065da8ff0f214dd70d0b71c7abd020e020170d8a5077dacfeb1361",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/000/feature_6.u8",
+          "sha256": "2db7a9dfe835ab418f8fc79627cce55f3c8a6de5b88aed54b455c87817ef784d",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/000/feature_7.u8",
+          "sha256": "e7aff3adf6b89df716ea9d92d87fc4556295e7fb3672b9a46d96201e65fe595a",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 1,
+      "path": "inputs/001.u8",
+      "sha256": "18910992ef43503b2a6539768f51fd147ff71cd560e89eb6e3e6c42367893940",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/001-clean.u8",
+        "sha256": "a0e1c01904182eebf3d1978213bb16b9f2d039e8678fe7dfabd2b644581e3696",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/001/output.u8",
+          "sha256": "f810040bf13cc396ff80f13f623543560505c79bb0c222c3b3aac4357a710054",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/001/feature_0.u8",
+          "sha256": "3e86551b2061bd2f49c3168cf2684cfe9825703b0e9311d5b37e4a9a817ce02e",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/001/feature_1.u8",
+          "sha256": "1adc26c7c4266e8a29296052a926fd267951e55ebd4af1bfdc19fd37c8ef7cf3",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/001/feature_2.u8",
+          "sha256": "1adc26c7c4266e8a29296052a926fd267951e55ebd4af1bfdc19fd37c8ef7cf3",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/001/feature_3.u8",
+          "sha256": "d76adb60403375e5eb79be65f00576eecd7a994afc2cc5eabe2636a7f81053f1",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/001/feature_4.u8",
+          "sha256": "e73c53976ba77a571ef6910782e02097e3ab3a2536cebc72c51f2f13b621030b",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/001/feature_5.u8",
+          "sha256": "78ae021de7546f55dd8c25361f0a1bc65dc6366ed869bd09cddc234a622f60ba",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/001/feature_6.u8",
+          "sha256": "6283f1319350ebe576c4b3751de5b21f427125b4d22a1bdba1e0064a753ec0ff",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/001/feature_7.u8",
+          "sha256": "8895de541c5a8e846f232efe558eb5af6b622eddcf2494623dd95441e45a741d",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 2,
+      "path": "inputs/002.u8",
+      "sha256": "ad67ec15074686055863b74e6cf811476e9af5e1f3a303e83fa06560fe35ad40",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/002-clean.u8",
+        "sha256": "a46f27159a2af138966ffabc9b7e2f0c1f796bea5996d18ce6b152cff9a3b0a1",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/002/output.u8",
+          "sha256": "52ce670243cebc48fe7bb3e3796fd535c47d6f812ba7ed9295c5af69fb244783",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/002/feature_0.u8",
+          "sha256": "5a11f4367b588d82058e6cba9c5a8e46b76cd94864c7796e257c5e0707655456",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/002/feature_1.u8",
+          "sha256": "089ca4a700a4380266d3b2b025a8dac2ae129e06611ab3ea809e0460195a0bd4",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/002/feature_2.u8",
+          "sha256": "089ca4a700a4380266d3b2b025a8dac2ae129e06611ab3ea809e0460195a0bd4",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/002/feature_3.u8",
+          "sha256": "30e4d6399742c45168a444003bcc3a7681d0b52af631aa31b5694d00c1f05354",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/002/feature_4.u8",
+          "sha256": "387dd5b29c1b366be54c7a3de39bb6ab2e414652dca86f6994c76859ec27b757",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/002/feature_5.u8",
+          "sha256": "240f34a6108af1e35165c89a23a9e218c4beea5840bfe245d778d4a38657256d",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/002/feature_6.u8",
+          "sha256": "5cebc3c9f13c6b66f9faf746eb4ce6c619bd222affb01fbd07baa2eb567108b4",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/002/feature_7.u8",
+          "sha256": "2975b603ee056608c68d4eef7172cd268b7f5657538341be3314f2419fe94e83",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 3,
+      "path": "inputs/003.u8",
+      "sha256": "41a33e2990853e33df7131ef75c94d5808eaca59d1c21c51ea99f34ad3ea7bca",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/003-clean.u8",
+        "sha256": "dfb898babffc3a8d423abe51b0111896fb168754265d0e2a86338b4ff6691ed4",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/003/output.u8",
+          "sha256": "359e04ab76a52c346823f5d40cdbae9212bb7d6540e9be85f2fe0a747c467e93",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/003/feature_0.u8",
+          "sha256": "c171008ad7c895d5a9c60303f358f886b6597b5638aeea64530425f01dc6c58e",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/003/feature_1.u8",
+          "sha256": "20175aa30aabcf3199f70d67cf14a1de132ca89472e1a42fe43d0639f227aed9",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/003/feature_2.u8",
+          "sha256": "20175aa30aabcf3199f70d67cf14a1de132ca89472e1a42fe43d0639f227aed9",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/003/feature_3.u8",
+          "sha256": "cea6ebc6381acd6bf9fe7c9d6b96b903ebb834e5cd66997b8c48ebf620025e12",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/003/feature_4.u8",
+          "sha256": "bba0401e5d0ed2ac94b843987c67b1fea2005e2595dae8f6da24cb3db22a7d5b",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/003/feature_5.u8",
+          "sha256": "5cbc2df859c2884d3f20e9f21c069ca17fd808b35fbcb2fb4bcedd57d8886830",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/003/feature_6.u8",
+          "sha256": "a61f94f134d152f5931e53b723a0dd1721b49b4d4f65d36241b90acfedeabe10",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/003/feature_7.u8",
+          "sha256": "e9527a3e06b231153c156d9b65c28c234edf96c46aafd34f0179ff8015692ab5",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 4,
+      "path": "inputs/004.u8",
+      "sha256": "4163b7e215577fa69b077271d18cbe6fc5c1b3b199fae20725d32a75aebc4078",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/004-clean.u8",
+        "sha256": "eb74d65396d8eda30d76f17538591306a33ad548c54b2a321ce90d7d26ec3c84",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/004/output.u8",
+          "sha256": "09e40d9b3be4582b4bfe46fdd52eca1fb563ea1c6982e100cdf308ae4cd40bd5",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/004/feature_0.u8",
+          "sha256": "4c57a8166badf657e2e5ac21031b8447019f2c25b7b934d6bb4e6259a4dff0e2",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/004/feature_1.u8",
+          "sha256": "1a7d26ea4487f1a7dceecebd7aa1ad1db0968549216de20015540e756c54f697",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/004/feature_2.u8",
+          "sha256": "1a7d26ea4487f1a7dceecebd7aa1ad1db0968549216de20015540e756c54f697",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/004/feature_3.u8",
+          "sha256": "d4dec979a765a7768035ce618e4a448c0dcac8d6976b6de562d42f9ed92c95ee",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/004/feature_4.u8",
+          "sha256": "f120638b2987af8fb6ad91cd8a48672a4532fefc3f010912cd75b64567af0f0b",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/004/feature_5.u8",
+          "sha256": "8cd057aa0e94816390a2bdc470c9c06d71bf61396582f199642b7b0f003eb067",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/004/feature_6.u8",
+          "sha256": "b020eb28f4e26987b306eae03ed0065576bb6653f1386197ab067f78d1267c33",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/004/feature_7.u8",
+          "sha256": "0c21861e39e630dd7987a97b253a71bc0ae373176d143cd8d1b634d60efcde68",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 5,
+      "path": "inputs/005.u8",
+      "sha256": "75d6e7126238c79c07be3587740191236181769569764148b4bfe4a72525c1ba",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/005-clean.u8",
+        "sha256": "cfba01776431e4e01a0d1c8a8181664bc666151d24f2f61e46a1ba5133545733",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/005/output.u8",
+          "sha256": "880a9e15398f43ef177d0875f1afeb011b836aa311fedb293260cf43c88de2a8",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/005/feature_0.u8",
+          "sha256": "afdea2a2a32e572cd40d744af711fbb04413a15af185d025267e61a70eda66eb",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/005/feature_1.u8",
+          "sha256": "897d699ae288d591401ad601f7bf729a6bcf5050461ab794b907265547017896",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/005/feature_2.u8",
+          "sha256": "897d699ae288d591401ad601f7bf729a6bcf5050461ab794b907265547017896",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/005/feature_3.u8",
+          "sha256": "dba057a3507a0516ba473000421f1f7b0e73a7f96cd9e80a4fc1fad6df208ee5",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/005/feature_4.u8",
+          "sha256": "938093a0873a1c35d5bbf635298cb674f9b5412a07c512f045616e6e5bb5dfc7",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/005/feature_5.u8",
+          "sha256": "7806a6eecb5c378f717a914f6bcf47f4c2a304c19dc3f027b6297ec0e5694e4b",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/005/feature_6.u8",
+          "sha256": "fe1e21e11bb68de021d25aa92b0c9a8622e9c08afa67374a013a597c5a4fd7a8",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/005/feature_7.u8",
+          "sha256": "a1b2d425466cafb98e23f576eb617e950fb501396cf7afc14f03a1a9475a77bc",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 6,
+      "path": "inputs/006.u8",
+      "sha256": "c3c7c8ed455ac5be6b77aaef94863de1890df207daa457690cb854f1360ce588",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/006-clean.u8",
+        "sha256": "6f41331528af1709fd1d0b984d07230e82e16b87de9b574a869fccbed384ad3f",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/006/output.u8",
+          "sha256": "4027d9258ce489ad753bab1dbe1d48ae8377b898ed1507ae025a09da4bee0166",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/006/feature_0.u8",
+          "sha256": "8678ad06152f371137b6016208bb893ef289f271a73f6cb2b4b58c77a46a1d47",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/006/feature_1.u8",
+          "sha256": "06e58a4e3c8b1ad1b63b37bdf7bbde8f8b910cce3066c6a18d66ff81a05ef4c5",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/006/feature_2.u8",
+          "sha256": "06e58a4e3c8b1ad1b63b37bdf7bbde8f8b910cce3066c6a18d66ff81a05ef4c5",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/006/feature_3.u8",
+          "sha256": "653f3d1de86bb07c6b8fa3fdc256a61501e2c7e0b2a6f27cc57fbde0503bf8c7",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/006/feature_4.u8",
+          "sha256": "f9c378113fd3735c11db086a3c682c8d93ab0802577b0f8d579aa7155d586f47",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/006/feature_5.u8",
+          "sha256": "e8c1a194845df072435faf334b6be09d836256682211362dd3f361e64c167739",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/006/feature_6.u8",
+          "sha256": "368f26fb314c7f4aace52cbe75085301ece4947b9de0a68fea243a9e370fea6b",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/006/feature_7.u8",
+          "sha256": "95f4e2c821120e2f25e559556a7dc2a5130859c778446126fe7d73f6c33af484",
+          "bytes": 1024
+        }
+      }
+    },
+    {
+      "index": 7,
+      "path": "inputs/007.u8",
+      "sha256": "0d4cd940d501fcc11d6e4aaccb68328013b77b76a371f523cb3ca2a561ece1c5",
+      "bytes": 1024,
+      "clean": {
+        "path": "inputs/007-clean.u8",
+        "sha256": "fd7a0e7a5be52ed7ff17958aeac4ec37e660f9c58c1cf42c311642c4a46f8d3d",
+        "bytes": 1024
+      },
+      "named_outputs": {
+        "output": {
+          "path": "oracle/007/output.u8",
+          "sha256": "53e53ee492857ef4c3668e02ab804ab234b6d6f9dc3fc92593e45f5e43c498b3",
+          "bytes": 1024
+        },
+        "feature_0": {
+          "path": "oracle/007/feature_0.u8",
+          "sha256": "0f9d62b881b9e35f2dad462928ac85f92abc6d30c4468d6daf62510d3a88c3b5",
+          "bytes": 1024
+        },
+        "feature_1": {
+          "path": "oracle/007/feature_1.u8",
+          "sha256": "1f6352620c3b53f3f833a48ec7ce96551633a3bd0dc8012a406178babd0d29d3",
+          "bytes": 1024
+        },
+        "feature_2": {
+          "path": "oracle/007/feature_2.u8",
+          "sha256": "1f6352620c3b53f3f833a48ec7ce96551633a3bd0dc8012a406178babd0d29d3",
+          "bytes": 1024
+        },
+        "feature_3": {
+          "path": "oracle/007/feature_3.u8",
+          "sha256": "1f2247d7b2d5c5782c479342f645e9db4d5f741084c8947b4621e4a7f4a63fb2",
+          "bytes": 1024
+        },
+        "feature_4": {
+          "path": "oracle/007/feature_4.u8",
+          "sha256": "06e04216d835275ad149ce2e436a9c4acae4ca39a3cb735b74a252a29156964f",
+          "bytes": 1024
+        },
+        "feature_5": {
+          "path": "oracle/007/feature_5.u8",
+          "sha256": "eff42736843a8f57bd1e33cb800f3589706eff3e8570d6d3d3f2ebeac4cc4bc1",
+          "bytes": 1024
+        },
+        "feature_6": {
+          "path": "oracle/007/feature_6.u8",
+          "sha256": "4b5351ed65f0a9e77788ad5d0d8973a59d8b7461e88e0e2f12b2074a20a2f263",
+          "bytes": 1024
+        },
+        "feature_7": {
+          "path": "oracle/007/feature_7.u8",
+          "sha256": "61768c20b7bfc1259ef2d7675ed2d25b6775f07d73db94ae33a6ee175d6b932d",
+          "bytes": 1024
+        }
+      }
+    }
+  ],
+  "variants": {
+    "baseline": {
+      "tiles_requested": null,
+      "manifest": "baseline/program.json",
+      "manifest_sha256": "4e0204c9cbb151733ce93143236e6d4da425ee1c208a2015ba9d1d207f5c30b6",
+      "width": 32,
+      "height": 32,
+      "coded_width": 64,
+      "coded_height": 64,
+      "pictures_per_job": 52,
+      "frame_bytes": 6144,
+      "output_picture_indices": [
+        9,
+        18,
+        20,
+        29,
+        38,
+        46,
+        50,
+        51
+      ],
+      "output_regions": {
+        "output": {
+          "frame": 51,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_0": {
+          "frame": 18,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_1": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_2": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_3": {
+          "frame": 20,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_4": {
+          "frame": 29,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_5": {
+          "frame": 38,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_6": {
+          "frame": 46,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_7": {
+          "frame": 50,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        }
+      },
+      "costs": {
+        "input_pictures": 1,
+        "normalization_pictures": 1,
+        "arithmetic_pictures": 50,
+        "refresh_pictures": 0,
+        "total_pictures": 52,
+        "prediction_slices": 408,
+        "prediction_bytes": 9080,
+        "peak_live_values": 6,
+        "reference_slots_used": 6
+      },
+      "lowering_ms": 43.72640200017486,
+      "packing_ms": 0,
+      "first_tail_ms": 17.281209002248943,
+      "tail": "baseline/prediction.h264",
+      "tail_sha256": "2582024bda32d42212211f6d2760715f7b1c7b37573f506d905c5d558fecbd01",
+      "tail_bytes_per_job": 9080,
+      "jobs": [
+        {
+          "index": 0,
+          "input_sha256": "2ac0f96b8e4e8536342dc435bb86267d8e5a82a6fd81820fba136c9a4a30c9d0",
+          "input_prefix": "baseline/inputs/000.h264",
+          "input_prefix_sha256": "a3b8501a8cdebee3fbc628fe709b4cdc0521ea816229b04e9686c19c485ef3e6",
+          "input_bytes": 7979,
+          "input_packing_ms": 0.41736500133993104,
+          "stream": "baseline/streams/000.h264",
+          "stream_sha256": "4f7d6b1856937d522caf48ecbbe931b638fbb6b2c31b245d9e8f8dc8dc5d264a",
+          "stream_bytes": 17059,
+          "expected": "baseline/expected/000.i420",
+          "expected_sha256": "d57049f487462ade7724a726bd64241bfbbe72dd6223e484e77eaabc3b85737c",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 1,
+          "input_sha256": "18910992ef43503b2a6539768f51fd147ff71cd560e89eb6e3e6c42367893940",
+          "input_prefix": "baseline/inputs/001.h264",
+          "input_prefix_sha256": "43327b50a0962c394be7babf0b512e2c3839370f30a824baa0b05971b2abb5f7",
+          "input_bytes": 8020,
+          "input_packing_ms": 0.3709979937411845,
+          "stream": "baseline/streams/001.h264",
+          "stream_sha256": "bb39988c19f9cc9879d125a18fb6fad946936da90d06e69a73cbb2db59be94f4",
+          "stream_bytes": 17100,
+          "expected": "baseline/expected/001.i420",
+          "expected_sha256": "f36407951c7edb4e6997b2b7740ee18a657a08a81b295ebe0ed9c43f7a919eba",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 2,
+          "input_sha256": "ad67ec15074686055863b74e6cf811476e9af5e1f3a303e83fa06560fe35ad40",
+          "input_prefix": "baseline/inputs/002.h264",
+          "input_prefix_sha256": "4d5413bc16ce5beaaf8474a4ad153fe0aedc87507a2387139801b2dde480dccf",
+          "input_bytes": 7982,
+          "input_packing_ms": 0.4214389991830103,
+          "stream": "baseline/streams/002.h264",
+          "stream_sha256": "ada64946cdcfe38b4963e6eb8a899df4f4850b5dd75acbc1f00fe40445797097",
+          "stream_bytes": 17062,
+          "expected": "baseline/expected/002.i420",
+          "expected_sha256": "c4338d06d8d225c3e52647eff26897176a60cd37c50ba41903b20883dffa6eaf",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 3,
+          "input_sha256": "41a33e2990853e33df7131ef75c94d5808eaca59d1c21c51ea99f34ad3ea7bca",
+          "input_prefix": "baseline/inputs/003.h264",
+          "input_prefix_sha256": "8cda25035bbd54d41d3c49fe0e9e079c21f672803dd3b3cdf803f9568846c7c6",
+          "input_bytes": 7993,
+          "input_packing_ms": 0.3671689992188476,
+          "stream": "baseline/streams/003.h264",
+          "stream_sha256": "8e8dd3e392344460211b71193231b40c51ee2c95612fa00954393a5cb9572dc8",
+          "stream_bytes": 17073,
+          "expected": "baseline/expected/003.i420",
+          "expected_sha256": "9859201a566d268d7cef7fb0d7823958541949db6bae6ba4ae905cd75c04127b",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 4,
+          "input_sha256": "4163b7e215577fa69b077271d18cbe6fc5c1b3b199fae20725d32a75aebc4078",
+          "input_prefix": "baseline/inputs/004.h264",
+          "input_prefix_sha256": "6f048e904be3d5a9912b157d62b03bdcc686f3aaf0f8191876d95388f6f32dd5",
+          "input_bytes": 8018,
+          "input_packing_ms": 0.3749309980776161,
+          "stream": "baseline/streams/004.h264",
+          "stream_sha256": "89394f51ff808f90e731a9aa2b40b11d47a17c2bb3ca2906633c41c94d556c2e",
+          "stream_bytes": 17098,
+          "expected": "baseline/expected/004.i420",
+          "expected_sha256": "d26ad992abf28ea157ff5987447c2073105240b35b8494d09f63d301ef9e6625",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 5,
+          "input_sha256": "75d6e7126238c79c07be3587740191236181769569764148b4bfe4a72525c1ba",
+          "input_prefix": "baseline/inputs/005.h264",
+          "input_prefix_sha256": "61953af41be5c83f417d19ede42432ba3e61a9153295504863006cac7edb2d80",
+          "input_bytes": 7985,
+          "input_packing_ms": 0.3644820026238449,
+          "stream": "baseline/streams/005.h264",
+          "stream_sha256": "28b340482339a9898b5a836c7eabd46a8eec8146c6f35b0628884c083ec9ad44",
+          "stream_bytes": 17065,
+          "expected": "baseline/expected/005.i420",
+          "expected_sha256": "d3638d0fcf9a8ad5d56d96cb5413efd4829b4638882e51184df57362b76b7378",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 6,
+          "input_sha256": "c3c7c8ed455ac5be6b77aaef94863de1890df207daa457690cb854f1360ce588",
+          "input_prefix": "baseline/inputs/006.h264",
+          "input_prefix_sha256": "318a1dccf56aeeeceee1835de352080249065d74bc91f0bf36fc392ce7b30a17",
+          "input_bytes": 8036,
+          "input_packing_ms": 0.35824900260195136,
+          "stream": "baseline/streams/006.h264",
+          "stream_sha256": "a482a15e648dee04fec2251cb6b645e291d9d825b92c48c2299f2199a4be1ce7",
+          "stream_bytes": 17116,
+          "expected": "baseline/expected/006.i420",
+          "expected_sha256": "cde87fd240188e477009d219c357a54f758880d8b328f8cbb05fb75c90e12ba5",
+          "expected_bytes": 319488
+        },
+        {
+          "index": 7,
+          "input_sha256": "0d4cd940d501fcc11d6e4aaccb68328013b77b76a371f523cb3ca2a561ece1c5",
+          "input_prefix": "baseline/inputs/007.h264",
+          "input_prefix_sha256": "bf7be9f089aa44cc89e383bf6dbdce79e7a87e3cf867d28fa1983ba01fcc2787",
+          "input_bytes": 8023,
+          "input_packing_ms": 0.3582010031095706,
+          "stream": "baseline/streams/007.h264",
+          "stream_sha256": "b5fc4cda9b1a800157375c6937e429b63bfb0463921ece701ac69930778d4039",
+          "stream_bytes": 17103,
+          "expected": "baseline/expected/007.i420",
+          "expected_sha256": "b2edd3cde4057ff4b9a576ce5d118ad70b0ec1657c1fb772b05577deabebd6b9",
+          "expected_bytes": 319488
+        }
+      ],
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 416,
+          "copied_pictures": 416,
+          "i420_bytes": 2555904,
+          "named_outputs": 72,
+          "padding_bytes": 1277952,
+          "chroma_bytes": 851968
+        },
+        "openh264": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 416,
+          "copied_pictures": 416,
+          "i420_bytes": 2555904,
+          "named_outputs": 72,
+          "padding_bytes": 1277952,
+          "chroma_bytes": 851968
+        },
+        "vaapi": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 416,
+          "copied_pictures": 416,
+          "i420_bytes": 2555904,
+          "named_outputs": 72,
+          "padding_bytes": 1277952,
+          "chroma_bytes": 851968
+        }
+      },
+      "total_pictures": 416,
+      "total_i420_bytes": 2555904
+    },
+    "packed-2": {
+      "tiles_requested": 2,
+      "manifest": "packed-2/program.json",
+      "manifest_sha256": "7d2d34d7f42617ec0cf6bc7c5ff59a2d6997d600e47cd91795c2bda379a01161",
+      "width": 32,
+      "height": 32,
+      "coded_width": 112,
+      "coded_height": 64,
+      "pictures_per_job": 29,
+      "frame_bytes": 10752,
+      "output_picture_indices": [
+        9,
+        10,
+        18,
+        20,
+        24,
+        26,
+        28
+      ],
+      "output_regions": {
+        "output": {
+          "frame": 28,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_0": {
+          "frame": 10,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_1": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_2": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_3": {
+          "frame": 10,
+          "tile": 1,
+          "x": 48,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_4": {
+          "frame": 18,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_5": {
+          "frame": 20,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_6": {
+          "frame": 26,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_7": {
+          "frame": 24,
+          "tile": 1,
+          "x": 48,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        }
+      },
+      "costs": {
+        "input_pictures": 1,
+        "total_pictures": 29,
+        "prediction_pictures": 28,
+        "prediction_slices": 316,
+        "prediction_bytes": 7414,
+        "coded_width": 112,
+        "coded_height": 64,
+        "coded_luma_samples": 207872,
+        "coded_macroblocks": 812,
+        "full_readback_bytes": 311808,
+        "output_readback_bytes": 75264,
+        "tile_capacity": 2,
+        "peak_live_values": 5,
+        "reference_slots_used": 5
+      },
+      "lowering_ms": 43.72640200017486,
+      "packing_ms": 3.796279001107905,
+      "first_tail_ms": 17.90400100435363,
+      "tail": "packed-2/prediction.h264",
+      "tail_sha256": "47dcb8b16930bb836de81f101a5a8480ee1143ccde7ddc54c14cb2214a0428d3",
+      "tail_bytes_per_job": 7414,
+      "jobs": [
+        {
+          "index": 0,
+          "input_sha256": "2ac0f96b8e4e8536342dc435bb86267d8e5a82a6fd81820fba136c9a4a30c9d0",
+          "input_prefix": "packed-2/inputs/000.h264",
+          "input_prefix_sha256": "b5936dbdc743434eebde0c6eaf143c551fce52bc32bf9fcb539159be3a89cb92",
+          "input_bytes": 14148,
+          "input_packing_ms": 0.5942550051258877,
+          "stream": "packed-2/streams/000.h264",
+          "stream_sha256": "1c261fe2e51709e236d4c4cf7c6ebfd480dbe42820082186a2b2f1e91cb61124",
+          "stream_bytes": 21562,
+          "expected": "packed-2/expected/000.i420",
+          "expected_sha256": "3e73a299718db311ce87c5a70e298f43a0655996e2c81e9a21e99f200ade1129",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 1,
+          "input_sha256": "18910992ef43503b2a6539768f51fd147ff71cd560e89eb6e3e6c42367893940",
+          "input_prefix": "packed-2/inputs/001.h264",
+          "input_prefix_sha256": "0db8398d3b91dff4cedd066d8c2f6098c9408b6a99804a519b932d7b66931c35",
+          "input_bytes": 14189,
+          "input_packing_ms": 0.5768999981228262,
+          "stream": "packed-2/streams/001.h264",
+          "stream_sha256": "6e8c55497ab9a7ef0a160aa658bb05c5fbf16828a8659f7af68bc9b2c9ae5e20",
+          "stream_bytes": 21603,
+          "expected": "packed-2/expected/001.i420",
+          "expected_sha256": "08f278361673581339b308025e7124625810d8b35f8fc488ff2ebe9852ee834a",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 2,
+          "input_sha256": "ad67ec15074686055863b74e6cf811476e9af5e1f3a303e83fa06560fe35ad40",
+          "input_prefix": "packed-2/inputs/002.h264",
+          "input_prefix_sha256": "8aac02960b1f203118e28052bc132746967215e1b07dd232b198e256fc70a935",
+          "input_bytes": 14151,
+          "input_packing_ms": 0.6176080059958622,
+          "stream": "packed-2/streams/002.h264",
+          "stream_sha256": "66256de8b12b05ae3fcb49df39299462d49c37a14f398606809d328ae6f4714b",
+          "stream_bytes": 21565,
+          "expected": "packed-2/expected/002.i420",
+          "expected_sha256": "1e9ebb3d691b04361ec0379639ccfba2ec371b2347d5cc389c0ffdda43f69084",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 3,
+          "input_sha256": "41a33e2990853e33df7131ef75c94d5808eaca59d1c21c51ea99f34ad3ea7bca",
+          "input_prefix": "packed-2/inputs/003.h264",
+          "input_prefix_sha256": "9d16a1fe99fdb49b2a860498f72ae0b8c55c5e70c51a6992a81166e78d037e5b",
+          "input_bytes": 14162,
+          "input_packing_ms": 0.5717819949495606,
+          "stream": "packed-2/streams/003.h264",
+          "stream_sha256": "8928a09d792eb57219ec4bce6e4dca5cdf1d0e609158fcb44a3876a40cf6caa8",
+          "stream_bytes": 21576,
+          "expected": "packed-2/expected/003.i420",
+          "expected_sha256": "b7550bc2d19a9def632cf56b4887ee2dd36555b8cea5940e9dba4cd8d5de949b",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 4,
+          "input_sha256": "4163b7e215577fa69b077271d18cbe6fc5c1b3b199fae20725d32a75aebc4078",
+          "input_prefix": "packed-2/inputs/004.h264",
+          "input_prefix_sha256": "7b4aa162432207f4b55674ce6de6d2c3b35074ac643546bf58077788422c23b1",
+          "input_bytes": 14187,
+          "input_packing_ms": 0.5648410005960613,
+          "stream": "packed-2/streams/004.h264",
+          "stream_sha256": "570d40b599a737350bc2b47a5be2be21c006735667749052d4de6b516daa19fd",
+          "stream_bytes": 21601,
+          "expected": "packed-2/expected/004.i420",
+          "expected_sha256": "1c759c78ea2a727f084505fbc45e2ae9c331ffdbd18d370f3a10536286dd75fd",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 5,
+          "input_sha256": "75d6e7126238c79c07be3587740191236181769569764148b4bfe4a72525c1ba",
+          "input_prefix": "packed-2/inputs/005.h264",
+          "input_prefix_sha256": "229b5203055bc2a35cf4f5ff45be7592bf3df92f44173a07ae756e7aacc4720b",
+          "input_bytes": 14154,
+          "input_packing_ms": 0.5853699985891581,
+          "stream": "packed-2/streams/005.h264",
+          "stream_sha256": "02dce21b6d776159ad6e36cc1fdb2ff024a66919de0005f4a0c1c99439317192",
+          "stream_bytes": 21568,
+          "expected": "packed-2/expected/005.i420",
+          "expected_sha256": "b2ffc17a990dc82c480375a1ec655c485102797eb1f8298350d0d41cb1bd2eec",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 6,
+          "input_sha256": "c3c7c8ed455ac5be6b77aaef94863de1890df207daa457690cb854f1360ce588",
+          "input_prefix": "packed-2/inputs/006.h264",
+          "input_prefix_sha256": "1922a0c1d43252668b333802aa293851acdd3319bcaacad3cffd83a1d7facdda",
+          "input_bytes": 14205,
+          "input_packing_ms": 0.8150900030159391,
+          "stream": "packed-2/streams/006.h264",
+          "stream_sha256": "caa3127a98a3cfc59ea6dc58eeb3cf5319f29bfac136cf0a1cdb1e54dc73744d",
+          "stream_bytes": 21619,
+          "expected": "packed-2/expected/006.i420",
+          "expected_sha256": "7b80f0635a7df12b5cc3ace975c6e206552a1451d01732054f51ba5aa2c9fba8",
+          "expected_bytes": 311808
+        },
+        {
+          "index": 7,
+          "input_sha256": "0d4cd940d501fcc11d6e4aaccb68328013b77b76a371f523cb3ca2a561ece1c5",
+          "input_prefix": "packed-2/inputs/007.h264",
+          "input_prefix_sha256": "c4bdd364ba47b969d80df70eef2e54c37a39c330e4c5354dcb2c9b4fa8b0fa38",
+          "input_bytes": 14192,
+          "input_packing_ms": 1.009572995826602,
+          "stream": "packed-2/streams/007.h264",
+          "stream_sha256": "4264df839c72806733b1c3ac9927d35830f49649557382e701d52614071931c3",
+          "stream_bytes": 21606,
+          "expected": "packed-2/expected/007.i420",
+          "expected_sha256": "e180010953d3d0e90bdcd729e31775ee6852aaaf0046bea98410e5a4d88cd897",
+          "expected_bytes": 311808
+        }
+      ],
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 232,
+          "copied_pictures": 232,
+          "i420_bytes": 2494464,
+          "named_outputs": 72,
+          "padding_bytes": 1236992,
+          "chroma_bytes": 831488
+        },
+        "openh264": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 232,
+          "copied_pictures": 232,
+          "i420_bytes": 2494464,
+          "named_outputs": 72,
+          "padding_bytes": 1236992,
+          "chroma_bytes": 831488
+        },
+        "vaapi": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 232,
+          "copied_pictures": 232,
+          "i420_bytes": 2494464,
+          "named_outputs": 72,
+          "padding_bytes": 1236992,
+          "chroma_bytes": 831488
+        }
+      },
+      "total_pictures": 232,
+      "total_i420_bytes": 2494464
+    },
+    "packed-4": {
+      "tiles_requested": 4,
+      "manifest": "packed-4/program.json",
+      "manifest_sha256": "6013a28be012b8cfd7fd8d51115dfaa0039f1f4a227fbdced00f72433c91f0e3",
+      "width": 32,
+      "height": 32,
+      "coded_width": 112,
+      "coded_height": 112,
+      "pictures_per_job": 20,
+      "frame_bytes": 18816,
+      "output_picture_indices": [
+        9,
+        10,
+        13,
+        17,
+        19
+      ],
+      "output_regions": {
+        "output": {
+          "frame": 19,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_0": {
+          "frame": 10,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_1": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_2": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_3": {
+          "frame": 10,
+          "tile": 1,
+          "x": 48,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_4": {
+          "frame": 9,
+          "tile": 2,
+          "x": 0,
+          "y": 48,
+          "width": 32,
+          "height": 32
+        },
+        "feature_5": {
+          "frame": 9,
+          "tile": 3,
+          "x": 48,
+          "y": 48,
+          "width": 32,
+          "height": 32
+        },
+        "feature_6": {
+          "frame": 17,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_7": {
+          "frame": 13,
+          "tile": 2,
+          "x": 0,
+          "y": 48,
+          "width": 32,
+          "height": 32
+        }
+      },
+      "costs": {
+        "input_pictures": 1,
+        "total_pictures": 20,
+        "prediction_pictures": 19,
+        "prediction_slices": 337,
+        "prediction_bytes": 8056,
+        "coded_width": 112,
+        "coded_height": 112,
+        "coded_luma_samples": 250880,
+        "coded_macroblocks": 980,
+        "full_readback_bytes": 376320,
+        "output_readback_bytes": 94080,
+        "tile_capacity": 4,
+        "peak_live_values": 5,
+        "reference_slots_used": 5
+      },
+      "lowering_ms": 43.72640200017486,
+      "packing_ms": 4.290523997042328,
+      "first_tail_ms": 23.2084399976884,
+      "tail": "packed-4/prediction.h264",
+      "tail_sha256": "8e35cc590846657917f14f555903d84f8eeb413e831d5ab0a332cb68f63d189b",
+      "tail_bytes_per_job": 8056,
+      "jobs": [
+        {
+          "index": 0,
+          "input_sha256": "2ac0f96b8e4e8536342dc435bb86267d8e5a82a6fd81820fba136c9a4a30c9d0",
+          "input_prefix": "packed-4/inputs/000.h264",
+          "input_prefix_sha256": "5af50fed0db1c867ddff3a1ffb535921a19931b5417fb76fae1ab5a9ea915879",
+          "input_bytes": 24942,
+          "input_packing_ms": 1.2207760009914637,
+          "stream": "packed-4/streams/000.h264",
+          "stream_sha256": "968a0a3414ad32bc08159555da7829f2ea64d6bbf1cabb2a7c05989ce182e7c3",
+          "stream_bytes": 32998,
+          "expected": "packed-4/expected/000.i420",
+          "expected_sha256": "f6ed08015f4f00a3a3fbc69d30633f43bedac769493a24f3d7ac0c441842a7ea",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 1,
+          "input_sha256": "18910992ef43503b2a6539768f51fd147ff71cd560e89eb6e3e6c42367893940",
+          "input_prefix": "packed-4/inputs/001.h264",
+          "input_prefix_sha256": "e724a96aa6973f96824e5b758e083e807654cae5b3456b1b978e0b6e01765394",
+          "input_bytes": 24983,
+          "input_packing_ms": 1.0894950028159656,
+          "stream": "packed-4/streams/001.h264",
+          "stream_sha256": "e77c58bb273200ba77383ad2b96cc93f791c69139ff543d09f42b744a5f30323",
+          "stream_bytes": 33039,
+          "expected": "packed-4/expected/001.i420",
+          "expected_sha256": "49cde4e9d94a372a50f85297aa9941ed2a3f650fd07ec5edbe034b1a18f049c5",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 2,
+          "input_sha256": "ad67ec15074686055863b74e6cf811476e9af5e1f3a303e83fa06560fe35ad40",
+          "input_prefix": "packed-4/inputs/002.h264",
+          "input_prefix_sha256": "955370ba2c299d78999cfbd1cdf2e594ceb52bf8b667128c0e283514e2b1300d",
+          "input_bytes": 24945,
+          "input_packing_ms": 1.0390749957878143,
+          "stream": "packed-4/streams/002.h264",
+          "stream_sha256": "431426ff58efd2d8769644f06ff5e85dd8754d09f6d5029fd0024639af725dba",
+          "stream_bytes": 33001,
+          "expected": "packed-4/expected/002.i420",
+          "expected_sha256": "9c5ec78563cf2de5320b9f69bd5d53eff1e8293eb17d59773e980287dd19fb29",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 3,
+          "input_sha256": "41a33e2990853e33df7131ef75c94d5808eaca59d1c21c51ea99f34ad3ea7bca",
+          "input_prefix": "packed-4/inputs/003.h264",
+          "input_prefix_sha256": "72e1ed117009ab36614c8260fd753b974476cd1a40747bdbed16f2e06baa2cfa",
+          "input_bytes": 24956,
+          "input_packing_ms": 1.0571749953669496,
+          "stream": "packed-4/streams/003.h264",
+          "stream_sha256": "61b36b6214812fa5c44e9da3fc27bc1e5fa39e6312dd3819f48c2d186010a338",
+          "stream_bytes": 33012,
+          "expected": "packed-4/expected/003.i420",
+          "expected_sha256": "4b81118e3ff7134b0822e330a81b9aa27942d135de201b7a03c06dc8a2560031",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 4,
+          "input_sha256": "4163b7e215577fa69b077271d18cbe6fc5c1b3b199fae20725d32a75aebc4078",
+          "input_prefix": "packed-4/inputs/004.h264",
+          "input_prefix_sha256": "b6c04c4095b67a64f3bf7e6012fb1c1306518aa194f2eb011651dbf9f77852e7",
+          "input_bytes": 24981,
+          "input_packing_ms": 1.1024539999198169,
+          "stream": "packed-4/streams/004.h264",
+          "stream_sha256": "2ff7e3c20a03e0e89631fc923277caa3e87c872a7694e9eb2197861206ab3e38",
+          "stream_bytes": 33037,
+          "expected": "packed-4/expected/004.i420",
+          "expected_sha256": "6218a5d50095ea8a1d26676be879029d2deb41760d9529724b849a936427ff13",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 5,
+          "input_sha256": "75d6e7126238c79c07be3587740191236181769569764148b4bfe4a72525c1ba",
+          "input_prefix": "packed-4/inputs/005.h264",
+          "input_prefix_sha256": "c1a7eb18fd7a7f211507b9d9f1b63ebb3489c0f431940189cc12883bb2ee2dd3",
+          "input_bytes": 24948,
+          "input_packing_ms": 1.0783600009744987,
+          "stream": "packed-4/streams/005.h264",
+          "stream_sha256": "a21cb519fd1a8216c471fa0fcc36b3636985eb0d8312e716db887a1cc2a86e3f",
+          "stream_bytes": 33004,
+          "expected": "packed-4/expected/005.i420",
+          "expected_sha256": "28b4cc757ac77dd67c1942d46d46e47bb9b28c16950dce6323c37ff1c01ad9ab",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 6,
+          "input_sha256": "c3c7c8ed455ac5be6b77aaef94863de1890df207daa457690cb854f1360ce588",
+          "input_prefix": "packed-4/inputs/006.h264",
+          "input_prefix_sha256": "80fe2f9e63be7cd4ea6a6da3e9ef71af1368b7087bf8e2cb4b63c3d2229a6b2a",
+          "input_bytes": 24999,
+          "input_packing_ms": 1.0539239956415258,
+          "stream": "packed-4/streams/006.h264",
+          "stream_sha256": "7b91c2de5e395bde9eea76ecd71b7af09f954655b5846786b5342d6a929ede9f",
+          "stream_bytes": 33055,
+          "expected": "packed-4/expected/006.i420",
+          "expected_sha256": "1a3d89694eabcd5afa1378a11d31e259ad95f2fe47d1e0a0b9cccc9edcd205a8",
+          "expected_bytes": 376320
+        },
+        {
+          "index": 7,
+          "input_sha256": "0d4cd940d501fcc11d6e4aaccb68328013b77b76a371f523cb3ca2a561ece1c5",
+          "input_prefix": "packed-4/inputs/007.h264",
+          "input_prefix_sha256": "7dc34972c49277f94c7aa9fdb5b42cf2c15152842056ad6872f4d684b4aa54a9",
+          "input_bytes": 24986,
+          "input_packing_ms": 1.1300719997962005,
+          "stream": "packed-4/streams/007.h264",
+          "stream_sha256": "39b3f26e3d225a75f4acfbfa29c9e3e8bd033bee7fb616595c7a5e425fc2aaf1",
+          "stream_bytes": 33042,
+          "expected": "packed-4/expected/007.i420",
+          "expected_sha256": "c9c8e01c6f5feb23ae4d7f4c193d1bd377b02d11581e19576ccbf7e65e33e963",
+          "expected_bytes": 376320
+        }
+      ],
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 160,
+          "copied_pictures": 160,
+          "i420_bytes": 3010560,
+          "named_outputs": 72,
+          "padding_bytes": 1581056,
+          "chroma_bytes": 1003520
+        },
+        "openh264": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 160,
+          "copied_pictures": 160,
+          "i420_bytes": 3010560,
+          "named_outputs": 72,
+          "padding_bytes": 1581056,
+          "chroma_bytes": 1003520
+        },
+        "vaapi": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 160,
+          "copied_pictures": 160,
+          "i420_bytes": 3010560,
+          "named_outputs": 72,
+          "padding_bytes": 1581056,
+          "chroma_bytes": 1003520
+        }
+      },
+      "total_pictures": 160,
+      "total_i420_bytes": 3010560
+    },
+    "packed-8": {
+      "tiles_requested": 8,
+      "manifest": "packed-8/program.json",
+      "manifest_sha256": "0f23c275188c5c2e27a41d251f84ff82a3d45cc32a350766ad19583d386f0e06",
+      "width": 32,
+      "height": 32,
+      "coded_width": 208,
+      "coded_height": 112,
+      "pictures_per_job": 17,
+      "frame_bytes": 34944,
+      "output_picture_indices": [
+        9,
+        10,
+        16
+      ],
+      "output_regions": {
+        "output": {
+          "frame": 16,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_0": {
+          "frame": 10,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_1": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_2": {
+          "frame": 9,
+          "tile": 0,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_3": {
+          "frame": 10,
+          "tile": 1,
+          "x": 48,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_4": {
+          "frame": 9,
+          "tile": 2,
+          "x": 96,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_5": {
+          "frame": 9,
+          "tile": 3,
+          "x": 144,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "feature_6": {
+          "frame": 9,
+          "tile": 4,
+          "x": 0,
+          "y": 48,
+          "width": 32,
+          "height": 32
+        },
+        "feature_7": {
+          "frame": 9,
+          "tile": 5,
+          "x": 48,
+          "y": 48,
+          "width": 32,
+          "height": 32
+        }
+      },
+      "costs": {
+        "input_pictures": 1,
+        "total_pictures": 17,
+        "prediction_pictures": 16,
+        "prediction_slices": 316,
+        "prediction_bytes": 8285,
+        "coded_width": 208,
+        "coded_height": 112,
+        "coded_luma_samples": 396032,
+        "coded_macroblocks": 1547,
+        "full_readback_bytes": 594048,
+        "output_readback_bytes": 104832,
+        "tile_capacity": 8,
+        "peak_live_values": 3,
+        "reference_slots_used": 3
+      },
+      "lowering_ms": 43.72640200017486,
+      "packing_ms": 4.065879998961464,
+      "first_tail_ms": 19.519631001458038,
+      "tail": "packed-8/prediction.h264",
+      "tail_sha256": "a5418e30fc3d2cc2b1087a8879e98dfff73f1e1cb74763e15f9c697a493d3d8b",
+      "tail_bytes_per_job": 8285,
+      "jobs": [
+        {
+          "index": 0,
+          "input_sha256": "2ac0f96b8e4e8536342dc435bb86267d8e5a82a6fd81820fba136c9a4a30c9d0",
+          "input_prefix": "packed-8/inputs/000.h264",
+          "input_prefix_sha256": "faba30cc705d89be2e40b406e7824a48ab90c0a9bd63ff9a309dc46e43e9fc81",
+          "input_bytes": 46530,
+          "input_packing_ms": 2.095497002301272,
+          "stream": "packed-8/streams/000.h264",
+          "stream_sha256": "9b58e0eda0d8382ee276c76ab7d8efc34e2ecf5d6e8be9eedfdfacbea87180d1",
+          "stream_bytes": 54815,
+          "expected": "packed-8/expected/000.i420",
+          "expected_sha256": "e3dc1855c1216888d3054a6ed46d98349b5572c489504b9ade08811c38ea6178",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 1,
+          "input_sha256": "18910992ef43503b2a6539768f51fd147ff71cd560e89eb6e3e6c42367893940",
+          "input_prefix": "packed-8/inputs/001.h264",
+          "input_prefix_sha256": "ba1aabe7e1bece7e7fed46231ccd7eb55b1085e4167e7f8593c861fa6780d2bb",
+          "input_bytes": 46571,
+          "input_packing_ms": 2.046508998319041,
+          "stream": "packed-8/streams/001.h264",
+          "stream_sha256": "4d501869150bc337b41641d2faeb30906d7f1509aa21034a03342c6917ef9463",
+          "stream_bytes": 54856,
+          "expected": "packed-8/expected/001.i420",
+          "expected_sha256": "23e1bc6ae64b275c38db0fdd631a133f8b2d020ec646f34f48beb53ab792f835",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 2,
+          "input_sha256": "ad67ec15074686055863b74e6cf811476e9af5e1f3a303e83fa06560fe35ad40",
+          "input_prefix": "packed-8/inputs/002.h264",
+          "input_prefix_sha256": "69ff977f4caa71d58efe476880d29c5f08dc185e082654a355448a2515b2ddb1",
+          "input_bytes": 46533,
+          "input_packing_ms": 2.15231699985452,
+          "stream": "packed-8/streams/002.h264",
+          "stream_sha256": "69e3790243fc0204d6a79dad26373d149d3385a20ad27f1854223dff1746f0b5",
+          "stream_bytes": 54818,
+          "expected": "packed-8/expected/002.i420",
+          "expected_sha256": "8a0e3d9b4bddd987851112bfd59bb624e2b7cae63f5cface1adedd5874d3dd9c",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 3,
+          "input_sha256": "41a33e2990853e33df7131ef75c94d5808eaca59d1c21c51ea99f34ad3ea7bca",
+          "input_prefix": "packed-8/inputs/003.h264",
+          "input_prefix_sha256": "20a18eece2e005f54dffb31191787ea1edaae61677f40b45aaf5cd7a6fa5b55d",
+          "input_bytes": 46544,
+          "input_packing_ms": 2.008175004448276,
+          "stream": "packed-8/streams/003.h264",
+          "stream_sha256": "284f56a3ce4a26539064619bf52b56e4deb3cba8c8c1a0dfa28b50ad6d3e8b44",
+          "stream_bytes": 54829,
+          "expected": "packed-8/expected/003.i420",
+          "expected_sha256": "78d2f8ec55452c407abef2889c4695ed9f30d5becc78093634398c2198070782",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 4,
+          "input_sha256": "4163b7e215577fa69b077271d18cbe6fc5c1b3b199fae20725d32a75aebc4078",
+          "input_prefix": "packed-8/inputs/004.h264",
+          "input_prefix_sha256": "3351b4bf320cd949a68e39e5eeb01150051d0265cd2bf13d3b82bb4a7caa7cd2",
+          "input_bytes": 46569,
+          "input_packing_ms": 2.093069997499697,
+          "stream": "packed-8/streams/004.h264",
+          "stream_sha256": "82c93ea5c81f9369947cbe908729c47ba92847f36238a526a96a87503f607b41",
+          "stream_bytes": 54854,
+          "expected": "packed-8/expected/004.i420",
+          "expected_sha256": "65fba5c176e103507e3191df8b2f1102eca17bc6a9cf718d19202ff12f060e3c",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 5,
+          "input_sha256": "75d6e7126238c79c07be3587740191236181769569764148b4bfe4a72525c1ba",
+          "input_prefix": "packed-8/inputs/005.h264",
+          "input_prefix_sha256": "79d84de9dba3012ea46f259cc70652ea8b0956a24cf11f62fc88a8a84e4be268",
+          "input_bytes": 46536,
+          "input_packing_ms": 2.0172869990346953,
+          "stream": "packed-8/streams/005.h264",
+          "stream_sha256": "1df893cb830724b3832e8cb8fca14685af9da87a17b180e0b4e3dff43f0940eb",
+          "stream_bytes": 54821,
+          "expected": "packed-8/expected/005.i420",
+          "expected_sha256": "762b9f371411f95662955ce84d4c011a46675740d603bd184eca660646689565",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 6,
+          "input_sha256": "c3c7c8ed455ac5be6b77aaef94863de1890df207daa457690cb854f1360ce588",
+          "input_prefix": "packed-8/inputs/006.h264",
+          "input_prefix_sha256": "8dc3c5f377fb171205a0bad5ab1cf47fd5e736ee4f563670092efab485821a5e",
+          "input_bytes": 46587,
+          "input_packing_ms": 2.0552150017465465,
+          "stream": "packed-8/streams/006.h264",
+          "stream_sha256": "78466e78a6dedb2062ecd38d5279e9a57942228a10789ec68b14065b4429bb4b",
+          "stream_bytes": 54872,
+          "expected": "packed-8/expected/006.i420",
+          "expected_sha256": "5f2d9f6c4942e5b32b7f0703547a14c4e24b585465ae1e1df0c0f1f06241b7bb",
+          "expected_bytes": 594048
+        },
+        {
+          "index": 7,
+          "input_sha256": "0d4cd940d501fcc11d6e4aaccb68328013b77b76a371f523cb3ca2a561ece1c5",
+          "input_prefix": "packed-8/inputs/007.h264",
+          "input_prefix_sha256": "9b4086ff690d888cd0b511513cf052d6ebae20b3218b62fa0e1399ee2e02ffb4",
+          "input_bytes": 46574,
+          "input_packing_ms": 2.076709999528248,
+          "stream": "packed-8/streams/007.h264",
+          "stream_sha256": "b12b3cbe54dfd1a57e17baaa534fb06973eaeb057e86cb018ea39901b785cc21",
+          "stream_bytes": 54859,
+          "expected": "packed-8/expected/007.i420",
+          "expected_sha256": "c0c0c9c7af0b49969ab8ff049763fedc8e5dd67ea3149ccd7b0968f3d82f5e40",
+          "expected_bytes": 594048
+        }
+      ],
+      "decoders": {
+        "ffmpeg": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 136,
+          "copied_pictures": 136,
+          "i420_bytes": 4752384,
+          "named_outputs": 72,
+          "padding_bytes": 2742272,
+          "chroma_bytes": 1584128
+        },
+        "openh264": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 136,
+          "copied_pictures": 136,
+          "i420_bytes": 4752384,
+          "named_outputs": 72,
+          "padding_bytes": 2742272,
+          "chroma_bytes": 1584128
+        },
+        "vaapi": {
+          "status": "pass",
+          "jobs": 8,
+          "decoded_pictures": 136,
+          "copied_pictures": 136,
+          "i420_bytes": 4752384,
+          "named_outputs": 72,
+          "padding_bytes": 2742272,
+          "chroma_bytes": 1584128
+        }
+      },
+      "total_pictures": 136,
+      "total_i420_bytes": 4752384
+    }
+  },
+  "baseline_lowering_ms": 43.72640200017486
+}
