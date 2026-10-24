@@ -83,11 +83,30 @@ class Operation:
     block_operations: tuple["Operation", ...] = ()
 
 
+@dataclass(frozen=True)
+class _LevelLimits:
+    max_mbps: int
+    max_fs: int
+    max_dpb_mbs: int
+    max_br: int
+    max_cpb: int
+    min_cr: int
+    slice_rate: int
+
+
+# H.264 (08/2024), Tables A-1 and A-4. Other levels remain unsupported;
+# accepting a level identifier without its complete limits would be unsafe.
+_LEVELS = MappingProxyType({
+    31: _LevelLimits(108000, 3600, 18000, 14000, 14000, 4, 60),
+    41: _LevelLimits(245760, 8192, 32768, 50000, 62500, 2, 24),
+})
+
+
 class Writer:
     MAX_REFS = 16
 
     def __init__(self, width, height, fps=30, motion_bits=4,
-                 reference_slots=None, slice_mode="macroblock"):
+                 reference_slots=None, slice_mode="macroblock", *, level_idc=31):
         """Create a writer with an optional immutable physical-frame slot plan.
 
         A plan assigns every frame, starting at zero, a long-term slot in 0..15.
@@ -96,25 +115,38 @@ class Writer:
         read that old occupant. Without a plan, the legacy sliding window applies.
         Encoding never changes reference state; repeated or out-of-order calls
         produce the same bytes for the same arguments.
+
+        High level 3.1 remains the byte-compatible default. Explicit level 4.1
+        permits larger PCM inputs and uses a conservative per-access-unit
+        bitrate budget, rather than simulating a stateful burst-buffer model.
         """
+        if type(level_idc) is not int or level_idc not in _LEVELS:
+            raise ValueError("level_idc must be 31 or 41")
+        self.level_idc, self._limits = level_idc, _LEVELS[level_idc]
+        self.level_name = f"{level_idc // 10}.{level_idc % 10}"
         # A 16-pixel guard on every side enforces a finite, dead boundary.
-        if width < 16 or height < 16 or width % 16 or height % 16:
+        if type(width) is not int or type(height) is not int or width < 16 or height < 16 or width % 16 or height % 16:
             raise ValueError("Board dimensions must be positive multiples of 16")
         self.width, self.height = width + 32, height + 32
         self.mb_width, self.mb_height = self.width // 16, self.height // 16
-        if max(self.mb_width, self.mb_height) > 169:
-            raise ValueError("Board exceeds level 3.1 per-axis dimension limit")
-        if self.mb_width * self.mb_height * self.MAX_REFS > 18000:
-            raise ValueError("Board exceeds level 3.1 decoded-picture buffer limit")
-        if not 1 <= fps <= 60:
+        macroblocks = self.mb_width * self.mb_height
+        if max(self.mb_width, self.mb_height) ** 2 > self._limits.max_fs * 8:
+            raise ValueError(f"Board exceeds level {self.level_name} per-axis dimension limit")
+        if macroblocks > self._limits.max_fs:
+            raise ValueError(f"Board exceeds level {self.level_name} frame-size limit")
+        if macroblocks * self.MAX_REFS > self._limits.max_dpb_mbs:
+            raise ValueError(f"Board exceeds level {self.level_name} decoded-picture buffer limit")
+        if type(fps) is not int or not 1 <= fps <= 60:
             raise ValueError("fps must be between 1 and 60")
+        if macroblocks * fps > self._limits.max_mbps:
+            raise ValueError(f"Board exceeds level {self.level_name} macroblock processing rate")
         if slice_mode not in ("macroblock", "row"):
             raise ValueError("slice_mode must be 'macroblock' or 'row'")
         self.slice_mode = slice_mode
         slices = (self.mb_width * self.mb_height if slice_mode == "macroblock"
                   else 3 * (self.mb_height - 2) + 2)
-        if slices * fps > 1800:
-            raise ValueError("Prediction slices exceed level 3.1 slice rate; reduce board size or fps")
+        if slices * fps * self._limits.slice_rate > self._limits.max_mbps:
+            raise ValueError(f"Prediction slices exceed level {self.level_name} slice rate; reduce board size or fps")
         self.fps = fps
         if not 0 <= motion_bits <= 16:
             raise ValueError("Motion-vector bound must use 0..16 bits")
@@ -179,7 +211,7 @@ class Writer:
         b = Bits()
         b.u(100, 8)  # High profile permits zero-valued I_PCM samples
         b.u(0, 8)
-        b.u(31, 8)  # level 3.1
+        b.u(self.level_idc, 8)
         b.ue(0)
         b.ue(1)  # chroma_format_idc: 4:2:0
         b.ue(0)  # bit_depth_luma_minus8
@@ -324,12 +356,41 @@ class Writer:
                     rbsp.extend(chroma)
         rbsp.append(128)  # rbsp_stop_one_bit, then seven zero alignment bits.
         out = (self.parameter_sets() + nal_from_rbsp(5, rbsp)) if frame == 0 else nal_from_rbsp(1, rbsp)
-        # High profile MinCR=4; initial AU bound, Annex A.3.3(i).
-        # Exactly three NALs (SPS, PPS, IDR); four-byte start codes don't count.
-        initial_limit = 96 * max(self.mb_width * self.mb_height * 172, 108000) // 172
-        if frame == 0 and len(out) - 12 > initial_limit:
-            raise ValueError("PCM seed exceeds High level 3.1 initial access-unit size limit")
-        return out
+        return self._checked_access_unit(frame, out, "PCM seed" if frame == 0 else "PCM input")
+
+    def _checked_access_unit(self, frame, data, label):
+        """Apply stateless level limits to the exact escaped bytes being emitted.
+
+        Annex A.3.3(i,j) counts NAL-unit bytes, excluding Annex B start codes.
+        VCL HRD counts only slice NAL units. The NAL/byte-stream HRD budget
+        below conservatively also counts the four-byte Annex B start codes.
+        """
+        units = data.split(b"\x00\x00\x00\x01")[1:]
+        nal_bytes = sum(len(unit) for unit in units)
+        vcl_bytes = sum(len(unit) for unit in units if 1 <= (unit[0] & 31) <= 5)
+        limits = self._limits
+        if frame == 0:
+            macroblocks = self.mb_width * self.mb_height
+            maximum = 384 * max(macroblocks * 172, limits.max_mbps) // (172 * limits.min_cr)
+            kind = "initial"
+        else:
+            maximum = 384 * limits.max_mbps // (self.fps * limits.min_cr)
+            kind = "subsequent"
+        if nal_bytes > maximum:
+            raise ValueError(f"{label} exceeds High level {self.level_name} {kind} access-unit size limit")
+        # Table A-2 specifies High-profile VCL/NAL factors of 1250/1500.
+        if vcl_bytes * 8 > 1250 * limits.max_cpb or len(data) * 8 > 1500 * limits.max_cpb:
+            raise ValueError(f"{label} exceeds High level {self.level_name} coded-picture buffer capacity")
+        if self.level_idc == 41:
+            # A sufficient, deliberately narrower bound for arbitrary sequences
+            # assembled from this stateless writer: every AU fits one frame
+            # interval at both inferred HRD bitrates. Valid bursty level-4.1
+            # streams can exceed this bound and are not supported here.
+            if vcl_bytes * 8 * self.fps > 1250 * limits.max_br:
+                raise ValueError(f"{label} exceeds conservative level {self.level_name} VCL bitrate budget")
+            if len(data) * 8 * self.fps > 1500 * limits.max_br:
+                raise ValueError(f"{label} exceeds conservative level {self.level_name} NAL bitrate budget")
+        return data
 
     def _motion(self, source):
         components = (source.dx, source.dy, source.qx, source.qy)
@@ -339,6 +400,10 @@ class Writer:
         if any(not -(1 << self.motion_bits) <= component < (1 << self.motion_bits)
                for component in vector):
             raise ValueError("Motion vector exceeds declared SPS bound")
+        # Both supported levels have MaxVmvR=512 luma samples; Annex A.3.2
+        # independently limits horizontal displacement to [-2048,2047.75].
+        if not -8192 <= vector[0] <= 8191 or not -2048 <= vector[1] <= 2047:
+            raise ValueError(f"Motion vector exceeds level {self.level_name} component limit")
         return vector
 
     def _prediction_runs(self, operation):
@@ -411,8 +476,8 @@ class Writer:
             # Per-block headers can split rows more often than the uniform
             # prediction bound checked by the constructor. Check before writing.
             runs = list(runs)
-            if len(runs) * self.fps > 1800:
-                raise ValueError("Prediction slices exceed level 3.1 slice rate; reduce board size or fps")
+            if len(runs) * self.fps * self._limits.slice_rate > self._limits.max_mbps:
+                raise ValueError(f"Prediction slices exceed level {self.level_name} slice rate; reduce board size or fps")
             self._validate_frame(frame)
             for block in operation.block_operations:
                 for source in block.sources:
@@ -436,4 +501,4 @@ class Writer:
                     previous[index] = (qx, qy)
                 b.ue(0)  # coded_block_pattern: no residual
             out.extend(nal(1, b))
-        return bytes(out)
+        return self._checked_access_unit(frame, bytes(out), "Prediction")
