@@ -75,17 +75,18 @@ class CompilerTests(unittest.TestCase):
         self.assertEqual(program.output_frames["a"], program.output_frames["b"])
         program.verify(self.image())
 
-    def test__given_long_lived_input__when_unrolling__then_refreshes_keep_every_reference_legal(self):
+    def test__given_long_lived_input__when_retaining__then_age_copies_are_unnecessary(self):
         def kernel(x):
-            current = h264.repeat(70, h264.bit_not, x)
-            return h264.bit_or(x, current)
+            return h264.repeat(70, lambda value: h264.bit_or(h264.shift(value, 1), x), x)
         program = h264.compile(kernel, 16, 16)
-        self.assertGreater(len(program.refreshes), 0)
-        self.assertTrue(all(1 <= frame-s.frame <= 16 for frame, op in enumerate(program.operations, 1) for s in op.sources))
-        self.assertEqual(program.verify(self.image())["output"], self.image())
+        legacy = h264.compile(kernel, 16, 16, reference_mode="sliding")
+        self.assertEqual(program.refreshes, [])
+        self.assertTrue(legacy.refreshes)
+        self.assertTrue(all(1 <= frame-s.frame <= 16 for frame, op in enumerate(legacy.operations, 1) for s in op.sources))
+        self.assertEqual(program.verify(self.image()), legacy.verify(self.image()))
 
     def test__given_long_static_graph__when_tracing__then_python_recursion_depth_is_not_a_limit(self):
-        program = h264.compile(lambda x: h264.repeat(1500, h264.bit_not, x), 16, 16)
+        program = h264.compile(lambda x: h264.repeat(1500, h264.bit_not, x), 16, 16, optimize=False)
         self.assertEqual(program.pictures, 1502)
         self.assertEqual(program.verify(self.image())["output"], self.image())
 

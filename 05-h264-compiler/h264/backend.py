@@ -16,7 +16,8 @@ from .verify import evaluate, read
 
 
 class Program:
-    def __init__(self, function, width, height, input_range, optimize, input_ranges=None):
+    def __init__(self, function, width, height, input_range, optimize, input_ranges=None,
+                 reference_mode=None, slice_mode=None):
         integer(width, "width")
         integer(height, "height")
         self.width, self.height = width, height
@@ -26,17 +27,37 @@ class Program:
         sources, outputs, traced_count = trace(function, input_range, input_ranges)
         self.input_ranges = {source.params[0]: (source.lo, source.hi) for source in sources}
         self.input_count = len(sources)
+        self.reference_mode = reference_mode or ("retained" if optimize else "sliding")
+        self.slice_mode = slice_mode or ("row" if optimize else "macroblock")
+        if self.reference_mode not in ("retained", "sliding"):
+            raise CompileError("reference_mode must be 'retained' or 'sliding'")
+        if self.slice_mode not in ("row", "macroblock"):
+            raise CompileError("slice_mode must be 'row' or 'macroblock'")
         instructions, virtual_outputs, self.graph, self.stats, self.graph_outputs = lower(sources, outputs, optimize)
         if any(item.op == "gather" and len(item.params[0]) != (width//16)*(height//16) for item in self.graph):
             raise CompileError("gather needs one offset per active 16x16 block")
-        self.operations, self.output_frames, self.refreshes, peak, self.graph_frames = schedule(
-            instructions, virtual_outputs, self.binary_input, self.input_count)
+        self.operations, self.output_frames, self.refreshes, peak, self.graph_frames, self.reference_slots = schedule(
+            instructions, virtual_outputs, self.binary_input, self.input_count,
+            retain=self.reference_mode == "retained")
         self.stats.update({"traced_nodes": traced_count, "dead_nodes": traced_count-self.stats["reachable_nodes_before_cse"],
                            "reference_copies": len(self.refreshes), "peak_live_values": peak, "optimized": optimize})
         maximum = max((abs(value) for op in self.operations for ref in op.sources
                        for value in (4*ref.dx+ref.qx, 4*ref.dy+ref.qy)), default=0)
         maximum += max((abs(value) for op in self.operations for pair in op.block_offsets for value in pair), default=0)
-        self.writer = Writer(width, height, motion_bits=max(4, maximum.bit_length()))
+        self.writer = Writer(width, height, motion_bits=max(4, maximum.bit_length()),
+                             reference_slots=self.reference_slots, slice_mode=self.slice_mode)
+
+    @cached_property
+    def costs(self):
+        """Static costs; byte/slice totals describe the cached prediction tail."""
+        return {"input_pictures": self.input_count,
+                "normalization_pictures": int(self.binary_input),
+                "arithmetic_pictures": self.stats["lowered_instructions"],
+                "refresh_pictures": len(self.refreshes), "total_pictures": self.pictures,
+                "prediction_slices": self.tail.count(b"\x00\x00\x00\x01"),
+                "prediction_bytes": len(self.tail),
+                "peak_live_values": self.stats["peak_live_values"],
+                "reference_slots_used": len(set(self.reference_slots.values())) if self.reference_slots else None}
 
     @property
     def pictures(self):
@@ -78,7 +99,9 @@ class Program:
                             "encoding": "binary 0/255" if self.binary_input else "literal u8"}
                            for frame, (name, value_range) in enumerate(self.input_ranges.items())],
                 "guard": 16, "pictures": self.pictures, "output_frames": self.output_frames,
-                "graph_outputs": self.graph_outputs, "stats": self.stats,
+                "graph_outputs": self.graph_outputs, "stats": self.stats, "costs": self.costs,
+                "reference_mode": self.reference_mode, "slice_mode": self.slice_mode,
+                "reference_slots": self.reference_slots,
                 "graph": [{"id": ids[item], "op": item.op, "args": [ids[arg] for arg in item.args],
                            "params": list(item.params), "range": [item.lo, item.hi],
                            "last_lowered_frame": self.graph_frames.get(ids[item])} for item in self.graph],
@@ -121,5 +144,6 @@ class Program:
         return actual
 
 
-def compile(function, width=32, height=32, input_range=(0, 1), optimize=True, input_ranges=None):
-    return Program(function, width, height, input_range, optimize, input_ranges)
+def compile(function, width=32, height=32, input_range=(0, 1), optimize=True, input_ranges=None,
+            reference_mode=None, slice_mode=None):
+    return Program(function, width, height, input_range, optimize, input_ranges, reference_mode, slice_mode)

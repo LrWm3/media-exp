@@ -43,7 +43,7 @@ class NativeCompilerTests(unittest.TestCase):
             with self.subTest(backend=backend):
                 program.verify({"a": a, "b": b}, backend)
 
-    def test__given_long_chain_and_two_original_inputs__when_refreshing__then_both_inputs_remain_available(self):
+    def test__given_long_chain_and_two_original_inputs__when_retaining__then_both_inputs_remain_available(self):
         def kernel(a, b):
             value = h264.saturating_add(a, b)
             for i in range(75):
@@ -52,8 +52,8 @@ class NativeCompilerTests(unittest.TestCase):
         program = h264.compile(kernel, 16, 16, input_ranges={"a": (0, 255), "b": (0, 255)})
         image = {"a": [[y*16+x for x in range(16)] for y in range(16)],
                  "b": [[(x*17+y*23)%256 for x in range(16)] for y in range(16)]}
-        self.assertGreater(len(program.refreshes), 0)
-        self.assertTrue(all(1 <= frame-source.frame <= 16
+        self.assertEqual(program.refreshes, [])
+        self.assertTrue(any(frame-source.frame > 16
                             for frame, operation in enumerate(program.operations, program.input_count)
                             for source in operation.sources))
         for backend in self.backends():
@@ -72,7 +72,7 @@ class NativeCompilerTests(unittest.TestCase):
             return total
         program = h264.compile(kernel, 16, 16, input_ranges=ranges)
         images = {name: [[i%2]*16 for _ in range(16)] for i, name in enumerate(ranges)}
-        self.assertTrue(program.refreshes)
+        self.assertEqual(program.refreshes, [])
         self.assertFalse(program.binary_input)  # Named binary inputs are literal 0/1.
         for backend in self.backends():
             with self.subTest(backend=backend):

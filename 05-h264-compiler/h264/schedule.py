@@ -1,4 +1,4 @@
-"""Track last uses and refresh live pictures before the 16-picture DPB evicts them."""
+"""Allocate retained reference slots, or refresh pictures in the legacy window."""
 
 from dataclasses import replace
 
@@ -6,13 +6,16 @@ from decoder_core.bitstream import Operation, Source, Writer
 from .graph import CompileError
 
 
-def schedule(instructions, outputs, binary_input, input_count=1):
+def schedule(instructions, outputs, binary_input, input_count=1, retain=False):
     operations = [Operation("normalize binary seed", (Source(0, 1, -1),), 7)] if binary_input else []
     frame_offset = input_count-1
     registers = {index: index for index in range(input_count)}
     if binary_input:
         registers[0] = 1
     definitions = dict(registers)
+    slots = {frame: frame for frame in range(input_count)} if retain else None
+    if retain and binary_input:
+        slots[1] = 0  # Normalization consumes the seed and replaces its slot.
     last_use = {}
     for index, instruction in enumerate(instructions):
         for ref in instruction.operation.sources:
@@ -23,7 +26,7 @@ def schedule(instructions, outputs, binary_input, input_count=1):
         peak_live = max(peak_live, len(registers))
         if len(registers) >= Writer.MAX_REFS:
             raise CompileError("Graph exceeds 15 simultaneously live values; split the kernel or reduce shared intermediates")
-        while registers and frame_offset+len(operations)+1-min(registers.values()) >= Writer.MAX_REFS:
+        while not retain and registers and frame_offset+len(operations)+1-min(registers.values()) >= Writer.MAX_REFS:
             oldest = min(registers.values())
             if frame_offset+len(operations)+1-oldest > Writer.MAX_REFS:
                 raise CompileError("Scheduler lost a live reference")
@@ -35,6 +38,14 @@ def schedule(instructions, outputs, binary_input, input_count=1):
         op = instruction.operation
         refs = tuple(replace(s, frame=registers[s.frame]) for s in op.sources)
         operations.append(replace(op, sources=refs))
+        if retain:
+            # A source whose final use is this instruction may be overwritten by
+            # MMCO after prediction finishes. Named outputs are read at their
+            # own output picture, and do not require permanent DPB storage.
+            occupied = {slots[frame] for value, frame in registers.items()
+                        if last_use.get(value, -1) > index}
+            slots[frame_offset+len(operations)] = next(
+                slot for slot in range(Writer.MAX_REFS) if slot not in occupied)
         definitions[instruction.result] = registers[instruction.result] = frame_offset+len(operations)
         graph_frames[instruction.graph_id] = frame_offset+len(operations)
-    return operations, {name: definitions[value] for name, value in outputs.items()}, refreshes, peak_live, graph_frames
+    return operations, {name: definitions[value] for name, value in outputs.items()}, refreshes, peak_live, graph_frames, slots

@@ -224,9 +224,11 @@ def prepare_correctness(bundle):
             value = h264.saturating_combine(value, a if index % 2 else b, wb=-1, bias=67)
         return {"output": value, "original_a": a, "original_b": b}
     refreshed = h264.compile(refresh, **named32)
-    if not refreshed.refreshes:
-        raise AssertionError("Long-chain fixture did not exercise reference refresh")
-    bundle.compiled("resident-75-stages", "dpb-refresh", refreshed, images, logical_operations=75)
+    if not any(frame-source.frame > 16
+               for frame, op in enumerate(refreshed.operations, refreshed.input_count)
+               for source in op.sources):
+        raise AssertionError("Long-chain fixture did not exercise retained references")
+    bundle.compiled("resident-75-stages", "dpb-retention", refreshed, images, logical_operations=75)
 
     binary = [[(x*7+y*11) % 5 == 0 for x in range(32)] for y in range(32)]
     binary = [[int(value) for value in row] for row in binary]
@@ -261,7 +263,7 @@ def prepare_benchmarks(bundle):
         if name == "benchmark-resident":
             manifest = json.loads(source.with_suffix(".json").read_text())
             expected = resident.reference(inputs)
-            if resident.read(raw) != expected:
+            if verify_saved_graph(raw, manifest) != expected:
                 raise AssertionError("Committed resident benchmark differs from integer reference")
         else:
             frame_bytes = pair.writer.width*pair.writer.height*3//2
