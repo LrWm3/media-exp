@@ -59,6 +59,11 @@ slots, and exact comparisons across all six experiments.
 proved small-domain replacements reduce Life from 682 to 402 pictures and
 denoising from 58 to 52, with decoder captures and paired NVDEC measurements.
 
+[Semantic IR improvements](05-h264-compiler/optimizations/ir/README.md):
+Boolean value propagation removes redundant computation, equivalent outputs
+share results, and mixed P/B packing reduces four-tile denoising from 20 pictures
+to 19 while preserving every named output.
+
 [Maze kernel and readback improvements](02-maze-flood-fill-decoder-solver/compiled/optimizations/README.md):
 265 → 214 decoded pictures, 265 → 54 NVDEC copies, and a measured 1.12× speedup
 while preserving every flood state and shortest distance.

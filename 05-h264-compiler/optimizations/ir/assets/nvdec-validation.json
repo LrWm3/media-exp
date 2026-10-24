@@ -1,0 +1,179 @@
+{
+  "status": "pass",
+  "backend": "nvdec",
+  "suite_sha256": "10dbf2c55e855c3cc04846bac29209da57967f6debb1ed1dd412f356a8c797e8",
+  "validator_sha256": "cd28c742b4e9afac4dfb37e292d8523f5e534e517dfd418115550bf1eb845d0c",
+  "decode_module_sha256": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+  "stream_count": 24,
+  "cases": [
+    {
+      "name": "parity40-baseline",
+      "status": "pass",
+      "pictures": 153,
+      "named_outputs": 3,
+      "actual_sha256": "dccc0ebde06af4fd95bc2c449cd82787a6dff67af2ecb319c4bf18c79f01288c"
+    },
+    {
+      "name": "parity40-optimized",
+      "status": "pass",
+      "pictures": 2,
+      "named_outputs": 3,
+      "actual_sha256": "5317c061cbd980c41282ee6b9c888f17eb8f171c086cf79a2d7b2dbdc7cc0e17"
+    },
+    {
+      "name": "absorption-baseline",
+      "status": "pass",
+      "pictures": 5,
+      "named_outputs": 3,
+      "actual_sha256": "8f473989eb8bb927ece121d2516141854745038ce8b8e7fc2ab7f40fc28970a0"
+    },
+    {
+      "name": "absorption-optimized",
+      "status": "pass",
+      "pictures": 2,
+      "named_outputs": 3,
+      "actual_sha256": "5317c061cbd980c41282ee6b9c888f17eb8f171c086cf79a2d7b2dbdc7cc0e17"
+    },
+    {
+      "name": "equivalent-or-baseline",
+      "status": "pass",
+      "pictures": 4,
+      "named_outputs": 2,
+      "actual_sha256": "893eaefeee1bd5c7e00561044220342ca8904b05cb67401637bc3ba1a9392252"
+    },
+    {
+      "name": "equivalent-or-optimized",
+      "status": "pass",
+      "pictures": 3,
+      "named_outputs": 2,
+      "actual_sha256": "50b959792d676ffe3337ec1bbe974ccc002aee9d26d7355c35c7623b837e9b50"
+    },
+    {
+      "name": "mixed-pb-baseline",
+      "status": "pass",
+      "pictures": 5,
+      "named_outputs": 3,
+      "actual_sha256": "2c5b9ad90d9e756f368a27346406e9341f9641c7383960af2efebc10c8cf4af8"
+    },
+    {
+      "name": "mixed-pb-optimized",
+      "status": "pass",
+      "pictures": 4,
+      "named_outputs": 3,
+      "actual_sha256": "e46e388c16194382059eac824a91774ef38173488927e3f00ab0b7b496cc5454"
+    },
+    {
+      "name": "life-baseline",
+      "status": "pass",
+      "pictures": 402,
+      "named_outputs": 42,
+      "actual_sha256": "a48af01c04d19fbd31250cb6725197aa72476bb37e56c77fdfb9e5e6d6ca191d"
+    },
+    {
+      "name": "life-optimized",
+      "status": "pass",
+      "pictures": 402,
+      "named_outputs": 42,
+      "actual_sha256": "a48af01c04d19fbd31250cb6725197aa72476bb37e56c77fdfb9e5e6d6ca191d"
+    },
+    {
+      "name": "maze-baseline",
+      "status": "pass",
+      "pictures": 265,
+      "named_outputs": 55,
+      "actual_sha256": "1eaad54f0bc3531ea2392cde6ea62a0d405704732970bb9fb17b0887ca6ada89"
+    },
+    {
+      "name": "maze-optimized",
+      "status": "pass",
+      "pictures": 265,
+      "named_outputs": 55,
+      "actual_sha256": "1eaad54f0bc3531ea2392cde6ea62a0d405704732970bb9fb17b0887ca6ada89"
+    },
+    {
+      "name": "denoise-00-baseline",
+      "status": "pass",
+      "pictures": 52,
+      "named_outputs": 9,
+      "actual_sha256": "e88c47b209bbfebb016be7b6287d795dafc8ed5191172ab3b1b1dc5d39d10401"
+    },
+    {
+      "name": "denoise-00-optimized",
+      "status": "pass",
+      "pictures": 52,
+      "named_outputs": 9,
+      "actual_sha256": "e88c47b209bbfebb016be7b6287d795dafc8ed5191172ab3b1b1dc5d39d10401"
+    },
+    {
+      "name": "denoise-packed4-00-baseline",
+      "status": "pass",
+      "pictures": 20,
+      "named_outputs": 9,
+      "actual_sha256": "dad7d799c178aac141d264146f5b406bceb91874641a7bc5d0e393928b3e83c7"
+    },
+    {
+      "name": "denoise-packed4-00-optimized",
+      "status": "pass",
+      "pictures": 19,
+      "named_outputs": 9,
+      "actual_sha256": "11556b3b7f5dbf244bffb9818f3e2685d27f719f014510d5e937b48078cc0a0b"
+    },
+    {
+      "name": "denoise-packed8-00-baseline",
+      "status": "pass",
+      "pictures": 17,
+      "named_outputs": 9,
+      "actual_sha256": "84bc00e5feec5525dc6fbe42eab065abd98355d5ad3a9a10fe7fdc7915b7548b"
+    },
+    {
+      "name": "denoise-packed8-00-optimized",
+      "status": "pass",
+      "pictures": 17,
+      "named_outputs": 9,
+      "actual_sha256": "84bc00e5feec5525dc6fbe42eab065abd98355d5ad3a9a10fe7fdc7915b7548b"
+    },
+    {
+      "name": "mnist-00-baseline",
+      "status": "pass",
+      "pictures": 1589,
+      "named_outputs": 10,
+      "actual_sha256": "f5f7a9472db4af14a0f55f79662616fa62e81e71b7feced244735fbea71c0599"
+    },
+    {
+      "name": "mnist-00-optimized",
+      "status": "pass",
+      "pictures": 1589,
+      "named_outputs": 10,
+      "actual_sha256": "f5f7a9472db4af14a0f55f79662616fa62e81e71b7feced244735fbea71c0599"
+    },
+    {
+      "name": "motion-00-baseline",
+      "status": "pass",
+      "pictures": 23,
+      "named_outputs": 5,
+      "actual_sha256": "1a0db47743b8e18f31b4af51311a0bc029cb71a614d434a518a1103f72b1f2c0"
+    },
+    {
+      "name": "motion-00-optimized",
+      "status": "pass",
+      "pictures": 23,
+      "named_outputs": 5,
+      "actual_sha256": "1a0db47743b8e18f31b4af51311a0bc029cb71a614d434a518a1103f72b1f2c0"
+    },
+    {
+      "name": "maze-current-baseline",
+      "status": "pass",
+      "pictures": 214,
+      "named_outputs": 55,
+      "actual_sha256": "f2bac6f9428b5b90f1553720114efbfc6d68b2642645c3911aa195754a4f21f0"
+    },
+    {
+      "name": "maze-current-optimized",
+      "status": "pass",
+      "pictures": 214,
+      "named_outputs": 55,
+      "actual_sha256": "f2bac6f9428b5b90f1553720114efbfc6d68b2642645c3911aa195754a4f21f0"
+    }
+  ],
+  "helper_sha256": "42bdf4c5b2d3eddeb53a3d19324ab8f52eeb487bbc39bf9155f66e65d29ca4f0"
+}

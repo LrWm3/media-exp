@@ -14,6 +14,15 @@ replaces small scalar subgraphs with exhaustively verified prediction sequences.
 Life's rule drops from ten predictions to three; denoising also becomes smaller.
 Pass `exact_search=False` to isolate the earlier optimizations.
 
+[Semantic IR and mixed prediction packing](optimizations/ir/README.md) add
+truth-table value propagation before instruction selection. Equivalent Boolean
+expressions share results, input identities become aliases, and constants lose
+their dead dependencies. Forty repeated XORs now need **zero arithmetic
+pictures instead of 151**. Compatible P and B predictions can also share packed
+pictures, reducing the four-tile denoiser from **20 to 19 total pictures**.
+Both passes are enabled by default; `semantic_ir=False` and
+`pack(..., mixed_predictions=False)` reproduce their respective baselines.
+
 ```python
 import h264
 

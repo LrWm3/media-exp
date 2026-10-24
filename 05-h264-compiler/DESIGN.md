@@ -52,7 +52,12 @@ byte images is rejected because the range reaches 510; `saturating_add()` explic
 requests the clipping behavior. Analysis is conservative:
 even `combine(x,x,1,-1)` may fail without a proof accounting for correlations.
 P coefficients fit [−128,127]; B combination coefficients fit [−64,63], since
-they are doubled on the wire.
+they are doubled on the wire. The two B coefficients must additionally sum to
+[−64,64] at denominator zero. The writer enforces the codec's hardware-weight
+sum [−128,128], with upper limit 127 at denominator seven. A mathematically valid
+u8 expression can still require a decomposition this frontend does not support;
+such direct forms fail during compilation. Fusion preserves legal original
+stages when their combined weights would violate this bound.
 
 Saturating operations require a bias in [−128,127]. Splitting a larger offset
 can change clipping, so the compiler rejects it. For example, unrestricted
@@ -98,6 +103,41 @@ one P-picture; a following operation can reuse that reference.
 legacy sliding reference window and one slice per macroblock. Some such
 graphs exceed the reference budget even when their optimized forms fit; they
 fail with a resource error instead of silently changing semantics.
+
+### Semantic Boolean values
+
+`ir.py` tracks complete scalar truth signatures over at most two independent
+binary frontier values. Each table has at most four entries, including exact
+nonbinary arithmetic intermediates and explicit clipping. It removes irrelevant
+variables, aliases projections to their inputs, shares equivalent Boolean
+expressions, and replaces constant Boolean results with one legal prediction.
+Constant generation remains real decoder work unless an existing value already
+provides the constant.
+
+Facts propagate bottom-up, so a long recurrence can collapse without increasing
+the bounded instruction search's cut size. For example, XOR with the same B
+twice aliases A; forty repetitions do too. More than two distinct frontiers
+stop propagation. Binary results beyond that boundary become opaque values.
+Spatial operations also open opaque frontiers, preserving crop and zero-padding
+boundaries. Singleton ranges can still prove spatial zeros constant.
+
+This pass preserves named outputs, including intermediates. It never evaluates
+actual input pixels. A whole-graph scalar instruction comparison rejects
+rewrites that would cost more after later fusion/search. If the old lowering
+cannot represent a dead expression, a legal simplified result may still compile;
+its saved-instruction count is reported as unknown. This comparison does not
+claim globally optimal reference allocation, packed pictures, or latency.
+
+`compile(..., semantic_ir=False)` disables semantic value propagation while
+keeping existing optimizations and exact search enabled. `optimize=False`
+disables it too. Manifest `semantic_ir_*` statistics record accepted rewrites,
+savings, and truth signatures. Their value IDs belong to the semantic pass,
+not physical frames or final graph IDs. These records explain local decisions;
+they are not standalone proof certificates containing the full original DAG.
+
+`Program.reference()` retains and interprets the original traced graph, before
+any IR rewrite. `verify()` therefore checks decoded results against those
+original semantics. The same independent oracle is retained by packed programs.
 
 ### Bounded exact instruction search
 

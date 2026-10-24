@@ -53,6 +53,11 @@ These timings do not establish a GPU-compute speed advantage or larger-image
 performance. Full-readback timing and individual samples are in
 [validation](VALIDATION.md) and the [raw report](assets/nvdec-results.json).
 
+The compiler's newer [mixed prediction packing](../05-h264-compiler/optimizations/ir/README.md)
+reduces the four-tile version to **19 pictures** by sharing compatible P and B
+operations. The eight-tile version remains at 17. The table above preserves
+the original measured schedules; its timings do not measure this newer pass.
+
 Packing currently supports uniform integer reads within ±16 pixels and rejects
 fractional motion, block gathers, and layouts exceeding writer limits. It is an
 explicit option; existing programs keep their current schedules by default.
