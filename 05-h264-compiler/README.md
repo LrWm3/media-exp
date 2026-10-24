@@ -20,8 +20,15 @@ expressions share results, input identities become aliases, and constants lose
 their dead dependencies. Forty repeated XORs now need **zero arithmetic
 pictures instead of 151**. Compatible P and B predictions can also share packed
 pictures, reducing the four-tile denoiser from **20 to 19 total pictures**.
-Both passes are enabled by default; `semantic_ir=False` and
-`pack(..., mixed_predictions=False)` reproduce their respective baselines.
+Both passes are enabled by default; `semantic_ir=False` disables value propagation.
+Use `pack(..., mixed_predictions=False, scheduling="stable")` to reproduce the
+earlier homogeneous packing baseline.
+
+[Cost-aware packed scheduling](optimizations/packing/README.md) now reduces
+four-tile denoising further, from **19 to 17 pictures**, with the same canvas and
+output readback. It prioritizes long dependency chains when doing so also avoids
+increasing prediction slices and bytes. These are static work reductions;
+the earlier decoder timings do not measure this pass.
 
 ```python
 import h264
@@ -95,6 +102,16 @@ Logical `width`/`height` stay unchanged; `writer.width`/`writer.height` describe
 the larger coded canvas. `output_regions` locates each named output by picture,
 tile, and rectangle. Coordinates exclude the outer 16-pixel guard. The manifest
 also records active tiles, original instruction locations, and reference slots.
+
+Packing defaults to `scheduling="auto"`: it constructs both the original stable
+schedule and a critical-path schedule, validates their reference and codec
+limits, and measures their encoded tails. It chooses the alternative only when
+pictures, slices, prediction bytes, and named-output readback do not increase,
+with at least one strict improvement. Equal costs retain the stable schedule.
+`scheduling="stable"` preserves FIFO grouping; `scheduling="critical"` lets you
+inspect its tradeoffs explicitly. Manifests record both candidate costs and any
+legality failures. This bounded comparison adds compilation work; the selected
+tail remains cached and reusable during execution.
 
 The first version supports 1–16 tiles, uniform integer motion within ±16 pixels,
 and the existing P/B arithmetic. It rejects fractional interpolation, block

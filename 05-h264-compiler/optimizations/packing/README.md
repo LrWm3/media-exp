@@ -52,6 +52,12 @@ bytes. Every comparison also checks the four static cost guard metrics.
 The main compiler suite passes 119 tests; both packing-harness cost guard
 regressions pass as well.
 
+[NVDEC validation](assets/nvdec-validation.json) passes all **24 representative
+streams, 2,543 pictures, and 37,827,456 I420 bytes**. The
+[suite index](assets/nvdec-suite.json) records the exact streams and hashes.
+This hardware run uses the first saved segment per graph and tile capacity;
+the 80-stream local comparison above includes every saved denoiser input.
+
 All eight committed denoising inputs run at 2, 3, 4, and 8 tiles. Committed Life
 and the current maze formulation run at 2 and 4 tiles. Their named results
 match both the old compiler graph reference and historical decoded outputs.

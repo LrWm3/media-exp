@@ -57,6 +57,9 @@ The compiler's newer [mixed prediction packing](../05-h264-compiler/optimization
 reduces the four-tile version to **19 pictures** by sharing compatible P and B
 operations. The eight-tile version remains at 17. The table above preserves
 the original measured schedules; its timings do not measure this newer pass.
+The later [shared scheduling pass](../05-h264-compiler/optimizations/packing/README.md)
+reaches **17 pictures with four tiles** too, using the same 112×112 canvas and
+preserving every feature output. The table's timings also predate this pass.
 
 Packing currently supports uniform integer reads within ±16 pixels and rejects
 fractional motion, block gathers, and layouts exceeding writer limits. It is an

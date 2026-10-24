@@ -281,6 +281,22 @@ optimization statistics. It also records slot assignments, execution modes and
 `costs`: input, normalization, arithmetic and refresh pictures, prediction slices
 and bytes, and peak live values. `program.costs` exposes the same information.
 Folded nodes and aliases may have no standalone frame.
+
+Packed schedules additionally map every original instruction to a physical
+picture and tile. `pack(..., scheduling="auto")` compares FIFO ready selection
+with longest-remaining-path selection. The latter breaks ties by original
+instruction number, preserving deterministic scheduling and provenance. A
+dependency becomes available only after its complete producing picture. P/B
+promotion remains subject to exact rounding and combined-weight limits.
+
+Both candidates must pass full writer and retained-reference allocation checks.
+Among legal candidates, auto keeps FIFO unless the alternative decreases at least
+one of total pictures, prediction slices, prediction bytes, and named-output
+readback without increasing any of them. Fewer total pictures can scatter named
+outputs across more readbacks, so both counts matter. If only one candidate is
+legal, it is used; if neither is legal, compilation reports both errors. The
+manifest records candidate costs and the chosen strategy. This is bounded
+heuristic scheduling, not an optimality proof or a latency model.
 The prediction hash identifies reusable instructions; the stream hash also
 includes the particular seed.
 

@@ -64,6 +64,10 @@ Boolean value propagation removes redundant computation, equivalent outputs
 share results, and mixed P/B packing reduces four-tile denoising from 20 pictures
 to 19 while preserving every named output.
 
+[Packed schedule selection](05-h264-compiler/optimizations/packing/README.md):
+critical-path scheduling reduces four-tile denoising further, from 19 pictures
+to 17, while guarding prediction slices, bytes, and named-output readback costs.
+
 [Maze kernel and readback improvements](02-maze-flood-fill-decoder-solver/compiled/optimizations/README.md):
 265 → 214 decoded pictures, 265 → 54 NVDEC copies, and a measured 1.12× speedup
 while preserving every flood state and shortest distance.

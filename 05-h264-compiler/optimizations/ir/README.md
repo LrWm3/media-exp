@@ -100,7 +100,9 @@ python3 05-h264-compiler/optimizations/ir/capture.py \
 ```
 
 Use `compile(..., semantic_ir=False)` to disable value propagation. Use
-`pack(..., mixed_predictions=False)` to disable mixed grouping. `exact_search`
+`pack(..., mixed_predictions=False)` to disable mixed grouping. This comparison
+pins `scheduling="stable"` in both packing variants to isolate these changes
+from the later [schedule selection pass](../packing/README.md). `exact_search`
 remains an independent option; `optimize=False` disables semantic IR too.
 Manifests record rewrite counts, truth signatures, savings, P-to-B promotions,
 mixed-picture counts, output rectangles, and actual instructions.

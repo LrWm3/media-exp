@@ -1,0 +1,179 @@
+{
+  "status": "pass",
+  "backend": "nvdec",
+  "suite_sha256": "89afca7f9ce1062176fe88c6ac00d627cb008996ab245d9b5a2f41cb52624ccc",
+  "validator_sha256": "cd28c742b4e9afac4dfb37e292d8523f5e534e517dfd418115550bf1eb845d0c",
+  "decode_module_sha256": "d8e37b9e006f7e1d7c43bbeb6527cc721a3377363e8a230a14954ce1f97665ed",
+  "stream_count": 24,
+  "cases": [
+    {
+      "name": "life-tiles2-baseline",
+      "status": "pass",
+      "pictures": 362,
+      "named_outputs": 42,
+      "actual_sha256": "625cf1bf717ce2f71fa2635c48444fe8e01363d3b58bcc65793d27fd186ad39d"
+    },
+    {
+      "name": "life-tiles2-optimized",
+      "status": "pass",
+      "pictures": 362,
+      "named_outputs": 42,
+      "actual_sha256": "625cf1bf717ce2f71fa2635c48444fe8e01363d3b58bcc65793d27fd186ad39d"
+    },
+    {
+      "name": "life-tiles4-baseline",
+      "status": "pass",
+      "pictures": 362,
+      "named_outputs": 42,
+      "actual_sha256": "13cdb740a3d142414f4f64814cf69d33dc64714abac5053082e14403256da5d3"
+    },
+    {
+      "name": "life-tiles4-optimized",
+      "status": "pass",
+      "pictures": 362,
+      "named_outputs": 42,
+      "actual_sha256": "13cdb740a3d142414f4f64814cf69d33dc64714abac5053082e14403256da5d3"
+    },
+    {
+      "name": "denoise-tiles2-00-baseline",
+      "status": "pass",
+      "pictures": 29,
+      "named_outputs": 9,
+      "actual_sha256": "fcaa143cb331ce2595d979460c068f5c83148258c382ebfe8cc1986335b6c8ad"
+    },
+    {
+      "name": "denoise-tiles2-00-optimized",
+      "status": "pass",
+      "pictures": 29,
+      "named_outputs": 9,
+      "actual_sha256": "fcaa143cb331ce2595d979460c068f5c83148258c382ebfe8cc1986335b6c8ad"
+    },
+    {
+      "name": "denoise-tiles3-00-baseline",
+      "status": "pass",
+      "pictures": 21,
+      "named_outputs": 9,
+      "actual_sha256": "d1ad4da3361cc98afb500b04ed0ca800f41b6c96c2d9681c9d3237abaaac1977"
+    },
+    {
+      "name": "denoise-tiles3-00-optimized",
+      "status": "pass",
+      "pictures": 21,
+      "named_outputs": 9,
+      "actual_sha256": "d1ad4da3361cc98afb500b04ed0ca800f41b6c96c2d9681c9d3237abaaac1977"
+    },
+    {
+      "name": "denoise-tiles4-00-baseline",
+      "status": "pass",
+      "pictures": 19,
+      "named_outputs": 9,
+      "actual_sha256": "11556b3b7f5dbf244bffb9818f3e2685d27f719f014510d5e937b48078cc0a0b"
+    },
+    {
+      "name": "denoise-tiles4-00-optimized",
+      "status": "pass",
+      "pictures": 17,
+      "named_outputs": 9,
+      "actual_sha256": "5257bb4b2d6ba1718f0f539460146aac1f47b55c0ecec0fe84a3653807ba82f9"
+    },
+    {
+      "name": "denoise-tiles8-00-baseline",
+      "status": "pass",
+      "pictures": 17,
+      "named_outputs": 9,
+      "actual_sha256": "84bc00e5feec5525dc6fbe42eab065abd98355d5ad3a9a10fe7fdc7915b7548b"
+    },
+    {
+      "name": "denoise-tiles8-00-optimized",
+      "status": "pass",
+      "pictures": 17,
+      "named_outputs": 9,
+      "actual_sha256": "84bc00e5feec5525dc6fbe42eab065abd98355d5ad3a9a10fe7fdc7915b7548b"
+    },
+    {
+      "name": "maze-current-tiles2-baseline",
+      "status": "pass",
+      "pictures": 211,
+      "named_outputs": 55,
+      "actual_sha256": "8f38b15a1bbb2c64ba6c8dd0ae564e8b42c0447456e58157deaccdf289555012"
+    },
+    {
+      "name": "maze-current-tiles2-optimized",
+      "status": "pass",
+      "pictures": 211,
+      "named_outputs": 55,
+      "actual_sha256": "8f38b15a1bbb2c64ba6c8dd0ae564e8b42c0447456e58157deaccdf289555012"
+    },
+    {
+      "name": "maze-current-tiles4-baseline",
+      "status": "pass",
+      "pictures": 211,
+      "named_outputs": 55,
+      "actual_sha256": "d33af492b9edb74bd6f610d4694f42f33ccc63e0d4bb69cda23e2de6d123efdb"
+    },
+    {
+      "name": "maze-current-tiles4-optimized",
+      "status": "pass",
+      "pictures": 211,
+      "named_outputs": 55,
+      "actual_sha256": "d33af492b9edb74bd6f610d4694f42f33ccc63e0d4bb69cda23e2de6d123efdb"
+    },
+    {
+      "name": "chain-leaves-tiles2-baseline",
+      "status": "pass",
+      "pictures": 13,
+      "named_outputs": 17,
+      "actual_sha256": "4f9d9112c54803dc3cbb42e9e7b9c3c38647f38d5878905ef9b4082b466c482f"
+    },
+    {
+      "name": "chain-leaves-tiles2-optimized",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 17,
+      "actual_sha256": "bc77908d199df7439a28dfd19a86eb26d90a89f5af5d2de5806033f21b74f149"
+    },
+    {
+      "name": "chain-leaves-tiles3-baseline",
+      "status": "pass",
+      "pictures": 11,
+      "named_outputs": 17,
+      "actual_sha256": "61e40d4b0536ac767c9dc5ea06b9e8f2ce4579c6b2997206fc97004780e53ce4"
+    },
+    {
+      "name": "chain-leaves-tiles3-optimized",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 17,
+      "actual_sha256": "6d0305ea46a0ee505166b9065debb982188849d68444a48170937360054b4d1d"
+    },
+    {
+      "name": "chain-leaves-tiles4-baseline",
+      "status": "pass",
+      "pictures": 11,
+      "named_outputs": 17,
+      "actual_sha256": "ab6c5703a966c95bee432c608d58c4a2e6deed6e1d5db3c483d1a69c2d621d75"
+    },
+    {
+      "name": "chain-leaves-tiles4-optimized",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 17,
+      "actual_sha256": "a74d94a0604a2f4cc0b488aeea0c6b6c3b1b682362c60d4a25d1273fecbce4f5"
+    },
+    {
+      "name": "chain-leaves-tiles8-baseline",
+      "status": "pass",
+      "pictures": 10,
+      "named_outputs": 17,
+      "actual_sha256": "c10fa2e0f633f6d84f27bc1d21e6c5241e461f08665f9b18955043fa38229a69"
+    },
+    {
+      "name": "chain-leaves-tiles8-optimized",
+      "status": "pass",
+      "pictures": 9,
+      "named_outputs": 17,
+      "actual_sha256": "a9b9600fcf8e299d29163db2b328fe6ffca5a93d76550ab3dcf74b5692c07033"
+    }
+  ],
+  "helper_sha256": "42bdf4c5b2d3eddeb53a3d19324ab8f52eeb487bbc39bf9155f66e65d29ca4f0"
+}
