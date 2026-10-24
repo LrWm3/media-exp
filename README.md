@@ -13,8 +13,9 @@
   a trained binary network classifies handwritten 3s versus 8s using decoder
   pooling, signed arithmetic, and thresholds; 94.96% accuracy on the official
   two-class test subset.
-- [05 — Python H.264 compiler](05-h264-compiler/README.md): a shared symbolic image
-  language with exact arithmetic, shift fusion, common-expression elimination,
+- [05 — Python H.264 compiler](05-h264-compiler/README.md): the legacy frontend,
+  deprecated for new work in favor of experiment 09. Its backend and packing
+  remain in use, with exact arithmetic, shift fusion, common-expression elimination,
   reference scheduling, and inspectable instruction manifests. Its
   [native-operation demos](05-h264-compiler/native_ops/README.md) add multiple
   input images, saturating arithmetic, block gathers, and quarter-pixel interpolation,
@@ -28,6 +29,10 @@
 - [08 — Decoder computation limits](08-decoder-compute-limits/README.md): proved
   minima for all 16 two-input Boolean functions, synthesis/scheduling tradeoffs,
   measured decoder costs, and exact denoising alongside CUDA workloads.
+- [09 — Exact image compute IR](09-codec-compute-ir/README.md): the current
+  frontend for new work, with exact image semantics, bounded synthesis, H.264/
+  HEVC/AV1 targets, resident execution and measured CPU comparisons. Includes
+  migration guidance; the `codec_compute` package keeps its existing path.
 
 Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 [Maze](02-maze-flood-fill-decoder-solver/compiled/README.md) ·
@@ -36,11 +41,11 @@ Compiler variants: [Life](01-conways-decoder-of-life/compiled/README.md) ·
 
 The experiments use the shared [H.264 writer and decoder tools](decoder_core).
 
-[Multi-codec compute IR](codec_compute/README.md): an isolated extension preserves
-the H.264 compiler, adds resident HEVC weighted-prediction programs and an AV1
-copy/translation/average target, and separates exact image semantics from
-codec-specific instruction selection and reference scheduling. Includes real
-decoder validation, explicit unsupported operations, and reusable computation tails.
+[Experiment 09](09-codec-compute-ir/README.md) is the canonical starting point
+for the multi-codec compute IR. Its [implementation and API reference](codec_compute/README.md)
+remain under `codec_compute`. H.264 backend reuse, independently implemented
+HEVC/AV1 targets, explicit unsupported operations and reusable computation tails
+are documented alongside exact-decoder evidence.
 
 [Automatic computation synthesis](codec_compute/synthesis/README.md): generic
 bounded search discovers min/max and Boolean AND/OR/XOR implementations from

@@ -1,10 +1,15 @@
 # Exact image IR targeting H.264, HEVC, and AV1
 
-This experiment follows **preserved H.264 → independent minimal HEVC → shared
-compute IR → AV1 → revised IR**. All three targets emit real video bitstreams;
-unmodified decoders execute their predictions. The implementation deliberately
-supports a bounded, verified subset. Existing H.264 applications remain in
-`05-h264-compiler` without modification.
+This is the implementation and API reference for
+[experiment 09](../09-codec-compute-ir/README.md), the current frontend for new
+decoder-compute programs. Its numbered landing page collects workload navigation
+and the migration guide from experiment 05. The Python package and artifacts
+remain at their existing `codec_compute` paths.
+
+All three targets emit real video bitstreams; unmodified decoders execute their
+predictions. The implementation supports a bounded, verified subset. Existing
+`h264` applications and packing remain in `05-h264-compiler`; the shared H.264
+adapter still depends on that directory's selector, scheduler and reader.
 
 ```python
 import codec_compute as media

@@ -1,5 +1,12 @@
 # A tiny Python → H.264 compiler
 
+**Frontend status: deprecated for new work.** Start new kernels with
+[experiment 09's shared compute IR](../09-codec-compute-ir/README.md), including
+its API migration guide. Existing `h264` programs and packed workloads remain
+available here. This directory is also still required by the shared H.264
+adapter, which reuses its selector, reference scheduler and reader. Deprecation
+does not remove those backend components or change existing imports.
+
 Write a restricted Python image kernel, compile it once, and let an ordinary
 video decoder execute its arithmetic. One shared graph, instruction selector,
 reference scheduler, and backend now serve variants of all four earlier experiments.
