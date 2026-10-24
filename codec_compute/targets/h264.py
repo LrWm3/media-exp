@@ -27,6 +27,14 @@ def _legacy():
     return module
 
 
+@lru_cache(maxsize=2)
+def _motion_policy(level_idc):
+    # Delegate component legality to the emitter's level policy. The generous
+    # declared SPS bound here isolates that policy; the actual program declares
+    # motion_bits from its selected vectors when its writer is constructed.
+    return Writer(16, 16, motion_bits=16, level_idc=level_idc)._motion
+
+
 class H264Program:
     target = "h264"
     suffix = ".h264"
@@ -44,7 +52,7 @@ class H264Program:
         # semantics. Never compose movements across a crop/filter boundary.
         for node in graph.nodes:
             if node.op in self.movements:
-                self._field(node, graph)
+                self._field(node, graph, level_idc=level_idc)
         eligible = {node for node in graph.nodes if node.op in self.movements and node not in named
                     and consumers[node] and all(user.op in scalar for user in consumers[node])}
         baseline_error, baseline_cost = None, None
@@ -83,7 +91,7 @@ class H264Program:
         self.optimizations = {"spatial_read_fusion": stats, "shift_read_fusion": deepcopy(stats)}
 
     @staticmethod
-    def _field(node, graph):
+    def _field(node, graph, *, level_idc=31):
         """One static quarter-pixel displacement per active output macroblock."""
         if node.op == "shift":
             dx, dy, border = node.params
@@ -100,8 +108,12 @@ class H264Program:
                 if node.params[2] != "zero":
                     raise UnsupportedOperation("h264", node.op, "this writer implements zero borders; clamp synthesis is unimplemented")
                 offsets = tuple((4 * dx, 4 * dy) for dx, dy in offsets)
-        if any(abs(component) > 508 for pair in offsets for component in pair):
-            raise UnsupportedOperation("h264", node.op, "motion offsets must lie within +/-127 pixels (+/-508 quarter pixels)")
+        try:
+            validate = _motion_policy(level_idc)
+            for qx, qy in set(offsets):
+                validate(Source(0, qx=qx, qy=qy))
+        except ValueError as error:
+            raise UnsupportedOperation("h264", node.op, str(error)) from error
         if node.op in ("shift", "sample_h264"):
             offsets *= ((graph.width + 15) // 16) * ((graph.height + 15) // 16)
         return offsets
@@ -154,13 +166,14 @@ class H264Program:
                 continue
             if node.op in self.movements:
                 operation = self._prediction(Operation(node.op, (Source(values[node.args[0]]),)),
-                                             (self._field(node, graph),))
+                                             (self._field(node, graph, level_idc=level_idc),))
                 instructions.append(legacy.lower.Instruction(next_value, operation, graph_id))
                 values[node] = next_value
                 next_value += 1
                 continue
             bases = tuple(arg.args[0] if arg in fused else arg for arg in node.args)
-            fields = tuple(self._field(arg, graph) if arg in fused else None for arg in node.args)
+            fields = tuple(self._field(arg, graph, level_idc=level_idc) if arg in fused else None
+                           for arg in node.args)
             if node.op == "average":
                 # Keep the complete sum in the decoder's weighted predictor;
                 # materializing it as a u8 image would change full-range means.

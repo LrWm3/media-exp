@@ -72,25 +72,40 @@ class ResamplingTargetRejectionTests(unittest.TestCase):
                 self.assertEqual(caught.exception.operation, operation)
 
     def test__given_motion_beyond_backend_limits__when_building_materialized_or_fused_reads__then_every_path_rejects(self):
-        for amount in (-509, 509):
-            movements = (lambda x: media.sample_h264(x, amount, 0),
-                         lambda x: media.gather_h264(x, [(0, amount)]))
+        for qx, qy in ((-8193, 0), (8192, 0), (0, -2049), (0, 2048)):
+            movements = (lambda x: media.sample_h264(x, qx, qy),
+                         lambda x: media.gather_h264(x, [(qx, qy)]))
             for movement in movements:
                 graph = media.trace(lambda image: media.average(image, movement(image)), width=16, height=16)
                 moved = graph.outputs[0][1].args[1]
                 for enabled in (False, True):
-                    with self.subTest(operation=moved.op, amount=amount, enabled=enabled), self.assertRaises(media.UnsupportedOperation):
+                    with self.subTest(operation=moved.op, offset=(qx, qy), enabled=enabled), self.assertRaises(media.UnsupportedOperation):
                         media.compile_graph(graph, h264_fuse_shifts=enabled)
                 with self.assertRaises(media.UnsupportedOperation):
                     H264Program._build(graph, {moved})
-        for amount in (-128, 128):
-            graph = media.trace(lambda image: media.average(image, media.gather(image, [(amount, 0)])),
+        for dx, dy in ((-2049, 0), (2048, 0), (0, -513), (0, 512)):
+            graph = media.trace(lambda image: media.average(image, media.gather(image, [(dx, dy)])),
                                 width=16, height=16)
             for enabled in (False, True):
-                with self.subTest(integer_amount=amount, enabled=enabled), self.assertRaises(media.UnsupportedOperation):
+                with self.subTest(integer_offset=(dx, dy), enabled=enabled), self.assertRaises(media.UnsupportedOperation):
                     media.compile_graph(graph, h264_fuse_shifts=enabled)
             with self.assertRaises(media.UnsupportedOperation):
                 H264Program._build(graph, {graph.outputs[0][1].args[1]})
+
+    def test__given_exact_writer_motion_endpoints__when_compiling_either_level__then_materialized_and_fused_reads_emit(self):
+        integer = ((-2048, 0), (2047, 0), (0, -512), (0, 511))
+        fractional = ((-8192, 0), (8191, 0), (0, -2048), (0, 2047))
+        movements = [(lambda x, d=pair: media.shift(x, *d)) for pair in integer]
+        movements += [(lambda x, q=pair: media.sample_h264(x, *q)) for pair in fractional]
+        movements += [lambda x: media.gather(x, integer), lambda x: media.gather_h264(x, fractional)]
+        for level in (31, 41):
+            for movement in movements:
+                graph = media.trace(lambda image: media.average(image, movement(image)), width=32, height=32)
+                for enabled in (False, True):
+                    with self.subTest(level=level, operation=graph.outputs[0][1].args[1].op, enabled=enabled):
+                        program = media.compile_graph(graph, h264_level=level, h264_fuse_shifts=enabled)
+                        self.assertTrue(program.tail)
+                        self.assertEqual(picture_count(program), 1 if enabled else 2)
 
 
 @unittest.skipUnless(shutil.which("ffmpeg"), "FFmpeg is required")
@@ -111,6 +126,59 @@ class ResamplingTargetDecoderTests(unittest.TestCase):
                     if first_raw is not None:
                         self.assertEqual(raw, first_raw)
                     first_raw = raw
+
+    def test__given_extreme_signed_fields__when_decoding__then_zero_extension_matches_independent_oracle(self):
+        integer = ((-2048, 0), (2047, 0), (0, -512), (0, 511))
+        fractional = ((-8192, 0), (8191, 0), (0, -2048), (0, 2047))
+        images = {"image": [[80+(13*x+29*y) % 176 for x in range(32)] for y in range(32)]}
+        for movement, fields, oracle in ((media.gather, integer, integer_gather),
+                                         (media.gather_h264, fractional, fractional_gather)):
+            moved = oracle(images["image"], fields)
+            self.assertEqual(moved, [[0]*32 for _ in range(32)])
+            expected = {"output": pointwise(lambda a, b: (a+b+1)//2, images["image"], moved)}
+            graph = media.trace(lambda image: media.average(image, movement(image, fields)),
+                                width=32, height=32, input_ranges={"image": (80, 255)})
+            for enabled in (False, True):
+                with self.subTest(operation=movement.__name__, enabled=enabled):
+                    program = media.compile_graph(graph, h264_fuse_shifts=enabled)
+                    self.assert_decoders(program, images, expected, all_backends=True)
+
+    def test__given_fractional_reads_beyond_old_limit__when_crossing_large_active_image__then_both_signs_keep_filter_and_border(self):
+        for width, height in ((256, 32), (32, 256)):
+            horizontal = width > height
+            offsets = ((509, 2), (-509, -1), (515, -5), (-515, 3))
+            fields = tuple((x, y) if horizontal else (y, x) for x, y in offsets)*((width*height)//1024)
+            images = {"image": [[(17*x+31*y+(x*y) % 29) % 256 for x in range(width)] for y in range(height)]}
+            moved = fractional_gather(images["image"], fields)
+            self.assertTrue(any(value for row in moved for value in row))
+            self.assertTrue(any(value == 0 for row in moved for value in row))
+            expected = {"output": pointwise(lambda a, b: (a+b+1)//2, images["image"], moved)}
+            graph = media.trace(lambda image: media.average(image, media.gather_h264(image, fields)),
+                                width=width, height=height)
+            for enabled in (False, True):
+                with self.subTest(shape=(width, height), enabled=enabled):
+                    program = media.compile_graph(graph, h264_fuse_shifts=enabled, h264_level=41)
+                    self.assert_decoders(program, images, expected, all_backends=True)
+
+    def test__given_256_patch_atlas__when_routing_two_fixtures__then_roi_and_zero_filler_decode_exactly(self):
+        from codec_compute.workloads.resampling.kernels import tasks, fixture
+        task = next(task for task in tasks(256) if task.name == "patch-atlas")
+        self.assertIn((255, 255), task.fields["integer"])
+        graph = media.trace(task.kernel, width=256, height=256, input_ranges=task.input_ranges)
+        baseline = media.compile_graph(graph, h264_fuse_shifts=False, h264_level=41)
+        selected = media.compile_graph(graph, h264_level=41)
+        self.assertEqual(baseline.tail, selected.tail)
+        self.assertEqual(picture_count(selected), 1)
+        self.assertEqual((selected.native.writer.width, selected.native.writer.height), (288, 288))
+        for index in (0, 1):
+            images = fixture(task, index, 256)
+            expected = {"output": integer_gather(images["image"], task.fields["integer"])}
+            self.assertTrue(any(expected["output"][y][x] for y in range(128) for x in range(128)))
+            self.assertTrue(all(expected["output"][y][x] == 0 for y in range(256) for x in range(256)
+                                if x >= 128 or y >= 128))
+            with self.subTest(fixture=index):
+                self.assertEqual(selected.reference(images), expected)
+                self.assert_decoders(selected, images, expected, all_backends=True)
 
     def test__given_two_independent_sixteen_phase_fields__when_averaging__then_one_b_picture_decodes_every_phase_and_edge(self):
         graph = media.trace(lambda a, b: media.average(media.gather_h264(a, FIELD_A),

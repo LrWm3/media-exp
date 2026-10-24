@@ -133,7 +133,7 @@ class H264FusionSelectionTests(unittest.TestCase):
                 self.assertEqual(calls, ["baseline", "candidate"])
 
     def test__given_motion_outside_backend_limit__when_average_folds_shift__then_candidate_and_baseline_reject_same_shift(self):
-        for dx, dy in ((128, 0), (-128, 0), (0, 128), (0, -128)):
+        for dx, dy in ((2048, 0), (-2049, 0), (0, 512), (0, -513)):
             graph = media.trace(lambda image: media.average(image, media.shift(image, dx, dy)),
                                 width=16, height=16)
             moved = next(node for node in graph.nodes if node.op == "shift")
@@ -147,7 +147,7 @@ class H264FusionSelectionTests(unittest.TestCase):
                 with self.assertRaises(media.UnsupportedOperation) as candidate:
                     H264Program._build(graph, {moved})
                 self.assertEqual(baseline.exception.operation, "shift")
-                self.assertIn("127", str(baseline.exception))
+                self.assertIn("component limit", str(baseline.exception))
                 self.assertEqual(str(enabled.exception), str(baseline.exception))
                 self.assertEqual(str(candidate.exception), str(baseline.exception))
 
