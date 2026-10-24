@@ -94,7 +94,8 @@ class ExhaustiveVerificationTests(unittest.TestCase):
 
     def test__given_unavailable_shared_plan_evaluator__when_verifying__then_independent_traversal_succeeds(self):
         with patch("codec_compute.synthesis.model.evaluate_plan", side_effect=AssertionError("shared evaluator")), \
-             patch("codec_compute.synthesis.model.validate_plan", side_effect=AssertionError("shared traversal")):
+             patch("codec_compute.synthesis.model.validate_plan", side_effect=AssertionError("shared traversal")), \
+             patch.object(Primitive, "evaluate", side_effect=AssertionError("shared arithmetic")):
             record = verify_plan(MAXIMUM, max, ((0, 7), (0, 7)), library=LIBRARY)
         self.assertTrue(record["verified"])
 
@@ -128,14 +129,43 @@ class VerificationValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "specification failed"):
             verify_plan(Plan(1, (), 0), lambda x: 1 // x, ((0, 1),), library=LIBRARY)
 
-    def test__given_invalid_primitive_result__when_verifying__then_u8_model_contract_is_enforced(self):
-        class InvalidPrimitive(Primitive):
+    def test__given_dishonest_average_evaluator__when_verifying__then_descriptor_prevents_false_certificate(self):
+        class DishonestAverage(Primitive):
             def evaluate(self, *values):
-                return 256
-        library = PrimitiveLibrary("broken", (InvalidPrimitive("broken", (1,)),))
-        with self.assertRaisesRegex(ValueError, "Primitive broken.*u8"):
-            verify_plan(Plan(1, (Instruction("broken", (0,)),), 1), lambda x: x,
-                        ((0, 1),), library=library)
+                return 0
+        honest = PrimitiveLibrary("average-only", (Primitive("average", (1, 1), shift=1),))
+        dishonest = PrimitiveLibrary("average-only", (DishonestAverage("average", (1, 1), shift=1),))
+        self.assertEqual(honest.fingerprint(), dishonest.fingerprint())
+        plan = Plan(2, (Instruction("average", (0, 1)),), 2)
+        # A global callback override also bypasses library normalization. Neither
+        # override may change the arithmetic bound to the descriptor fingerprint.
+        with patch.object(Primitive, "evaluate", return_value=0):
+            failed = verify_plan(plan, lambda a, b: 0, ((0, 1), (0, 1)), library=dishonest)
+            passed = verify_plan(plan, lambda a, b: (a + b + 1) // 2,
+                                 ((0, 1), (0, 1)), library=dishonest)
+        self.assertFalse(failed["verified"])
+        self.assertEqual(failed["counterexample"], {"inputs": [0, 1], "expected": 0, "actual": 1})
+        self.assertEqual(failed["mismatch_count"], 3)
+        self.assertTrue(passed["verified"])
+        self.assertEqual(failed["primitive_model_fingerprint"], passed["primitive_model_fingerprint"])
+
+    def test__given_signed_division_and_bias__when_verified__then_floor_rounding_precedes_offset_and_clip(self):
+        from fractions import Fraction
+        from math import floor
+        cases = (((-3,), 8, 1), ((-5,), 100, 2), ((3, -5), 129, 2),
+                 ((-7, 3), 300, 3), ((1,), -2, 0))
+        for weights, bias, shift in cases:
+            library = PrimitiveLibrary("signed-rounding", (Primitive("weighted", weights, bias, shift),))
+            count = len(weights)
+            plan = Plan(count, (Instruction("weighted", tuple(range(count))),), count)
+            def specification(*inputs):
+                scaled = Fraction(sum(weight * value for weight, value in zip(weights, inputs)), 2 ** shift)
+                rounded = floor(scaled + Fraction(1, 2)) if shift else int(scaled)
+                return max(0, min(255, rounded + bias))
+            with self.subTest(weights=weights, bias=bias, shift=shift):
+                record = verify_plan(plan, specification, ((0, 255),) * count, library=library)
+                self.assertTrue(record["verified"])
+                self.assertEqual(record["combinations_checked"], 256 ** count)
 
 
 class VerificationReplayTests(unittest.TestCase):

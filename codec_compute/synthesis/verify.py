@@ -43,8 +43,10 @@ def _domains(input_ranges: object, count: int) -> list[dict[str, object]]:
     return result
 
 
-def _prepared_plan(plan: Plan, library: PrimitiveLibrary) -> tuple[tuple[object, tuple[int, ...]], ...]:
-    """Validate and prepare a flat indexed traversal without search helpers."""
+def _prepared_plan(plan: Plan, library: PrimitiveLibrary) -> tuple[
+    tuple[tuple[int, ...], int, int, int, tuple[int, ...]], ...
+]:
+    """Validate references and snapshot descriptor arithmetic, never callbacks."""
     from .model import Plan, PrimitiveLibrary
 
     if not isinstance(plan, Plan) or not isinstance(library, PrimitiveLibrary):
@@ -55,23 +57,27 @@ def _prepared_plan(plan: Plan, library: PrimitiveLibrary) -> tuple[tuple[object,
     for primitive in library:
         if not isinstance(primitive.name, str) or not primitive.name or primitive.name in registry:
             raise ValueError("Primitive model IDs must be unique nonempty strings")
-        if type(primitive.arity) is not int or primitive.arity not in (1, 2):
-            raise ValueError(f"Unsupported primitive arity: {primitive.name}")
-        if not callable(primitive.evaluate):
-            raise ValueError(f"Primitive {primitive.name} has no scalar evaluator")
-        registry[primitive.name] = primitive
+        weights = tuple(primitive.weights)
+        if not 1 <= len(weights) <= 2 or any(type(weight) is not int for weight in weights):
+            raise ValueError(f"Invalid primitive weights: {primitive.name}")
+        if type(primitive.bias) is not int:
+            raise ValueError(f"Invalid primitive bias: {primitive.name}")
+        if type(primitive.shift) is not int or not 0 <= primitive.shift <= 31:
+            raise ValueError(f"Invalid primitive divisor shift: {primitive.name}")
+        registry[primitive.name] = (weights, primitive.bias, primitive.shift)
     prepared = []
     available = plan.input_count
     for instruction in plan.instructions:
         if not isinstance(instruction.primitive, str) or instruction.primitive not in registry:
             raise ValueError(f"Unknown primitive ID: {instruction.primitive!r}")
-        primitive = registry[instruction.primitive]
+        weights, bias, shift = registry[instruction.primitive]
         operands = tuple(instruction.operands)
-        if len(operands) != primitive.arity:
-            raise ValueError(f"Primitive {primitive.name} requires {primitive.arity} operands")
+        if len(operands) != len(weights):
+            raise ValueError(f"Primitive {instruction.primitive} requires {len(weights)} operands")
         if any(type(reference) is not int or not 0 <= reference < available for reference in operands):
             raise ValueError("Instruction operands must reference inputs or earlier instructions")
-        prepared.append((primitive, operands))
+        rounding = (1 << (shift - 1)) if shift else 0
+        prepared.append((weights, bias, rounding, 1 << shift, operands))
         available += 1
     if type(plan.output) is not int or not 0 <= plan.output < available:
         raise ValueError("Plan output must reference an input or an existing instruction")
@@ -100,8 +106,10 @@ def verify_plan(plan: Plan, spec: Callable[..., int], input_ranges: object, *,
 
     ``spec`` receives positional integers in domain order. Inclusive input
     ranges may be an ordered mapping or a sequence of ``(minimum, maximum)``
-    pairs. Boolean specification results normalize to 0/1; primitive results
-    must be u8 integers. Malformed models/plans/domains and invalid outputs raise
+    pairs. Boolean specification results normalize to 0/1. Primitive arithmetic
+    is independently calculated from declared weights, signed half-up division,
+    post-division bias, and u8 clipping; executable evaluator overrides are ignored.
+    Malformed models/plans/domains and invalid specification outputs raise
     ``ValueError`` rather than producing a false correctness certificate.
 
     Both passing and failing candidates are evaluated over the full Cartesian
@@ -127,12 +135,12 @@ def verify_plan(plan: Plan, spec: Callable[..., int], input_ranges: object, *,
             raise ValueError(f"Scalar specification failed for inputs {inputs}: {exc}") from exc
         expected = _u8(expected_value, source="Scalar specification", values=inputs, allow_bool=True)
         values = list(inputs)
-        for primitive, operands in prepared:
-            try:
-                result = primitive.evaluate(*(values[index] for index in operands))
-            except Exception as exc:
-                raise ValueError(f"Primitive {primitive.name} failed for inputs {inputs}: {exc}") from exc
-            values.append(_u8(result, source=f"Primitive {primitive.name}", values=inputs))
+        for weights, bias, rounding, divisor, operands in prepared:
+            total = sum(weight * values[index] for weight, index in zip(weights, operands))
+            # Python // is mathematical floor, including negative numerators.
+            # Bias is added after rounding/division, and clipping occurs last.
+            result = (total + rounding) // divisor + bias
+            values.append(min(255, max(0, result)))
         actual = values[plan.output]
         expected_digest.update(bytes((expected,)))
         actual_digest.update(bytes((actual,)))
