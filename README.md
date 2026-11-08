@@ -6,88 +6,20 @@ What if hardware decoders were just another general purpose accelerator?
 
 Actual decoder captures from the experiments. Select a preview to open its project.
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="01-conways-decoder-of-life/README.md"><strong>01 — Conway's decoder of Life</strong><br>
-      <img src="01-conways-decoder-of-life/assets/decoder-capture.gif" width="400" alt="Animated Game of Life generations computed by an H.264 hardware decoder"></a>
-      <p>Motion compensation, weighted prediction, and clipping compute each generation.</p>
-    </td>
-    <td width="50%" valign="top">
-      <a href="02-maze-flood-fill-decoder-solver/README.md"><strong>02 — Maze flood-fill solver</strong><br>
-      <img src="02-maze-flood-fill-decoder-solver/assets/decoder-capture.gif" width="400" alt="Animated decoder flood fill through a maze and the shortest path recovered from decoded arrival times"></a>
-      <p>Decoded reachability expands through the maze; arrival times reveal a shortest path.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="03-denoising-decoder/README.md"><strong>03 — Denoising decoder</strong><br>
-      <img src="03-denoising-decoder/assets/decoder-capture.gif" width="400" alt="Animated hardware-decoded denoising examples with noisy inputs, restored outputs, and neural feature maps"></a>
-      <p>A trained binary CNN runs as H.264 prediction operations.</p>
-    </td>
-    <td width="50%" valign="top">
-      <a href="04-binary-mnist-classification-decoder/README.md"><strong>04 — MNIST classification</strong><br>
-      <img src="04-binary-mnist-classification-decoder/assets/decoder-capture.gif" width="400" alt="Animated handwritten 3 and 8 examples classified by an H.264 hardware decoder"></a>
-      <p>Decoder pooling, signed arithmetic, and thresholds distinguish handwritten 3s and 8s.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="06-motion-mask-decoder/README.md"><strong>06 — Motion-mask decoder</strong><br>
-      <img src="06-motion-mask-decoder/assets/motion-capture.gif" width="400" alt="Animated NVDEC captures showing frame differences, thresholded motion, and cleaned binary masks"></a>
-      <p>Frame differences, thresholding, and binary cleanup produce motion masks.</p>
-    </td>
-    <td width="50%" valign="top">
-      <a href="07-packed-denoising-decoder/README.md"><strong>07 — Packed denoising</strong><br>
-      <img src="07-packed-denoising-decoder/assets/packed-capture.gif" width="400" alt="Animated exact denoising outputs from the packed NVDEC computation"></a>
-      <p>Packing independent features into picture tiles reduces 52 pictures to 17.</p>
-    </td>
-  </tr>
-</table>
-
-<details>
-<summary>Compiler, shared IR, and streaming screenshots</summary>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="05-h264-compiler/native_ops/README.md"><strong>05 — Native decoder operations</strong><br>
-      <img src="05-h264-compiler/native_ops/assets/fractional-translation.png" width="400" alt="Intel hardware decoder captures of fractional image translations"></a>
-      <p>Fractional motion compensation supplies native interpolation.</p>
-    </td>
-    <td width="50%" valign="top">
-      <a href="08-decoder-compute-limits/README.md"><strong>08 — Boolean computation</strong><br>
-      <img src="08-decoder-compute-limits/assets/boolean-atlas.png" width="400" alt="NVDEC output atlas covering all sixteen two-input Boolean functions"></a>
-      <p>All sixteen two-input Boolean functions, captured from NVDEC.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="codec_compute/workloads/README.md"><strong>09 — Shared image-compute IR</strong><br>
-      <img src="codec_compute/workloads/assets/capture.png" width="400" alt="Shared-IR decoder captures of image-processing workloads"></a>
-      <p>Change detection, blending, mask expansion, and smoothing share an exact image IR.</p>
-    </td>
-    <td width="50%" valign="top">
-      <a href="codec_compute/workloads/resampling/README.md"><strong>09 — Resampling and routing</strong><br>
-      <img src="codec_compute/workloads/resampling/assets/capture.png" width="400" alt="Decoded patch atlases, resampling outputs, and a known-motion comparison"></a>
-      <p>Block routing and fractional sampling build atlases and motion-compensated outputs.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="10-decoder-interface-limits/README.md"><strong>10 — Decoder interface limits</strong><br>
-      <img src="10-decoder-interface-limits/assets/paired-512.png" width="400" alt="Matching decoded interpolation and recurrence outputs under paired slice layouts"></a>
-      <p>Different slice layouts preserve the same decoded results.</p>
-    </td>
-    <td width="50%" valign="top">
-      <a href="11-retained-reference-streaming/README.md"><strong>11 — Retained-reference streaming</strong><br>
-      <img src="11-retained-reference-streaming/assets/motion-interpolation-outputs-512.png" width="400" alt="Multiple decoded interpolation outputs reusing retained inputs under two reference declarations"></a>
-      <p>Retained input pictures feed multiple interpolation outputs.</p>
-    </td>
-  </tr>
-</table>
-
-</details>
+| Experiment | Decoder output |
+| --- | --- |
+| **[01 — Conway's decoder of Life](01-conways-decoder-of-life/README.md)** — Motion compensation, weighted prediction, and clipping compute each generation. | [![Animated Game of Life generations computed by an H.264 hardware decoder](https://raw.githubusercontent.com/LrWm3/media-exp/main/01-conways-decoder-of-life/assets/decoder-capture.gif)](01-conways-decoder-of-life/README.md) |
+| **[02 — Maze flood-fill solver](02-maze-flood-fill-decoder-solver/README.md)** — Decoded reachability expands through the maze; arrival times reveal a shortest path. | [![Animated decoder flood fill through a maze and the shortest path recovered from decoded arrival times](https://raw.githubusercontent.com/LrWm3/media-exp/main/02-maze-flood-fill-decoder-solver/assets/decoder-capture.gif)](02-maze-flood-fill-decoder-solver/README.md) |
+| **[03 — Denoising decoder](03-denoising-decoder/README.md)** — A trained binary CNN runs as H.264 prediction operations. | [![Animated hardware-decoded denoising examples with noisy inputs, restored outputs, and neural feature maps](https://raw.githubusercontent.com/LrWm3/media-exp/main/03-denoising-decoder/assets/decoder-capture.gif)](03-denoising-decoder/README.md) |
+| **[04 — MNIST classification](04-binary-mnist-classification-decoder/README.md)** — Decoder pooling, signed arithmetic, and thresholds distinguish handwritten 3s and 8s. | [![Animated handwritten 3 and 8 examples classified by an H.264 hardware decoder](https://raw.githubusercontent.com/LrWm3/media-exp/main/04-binary-mnist-classification-decoder/assets/decoder-capture.gif)](04-binary-mnist-classification-decoder/README.md) |
+| **[05 — Native decoder operations](05-h264-compiler/native_ops/README.md)** — Fractional motion compensation supplies native interpolation. | [![Intel hardware decoder captures of fractional image translations](https://raw.githubusercontent.com/LrWm3/media-exp/main/05-h264-compiler/native_ops/assets/fractional-translation.png)](05-h264-compiler/native_ops/README.md) |
+| **[06 — Motion-mask decoder](06-motion-mask-decoder/README.md)** — Frame differences, thresholding, and binary cleanup produce motion masks. | [![Animated NVDEC captures showing frame differences, thresholded motion, and cleaned binary masks](https://raw.githubusercontent.com/LrWm3/media-exp/main/06-motion-mask-decoder/assets/motion-capture.gif)](06-motion-mask-decoder/README.md) |
+| **[07 — Packed denoising](07-packed-denoising-decoder/README.md)** — Packing independent features into picture tiles reduces 52 pictures to 17. | [![Animated exact denoising outputs from the packed NVDEC computation](https://raw.githubusercontent.com/LrWm3/media-exp/main/07-packed-denoising-decoder/assets/packed-capture.gif)](07-packed-denoising-decoder/README.md) |
+| **[08 — Boolean computation](08-decoder-compute-limits/README.md)** — All sixteen two-input Boolean functions, captured from NVDEC. | [![NVDEC output atlas covering all sixteen two-input Boolean functions](https://raw.githubusercontent.com/LrWm3/media-exp/main/08-decoder-compute-limits/assets/boolean-atlas.png)](08-decoder-compute-limits/README.md) |
+| **[09 — Shared image-compute IR](codec_compute/workloads/README.md)** — Change detection, blending, mask expansion, and smoothing share an exact image IR. | [![Shared-IR decoder captures of image-processing workloads](https://raw.githubusercontent.com/LrWm3/media-exp/main/codec_compute/workloads/assets/capture.png)](codec_compute/workloads/README.md) |
+| **[09 — Resampling and routing](codec_compute/workloads/resampling/README.md)** — Block routing and fractional sampling build atlases and motion-compensated outputs. | [![Decoded patch atlases, resampling outputs, and a known-motion comparison](https://raw.githubusercontent.com/LrWm3/media-exp/main/codec_compute/workloads/resampling/assets/capture.png)](codec_compute/workloads/resampling/README.md) |
+| **[10 — Decoder interface limits](10-decoder-interface-limits/README.md)** — Different slice layouts preserve the same decoded results. | [![Matching decoded interpolation and recurrence outputs under paired slice layouts](https://raw.githubusercontent.com/LrWm3/media-exp/main/10-decoder-interface-limits/assets/paired-512.png)](10-decoder-interface-limits/README.md) |
+| **[11 — Retained-reference streaming](11-retained-reference-streaming/README.md)** — Retained input pictures feed multiple interpolation outputs. | [![Multiple decoded interpolation outputs reusing retained inputs under two reference declarations](https://raw.githubusercontent.com/LrWm3/media-exp/main/11-retained-reference-streaming/assets/motion-interpolation-outputs-512.png)](11-retained-reference-streaming/README.md) |
 
 ## Experiments
 
